@@ -16,22 +16,22 @@ const CalendarioEjemplo = () => {
         const jsonCalendario =
             [
                 {
-                    "anio": "2024",
-                    "mes": "10",
+                    "anio": "2025",
+                    "mes": "05",
                     "dia": "05",
-                    "tipo": ''
+                    "tipo": 'evento'
                 },
                 {
-                    "anio": "2024",
-                    "mes": "10",
+                    "anio": "2025",
+                    "mes": "05",
                     "dia": "04",
-                    "tipo": ''
+                    "tipo": 'evento'
                 },
                 {
-                    "anio": "2024",
-                    "mes": "10",
+                    "anio": "2025",
+                    "mes": "05",
                     "dia": "03",
-                    "tipo": ''
+                    "tipo": 'evento'
                 },
 
 
@@ -61,7 +61,7 @@ const CalendarioEjemplo = () => {
         </div>
     );
     return (
-        <div className="grid teclado">
+        <div className="grid">
             <div className="col-12">
                 <div className="card">
                     {/* ENCABEZADO PRINCIPAL */}

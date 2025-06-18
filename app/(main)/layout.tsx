@@ -1,7 +1,6 @@
 "use client"
 
 import { ReactNode, useEffect } from 'react';
-import Layout from "../../layout/layout";
 import { Metadata } from "next";
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation'
@@ -14,7 +13,7 @@ interface MainLayoutProps {
 export const metadata: Metadata = {
     title: "Neatpallet",
     description:
-        "Neatpallet.",
+        "Language Experiences.",
     robots: { index: false, follow: false },
     viewport: { initialScale: 1, width: "device-width" },
     openGraph: {
@@ -22,7 +21,7 @@ export const metadata: Metadata = {
         title: "Neatpallet",
         url: "https://www.primefaces.org/apollo-react",
         description:
-            "Language Experiences.",
+            "Control de movimientos de palets.",
         images: ["https://www.primefaces.org/static/social/apollo-react.png"],
         ttl: 604800,
     },
@@ -54,9 +53,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
     return (
             <ProtectedRoute>
-                <Layout>
                     {children}
-                </Layout>
             </ProtectedRoute>
     );
 }

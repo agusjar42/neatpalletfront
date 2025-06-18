@@ -1,4 +1,5 @@
 "use client";
+import { obtenerRolDashboard } from "@/app/api-endpoints/rol";
 import type { Page } from "@/types";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
@@ -40,7 +41,7 @@ const Error: Page = () => {
                         Something went wrong!
                     </p>
                     <Button
-                        onClick={() => router.push("/tablas-maestras/empresa")}
+                        onClick={async () => router.push(await obtenerRolDashboard())}
                         severity="danger"
                         raised
                         className="font-medium"

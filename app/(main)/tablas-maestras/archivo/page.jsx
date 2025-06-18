@@ -2,13 +2,14 @@
 import { getVistaArchivoEmpresa, getVistaArchivoEmpresaCount, deleteArchivo } from "@/app/api-endpoints/archivo";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
-
+import { getUsuarioSesion } from "@/app/utility/Utils";
 const Archivo = () => {
     const intl = useIntl()
     const columnas = [
+        { campo: 'tabla', header: intl.formatMessage({ id: 'Tabla' }), tipo: 'string' },
+        { campo: 'tablaId', header: 'ID', tipo: 'string' },
         { campo: 'url', header: intl.formatMessage({ id: 'Archivo' }), tipo: 'imagen' },
         { campo: 'url', header: 'Url', tipo: 'string' },
-
     ]
 
     // Esta función transforma los registros para su exportación en formato CSV,
@@ -29,7 +30,7 @@ const Archivo = () => {
                 getRegistrosCount={getVistaArchivoEmpresaCount}
                 botones={['descargarCSV']}
                 controlador={"Archivos"}
-                empresaId={null}
+                filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 columnas={columnas}
                 deleteRegistro={deleteArchivo}
                 procesarDatosParaCSV={procesarDatosParaCSV}

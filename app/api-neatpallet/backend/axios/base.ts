@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * neatpallet application
- * Proyecto API encargado de ser la parte Backend de la aplicación web neatpallet
+ * NeatPallet application
+ * Proyecto API encargado de ser la parte Backend de la aplicación web NEATPALLET
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: agusjar@hotmail.com
@@ -18,7 +18,7 @@ import { Configuration } from "./configuration";
 // @ts-ignore
 import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
 
-export const BASE_PATH = "http://[::1]:8000".replace(/\/+$/, "");
+export const BASE_PATH = "http://localhost:8000".replace(/\/+$/, "");
 
 /**
  *

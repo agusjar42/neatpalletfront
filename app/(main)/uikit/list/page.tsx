@@ -233,6 +233,7 @@ const ListDemo = () => {
                     <PickList
                         source={picklistSourceValue}
                         target={picklistTargetValue}
+                        dataKey="code"
                         sourceHeader="From"
                         targetHeader="To"
                         itemTemplate={(item) => <div>{item.name}</div>}
@@ -251,6 +252,7 @@ const ListDemo = () => {
                     <h5>OrderList</h5>
                     <OrderList
                         value={orderlistValue}
+                        dataKey="code"
                         listStyle={{ height: "200px" }}
                         className="p-orderlist-responsive"
                         header="Cities"

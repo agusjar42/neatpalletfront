@@ -1,7 +1,8 @@
+import { obtenerRolDashboard } from "@/app/api-endpoints/rol";
 import type { Page } from "@/types";
 import Link from "next/link";
 
-const NotFound: Page = () => {
+const NotFound: Page = async () => {
     return (
         <>
             <svg
@@ -35,7 +36,7 @@ const NotFound: Page = () => {
                     <p className="line-height-3 mt-0 mb-5 text-700 text-xl font-medium">
                         There is nothing here
                     </p>
-                    <Link href={"/tablas-maestras/empresa"}>
+                    <Link href={await obtenerRolDashboard()}>
                         <button
                             type="button"
                             className="p-button p-button-warning font-medium p-button-raised"

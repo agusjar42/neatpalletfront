@@ -44,7 +44,11 @@ const TreeDemo = () => {
                         value={files2}
                         selectionMode="checkbox"
                         selectionKeys={selectedFileKeys2}
-                        onSelectionChange={(e) => setSelectedFileKeys2(e.value)}
+                        onSelectionChange={(e) => {
+                            if (typeof e.value !== "string") {
+                                setSelectedFileKeys2(e.value);
+                            }
+                        }}
                     >
                         <Column field="name" header="Name" expander />
                         <Column field="size" header="Size" />

@@ -1,4 +1,5 @@
 "use client";
+import { obtenerRolDashboard } from "@/app/api-endpoints/rol";
 import type { Page } from "@/types";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
@@ -39,7 +40,7 @@ const AccessDenied: Page = () => {
                         You don&lsquo;t have the permissions to access this page
                     </p>
                     <Button
-                        onClick={() => router.push("/tablas-maestras/empresa")}
+                        onClick={async () => router.push(await obtenerRolDashboard())}
                         severity="help"
                         raised
                         className="font-medium"

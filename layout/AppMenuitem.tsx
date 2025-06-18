@@ -8,11 +8,12 @@ import { useContext, useEffect, useRef } from "react";
 import { LayoutContext } from "./context/layoutcontext";
 import { MenuContext } from "./context/menucontext";
 import { useSubmenuOverlayPosition } from "./hooks/useSubmenuOverlayPosition";
+import { useIntl } from 'react-intl';
 
 const AppMenuitem = (props: AppMenuItemProps) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
-
+    const intl = useIntl();
     const { activeMenu, setActiveMenu } = useContext(MenuContext);
     const {
         isSlim,
@@ -171,7 +172,7 @@ const AppMenuitem = (props: AppMenuItemProps) => {
                             index={i}
                             className={child.badgeClass}
                             parentKey={key}
-                            key={child.label}
+                            key={`${child.label}-${i}`}
                         />
                     );
                 })}
@@ -187,7 +188,7 @@ const AppMenuitem = (props: AppMenuItemProps) => {
             })}
         >
             {props.root && item?.visible !== false && (
-                <div className="layout-menuitem-root-text">{item?.label}</div>
+                <div className="layout-menuitem-root-text">{intl.formatMessage({ id: item?.label })}</div>
             )}
             {(!item?.to || item?.items) && item?.visible !== false ? (
                 <>
@@ -199,7 +200,7 @@ const AppMenuitem = (props: AppMenuItemProps) => {
                             "p-ripple tooltip-target"
                         )}
                         target={item?.target}
-                        data-pr-tooltip={item?.label}
+                        data-pr-tooltip={intl.formatMessage({ id: item?.label })}
                         data-pr-disabled={
                             !(
                                 isSlim() &&
@@ -217,7 +218,7 @@ const AppMenuitem = (props: AppMenuItemProps) => {
                             )}
                         ></i>
                         <span className="layout-menuitem-text">
-                            {item?.label}
+                            {intl.formatMessage({ id: item?.label })}
                         </span>
                         {item?.items && (
                             <i className="pi pi-fw pi-angle-down layout-submenu-toggler"></i>
@@ -246,7 +247,7 @@ const AppMenuitem = (props: AppMenuItemProps) => {
                             )}
                         ></i>
                         <span className="layout-menuitem-text">
-                            {item?.label}
+                            {intl.formatMessage({ id: item?.label })}
                         </span>
                         {badge}
                         {item?.items && (

@@ -18,7 +18,10 @@ import { getRol, getNombreRol } from "@/app/api-endpoints/rol";
 import { formatearFechaLocal_a_toISOString, getUsuarioSesion } from "@/app/utility/Utils";
 import { AutoComplete } from "primereact/autocomplete";
 import { Checkbox } from "primereact/checkbox";
+import { bloquearPantalla } from "@/app/utility/Utils"
 import { useIntl } from 'react-intl';
+import Cookies from 'js-cookie';
+
 const Permiso = () => {
     const intl = useIntl();
     const [permisos, setPermisos] = useState([]);
@@ -50,28 +53,120 @@ const Permiso = () => {
     const obtenerDatos = async () => {
         try {
             //Obtenemos las tablas maestras
-            const registrosTablas = await getListaPermisos();
-            // const listaPermisos = [
-            //     { header: intl.formatMessage({ id: 'Roles' }), seccion: 'Roles' },
-            //     { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Rol-Acceder' },
-            //     { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Rol-Ver' },
-            //     { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Rol-Nuevo' },
-            //     { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Rol-Actualizar' },
-            //     { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Rol-Borrar' },
-            // ];
+            const listaPermisos = [
+                // Empresas
+                { header: intl.formatMessage({ id: 'Empresas' }), seccion: 'Empresas' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Empresas-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Empresas-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Empresas-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Empresas-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Empresas-Borrar' },
 
-            const listaPermisos = [];
-            for (let tabla of registrosTablas) {
-                listaPermisos.push({ header: intl.formatMessage({ id: tabla.header }), seccion: tabla.header });
-                listaPermisos.push({ header: intl.formatMessage({ id: 'Acceder' }), seccion: `${tabla.header}-Acceder` });
-                listaPermisos.push({ header: intl.formatMessage({ id: 'Ver' }), seccion: `${tabla.header}-Ver` });
-                listaPermisos.push({ header: intl.formatMessage({ id: 'Nuevo' }), seccion: `${tabla.header}-Nuevo` });
-                listaPermisos.push({ header: intl.formatMessage({ id: 'Actualizar' }), seccion: `${tabla.header}-Actualizar` });
-                listaPermisos.push({ header: intl.formatMessage({ id: 'Borrar' }), seccion: `${tabla.header}-Borrar` });
-            };
+                // Idiomas
+                { header: intl.formatMessage({ id: 'Idiomas' }), seccion: 'Idiomas' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Idiomas-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Idiomas-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Idiomas-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Idiomas-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Idiomas-Borrar' },
+
+                // Logs de usuarios
+                { header: intl.formatMessage({ id: 'Logs de usuarios' }), seccion: 'Logs de usuarios' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Logs de usuarios-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Logs de usuarios-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Logs de usuarios-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Logs de usuarios-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Logs de usuarios-Borrar' },
+
+                // Paises
+                { header: intl.formatMessage({ id: 'Paises' }), seccion: 'Paises' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Paises-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Paises-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Paises-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Paises-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Paises-Borrar' },
+
+                // Tipos de archivo
+                { header: intl.formatMessage({ id: 'Tipos de archivo' }), seccion: 'Tipos de archivo' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipos de archivo-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipos de archivo-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipos de archivo-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de archivo-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de archivo-Borrar' },
+
+                // Plantillas de correo
+                /*{ header: intl.formatMessage({ id: 'Plantillas de correo' }), seccion: 'Plantillas de correo' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Plantillas de correo-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Plantillas de correo-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Plantillas de correo-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Plantillas de correo-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Plantillas de correo-Borrar' },
+                */
+                // Secciones
+                { header: intl.formatMessage({ id: 'Secciones' }), seccion: 'Secciones' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Secciones-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Secciones-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Secciones-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Secciones-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Secciones-Borrar' },
+
+                // Archivos
+                { header: intl.formatMessage({ id: 'Archivos' }), seccion: 'Archivos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Archivos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Archivos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Archivos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Archivos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Archivos-Borrar' },
+
+                // Traducciones
+                { header: intl.formatMessage({ id: 'Traducciones' }), seccion: 'Traducciones' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Traducciones-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Traducciones-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Traducciones-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Traducciones-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Traducciones-Borrar' },
+
+                // Roles
+                { header: intl.formatMessage({ id: 'Roles' }), seccion: 'Roles' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Roles-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Roles-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Roles-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Roles-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Roles-Borrar' },
+
+                // Permisos
+                { header: intl.formatMessage({ id: 'Permisos' }), seccion: 'Permisos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Permisos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Permisos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Permisos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Permisos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Permisos-Borrar' },
+
+                // Usuarios
+                { header: intl.formatMessage({ id: 'Usuarios' }), seccion: 'Usuarios' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Usuarios-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Usuarios-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Usuarios-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Usuarios-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Usuarios-Borrar' },
+                { header: intl.formatMessage({ id: 'Seleccionar rol' }), seccion: 'Usuarios-SeleccionarRol' },
+                { header: intl.formatMessage({ id: 'Seleccionar tipo' }), seccion: 'Usuarios-SeleccionarTipo' },
+                { header: intl.formatMessage({ id: 'Cancelar' }), seccion: 'Usuarios-Cancelar' },
+                { header: intl.formatMessage({ id: 'Ver perfil' }), seccion: 'Usuarios-VerPerfil' },
+                
+                // Movimientos
+                { header: intl.formatMessage({ id: 'Movimientos' }), seccion: 'Movimientos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Movimientos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Movimientos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Movimientos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Movimientos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Movimientos-Borrar' },
+
+            ];
 
             // Obtenemos los roles
-            const registrosRoles = await getRol();
+            const filtroRol = { where: { empresaId: getUsuarioSesion().empresaId } };
+            const registrosRoles = await getRol(JSON.stringify(filtroRol));
             const nombresColumnas = Array.from(new Set(registrosRoles.map(registro => registro.nombre)));
             // Crear un objeto para almacenar las acciones por controlador
             setColumnaPrincipal(listaPermisos);
@@ -84,9 +179,8 @@ const Permiso = () => {
             const parsedData = JSON.parse(storedData);
             setDatosUsuario(parsedData);
 
-
             //Marcar los que esten dentro de la vista.
-            const permisosMarcados = await getVistaEmpresaRolPermiso(parsedData.rolId);
+            const permisosMarcados = await getVistaEmpresaRolPermiso();
             // Crear un nuevo conjunto con el formato especificado
             const permisosSet = new Set(permisosMarcados.map(permisoMarcado =>
                 `${permisoMarcado.permiso_controlador}-${permisoMarcado.permiso_accion}-${permisoMarcado.rol_nombre}-${permisoMarcado.permiso_id}`
@@ -130,6 +224,8 @@ const Permiso = () => {
     const handlePermisoMarcado = (permiso, evento) => {
         setListaPermisosMarcados(async (prevSet) => {
             const newSet = new Set(prevSet);
+            bloquearPantalla(true)
+            document.body.style.cursor = 'wait';
             if (evento.checked) {
                 //añadir a la BBDD y al set
                 const partesPermiso = permiso.split('-');
@@ -139,15 +235,16 @@ const Permiso = () => {
                     modulo: "Neatpallet",
                     controlador: partesPermiso[0],
                     accion: partesPermiso[1],
+                    usuCreacion: getUsuarioSesion()?.id,
                 };
-                postPermiso(emptyPermiso);
+                await postPermiso(emptyPermiso);
                 newSet.add(permiso);
                 // if (partesPermiso[1] === 'Ver') {
                 //     window.location.reload();
                 // } else {
                 //     obtenerDatos();
                 // }
-                obtenerDatos();
+                await obtenerDatos();
             } else {
                 const partesPermiso = permiso.split('-');
                 if (partesPermiso[2] !== 'Sistemas') {
@@ -161,20 +258,22 @@ const Permiso = () => {
                     }, {});
                     // Buscar coincidencias y extraer sus IDs
                     if (listaSinId.hasOwnProperty(permiso)) {
-                        deletePermiso(parseInt(listaSinId[permiso]));
+                        await deletePermiso(parseInt(listaSinId[permiso]));
                         newSet.delete(permiso + listaSinId[permiso]);
                         // if (partesPermiso[1] === 'Ver') {
                         //     window.location.reload();
                         // } else {
                         //     obtenerDatos();
                         // }
-                        obtenerDatos();
+                        await obtenerDatos();
                     }
                 } else {
                     toast.current.show({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar permisos del rol de Sistemas' });
-                    obtenerDatos();
+                    await obtenerDatos();
                 }
             }
+            document.body.style.cursor = 'default';
+            bloquearPantalla(false)
             return newSet;
         });
     };

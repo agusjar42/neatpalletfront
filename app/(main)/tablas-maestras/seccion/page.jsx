@@ -17,7 +17,6 @@ const Seccion = () => {
                 getRegistrosCount={getSeccionesCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Secciones"}
-                empresaId={null}
                 editarComponente={<EditarSeccion />}
                 columnas={columnas}
                 deleteRegistro={deleteSeccion}

@@ -9,7 +9,7 @@ interface FullPageLayoutProps {
 export const metadata: Metadata = {
     title: "Neatpallet",
     description:
-        "Neatpallet",
+        "Control de movimientos de palets.",
 };
 
 export default function FullPageLayout({ children }: FullPageLayoutProps) {

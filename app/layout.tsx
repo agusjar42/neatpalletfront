@@ -6,7 +6,8 @@ import { AuthProvider } from "./auth/AuthContext";
 import { AbilityProvider } from '@/app/utility/Can'; // Importa AbilityProvider
 
 import { PrimeReactProvider, locale, addLocale } from "primereact/api";
-
+import { MenuProvider } from "../layout/context/menucontext";
+import LayoutContainer from "@/layout/layoutContainer";
 import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
 import "primereact/resources/primereact.css";
@@ -15,6 +16,7 @@ import "../styles/layout/layout.scss";
 import IntlProviderWrapper from '@/app/utility/Traducciones.js'; //-> Archivo con la configuración de las traducciones
 
 import locales from "@/app/utility/locales.json"; //-> Archivo Json con la configuración de PrimeReact de palabras traducidas al español
+import AutoLogout from './global';
 
 interface RootLayoutProps {
     children: React.ReactNode;
@@ -31,7 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <head>
                 <link
                     id="theme-link"
-                    href={`/theme/theme-light/mitema/theme.css`}
+                    href={`/theme/theme-light/green/theme.css`}
                     rel="stylesheet"
                 ></link>
             </head>
@@ -39,9 +41,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <IntlProviderWrapper>
                     <PrimeReactProvider>
                         {/* Envolvemos el Layout Principal con <AuthProvider> para comprobar que el usuario se encuentre atenticado */}
-                        <AuthProvider> 
+                        <AuthProvider>
+                            <AutoLogout /> {/* Llama al componente AutoLogout al cargar la aplicación */}
                             <AbilityProvider> {/* Envolvemos con AbilityProvider */}
-                                <LayoutProvider>{children}</LayoutProvider>
+                                <MenuProvider>
+                                    <LayoutProvider>
+                                        <LayoutContainer>
+                                            {children}
+                                        </LayoutContainer>
+                                    </LayoutProvider>
+                                </MenuProvider>
                             </AbilityProvider>
                         </AuthProvider>
                     </PrimeReactProvider>

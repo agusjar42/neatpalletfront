@@ -17,8 +17,22 @@ const IntlProviderWrapper = ({ children }) => {
         fetchTranslations();
     }, [locale]);
 
+    // Handler para devolver el id si falta la traducción
+    const handleIntlError = (err) => {
+        if (err.code === 'MISSING_TRANSLATION') {
+            // No mostrar error en consola
+            return;
+        }
+        console.error(err);
+    };
+
     return (
-        <IntlProvider locale={locale} messages={messages}>
+        <IntlProvider
+            locale={locale}
+            messages={messages}
+            onError={handleIntlError}
+            defaultRichTextElements={{}}
+        >
             {children}
         </IntlProvider>
     );

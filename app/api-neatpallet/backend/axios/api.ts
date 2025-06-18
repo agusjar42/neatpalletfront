@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * neatpallet application
- * Proyecto API encargado de ser la parte Backend de la aplicación web neatpallet
+ * NeatPallet application
+ * Proyecto API encargado de ser la parte Backend de la aplicación web NEATPALLET
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: agusjar@hotmail.com
@@ -83,12 +83,6 @@ export interface Archivo {
     'pantalla'?: string | null;
     /**
      * 
-     * @type {number}
-     * @memberof Archivo
-     */
-    'orden'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof Archivo
      */
@@ -104,7 +98,7 @@ export interface Archivo {
      * @type {number}
      * @memberof Archivo
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -254,12 +248,6 @@ export interface ArchivoPartial {
     'pantalla'?: string | null;
     /**
      * 
-     * @type {number}
-     * @memberof ArchivoPartial
-     */
-    'orden'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof ArchivoPartial
      */
@@ -275,7 +263,7 @@ export interface ArchivoPartial {
      * @type {number}
      * @memberof ArchivoPartial
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -345,12 +333,6 @@ export interface ArchivoWithRelations {
     'pantalla'?: string | null;
     /**
      * 
-     * @type {number}
-     * @memberof ArchivoWithRelations
-     */
-    'orden'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof ArchivoWithRelations
      */
@@ -366,7 +348,7 @@ export interface ArchivoWithRelations {
      * @type {number}
      * @memberof ArchivoWithRelations
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -415,6 +397,18 @@ export interface Empresa {
      * @type {string}
      * @memberof Empresa
      */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'servicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -427,13 +421,19 @@ export interface Empresa {
      * @type {number}
      * @memberof Empresa
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof Empresa
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Empresa
+     */
+    'tiempoInactividad'?: number;
 }
 /**
  * 
@@ -556,6 +556,18 @@ export interface EmpresaPartial {
      * @type {string}
      * @memberof EmpresaPartial
      */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'servicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -568,13 +580,19 @@ export interface EmpresaPartial {
      * @type {number}
      * @memberof EmpresaPartial
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion'?: number;
     /**
      * 
      * @type {number}
      * @memberof EmpresaPartial
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPartial
+     */
+    'tiempoInactividad'?: number;
 }
 /**
  * (tsType: EmpresaWithRelations, schemaOptions: { includeRelations: true })
@@ -617,6 +635,18 @@ export interface EmpresaWithRelations {
      * @type {string}
      * @memberof EmpresaWithRelations
      */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'servicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -629,13 +659,19 @@ export interface EmpresaWithRelations {
      * @type {number}
      * @memberof EmpresaWithRelations
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof EmpresaWithRelations
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaWithRelations
+     */
+    'tiempoInactividad'?: number;
 }
 /**
  * 
@@ -684,7 +720,7 @@ export interface Idioma {
      * @type {number}
      * @memberof Idioma
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -831,7 +867,7 @@ export interface IdiomaPartial {
      * @type {number}
      * @memberof IdiomaPartial
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -898,7 +934,7 @@ export interface IdiomaWithRelations {
      * @type {number}
      * @memberof IdiomaWithRelations
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -926,16 +962,16 @@ export interface IdiomaWithRelations {
 export interface InlineObject3 {
     /**
      * 
-     * @type {string}
+     * @type {Array<string>}
      * @memberof InlineObject3
      */
-    'mail': string;
+    'emails'?: Array<string>;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineObject3
      */
-    'password': string;
+    'empresaId'?: number;
 }
 /**
  * 
@@ -945,40 +981,85 @@ export interface InlineObject3 {
 export interface InlineObject4 {
     /**
      * 
-     * @type {string}
+     * @type {Array<string>}
      * @memberof InlineObject4
      */
-    'nombre': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject4
-     */
-    'mail': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject4
-     */
-    'password': string;
+    'emails'?: Array<string>;
     /**
      * 
      * @type {number}
      * @memberof InlineObject4
      */
     'empresaId'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject5
+ */
+export interface InlineObject5 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject5
+     */
+    'mail': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject5
+     */
+    'password': string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject6
+ */
+export interface InlineObject6 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject6
+     */
+    'email'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject7
+ */
+export interface InlineObject7 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'nombre': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'mail': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'password': string;
     /**
      * 
      * @type {number}
-     * @memberof InlineObject4
+     * @memberof InlineObject7
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineObject7
      */
     'rolId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineObject4
-     */
-    'idiomaId'?: number;
 }
 /**
  * 
@@ -1199,6 +1280,18 @@ export interface LogUsuario {
     'id'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof LogUsuario
+     */
+    'usuarioId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogUsuario
+     */
+    'fechaRegistro'?: string | null;
+    /**
+     * 
      * @type {string}
      * @memberof LogUsuario
      */
@@ -1226,7 +1319,7 @@ export interface LogUsuario {
      * @type {number}
      * @memberof LogUsuario
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -1328,6 +1421,18 @@ export interface LogUsuarioPartial {
     'id'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof LogUsuarioPartial
+     */
+    'usuarioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogUsuarioPartial
+     */
+    'fechaRegistro'?: string | null;
+    /**
+     * 
      * @type {string}
      * @memberof LogUsuarioPartial
      */
@@ -1355,7 +1460,7 @@ export interface LogUsuarioPartial {
      * @type {number}
      * @memberof LogUsuarioPartial
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -1377,6 +1482,18 @@ export interface LogUsuarioWithRelations {
     'id'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof LogUsuarioWithRelations
+     */
+    'usuarioId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogUsuarioWithRelations
+     */
+    'fechaRegistro'?: string | null;
+    /**
+     * 
      * @type {string}
      * @memberof LogUsuarioWithRelations
      */
@@ -1404,7 +1521,7 @@ export interface LogUsuarioWithRelations {
      * @type {number}
      * @memberof LogUsuarioWithRelations
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -1481,12 +1598,6 @@ export interface NewArchivo {
     'pantalla'?: string | null;
     /**
      * 
-     * @type {number}
-     * @memberof NewArchivo
-     */
-    'orden'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof NewArchivo
      */
@@ -1502,7 +1613,7 @@ export interface NewArchivo {
      * @type {number}
      * @memberof NewArchivo
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -1545,6 +1656,18 @@ export interface NewEmpresa {
      * @type {string}
      * @memberof NewEmpresa
      */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'servicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -1557,13 +1680,19 @@ export interface NewEmpresa {
      * @type {number}
      * @memberof NewEmpresa
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof NewEmpresa
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEmpresa
+     */
+    'tiempoInactividad'?: number;
 }
 /**
  * (tsType: Omit<Idioma, \'id\'>, schemaOptions: { title: \'NewIdioma\', exclude: [ \'id\' ] })
@@ -1606,7 +1735,7 @@ export interface NewIdioma {
      * @type {number}
      * @memberof NewIdioma
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -1653,6 +1782,18 @@ export interface NewListaPermisos {
 export interface NewLogUsuario {
     /**
      * 
+     * @type {number}
+     * @memberof NewLogUsuario
+     */
+    'usuarioId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewLogUsuario
+     */
+    'fechaRegistro'?: string | null;
+    /**
+     * 
      * @type {string}
      * @memberof NewLogUsuario
      */
@@ -1680,13 +1821,135 @@ export interface NewLogUsuario {
      * @type {number}
      * @memberof NewLogUsuario
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof NewLogUsuario
      */
     'usuModificacion'?: number | null;
+}
+/**
+ * (tsType: Omit<Pais, \'id\'>, schemaOptions: { title: \'NewPais\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewPais
+ */
+export interface NewPais {
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPais
+     */
+    'iso'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPais
+     */
+    'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPais
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPais
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPais
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPais
+     */
+    'usuCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPais
+     */
+    'usuModificacion'?: number | null;
+}
+/**
+ * (tsType: Omit<PalletsMovements, \'id\'>, schemaOptions: { title: \'NewPalletsMovements\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewPalletsMovements
+ */
+export interface NewPalletsMovements {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPalletsMovements
+     */
+    'empresa_Id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletsMovements
+     */
+    'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletsMovements
+     */
+    'temperature'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletsMovements
+     */
+    'humidity'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletsMovements
+     */
+    'press'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletsMovements
+     */
+    'pm2_5'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletsMovements
+     */
+    'pm5'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletsMovements
+     */
+    'pm10'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletsMovements
+     */
+    'battery_volts'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletsMovements
+     */
+    'battery_pct'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletsMovements
+     */
+    'rssi'?: string | null;
 }
 /**
  * (tsType: Omit<Permiso, \'id\'>, schemaOptions: { title: \'NewPermiso\', exclude: [ \'id\' ] })
@@ -1735,13 +1998,92 @@ export interface NewPermiso {
      * @type {number}
      * @memberof NewPermiso
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof NewPermiso
      */
     'usuModificacion'?: number | null;
+}
+/**
+ * (tsType: Omit<PlantillaEmail, \'id\'>, schemaOptions: { title: \'NewPlantillaEmail\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewPlantillaEmail
+ */
+export interface NewPlantillaEmail {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPlantillaEmail
+     */
+    'idiomaId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPlantillaEmail
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlantillaEmail
+     */
+    'nombrePlantilla': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlantillaEmail
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlantillaEmail
+     */
+    'titulo'?: string | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof NewPlantillaEmail
+     */
+    'cuerpo'?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlantillaEmail
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlantillaEmail
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPlantillaEmail
+     */
+    'usuCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPlantillaEmail
+     */
+    'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlantillaEmail
+     */
+    'fechaInactivo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPlantillaEmail
+     */
+    'usuInactivo'?: number | null;
 }
 /**
  * (tsType: Omit<RefrescarToken, \'id\'>, schemaOptions: { title: \'NewRefrescarToken\', exclude: [ \'id\' ] })
@@ -1791,6 +2133,18 @@ export interface NewRol {
      * @type {string}
      * @memberof NewRol
      */
+    'muestraEmpresa'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewRol
+     */
+    'dashboardUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewRol
+     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -1803,7 +2157,7 @@ export interface NewRol {
      * @type {number}
      * @memberof NewRol
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -1852,7 +2206,7 @@ export interface NewSeccion {
      * @type {number}
      * @memberof NewSeccion
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -1877,7 +2231,7 @@ export interface NewTipoArchivo {
      * @type {number}
      * @memberof NewTipoArchivo
      */
-    'seccionId'?: number | null;
+    'seccionId': number;
     /**
      * 
      * @type {string}
@@ -1919,7 +2273,7 @@ export interface NewTipoArchivo {
      * @type {number}
      * @memberof NewTipoArchivo
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -1974,7 +2328,7 @@ export interface NewTraduccion {
      * @type {number}
      * @memberof NewTraduccion
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -2072,12 +2426,6 @@ export interface NewUsuario {
      * @memberof NewUsuario
      */
     'usuInactivo'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewUsuario
-     */
-    'roles'?: string;
 }
 /**
  * (tsType: Omit<UsuarioCredenciales, \'id\'>, schemaOptions: { title: \'NewUsuarioCredenciales\', exclude: [ \'id\' ] })
@@ -2096,7 +2444,7 @@ export interface NewUsuarioCredenciales {
      * @type {number}
      * @memberof NewUsuarioCredenciales
      */
-    'usuarioId'?: number | null;
+    'usuarioId'?: number;
 }
 /**
  * (tsType: Omit<UsuarioPasswordHistorico, \'id\'>, schemaOptions: { title: \'NewUsuarioPasswordHistorico\', exclude: [ \'id\' ] })
@@ -2145,7 +2493,7 @@ export interface NewUsuarioPasswordHistorico {
      * @type {number}
      * @memberof NewUsuarioPasswordHistorico
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -2154,35 +2502,566 @@ export interface NewUsuarioPasswordHistorico {
     'usuModificacion'?: number | null;
 }
 /**
- * (tsType: Omit<UsuarioRestablecerPassword, \'id\'>, schemaOptions: { title: \'NewUsuarioRestablecerPassword\', exclude: [ \'id\' ] })
+ * 
  * @export
- * @interface NewUsuarioRestablecerPassword
+ * @interface Pais
  */
-export interface NewUsuarioRestablecerPassword {
+export interface Pais {
     /**
      * 
      * @type {number}
-     * @memberof NewUsuarioRestablecerPassword
+     * @memberof Pais
      */
-    'usuarioId'?: number | null;
+    'id'?: number;
     /**
      * 
      * @type {string}
-     * @memberof NewUsuarioRestablecerPassword
+     * @memberof Pais
      */
-    'email'?: string;
+    'iso'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof NewUsuarioRestablecerPassword
+     * @memberof Pais
      */
-    'codigoRecuperacion'?: string;
+    'nombre'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof NewUsuarioRestablecerPassword
+     * @memberof Pais
      */
-    'expiraEn'?: string;
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Pais
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Pais
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Pais
+     */
+    'usuCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Pais
+     */
+    'usuModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface PaisFilter
+ */
+export interface PaisFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof PaisFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof PaisFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface PaisFilter1
+ */
+export interface PaisFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof PaisFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof PaisFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof PaisFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<Pais>, schemaOptions: { partial: true })
+ * @export
+ * @interface PaisPartial
+ */
+export interface PaisPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaisPartial
+     */
+    'iso'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaisPartial
+     */
+    'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaisPartial
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaisPartial
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaisPartial
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisPartial
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisPartial
+     */
+    'usuModificacion'?: number | null;
+}
+/**
+ * (tsType: PaisWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface PaisWithRelations
+ */
+export interface PaisWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaisWithRelations
+     */
+    'iso'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaisWithRelations
+     */
+    'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaisWithRelations
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaisWithRelations
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaisWithRelations
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisWithRelations
+     */
+    'usuCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisWithRelations
+     */
+    'usuModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface PalletsMovements
+ */
+export interface PalletsMovements {
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovements
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovements
+     */
+    'empresa_Id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovements
+     */
+    'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovements
+     */
+    'temperature'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovements
+     */
+    'humidity'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovements
+     */
+    'press'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovements
+     */
+    'pm2_5'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovements
+     */
+    'pm5'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovements
+     */
+    'pm10'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovements
+     */
+    'battery_volts'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovements
+     */
+    'battery_pct'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovements
+     */
+    'rssi'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface PalletsMovementsFilter
+ */
+export interface PalletsMovementsFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovementsFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovementsFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovementsFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof PalletsMovementsFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof PalletsMovementsFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface PalletsMovementsFilter1
+ */
+export interface PalletsMovementsFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovementsFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovementsFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovementsFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof PalletsMovementsFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof PalletsMovementsFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof PalletsMovementsFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<PalletsMovements>, schemaOptions: { partial: true })
+ * @export
+ * @interface PalletsMovementsPartial
+ */
+export interface PalletsMovementsPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovementsPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovementsPartial
+     */
+    'empresa_Id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsPartial
+     */
+    'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsPartial
+     */
+    'temperature'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsPartial
+     */
+    'humidity'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsPartial
+     */
+    'press'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsPartial
+     */
+    'pm2_5'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsPartial
+     */
+    'pm5'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsPartial
+     */
+    'pm10'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsPartial
+     */
+    'battery_volts'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsPartial
+     */
+    'battery_pct'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsPartial
+     */
+    'rssi'?: string | null;
+}
+/**
+ * (tsType: PalletsMovementsWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface PalletsMovementsWithRelations
+ */
+export interface PalletsMovementsWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'empresa_Id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'temperature'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'humidity'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'press'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'pm2_5'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'pm5'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'pm10'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'battery_volts'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'battery_pct'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletsMovementsWithRelations
+     */
+    'rssi'?: string | null;
 }
 /**
  * 
@@ -2237,7 +3116,7 @@ export interface Permiso {
      * @type {number}
      * @memberof Permiso
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -2378,7 +3257,7 @@ export interface PermisoPartial {
      * @type {number}
      * @memberof PermisoPartial
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -2439,13 +3318,379 @@ export interface PermisoWithRelations {
      * @type {number}
      * @memberof PermisoWithRelations
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof PermisoWithRelations
      */
     'usuModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface PingResponse
+ */
+export interface PingResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof PingResponse
+     */
+    'greeting'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PingResponse
+     */
+    'date'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PingResponse
+     */
+    'url'?: string;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof PingResponse
+     */
+    'headers'?: { [key: string]: object; };
+}
+/**
+ * 
+ * @export
+ * @interface PlantillaEmail
+ */
+export interface PlantillaEmail {
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmail
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmail
+     */
+    'idiomaId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmail
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmail
+     */
+    'nombrePlantilla': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmail
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmail
+     */
+    'titulo'?: string | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof PlantillaEmail
+     */
+    'cuerpo'?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmail
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmail
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmail
+     */
+    'usuCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmail
+     */
+    'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmail
+     */
+    'fechaInactivo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmail
+     */
+    'usuInactivo'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface PlantillaEmailFilter
+ */
+export interface PlantillaEmailFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof PlantillaEmailFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof PlantillaEmailFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface PlantillaEmailFilter1
+ */
+export interface PlantillaEmailFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof PlantillaEmailFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof PlantillaEmailFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof PlantillaEmailFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<PlantillaEmail>, schemaOptions: { partial: true })
+ * @export
+ * @interface PlantillaEmailPartial
+ */
+export interface PlantillaEmailPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailPartial
+     */
+    'idiomaId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailPartial
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailPartial
+     */
+    'nombrePlantilla'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailPartial
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailPartial
+     */
+    'titulo'?: string | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof PlantillaEmailPartial
+     */
+    'cuerpo'?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailPartial
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailPartial
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailPartial
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailPartial
+     */
+    'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailPartial
+     */
+    'fechaInactivo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailPartial
+     */
+    'usuInactivo'?: number | null;
+}
+/**
+ * (tsType: PlantillaEmailWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface PlantillaEmailWithRelations
+ */
+export interface PlantillaEmailWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'idiomaId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'nombrePlantilla': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'titulo'?: string | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'cuerpo'?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'usuCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'fechaInactivo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlantillaEmailWithRelations
+     */
+    'usuInactivo'?: number | null;
 }
 /**
  * 
@@ -2637,6 +3882,18 @@ export interface Rol {
      * @type {string}
      * @memberof Rol
      */
+    'muestraEmpresa'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Rol
+     */
+    'dashboardUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Rol
+     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -2649,7 +3906,7 @@ export interface Rol {
      * @type {number}
      * @memberof Rol
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -2784,6 +4041,18 @@ export interface RolPartial {
      * @type {string}
      * @memberof RolPartial
      */
+    'muestraEmpresa'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof RolPartial
+     */
+    'dashboardUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof RolPartial
+     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -2796,7 +4065,7 @@ export interface RolPartial {
      * @type {number}
      * @memberof RolPartial
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -2851,6 +4120,18 @@ export interface RolWithRelations {
      * @type {string}
      * @memberof RolWithRelations
      */
+    'muestraEmpresa'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof RolWithRelations
+     */
+    'dashboardUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof RolWithRelations
+     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -2863,7 +4144,7 @@ export interface RolWithRelations {
      * @type {number}
      * @memberof RolWithRelations
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -2918,7 +4199,7 @@ export interface Seccion {
      * @type {number}
      * @memberof Seccion
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -3041,7 +4322,7 @@ export interface SeccionPartial {
      * @type {number}
      * @memberof SeccionPartial
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -3084,7 +4365,7 @@ export interface SeccionWithRelations {
      * @type {number}
      * @memberof SeccionWithRelations
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -3115,7 +4396,7 @@ export interface TipoArchivo {
      * @type {number}
      * @memberof TipoArchivo
      */
-    'seccionId'?: number | null;
+    'seccionId': number;
     /**
      * 
      * @type {string}
@@ -3157,7 +4438,7 @@ export interface TipoArchivo {
      * @type {number}
      * @memberof TipoArchivo
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -3274,7 +4555,7 @@ export interface TipoArchivoPartial {
      * @type {number}
      * @memberof TipoArchivoPartial
      */
-    'seccionId'?: number | null;
+    'seccionId'?: number;
     /**
      * 
      * @type {string}
@@ -3316,7 +4597,7 @@ export interface TipoArchivoPartial {
      * @type {number}
      * @memberof TipoArchivoPartial
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -3353,7 +4634,7 @@ export interface TipoArchivoWithRelations {
      * @type {number}
      * @memberof TipoArchivoWithRelations
      */
-    'seccionId'?: number | null;
+    'seccionId': number;
     /**
      * 
      * @type {string}
@@ -3395,7 +4676,7 @@ export interface TipoArchivoWithRelations {
      * @type {number}
      * @memberof TipoArchivoWithRelations
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -3456,7 +4737,7 @@ export interface Traduccion {
      * @type {number}
      * @memberof Traduccion
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -3591,7 +4872,7 @@ export interface TraduccionPartial {
      * @type {number}
      * @memberof TraduccionPartial
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -3646,7 +4927,7 @@ export interface TraduccionWithRelations {
      * @type {number}
      * @memberof TraduccionWithRelations
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -3750,12 +5031,6 @@ export interface Usuario {
      * @memberof Usuario
      */
     'usuInactivo'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Usuario
-     */
-    'roles'?: string;
 }
 /**
  * 
@@ -3780,7 +5055,7 @@ export interface UsuarioCredenciales {
      * @type {number}
      * @memberof UsuarioCredenciales
      */
-    'usuarioId'?: number | null;
+    'usuarioId'?: number;
 }
 /**
  * 
@@ -3885,7 +5160,7 @@ export interface UsuarioCredencialesPartial {
      * @type {number}
      * @memberof UsuarioCredencialesPartial
      */
-    'usuarioId'?: number | null;
+    'usuarioId'?: number;
 }
 /**
  * (tsType: UsuarioCredencialesWithRelations, schemaOptions: { includeRelations: true })
@@ -3910,7 +5185,7 @@ export interface UsuarioCredencialesWithRelations {
      * @type {number}
      * @memberof UsuarioCredencialesWithRelations
      */
-    'usuarioId'?: number | null;
+    'usuarioId'?: number;
 }
 /**
  * 
@@ -4128,12 +5403,6 @@ export interface UsuarioPartial {
      * @memberof UsuarioPartial
      */
     'usuInactivo'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsuarioPartial
-     */
-    'roles'?: string;
 }
 /**
  * 
@@ -4188,7 +5457,7 @@ export interface UsuarioPasswordHistorico {
      * @type {number}
      * @memberof UsuarioPasswordHistorico
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
@@ -4329,7 +5598,7 @@ export interface UsuarioPasswordHistoricoPartial {
      * @type {number}
      * @memberof UsuarioPasswordHistoricoPartial
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion'?: number;
     /**
      * 
      * @type {number}
@@ -4390,204 +5659,13 @@ export interface UsuarioPasswordHistoricoWithRelations {
      * @type {number}
      * @memberof UsuarioPasswordHistoricoWithRelations
      */
-    'usuCreacion'?: number | null;
+    'usuCreacion': number;
     /**
      * 
      * @type {number}
      * @memberof UsuarioPasswordHistoricoWithRelations
      */
     'usuModificacion'?: number | null;
-}
-/**
- * 
- * @export
- * @interface UsuarioRestablecerPassword
- */
-export interface UsuarioRestablecerPassword {
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPassword
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPassword
-     */
-    'usuarioId'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsuarioRestablecerPassword
-     */
-    'email'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsuarioRestablecerPassword
-     */
-    'codigoRecuperacion'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsuarioRestablecerPassword
-     */
-    'expiraEn'?: string;
-}
-/**
- * 
- * @export
- * @interface UsuarioRestablecerPasswordFilter
- */
-export interface UsuarioRestablecerPasswordFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPasswordFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPasswordFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPasswordFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof UsuarioRestablecerPasswordFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof UsuarioRestablecerPasswordFilter
-     */
-    'fields'?: object | Set<string>;
-}
-/**
- * 
- * @export
- * @interface UsuarioRestablecerPasswordFilter1
- */
-export interface UsuarioRestablecerPasswordFilter1 {
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPasswordFilter1
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPasswordFilter1
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPasswordFilter1
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof UsuarioRestablecerPasswordFilter1
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof UsuarioRestablecerPasswordFilter1
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof UsuarioRestablecerPasswordFilter1
-     */
-    'fields'?: object | Set<string>;
-}
-/**
- * (tsType: Partial<UsuarioRestablecerPassword>, schemaOptions: { partial: true })
- * @export
- * @interface UsuarioRestablecerPasswordPartial
- */
-export interface UsuarioRestablecerPasswordPartial {
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPasswordPartial
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPasswordPartial
-     */
-    'usuarioId'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsuarioRestablecerPasswordPartial
-     */
-    'email'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsuarioRestablecerPasswordPartial
-     */
-    'codigoRecuperacion'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsuarioRestablecerPasswordPartial
-     */
-    'expiraEn'?: string;
-}
-/**
- * (tsType: UsuarioRestablecerPasswordWithRelations, schemaOptions: { includeRelations: true })
- * @export
- * @interface UsuarioRestablecerPasswordWithRelations
- */
-export interface UsuarioRestablecerPasswordWithRelations {
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPasswordWithRelations
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioRestablecerPasswordWithRelations
-     */
-    'usuarioId'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsuarioRestablecerPasswordWithRelations
-     */
-    'email'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsuarioRestablecerPasswordWithRelations
-     */
-    'codigoRecuperacion'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsuarioRestablecerPasswordWithRelations
-     */
-    'expiraEn'?: string;
 }
 /**
  * 
@@ -4734,12 +5812,6 @@ export interface UsuarioWithRelations {
      * @memberof UsuarioWithRelations
      */
     'usuInactivo'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsuarioWithRelations
-     */
-    'roles'?: string;
     /**
      * 
      * @type {UsuarioCredencialesWithRelations}
@@ -5070,6 +6142,82 @@ export const ArchivoControllerApiAxiosParamCreator = function (configuration?: C
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {ArchivoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        archivoControllerVistaArchivoEmpresa: async (filter?: ArchivoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaArchivoEmpresa`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        archivoControllerVistaArchivoEmpresaCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaArchivoEmpresaCount`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -5164,6 +6312,26 @@ export const ArchivoControllerApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.archivoControllerUpdateById(id, archivoPartial, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @param {ArchivoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async archivoControllerVistaArchivoEmpresa(filter?: ArchivoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.archivoControllerVistaArchivoEmpresa(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async archivoControllerVistaArchivoEmpresaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.archivoControllerVistaArchivoEmpresaCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -5249,6 +6417,24 @@ export const ArchivoControllerApiFactory = function (configuration?: Configurati
          */
         archivoControllerUpdateById(id: number, archivoPartial?: ArchivoPartial, options?: any): AxiosPromise<any> {
             return localVarFp.archivoControllerUpdateById(id, archivoPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {ArchivoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        archivoControllerVistaArchivoEmpresa(filter?: ArchivoFilter1, options?: any): AxiosPromise<object> {
+            return localVarFp.archivoControllerVistaArchivoEmpresa(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        archivoControllerVistaArchivoEmpresaCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
+            return localVarFp.archivoControllerVistaArchivoEmpresaCount(where, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5350,6 +6536,28 @@ export class ArchivoControllerApi extends BaseAPI {
      */
     public archivoControllerUpdateById(id: number, archivoPartial?: ArchivoPartial, options?: AxiosRequestConfig) {
         return ArchivoControllerApiFp(this.configuration).archivoControllerUpdateById(id, archivoPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {ArchivoFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ArchivoControllerApi
+     */
+    public archivoControllerVistaArchivoEmpresa(filter?: ArchivoFilter1, options?: AxiosRequestConfig) {
+        return ArchivoControllerApiFp(this.configuration).archivoControllerVistaArchivoEmpresa(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ArchivoControllerApi
+     */
+    public archivoControllerVistaArchivoEmpresaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return ArchivoControllerApiFp(this.configuration).archivoControllerVistaArchivoEmpresaCount(where, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -7962,6 +9170,82 @@ export const LogUsuarioControllerApiAxiosParamCreator = function (configuration?
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {LogUsuarioFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerVistaLogUsuarioUsuario: async (filter?: LogUsuarioFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaLogUsuarioUsuario`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerVistaLogUsuarioUsuarioCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaLogUsuarioUsuarioCount`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -8056,6 +9340,26 @@ export const LogUsuarioControllerApiFp = function(configuration?: Configuration)
             const localVarAxiosArgs = await localVarAxiosParamCreator.logUsuarioControllerUpdateById(id, logUsuarioPartial, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @param {LogUsuarioFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logUsuarioControllerVistaLogUsuarioUsuario(filter?: LogUsuarioFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logUsuarioControllerVistaLogUsuarioUsuario(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logUsuarioControllerVistaLogUsuarioUsuarioCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logUsuarioControllerVistaLogUsuarioUsuarioCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -8141,6 +9445,24 @@ export const LogUsuarioControllerApiFactory = function (configuration?: Configur
          */
         logUsuarioControllerUpdateById(id: number, logUsuarioPartial?: LogUsuarioPartial, options?: any): AxiosPromise<any> {
             return localVarFp.logUsuarioControllerUpdateById(id, logUsuarioPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {LogUsuarioFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerVistaLogUsuarioUsuario(filter?: LogUsuarioFilter1, options?: any): AxiosPromise<object> {
+            return localVarFp.logUsuarioControllerVistaLogUsuarioUsuario(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerVistaLogUsuarioUsuarioCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
+            return localVarFp.logUsuarioControllerVistaLogUsuarioUsuarioCount(where, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -8242,6 +9564,1240 @@ export class LogUsuarioControllerApi extends BaseAPI {
      */
     public logUsuarioControllerUpdateById(id: number, logUsuarioPartial?: LogUsuarioPartial, options?: AxiosRequestConfig) {
         return LogUsuarioControllerApiFp(this.configuration).logUsuarioControllerUpdateById(id, logUsuarioPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {LogUsuarioFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogUsuarioControllerApi
+     */
+    public logUsuarioControllerVistaLogUsuarioUsuario(filter?: LogUsuarioFilter1, options?: AxiosRequestConfig) {
+        return LogUsuarioControllerApiFp(this.configuration).logUsuarioControllerVistaLogUsuarioUsuario(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogUsuarioControllerApi
+     */
+    public logUsuarioControllerVistaLogUsuarioUsuarioCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return LogUsuarioControllerApiFp(this.configuration).logUsuarioControllerVistaLogUsuarioUsuarioCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PaisControllerApi - axios parameter creator
+ * @export
+ */
+export const PaisControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/paises/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewPais} [newPais] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerCreate: async (newPais?: NewPais, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/paises`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newPais, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('paisControllerDeleteById', 'id', id)
+            const localVarPath = `/paises/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {PaisFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerFind: async (filter?: PaisFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/paises`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PaisFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerFindById: async (id: number, filter?: PaisFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('paisControllerFindById', 'id', id)
+            const localVarPath = `/paises/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {Pais} [pais] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerReplaceById: async (id: number, pais?: Pais, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('paisControllerReplaceById', 'id', id)
+            const localVarPath = `/paises/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(pais, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PaisPartial} [paisPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerUpdateAll: async (where?: { [key: string]: object; }, paisPartial?: PaisPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/paises`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(paisPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PaisPartial} [paisPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerUpdateById: async (id: number, paisPartial?: PaisPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('paisControllerUpdateById', 'id', id)
+            const localVarPath = `/paises/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(paisPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PaisControllerApi - functional programming interface
+ * @export
+ */
+export const PaisControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PaisControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paisControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paisControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewPais} [newPais] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paisControllerCreate(newPais?: NewPais, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Pais>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paisControllerCreate(newPais, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paisControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paisControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {PaisFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paisControllerFind(filter?: PaisFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaisWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paisControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PaisFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paisControllerFindById(id: number, filter?: PaisFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaisWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paisControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {Pais} [pais] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paisControllerReplaceById(id: number, pais?: Pais, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paisControllerReplaceById(id, pais, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PaisPartial} [paisPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paisControllerUpdateAll(where?: { [key: string]: object; }, paisPartial?: PaisPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paisControllerUpdateAll(where, paisPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PaisPartial} [paisPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paisControllerUpdateById(id: number, paisPartial?: PaisPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paisControllerUpdateById(id, paisPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PaisControllerApi - factory interface
+ * @export
+ */
+export const PaisControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PaisControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.paisControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewPais} [newPais] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerCreate(newPais?: NewPais, options?: any): AxiosPromise<Pais> {
+            return localVarFp.paisControllerCreate(newPais, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.paisControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {PaisFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerFind(filter?: PaisFilter1, options?: any): AxiosPromise<Array<PaisWithRelations>> {
+            return localVarFp.paisControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PaisFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerFindById(id: number, filter?: PaisFilter, options?: any): AxiosPromise<PaisWithRelations> {
+            return localVarFp.paisControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {Pais} [pais] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerReplaceById(id: number, pais?: Pais, options?: any): AxiosPromise<any> {
+            return localVarFp.paisControllerReplaceById(id, pais, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PaisPartial} [paisPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerUpdateAll(where?: { [key: string]: object; }, paisPartial?: PaisPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.paisControllerUpdateAll(where, paisPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PaisPartial} [paisPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paisControllerUpdateById(id: number, paisPartial?: PaisPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.paisControllerUpdateById(id, paisPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PaisControllerApi - object-oriented interface
+ * @export
+ * @class PaisControllerApi
+ * @extends {BaseAPI}
+ */
+export class PaisControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaisControllerApi
+     */
+    public paisControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return PaisControllerApiFp(this.configuration).paisControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewPais} [newPais] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaisControllerApi
+     */
+    public paisControllerCreate(newPais?: NewPais, options?: AxiosRequestConfig) {
+        return PaisControllerApiFp(this.configuration).paisControllerCreate(newPais, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaisControllerApi
+     */
+    public paisControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return PaisControllerApiFp(this.configuration).paisControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {PaisFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaisControllerApi
+     */
+    public paisControllerFind(filter?: PaisFilter1, options?: AxiosRequestConfig) {
+        return PaisControllerApiFp(this.configuration).paisControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {PaisFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaisControllerApi
+     */
+    public paisControllerFindById(id: number, filter?: PaisFilter, options?: AxiosRequestConfig) {
+        return PaisControllerApiFp(this.configuration).paisControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {Pais} [pais] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaisControllerApi
+     */
+    public paisControllerReplaceById(id: number, pais?: Pais, options?: AxiosRequestConfig) {
+        return PaisControllerApiFp(this.configuration).paisControllerReplaceById(id, pais, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {PaisPartial} [paisPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaisControllerApi
+     */
+    public paisControllerUpdateAll(where?: { [key: string]: object; }, paisPartial?: PaisPartial, options?: AxiosRequestConfig) {
+        return PaisControllerApiFp(this.configuration).paisControllerUpdateAll(where, paisPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {PaisPartial} [paisPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaisControllerApi
+     */
+    public paisControllerUpdateById(id: number, paisPartial?: PaisPartial, options?: AxiosRequestConfig) {
+        return PaisControllerApiFp(this.configuration).paisControllerUpdateById(id, paisPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PalletsMovementsControllerApi - axios parameter creator
+ * @export
+ */
+export const PalletsMovementsControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/pallets-movements/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Array<NewPalletsMovements>} [newPalletsMovements] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerCreate: async (newPalletsMovements?: Array<NewPalletsMovements>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/pallets-movements`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newPalletsMovements, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('palletsMovementsControllerDeleteById', 'id', id)
+            const localVarPath = `/pallets-movements/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {PalletsMovementsFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerFind: async (filter?: PalletsMovementsFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/pallets-movements`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PalletsMovementsFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerFindById: async (id: number, filter?: PalletsMovementsFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('palletsMovementsControllerFindById', 'id', id)
+            const localVarPath = `/pallets-movements/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PalletsMovements} [palletsMovements] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerReplaceById: async (id: number, palletsMovements?: PalletsMovements, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('palletsMovementsControllerReplaceById', 'id', id)
+            const localVarPath = `/pallets-movements/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(palletsMovements, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerUpdateAll: async (where?: { [key: string]: object; }, palletsMovementsPartial?: PalletsMovementsPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/pallets-movements`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(palletsMovementsPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerUpdateById: async (id: number, palletsMovementsPartial?: PalletsMovementsPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('palletsMovementsControllerUpdateById', 'id', id)
+            const localVarPath = `/pallets-movements/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(palletsMovementsPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PalletsMovementsControllerApi - functional programming interface
+ * @export
+ */
+export const PalletsMovementsControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PalletsMovementsControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async palletsMovementsControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Array<NewPalletsMovements>} [newPalletsMovements] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async palletsMovementsControllerCreate(newPalletsMovements?: Array<NewPalletsMovements>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PalletsMovements>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerCreate(newPalletsMovements, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async palletsMovementsControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {PalletsMovementsFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async palletsMovementsControllerFind(filter?: PalletsMovementsFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PalletsMovementsWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PalletsMovementsFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async palletsMovementsControllerFindById(id: number, filter?: PalletsMovementsFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PalletsMovementsWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PalletsMovements} [palletsMovements] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async palletsMovementsControllerReplaceById(id: number, palletsMovements?: PalletsMovements, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerReplaceById(id, palletsMovements, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async palletsMovementsControllerUpdateAll(where?: { [key: string]: object; }, palletsMovementsPartial?: PalletsMovementsPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerUpdateAll(where, palletsMovementsPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async palletsMovementsControllerUpdateById(id: number, palletsMovementsPartial?: PalletsMovementsPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerUpdateById(id, palletsMovementsPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PalletsMovementsControllerApi - factory interface
+ * @export
+ */
+export const PalletsMovementsControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PalletsMovementsControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.palletsMovementsControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<NewPalletsMovements>} [newPalletsMovements] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerCreate(newPalletsMovements?: Array<NewPalletsMovements>, options?: any): AxiosPromise<Array<PalletsMovements>> {
+            return localVarFp.palletsMovementsControllerCreate(newPalletsMovements, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.palletsMovementsControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {PalletsMovementsFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerFind(filter?: PalletsMovementsFilter1, options?: any): AxiosPromise<Array<PalletsMovementsWithRelations>> {
+            return localVarFp.palletsMovementsControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PalletsMovementsFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerFindById(id: number, filter?: PalletsMovementsFilter, options?: any): AxiosPromise<PalletsMovementsWithRelations> {
+            return localVarFp.palletsMovementsControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PalletsMovements} [palletsMovements] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerReplaceById(id: number, palletsMovements?: PalletsMovements, options?: any): AxiosPromise<any> {
+            return localVarFp.palletsMovementsControllerReplaceById(id, palletsMovements, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerUpdateAll(where?: { [key: string]: object; }, palletsMovementsPartial?: PalletsMovementsPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.palletsMovementsControllerUpdateAll(where, palletsMovementsPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletsMovementsControllerUpdateById(id: number, palletsMovementsPartial?: PalletsMovementsPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.palletsMovementsControllerUpdateById(id, palletsMovementsPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PalletsMovementsControllerApi - object-oriented interface
+ * @export
+ * @class PalletsMovementsControllerApi
+ * @extends {BaseAPI}
+ */
+export class PalletsMovementsControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PalletsMovementsControllerApi
+     */
+    public palletsMovementsControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<NewPalletsMovements>} [newPalletsMovements] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PalletsMovementsControllerApi
+     */
+    public palletsMovementsControllerCreate(newPalletsMovements?: Array<NewPalletsMovements>, options?: AxiosRequestConfig) {
+        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerCreate(newPalletsMovements, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PalletsMovementsControllerApi
+     */
+    public palletsMovementsControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {PalletsMovementsFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PalletsMovementsControllerApi
+     */
+    public palletsMovementsControllerFind(filter?: PalletsMovementsFilter1, options?: AxiosRequestConfig) {
+        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {PalletsMovementsFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PalletsMovementsControllerApi
+     */
+    public palletsMovementsControllerFindById(id: number, filter?: PalletsMovementsFilter, options?: AxiosRequestConfig) {
+        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {PalletsMovements} [palletsMovements] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PalletsMovementsControllerApi
+     */
+    public palletsMovementsControllerReplaceById(id: number, palletsMovements?: PalletsMovements, options?: AxiosRequestConfig) {
+        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerReplaceById(id, palletsMovements, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PalletsMovementsControllerApi
+     */
+    public palletsMovementsControllerUpdateAll(where?: { [key: string]: object; }, palletsMovementsPartial?: PalletsMovementsPartial, options?: AxiosRequestConfig) {
+        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerUpdateAll(where, palletsMovementsPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PalletsMovementsControllerApi
+     */
+    public palletsMovementsControllerUpdateById(id: number, palletsMovementsPartial?: PalletsMovementsPartial, options?: AxiosRequestConfig) {
+        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerUpdateById(id, palletsMovementsPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -9000,6 +11556,998 @@ export class PermisoControllerApi extends BaseAPI {
      */
     public permisoControllerVistaEmpresaRolPermiso(options?: AxiosRequestConfig) {
         return PermisoControllerApiFp(this.configuration).permisoControllerVistaEmpresaRolPermiso(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PingControllerApi - axios parameter creator
+ * @export
+ */
+export const PingControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pingControllerPing: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/ping`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PingControllerApi - functional programming interface
+ * @export
+ */
+export const PingControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PingControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pingControllerPing(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PingResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pingControllerPing(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PingControllerApi - factory interface
+ * @export
+ */
+export const PingControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PingControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pingControllerPing(options?: any): AxiosPromise<PingResponse> {
+            return localVarFp.pingControllerPing(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PingControllerApi - object-oriented interface
+ * @export
+ * @class PingControllerApi
+ * @extends {BaseAPI}
+ */
+export class PingControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PingControllerApi
+     */
+    public pingControllerPing(options?: AxiosRequestConfig) {
+        return PingControllerApiFp(this.configuration).pingControllerPing(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PlantillaEmailControllerApi - axios parameter creator
+ * @export
+ */
+export const PlantillaEmailControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/plantilla-emails/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewPlantillaEmail} [newPlantillaEmail] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerCreate: async (newPlantillaEmail?: NewPlantillaEmail, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/plantilla-emails`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newPlantillaEmail, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('plantillaEmailControllerDeleteById', 'id', id)
+            const localVarPath = `/plantilla-emails/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} nombrePlantilla 
+         * @param {InlineObject3} inlineObject3 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerEnviarEmails: async (nombrePlantilla: string, inlineObject3: InlineObject3, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'nombrePlantilla' is not null or undefined
+            assertParamExists('plantillaEmailControllerEnviarEmails', 'nombrePlantilla', nombrePlantilla)
+            // verify required parameter 'inlineObject3' is not null or undefined
+            assertParamExists('plantillaEmailControllerEnviarEmails', 'inlineObject3', inlineObject3)
+            const localVarPath = `/plantilla-emails/enviarEmails/{nombrePlantilla}`
+                .replace(`{${"nombrePlantilla"}}`, encodeURIComponent(String(nombrePlantilla)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject3, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} url 
+         * @param {InlineObject4} inlineObject4 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerEnviarQR: async (url: string, inlineObject4: InlineObject4, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'url' is not null or undefined
+            assertParamExists('plantillaEmailControllerEnviarQR', 'url', url)
+            // verify required parameter 'inlineObject4' is not null or undefined
+            assertParamExists('plantillaEmailControllerEnviarQR', 'inlineObject4', inlineObject4)
+            const localVarPath = `/plantilla-emails/enviarQR/{url}`
+                .replace(`{${"url"}}`, encodeURIComponent(String(url)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject4, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {PlantillaEmailFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerFind: async (filter?: PlantillaEmailFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/plantilla-emails`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PlantillaEmailFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerFindById: async (id: number, filter?: PlantillaEmailFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('plantillaEmailControllerFindById', 'id', id)
+            const localVarPath = `/plantilla-emails/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PlantillaEmail} [plantillaEmail] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerReplaceById: async (id: number, plantillaEmail?: PlantillaEmail, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('plantillaEmailControllerReplaceById', 'id', id)
+            const localVarPath = `/plantilla-emails/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(plantillaEmail, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PlantillaEmailPartial} [plantillaEmailPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerUpdateAll: async (where?: { [key: string]: object; }, plantillaEmailPartial?: PlantillaEmailPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/plantilla-emails`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(plantillaEmailPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PlantillaEmailPartial} [plantillaEmailPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerUpdateById: async (id: number, plantillaEmailPartial?: PlantillaEmailPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('plantillaEmailControllerUpdateById', 'id', id)
+            const localVarPath = `/plantilla-emails/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(plantillaEmailPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {PlantillaEmailFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerVistaPlantillaEmailIdioma: async (filter?: PlantillaEmailFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaPlantillaEmailIdioma`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerVistaPlantillaEmailIdiomaCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaPlantillaEmailIdiomaCount`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PlantillaEmailControllerApi - functional programming interface
+ * @export
+ */
+export const PlantillaEmailControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PlantillaEmailControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewPlantillaEmail} [newPlantillaEmail] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerCreate(newPlantillaEmail?: NewPlantillaEmail, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlantillaEmail>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerCreate(newPlantillaEmail, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} nombrePlantilla 
+         * @param {InlineObject3} inlineObject3 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject3: InlineObject3, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject3, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} url 
+         * @param {InlineObject4} inlineObject4 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerEnviarQR(url: string, inlineObject4: InlineObject4, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarQR(url, inlineObject4, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {PlantillaEmailFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerFind(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PlantillaEmailWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PlantillaEmailFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerFindById(id: number, filter?: PlantillaEmailFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlantillaEmailWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PlantillaEmail} [plantillaEmail] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerReplaceById(id: number, plantillaEmail?: PlantillaEmail, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerReplaceById(id, plantillaEmail, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PlantillaEmailPartial} [plantillaEmailPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerUpdateAll(where?: { [key: string]: object; }, plantillaEmailPartial?: PlantillaEmailPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerUpdateAll(where, plantillaEmailPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PlantillaEmailPartial} [plantillaEmailPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerUpdateById(id: number, plantillaEmailPartial?: PlantillaEmailPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerUpdateById(id, plantillaEmailPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {PlantillaEmailFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerVistaPlantillaEmailIdioma(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerVistaPlantillaEmailIdioma(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PlantillaEmailControllerApi - factory interface
+ * @export
+ */
+export const PlantillaEmailControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PlantillaEmailControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.plantillaEmailControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewPlantillaEmail} [newPlantillaEmail] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerCreate(newPlantillaEmail?: NewPlantillaEmail, options?: any): AxiosPromise<PlantillaEmail> {
+            return localVarFp.plantillaEmailControllerCreate(newPlantillaEmail, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.plantillaEmailControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} nombrePlantilla 
+         * @param {InlineObject3} inlineObject3 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject3: InlineObject3, options?: any): AxiosPromise<void> {
+            return localVarFp.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject3, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} url 
+         * @param {InlineObject4} inlineObject4 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerEnviarQR(url: string, inlineObject4: InlineObject4, options?: any): AxiosPromise<void> {
+            return localVarFp.plantillaEmailControllerEnviarQR(url, inlineObject4, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {PlantillaEmailFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerFind(filter?: PlantillaEmailFilter1, options?: any): AxiosPromise<Array<PlantillaEmailWithRelations>> {
+            return localVarFp.plantillaEmailControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PlantillaEmailFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerFindById(id: number, filter?: PlantillaEmailFilter, options?: any): AxiosPromise<PlantillaEmailWithRelations> {
+            return localVarFp.plantillaEmailControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PlantillaEmail} [plantillaEmail] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerReplaceById(id: number, plantillaEmail?: PlantillaEmail, options?: any): AxiosPromise<any> {
+            return localVarFp.plantillaEmailControllerReplaceById(id, plantillaEmail, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PlantillaEmailPartial} [plantillaEmailPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerUpdateAll(where?: { [key: string]: object; }, plantillaEmailPartial?: PlantillaEmailPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.plantillaEmailControllerUpdateAll(where, plantillaEmailPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PlantillaEmailPartial} [plantillaEmailPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerUpdateById(id: number, plantillaEmailPartial?: PlantillaEmailPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.plantillaEmailControllerUpdateById(id, plantillaEmailPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {PlantillaEmailFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerVistaPlantillaEmailIdioma(filter?: PlantillaEmailFilter1, options?: any): AxiosPromise<object> {
+            return localVarFp.plantillaEmailControllerVistaPlantillaEmailIdioma(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
+            return localVarFp.plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PlantillaEmailControllerApi - object-oriented interface
+ * @export
+ * @class PlantillaEmailControllerApi
+ * @extends {BaseAPI}
+ */
+export class PlantillaEmailControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewPlantillaEmail} [newPlantillaEmail] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerCreate(newPlantillaEmail?: NewPlantillaEmail, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerCreate(newPlantillaEmail, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} nombrePlantilla 
+     * @param {InlineObject3} inlineObject3 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject3: InlineObject3, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject3, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} url 
+     * @param {InlineObject4} inlineObject4 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerEnviarQR(url: string, inlineObject4: InlineObject4, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarQR(url, inlineObject4, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {PlantillaEmailFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerFind(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {PlantillaEmailFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerFindById(id: number, filter?: PlantillaEmailFilter, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {PlantillaEmail} [plantillaEmail] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerReplaceById(id: number, plantillaEmail?: PlantillaEmail, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerReplaceById(id, plantillaEmail, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {PlantillaEmailPartial} [plantillaEmailPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerUpdateAll(where?: { [key: string]: object; }, plantillaEmailPartial?: PlantillaEmailPartial, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerUpdateAll(where, plantillaEmailPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {PlantillaEmailPartial} [plantillaEmailPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerUpdateById(id: number, plantillaEmailPartial?: PlantillaEmailPartial, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerUpdateById(id, plantillaEmailPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {PlantillaEmailFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerVistaPlantillaEmailIdioma(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerVistaPlantillaEmailIdioma(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -10433,7 +13981,7 @@ export const SeccionControllerApiAxiosParamCreator = function (configuration?: C
          * @throws {RequiredError}
          */
         seccionControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/seccions/count`;
+            const localVarPath = `/secciones/count`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10471,7 +14019,7 @@ export const SeccionControllerApiAxiosParamCreator = function (configuration?: C
          * @throws {RequiredError}
          */
         seccionControllerCreate: async (newSeccion?: NewSeccion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/seccions`;
+            const localVarPath = `/secciones`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10510,7 +14058,7 @@ export const SeccionControllerApiAxiosParamCreator = function (configuration?: C
         seccionControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('seccionControllerDeleteById', 'id', id)
-            const localVarPath = `/seccions/{id}`
+            const localVarPath = `/secciones/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10545,7 +14093,7 @@ export const SeccionControllerApiAxiosParamCreator = function (configuration?: C
          * @throws {RequiredError}
          */
         seccionControllerFind: async (filter?: SeccionFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/seccions`;
+            const localVarPath = `/secciones`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10586,7 +14134,7 @@ export const SeccionControllerApiAxiosParamCreator = function (configuration?: C
         seccionControllerFindById: async (id: number, filter?: SeccionFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('seccionControllerFindById', 'id', id)
-            const localVarPath = `/seccions/{id}`
+            const localVarPath = `/secciones/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10628,7 +14176,7 @@ export const SeccionControllerApiAxiosParamCreator = function (configuration?: C
         seccionControllerReplaceById: async (id: number, seccion?: Seccion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('seccionControllerReplaceById', 'id', id)
-            const localVarPath = `/seccions/{id}`
+            const localVarPath = `/secciones/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10667,7 +14215,7 @@ export const SeccionControllerApiAxiosParamCreator = function (configuration?: C
          * @throws {RequiredError}
          */
         seccionControllerUpdateAll: async (where?: { [key: string]: object; }, seccionPartial?: SeccionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/seccions`;
+            const localVarPath = `/secciones`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10711,7 +14259,7 @@ export const SeccionControllerApiAxiosParamCreator = function (configuration?: C
         seccionControllerUpdateById: async (id: number, seccionPartial?: SeccionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('seccionControllerUpdateById', 'id', id)
-            const localVarPath = `/seccions/{id}`
+            const localVarPath = `/secciones/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -11348,6 +14896,82 @@ export const TipoArchivoControllerApiAxiosParamCreator = function (configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {TipoArchivoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoArchivoControllerVistaTipoArchivoEmpresaSeccion: async (filter?: TipoArchivoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaTipoArchivoEmpresaSeccion`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoArchivoControllerVistaTipoArchivoEmpresaSeccionCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaTipoArchivoEmpresaSeccionCount`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -11442,6 +15066,26 @@ export const TipoArchivoControllerApiFp = function(configuration?: Configuration
             const localVarAxiosArgs = await localVarAxiosParamCreator.tipoArchivoControllerUpdateById(id, tipoArchivoPartial, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @param {TipoArchivoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoArchivoControllerVistaTipoArchivoEmpresaSeccion(filter?: TipoArchivoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoArchivoControllerVistaTipoArchivoEmpresaSeccion(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoArchivoControllerVistaTipoArchivoEmpresaSeccionCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoArchivoControllerVistaTipoArchivoEmpresaSeccionCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -11527,6 +15171,24 @@ export const TipoArchivoControllerApiFactory = function (configuration?: Configu
          */
         tipoArchivoControllerUpdateById(id: number, tipoArchivoPartial?: TipoArchivoPartial, options?: any): AxiosPromise<any> {
             return localVarFp.tipoArchivoControllerUpdateById(id, tipoArchivoPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TipoArchivoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoArchivoControllerVistaTipoArchivoEmpresaSeccion(filter?: TipoArchivoFilter1, options?: any): AxiosPromise<object> {
+            return localVarFp.tipoArchivoControllerVistaTipoArchivoEmpresaSeccion(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoArchivoControllerVistaTipoArchivoEmpresaSeccionCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
+            return localVarFp.tipoArchivoControllerVistaTipoArchivoEmpresaSeccionCount(where, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -11629,6 +15291,28 @@ export class TipoArchivoControllerApi extends BaseAPI {
     public tipoArchivoControllerUpdateById(id: number, tipoArchivoPartial?: TipoArchivoPartial, options?: AxiosRequestConfig) {
         return TipoArchivoControllerApiFp(this.configuration).tipoArchivoControllerUpdateById(id, tipoArchivoPartial, options).then((request) => request(this.axios, this.basePath));
     }
+
+    /**
+     * 
+     * @param {TipoArchivoFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoArchivoControllerApi
+     */
+    public tipoArchivoControllerVistaTipoArchivoEmpresaSeccion(filter?: TipoArchivoFilter1, options?: AxiosRequestConfig) {
+        return TipoArchivoControllerApiFp(this.configuration).tipoArchivoControllerVistaTipoArchivoEmpresaSeccion(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoArchivoControllerApi
+     */
+    public tipoArchivoControllerVistaTipoArchivoEmpresaSeccionCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TipoArchivoControllerApiFp(this.configuration).tipoArchivoControllerVistaTipoArchivoEmpresaSeccionCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
 }
 
 
@@ -11640,12 +15324,50 @@ export const TraduccionControllerApiAxiosParamCreator = function (configuration?
     return {
         /**
          * 
+         * @param {string} [iso] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionControllerBuscarTraduccion: async (iso?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/buscarTraduccion`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (iso !== undefined) {
+                localVarQueryParameter['iso'] = iso;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         traduccionControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/traduccions/count`;
+            const localVarPath = `/traducciones/count`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11683,7 +15405,7 @@ export const TraduccionControllerApiAxiosParamCreator = function (configuration?
          * @throws {RequiredError}
          */
         traduccionControllerCreate: async (newTraduccion?: NewTraduccion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/traduccions`;
+            const localVarPath = `/traducciones`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11722,7 +15444,7 @@ export const TraduccionControllerApiAxiosParamCreator = function (configuration?
         traduccionControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('traduccionControllerDeleteById', 'id', id)
-            const localVarPath = `/traduccions/{id}`
+            const localVarPath = `/traducciones/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -11757,7 +15479,7 @@ export const TraduccionControllerApiAxiosParamCreator = function (configuration?
          * @throws {RequiredError}
          */
         traduccionControllerFind: async (filter?: TraduccionFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/traduccions`;
+            const localVarPath = `/traducciones`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11798,7 +15520,7 @@ export const TraduccionControllerApiAxiosParamCreator = function (configuration?
         traduccionControllerFindById: async (id: number, filter?: TraduccionFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('traduccionControllerFindById', 'id', id)
-            const localVarPath = `/traduccions/{id}`
+            const localVarPath = `/traducciones/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -11840,7 +15562,7 @@ export const TraduccionControllerApiAxiosParamCreator = function (configuration?
         traduccionControllerReplaceById: async (id: number, traduccion?: Traduccion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('traduccionControllerReplaceById', 'id', id)
-            const localVarPath = `/traduccions/{id}`
+            const localVarPath = `/traducciones/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -11879,7 +15601,7 @@ export const TraduccionControllerApiAxiosParamCreator = function (configuration?
          * @throws {RequiredError}
          */
         traduccionControllerUpdateAll: async (where?: { [key: string]: object; }, traduccionPartial?: TraduccionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/traduccions`;
+            const localVarPath = `/traducciones`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11923,7 +15645,7 @@ export const TraduccionControllerApiAxiosParamCreator = function (configuration?
         traduccionControllerUpdateById: async (id: number, traduccionPartial?: TraduccionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('traduccionControllerUpdateById', 'id', id)
-            const localVarPath = `/traduccions/{id}`
+            const localVarPath = `/traducciones/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -11954,6 +15676,82 @@ export const TraduccionControllerApiAxiosParamCreator = function (configuration?
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {TraduccionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionControllerVistaTraduccionIdioma: async (filter?: TraduccionFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaTraduccionIdioma`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionControllerVistaTraduccionIdiomaCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaTraduccionIdiomaCount`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -11964,6 +15762,16 @@ export const TraduccionControllerApiAxiosParamCreator = function (configuration?
 export const TraduccionControllerApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = TraduccionControllerApiAxiosParamCreator(configuration)
     return {
+        /**
+         * 
+         * @param {string} [iso] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionControllerBuscarTraduccion(iso?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionControllerBuscarTraduccion(iso, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
         /**
          * 
          * @param {{ [key: string]: object; }} [where] 
@@ -12048,6 +15856,26 @@ export const TraduccionControllerApiFp = function(configuration?: Configuration)
             const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionControllerUpdateById(id, traduccionPartial, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @param {TraduccionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionControllerVistaTraduccionIdioma(filter?: TraduccionFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionControllerVistaTraduccionIdioma(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionControllerVistaTraduccionIdiomaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionControllerVistaTraduccionIdiomaCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -12058,6 +15886,15 @@ export const TraduccionControllerApiFp = function(configuration?: Configuration)
 export const TraduccionControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = TraduccionControllerApiFp(configuration)
     return {
+        /**
+         * 
+         * @param {string} [iso] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionControllerBuscarTraduccion(iso?: string, options?: any): AxiosPromise<object> {
+            return localVarFp.traduccionControllerBuscarTraduccion(iso, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @param {{ [key: string]: object; }} [where] 
@@ -12134,6 +15971,24 @@ export const TraduccionControllerApiFactory = function (configuration?: Configur
         traduccionControllerUpdateById(id: number, traduccionPartial?: TraduccionPartial, options?: any): AxiosPromise<any> {
             return localVarFp.traduccionControllerUpdateById(id, traduccionPartial, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {TraduccionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionControllerVistaTraduccionIdioma(filter?: TraduccionFilter1, options?: any): AxiosPromise<object> {
+            return localVarFp.traduccionControllerVistaTraduccionIdioma(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionControllerVistaTraduccionIdiomaCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
+            return localVarFp.traduccionControllerVistaTraduccionIdiomaCount(where, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -12144,6 +15999,17 @@ export const TraduccionControllerApiFactory = function (configuration?: Configur
  * @extends {BaseAPI}
  */
 export class TraduccionControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} [iso] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionControllerApi
+     */
+    public traduccionControllerBuscarTraduccion(iso?: string, options?: AxiosRequestConfig) {
+        return TraduccionControllerApiFp(this.configuration).traduccionControllerBuscarTraduccion(iso, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {{ [key: string]: object; }} [where] 
@@ -12234,6 +16100,28 @@ export class TraduccionControllerApi extends BaseAPI {
      */
     public traduccionControllerUpdateById(id: number, traduccionPartial?: TraduccionPartial, options?: AxiosRequestConfig) {
         return TraduccionControllerApiFp(this.configuration).traduccionControllerUpdateById(id, traduccionPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TraduccionFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionControllerApi
+     */
+    public traduccionControllerVistaTraduccionIdioma(filter?: TraduccionFilter1, options?: AxiosRequestConfig) {
+        return TraduccionControllerApiFp(this.configuration).traduccionControllerVistaTraduccionIdioma(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionControllerApi
+     */
+    public traduccionControllerVistaTraduccionIdiomaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TraduccionControllerApiFp(this.configuration).traduccionControllerVistaTraduccionIdiomaCount(where, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -13451,612 +17339,6 @@ export class UsuarioPasswordHistoricoControllerApi extends BaseAPI {
 
 
 /**
- * UsuarioRestablecerPasswordControllerApi - axios parameter creator
- * @export
- */
-export const UsuarioRestablecerPasswordControllerApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/usuario-restablecer-passwords/count`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {NewUsuarioRestablecerPassword} [newUsuarioRestablecerPassword] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerCreate: async (newUsuarioRestablecerPassword?: NewUsuarioRestablecerPassword, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/usuario-restablecer-passwords`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newUsuarioRestablecerPassword, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('usuarioRestablecerPasswordControllerDeleteById', 'id', id)
-            const localVarPath = `/usuario-restablecer-passwords/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {UsuarioRestablecerPasswordFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerFind: async (filter?: UsuarioRestablecerPasswordFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/usuario-restablecer-passwords`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UsuarioRestablecerPasswordFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerFindById: async (id: number, filter?: UsuarioRestablecerPasswordFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('usuarioRestablecerPasswordControllerFindById', 'id', id)
-            const localVarPath = `/usuario-restablecer-passwords/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UsuarioRestablecerPassword} [usuarioRestablecerPassword] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerReplaceById: async (id: number, usuarioRestablecerPassword?: UsuarioRestablecerPassword, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('usuarioRestablecerPasswordControllerReplaceById', 'id', id)
-            const localVarPath = `/usuario-restablecer-passwords/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(usuarioRestablecerPassword, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {UsuarioRestablecerPasswordPartial} [usuarioRestablecerPasswordPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerUpdateAll: async (where?: { [key: string]: object; }, usuarioRestablecerPasswordPartial?: UsuarioRestablecerPasswordPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/usuario-restablecer-passwords`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(usuarioRestablecerPasswordPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UsuarioRestablecerPasswordPartial} [usuarioRestablecerPasswordPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerUpdateById: async (id: number, usuarioRestablecerPasswordPartial?: UsuarioRestablecerPasswordPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('usuarioRestablecerPasswordControllerUpdateById', 'id', id)
-            const localVarPath = `/usuario-restablecer-passwords/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(usuarioRestablecerPasswordPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * UsuarioRestablecerPasswordControllerApi - functional programming interface
- * @export
- */
-export const UsuarioRestablecerPasswordControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = UsuarioRestablecerPasswordControllerApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usuarioRestablecerPasswordControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuarioRestablecerPasswordControllerCount(where, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {NewUsuarioRestablecerPassword} [newUsuarioRestablecerPassword] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usuarioRestablecerPasswordControllerCreate(newUsuarioRestablecerPassword?: NewUsuarioRestablecerPassword, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsuarioRestablecerPassword>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuarioRestablecerPasswordControllerCreate(newUsuarioRestablecerPassword, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usuarioRestablecerPasswordControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuarioRestablecerPasswordControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {UsuarioRestablecerPasswordFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usuarioRestablecerPasswordControllerFind(filter?: UsuarioRestablecerPasswordFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UsuarioRestablecerPasswordWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuarioRestablecerPasswordControllerFind(filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UsuarioRestablecerPasswordFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usuarioRestablecerPasswordControllerFindById(id: number, filter?: UsuarioRestablecerPasswordFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsuarioRestablecerPasswordWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuarioRestablecerPasswordControllerFindById(id, filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UsuarioRestablecerPassword} [usuarioRestablecerPassword] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usuarioRestablecerPasswordControllerReplaceById(id: number, usuarioRestablecerPassword?: UsuarioRestablecerPassword, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuarioRestablecerPasswordControllerReplaceById(id, usuarioRestablecerPassword, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {UsuarioRestablecerPasswordPartial} [usuarioRestablecerPasswordPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usuarioRestablecerPasswordControllerUpdateAll(where?: { [key: string]: object; }, usuarioRestablecerPasswordPartial?: UsuarioRestablecerPasswordPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuarioRestablecerPasswordControllerUpdateAll(where, usuarioRestablecerPasswordPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UsuarioRestablecerPasswordPartial} [usuarioRestablecerPasswordPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usuarioRestablecerPasswordControllerUpdateById(id: number, usuarioRestablecerPasswordPartial?: UsuarioRestablecerPasswordPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuarioRestablecerPasswordControllerUpdateById(id, usuarioRestablecerPasswordPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * UsuarioRestablecerPasswordControllerApi - factory interface
- * @export
- */
-export const UsuarioRestablecerPasswordControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = UsuarioRestablecerPasswordControllerApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.usuarioRestablecerPasswordControllerCount(where, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {NewUsuarioRestablecerPassword} [newUsuarioRestablecerPassword] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerCreate(newUsuarioRestablecerPassword?: NewUsuarioRestablecerPassword, options?: any): AxiosPromise<UsuarioRestablecerPassword> {
-            return localVarFp.usuarioRestablecerPasswordControllerCreate(newUsuarioRestablecerPassword, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.usuarioRestablecerPasswordControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {UsuarioRestablecerPasswordFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerFind(filter?: UsuarioRestablecerPasswordFilter1, options?: any): AxiosPromise<Array<UsuarioRestablecerPasswordWithRelations>> {
-            return localVarFp.usuarioRestablecerPasswordControllerFind(filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UsuarioRestablecerPasswordFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerFindById(id: number, filter?: UsuarioRestablecerPasswordFilter, options?: any): AxiosPromise<UsuarioRestablecerPasswordWithRelations> {
-            return localVarFp.usuarioRestablecerPasswordControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UsuarioRestablecerPassword} [usuarioRestablecerPassword] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerReplaceById(id: number, usuarioRestablecerPassword?: UsuarioRestablecerPassword, options?: any): AxiosPromise<any> {
-            return localVarFp.usuarioRestablecerPasswordControllerReplaceById(id, usuarioRestablecerPassword, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {UsuarioRestablecerPasswordPartial} [usuarioRestablecerPasswordPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerUpdateAll(where?: { [key: string]: object; }, usuarioRestablecerPasswordPartial?: UsuarioRestablecerPasswordPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.usuarioRestablecerPasswordControllerUpdateAll(where, usuarioRestablecerPasswordPartial, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UsuarioRestablecerPasswordPartial} [usuarioRestablecerPasswordPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuarioRestablecerPasswordControllerUpdateById(id: number, usuarioRestablecerPasswordPartial?: UsuarioRestablecerPasswordPartial, options?: any): AxiosPromise<any> {
-            return localVarFp.usuarioRestablecerPasswordControllerUpdateById(id, usuarioRestablecerPasswordPartial, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * UsuarioRestablecerPasswordControllerApi - object-oriented interface
- * @export
- * @class UsuarioRestablecerPasswordControllerApi
- * @extends {BaseAPI}
- */
-export class UsuarioRestablecerPasswordControllerApi extends BaseAPI {
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsuarioRestablecerPasswordControllerApi
-     */
-    public usuarioRestablecerPasswordControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return UsuarioRestablecerPasswordControllerApiFp(this.configuration).usuarioRestablecerPasswordControllerCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {NewUsuarioRestablecerPassword} [newUsuarioRestablecerPassword] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsuarioRestablecerPasswordControllerApi
-     */
-    public usuarioRestablecerPasswordControllerCreate(newUsuarioRestablecerPassword?: NewUsuarioRestablecerPassword, options?: AxiosRequestConfig) {
-        return UsuarioRestablecerPasswordControllerApiFp(this.configuration).usuarioRestablecerPasswordControllerCreate(newUsuarioRestablecerPassword, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsuarioRestablecerPasswordControllerApi
-     */
-    public usuarioRestablecerPasswordControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return UsuarioRestablecerPasswordControllerApiFp(this.configuration).usuarioRestablecerPasswordControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {UsuarioRestablecerPasswordFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsuarioRestablecerPasswordControllerApi
-     */
-    public usuarioRestablecerPasswordControllerFind(filter?: UsuarioRestablecerPasswordFilter1, options?: AxiosRequestConfig) {
-        return UsuarioRestablecerPasswordControllerApiFp(this.configuration).usuarioRestablecerPasswordControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {UsuarioRestablecerPasswordFilter} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsuarioRestablecerPasswordControllerApi
-     */
-    public usuarioRestablecerPasswordControllerFindById(id: number, filter?: UsuarioRestablecerPasswordFilter, options?: AxiosRequestConfig) {
-        return UsuarioRestablecerPasswordControllerApiFp(this.configuration).usuarioRestablecerPasswordControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {UsuarioRestablecerPassword} [usuarioRestablecerPassword] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsuarioRestablecerPasswordControllerApi
-     */
-    public usuarioRestablecerPasswordControllerReplaceById(id: number, usuarioRestablecerPassword?: UsuarioRestablecerPassword, options?: AxiosRequestConfig) {
-        return UsuarioRestablecerPasswordControllerApiFp(this.configuration).usuarioRestablecerPasswordControllerReplaceById(id, usuarioRestablecerPassword, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {UsuarioRestablecerPasswordPartial} [usuarioRestablecerPasswordPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsuarioRestablecerPasswordControllerApi
-     */
-    public usuarioRestablecerPasswordControllerUpdateAll(where?: { [key: string]: object; }, usuarioRestablecerPasswordPartial?: UsuarioRestablecerPasswordPartial, options?: AxiosRequestConfig) {
-        return UsuarioRestablecerPasswordControllerApiFp(this.configuration).usuarioRestablecerPasswordControllerUpdateAll(where, usuarioRestablecerPasswordPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {UsuarioRestablecerPasswordPartial} [usuarioRestablecerPasswordPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsuarioRestablecerPasswordControllerApi
-     */
-    public usuarioRestablecerPasswordControllerUpdateById(id: number, usuarioRestablecerPasswordPartial?: UsuarioRestablecerPasswordPartial, options?: AxiosRequestConfig) {
-        return UsuarioRestablecerPasswordControllerApiFp(this.configuration).usuarioRestablecerPasswordControllerUpdateById(id, usuarioRestablecerPasswordPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
  * UsuariosControllerApi - axios parameter creator
  * @export
  */
@@ -14256,13 +17538,13 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @param {InlineObject3} inlineObject3 
+         * @param {InlineObject5} inlineObject5 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerLogin: async (inlineObject3: InlineObject3, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'inlineObject3' is not null or undefined
-            assertParamExists('usuariosControllerLogin', 'inlineObject3', inlineObject3)
+        usuariosControllerLogin: async (inlineObject5: InlineObject5, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'inlineObject5' is not null or undefined
+            assertParamExists('usuariosControllerLogin', 'inlineObject5', inlineObject5)
             const localVarPath = `/usuarios/login`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -14286,7 +17568,7 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject3, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject5, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -14332,11 +17614,50 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @param {InlineObject4} [inlineObject4] 
+         * @param {InlineObject6} inlineObject6 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRegister: async (inlineObject4?: InlineObject4, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        usuariosControllerRecuperarPassword: async (inlineObject6: InlineObject6, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'inlineObject6' is not null or undefined
+            assertParamExists('usuariosControllerRecuperarPassword', 'inlineObject6', inlineObject6)
+            const localVarPath = `/usuarios/recuperarPassword`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject6, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {InlineObject7} [inlineObject7] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usuariosControllerRegister: async (inlineObject7?: InlineObject7, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/usuarios/register`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -14360,7 +17681,7 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject4, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject7, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -14534,6 +17855,43 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
+         * @param {number} codigoRecuperacion 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usuariosControllerValidarCodigoRecuperacion: async (codigoRecuperacion: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'codigoRecuperacion' is not null or undefined
+            assertParamExists('usuariosControllerValidarCodigoRecuperacion', 'codigoRecuperacion', codigoRecuperacion)
+            const localVarPath = `/usuarios/validarCodigoRecuperacion/{codigoRecuperacion}`
+                .replace(`{${"codigoRecuperacion"}}`, encodeURIComponent(String(codigoRecuperacion)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {UsuarioFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -14671,12 +18029,12 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {InlineObject3} inlineObject3 
+         * @param {InlineObject5} inlineObject5 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerLogin(inlineObject3: InlineObject3, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerLogin(inlineObject3, options);
+        async usuariosControllerLogin(inlineObject5: InlineObject5, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerLogin(inlineObject5, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -14691,12 +18049,22 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {InlineObject4} [inlineObject4] 
+         * @param {InlineObject6} inlineObject6 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerRegister(inlineObject4?: InlineObject4, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRegister(inlineObject4, options);
+        async usuariosControllerRecuperarPassword(inlineObject6: InlineObject6, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRecuperarPassword(inlineObject6, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {InlineObject7} [inlineObject7] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usuariosControllerRegister(inlineObject7?: InlineObject7, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRegister(inlineObject7, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -14741,6 +18109,16 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
          */
         async usuariosControllerUpdateByIdCredenciales(idUsuario: number, usuarioCredencialesPartial?: UsuarioCredencialesPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerUpdateByIdCredenciales(idUsuario, usuarioCredencialesPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} codigoRecuperacion 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usuariosControllerValidarCodigoRecuperacion(codigoRecuperacion: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<number>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerValidarCodigoRecuperacion(codigoRecuperacion, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -14821,12 +18199,12 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @param {InlineObject3} inlineObject3 
+         * @param {InlineObject5} inlineObject5 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerLogin(inlineObject3: InlineObject3, options?: any): AxiosPromise<InlineResponse200> {
-            return localVarFp.usuariosControllerLogin(inlineObject3, options).then((request) => request(axios, basePath));
+        usuariosControllerLogin(inlineObject5: InlineObject5, options?: any): AxiosPromise<InlineResponse200> {
+            return localVarFp.usuariosControllerLogin(inlineObject5, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -14839,12 +18217,21 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @param {InlineObject4} [inlineObject4] 
+         * @param {InlineObject6} inlineObject6 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRegister(inlineObject4?: InlineObject4, options?: any): AxiosPromise<InlineResponse2001> {
-            return localVarFp.usuariosControllerRegister(inlineObject4, options).then((request) => request(axios, basePath));
+        usuariosControllerRecuperarPassword(inlineObject6: InlineObject6, options?: any): AxiosPromise<void> {
+            return localVarFp.usuariosControllerRecuperarPassword(inlineObject6, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {InlineObject7} [inlineObject7] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usuariosControllerRegister(inlineObject7?: InlineObject7, options?: any): AxiosPromise<InlineResponse2001> {
+            return localVarFp.usuariosControllerRegister(inlineObject7, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -14885,6 +18272,15 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
          */
         usuariosControllerUpdateByIdCredenciales(idUsuario: number, usuarioCredencialesPartial?: UsuarioCredencialesPartial, options?: any): AxiosPromise<any> {
             return localVarFp.usuariosControllerUpdateByIdCredenciales(idUsuario, usuarioCredencialesPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} codigoRecuperacion 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usuariosControllerValidarCodigoRecuperacion(codigoRecuperacion: number, options?: any): AxiosPromise<number> {
+            return localVarFp.usuariosControllerValidarCodigoRecuperacion(codigoRecuperacion, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -14972,13 +18368,13 @@ export class UsuariosControllerApi extends BaseAPI {
 
     /**
      * 
-     * @param {InlineObject3} inlineObject3 
+     * @param {InlineObject5} inlineObject5 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsuariosControllerApi
      */
-    public usuariosControllerLogin(inlineObject3: InlineObject3, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerLogin(inlineObject3, options).then((request) => request(this.axios, this.basePath));
+    public usuariosControllerLogin(inlineObject5: InlineObject5, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerLogin(inlineObject5, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -14994,13 +18390,24 @@ export class UsuariosControllerApi extends BaseAPI {
 
     /**
      * 
-     * @param {InlineObject4} [inlineObject4] 
+     * @param {InlineObject6} inlineObject6 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsuariosControllerApi
      */
-    public usuariosControllerRegister(inlineObject4?: InlineObject4, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerRegister(inlineObject4, options).then((request) => request(this.axios, this.basePath));
+    public usuariosControllerRecuperarPassword(inlineObject6: InlineObject6, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerRecuperarPassword(inlineObject6, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {InlineObject7} [inlineObject7] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsuariosControllerApi
+     */
+    public usuariosControllerRegister(inlineObject7?: InlineObject7, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerRegister(inlineObject7, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -15049,6 +18456,17 @@ export class UsuariosControllerApi extends BaseAPI {
      */
     public usuariosControllerUpdateByIdCredenciales(idUsuario: number, usuarioCredencialesPartial?: UsuarioCredencialesPartial, options?: AxiosRequestConfig) {
         return UsuariosControllerApiFp(this.configuration).usuariosControllerUpdateByIdCredenciales(idUsuario, usuarioCredencialesPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} codigoRecuperacion 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsuariosControllerApi
+     */
+    public usuariosControllerValidarCodigoRecuperacion(codigoRecuperacion: number, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerValidarCodigoRecuperacion(codigoRecuperacion, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

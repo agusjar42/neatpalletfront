@@ -9,9 +9,16 @@ import { Password } from "primereact/password";
 import Link from "next/link"; // Importa Link para la navegación
 import { useAuth } from "@/app/auth/AuthContext";
 import jwt from "@/app/auth/jwt/useJwt";
-
-
+import { postLogUsuario } from "@/app/api-endpoints/log_usuario";
+import { getIdioma } from "@/app/api-endpoints/idioma";
+import { useRouter } from 'next/navigation';
+import { ProgressSpinner } from 'primereact/progressspinner';
+import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
+import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
+import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
+import { obtenerTodosLosPermisos } from "@/app/components/shared/componentes";
 const Login = () => {
+    const router = useRouter();
     const config = jwt.jwtConfig;
     //const apiUsuarios = new UsuariosControllerApi(settings)
     const [rememberMe, setRememberMe] = useState(false);
@@ -19,43 +26,111 @@ const Login = () => {
     const [message, setMessage] = useState("");
     const dark = layoutConfig.colorScheme !== "light";
 
-    const { login } = useAuth();
+    const { loginSinDashboard, login } = useAuth();
     const toast = useRef(null);
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
+    const [registroUsuario, setRegistroUsuario] = useState(true);
     const [deshabilitarLink, setDeshabilitarLink] = useState(false);
     const [deshabilitarBoton, setDeshabilitarBoton] = useState(false);
 
 
     useEffect(() => {
-        //Obtiene el mensaje del toast de la pantalla de recuperar contraseña
-        const toastMensaje = localStorage.getItem('toastMensaje');
-        if (toastMensaje && toastMensaje.length > 0) {
-            toast.current?.show({
-                severity: "success",
-                summary: "OK",
-                detail: toastMensaje,
-                life: 3000,
-            });
-            //Limpiar el local storage
-            localStorage.removeItem('toastMensaje');
+        const hash = window.location.hash;
+        const obj = {};
+        try {
+            //Obtiene el hash de la URL y le quita el # al principio
+            const paramsStr = atob(hash.slice(1))
+            //Transforma el string en un objeto
+            const params = new URLSearchParams(paramsStr);
+            for (const [key, value] of params.entries()) {
+                obj[key] = value;
+            }
+        } catch (error) {
+            console.error('Error al obtener el hash de la URL:', error);
         }
+        if (obj.email && obj.password && obj.tipo && obj.rol) {
+            //Limia el local strorage
+            localStorage.clear();
+            //Almacena el tipo y el rol en el localstorage
+            localStorage.setItem('tipo', obj.tipo);
+            localStorage.setItem('rol', obj.rol);
+            //Hace el login
+            loginRegistro(obj.email, obj.password);
+        }
+        //Si se accede a la pagina de login normalmente
+        else {
+            setRegistroUsuario(false);
+            //Obtiene el mensaje del toast de la pantalla de recuperar contraseña
+            const toastMensaje = localStorage.getItem('toastMensaje');
+            if (toastMensaje && toastMensaje.length > 0) {
+                toast.current?.show({
+                    severity: "success",
+                    summary: "OK",
+                    detail: toastMensaje,
+                    life: 3000,
+                });
+                //Limpiar el local storage
+                localStorage.removeItem('toastMensaje');
+            }
+        }
+
     }, []);
+
+    //Funcion para acotar codigo
+    const loginGenerico = async (usuario, password) => {
+        const res = await jwt.login({ mail: usuario, password });
+        //Si el login da excepcion, lanza una excepcion y se captura en el catch
+        if (res.data.message) {
+            throw new Error(res.data.message);
+        }
+        const data = { ...res.data.userData, accessToken: res.data.accessToken, refreshToken: res.data.refreshToken };
+
+        console.log('Usuario autenticado: ', data);
+
+        return data;
+    }
+
+    //El login que tiene que hacer para registrar al usuario
+    const loginRegistro = async (usuario, password) => {
+        bloquearPantalla(true);
+        try {
+            const data = await loginGenerico(usuario, password);
+            if (data.accessToken) {
+                loginSinDashboard(data.accessToken, rememberMe, data);
+                //await almacenarLogin(data);
+                //Obtenemos los roles del sistema
+                const rol = localStorage.getItem('rol');
+                if (rol === 'Familia_acogida') {
+                    document.cookie = `CrearRegistro=true; max-age=60; path=/; secure;`;
+                    router.push(`/familia_acogida/`);
+                }
+                else {
+                    router.push(`/usuarios/?usuario=0`)
+                }
+
+
+
+                bloquearPantalla(false);
+            } else {
+                console.error('El token es undefined');
+                bloquearPantalla(false);
+            }
+        } catch (error) {
+            setMessage('Las credenciales del usuario son incorrectas.');
+            bloquearPantalla(false);
+        }
+    }
+
+
 
     const manejarLogin = async () => {
         bloquearPantalla(true);
         try {
-            const res = await jwt.login({ mail: usuario, password });
-            const data = { ...res.data.userData, accessToken: res.data.accessToken, refreshToken: res.data.refreshToken };
-
-            console.log('Usuario autenticado: ', data);
-
-            localStorage.setItem(config.storageTokenKeyName, JSON.stringify(data.accessToken));
-            localStorage.setItem('userDataNeatpallet', JSON.stringify({ ...data }));
-            localStorage.setItem('empresa', '1'); //De momento dejamos la empresa 1 fija
-
+            const data = await loginGenerico(usuario, password);
             if (data.accessToken) {
-                login(data.accessToken, rememberMe);
+                login(data.accessToken, rememberMe, data);
+                //await almacenarLogin(data);
                 bloquearPantalla(false);
             } else {
                 console.error('El token es undefined');
@@ -72,13 +147,14 @@ const Login = () => {
         setDeshabilitarBoton(bloquear);
         //Link no tiene parametro disabled, por lo que hay que hacer una ligera chapuza
         setDeshabilitarLink(bloquear);
-        if(bloquear){
+        if (bloquear) {
             document.body.style.cursor = 'wait';
         }
-        else{
+        else {
             document.body.style.cursor = 'default';
-        } 
+        }
     }
+
 
     return (
         <>
@@ -112,90 +188,102 @@ const Login = () => {
             </svg>
             <div className="px-5 min-h-screen flex justify-content-center align-items-center">
                 <Toast ref={toast} position="top-right" />
-                <div className="border-1 surface-border surface-card border-round py-7 px-4 md:px-7 z-1">
-                    <div className="mb-4">
-                        <div className="text-900 text-xl font-bold mb-2">
-                            Iniciar sesión
-                        </div>
-                        <span className="text-600 font-medium">
-                            Por favor ingresa tus credenciales
-                        </span>
-                    </div>
-                    <div className="flex flex-column">
-                        {message && <p style={{ color: 'red' }}>{message}</p>}
-                        <span className="p-input-icon-left w-full mb-4">
-                            <i className="pi pi-envelope"></i>
-                            <InputText
-                                id="email"
-                                type="text"
-                                value={usuario}
-                                onChange={(event) => setUsuario(event.target.value)}
-                                className="w-full md:w-25rem"
-                                placeholder="Email"
-                            />
-                        </span>
-                        <span className="p-input-icon-left w-full mb-4">
-                            <i className="pi pi-lock z-2"></i>
-                            <Password
-                                id="password"
-                                className="w-full md:w-25rem"
-                                type="text"
-                                inputClassName="w-full md:w-25rem"
-                                onChange={(e) => setPassword(e.target.value)}
-                                placeholder='Contraseña'
-                                toggleMask
-                                feedback={false}
-                                inputStyle={{ paddingLeft: "2.5rem" }}
-                            />
-                        </span>
-                        <div className="mb-4 flex flex-wrap gap-3">
-                            <div>
-                                <Checkbox
-                                    name="checkbox"
-                                    checked={rememberMe}
-                                    onChange={(e) =>
-                                        setRememberMe(e.checked ?? false)
-                                    }
-                                    className="mr-2"
-                                ></Checkbox>
-                                <label
-                                    htmlFor="checkbox"
-                                    className="text-900 font-medium mr-8"
-                                >
-                                    Recuérdame
-                                </label>
+                {(!registroUsuario) && (
+                    <div className="border-1 surface-border surface-card border-round py-7 px-4 md:px-7 z-1">
+                        <div className="mb-4">
+                            <div className="text-900 text-xl font-bold mb-2">
+                                Iniciar sesión
                             </div>
-                            {deshabilitarLink ? (
-                                <span
-                                    style={{
-                                        color: 'gray',
-                                        cursor: 'not-allowed',
-                                        textDecoration: 'none',
-                                        marginLeft: 'auto',
-                                        transition: 'color 0.3s',
-                                    }}
-                                >
-                                    Restablecer contraseña
-                                </span>
-                            ) : (
-                                <Link
-                                    id="restablecerLink"
-                                    href="/auth/forgotpassword/"
-                                    className="text-600 cursor-pointer hover:text-primary ml-auto transition-colors transition-duration-300"
-                                >
-                                    Restablecer contraseña
-                                </Link>
-                            )}
+                            <span className="text-600 font-medium">
+                                Por favor ingresa tus credenciales
+                            </span>
                         </div>
-                        <Button
-                            label={deshabilitarBoton ? 'Cargando...' : 'Iniciar sesión'}
-                            className="w-full"
-                            onClick={manejarLogin}
-                            disabled={deshabilitarBoton}
-                        ></Button>
-                        <hr />
+                        <div className="flex flex-column">
+                            {message && <p style={{ color: 'red' }}>{message}</p>}
+                            <span className="p-input-icon-left w-full mb-4">
+                                <i className="pi pi-envelope"></i>
+                                <InputText
+                                    id="email"
+                                    type="text"
+                                    value={usuario}
+                                    onChange={(event) => setUsuario(event.target.value)}
+                                    className="w-full md:w-25rem"
+                                    placeholder="Email"
+                                />
+                            </span>
+                            <span className="p-input-icon-left w-full mb-4">
+                                <i className="pi pi-lock z-2"></i>
+                                <Password
+                                    id="password"
+                                    className="w-full md:w-25rem"
+                                    type="text"
+                                    inputClassName="w-full md:w-25rem"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder='Contraseña'
+                                    toggleMask
+                                    feedback={false}
+                                    inputStyle={{ paddingLeft: "2.5rem" }}
+                                    maxLength={12}
+                                />
+                            </span>
+                            <div className="mb-4 flex flex-wrap gap-3">
+                                <div>
+                                    <Checkbox
+                                        name="checkbox"
+                                        checked={rememberMe}
+                                        onChange={(e) =>
+                                            setRememberMe(e.checked ?? false)
+                                        }
+                                        className="mr-2"
+                                    ></Checkbox>
+                                    <label
+                                        htmlFor="checkbox"
+                                        className="text-900 font-medium mr-8"
+                                    >
+                                        Recuérdame
+                                    </label>
+                                </div>
+                                {deshabilitarLink ? (
+                                    <span
+                                        style={{
+                                            color: 'gray',
+                                            cursor: 'not-allowed',
+                                            textDecoration: 'none',
+                                            marginLeft: 'auto',
+                                            transition: 'color 0.3s',
+                                        }}
+                                    >
+                                        Restablecer contraseña
+                                    </span>
+                                ) : (
+                                    <Link
+                                        id="restablecerLink"
+                                        href="/auth/forgotpassword/"
+                                        className="text-600 cursor-pointer hover:text-primary ml-auto transition-colors transition-duration-300"
+                                    >
+                                        Restablecer contraseña
+                                    </Link>
+                                )}
+                            </div>
+                            <Button
+                                label={deshabilitarBoton ? 'Cargando...' : 'Iniciar sesión'}
+                                className="w-full"
+                                onClick={manejarLogin}
+                                disabled={deshabilitarBoton}
+                            ></Button>
+                            <hr />
+                        </div>
                     </div>
-                </div>
+                )}
+                {(registroUsuario) && (
+                    <div className="flex flex-column align-items-center border-1 surface-border surface-card border-round py-7 px-4 md:px-7 z-1">
+                        <ProgressSpinner
+
+                        />
+                        <h2 className="mt-3">Cargando...</h2>
+                    </div>
+                )}
+
             </div>
         </>
     );

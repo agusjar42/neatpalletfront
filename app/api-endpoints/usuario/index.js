@@ -2,6 +2,7 @@ import { UsuariosControllerApi, settings } from "@/app/api-neatpallet";
 
 const apiUsuario = new UsuariosControllerApi(settings)
 
+
 export const getUsuarios = async (filtro) => {
     const { data: dataUsuarios } = await apiUsuario.usuariosControllerFind(filtro)
     return dataUsuarios
@@ -9,6 +10,21 @@ export const getUsuarios = async (filtro) => {
 
 export const getUsuariosCount = async (filtro) => {
     const { data: dataUsuarios } = await apiUsuario.usuariosControllerCount(filtro)
+    return dataUsuarios
+}
+
+export const getVistaUsuarios = async (filtro) => {
+    const { data: dataUsuarios } = await apiUsuario.usuariosControllerVistaEmpresaRolUsuario(filtro)
+    return dataUsuarios
+}
+
+export const getVistaUsuariosCount = async (filtro) => {
+    const { data: dataUsuarios } = await apiUsuario.usuariosControllerVistaEmpresaRolUsuarioCount(filtro)
+    return dataUsuarios
+}
+
+export const getUsuarioAvatar = async (id) => {
+    const { data: dataUsuarios } = await apiUsuario.usuariosControllerObtenerUsuarioAvatar(id)
     return dataUsuarios
 }
 

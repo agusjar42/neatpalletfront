@@ -18,6 +18,7 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
 
+
     useEffect(() => {
         //
         //Lo marcamos aquí como saync ya que useEffect no permite ser async porque espera que la función que le pases devueva undefined o una función para limpiar el efecto. 
@@ -25,39 +26,37 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
         //
         const fetchData = async () => {
             // Obtenemos todas las idiomas
-            const registrosIdiomas = await getIdiomas();
-            const jsonIdiomas = registrosIdiomas.map(idioma => ({
-                nombre: idioma.nombre,
-                id: idioma.id
-            }));
-            setListaIdiomas(jsonIdiomas);
+            try {
+                const idiomasData = await getIdiomas();
+                // Ordenar idiomas alfabéticamente
+                const idiomasOrdenados = idiomasData.sort((a, b) => a.nombre.localeCompare(b.nombre));
+                setListaIdiomas(idiomasOrdenados);
+            } catch (error) {
+                console.error('Error al cargar los idiomas:', error);
+            }
 
             // Si el idEditar es diferente de nuevo, entonces se va a editar
             if (idEditar !== 0) {
                 // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
                 setTraduccion(registro);
-                // Obtenemos el nombre del idioma seleccionado
-                const registroIdioma = registrosIdiomas.find((element) => element.id === registro.idiomaId).nombre;
-                setIdiomaSeleccionado(registroIdioma);
-
             }
         };
         fetchData();
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
-        const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado.id === "";
+        //const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado.id === "";
         const validaClave = traduccion.clave === undefined || traduccion.clave === "";
-        const validaValor = traduccion.valor === undefined || traduccion.valor === "";
+        //const validaValor = traduccion.valor === undefined || traduccion.valor === "";
 
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return (!validaClave && !validaValor && !validaIdioma)
+        return !validaClave // (!validaClave && !validaValor && !validaIdioma)
     }
 
-    const guardarTraduccion = async () => {
+    const guardarCodigoPostal = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
         if (await validaciones()) {
@@ -67,22 +66,19 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
 
             // Si estoy insertando uno nuevo
             if (idEditar === 0) {
-                // Elimino y añado los campos que no se necesitan
-                delete objGuardar.id;
-                delete objGuardar.nombreIdioma;
-                objGuardar['usuCreacion'] = usuarioActual;
-                objGuardar['idiomaId'] = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado).id;
-
-                // Hacemos el insert del registro
-                const nuevoRegistro = await postTraduccion(objGuardar);
-
-                //Si se crea el registro mostramos el toast
-                if (nuevoRegistro?.id) {
-
-                    //Usamos una variable que luego se cargara en el useEffect de la pagina principal para mostrar el toast
+                try {
+                    for (const idioma of listaIdiomas) {
+                        const objTraduccion = {
+                            usuCreacion: usuarioActual,
+                            idiomaId: idioma.id,
+                            clave: objGuardar.clave,
+                            valor: objGuardar[idioma.nombre.toLowerCase()],
+                        }
+                        await postTraduccion(objTraduccion);
+                    }
                     setRegistroResult("insertado");
                     setIdEditar(null);
-                } else {
+                } catch (error) {
                     toast.current?.show({
                         severity: 'error',
                         summary: 'ERROR',
@@ -90,16 +86,41 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                         life: 3000,
                     });
                 }
-            } else {
-                //Si se edita un registro existente Hacemos el patch del registro
-                objGuardar['idiomaId'] = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado).id;
-                objGuardar['usuModificacion'] = getUsuarioSesion()?.id
-                delete objGuardar.nombreIdioma;
-                delete objGuardar.iso;
 
-                await patchTraduccion(objGuardar.id, objGuardar);
-                setIdEditar(null)
-                setRegistroResult("editado");
+            } else {
+                try {
+                    for (const idioma of listaIdiomas) {
+                        //Si la traduccion ya existe, hacemos el patch
+                        if (objGuardar[idioma.nombre.toLowerCase() + 'Id']) {
+                            const objTraduccion = {
+                                usuModificacion: usuarioActual,
+                                clave: objGuardar.clave,
+                                valor: objGuardar[idioma.nombre.toLowerCase()],
+                            }
+                            await patchTraduccion(objGuardar[idioma.nombre.toLowerCase() + 'Id'], objTraduccion);
+                        }
+                        //Si la traduccion no existe, hacemos el post
+                        else if (objGuardar[idioma.nombre.toLowerCase()]) {
+                            const objTraduccion = {
+                                usuCreacion: usuarioActual,
+                                idiomaId: idioma.id,
+                                clave: objGuardar.clave,
+                                valor: objGuardar[idioma.nombre.toLowerCase()],
+                            }
+                            await postTraduccion(objTraduccion);
+                        }
+                    }
+
+                    setIdEditar(null)
+                    setRegistroResult("editado");
+                } catch (error) {
+                    toast.current?.show({
+                        severity: 'error',
+                        summary: 'ERROR',
+                        detail: intl.formatMessage({ id: 'Ha ocurrido un error creando el registro' }),
+                        life: 3000,
+                    });
+                }
             }
         }
         else {
@@ -128,22 +149,20 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
-                        <h2>{header} {(intl.formatMessage({ id: 'Traduccion' })).toLowerCase()}</h2>
+                        <h2>{header} {(intl.formatMessage({ id: 'Traducción' })).toLowerCase()}</h2>
                         <EditarDatosTraduccion
                             traduccion={traduccion}
                             setTraduccion={setTraduccion}
-                            listaIdiomas={listaIdiomas}
-                            idiomaSeleccionado={idiomaSeleccionado}
-                            setIdiomaSeleccionado={setIdiomaSeleccionado}
+                            idiomas={listaIdiomas}
                             estadoGuardando={estadoGuardando}
                         />
-                        
+
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                onClick={guardarTraduccion}
+                                    onClick={guardarCodigoPostal}
                                     className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />

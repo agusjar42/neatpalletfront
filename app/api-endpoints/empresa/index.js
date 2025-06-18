@@ -2,13 +2,18 @@ import { EmpresaControllerApi, settings } from "@/app/api-neatpallet";
 
 const apiEmpresa = new EmpresaControllerApi(settings)
 
-export const getEmpresas = async (filtro) => {
-    const { data: dataEmpresaTransportes } = await apiEmpresa.empresaControllerFind(filtro)
-    return dataEmpresaTransportes
+export const getEmpresas = async (objEmpresa) => {
+    const { data: dataEmpresas } = await apiEmpresa.empresaControllerFind(objEmpresa)
+    return dataEmpresas
 }
 
-export const getEmpresasCount = async (filtro) => {
-    const { data: dataEmpresas } = await apiEmpresa.empresaControllerCount(filtro)
+export const getEmpresasCount = async (objEmpresa) => {
+    const { data: dataEmpresas } = await apiEmpresa.empresaControllerCount(objEmpresa)
+    return dataEmpresas
+}
+
+export const getEmpresa = async (id) => {
+    const { data: dataEmpresas } = await apiEmpresa.empresaControllerFindById(id)
     return dataEmpresas
 }
 

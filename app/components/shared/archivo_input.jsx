@@ -7,12 +7,20 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
     const intl = useIntl();
     const divImagen = useRef(null); // Usa useRef para el contenedor de la imagen
     const [archivoIcono, setArchivoIcono] = useState(null);
+    const [primeraCarga, setPrimeraCarga] = useState(true);
     const [inputArchivo, setInputArchivo] = useState(null);
     const [labelArchivo, setLabelArchivo] = useState(null);
     const [cargarUrlCliente, setCargarUrlCliente] = useState(false);
     useEffect(() => {
+        if (primeraCarga) {
+            setPrimeraCarga(false)
+            //Forzamos la carga de la imagen
+            registro[campoNombre] = registro[campoNombre];
+        }
+    }, []);
+    useEffect(() => {
         if (registro[campoNombre]) {
-            if (cargarUrlCliente) {
+            if (typeof registro[campoNombre] !== 'string') {
                 //Si el cliente ha cargado una imagen, se muestra si es valida
                 const archivoUrl = URL.createObjectURL(registro[campoNombre]);
                 setLabelArchivo(registro[campoNombre].name);
@@ -26,12 +34,34 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
                     }
 
                 }
+                else {
+                    const _inputArchivo = (
+                        <input onChange={cambioArchivoHandler} type='file' style={{ display: 'none' }} />
+                    );
+                    setInputArchivo(_inputArchivo);
+
+                    const _archivoIcono = (
+                        <i className="pi pi-file text-6xl"></i>
+                    );
+                    setArchivoIcono(_archivoIcono);
+                }
             }
             else {
                 // Si ya hay una imagen previamente cargada en el registro, la mostramos
                 setLabelArchivo(registro[campoNombre].split('/').pop());
                 if (archivoTipo.toLowerCase() === 'imagen') {
                     mostrarImagen(`${devuelveBasePath()}${registro[campoNombre]}`);
+                }
+                else {
+                    const _inputArchivo = (
+                        <input onChange={cambioArchivoHandler} type='file' style={{ display: 'none' }} />
+                    );
+                    setInputArchivo(_inputArchivo);
+
+                    const _archivoIcono = (
+                        <i className="pi pi-file text-6xl"></i>
+                    );
+                    setArchivoIcono(_archivoIcono);
                 }
 
             }
@@ -105,46 +135,51 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
     };
 
     return (
-        <div className='grid formgrid text-center'>
+        <div className='grid formgrid text-center' width='100%' style={{ gap: '0px' }}>
             <div
                 ref={divImagen}
                 className='col-2 field'
                 style={{
                     display: 'flex',
+                    minWidth: '0px',
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
                 {archivoIcono}
             </div>
-            <div className='flex field flex-column col-10 text-left'>
-                <label htmlFor="imagen">{archivoHeader}</label>
-                <div className='flex'>
-                    <label className='inputtext p-component' style={{
-                        border: '1px solid #ccc',
-                        display: 'inline-block',
-                        padding: '6px 12px',
-                        width: '75%',
-                        height: '100%',
-                        whiteSpace: 'nowrap',
-                        textOverflow: 'ellipsis',
-                        overflow: 'hidden',
-                    }}>{labelArchivo}</label>
-                    <label className='inputtext p-component' style={{
-                        border: '1px solid #ccc',
-                        display: 'inline-block',
-                        textAlign: 'center',
-                        padding: '6px 12px',
-                        cursor: 'pointer',
-                        width: '25%',
-                        height: '100%',
-                        whiteSpace: 'nowrap',
-                        textOverflow: 'ellipsis',
-                        overflow: 'hidden',
-                    }}>Subir
+            <div className="col-10 field flex flex-column">
+                <label style={{textAlign: 'left'}} htmlFor="imagen">{intl.formatMessage({ id: archivoHeader })}</label>
+                <div className="flex" >
+                    <label
+                        className="inputtext p-component flex-1 w-100"
+                        style={{
+                            border: '1px solid #ccc',
+                            padding: '6px 12px',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                            minWidth: '0px',        
+                            overflow: 'hidden',
+                            textAlign: 'left',
+                        }}
+                    >
+                        {labelArchivo && labelArchivo.length > 20 ? `${labelArchivo.substring(0, 20)}...` : labelArchivo}
+                    </label>
+                    <label
+                        className="inputtext p-component flex-0 flex-shrink-0"
+                        style={{
+                            border: '1px solid #ccc',
+                            padding: '6px 12px',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        Subir
                         {inputArchivo}
                     </label>
-                    <Button onClick={limpiarArchivoHandler} className="ml-2 p-button p-component p-button-icon-only p-button-rounded p-button-danger">
-                        <span className='p-button-icon p-c pi pi-times'></span>
+                    <Button
+                        onClick={limpiarArchivoHandler}
+                        className="ml-2 p-button p-component p-button-icon-only p-button-rounded p-button-danger"
+                    >
+                        <span className="p-button-icon p-c pi pi-times"></span>
                     </Button>
                 </div>
             </div>

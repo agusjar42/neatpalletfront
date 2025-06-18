@@ -7,6 +7,7 @@ import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { useContext, useState } from "react";
 import { LayoutContext } from "../../../../layout/context/layoutcontext";
+import { obtenerRolDashboard } from "@/app/api-endpoints/rol";
 
 const Register: Page = () => {
     const [confirmed, setConfirmed] = useState(false);
@@ -107,7 +108,7 @@ const Register: Page = () => {
                         <Button
                             label="Sign Up"
                             className="w-full mb-4"
-                            onClick={() => router.push("/tablas-maestras/empresa")}
+                            onClick={async () => router.push(await obtenerRolDashboard())}
                         ></Button>
                         <span className="font-medium text-600">
                             Already have an account?{" "}

@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "neatpallet application",
+    "title": "NeatPallet application",
     "version": "1.0.0",
-    "description": "Proyecto API encargado de ser la parte Backend de la aplicación web neatpallet",
+    "description": "Proyecto API encargado de ser la parte Backend de la aplicación web NEATPALLET",
     "contact": {
       "name": "Agusjar",
       "email": "agusjar@hotmail.com"
@@ -458,6 +458,37 @@
           }
         ],
         "operationId": "PermisoController.buscarPermiso"
+      }
+    },
+    "/buscarTraduccion": {
+      "get": {
+        "x-controller-name": "TraduccionController",
+        "x-operation-name": "buscarTraduccion",
+        "tags": [
+          "TraduccionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve la traducción basada en el código ISO",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "iso",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "TraduccionController.buscarTraduccion"
       }
     },
     "/compruebaImagen/{imagenUrl}": {
@@ -1884,6 +1915,618 @@
         "operationId": "UsuariosController.obtenerUsuarioAvatar"
       }
     },
+    "/paises/count": {
+      "get": {
+        "x-controller-name": "PaisController",
+        "x-operation-name": "count",
+        "tags": [
+          "PaisController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Pais model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Pais.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Pais>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PaisController.count"
+      }
+    },
+    "/paises/{id}": {
+      "put": {
+        "x-controller-name": "PaisController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PaisController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Pais PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pais"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PaisController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PaisController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PaisController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Pais PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaisPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PaisController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PaisController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PaisController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Pais model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaisWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pais.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PaisController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PaisController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PaisController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Pais DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PaisController.deleteById"
+      }
+    },
+    "/paises": {
+      "post": {
+        "x-controller-name": "PaisController",
+        "x-operation-name": "create",
+        "tags": [
+          "PaisController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Pais model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pais"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPais"
+              }
+            }
+          }
+        },
+        "operationId": "PaisController.create"
+      },
+      "patch": {
+        "x-controller-name": "PaisController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PaisController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Pais PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Pais.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Pais>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaisPartial"
+              }
+            }
+          }
+        },
+        "operationId": "PaisController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PaisController",
+        "x-operation-name": "find",
+        "tags": [
+          "PaisController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Pais model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaisWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pais.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PaisController.find"
+      }
+    },
+    "/pallets-movements/count": {
+      "get": {
+        "x-controller-name": "PalletsMovementsController",
+        "x-operation-name": "count",
+        "tags": [
+          "PalletsMovementsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PalletsMovements model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PalletsMovements.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PalletsMovements>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PalletsMovementsController.count"
+      }
+    },
+    "/pallets-movements/{id}": {
+      "put": {
+        "x-controller-name": "PalletsMovementsController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PalletsMovementsController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PalletsMovements PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PalletsMovements"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PalletsMovementsController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PalletsMovementsController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PalletsMovementsController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PalletsMovements PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PalletsMovementsPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PalletsMovementsController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PalletsMovementsController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PalletsMovementsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PalletsMovements model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PalletsMovementsWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PalletsMovements.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PalletsMovementsController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PalletsMovementsController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PalletsMovementsController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PalletsMovements DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PalletsMovementsController.deleteById"
+      }
+    },
+    "/pallets-movements": {
+      "post": {
+        "x-controller-name": "PalletsMovementsController",
+        "x-operation-name": "create",
+        "tags": [
+          "PalletsMovementsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of PalletsMovements model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PalletsMovements"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/NewPalletsMovements"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "PalletsMovementsController.create"
+      },
+      "patch": {
+        "x-controller-name": "PalletsMovementsController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PalletsMovementsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PalletsMovements PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PalletsMovements.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PalletsMovements>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PalletsMovementsPartial"
+              }
+            }
+          }
+        },
+        "operationId": "PalletsMovementsController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PalletsMovementsController",
+        "x-operation-name": "find",
+        "tags": [
+          "PalletsMovementsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of PalletsMovements model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PalletsMovementsWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PalletsMovements.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PalletsMovementsController.find"
+      }
+    },
     "/permisos/count": {
       "get": {
         "x-controller-name": "PermisoController",
@@ -2185,6 +2828,427 @@
           }
         ],
         "operationId": "PermisoController.find"
+      }
+    },
+    "/ping": {
+      "get": {
+        "x-controller-name": "PingController",
+        "x-operation-name": "ping",
+        "tags": [
+          "PingController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ping Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PingResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "PingController.ping"
+      }
+    },
+    "/plantilla-emails/count": {
+      "get": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "count",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlantillaEmail model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlantillaEmail.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlantillaEmail>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlantillaEmailController.count"
+      }
+    },
+    "/plantilla-emails/enviarEmails/{nombrePlantilla}": {
+      "post": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "enviarEmails",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of PlantillaEmailController.enviarEmails"
+          }
+        },
+        "parameters": [
+          {
+            "name": "nombrePlantilla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "emails": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "empresaId": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Enviar los correos a los usuarios",
+          "required": true,
+          "x-parameter-index": 1
+        },
+        "operationId": "PlantillaEmailController.enviarEmails"
+      }
+    },
+    "/plantilla-emails/enviarQR/{url}": {
+      "post": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "enviarQR",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of PlantillaEmailController.enviarQR"
+          }
+        },
+        "parameters": [
+          {
+            "name": "url",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "emails": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "empresaId": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Enviar un correo con un QR",
+          "required": true,
+          "x-parameter-index": 1
+        },
+        "operationId": "PlantillaEmailController.enviarQR"
+      }
+    },
+    "/plantilla-emails/{id}": {
+      "put": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlantillaEmail PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlantillaEmail"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlantillaEmailController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlantillaEmail PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlantillaEmailPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlantillaEmailController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlantillaEmail model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlantillaEmailWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlantillaEmail.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlantillaEmailController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlantillaEmail DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PlantillaEmailController.deleteById"
+      }
+    },
+    "/plantilla-emails": {
+      "post": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "create",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlantillaEmail model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlantillaEmail"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlantillaEmail"
+              }
+            }
+          }
+        },
+        "operationId": "PlantillaEmailController.create"
+      },
+      "patch": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlantillaEmail PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlantillaEmail.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlantillaEmail>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlantillaEmailPartial"
+              }
+            }
+          }
+        },
+        "operationId": "PlantillaEmailController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "find",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of PlantillaEmail model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlantillaEmailWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlantillaEmail.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlantillaEmailController.find"
       }
     },
     "/refrescar-tokens/count": {
@@ -2793,7 +3857,7 @@
         "operationId": "RolController.find"
       }
     },
-    "/seccions/count": {
+    "/secciones/count": {
       "get": {
         "x-controller-name": "SeccionController",
         "x-operation-name": "count",
@@ -2831,7 +3895,7 @@
         "operationId": "SeccionController.count"
       }
     },
-    "/seccions/{id}": {
+    "/secciones/{id}": {
       "put": {
         "x-controller-name": "SeccionController",
         "x-operation-name": "replaceById",
@@ -2984,7 +4048,7 @@
         "operationId": "SeccionController.deleteById"
       }
     },
-    "/seccions": {
+    "/secciones": {
       "post": {
         "x-controller-name": "SeccionController",
         "x-operation-name": "create",
@@ -3399,7 +4463,7 @@
         "operationId": "TipoArchivoController.find"
       }
     },
-    "/traduccions/count": {
+    "/traducciones/count": {
       "get": {
         "x-controller-name": "TraduccionController",
         "x-operation-name": "count",
@@ -3437,7 +4501,7 @@
         "operationId": "TraduccionController.count"
       }
     },
-    "/traduccions/{id}": {
+    "/traducciones/{id}": {
       "put": {
         "x-controller-name": "TraduccionController",
         "x-operation-name": "replaceById",
@@ -3590,7 +4654,7 @@
         "operationId": "TraduccionController.deleteById"
       }
     },
-    "/traduccions": {
+    "/traducciones": {
       "post": {
         "x-controller-name": "TraduccionController",
         "x-operation-name": "create",
@@ -4308,309 +5372,6 @@
         "operationId": "UsuarioPasswordHistoricoController.find"
       }
     },
-    "/usuario-restablecer-passwords/count": {
-      "get": {
-        "x-controller-name": "UsuarioRestablecerPasswordController",
-        "x-operation-name": "count",
-        "tags": [
-          "UsuarioRestablecerPasswordController"
-        ],
-        "responses": {
-          "200": {
-            "description": "UsuarioRestablecerPassword model count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "UsuarioRestablecerPassword.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<UsuarioRestablecerPassword>"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "UsuarioRestablecerPasswordController.count"
-      }
-    },
-    "/usuario-restablecer-passwords/{id}": {
-      "put": {
-        "x-controller-name": "UsuarioRestablecerPasswordController",
-        "x-operation-name": "replaceById",
-        "tags": [
-          "UsuarioRestablecerPasswordController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "UsuarioRestablecerPassword PUT success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UsuarioRestablecerPassword"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "UsuarioRestablecerPasswordController.replaceById"
-      },
-      "patch": {
-        "x-controller-name": "UsuarioRestablecerPasswordController",
-        "x-operation-name": "updateById",
-        "tags": [
-          "UsuarioRestablecerPasswordController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "UsuarioRestablecerPassword PATCH success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UsuarioRestablecerPasswordPartial"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "UsuarioRestablecerPasswordController.updateById"
-      },
-      "get": {
-        "x-controller-name": "UsuarioRestablecerPasswordController",
-        "x-operation-name": "findById",
-        "tags": [
-          "UsuarioRestablecerPasswordController"
-        ],
-        "responses": {
-          "200": {
-            "description": "UsuarioRestablecerPassword model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UsuarioRestablecerPasswordWithRelations"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UsuarioRestablecerPassword.Filter"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "UsuarioRestablecerPasswordController.findById"
-      },
-      "delete": {
-        "x-controller-name": "UsuarioRestablecerPasswordController",
-        "x-operation-name": "deleteById",
-        "tags": [
-          "UsuarioRestablecerPasswordController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "UsuarioRestablecerPassword DELETE success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "operationId": "UsuarioRestablecerPasswordController.deleteById"
-      }
-    },
-    "/usuario-restablecer-passwords": {
-      "post": {
-        "x-controller-name": "UsuarioRestablecerPasswordController",
-        "x-operation-name": "create",
-        "tags": [
-          "UsuarioRestablecerPasswordController"
-        ],
-        "responses": {
-          "200": {
-            "description": "UsuarioRestablecerPassword model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UsuarioRestablecerPassword"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewUsuarioRestablecerPassword"
-              }
-            }
-          }
-        },
-        "operationId": "UsuarioRestablecerPasswordController.create"
-      },
-      "patch": {
-        "x-controller-name": "UsuarioRestablecerPasswordController",
-        "x-operation-name": "updateAll",
-        "tags": [
-          "UsuarioRestablecerPasswordController"
-        ],
-        "responses": {
-          "200": {
-            "description": "UsuarioRestablecerPassword PATCH success count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "UsuarioRestablecerPassword.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<UsuarioRestablecerPassword>"
-                }
-              }
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UsuarioRestablecerPasswordPartial"
-              }
-            }
-          }
-        },
-        "operationId": "UsuarioRestablecerPasswordController.updateAll"
-      },
-      "get": {
-        "x-controller-name": "UsuarioRestablecerPasswordController",
-        "x-operation-name": "find",
-        "tags": [
-          "UsuarioRestablecerPasswordController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Array of UsuarioRestablecerPassword model instances",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UsuarioRestablecerPasswordWithRelations"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UsuarioRestablecerPassword.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "UsuarioRestablecerPasswordController.find"
-      }
-    },
     "/usuarioCredenciales/{idUsuario}": {
       "patch": {
         "x-controller-name": "UsuariosController",
@@ -4750,6 +5511,37 @@
         "operationId": "UsuariosController.login"
       }
     },
+    "/usuarios/recuperarPassword": {
+      "post": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "recuperarPassword",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of UsuariosController.recuperarPassword"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Correo electrónico para restablecer contraseña",
+          "required": true
+        },
+        "operationId": "UsuariosController.recuperarPassword"
+      }
+    },
     "/usuarios/register": {
       "post": {
         "x-controller-name": "UsuariosController",
@@ -4787,8 +5579,7 @@
                   "password",
                   "nombre",
                   "empresa_id",
-                  "rol_id",
-                  "idioma_id"
+                  "rol_id"
                 ],
                 "properties": {
                   "nombre": {
@@ -4805,9 +5596,6 @@
                   },
                   "rolId": {
                     "type": "number"
-                  },
-                  "idiomaId": {
-                    "type": "number"
                   }
                 }
               }
@@ -4816,6 +5604,38 @@
           "description": "registro del perfil de usuario"
         },
         "operationId": "UsuariosController.register"
+      }
+    },
+    "/usuarios/validarCodigoRecuperacion/{codigoRecuperacion}": {
+      "get": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "validarCodigoRecuperacion",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Código de recuperación validado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "codigoRecuperacion",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "UsuariosController.validarCodigoRecuperacion"
       }
     },
     "/usuarios/{id}": {
@@ -5083,6 +5903,79 @@
         "operationId": "UsuariosController.find"
       }
     },
+    "/vistaArchivoEmpresa": {
+      "get": {
+        "x-controller-name": "ArchivoController",
+        "x-operation-name": "vistaArchivoEmpresa",
+        "tags": [
+          "ArchivoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve archivos con su empresa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Archivo.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ArchivoController.vistaArchivoEmpresa"
+      }
+    },
+    "/vistaArchivoEmpresaCount": {
+      "get": {
+        "x-controller-name": "ArchivoController",
+        "x-operation-name": "vistaArchivoEmpresaCount",
+        "tags": [
+          "ArchivoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve archivos con su empresa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Archivo.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Archivo>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ArchivoController.vistaArchivoEmpresaCount"
+      }
+    },
     "/vistaEmpresaRol": {
       "get": {
         "x-controller-name": "RolController",
@@ -5250,6 +6143,298 @@
         ],
         "operationId": "UsuariosController.vistaEmpresaRolUsuarioCount"
       }
+    },
+    "/vistaLogUsuarioUsuario": {
+      "get": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "vistaLogUsuarioUsuario",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve los logs de usuario con sus nombres",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogUsuario.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "LogUsuarioController.vistaLogUsuarioUsuario"
+      }
+    },
+    "/vistaLogUsuarioUsuarioCount": {
+      "get": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "vistaLogUsuarioUsuarioCount",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve los tipos de extras y el nombre de la empresa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "LogUsuario.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<LogUsuario>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "LogUsuarioController.vistaLogUsuarioUsuarioCount"
+      }
+    },
+    "/vistaPlantillaEmailIdioma": {
+      "get": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "vistaPlantillaEmailIdioma",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve plantillas email y su idioma",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlantillaEmail.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlantillaEmailController.vistaPlantillaEmailIdioma"
+      }
+    },
+    "/vistaPlantillaEmailIdiomaCount": {
+      "get": {
+        "x-controller-name": "PlantillaEmailController",
+        "x-operation-name": "vistaPlantillaEmailIdiomaCount",
+        "tags": [
+          "PlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve plantillas email y su idioma",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlantillaEmail.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlantillaEmail>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlantillaEmailController.vistaPlantillaEmailIdiomaCount"
+      }
+    },
+    "/vistaTipoArchivoEmpresaSeccion": {
+      "get": {
+        "x-controller-name": "TipoArchivoController",
+        "x-operation-name": "vistaTipoArchivoEmpresaSeccion",
+        "tags": [
+          "TipoArchivoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve tipos de archivo y su seccion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoArchivo.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoArchivoController.vistaTipoArchivoEmpresaSeccion"
+      }
+    },
+    "/vistaTipoArchivoEmpresaSeccionCount": {
+      "get": {
+        "x-controller-name": "TipoArchivoController",
+        "x-operation-name": "vistaTipoArchivoEmpresaSeccionCount",
+        "tags": [
+          "TipoArchivoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve plantillas email y su idioma",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoArchivo.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoArchivo>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoArchivoController.vistaTipoArchivoEmpresaSeccionCount"
+      }
+    },
+    "/vistaTraduccionIdioma": {
+      "get": {
+        "x-controller-name": "TraduccionController",
+        "x-operation-name": "vistaTraduccionIdioma",
+        "tags": [
+          "TraduccionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve las traducciones y sus idiomas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Traduccion.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TraduccionController.vistaTraduccionIdioma"
+      }
+    },
+    "/vistaTraduccionIdiomaCount": {
+      "get": {
+        "x-controller-name": "TraduccionController",
+        "x-operation-name": "vistaTraduccionIdiomaCount",
+        "tags": [
+          "TraduccionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve las traducciones y sus idiomas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Traduccion.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Traduccion>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TraduccionController.vistaTraduccionIdiomaCount"
+      }
     }
   },
   "components": {
@@ -5312,9 +6497,6 @@
           },
           "usuInactivo": {
             "type": "number"
-          },
-          "roles": {
-            "type": "string"
           }
         },
         "required": [
@@ -5373,9 +6555,6 @@
           },
           "usuInactivo": {
             "type": "number"
-          },
-          "roles": {
-            "type": "string"
           }
         },
         "required": [
@@ -5401,7 +6580,7 @@
           },
           "usuarioId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
@@ -5462,9 +6641,6 @@
           },
           "usuInactivo": {
             "type": "number"
-          },
-          "roles": {
-            "type": "string"
           },
           "userCredentials": {
             "$ref": "#/components/schemas/UsuarioCredencialesWithRelations"
@@ -5530,9 +6706,6 @@
           },
           "usuInactivo": {
             "type": "number"
-          },
-          "roles": {
-            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -5553,7 +6726,7 @@
           },
           "usuarioId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "additionalProperties": false,
@@ -5573,112 +6746,13 @@
           },
           "usuarioId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
           "password"
         ],
         "additionalProperties": false
-      },
-      "UsuarioRestablecerPassword": {
-        "title": "UsuarioRestablecerPassword",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "usuarioId": {
-            "type": "number",
-            "nullable": true
-          },
-          "email": {
-            "type": "string"
-          },
-          "codigoRecuperacion": {
-            "type": "string"
-          },
-          "expiraEn": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "NewUsuarioRestablecerPassword": {
-        "title": "NewUsuarioRestablecerPassword",
-        "type": "object",
-        "description": "(tsType: Omit<UsuarioRestablecerPassword, 'id'>, schemaOptions: { title: 'NewUsuarioRestablecerPassword', exclude: [ 'id' ] })",
-        "properties": {
-          "usuarioId": {
-            "type": "number",
-            "nullable": true
-          },
-          "email": {
-            "type": "string"
-          },
-          "codigoRecuperacion": {
-            "type": "string"
-          },
-          "expiraEn": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<UsuarioRestablecerPassword, 'id'>"
-      },
-      "UsuarioRestablecerPasswordWithRelations": {
-        "title": "UsuarioRestablecerPasswordWithRelations",
-        "type": "object",
-        "description": "(tsType: UsuarioRestablecerPasswordWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "usuarioId": {
-            "type": "number",
-            "nullable": true
-          },
-          "email": {
-            "type": "string"
-          },
-          "codigoRecuperacion": {
-            "type": "string"
-          },
-          "expiraEn": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "UsuarioRestablecerPasswordWithRelations"
-      },
-      "UsuarioRestablecerPasswordPartial": {
-        "title": "UsuarioRestablecerPasswordPartial",
-        "type": "object",
-        "description": "(tsType: Partial<UsuarioRestablecerPassword>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "usuarioId": {
-            "type": "number",
-            "nullable": true
-          },
-          "email": {
-            "type": "string"
-          },
-          "codigoRecuperacion": {
-            "type": "string"
-          },
-          "expiraEn": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<UsuarioRestablecerPassword>"
       },
       "UsuarioPasswordHistorico": {
         "title": "UsuarioPasswordHistorico",
@@ -5718,7 +6792,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -5726,7 +6800,8 @@
           }
         },
         "required": [
-          "usuarioId"
+          "usuarioId",
+          "usuCreacion"
         ],
         "additionalProperties": false
       },
@@ -5765,7 +6840,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -5773,7 +6848,8 @@
           }
         },
         "required": [
-          "usuarioId"
+          "usuarioId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<UsuarioPasswordHistorico, 'id'>"
@@ -5817,7 +6893,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -5825,7 +6901,8 @@
           }
         },
         "required": [
-          "usuarioId"
+          "usuarioId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "UsuarioPasswordHistoricoWithRelations"
@@ -5869,7 +6946,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -5890,7 +6967,7 @@
           },
           "usuarioId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
@@ -5931,7 +7008,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -5939,7 +7016,8 @@
           }
         },
         "required": [
-          "idiomaId"
+          "idiomaId",
+          "usuCreacion"
         ],
         "additionalProperties": false
       },
@@ -5972,7 +7050,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -5980,7 +7058,8 @@
           }
         },
         "required": [
-          "idiomaId"
+          "idiomaId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Traduccion, 'id'>"
@@ -6018,7 +7097,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6026,7 +7105,8 @@
           }
         },
         "required": [
-          "idiomaId"
+          "idiomaId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "TraduccionWithRelations"
@@ -6064,7 +7144,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6088,7 +7168,7 @@
           },
           "seccionId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "nombre": {
             "type": "string",
@@ -6118,7 +7198,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6130,7 +7210,9 @@
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "seccionId",
+          "usuCreacion"
         ],
         "additionalProperties": false
       },
@@ -6145,7 +7227,7 @@
           },
           "seccionId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "nombre": {
             "type": "string",
@@ -6175,7 +7257,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6187,7 +7269,9 @@
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "seccionId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<TipoArchivo, 'id'>"
@@ -6207,7 +7291,7 @@
           },
           "seccionId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "nombre": {
             "type": "string",
@@ -6237,7 +7321,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6249,7 +7333,9 @@
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "seccionId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "TipoArchivoWithRelations"
@@ -6269,7 +7355,7 @@
           },
           "seccionId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "nombre": {
             "type": "string",
@@ -6299,7 +7385,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6337,13 +7423,16 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
             "nullable": true
           }
         },
+        "required": [
+          "usuCreacion"
+        ],
         "additionalProperties": false
       },
       "NewSeccion": {
@@ -6367,13 +7456,16 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
             "nullable": true
           }
         },
+        "required": [
+          "usuCreacion"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Seccion, 'id'>"
       },
@@ -6402,13 +7494,16 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
             "nullable": true
           }
         },
+        "required": [
+          "usuCreacion"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "SeccionWithRelations"
       },
@@ -6437,7 +7532,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6467,6 +7562,14 @@
             "type": "string",
             "nullable": true
           },
+          "muestraEmpresa": {
+            "type": "string",
+            "nullable": true
+          },
+          "dashboardUrl": {
+            "type": "string",
+            "nullable": true
+          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -6479,7 +7582,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6496,7 +7599,8 @@
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "usuCreacion"
         ],
         "additionalProperties": false
       },
@@ -6517,6 +7621,14 @@
             "type": "string",
             "nullable": true
           },
+          "muestraEmpresa": {
+            "type": "string",
+            "nullable": true
+          },
+          "dashboardUrl": {
+            "type": "string",
+            "nullable": true
+          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -6529,7 +7641,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6546,7 +7658,8 @@
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Rol, 'id'>"
@@ -6572,6 +7685,14 @@
             "type": "string",
             "nullable": true
           },
+          "muestraEmpresa": {
+            "type": "string",
+            "nullable": true
+          },
+          "dashboardUrl": {
+            "type": "string",
+            "nullable": true
+          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -6584,7 +7705,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6601,7 +7722,8 @@
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "RolWithRelations"
@@ -6627,6 +7749,14 @@
             "type": "string",
             "nullable": true
           },
+          "muestraEmpresa": {
+            "type": "string",
+            "nullable": true
+          },
+          "dashboardUrl": {
+            "type": "string",
+            "nullable": true
+          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -6639,7 +7769,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6736,6 +7866,282 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<RefrescarToken>"
       },
+      "PlantillaEmail": {
+        "title": "PlantillaEmail",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "idiomaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombrePlantilla": {
+            "type": "string",
+            "nullable": false,
+            "uniqueItems": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "titulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "cuerpo": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "idiomaId",
+          "empresaId",
+          "nombrePlantilla",
+          "usuCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewPlantillaEmail": {
+        "title": "NewPlantillaEmail",
+        "type": "object",
+        "description": "(tsType: Omit<PlantillaEmail, 'id'>, schemaOptions: { title: 'NewPlantillaEmail', exclude: [ 'id' ] })",
+        "properties": {
+          "idiomaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombrePlantilla": {
+            "type": "string",
+            "nullable": false,
+            "uniqueItems": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "titulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "cuerpo": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "idiomaId",
+          "empresaId",
+          "nombrePlantilla",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<PlantillaEmail, 'id'>"
+      },
+      "PlantillaEmailWithRelations": {
+        "title": "PlantillaEmailWithRelations",
+        "type": "object",
+        "description": "(tsType: PlantillaEmailWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "idiomaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombrePlantilla": {
+            "type": "string",
+            "nullable": false,
+            "uniqueItems": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "titulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "cuerpo": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "idiomaId",
+          "empresaId",
+          "nombrePlantilla",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PlantillaEmailWithRelations"
+      },
+      "PlantillaEmailPartial": {
+        "title": "PlantillaEmailPartial",
+        "type": "object",
+        "description": "(tsType: Partial<PlantillaEmail>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "idiomaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombrePlantilla": {
+            "type": "string",
+            "nullable": false,
+            "uniqueItems": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "titulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "cuerpo": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<PlantillaEmail>"
+      },
       "Permiso": {
         "title": "Permiso",
         "type": "object",
@@ -6772,7 +8178,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6780,7 +8186,8 @@
           }
         },
         "required": [
-          "rolId"
+          "rolId",
+          "usuCreacion"
         ],
         "additionalProperties": false
       },
@@ -6817,7 +8224,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6825,7 +8232,8 @@
           }
         },
         "required": [
-          "rolId"
+          "rolId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Permiso, 'id'>"
@@ -6867,7 +8275,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6875,7 +8283,8 @@
           }
         },
         "required": [
-          "rolId"
+          "rolId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "PermisoWithRelations"
@@ -6917,7 +8326,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -6927,6 +8336,408 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<Permiso>"
       },
+      "PalletsMovements": {
+        "title": "PalletsMovements",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresa_Id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "temperature": {
+            "type": "string",
+            "nullable": true
+          },
+          "humidity": {
+            "type": "string",
+            "nullable": true
+          },
+          "press": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm2_5": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm5": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm10": {
+            "type": "string",
+            "nullable": true
+          },
+          "battery_volts": {
+            "type": "string",
+            "nullable": true
+          },
+          "battery_pct": {
+            "type": "string",
+            "nullable": true
+          },
+          "rssi": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresa_Id"
+        ],
+        "additionalProperties": false
+      },
+      "NewPalletsMovements": {
+        "title": "NewPalletsMovements",
+        "type": "object",
+        "description": "(tsType: Omit<PalletsMovements, 'id'>, schemaOptions: { title: 'NewPalletsMovements', exclude: [ 'id' ] })",
+        "properties": {
+          "empresa_Id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "temperature": {
+            "type": "string",
+            "nullable": true
+          },
+          "humidity": {
+            "type": "string",
+            "nullable": true
+          },
+          "press": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm2_5": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm5": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm10": {
+            "type": "string",
+            "nullable": true
+          },
+          "battery_volts": {
+            "type": "string",
+            "nullable": true
+          },
+          "battery_pct": {
+            "type": "string",
+            "nullable": true
+          },
+          "rssi": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresa_Id"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<PalletsMovements, 'id'>"
+      },
+      "PalletsMovementsWithRelations": {
+        "title": "PalletsMovementsWithRelations",
+        "type": "object",
+        "description": "(tsType: PalletsMovementsWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresa_Id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "temperature": {
+            "type": "string",
+            "nullable": true
+          },
+          "humidity": {
+            "type": "string",
+            "nullable": true
+          },
+          "press": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm2_5": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm5": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm10": {
+            "type": "string",
+            "nullable": true
+          },
+          "battery_volts": {
+            "type": "string",
+            "nullable": true
+          },
+          "battery_pct": {
+            "type": "string",
+            "nullable": true
+          },
+          "rssi": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresa_Id"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PalletsMovementsWithRelations"
+      },
+      "PalletsMovementsPartial": {
+        "title": "PalletsMovementsPartial",
+        "type": "object",
+        "description": "(tsType: Partial<PalletsMovements>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresa_Id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "temperature": {
+            "type": "string",
+            "nullable": true
+          },
+          "humidity": {
+            "type": "string",
+            "nullable": true
+          },
+          "press": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm2_5": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm5": {
+            "type": "string",
+            "nullable": true
+          },
+          "pm10": {
+            "type": "string",
+            "nullable": true
+          },
+          "battery_volts": {
+            "type": "string",
+            "nullable": true
+          },
+          "battery_pct": {
+            "type": "string",
+            "nullable": true
+          },
+          "rssi": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<PalletsMovements>"
+      },
+      "Pais": {
+        "title": "Pais",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "iso": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "usuCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewPais": {
+        "title": "NewPais",
+        "type": "object",
+        "description": "(tsType: Omit<Pais, 'id'>, schemaOptions: { title: 'NewPais', exclude: [ 'id' ] })",
+        "properties": {
+          "iso": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Pais, 'id'>"
+      },
+      "PaisWithRelations": {
+        "title": "PaisWithRelations",
+        "type": "object",
+        "description": "(tsType: PaisWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "iso": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PaisWithRelations"
+      },
+      "PaisPartial": {
+        "title": "PaisPartial",
+        "type": "object",
+        "description": "(tsType: Partial<Pais>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "iso": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Pais>"
+      },
       "LogUsuario": {
         "title": "LogUsuario",
         "type": "object",
@@ -6935,6 +8746,15 @@
             "type": "number",
             "nullable": false
           },
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaRegistro": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "ip": {
             "type": "string",
             "nullable": true
@@ -6955,13 +8775,17 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
             "nullable": true
           }
         },
+        "required": [
+          "usuarioId",
+          "usuCreacion"
+        ],
         "additionalProperties": false
       },
       "NewLogUsuario": {
@@ -6969,6 +8793,15 @@
         "type": "object",
         "description": "(tsType: Omit<LogUsuario, 'id'>, schemaOptions: { title: 'NewLogUsuario', exclude: [ 'id' ] })",
         "properties": {
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaRegistro": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "ip": {
             "type": "string",
             "nullable": true
@@ -6989,13 +8822,17 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
             "nullable": true
           }
         },
+        "required": [
+          "usuarioId",
+          "usuCreacion"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<LogUsuario, 'id'>"
       },
@@ -7008,6 +8845,15 @@
             "type": "number",
             "nullable": false
           },
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaRegistro": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "ip": {
             "type": "string",
             "nullable": true
@@ -7028,13 +8874,17 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
             "nullable": true
           }
         },
+        "required": [
+          "usuarioId",
+          "usuCreacion"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "LogUsuarioWithRelations"
       },
@@ -7047,6 +8897,15 @@
             "type": "number",
             "nullable": false
           },
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaRegistro": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "ip": {
             "type": "string",
             "nullable": true
@@ -7067,7 +8926,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -7187,7 +9046,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -7203,6 +9062,9 @@
             "nullable": true
           }
         },
+        "required": [
+          "usuCreacion"
+        ],
         "additionalProperties": false
       },
       "NewIdioma": {
@@ -7234,7 +9096,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -7250,6 +9112,9 @@
             "nullable": true
           }
         },
+        "required": [
+          "usuCreacion"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Idioma, 'id'>"
       },
@@ -7286,7 +9151,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -7302,6 +9167,9 @@
             "nullable": true
           }
         },
+        "required": [
+          "usuCreacion"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "IdiomaWithRelations"
       },
@@ -7338,7 +9206,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -7381,6 +9249,14 @@
             "type": "string",
             "nullable": true
           },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
+          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -7393,13 +9269,20 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "tiempoInactividad": {
+            "type": "number",
+            "nullable": false
           }
         },
+        "required": [
+          "usuCreacion"
+        ],
         "additionalProperties": false
       },
       "NewEmpresa": {
@@ -7423,6 +9306,14 @@
             "type": "string",
             "nullable": true
           },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
+          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -7435,13 +9326,20 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "tiempoInactividad": {
+            "type": "number",
+            "nullable": false
           }
         },
+        "required": [
+          "usuCreacion"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Empresa, 'id'>"
       },
@@ -7470,6 +9368,14 @@
             "type": "string",
             "nullable": true
           },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
+          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -7482,13 +9388,20 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "tiempoInactividad": {
+            "type": "number",
+            "nullable": false
           }
         },
+        "required": [
+          "usuCreacion"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "EmpresaWithRelations"
       },
@@ -7517,6 +9430,14 @@
             "type": "string",
             "nullable": true
           },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
+          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -7529,11 +9450,15 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "tiempoInactividad": {
+            "type": "number",
+            "nullable": false
           }
         },
         "additionalProperties": false,
@@ -7579,10 +9504,6 @@
             "type": "string",
             "nullable": true
           },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -7595,7 +9516,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -7603,7 +9524,8 @@
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "usuCreacion"
         ],
         "additionalProperties": false
       },
@@ -7644,10 +9566,6 @@
             "type": "string",
             "nullable": true
           },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -7660,7 +9578,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -7668,7 +9586,8 @@
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Archivo, 'id'>"
@@ -7714,10 +9633,6 @@
             "type": "string",
             "nullable": true
           },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -7730,7 +9645,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -7738,7 +9653,8 @@
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "usuCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "ArchivoWithRelations"
@@ -7784,10 +9700,6 @@
             "type": "string",
             "nullable": true
           },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -7800,7 +9712,7 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "usuModificacion": {
             "type": "number",
@@ -7882,9 +9794,6 @@
                   "pantalla": {
                     "type": "boolean"
                   },
-                  "orden": {
-                    "type": "boolean"
-                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -7914,7 +9823,6 @@
                     "tabla",
                     "idTabla",
                     "pantalla",
-                    "orden",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -7998,9 +9906,6 @@
                   "pantalla": {
                     "type": "boolean"
                   },
-                  "orden": {
-                    "type": "boolean"
-                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -8030,7 +9935,6 @@
                     "tabla",
                     "idTabla",
                     "pantalla",
-                    "orden",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -8097,6 +10001,12 @@
                   "email": {
                     "type": "boolean"
                   },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "servicio": {
+                    "type": "boolean"
+                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -8107,6 +10017,9 @@
                     "type": "boolean"
                   },
                   "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "tiempoInactividad": {
                     "type": "boolean"
                   }
                 },
@@ -8122,10 +10035,13 @@
                     "nombre",
                     "descripcion",
                     "email",
+                    "password",
+                    "servicio",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
-                    "usuModificacion"
+                    "usuModificacion",
+                    "tiempoInactividad"
                   ],
                   "example": "id"
                 },
@@ -8193,6 +10109,12 @@
                   "email": {
                     "type": "boolean"
                   },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "servicio": {
+                    "type": "boolean"
+                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -8203,6 +10125,9 @@
                     "type": "boolean"
                   },
                   "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "tiempoInactividad": {
                     "type": "boolean"
                   }
                 },
@@ -8218,10 +10143,13 @@
                     "nombre",
                     "descripcion",
                     "email",
+                    "password",
+                    "servicio",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
-                    "usuModificacion"
+                    "usuModificacion",
+                    "tiempoInactividad"
                   ],
                   "example": "id"
                 },
@@ -8606,6 +10534,12 @@
                   "id": {
                     "type": "boolean"
                   },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "fechaRegistro": {
+                    "type": "boolean"
+                  },
                   "ip": {
                     "type": "boolean"
                   },
@@ -8633,6 +10567,8 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "usuarioId",
+                    "fechaRegistro",
                     "ip",
                     "masDatos",
                     "fechaCreacion",
@@ -8694,6 +10630,12 @@
                   "id": {
                     "type": "boolean"
                   },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "fechaRegistro": {
+                    "type": "boolean"
+                  },
                   "ip": {
                     "type": "boolean"
                   },
@@ -8721,6 +10663,8 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "usuarioId",
+                    "fechaRegistro",
                     "ip",
                     "masDatos",
                     "fechaCreacion",
@@ -8738,6 +10682,396 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<LogUsuario>"
+      },
+      "Pais.Filter": {
+        "type": "object",
+        "title": "Pais.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "iso": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "iso",
+                    "nombre",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Pais.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Pais>"
+      },
+      "Pais.Filter1": {
+        "type": "object",
+        "title": "Pais.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "Pais.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "iso": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "iso",
+                    "nombre",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Pais.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Pais>"
+      },
+      "PalletsMovements.Filter": {
+        "type": "object",
+        "title": "PalletsMovements.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresa_Id": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "boolean"
+                  },
+                  "temperature": {
+                    "type": "boolean"
+                  },
+                  "humidity": {
+                    "type": "boolean"
+                  },
+                  "press": {
+                    "type": "boolean"
+                  },
+                  "pm2_5": {
+                    "type": "boolean"
+                  },
+                  "pm5": {
+                    "type": "boolean"
+                  },
+                  "pm10": {
+                    "type": "boolean"
+                  },
+                  "battery_volts": {
+                    "type": "boolean"
+                  },
+                  "battery_pct": {
+                    "type": "boolean"
+                  },
+                  "rssi": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresa_Id",
+                    "name",
+                    "temperature",
+                    "humidity",
+                    "press",
+                    "pm2_5",
+                    "pm5",
+                    "pm10",
+                    "battery_volts",
+                    "battery_pct",
+                    "rssi"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PalletsMovements.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PalletsMovements>"
+      },
+      "PalletsMovements.Filter1": {
+        "type": "object",
+        "title": "PalletsMovements.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "PalletsMovements.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresa_Id": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "boolean"
+                  },
+                  "temperature": {
+                    "type": "boolean"
+                  },
+                  "humidity": {
+                    "type": "boolean"
+                  },
+                  "press": {
+                    "type": "boolean"
+                  },
+                  "pm2_5": {
+                    "type": "boolean"
+                  },
+                  "pm5": {
+                    "type": "boolean"
+                  },
+                  "pm10": {
+                    "type": "boolean"
+                  },
+                  "battery_volts": {
+                    "type": "boolean"
+                  },
+                  "battery_pct": {
+                    "type": "boolean"
+                  },
+                  "rssi": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresa_Id",
+                    "name",
+                    "temperature",
+                    "humidity",
+                    "press",
+                    "pm2_5",
+                    "pm5",
+                    "pm10",
+                    "battery_volts",
+                    "battery_pct",
+                    "rssi"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PalletsMovements.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PalletsMovements>"
       },
       "Permiso.Filter": {
         "type": "object",
@@ -8926,6 +11260,249 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Permiso>"
       },
+      "PingResponse": {
+        "type": "object",
+        "title": "PingResponse",
+        "properties": {
+          "greeting": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "headers": {
+            "type": "object",
+            "properties": {
+              "Content-Type": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "PlantillaEmail.Filter": {
+        "type": "object",
+        "title": "PlantillaEmail.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "idiomaId": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombrePlantilla": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "titulo": {
+                    "type": "boolean"
+                  },
+                  "cuerpo": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "idiomaId",
+                    "empresaId",
+                    "nombrePlantilla",
+                    "activoSn",
+                    "titulo",
+                    "cuerpo",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlantillaEmail.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlantillaEmail>"
+      },
+      "PlantillaEmail.Filter1": {
+        "type": "object",
+        "title": "PlantillaEmail.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "PlantillaEmail.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "idiomaId": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombrePlantilla": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "titulo": {
+                    "type": "boolean"
+                  },
+                  "cuerpo": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "idiomaId",
+                    "empresaId",
+                    "nombrePlantilla",
+                    "activoSn",
+                    "titulo",
+                    "cuerpo",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlantillaEmail.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlantillaEmail>"
+      },
       "RefrescarToken.Filter": {
         "type": "object",
         "title": "RefrescarToken.Filter",
@@ -9112,6 +11689,12 @@
                   "activoSn": {
                     "type": "boolean"
                   },
+                  "muestraEmpresa": {
+                    "type": "boolean"
+                  },
+                  "dashboardUrl": {
+                    "type": "boolean"
+                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -9142,6 +11725,8 @@
                     "empresaId",
                     "nombre",
                     "activoSn",
+                    "muestraEmpresa",
+                    "dashboardUrl",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -9212,6 +11797,12 @@
                   "activoSn": {
                     "type": "boolean"
                   },
+                  "muestraEmpresa": {
+                    "type": "boolean"
+                  },
+                  "dashboardUrl": {
+                    "type": "boolean"
+                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -9242,6 +11833,8 @@
                     "empresaId",
                     "nombre",
                     "activoSn",
+                    "muestraEmpresa",
+                    "dashboardUrl",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -10139,161 +12732,6 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<UsuarioPasswordHistorico>"
       },
-      "UsuarioRestablecerPassword.Filter": {
-        "type": "object",
-        "title": "UsuarioRestablecerPassword.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "usuarioId": {
-                    "type": "boolean"
-                  },
-                  "email": {
-                    "type": "boolean"
-                  },
-                  "codigoRecuperacion": {
-                    "type": "boolean"
-                  },
-                  "expiraEn": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "usuarioId",
-                    "email",
-                    "codigoRecuperacion",
-                    "expiraEn"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "UsuarioRestablecerPassword.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<UsuarioRestablecerPassword>"
-      },
-      "UsuarioRestablecerPassword.Filter1": {
-        "type": "object",
-        "title": "UsuarioRestablecerPassword.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "title": "UsuarioRestablecerPassword.WhereFilter",
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "usuarioId": {
-                    "type": "boolean"
-                  },
-                  "email": {
-                    "type": "boolean"
-                  },
-                  "codigoRecuperacion": {
-                    "type": "boolean"
-                  },
-                  "expiraEn": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "usuarioId",
-                    "email",
-                    "codigoRecuperacion",
-                    "expiraEn"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "UsuarioRestablecerPassword.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<UsuarioRestablecerPassword>"
-      },
       "Usuario.ScopeFilter": {
         "type": "object",
         "properties": {
@@ -10449,9 +12887,6 @@
                   },
                   "usuInactivo": {
                     "type": "boolean"
-                  },
-                  "roles": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -10475,8 +12910,7 @@
                     "usuCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo",
-                    "roles"
+                    "usuInactivo"
                   ],
                   "example": "id"
                 },
@@ -10587,9 +13021,6 @@
                   },
                   "usuInactivo": {
                     "type": "boolean"
-                  },
-                  "roles": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -10613,8 +13044,7 @@
                     "usuCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo",
-                    "roles"
+                    "usuInactivo"
                   ],
                   "example": "id"
                 },
@@ -10650,7 +13080,7 @@
   ],
   "servers": [
     {
-      "url": "http://[::1]:8000"
+      "url": "http://localhost:8000"
     }
   ]
 }

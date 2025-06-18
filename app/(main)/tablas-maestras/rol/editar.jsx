@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
-import { getEmpresas } from "@/app/api-endpoints/empresa";
 import { postRol, patchRol } from "@/app/api-endpoints/rol";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
@@ -12,34 +11,30 @@ import { useIntl } from 'react-intl';
 const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const toast = useRef(null);
     const [rol, setRol] = useState(emptyRegistro);
-    const [listaEmpresas, setListaEmpresas] = useState([]);
-    const [empresaSeleccionada, setEmpresaSeleccionada] = useState(null);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [pantallaDashboardSeleccionada, setPantallaDashboardSeleccionada] = useState(null);
     const intl = useIntl();
-
+    const pantallasDashboard = [
+        { nombre: intl.formatMessage({ id: 'Roles' }), url: '/tablas-maestras/rol/' },
+        { nombre: intl.formatMessage({ id: 'Palets' }), url: '/movimientos' },
+    ];
     useEffect(() => {
         //
         //Lo marcamos aquí como saync ya que useEffect no permite ser async porque espera que la función que le pases devueva undefined o una función para limpiar el efecto. 
         //Una función async devuelve una promesa, lo cual no es compatible con el comportamiento esperado de useEffect.
         //
         const fetchData = async () => {
-            // Obtenemos todas las empresas
-            const registrosEmpresas = await getEmpresas();
-            const jsonEmpresas = registrosEmpresas.map(empresa => ({
-                nombre: empresa.nombre,
-                id: empresa.id
-            }));
-            setListaEmpresas(jsonEmpresas);
 
             // Si el idEditar es diferente de nuevo, entonces se va a editar
             if (idEditar !== 0) {
                 // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
+                const pantallaDashboard = (pantallasDashboard.find(cod => cod.url === registro.dashboardUrl));
+                if (pantallaDashboard) {
+                    setPantallaDashboardSeleccionada(pantallaDashboard.nombre)
+                }
                 setRol(registro);
-                // Obtenemos el nombre de la empresa
-                const registroEmpresa = registrosEmpresas.find((element) => element.id === registro.empresaId).nombre;
-                setEmpresaSeleccionada(registroEmpresa);
             }
         };
         fetchData();
@@ -49,14 +44,13 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
 
         //Valida el bloque de nivel idioma
         const validaNombre = rol.nombre === undefined || rol.nombre === "";
-        const validaEmpresa = empresaSeleccionada == null || empresaSeleccionada.id === "";
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return (!validaEmpresa && !validaNombre)
+        return (!validaNombre)
     }
 
-    const guardarTipoTransporte = async () => {
+    const guardarRol = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
         if (await validaciones()) {
@@ -70,8 +64,11 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
                 delete objGuardar.id;
                 delete objGuardar.nombreEmpresa;
                 objGuardar['usuCreacion'] = usuarioActual;
-                objGuardar['empresaId'] = listaEmpresas.find(empresa => empresa.nombre === empresaSeleccionada).id;
-
+                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                if(pantallaDashboardSeleccionada){
+                    objGuardar['dashboardUrl'] = pantallasDashboard.find(dashboard => dashboard.nombre === pantallaDashboardSeleccionada).url;
+                }
+                
                 // Hacemos el insert del registro
                 const nuevoRegistro = await postRol(objGuardar);
 
@@ -93,7 +90,10 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
                 //Si se edita un registro existente Hacemos el patch del registro
                 delete objGuardar.nombreEmpresa;
                 objGuardar['usuModificacion'] = usuarioActual;
-                objGuardar['empresaId'] = listaEmpresas.find(empresa => empresa.nombre === empresaSeleccionada).id;
+                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                if(pantallaDashboardSeleccionada){
+                    objGuardar['dashboardUrl'] = pantallasDashboard.find(dashboard => dashboard.nombre === pantallaDashboardSeleccionada).url;
+                }
                 await patchRol(objGuardar.id, objGuardar);
                 setIdEditar(null)
                 setRegistroResult("editado");
@@ -129,18 +129,18 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
                         <EditarDatosRol
                             rol={rol}
                             setRol={setRol}
-                            listaEmpresas={listaEmpresas}
-                            empresaSeleccionada={empresaSeleccionada}
-                            setEmpresaSeleccionada={setEmpresaSeleccionada}
                             estadoGuardando={estadoGuardando}
+                            pantallasDashboard={pantallasDashboard}
+                            pantallaDashboardSeleccionada={pantallaDashboardSeleccionada} 
+                            setPantallaDashboardSeleccionada={setPantallaDashboardSeleccionada}
                         />
-                        
+
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                onClick={guardarTipoTransporte}
+                                    onClick={guardarRol}
                                     className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />

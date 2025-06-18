@@ -2,13 +2,21 @@ import React, { useContext, useRef, useImperativeHandle, useState, useEffect } f
 import { LayoutContext } from './context/layoutcontext';
 import { getIdiomas } from '@/app/api-endpoints/idioma';
 import { Dropdown } from 'primereact/dropdown';
+import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
+import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
+import { getEmpresa } from "@/app/api-endpoints/empresa";
+import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import { getUsuarioAvatar } from "@/app/api-endpoints/usuario";
 import AppBreadcrumb from './AppBreadCrumb';
+import { devuelveBasePath, getUsuarioSesion } from "@/app/utility/Utils";
+import { set } from 'date-fns';
 
 const AppTopbar = React.forwardRef((props, ref) => {
     const { onMenuToggle, showProfileSidebar, showConfigSidebar } = useContext(LayoutContext);
     const menubuttonRef = useRef(null);
+    const [avatar, setAvatar] = useState(null);
 
     const onConfigButtonClick = () => {
         showConfigSidebar();
@@ -20,16 +28,50 @@ const AppTopbar = React.forwardRef((props, ref) => {
 
     const [dropdownValue, setDropdownValue] = useState(null);
     const [dropdownValues, setDropdownValues] = useState([]);
+    const [logoEmpresaUrl, setLogoEmpresaUrl] = useState(null);
+    const [empresaNombre, setEmpresaNombre] = useState('');
     useEffect(() => {
-        obtenerListaIdiomas();
+
+
+        const fetchData = async () => {
+            await obtenerListaIdiomas();
+            await obtenerAvatarUsuario();
+            //Si el rol del usuario tiene permisos para ver la empresa
+            if (await obtenerRolUsuario()) {
+                obtenerNombreEmpresa();
+                //obtenerLogoEmpresa()
+            }
+
+        }
+        fetchData();
     }, []);
 
+    const obtenerAvatarUsuario = async () => {
+        let avatar = await getUsuarioAvatar(getUsuarioSesion()?.id);
+        if (avatar.length > 0){
+            avatar = avatar[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$132x32_$2');
+            setAvatar(`${devuelveBasePath()}${avatar}`);
+        }
+        else{
+            setAvatar(`${devuelveBasePath()}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`);
+        }
+
+    }
+
     const obtenerListaIdiomas = async () => {
+        // const filtro = {
+        //     where: {
+        //         and: {
+        //             activo_sn: 'S'
+        //         }
+        //     }
+        // }
+        // const registrosIdiomas = await getIdiomas(JSON.stringify(filtro));
         const registrosIdiomas = await getIdiomas();
         const jsonDeIdiomas = registrosIdiomas.map((idioma) => ({
             name: idioma.nombre,
             code: idioma.iso
-        }));
+        })).sort((a, b) => a.name.localeCompare(b.name));;
         const idiomaGuardado = localStorage.getItem("idioma");
         if (idiomaGuardado) {
             const idiomaEncontrado = jsonDeIdiomas.find((idioma) => idioma.code === idiomaGuardado);
@@ -39,6 +81,32 @@ const AppTopbar = React.forwardRef((props, ref) => {
         }
         setDropdownValues(jsonDeIdiomas);
     }
+
+    const obtenerRolUsuario = async () => {
+        const usuario = getUsuarioSesion();
+        const queryParamsRol = {
+            where: {
+                and: {
+                    id: usuario.rolId
+                }
+            },
+        };
+        const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
+        //setMuestraEmpresa(rol[0].muestraEmpresa === 'S')
+        return rol[0].muestraEmpresa === 'S'
+    }
+
+    const obtenerNombreEmpresa = async () => {
+        const queryParamsTiposArchivo = {
+            where: {                
+                id: Number(localStorage.getItem('empresa'))
+            },
+        };
+        const empresa = await getEmpresa(Number(localStorage.getItem('empresa')));
+        setEmpresaNombre(empresa.nombre)
+    }
+
+
 
     const cambiarIdioma = (idioma) => {
         setDropdownValue(idioma);
@@ -58,7 +126,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
                     <i className="pi pi-bars"></i>
                 </button>
 
-                <AppBreadcrumb className="topbar-breadcrumb"></AppBreadcrumb>
+                {/* <AppBreadcrumb className="topbar-breadcrumb"></AppBreadcrumb> */}
             </div>
 
             <div className="topbar-end">
@@ -90,6 +158,11 @@ const AppTopbar = React.forwardRef((props, ref) => {
                         </li>
                     )}
                     <li className="ml-3">
+
+                        
+                        <h5 className="m-0 mr-2">{empresaNombre}</h5>
+                    </li>
+                    <li className="ml-3">
                         <Dropdown
                             value={dropdownValue}
                             onChange={(e) => cambiarIdioma(e.value)}
@@ -105,7 +178,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
                             onClick={showProfileSidebar}
                         >
                             <img
-                                src="/layout/images/avatar/avatar.png"
+                                src={avatar}
                                 alt="Profile"
                             />
                         </button>

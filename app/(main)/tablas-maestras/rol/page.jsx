@@ -3,10 +3,11 @@ import { getVistaEmpresaRol, getVistaEmpresaRolCount, deleteRol } from "@/app/ap
 import EditarRoles from "./editar";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
+import { getUsuarioSesion } from "@/app/utility/Utils";
 const Rol = () => {
     const intl = useIntl();
     const columnas = [
-        { campo: 'nombreEmpresa', header: intl.formatMessage({ id: 'Empresa' }), tipo: 'string' },
+ 
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ]
@@ -19,7 +20,7 @@ const Rol = () => {
                 getRegistrosCount={getVistaEmpresaRolCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Roles"}
-                empresaId={null}
+                filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarRoles />}
                 columnas={columnas}
                 deleteRegistro={deleteRol}

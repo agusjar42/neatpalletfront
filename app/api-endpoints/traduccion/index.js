@@ -54,3 +54,39 @@ export const getIdiomas = async () => {
     const { data: dataTraducciones } = await apiIdioma.idiomaControllerFind()
     return dataTraducciones
 }
+
+export const crearVistaTraduccionesDinamica = async () => {
+    try {
+        // Obtener todos los idiomas activos
+        const idiomas = await getIdiomas();
+        
+        // Crear la consulta dinámica
+        let query = `
+            CREATE OR REPLACE VIEW vista_traducciones_dinamica AS
+            SELECT 
+                t.clave,
+                ${idiomas.map(idioma => `
+                    MAX(CASE WHEN t.idiomaId = ${idioma.id} THEN t.valor END) as ${idioma.iso.toLowerCase()}
+                `).join(',\n')}
+            FROM traduccion t
+            GROUP BY t.clave
+        `;
+
+        // Ejecutar la consulta
+        const { data } = await apiTraduccion.traduccionControllerExecuteQuery(query);
+        return data;
+    } catch (error) {
+        console.error('Error al crear la vista dinámica:', error);
+        throw error;
+    }
+}
+
+export const getVistaTraduccionesDinamica = async (filtro) => {
+    try {
+        const { data } = await apiTraduccion.traduccionControllerVistaTraduccionesDinamica(filtro);
+        return data;
+    } catch (error) {
+        console.error('Error al obtener la vista dinámica:', error);
+        throw error;
+    }
+}

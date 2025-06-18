@@ -3,7 +3,7 @@ import { Tooltip } from "primereact/tooltip";
 import { useContext, useEffect, useRef } from "react";
 import AppMenuitem from "./AppMenuitem";
 import { LayoutContext } from "./context/layoutcontext";
-import { MenuProvider } from "./context/menucontext";
+//import { MenuProvider } from "./context/menucontext";
 
 const AppSubMenu = (props: MenuProps) => {
     const { layoutState, setBreadcrumbs } = useContext(LayoutContext);
@@ -25,26 +25,20 @@ const AppSubMenu = (props: MenuProps) => {
 
         const getBreadcrumb = (item: BreadcrumbItem, labels: string[] = []) => {
             const { label, to, items } = item;
-
             label && labels.push(label);
-            items &&
-                items.forEach((_item) => {
-                    getBreadcrumb(_item, labels.slice());
-                });
+            items?.forEach((_item) => getBreadcrumb(_item, labels.slice()));
             to && breadcrumbs.push({ labels, to });
         };
 
-        model.forEach((item) => {
-            getBreadcrumb(item);
-        });
+        model.forEach((item) => getBreadcrumb(item));
         setBreadcrumbs(breadcrumbs);
     };
 
     return (
-        <MenuProvider>
+        <>
             <ul className="layout-menu">
-                {props.model.map((item, i) => {
-                    return !item.seperator ? (
+                {props.model.map((item, i) =>
+                    !item.seperator ? (
                         <AppMenuitem
                             item={item}
                             root={true}
@@ -52,15 +46,15 @@ const AppSubMenu = (props: MenuProps) => {
                             key={item.label}
                         />
                     ) : (
-                        <li className="menu-separator"></li>
-                    );
-                })}
+                        <li className="menu-separator" key={`sep-${i}`}></li>
+                    )
+                )}
             </ul>
             <Tooltip
                 ref={tooltipRef}
                 target="li:not(.active-menuitem)>.tooltip-target"
             />
-        </MenuProvider>
+        </>
     );
 };
 

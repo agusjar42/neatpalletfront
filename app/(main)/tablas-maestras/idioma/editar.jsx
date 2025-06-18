@@ -101,11 +101,11 @@ const EditarIdioma = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
 
         //Valida que los campos no esten vacios
         const validaNombre = idioma.nombre === undefined || idioma.nombre === "";
-        const validaIso = isoSeleccionado == null || isoSeleccionado === "";
+        //const validaIso = isoSeleccionado == null || isoSeleccionado === "";
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return (!validaIso && !validaNombre)
+        return (/*!validaIso && */!validaNombre)
     }
 
     const guardarEmpresaTransporte = async () => {
@@ -121,7 +121,10 @@ const EditarIdioma = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                 // Elimino y añado los campos que no se necesitan
                 delete objGuardar.id;
                 objGuardar['usuCreacion'] = usuarioActual;
-                objGuardar['iso'] = isoSeleccionado.iso;
+                if(isoSeleccionado){
+                    objGuardar['iso'] = isoSeleccionado.iso;
+                }
+                
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'N';
                 }
@@ -144,7 +147,12 @@ const EditarIdioma = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
             } else {
                 //Si se edita un registro existente Hacemos el patch del registro
                 objGuardar['usuModificacion'] = usuarioActual;
-                objGuardar['iso'] = isoSeleccionado.iso;
+                if(isoSeleccionado){
+                    objGuardar['iso'] = isoSeleccionado.iso;
+                }
+                else{
+                    objGuardar['iso'] = null;
+                }
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'N';
                 }

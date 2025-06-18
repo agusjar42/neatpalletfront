@@ -32,12 +32,12 @@ const EditarDatosIdioma = ({ idioma, setIdioma, estadoGuardando, isoIdiomas, set
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el idioma' })}>
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="empresaTransporteNombre">{intl.formatMessage({ id: 'Nombre' })}</label>
+                    <label htmlFor="empresaTransporteNombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
                     <InputText value={idioma.nombre}
                         placeholder={intl.formatMessage({ id: 'Nombre del idioma' })}
                         onChange={(e) => setIdioma({ ...idioma, nombre: e.target.value })}
                         className={`${(estadoGuardando && idioma.nombre === "") ? "p-invalid" : ""}`}
-                        rows={5} cols={30} />
+                        rows={5} cols={30} maxLength={50}/>
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="empresaTransporteNombre">{intl.formatMessage({ id: 'Iso' })}</label>
@@ -48,7 +48,7 @@ const EditarDatosIdioma = ({ idioma, setIdioma, estadoGuardando, isoIdiomas, set
                             field="idioma"
                             completeMethod={busquedaIsoIdiomas}
                             onChange={(e) => setIsoSeleccionado(e.value)}
-                            className={`${(estadoGuardando && idioma.iso === "") ? "p-invalid" : ""}`}
+                            //className={`${(estadoGuardando && idioma.iso === "") ? "p-invalid" : ""}`}
                             style={{ width: '350px' }} // Ajusta este valor según sea necesario
                         />
                 </div>

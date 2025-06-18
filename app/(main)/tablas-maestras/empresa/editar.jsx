@@ -25,13 +25,13 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         //Una función async devuelve una promesa, lo cual no es compatible con el comportamiento esperado de useEffect.
         //
         const fetchData = async () => {
-
-
+            
             // Si el idEditar es diferente de nuevo, entonces se va a editar
             if (idEditar !== 0) {
                 // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
                 setEmpresa(registro);
+                
                 //Guardamos los archivos para luego poder compararlos
                 const _listaArchivosAntiguos = {}
                 for (const tipoArchivo of listaTipoArchivos) {
@@ -65,13 +65,10 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         //Valida que los campos no esten vacios
         const validaCodigo = empresa.codigo === undefined || empresa.codigo === "";
         const validaNombre = empresa.nombre === undefined || empresa.nombre === "";
-        const validaDescripcion = empresa.descripcion === undefined || empresa.descripcion === "";
-        const validaEmail = empresa.email === undefined || empresa.email === "" ;
-        const validaServicio = empresa.servicio === undefined || empresa.servicio === "" ;
-        const validaPassword = empresa.password === undefined || empresa.password === ""
+
         const validaImagenes = validacionesImagenes();
 
-        if (validaNombre || validaCodigo || validaDescripcion || validaEmail || validaPassword || validaServicio) {
+        if (validaNombre || validaCodigo /*|| validaDescripcion || validaEmail || validaPassword || validaServicio */) {
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
@@ -87,7 +84,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 life: 3000,
             });
         }
-        if(!regexEmail.test(empresa.email)){
+        if ((empresa.email?.length == undefined) || (empresa.email.length > 0 && !regexEmail.test(empresa.email))) {
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
@@ -99,8 +96,12 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return (!validaNombre && !validaCodigo && !validaDescripcion && !validaImagenes 
-            && !validaEmail && !validaPassword && regexEmail.test(empresa.email) && !validaServicio);
+        return (!validaNombre// && !validaCodigo && !validaDescripcion 
+            && !validaImagenes
+            //&& !validaEmail && !validaPassword 
+            && !(empresa.email.length > 0 && !regexEmail.test(empresa.email))
+            //&& !validaServicio
+        );
     }
 
     const guardarEmpresa = async () => {
@@ -152,6 +153,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     nombre: objGuardar.nombre,
                     descripcion: objGuardar.descripcion,
                     email: objGuardar.email,
+                    tiempoInactividad: objGuardar.tiempoInactividad || 0,
                     usuModificacion: usuarioActual,
                     password: objGuardar.password,
                     servicio: objGuardar.servicio
@@ -236,20 +238,20 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
-                        <h2>{header} { (intl.formatMessage({ id: 'Empresa' })).toLowerCase()}</h2>
+                        <h2>{header} {(intl.formatMessage({ id: 'Empresa' })).toLowerCase()}</h2>
                         <EditarDatosEmpresa
                             empresa={empresa}
-                            setEmpresa={setEmpresa}
+                            setEmpresa={setEmpresa}                            
                             listaTipoArchivos={listaTipoArchivos}
                             estadoGuardando={estadoGuardando}
                         />
-                        
+
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                onClick={guardarEmpresa}
+                                    onClick={guardarEmpresa}
                                     className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />

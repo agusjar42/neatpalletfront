@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * neatpallet application
- * Proyecto API encargado de ser la parte Backend de la aplicación web neatpallet
+ * NeatPallet application
+ * Proyecto API encargado de ser la parte Backend de la aplicación web NEATPALLET
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: agusjar@hotmail.com

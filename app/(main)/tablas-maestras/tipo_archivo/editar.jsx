@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
-import { getEmpresas } from "@/app/api-endpoints/empresa";
 import { getSecciones } from "@/app/api-endpoints/seccion";
 import { postTipoArchivo, patchTipoArchivo } from "@/app/api-endpoints/tipo_archivo";
 import 'primeicons/primeicons.css';
@@ -14,16 +13,14 @@ const EditarTipoArchivo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
     const intl = useIntl();
     const toast = useRef(null);
     const [tipoArchivo, setTipoArchivo] = useState(emptyRegistro);
-    const [listaEmpresas, setListaEmpresas] = useState([]);
-    const [empresaSeleccionada, setEmpresaSeleccionada] = useState(null);
     const [listaSecciones, setListaSecciones] = useState([]);
     const [seccionSeleccionada, setSeccionSeleccionada] = useState(null);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const tiposArchivos = [
-        
-        {nombre: intl.formatMessage({ id: 'Fichero' }), value: "Fichero"},
-        {nombre: intl.formatMessage({ id: 'Imagen' }), value: "Imagen"},
+
+        { nombre: intl.formatMessage({ id: 'Fichero' }), value: "Fichero" },
+        { nombre: intl.formatMessage({ id: 'Imagen' }), value: "Imagen" },
     ];
     useEffect(() => {
         //
@@ -31,20 +28,12 @@ const EditarTipoArchivo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
         //Una función async devuelve una promesa, lo cual no es compatible con el comportamiento esperado de useEffect.
         //
         const fetchData = async () => {
-            // Obtenemos todas las empresas
-            const registrosEmpresas = await getEmpresas();
-            const jsonEmpresas = registrosEmpresas.map(empresa => ({
-                nombre: empresa.nombre,
-                id: empresa.id
-            }));
-            setListaEmpresas(jsonEmpresas);
-
             // Obtenemos todas las secciones
             const registrosSecciones = await getSecciones();
             const jsonSecciones = registrosSecciones.map(seccion => ({
                 nombre: seccion.nombre,
                 id: seccion.id
-            }));
+            })).sort((a, b) => a.nombre.localeCompare(b.nombre));;
             setListaSecciones(jsonSecciones);
 
 
@@ -53,9 +42,6 @@ const EditarTipoArchivo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                 // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
                 setTipoArchivo(registro)
-                // Obtenemos el nombre de la empresa
-                const registroEmpresa = registrosEmpresas.find((element) => element.id === registro.empresaId).nombre;
-                setEmpresaSeleccionada(registroEmpresa);
 
                 // Obtenemos el nombre de la seccion
                 const registrosSeccion = registrosSecciones.find((element) => element.id === registro.seccionId).nombre;
@@ -69,14 +55,13 @@ const EditarTipoArchivo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
 
         //Valida el bloque de nivel idioma
         const validaNombre = tipoArchivo.nombre === undefined || tipoArchivo.nombre === "";
-        const validaOrden = tipoArchivo.orden === undefined || tipoArchivo.orden === "";
-        const validaEmpresa = empresaSeleccionada == null || empresaSeleccionada.id === "";
+        // const validaOrden = tipoArchivo.orden === undefined || tipoArchivo.orden === "";
         const validaTipo = tipoArchivo.tipo === null || tipoArchivo.tipo === "";
-        const validaSeccion = seccionSeleccionada == null || seccionSeleccionada.id === "";
+        // const validaSeccion = seccionSeleccionada == null || seccionSeleccionada.id === "";
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return (!validaEmpresa && !validaNombre && !validaSeccion && !validaOrden && !validaTipo)
+        return !validaTipo && !validaNombre  // (!validaNombre && !validaSeccion && !validaOrden && !validaTipo)
     }
 
     const guardarTipoArchivo = async () => {
@@ -94,9 +79,14 @@ const EditarTipoArchivo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                 delete objGuardar.nombreEmpresa;
                 delete objGuardar.nombreSeccion;
                 objGuardar['usuCreacion'] = usuarioActual;
-                objGuardar['empresaId'] = listaEmpresas.find(empresa => empresa.nombre === empresaSeleccionada).id;
-                objGuardar['seccionId'] = listaSecciones.find(seccion => seccion.nombre === seccionSeleccionada).id;
-
+                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                if(seccionSeleccionada){
+                    objGuardar['seccionId'] = listaSecciones.find(seccion => seccion.nombre === seccionSeleccionada).id;
+                }
+                else{
+                    objGuardar['seccionId'] = null;
+                }
+                
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'N';
                 }
@@ -126,8 +116,13 @@ const EditarTipoArchivo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                     objGuardar.activoSn = 'N';
                 }
                 objGuardar['usuModificacion'] = usuarioActual;
-                objGuardar['empresaId'] = listaEmpresas.find(empresa => empresa.nombre === empresaSeleccionada).id;
-                objGuardar['seccionId'] = listaSecciones.find(seccion => seccion.nombre === seccionSeleccionada).id;
+                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                if(seccionSeleccionada){
+                    objGuardar['seccionId'] = listaSecciones.find(seccion => seccion.nombre === seccionSeleccionada).id;
+                }
+                else{
+                    objGuardar['seccionId'] = null;
+                }
                 await patchTipoArchivo(objGuardar.id, objGuardar);
                 setIdEditar(null)
                 setRegistroResult("editado");
@@ -163,22 +158,21 @@ const EditarTipoArchivo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                         <EditarDatosTipoArchivo
                             tipoArchivo={tipoArchivo}
                             setTipoArchivo={setTipoArchivo}
-                            listaEmpresas={listaEmpresas}
+                            
                             listaTipoArchivos={tiposArchivos}
-                            empresaSeleccionada={empresaSeleccionada}
-                            setEmpresaSeleccionada={setEmpresaSeleccionada}
+                        
                             listaSecciones={listaSecciones}
                             seccionSeleccionada={seccionSeleccionada}
                             setSeccionSeleccionada={setSeccionSeleccionada}
                             estadoGuardando={estadoGuardando}
                         />
-                        
+
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                onClick={guardarTipoArchivo}
+                                    onClick={guardarTipoArchivo}
                                     className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />

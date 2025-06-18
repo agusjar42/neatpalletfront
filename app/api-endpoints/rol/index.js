@@ -1,11 +1,11 @@
 import { RolControllerApi, settings, PermisoControllerApi, EmpresaControllerApi } from "@/app/api-neatpallet";
-
+import { getUsuarioSesion } from "@/app/utility/Utils";
 const apiRol = new RolControllerApi(settings)
 const apiPermisos = new PermisoControllerApi(settings)
 const apiEmpresa = new EmpresaControllerApi(settings)
 
-export const getRol= async () => {
-    const { data: dataRoles } = await apiRol.rolControllerFind()
+export const getRol= async (filtro) => {
+    const { data: dataRoles } = await apiRol.rolControllerFind(filtro)
     return dataRoles
 }
 
@@ -56,4 +56,21 @@ export const getEmpresas = async () => {
 export const getNombreRol = async (nombre) => {
     const { data: dataRol } = await apiRol.rolControllerBuscarIdRol(nombre)
     return dataRol
+}
+
+export const obtenerRolDashboard = async () => {
+    const usuario = getUsuarioSesion();
+    if(usuario){
+        const queryParamsRol = {
+            where: {
+                and: {
+                    id: usuario.rolId
+                }
+            },
+        };
+        const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
+        return rol[0].dashboardUrl || '/dashboard';
+    }
+    return '/dashboard';
+
 }

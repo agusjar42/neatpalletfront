@@ -1,10 +1,14 @@
-import { IdiomaControllerApi, TraduccionControllerApi, settings } from "@/app/api-neatpallet";
+import { IdiomaControllerApi, ExamenControllerApi, MensajePlantillaControllerApi, TraduccionControllerApi, settings } from "@/app/api-neatpallet";
 
 const apiIdioma = new IdiomaControllerApi(settings)
 const apiTraduccion = new TraduccionControllerApi(settings)
 
 export const getIdiomas = async (filtro) => {
     const { data: dataIdiomas } = await apiIdioma.idiomaControllerFind(filtro)
+    return dataIdiomas
+}
+export const getIdioma = async (filtro) => {
+    const { data: dataIdiomas } = await apiIdioma.idiomaControllerFindById(filtro)
     return dataIdiomas
 }
 export const getIdiomasCount = async (filtro) => {
@@ -31,7 +35,6 @@ export const deleteIdioma = async (idIdioma) => {
     const { data: dataIdioma } = await apiIdioma.idiomaControllerDeleteById(idIdioma)
     return dataIdioma
 }
-
 
 export const buscarTraduccionExistente = async (idIdioma) => {
     const { data: dataIdioma } = await apiTraduccion.traduccionControllerFind(JSON.stringify(

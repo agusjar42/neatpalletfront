@@ -1,11 +1,6 @@
 Este es un proyecto de [Next.js](https://nextjs.org/) creado con [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 
-## Autores
-
-- [@AlejandroCaicedo](https://www.linkedin.com/in/alejandrocaicedopalacios/)
-
-
 # Proyecto WEB Neatpallet
 
 A continuación se describe todo lo necesario para configurar e instalar este proyecto web en local y en el servidor.

@@ -8,17 +8,17 @@ export const getLogUsuarios = async () => {
 }
 
 export const postLogUsuario = async (objLogUsuario) => {
-    const { data: dataLogUsuario } = await apiLogUsuario.LogUsuarioControllerCreate(objLogUsuario)
+    const { data: dataLogUsuario } = await apiLogUsuario.logUsuarioControllerCreate(objLogUsuario)
     return dataLogUsuario
 }
 
 export const patchLogUsuario = async (idLogUsuario, objLogUsuario) => {
-    const { data: dataLogUsuario } = await apiLogUsuario.LogUsuarioControllerUpdateById(idLogUsuario, objLogUsuario)
+    const { data: dataLogUsuario } = await apiLogUsuario.logUsuarioControllerUpdateById(idLogUsuario, objLogUsuario)
     return dataLogUsuario
 }
 
 export const deleteLogUsuario = async (idLogUsuario) => {
-    const { data: dataLogUsuario } = await apiLogUsuario.LogUsuarioControllerDeleteById(idLogUsuario)
+    const { data: dataLogUsuario } = await apiLogUsuario.logUsuarioControllerDeleteById(idLogUsuario)
     return dataLogUsuario
 }
 

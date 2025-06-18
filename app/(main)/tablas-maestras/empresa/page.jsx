@@ -9,8 +9,9 @@ const Empresa = () => {
     const columnas = [
         { campo: 'codigo', header: intl.formatMessage({ id: 'Codigo' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
-        { campo: 'descripcion', header: intl.formatMessage({ id: 'Descripcion' }), tipo: 'string' },
-        { campo: 'email', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
+        { campo: 'descripcion', header: intl.formatMessage({ id: 'Descripción' }), tipo: 'string' },
+        { campo: 'imagen', header: intl.formatMessage({ id: 'Imagen' }), tipo: 'imagen' },
+        { campo: 'logo', header: intl.formatMessage({ id: 'Logo' }), tipo: 'imagen' },
     ]
 
     // Esta función transforma los registros para su exportación en formato CSV,
@@ -18,10 +19,9 @@ const Empresa = () => {
     const procesarDatosParaCSV = (registros) => {
         return registros.map(registro => {
             return {
-                [intl.formatMessage({ id: 'Codigo' })]: registro.codigo,
+                [intl.formatMessage({ id: 'Código' })]: registro.codigo,
                 [intl.formatMessage({ id: 'Nombre' })]: registro.nombre,
-                [intl.formatMessage({ id: 'Descripcion' })]: registro.descripcion,
-                [intl.formatMessage({ id: 'Email' })]: registro.email,
+                [intl.formatMessage({ id: 'Descripción' })]: registro.descripcion,
             };
         });
     };
@@ -30,6 +30,7 @@ const Empresa = () => {
         <div>
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Empresas' })}
+                seccion={"Empresa"}
                 getRegistros={getEmpresas}
                 getRegistrosCount={getEmpresasCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}

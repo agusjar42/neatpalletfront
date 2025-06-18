@@ -5,6 +5,7 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { useContext } from "react";
 import { LayoutContext } from "../../../../layout/context/layoutcontext";
+import { obtenerRolDashboard } from "@/app/api-endpoints/rol";
 
 const LockScreen: Page = () => {
     const router = useRouter();
@@ -73,7 +74,7 @@ const LockScreen: Page = () => {
                             icon="pi pi-lock-open"
                             label="Unlock"
                             className="w-full"
-                            onClick={() => router.push("/tablas-maestras/empresa")}
+                            onClick={async () => router.push(await obtenerRolDashboard())}
                         ></Button>
                     </div>
                 </div>

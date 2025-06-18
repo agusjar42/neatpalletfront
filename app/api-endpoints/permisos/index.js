@@ -28,9 +28,9 @@ export const getListaPermisos = async () => {
     return dataPermisos
 }
 
-export const getVistaEmpresaRolPermiso = async (idPermiso) => {
+export const getVistaEmpresaRolPermiso = async (filtros) => {
     try {
-        const { data: dataPermiso } = await apiPermisos.permisoControllerVistaEmpresaRolPermiso(idPermiso)
+        const { data: dataPermiso } = await apiPermisos.permisoControllerVistaEmpresaRolPermiso(filtros)
         return dataPermiso   
     } catch (error) {
         console.log(error)

@@ -6,9 +6,9 @@ import { ProgressBar } from 'primereact/progressbar';
 import { Tooltip } from 'primereact/tooltip';
 import { Tag } from 'primereact/tag';
 import { esUrlImagen, formatearBytes } from "@/app/components/shared/componentes";
-import { devuelveBasePath } from "../../utility/Utils";
+import { devuelveBasePath } from "@/app/utility/Utils"
 import { useIntl } from "react-intl";
-const ArchivoMultipleInput = ({ registro, setRegistro, campoNombre, tipoArchivo, espacioMaximo }) => {
+const ArchivoMultipleInput = ({ registro, setRegistro, campoNombre, archivoTipo, espacioMaximo }) => {
     const intl = useIntl();
     const toast = useRef(null);
     const [totalEspacio, setTotalEspacio] = useState(0);
@@ -45,6 +45,26 @@ const ArchivoMultipleInput = ({ registro, setRegistro, campoNombre, tipoArchivo,
         //siempre recibe el registro vacio y luego con los datos
     }, [registro.id]);
 
+    // 2. NUEVO useEffect: si el registro no tiene archivos, limpiar FileUpload y espacio
+    useEffect(() => {
+        const archivosEnRegistro = registro[campoNombre] || [];
+        if (Array.isArray(archivosEnRegistro) && archivosEnRegistro.length === 0) {
+            // Vaciar totalEspacio
+            setTotalEspacio(0);
+            setCargarUrlImagenes(true)
+            // Si el FileUpload está montado, limpiamos sus archivos internos
+            if (subidaArchivosRef.current) {
+                // PrimeReact FileUpload tiene el método clear() que borra todos los archivos
+                // Si la versión que usas no tiene clear(), puedes usar setFiles([])
+                if (typeof subidaArchivosRef.current.clear === 'function') {
+                    subidaArchivosRef.current.clear();
+                } else if (typeof subidaArchivosRef.current.setFiles === 'function') {
+                    subidaArchivosRef.current.setFiles([]);
+                }
+            }
+        }
+    }, [registro[campoNombre]]);
+
     //Trozo del codigo del useEffect que se ha extraido hacia una funcion asincrona para que no hayan problemas de tiempos de ejecucion
     const cargarImagenesRegistro = async () => {
         for (const archivo of registro[campoNombre]) {
@@ -56,14 +76,14 @@ const ArchivoMultipleInput = ({ registro, setRegistro, campoNombre, tipoArchivo,
 
     //Guarda el archivo cuando se selecciona
     const customSubidaArchivos = async (event) => {
-        setRegistro({ ...registro, [campoNombre]: event.files });
+        await setRegistro({ ...registro, [campoNombre]: event.files });
     };
 
     //Cuando se selecciona un archivo actualiza el espacio que ocupan por si queremos marcar un limite de tamaño
     const manejarArchivoSeleccionado = (e) => {
         let archivos = e.files;
-        const _archivos =  [...archivos]
-        ;
+        const _archivos = [...archivos]
+            ;
         //Crea una copia para que se pueda recorrer los archivos sin miedo a que cambie el array con sus modificaciones
         let totalNuevoEspacio = 0;
 
@@ -72,7 +92,7 @@ const ArchivoMultipleInput = ({ registro, setRegistro, campoNombre, tipoArchivo,
         for (const archivo of _archivos) {
             let valido = true;
             totalNuevoEspacio += archivo.size || 0;
-            if (!archivo.type.includes('image/') && tipoArchivo.toLowerCase() === 'imagen') {
+            if (!archivo.type.includes('image/') && archivoTipo.toLowerCase() === 'imagen') {
                 // Notificar al usuario si el tipo de archivo no es valido
                 toast.current.show({
                     severity: 'error',
@@ -99,7 +119,7 @@ const ArchivoMultipleInput = ({ registro, setRegistro, campoNombre, tipoArchivo,
                     archivos.splice(index, 1);
                 }
                 totalNuevoEspacio -= archivo.size || 0;
-                
+
             }
 
         }
@@ -123,13 +143,13 @@ const ArchivoMultipleInput = ({ registro, setRegistro, campoNombre, tipoArchivo,
     };
 
     //Quita el archivo que se ha borrado
-    const manejarArchivoBorrado = (file, callback) => {
+    const manejarArchivoBorrado = async (file, callback) => {
         setTotalEspacio(totalEspacio - file.size);
         //callback(); Esta linea no es necesaria pero la he dejado porque es del propio primeReact y puede ser util en un futuro
         //Elimina el archivo del registro
         const archivosExistentes = subidaArchivosRef.current.getFiles();
         archivosExistentes.splice(archivosExistentes.findIndex(obj => obj === file), 1);
-        setRegistro({ ...registro, [campoNombre]: archivosExistentes });
+        await setRegistro({ ...registro, [campoNombre]: archivosExistentes });
 
     };
 
@@ -181,7 +201,7 @@ const ArchivoMultipleInput = ({ registro, setRegistro, campoNombre, tipoArchivo,
             <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
             {/* <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" /> Boton para vaciar todos los archivos*/}
 
-            <FileUpload multiple={true} ref={subidaArchivosRef} name="demo[]" accept={tipoArchivo.toLowerCase() === 'imagen' ? "image/*" : "*/*"}
+            <FileUpload multiple={true} ref={subidaArchivosRef} name="demo[]" accept={archivoTipo.toLowerCase() === 'imagen' ? "image/*" : "*/*"}
                 //maxFileSize={espacioMaximo}  //Propiedad para marcar el tamaño maximo que pueden ocupar los archivos del input en total
                 onSelect={manejarArchivoSeleccionado}
                 headerTemplate={headerTemplate} itemTemplate={archivoTemplate}

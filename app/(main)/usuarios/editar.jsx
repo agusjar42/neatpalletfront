@@ -1,210 +1,129 @@
-"use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { Divider } from "primereact/divider";
-import { Button } from "primereact/button";
-import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
-import { patchUsuario, postUsuario, getUsuarioTiposUsuario } from "@/app/api-endpoints/usuario";
-import { postUsuarioTipos, deleteUsuarioTipos, getUsuarioTipos } from "@/app/api-endpoints/usuario_tipos";
-import { getRol } from "@/app/api-endpoints/rol";
-import { useIntl } from 'react-intl'
-import { TabView, TabPanel } from 'primereact/tabview';
-import { getIdiomas } from "@/app/api-endpoints/idioma";
-import { getEmpresas } from "@/app/api-endpoints/empresa";
-import { getVistaTipoIvaPais } from "@/app/api-endpoints/tipo_iva";
-import { borrarFichero, postSubirImagen, postSubirFichero, postSubirAvatar } from "@/app/api-endpoints/ficheros"
-import { postArchivo, deleteArchivo } from "@/app/api-endpoints/archivo"
-import { getCentrosEscolares, postCentroEscolar, patchCentroEscolar, deleteCentroEscolar } from "@/app/api-endpoints/centro_escolar";
-import ArchivosUsuario from "./archivosUsuario";
-import PasswordHistorico from "./passwordHistorico";
-import CuentaBancariaUsuario from "./cuenta_bancaria/cuentaBancariaUsuario";
-import DatosParaFacutras from "./datos_facturas/datosParaFacturas";
-import FacturasEmitidas from "./facturas_emitidas/facturaEmitida";
-import EditarCentroEscolar from "./centro_escolar/EditarDatosCentroEscolar";
-import Cobros from "./cobros/page";
-import Incidencias from "./incidencias/incidenciasUsuario";
+import EditarDatosUsuario from "./EditarDatosUsuario";
 
-const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
-    const intl = useIntl()
+import { useIntl } from 'react-intl';
+import { getEmpresas } from "@/app/api-endpoints/empresa";
+import { getRol, obtenerRolDashboard } from "@/app/api-endpoints/rol";
+import { getIdiomas } from "@/app/api-endpoints/idioma";
+import { InputSwitch } from "primereact/inputswitch";
+import { Button } from "primereact/button";
+import { getVistaUsuarios, patchUsuario, postUsuario } from "@/app/api-endpoints/usuario";
+import { Dropdown } from "primereact/dropdown";
+import { getUsuarioSesion } from "@/app/utility/Utils";
+import { borrarFichero, postSubirAvatar, postSubirFichero, postSubirImagen } from "@/app/api-endpoints/ficheros";
+import { deleteArchivo, postArchivo } from "@/app/api-endpoints/archivo";
+import { esUrlImagen } from "@/app/components/shared/componentes";
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+
+const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion,
+    editable, setRegistroEditarFlag, tipo, rol, crudDerivado }) => {
+    const intl = useIntl();
     const toast = useRef(null);
+    const router = useRouter();
     const [usuario, setUsuario] = useState(emptyRegistro);
-    const [estadoGuardando, setEstadoGuardando] = useState(false);
-    const [listaIdiomas, setListaIdiomas] = useState([]);
-    const [idiomaSeleccionado, setIdiomaSeleccionado] = useState(null);
-    const [tiposSeleccionados, setTiposSeleccionados] = useState([]);
-    const [tiposSeleccionadosAntiguo, setTiposSeleccionadosAntiguo] = useState([]);
-    const [listaTiposIva, setListaTiposIva] = useState([]);
-    const [tipoIvaSeleccionado, setTipoIvaSeleccionado] = useState(null);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [listaEmpresas, setListaEmpresas] = useState([]);
     const [empresaSeleccionada, setEmpresaSeleccionada] = useState(null);
     const [listaRoles, setListaRoles] = useState([]);
     const [rolSeleccionado, setRolSeleccionado] = useState(null);
-    const [codigoPaisSeleccionado, setCodigoPaisSeleccionado] = useState(null);
-    const [codigoPaisSeleccionadoCentroEscolar, setCodigoPaisSeleccionadoCentroEscolar] = useState(null);
+    const [listaIdiomas, setListaIdiomas] = useState([]);
+    const [idiomaSeleccionado, setIdiomaSeleccionado] = useState(null);
+    const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [listaTipoArchivosAntiguos, setListaTipoArchivosAntiguos] = useState([]);
-    const [pestanyasTipoUsuario, setPestanyasTipoUsuario] = useState([]);
-    const [activeIndex, setActiveIndex] = useState(0);
-    const emptyRegistroCentro = {
-        id: 0,
-        nombre: "",
-        horario: "",
-        personaContacto: "",
-        emailPersonaContacto: "",
-        activoSn: "N",
-    }
-    const [centroEscolar, setCentroEscolar] = useState(emptyRegistroCentro);
-
-    const codigoPaises = [
-        { pais: `${intl.formatMessage({ id: 'Argentina' })} (+54)`, codigo: "+54" },
-        { pais: `${intl.formatMessage({ id: 'Brasil' })} (+55)`, codigo: "+55" },
-        { pais: `${intl.formatMessage({ id: 'Canada' })} (+1)`, codigo: "+1" },
-        { pais: `${intl.formatMessage({ id: 'Chile' })} (+56)`, codigo: "+56" },
-        { pais: `${intl.formatMessage({ id: 'Colombia' })} (+57)`, codigo: "+57" },
-        { pais: `${intl.formatMessage({ id: 'Costa Rica' })} (+506)`, codigo: "+506" },
-        { pais: `${intl.formatMessage({ id: 'Cuba' })} (+53)`, codigo: "+53" },
-        { pais: `${intl.formatMessage({ id: 'Ecuador' })} (+593)`, codigo: "+593" },
-        { pais: `${intl.formatMessage({ id: 'Estados Unidos' })} (+1)`, codigo: "+1" },
-        { pais: `${intl.formatMessage({ id: 'Espana' })} (+34)`, codigo: "+34" },
-        { pais: `${intl.formatMessage({ id: 'Francia' })} (+33)`, codigo: "+33" },
-        { pais: `${intl.formatMessage({ id: 'Guatemala' })} (+502)`, codigo: "+502" },
-        { pais: `${intl.formatMessage({ id: 'Honduras' })} (+504)`, codigo: "+504" },
-        { pais: `${intl.formatMessage({ id: 'Italia' })} (+39)`, codigo: "+39" },
-        { pais: `${intl.formatMessage({ id: 'Jamaica' })} (+1-876)`, codigo: "+1-876" },
-        { pais: `${intl.formatMessage({ id: 'Mexico' })} (+52)`, codigo: "+52" },
-        { pais: `${intl.formatMessage({ id: 'Nicaragua' })} (+505)`, codigo: "+505" },
-        { pais: `${intl.formatMessage({ id: 'Panama' })} (+507)`, codigo: "+507" },
-        { pais: `${intl.formatMessage({ id: 'Paraguay' })} (+595)`, codigo: "+595" },
-        { pais: `${intl.formatMessage({ id: 'Peru' })} (+51)`, codigo: "+51" },
-        { pais: `${intl.formatMessage({ id: 'Portugal' })} (+351)`, codigo: "+351" },
-        { pais: `${intl.formatMessage({ id: 'Republica Dominicana' })} (+1-809)`, codigo: "+1-809" },
-        { pais: `${intl.formatMessage({ id: 'Uruguay' })} (+598)`, codigo: "+598" },
-        { pais: `${intl.formatMessage({ id: 'Venezuela' })} (+58)`, codigo: "+58" },
-        { pais: `${intl.formatMessage({ id: 'Reino Unido' })} (+44)`, codigo: "+44" }
-    ];
-
-    const tipos = [
-        { nombre: intl.formatMessage({ id: 'Profesor' }), id: 1 },
-        { nombre: intl.formatMessage({ id: 'Familia acogida' }), id: 2 },
-        { nombre: intl.formatMessage({ id: 'Profesor nativo' }), id: 3 },
-        { nombre: intl.formatMessage({ id: 'Acompañante' }), id: 4 },
-        { nombre: intl.formatMessage({ id: 'Tutor' }), id: 5 },
-        { nombre: intl.formatMessage({ id: 'Agente' }), id: 6 },
-        { nombre: intl.formatMessage({ id: 'Centro escolar' }), id: 7 },
-        { nombre: intl.formatMessage({ id: 'Alumno' }), id: 8 },
-    ]
+    const [idEditarDerivado, setIdEditarDerivado] = useState(idEditar);
 
     useEffect(() => {
-        //
-        //Lo marcamos aquí como saync ya que useEffect no permite ser async porque espera que la función que le pases devueva undefined o una función para limpiar el efecto. 
-        //Una función async devuelve una promesa, lo cual no es compatible con el comportamiento esperado de useEffect.
-        //
         const fetchData = async () => {
-            // Obtenemos todos los idiomas
-            const registrosIdiomas = await getIdiomas();
-            const jsonIdiomas = registrosIdiomas.map(idioma => ({
-                nombre: idioma.nombre,
-                id: idioma.id
-            }));
-            setListaIdiomas(jsonIdiomas);
-
+            //
+            //****************************************************************************************************
+            //
             // Obtenemos todas las empresas
+            //
             const registrosEmpresas = await getEmpresas();
             const jsonEmpresas = registrosEmpresas.map(empresa => ({
                 nombre: empresa.nombre,
-                id: empresa.id
+                id: empresa.id,
+                activoSn: empresa.activoSn
             }));
-            setListaEmpresas(jsonEmpresas);
-
-            // Obtenemos todas las empresas
+            //Quitamos los registros inactivos y ordenamos
+            const jsonEmpresasActivas = jsonEmpresas
+                .filter(registro => registro.activoSn === 'S')
+                .sort((a, b) => a.nombre.localeCompare(b.nombre));
+            setListaEmpresas(jsonEmpresasActivas);
+            //
+            //****************************************************************************************************
+            //
+            // Obtenemos todos los roles
+            //
             const registrosRoles = await getRol();
             const jsonRoles = registrosRoles.map(rol => ({
                 nombre: rol.nombre,
-                id: rol.id
+                id: rol.id,
+                activoSn: rol.activoSn
             }));
-            setListaRoles(jsonRoles);
+            //Quitamos los registros inactivos y ordenamos
+            const jsonRolesActivos = jsonRoles
+                .filter(registro => registro.activoSn === 'S')
+                .sort((a, b) => a.nombre.localeCompare(b.nombre));
+            setListaRoles(jsonRolesActivos);
 
-            // Obtenemos todos los tipos de iva
-            const registroIvas = await getVistaTipoIvaPais();
-            const jsonIvas = registroIvas.map(iva => ({
-                nombre: iva.nombrePais,
-                id: iva.id
-            }));
-            setListaTiposIva(jsonIvas);
+            //
+            //****************************************************************************************************
+            //
+            // Obtenemos todos los idiomas
+            //
+            const registrosIdiomas = await getIdiomas();
+            const jsonIdiomas = registrosIdiomas.map(idioma => ({
+                nombre: idioma.nombre,
+                id: idioma.id,
+                activoSn: idioma.activoSn
+            })).sort((a, b) => a.nombre.localeCompare(b.nombre));
+            //Quitamos los registros inactivos y ordenamos
+            const jsonIdiomasActivos = jsonIdiomas
+                .filter(registro => registro.activoSn === 'S')
+                .sort((a, b) => a.nombre.localeCompare(b.nombre));
+            setListaIdiomas(jsonIdiomasActivos);
 
             // Si el idEditar es diferente de nuevo, entonces se va a editar
             if (idEditar !== 0 && rowData !== 0) {
-                const filtro = JSON.stringify({
-                    where: {
-                        and: {
-                            usuario_id: idEditar
-                        }
-                    }
-                });
-                // Obtenemos el centro escolar
-                const registroCentroEscolar = await getCentrosEscolares(filtro);
-                if (registroCentroEscolar.length > 0) {
-                    if (registroCentroEscolar[0].telefono) {
-                        const codigoSplit = (registroCentroEscolar[0].telefono).split("-");
-                        const code = codigoPaises.find(cod => cod.codigo === codigoSplit[0]);
-                        if (code) {
-                            setCodigoPaisSeleccionadoCentroEscolar(code)
-                        }
-                        registroCentroEscolar[0].telefono = codigoSplit[1];
-                    }
-                    setCentroEscolar(registroCentroEscolar[0]);
-                }
+                //Si usuarioId esta declarado significa que estamos accediendo a la pantalla desde otro crud, por ejemplo centros escolares, por lo que
+                // el id de editar si tiene que cambiar para que se vea el del usuario y no el del registro del crud
+
                 // Obtenemos el registro a editar
-                const registro = rowData.find((element) => element.id === idEditar);
-                if (registro.telefono) {
-                    const codigoSplit = (registro.telefono).split("-");
-                    const code = codigoPaises.find(cod => cod.codigo === codigoSplit[0]);
-                    if (code) {
-                        setCodigoPaisSeleccionado(code)
-                    }
-                    registro.telefono = codigoSplit[1];
+                let registro = rowData.find((element) => element.id === idEditarDerivado);
+                //Es posible que accedamos a un usuario a traves del url, lo que significa que muy posiblemente no este dentro del rowData,
+                // por lo que hay que llamar a la bbdd
+                if (!registro) {
+                    const filtroUsuario = JSON.stringify({
+                        where: {
+                            and: {
+                                id: idEditarDerivado
+                            }
+                        }
+                    })
+                    let registro = await getVistaUsuarios(filtroUsuario);
+                    registro = registro[0]
                 }
+                if (crudDerivado) {
+                    const filtroUsuarioDerivado = JSON.stringify({
+                        where: {
+                            and: {
+                                id: registro.usuario_id
+                            }
+                        }
+                    })
+                    registro = await getVistaUsuarios(filtroUsuarioDerivado);
+                    registro = registro[0]
+                    await obtenerArchivosSeccion(registro, 'Usuario')
+                }
+
+                //Modificamos el idEditar
+                idEditar = registro.id;
+                setIdEditar(idEditar);
                 setUsuario(registro);
-                // Obtenemos los tipos de usuario
-                const tiposFiltros = {
-                    where: {
-                        usuarioId: registro.id
-                    }
-                }
-                const registrosTipos = await getUsuarioTiposUsuario(JSON.stringify(tiposFiltros));
-                const jsonTipos = registrosTipos.map(tipo => ({
-                    nombre: intl.formatMessage({ id: tipo.nombre }),
-                    id: tipo.id
-                }));
-                setTiposSeleccionados(jsonTipos);
-                setTiposSeleccionadosAntiguo(registrosTipos);
-                // //Generamos las pestañas
-                // const pestanyasTipos = [];
-                // for (const tipo of registrosTipos) {
-                //     if (tipo.nombre === 'Centro escolar') {
-                //         pestanyasTipos.push({
-                //             title: tipo.nombre,
-                //             content: <EditarCentroEscolar 
-                //             usuarioId={idEditar} 
-                //             centroEscolar={centroEscolar} 
-                //             setCentroEscolar={setCentroEscolar} 
-                //             codigoPaisSeleccionado={codigoPaisSeleccionadoCentroEscolar}
-                //             setCodigoPaisSeleccionado={setCodigoPaisSeleccionadoCentroEscolar}
-                //             codigoPaises={codigoPaises}
-                //             />,
-                //         });
-                //     }
-                //     else {
-                //         pestanyasTipos.push({
-                //             title: tipo.nombre,
-                //             content: 'contenido',
-                //         });
-                //     }
-
-                // }
-                // setPestanyasTipoUsuario(pestanyasTipos);
-
+                
                 //Guardamos los archivos para luego poder compararlos
                 const _listaArchivosAntiguos = {}
                 for (const tipoArchivo of listaTipoArchivos) {
@@ -212,70 +131,23 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 }
                 setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
 
-                // Obtenemos el nombre de la empresa
-                const registroEmpresa = registrosEmpresas.find((element) => element.id === registro.empresaId).nombre;
-                setEmpresaSeleccionada(registroEmpresa);
-                // Obtenemos el nombre del tipo de iva
-                const registroIva = registroIvas.find((element) => element.id === registro.tipo_iva_id).nombrePais;
-                setTipoIvaSeleccionado(registroIva);
-                // Obtenemos el nombre del idioma
+                // Obtenemos el nombre del idioma seleccionado
                 const registroIdioma = registrosIdiomas.find((element) => element.id === registro.idiomaId).nombre;
                 setIdiomaSeleccionado(registroIdioma);
                 // Obtenemos el nombre del rol
                 const registroRol = registrosRoles.find((element) => element.id === registro.rolId).nombre;
                 setRolSeleccionado(registroRol);
+                const filtro = JSON.stringify({
+                    where: {
+                        and: {
+                            usuario_id: idEditar
+                        }
+                    }
+                });
             }
         };
         fetchData();
     }, [idEditar, rowData]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-
-            // Si el idEditar es diferente de nuevo, entonces se va a editar
-            if (idEditar !== 0 && rowData !== 0) {
-                // Obtenemos los tipos de usuario
-                const tiposFiltros = {
-                    where: {
-                        usuarioId: idEditar
-                    }
-                }
-                const registrosTipos = await getUsuarioTiposUsuario(JSON.stringify(tiposFiltros));
-                const jsonTipos = registrosTipos.map(tipo => ({
-                    nombre: intl.formatMessage({ id: tipo.nombre }),
-                    id: tipo.id
-                }));
-                setTiposSeleccionados(jsonTipos);
-                setTiposSeleccionadosAntiguo(registrosTipos);
-                //Generamos las pestañas
-                const pestanyasTipos = [];
-                for (const tipo of registrosTipos) {
-                    if (tipo.nombre === 'Centro escolar') {
-                        pestanyasTipos.push({
-                            title: tipo.nombre,
-                            content: <EditarCentroEscolar
-                                usuarioId={idEditar}
-                                centroEscolar={centroEscolar}
-                                setCentroEscolar={setCentroEscolar}
-                                codigoPaisSeleccionadoCentroEscolar={codigoPaisSeleccionadoCentroEscolar}
-                                setCodigoPaisSeleccionadoCentroEscolar={setCodigoPaisSeleccionadoCentroEscolar}
-                                codigoPaises={codigoPaises}
-                            />,
-                        });
-                    }
-                    else {
-                        pestanyasTipos.push({
-                            title: tipo.nombre,
-                            content: 'contenido',
-                        });
-                    }
-
-                }
-                setPestanyasTipoUsuario(pestanyasTipos);
-            }
-        };
-        fetchData();
-    }, [centroEscolar, codigoPaisSeleccionadoCentroEscolar]);
 
     const validacionesImagenes = () => {
         for (const tipoArchivo of listaTipoArchivos) {
@@ -299,44 +171,12 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         //Valida que los campos no esten vacios
         const validaNombre = usuario.nombre === undefined || usuario.nombre === "";
         const validaTelefono = usuario.telefono === undefined || usuario.telefono === "";
-        const validaCodigoPais = codigoPaisSeleccionado == null || codigoPaisSeleccionado.codigo === "";
-        const validaTipoIva = tipoIvaSeleccionado == null || tipoIvaSeleccionado.codigo === "";
-        const validaEmpresa = empresaSeleccionada == null || empresaSeleccionada.codigo === "";
         const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado.codigo === "";
         const validaRol = rolSeleccionado == null || rolSeleccionado.codigo === "";
         const validaImagenes = validacionesImagenes();
         const validaEmail = usuario.mail === undefined || usuario.mail === "";
 
-        //Validaciones centro escolar
-        if (tiposSeleccionadosAntiguo.find(tipo => tipo.nombre === 'Centro escolar')) {
-            const validaNombre = centroEscolar.nombre === undefined || centroEscolar.nombre === "";
-            const validaTelefono = centroEscolar.telefono === undefined || centroEscolar.telefono === "";
-            const validaCodigoPaisEscolar = codigoPaisSeleccionadoCentroEscolar == null || codigoPaisSeleccionadoCentroEscolar.codigo === "";
-            const validaPersonaContacto = centroEscolar.persona_contacto === undefined || centroEscolar.persona_contacto === "";
-            const validaEmailContacto = centroEscolar.email_persona_contacto === undefined || centroEscolar.email_persona_contacto === "";
-            const validaHorario = centroEscolar.horario === undefined || centroEscolar.horario === "";
-            if (!regexEmail.test(centroEscolar.email_persona_contacto)) {
-                toast.current?.show({
-                    severity: 'error',
-                    summary: 'ERROR',
-                    detail: intl.formatMessage({ id: 'El email debe de tener el formato correcto' }),
-                    life: 3000,
-                });
-                setActiveIndex(6);
-                return false;
-            }
-            if (validaNombre || validaTelefono || validaCodigoPaisEscolar || validaPersonaContacto || validaEmailContacto || validaHorario) {
-                toast.current?.show({
-                    severity: 'error',
-                    summary: 'ERROR',
-                    detail: intl.formatMessage({ id: 'Todos los campos deben de ser rellenados' }),
-                    life: 3000,
-                });
-                setActiveIndex(6);
-                return false;
-            }
-        }
-        if (validaNombre || validaTelefono || validaCodigoPais || validaEmpresa || validaIdioma || validaRol || validaEmail || validaTipoIva) {
+        if (validaNombre || validaTelefono /* || validaEmpresa */ || validaIdioma || validaRol || validaEmail ) {
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
@@ -360,12 +200,46 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 life: 3000,
             });
         }
+        //Validar que el mail es unico
+        const filtroUsuario = JSON.stringify({
+            where: {
+                and: {
+                    mail: usuario.mail,
+                }
+            }
+
+        })
+        const usuarioExistente = await getVistaUsuarios(filtroUsuario);
+        let limite = 0
+        let condicion = true
+        //Si el usuario se esta editando, no contamos su propio email
+        if (idEditar !== undefined && idEditar !== null && idEditar !== "" && idEditar > 0) {
+            limite++;
+            if (usuarioExistente.length > 0) {
+                condicion = usuarioExistente[0].id !== idEditar
+            }
+        }
+        if (usuarioExistente.length > 0 && condicion) {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'El email no debe estar registrado en el sistema.' }),
+                life: 3000,
+            });
+            return false
+        }
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return (!validaNombre && !validaImagenes && !validaTelefono && !validaCodigoPais && !validaEmpresa && !validaIdioma
-            && !validaRol && !validaEmail && regexEmail.test(usuario.mail) && !validaTipoIva);
+        return (!validaNombre && !validaImagenes && !validaTelefono // && !validaEmpresa 
+            && !validaIdioma && !validaRol && !validaEmail && regexEmail.test(usuario.mail));
     }
+
+    const cancelarEdicion = () => {
+        setIdEditar(null)
+        //setAccion("consulta");
+    };
+    const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
 
     const guardarUsuario = async () => {
         setEstadoGuardando(true);
@@ -375,56 +249,49 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             let objGuardar = { ...usuario };
             if (objGuardar.nombre && objGuardar) {
                 const usuarioCreacion = getUsuarioSesion()?.id;
-
+                const usuarioGuardar = {
+                    nombre: objGuardar.nombre,
+                    mail: objGuardar.mail,
+                    activoSn: objGuardar.activoSn,
+                    empresaId: getUsuarioSesion()?.empresaId,
+                }
                 // Si estoy insertando uno nuevo
                 if (idEditar === 0) {
-                    // Elimino y añado los campos que no se necesitan
-                    for (const archivo of listaTipoArchivos) {
-                        delete objGuardar[(archivo.nombre).toLowerCase()];
-                        delete objGuardar[`${(archivo.nombre).toLowerCase()}Id`];
+                    usuarioGuardar['usuCreacion'] = usuarioCreacion;
 
+                    if (idiomaSeleccionado) {
+                        usuarioGuardar['idiomaId'] = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado)?.id;
                     }
-                    delete objGuardar.id;
-                    delete objGuardar.nombreIdioma;
-                    delete objGuardar.nombreEmpresa;
-                    delete objGuardar.nombreRol;
-                    objGuardar['usuCreacion'] = usuarioCreacion;
-                    objGuardar['idiomaId'] = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado).id;
-                    objGuardar['empresaId'] = listaEmpresas.find(empresa => empresa.nombre === empresaSeleccionada).id;
-                    objGuardar['rolId'] = listaRoles.find(rol => rol.nombre === rolSeleccionado).id;
-                    objGuardar['tipoIvaId'] = listaTiposIva.find(iva => iva.nombre === tipoIvaSeleccionado).id;
+                    if (rolSeleccionado) {
+                        usuarioGuardar['rolId'] = listaRoles.find(rol => rol.nombre === rolSeleccionado)?.id;
+                    }
 
-                    objGuardar.telefono = codigoPaisSeleccionado.codigo + "-" + objGuardar.telefono;
+                    if (objGuardar.telefono && objGuardar.telefono.length > 0) {
+                        usuarioGuardar.telefono = objGuardar.telefono;
+                    }
+                    else {
+                        usuarioGuardar.telefono = null;
+                    }
                     if (objGuardar.activoSn == '') {
-                        objGuardar.activoSn = 'N';
+                        usuarioGuardar.activoSn = 'N';
                     }
 
                     // Hacemos el insert del usuario
-                    const nuevoRegistro = await postUsuario(objGuardar);
+                    const nuevoRegistro = await postUsuario(usuarioGuardar);
 
-                    // Si se crea el examen, entonces creamos los niveles de idiomas
                     if (nuevoRegistro?.id) {
 
                         //Sube las imagenes al servidor
                         for (const tipoArchivo of listaTipoArchivos) {
                             //Comprueba que el input haya sido modificado
                             if (usuario[(tipoArchivo.nombre).toLowerCase()]?.type !== undefined) {
-                                await insertarArchivo(usuario, nuevoRegistro.id, tipoArchivo, seccion, usuarioCreacion)
+                                await insertarArchivo(usuario[(tipoArchivo.nombre).toLowerCase()], nuevoRegistro.id, tipoArchivo, seccion, usuarioCreacion)
                             }
                         }
-
-                        //Asigna los tipos del usuario
-                        for (const tipo of tiposSeleccionados) {
-                            postUsuarioTipos({ usuarioId: nuevoRegistro.id, tipoId: tipo.id });
-                        }
-
-                        //Guarda el centro escolar
-                        guardarCentroEscolar(nuevoRegistro.id);
-
-                        //Usamos una variable que luego se cargara en el useEffect de la pagina principal para mostrar el toast
+                        
                         setRegistroResult("insertado");
-                        //setAccion("consulta");
                         setIdEditar(null);
+
                     } else {
                         toast.current?.show({
                             severity: 'error',
@@ -435,46 +302,32 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     }
                 } else {
                     //Si se edita un examen existente Hacemos el patch del examen
-                    for (const archivo of listaTipoArchivos) {
-                        delete objGuardar[(archivo.nombre).toLowerCase()];
-                        delete objGuardar[`${(archivo.nombre).toLowerCase()}Id`];
-
-                    }
-                    delete objGuardar.nombreIdioma;
-                    delete objGuardar.nombreEmpresa;
-                    delete objGuardar.nombreRol;
-                    delete objGuardar.tipo_iva_id;
-                    objGuardar['usuModificacion'] = usuarioCreacion;
-                    objGuardar['idiomaId'] = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado).id;
-                    objGuardar['tipoIvaId'] = listaTiposIva.find(iva => iva.nombre === tipoIvaSeleccionado).id;
-                    objGuardar['empresaId'] = listaEmpresas.find(empresa => empresa.nombre === empresaSeleccionada).id;
-                    objGuardar['rolId'] = listaRoles.find(rol => rol.nombre === rolSeleccionado).id;
-                    objGuardar.telefono = codigoPaisSeleccionado.codigo + "-" + objGuardar.telefono;
-                    if (objGuardar.activoSn == '') {
-                        objGuardar.activoSn = 'N';
+                    usuarioGuardar['usuModificacion'] = usuarioCreacion;
+                    if (idiomaSeleccionado) {
+                        usuarioGuardar['idiomaId'] = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado)?.id;
                     }
 
-                    await patchUsuario(objGuardar.id, objGuardar);
+                    if (rolSeleccionado) {
+                        usuarioGuardar['rolId'] = listaRoles.find(rol => rol.nombre === rolSeleccionado)?.id;
+                    }
+                    usuarioGuardar.id = objGuardar.id;
+
+                    usuarioGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+
+                    if (objGuardar.telefono && objGuardar.telefono.length > 0) {
+                        usuarioGuardar.telefono = objGuardar.telefono;
+                    }
+                    else {
+                        usuarioGuardar.telefono = null;
+                    }
+                    if (objGuardar.activoSn === '' || objGuardar.activoSn == null) {
+                        usuarioGuardar.activoSn = 'N';
+                    }
+
+                    await patchUsuario(objGuardar.id, usuarioGuardar);
                     //Compara los archivos existentes con los de la subida para borrar o añadir en caso de que sea necesario
-                    await editarArchivos(usuario, objGuardar.id, seccion, usuarioCreacion)
-                    //Limpia los tipos del usuario
-                    for (const tipo of tiposSeleccionadosAntiguo) {
-                        const filtro = {
-                            where: {
-                                usuarioId: objGuardar.id,
-                                tipoId: tipo.id
-                            }
-                        }
-                        const tipoRegistro = await getUsuarioTipos(JSON.stringify(filtro))
-                        await deleteUsuarioTipos(tipoRegistro[0].id);
-                    }
-                    //Asigna los tipos del usuario
-                    for (const tipo of tiposSeleccionados) {
-                        await postUsuarioTipos({ usuarioId: objGuardar.id, tipoUsuarioId: tipo.id });
-                    }
-                    //Guarda el centro escolar
-                    guardarCentroEscolar(objGuardar.id);
-                    //setAccion("consulta");
+                    await editarArchivos(usuario, objGuardar.id, seccion, usuarioCreacion, listaTipoArchivos, listaTipoArchivosAntiguos)
+
                     setIdEditar(null)
                     setRegistroResult("editado");
                 }
@@ -490,47 +343,17 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         }
         setEstadoGuardandoBoton(false);
     };
-
-    const guardarCentroEscolar = async (usuarioId) => {
-        let objGuardar = { ...centroEscolar };
-        const centroEscolarGuardar = {
-            usuarioId: usuarioId,
-            nombre: objGuardar.nombre,
-            horario: objGuardar.horario,
-            personaContacto: objGuardar.persona_contacto,
-            emailPersonaContacto: objGuardar.email_persona_contacto,
-            activoSn: objGuardar.activo_sn,
-            telefono: codigoPaisSeleccionado.codigo + "-" + objGuardar.telefono,
-        }
-        //Si existe el centro escolar y esta recien creado, lo inserta
-        if (tiposSeleccionados.find(tipo => tipo.nombre === 'Centro escolar') && !tiposSeleccionadosAntiguo.find(tipo => tipo.nombre === 'Centro escolar')) {
-            centroEscolarGuardar['usuCreacion'] = getUsuarioSesion()?.id;
-            await postCentroEscolar(centroEscolarGuardar);
-        }
-        //Si existia antes se edita
-        else if (tiposSeleccionadosAntiguo.find(tipo => tipo.nombre === 'Centro escolar') && tiposSeleccionados.find(tipo => tipo.nombre === 'Centro escolar')) {
-            centroEscolarGuardar['usuModificacion'] = getUsuarioSesion()?.id;
-            centroEscolarGuardar['id'] = objGuardar.id
-            await patchCentroEscolar(centroEscolarGuardar.id, centroEscolarGuardar);
-        }
-        //Si existia antes y se ha eliminado, lo borra
-        else if (
-            tiposSeleccionadosAntiguo.find(tipo => tipo.nombre === 'Centro escolar') &&
-            !tiposSeleccionados.find(tipo => tipo.nombre === 'Centro escolar')
-        ) {
-            await deleteCentroEscolar(objGuardar.id);
-        }
-    }
-
-
-
-    //Compara los archivos del registro antes de ser editado para actualizar los archivos
-    const editarArchivos = async (registro, id, seccion, usuario) => {
+//Compara los archivos del registro antes de ser editado para actualizar los archivos
+    const editarArchivos = async (registro, id, seccion, usuario, listaTipoArchivos, listaTipoArchivosAntiguos) => {
         for (const tipoArchivo of listaTipoArchivos) {
+            if (Array.isArray(registro[(tipoArchivo.nombre).toLowerCase()])) {
+                await editarArchivosMultiples(registro, id, seccion, listaTipoArchivos, listaTipoArchivosAntiguos, usuario);
+                return
+            }
             //Comprueba que si ha añadido una imagen
             if (registro[(tipoArchivo.nombre).toLowerCase()]?.type !== undefined) {
                 //Si ya existia antes una imagen, hay que eliminarla junto a su version redimensionada
-                if (listaTipoArchivosAntiguos[tipoArchivo['nombre']] !== null) {
+                if (listaTipoArchivosAntiguos[tipoArchivo['nombre']] != null) {
                     await borrarFichero(listaTipoArchivosAntiguos[tipoArchivo['nombre']]);
                     await deleteArchivo(registro[`${(tipoArchivo.nombre).toLowerCase()}Id`]);
                     //Tambien borra la version sin redimensionar
@@ -545,7 +368,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
                 }
                 //Se inserta la imagen modificada
-                await insertarArchivo(registro, id, tipoArchivo, seccion, usuario)
+                await insertarArchivo(registro[(tipoArchivo.nombre).toLowerCase()], id, tipoArchivo, seccion, usuario)
             }
             else {
                 //Si ya existia antes una imagen y se ha borrado, hay que eliminarla junto a su version redimensionada
@@ -566,22 +389,25 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         }
     };
 
-    const insertarArchivo = async (registro, id, tipoArchivo, seccion, usuario) => {
+    
+    const insertarArchivo = async (archivo, id, tipoArchivo, seccion, usuario) => {
         //Comprueba que el input haya sido modificado
-        if (registro[(tipoArchivo.nombre).toLowerCase()]?.type !== undefined) {
+        if (archivo?.type !== undefined) {
             //Comprueba si el tipo de archivo es una imagen para la subida
             let response = null;
             if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
-                response = await postSubirImagen(seccion, registro[(tipoArchivo.nombre).toLowerCase()].name, registro[(tipoArchivo.nombre).toLowerCase()]);
-                response = await postSubirAvatar(seccion, registro[(tipoArchivo.nombre).toLowerCase()].name, registro[(tipoArchivo.nombre).toLowerCase()]);
+                if (seccion === 'Usuario') {
+                    response = await postSubirAvatar(seccion, archivo.name, archivo);
+                }
+                response = await postSubirImagen(seccion, archivo.name, archivo);
             }
             else {
-                response = await postSubirFichero(seccion, registro[(tipoArchivo.nombre).toLowerCase()].name, registro[(tipoArchivo.nombre).toLowerCase()]);
+                response = await postSubirFichero(seccion, archivo.name, archivo);
             }
             //Hace el insert en la tabla de archivos
             const objArchivo = {}
             objArchivo['usuCreacion'] = usuario;
-            objArchivo['empresaId'] = Number(localStorage.getItem('empresa'));
+            objArchivo['empresaId'] = JSON.parse(localStorage.getItem('userDataNeatpallet')).id
             objArchivo['tipoArchivoId'] = tipoArchivo.id;
             objArchivo['url'] = response.originalUrl;
             objArchivo['idTabla'] = id;
@@ -590,12 +416,48 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         }
     }
 
+    //Compara los archivos del registro antes de ser editado para actualizar los archivos
+    const editarArchivosMultiples = async (registro, id, seccion, listaTipoArchivos, listaTipoArchivosAlumnoAntiguos, usuario) => {
+        for (const tipoArchivo of listaTipoArchivos) {
+            if (listaTipoArchivosAlumnoAntiguos[tipoArchivo.nombre]) {
+                //Recorre los archivos antiguos para eliminarlos en caso de que sea necesario
+                for (const archivoAntiguo of listaTipoArchivosAlumnoAntiguos[tipoArchivo.nombre]) {
+                    //Obtiene el nombre del archivo para compararlo
+                    const archivoAntiguoNombre = archivoAntiguo.url.split('/').pop();
+                    //Comprueba si el archivo antiguo existe en el registro
+                    const archivoExisteEnRegistro = registro[(tipoArchivo.nombre).toLowerCase()].find(item => item.name === archivoAntiguoNombre || item.url === archivoAntiguo.url);
 
-    const cancelarEdicion = () => {
-        setIdEditar(null)
+                    //Si es undefined, significa que no existe en el array de registro por lo que se ha eliminado
+                    if (archivoExisteEnRegistro === undefined) {
+                        await borrarFichero(archivoAntiguo.url);
+                        await deleteArchivo(archivoAntiguo.id);
+                        //Tambien borra la version sin redimensionar
+                        //Funcion provisional porque no tengo manera de saber si x archivo de x tipo de input es imagen o no solo con el url
+                        if (esUrlImagen(archivoAntiguo.url)) {
+                            const url = (archivoAntiguo.url).replace(/(\/[^\/]+\/)1250x850_([^\/]+\.\w+)$/, '$1$2');
+                            await borrarFichero(url);
+                        }
+                    }
+                }
+            }
+            if (registro[(tipoArchivo.nombre).toLowerCase()]) {
+                for (const archivoNuevo of registro[(tipoArchivo.nombre).toLowerCase()]) {
+                    //Comprueba si el archivo antiguo existe en el registro
+                    if (listaTipoArchivosAlumnoAntiguos[tipoArchivo.nombre]) {
+                        const archivoExisteEnArchivosAntiguos = listaTipoArchivosAlumnoAntiguos[tipoArchivo.nombre].find(item => item.url.split('/').pop() === archivoNuevo.name || item.url === archivoNuevo.url);
+                        //Si es undefined, significa que no existe en el array de los archivos antiguos por lo que se ha insertado
+                        if (archivoExisteEnArchivosAntiguos === undefined) {
+                            await insertarArchivo(archivoNuevo, id, tipoArchivo, seccion, usuario);
+                        }
+                    }
+                    else {
+                        //Si antes no existia ni un solo archivo, no nos molestamos en comprobar si existe o no en el registro
+                        await insertarArchivo(archivoNuevo, id, tipoArchivo, seccion, usuario);
+                    }
+                }
+            }
+        }
     };
-
-    const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
     return (
         <div>
             <div className="grid Empresa">
@@ -603,63 +465,36 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Usuario' })).toLowerCase()}</h2>
-                        
-                        <Divider type="solid" />
-                        <TabView scrollable>
-                            <TabPanel header={intl.formatMessage({ id: 'Informacion' })}>
-                                <TabView activeIndex={activeIndex} scrollable onTabChange={(e) => setActiveIndex(e.index)}>
-                                    {pestanyasTipoUsuario.map((tab) => {
-                                        return (
-                                            <TabPanel key={tab.title} header={tab.title}>
-                                                {tab.content}
-                                            </TabPanel>
-                                        );
-                                    })}
-                                </TabView>
-                            </TabPanel>
-                            <TabPanel header={intl.formatMessage({ id: 'Datos para facturas' })}>
-                                <DatosParaFacutras usuarioId={idEditar} />
-                            </TabPanel>
-                            <TabPanel header={intl.formatMessage({ id: 'Facturas emitidas' })}>
-
-                                <FacturasEmitidas usuarioId={idEditar} />
-                            </TabPanel>
-                            <TabPanel header={intl.formatMessage({ id: 'Mensajes' })}>
-
-                            </TabPanel>
-                            <TabPanel header={intl.formatMessage({ id: 'Cuenta bancaria' })}>
-                                <CuentaBancariaUsuario usuarioId={idEditar} />
-                            </TabPanel>
-                            <TabPanel header={intl.formatMessage({ id: 'Incidencias' })}>
-                                <Incidencias usuarioId={idEditar} />
-                            </TabPanel>
-                            <TabPanel header={intl.formatMessage({ id: 'Cobros' })}>
-                                <Cobros usuarioId={idEditar} />
-                            </TabPanel>
-                            <TabPanel header={intl.formatMessage({ id: 'Historico de contraseñas' })}>
-                                <PasswordHistorico
-                                    usuarioId={idEditar}
-                                />
-                            </TabPanel>
-                            <TabPanel header={intl.formatMessage({ id: 'Archivos' })}>
-                                <ArchivosUsuario
-                                    usuCreacion={idEditar}
-                                />
-                            </TabPanel>
-                        </TabView>
+                        <EditarDatosUsuario
+                            usuario={usuario}
+                            setUsuario={setUsuario}
+                            listaEmpresas={listaEmpresas}
+                            empresaSeleccionada={empresaSeleccionada}
+                            setEmpresaSeleccionada={setEmpresaSeleccionada}
+                            listaRoles={listaRoles}
+                            rolSeleccionado={rolSeleccionado}
+                            setRolSeleccionado={setRolSeleccionado}
+                            listaIdiomas={listaIdiomas}
+                            idiomaSeleccionado={idiomaSeleccionado}
+                            setIdiomaSeleccionado={setIdiomaSeleccionado}
+                            estadoGuardando={estadoGuardando}
+                            listaTipoArchivos={listaTipoArchivos}
+                        />
                         <div className="flex justify-content-end mt-2">
-                            <Button
-                                label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
-                                icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                onClick={guardarUsuario}
-                                className="mr-2"
-                                disabled={estadoGuardandoBoton}
-                            />
+                            {editable && (
+                                <Button
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
+                                    icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
+                                    onClick={guardarUsuario}
+                                    className="mr-2"
+                                    disabled={estadoGuardandoBoton}
+                                />
+                            )}
                             <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>            
         </div>
     );
 };

@@ -1,15 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import FullCalendar from "@fullcalendar/react";
+import { getIdiomaDefecto } from "@/app/components/shared/componentes";
+import { useIntl } from 'react-intl'
+import { Divider } from "primereact/divider";
 // fullcalendar plugins imports
 import dayGridPlugin from "@fullcalendar/daygrid";
 
 const Calendario = ({ calendario, setCalendario }) => {
+    const intl = useIntl();
+    const colores = {
+        'disponible': 'rgb(193, 247, 188)',
+        'noDisponible': 'rgb(255, 114, 114)',
+        'evento': 'rgb(160, 221, 245)',
+        'neutral': '',
 
+    }
     useEffect(() => {
         const tdPresentacion = document.querySelector('td[role="presentation"]');
         if (tdPresentacion !== null) {
             tdPresentacion.onclick = clickCalendario
+        }
+        const botonHoy = document.querySelector('.fc-today-button');
+        if (botonHoy !== null) {
+            botonHoy.innerHTML = intl.formatMessage({ id: 'Hoy' });
         }
     }, []);
 
@@ -38,7 +52,6 @@ const Calendario = ({ calendario, setCalendario }) => {
                     anio: diaArr[0],
                     mes: diaArr[1],
                     dia: diaArr[2],
-                    tipo: ''
                 }
 
                 pintarDia(diaTd, diaJSON);
@@ -55,6 +68,10 @@ const Calendario = ({ calendario, setCalendario }) => {
         const calendarioFiltrado = _calendario.filter(dia => filtrarMes(inicioString, finalString, dia));
         limpiarMes();
         pintarMes(calendarioFiltrado);
+        const botonHoy = document.querySelector('.fc-today-button');
+        if (botonHoy !== null) {
+            botonHoy.innerHTML = intl.formatMessage({ id: 'Hoy' });
+        }
     }
 
     const limpiarMes = () => {
@@ -67,29 +84,43 @@ const Calendario = ({ calendario, setCalendario }) => {
     const pintarMes = (calendarioFiltrado) => {
         for (const diaJSON of calendarioFiltrado) {
             const diaTd = document.querySelector(`td[data-date="${diaJSON.anio}-${diaJSON.mes}-${diaJSON.dia}"]`);
-            if(diaTd !== null){
-                pintarDia(diaTd);
+            if (diaTd !== null) {
+                pintarDia(diaTd, diaJSON);
             }
         }
     }
 
-    const pintarDia = (diaTd, diaJSON = null) => {
-        if (diaTd.style.backgroundColor !== 'rgb(193, 247, 188)') {
-            diaTd.style.backgroundColor = 'rgb(193, 247, 188';
-        }
-        else if (diaTd.style.backgroundColor === 'rgb(193, 247, 188)') {
-            diaTd.style.backgroundColor = ''
+    const pintarDia = (diaTd, diaJSON) => {
+        if (!diaJSON.tipo) {
+            if (diaTd.style.backgroundColor === colores.disponible) {
+                diaJSON.tipo = 'noDisponible';
+            }
+            else if (diaTd.style.backgroundColor === colores.noDisponible) {
+                diaTd.style.backgroundColor = colores.neutral;
+                diaJSON.tipo = 'neutral';
+            }
+            else if (diaTd.style.backgroundColor === colores.neutral) {
+                diaJSON.tipo = 'disponible';
+            }
         }
 
-        if(diaJSON !== null){
-            const diaIndex = calendario.findIndex(dia => dia.anio === diaJSON.anio && dia.mes === diaJSON.mes && dia.dia === diaJSON.dia);
-            if( diaIndex < 0){
-                calendario.push(diaJSON);
+        diaTd.style.backgroundColor = colores[diaJSON.tipo];
+
+        if (diaJSON !== null && diaJSON.tipo !== undefined) {
+            if (diaJSON.tipo === 'evento') {
+                //Si es un evento no permitimos que el usuario lo toque
+                return
             }
-            else{
+            const diaIndex = calendario.findIndex(dia => dia.anio === diaJSON.anio && dia.mes === diaJSON.mes && dia.dia === diaJSON.dia);
+            if (diaIndex > 0) {
                 calendario.splice(diaIndex, 1);
             }
+            if (diaJSON.tipo !== 'neutral') {
+                
+                calendario.push(diaJSON);
+            }
         }
+        setCalendario(calendario);
     }
 
     const filtrarMes = (startStr, endStr, dia) => {
@@ -99,11 +130,6 @@ const Calendario = ({ calendario, setCalendario }) => {
         return diaDate >= startDate && diaDate <= endDate;
 
     }
-
-
-    const guardarCambios = () => {
-        setCalendario(calendario);
-    };
 
     return (
         <div className="card">
@@ -121,22 +147,48 @@ const Calendario = ({ calendario, setCalendario }) => {
                 }}
                 datesSet={cambiarMes}
                 // IDIOMA DEL CALENDARIO
-                locale={'es'}
+                locale={getIdiomaDefecto()}
                 firstDay={1}
                 editable
                 selectable
                 selectMirror
                 dayMaxEvents
             />
-            <div style={{marginTop: '15px'}} className="flex justify-content-end mt-2">
-                <Button
-                    type="button"
-                    label="Guardar"
-                    icon="pi pi-check"
-                    onClick={guardarCambios}
-                />
+            <Divider />
+            <div className="col-12">
+                <h4>{intl.formatMessage({ id: 'Significado de los colores:' })}</h4>
+                <div className="grid"
+                    style={{
+                        gap: '15px',
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(3, 1fr)',
+                    }}>
+                    <div className="col-12 md:col-4"
+                        style={{
+                            backgroundColor: colores.disponible,
+                            padding: '10px',
+                            width: '100%',
+                        }}>
+                        <span>{intl.formatMessage({ id: 'Disponible' })}</span>
+                    </div>
+                    <div className="col-12 md:col-4"
+                        style={{
+                            backgroundColor: colores.noDisponible,
+                            padding: '10px',
+                            width: '100%',
+                        }}>
+                        <span>{intl.formatMessage({ id: 'No disponible' })}</span>
+                    </div>
+                    <div className="col-12 md:col-4"
+                        style={{
+                            backgroundColor: colores.evento,
+                            padding: '10px',
+                            width: '100%',
+                        }}>
+                        <span>{intl.formatMessage({ id: 'Día previamente disponible que ha sido reservado para un evento' })}</span>
+                    </div>
+                </div>
             </div>
-
         </div>
     );
 }

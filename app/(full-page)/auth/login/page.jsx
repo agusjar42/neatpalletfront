@@ -36,106 +36,60 @@ const Login = () => {
 
 
     useEffect(() => {
-        const hash = window.location.hash;
-        const obj = {};
-        try {
-            //Obtiene el hash de la URL y le quita el # al principio
-            const paramsStr = atob(hash.slice(1))
-            //Transforma el string en un objeto
-            const params = new URLSearchParams(paramsStr);
-            for (const [key, value] of params.entries()) {
-                obj[key] = value;
-            }
-        } catch (error) {
-            console.error('Error al obtener el hash de la URL:', error);
+        setRegistroUsuario(false);
+        //Obtiene el mensaje del toast de la pantalla de recuperar contraseña
+        const toastMensaje = localStorage.getItem('toastMensaje');
+        if (toastMensaje && toastMensaje.length > 0) {
+            toast.current?.show({
+                severity: "success",
+                summary: "OK",
+                detail: toastMensaje,
+                life: 3000,
+            });
+            //Limpiar el local storage
+            localStorage.removeItem('toastMensaje');
         }
-        if (obj.email && obj.password && obj.tipo && obj.rol) {
-            //Limia el local strorage
-            localStorage.clear();
-            //Almacena el tipo y el rol en el localstorage
-            localStorage.setItem('tipo', obj.tipo);
-            localStorage.setItem('rol', obj.rol);
-            //Hace el login
-            loginRegistro(obj.email, obj.password);
-        }
-        //Si se accede a la pagina de login normalmente
-        else {
-            setRegistroUsuario(false);
-            //Obtiene el mensaje del toast de la pantalla de recuperar contraseña
-            const toastMensaje = localStorage.getItem('toastMensaje');
-            if (toastMensaje && toastMensaje.length > 0) {
-                toast.current?.show({
-                    severity: "success",
-                    summary: "OK",
-                    detail: toastMensaje,
-                    life: 3000,
-                });
-                //Limpiar el local storage
-                localStorage.removeItem('toastMensaje');
-            }
-        }
-
     }, []);
 
     //Funcion para acotar codigo
     const loginGenerico = async (usuario, password) => {
+        //
+        //Llamamos al servicio de login y obtenemos la respuesta
+        //
         const res = await jwt.login({ mail: usuario, password });
-        //Si el login da excepcion, lanza una excepcion y se captura en el catch
-        if (res.data.message) {
-            throw new Error(res.data.message);
-        }
-        const data = { ...res.data.userData, accessToken: res.data.accessToken, refreshToken: res.data.refreshToken };
-
-        console.log('Usuario autenticado: ', data);
-
-        return data;
-    }
-
-    //El login que tiene que hacer para registrar al usuario
-    const loginRegistro = async (usuario, password) => {
-        bloquearPantalla(true);
-        try {
-            const data = await loginGenerico(usuario, password);
-            if (data.accessToken) {
-                loginSinDashboard(data.accessToken, rememberMe, data);
-                //await almacenarLogin(data);
-                //Obtenemos los roles del sistema
-                const rol = localStorage.getItem('rol');
-                if (rol === 'Familia_acogida') {
-                    document.cookie = `CrearRegistro=true; max-age=60; path=/; secure;`;
-                    router.push(`/familia_acogida/`);
-                }
-                else {
-                    router.push(`/usuarios/?usuario=0`)
-                }
-
-
-
-                bloquearPantalla(false);
-            } else {
-                console.error('El token es undefined');
-                bloquearPantalla(false);
+        //
+        //Comprobamos si el usuario está activo, si no lo está, devolvemos un objeto con activo: false y mostramos un mensaje de error
+        //
+        if (res.data.userData.activoSn === 'N') {
+            return { activo: false };
+        } else {
+            //
+            //Si ha ocurrido un error, lanzamos una excepción
+            //
+            if (res.data.message) {
+                throw new Error(res.data.message);
             }
-        } catch (error) {
-            setMessage('Las credenciales del usuario son incorrectas.');
-            bloquearPantalla(false);
+            //
+            //Si todo ha ido bien, obtenemos el idioma del usuario y los permisos
+            //
+            return { ...res.data.userData, accessToken: res.data.accessToken, refreshToken: res.data.refreshToken };
         }
     }
-
-
 
     const manejarLogin = async () => {
         bloquearPantalla(true);
         try {
             const data = await loginGenerico(usuario, password);
-            if (data.accessToken) {
-                login(data.accessToken, rememberMe, data);
-                //await almacenarLogin(data);
-                bloquearPantalla(false);
+            if (data.activo === false) {
+                setMessage('El usuario no está activo.');
             } else {
-                console.error('El token es undefined');
-                bloquearPantalla(false);
+                if (data.accessToken) {
+                    login(data.accessToken, rememberMe, data);
+                } else {
+                    setMessage('Error al obtener el token: es undefined');
+                }
             }
+            bloquearPantalla(false);
         } catch (error) {
             setMessage('Las credenciales del usuario son incorrectas.');
             bloquearPantalla(false);

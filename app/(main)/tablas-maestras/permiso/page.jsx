@@ -180,7 +180,8 @@ const Permiso = () => {
             setDatosUsuario(parsedData);
 
             //Marcar los que esten dentro de la vista.
-            const permisosMarcados = await getVistaEmpresaRolPermiso();
+            const filtroEmpresaRolPermiso = { where: { and: { empresaId: getUsuarioSesion().empresaId }}};
+            const permisosMarcados = await getVistaEmpresaRolPermiso(JSON.stringify(filtroEmpresaRolPermiso));
             // Crear un nuevo conjunto con el formato especificado
             const permisosSet = new Set(permisosMarcados.map(permisoMarcado =>
                 `${permisoMarcado.permiso_controlador}-${permisoMarcado.permiso_accion}-${permisoMarcado.rol_nombre}-${permisoMarcado.permiso_id}`
@@ -229,7 +230,7 @@ const Permiso = () => {
             if (evento.checked) {
                 //añadir a la BBDD y al set
                 const partesPermiso = permiso.split('-');
-                const rolId = await getNombreRol(partesPermiso[2]);
+                const rolId = await getNombreRol(partesPermiso[2], getUsuarioSesion().empresaId);
                 emptyPermiso = {
                     rolId: rolId[0].id,
                     modulo: "Neatpallet",

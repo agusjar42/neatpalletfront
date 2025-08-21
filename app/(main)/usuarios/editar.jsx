@@ -57,7 +57,9 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             //
             // Obtenemos todos los roles
             //
-            const registrosRoles = await getRol();
+            const filtroRol = { where: { empresaId: getUsuarioSesion().empresaId } };
+            const registrosRoles = await getRol(JSON.stringify(filtroRol));
+
             const jsonRoles = registrosRoles.map(rol => ({
                 nombre: rol.nombre,
                 id: rol.id,

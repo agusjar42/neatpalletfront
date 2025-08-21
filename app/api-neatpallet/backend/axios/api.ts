@@ -11179,10 +11179,11 @@ export const PermisoControllerApiAxiosParamCreator = function (configuration?: C
         },
         /**
          * 
+         * @param {PermisoFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permisoControllerVistaEmpresaRolPermiso: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        permisoControllerVistaEmpresaRolPermiso: async (filter?: PermisoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/vistaEmpresaRolPermiso`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -11198,6 +11199,10 @@ export const PermisoControllerApiAxiosParamCreator = function (configuration?: C
             // authentication jwt required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
 
 
     
@@ -11319,11 +11324,12 @@ export const PermisoControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {PermisoFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permisoControllerVistaEmpresaRolPermiso(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.permisoControllerVistaEmpresaRolPermiso(options);
+        async permisoControllerVistaEmpresaRolPermiso(filter?: PermisoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.permisoControllerVistaEmpresaRolPermiso(filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -11426,11 +11432,12 @@ export const PermisoControllerApiFactory = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {PermisoFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permisoControllerVistaEmpresaRolPermiso(options?: any): AxiosPromise<object> {
-            return localVarFp.permisoControllerVistaEmpresaRolPermiso(options).then((request) => request(axios, basePath));
+        permisoControllerVistaEmpresaRolPermiso(filter?: PermisoFilter1, options?: any): AxiosPromise<object> {
+            return localVarFp.permisoControllerVistaEmpresaRolPermiso(filter, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -11550,12 +11557,13 @@ export class PermisoControllerApi extends BaseAPI {
 
     /**
      * 
+     * @param {PermisoFilter1} [filter] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PermisoControllerApi
      */
-    public permisoControllerVistaEmpresaRolPermiso(options?: AxiosRequestConfig) {
-        return PermisoControllerApiFp(this.configuration).permisoControllerVistaEmpresaRolPermiso(options).then((request) => request(this.axios, this.basePath));
+    public permisoControllerVistaEmpresaRolPermiso(filter?: PermisoFilter1, options?: AxiosRequestConfig) {
+        return PermisoControllerApiFp(this.configuration).permisoControllerVistaEmpresaRolPermiso(filter, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -13167,10 +13175,11 @@ export const RolControllerApiAxiosParamCreator = function (configuration?: Confi
         /**
          * 
          * @param {string} [nombre] 
+         * @param {number} [empresaId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rolControllerBuscarIdRol: async (nombre?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rolControllerBuscarIdRol: async (nombre?: string, empresaId?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/buscarIdRol`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -13189,6 +13198,10 @@ export const RolControllerApiAxiosParamCreator = function (configuration?: Confi
 
             if (nombre !== undefined) {
                 localVarQueryParameter['nombre'] = nombre;
+            }
+
+            if (empresaId !== undefined) {
+                localVarQueryParameter['empresaId'] = empresaId;
             }
 
 
@@ -13607,11 +13620,12 @@ export const RolControllerApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} [nombre] 
+         * @param {number} [empresaId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rolControllerBuscarIdRol(nombre?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RolWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rolControllerBuscarIdRol(nombre, options);
+        async rolControllerBuscarIdRol(nombre?: string, empresaId?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RolWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rolControllerBuscarIdRol(nombre, empresaId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -13731,11 +13745,12 @@ export const RolControllerApiFactory = function (configuration?: Configuration, 
         /**
          * 
          * @param {string} [nombre] 
+         * @param {number} [empresaId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rolControllerBuscarIdRol(nombre?: string, options?: any): AxiosPromise<Array<RolWithRelations>> {
-            return localVarFp.rolControllerBuscarIdRol(nombre, options).then((request) => request(axios, basePath));
+        rolControllerBuscarIdRol(nombre?: string, empresaId?: number, options?: any): AxiosPromise<Array<RolWithRelations>> {
+            return localVarFp.rolControllerBuscarIdRol(nombre, empresaId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -13844,12 +13859,13 @@ export class RolControllerApi extends BaseAPI {
     /**
      * 
      * @param {string} [nombre] 
+     * @param {number} [empresaId] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RolControllerApi
      */
-    public rolControllerBuscarIdRol(nombre?: string, options?: AxiosRequestConfig) {
-        return RolControllerApiFp(this.configuration).rolControllerBuscarIdRol(nombre, options).then((request) => request(this.axios, this.basePath));
+    public rolControllerBuscarIdRol(nombre?: string, empresaId?: number, options?: AxiosRequestConfig) {
+        return RolControllerApiFp(this.configuration).rolControllerBuscarIdRol(nombre, empresaId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

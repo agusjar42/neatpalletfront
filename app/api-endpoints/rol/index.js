@@ -53,8 +53,8 @@ export const getEmpresas = async () => {
     return dataRol
 }
 
-export const getNombreRol = async (nombre) => {
-    const { data: dataRol } = await apiRol.rolControllerBuscarIdRol(nombre)
+export const getNombreRol = async (nombre, empresaId) => {
+    const { data: dataRol } = await apiRol.rolControllerBuscarIdRol(nombre, empresaId)
     return dataRol
 }
 

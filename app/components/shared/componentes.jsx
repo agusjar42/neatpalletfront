@@ -164,7 +164,8 @@ const obtenerTodosLosPermisos = async (accion) => {
         where: {
             and: {
                 rol_id: usuario.rolId,
-                permiso_accion: accion
+                permiso_accion: accion,
+                empresaId: getUsuarioSesion().empresaId
             }
         }
     }));

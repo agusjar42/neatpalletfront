@@ -400,6 +400,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "empresaId",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
           }
         ],
         "operationId": "RolController.buscarIdRol"
@@ -6068,6 +6075,19 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Permiso.Filter1"
+                }
+              }
+            }
+          }
+        ],
         "operationId": "PermisoController.vistaEmpresaRolPermiso"
       }
     },

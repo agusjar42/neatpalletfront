@@ -97,11 +97,6 @@ const AppTopbar = React.forwardRef((props, ref) => {
     }
 
     const obtenerNombreEmpresa = async () => {
-        const queryParamsTiposArchivo = {
-            where: {                
-                id: Number(localStorage.getItem('empresa'))
-            },
-        };
         const empresa = await getEmpresa(Number(localStorage.getItem('empresa')));
         setEmpresaNombre(empresa.nombre)
     }

@@ -153,7 +153,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Seleccionar tipo' }), seccion: 'Usuarios-SeleccionarTipo' },
                 { header: intl.formatMessage({ id: 'Cancelar' }), seccion: 'Usuarios-Cancelar' },
                 { header: intl.formatMessage({ id: 'Ver perfil' }), seccion: 'Usuarios-VerPerfil' },
-                
+
                 // Movimientos
                 { header: intl.formatMessage({ id: 'Movimientos' }), seccion: 'Movimientos' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Movimientos-Acceder' },
@@ -162,6 +162,33 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Movimientos-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Movimientos-Borrar' },
 
+                // Envios
+                { header: intl.formatMessage({ id: 'Envios' }), seccion: 'Envios' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envios-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envios-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envios-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envios-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envios-Borrar' },
+                { header: intl.formatMessage({ id: 'Pallet' }), seccion: 'Envios-Pallet' },
+                { header: intl.formatMessage({ id: 'Parada' }), seccion: 'Envios-Parada' },
+                { header: intl.formatMessage({ id: 'Vehiculo' }), seccion: 'Envios-Vehiculo' },
+                { header: intl.formatMessage({ id: 'Contenido' }), seccion: 'Envios-Contenido' },
+
+                // Pallets
+                { header: intl.formatMessage({ id: 'Pallets' }), seccion: 'Pallets' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Pallets-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Pallets-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Pallets-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Pallets-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Pallets-Borrar' },
+
+                // Configuración General de Pallets
+                { header: intl.formatMessage({ id: 'Conf. Pallets' }), seccion: 'Conf. Pallets' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Conf. Pallets-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Conf. Pallets-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Conf. Pallets-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Conf. Pallets-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Conf. Pallets-Borrar' },
             ];
 
             // Obtenemos los roles

@@ -73,6 +73,10 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [puedeVer, setPuedeVer] = useState(true);
     const [puedeEditar, setPuedeEditar] = useState(true);
     const [puedeBorrar, setPuedeBorrar] = useState(true);
+    const [puedePallet, setPuedePallet] = useState(true);
+    const [puedeParada, setPuedeParada] = useState(true);
+    const [puedeVehiculo, setPuedeVehiculo] = useState(true);
+    const [puedeContenido, setPuedeContenido] = useState(true);
     const [busquedaRealizada, setBusquedaRealizada] = useState(false);
     const [registrosForaneos, setRegistrosForaneos] = useState({});
     const [operadorSeleccionado, setOperadorSeleccionado] = useState('or');
@@ -266,6 +270,10 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setPuedeVer(await tieneUsuarioPermiso('Neatpallet', controlador, 'ver'))
         setPuedeEditar(await tieneUsuarioPermiso('Neatpallet', controlador, 'actualizar'))
         setPuedeBorrar(await tieneUsuarioPermiso('Neatpallet', controlador, 'borrar'))
+        setPuedePallet(await tieneUsuarioPermiso('Neatpallet', controlador, 'pallet'))
+        setPuedeParada(await tieneUsuarioPermiso('Neatpallet', controlador, 'parada'))
+        setPuedeVehiculo(await tieneUsuarioPermiso('Neatpallet', controlador, 'vehiculo'))
+        setPuedeContenido(await tieneUsuarioPermiso('Neatpallet', controlador, 'contenido'))
     }
 
     useEffect(() => {
@@ -590,14 +598,55 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         onClick={() => editarRegistro(rowData)}
                     />
                 )}
+
+                {(botones.includes('pallet') && puedePallet) && (
+                        <Button
+                            icon="pi pi-box"
+                            className="mr-2"
+                            rounded
+                            title={intl.formatMessage({ id: 'Pallets asociados' })}
+                            severity="secondary"
+                            onClick={() => confirmarEliminarRegistro(rowData)}
+                        />
+                )}
+                {(botones.includes('parada') && puedeParada) && (
+                        <Button
+                            icon="pi pi-map-marker"
+                            className="mr-2"
+                            rounded
+                            title={intl.formatMessage({ id: 'Paradas' })}
+                            severity="secondary"
+                            onClick={() => confirmarEliminarRegistro(rowData)}
+                        />
+                )}
+                {(botones.includes('vehiculo') && puedeVehiculo) && (
+                        <Button
+                            icon="pi pi-car"
+                            className="mr-2"
+                            rounded
+                            title={intl.formatMessage({ id: 'Vehiculo' })}
+                            severity="secondary"
+                            onClick={() => confirmarEliminarRegistro(rowData)}
+                        />
+                )}
+                {(botones.includes('contenido') && puedeContenido) && (
+                        <Button
+                            icon="pi pi-inbox"                            
+                            className="mr-2"
+                            rounded
+                            title={intl.formatMessage({ id: 'Contenido' })}
+                            severity="secondary"
+                            onClick={() => router.push("/usuarios")}
+                        />
+                )}
                 {(botones.includes('eliminar') && puedeBorrar) && (
-                    <Button
-                        icon="pi pi-trash"
-                        rounded
-                        title={intl.formatMessage({ id: 'Eliminar' })}
-                        severity="warning"
-                        onClick={() => confirmarEliminarRegistro(rowData)}
-                    />
+                        <Button
+                            icon="pi pi-trash"
+                            rounded
+                            title={intl.formatMessage({ id: 'Eliminar' })}
+                            severity="danger"
+                            onClick={() => confirmarEliminarRegistro(rowData)}
+                        />
                 )}
             </>
         );

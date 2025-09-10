@@ -113,10 +113,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         },
       },
       "Palets": {
+          "Envios": {
+              "path": "/envios",
+              "icon": "pi pi-refresh"
+          },
+          "Pallets": {
+              "path": "/pallets",
+              "icon": "pi pi-refresh"
+          },
           "Movimientos": {
               "path": "/movimientos",
               "icon": "pi pi-refresh"
-          }
+          },
+          "Conf. Pallets": {
+              "path": "/palletconfiguracion",
+              "icon": "pi pi-refresh"
+          },
       }
     }
 

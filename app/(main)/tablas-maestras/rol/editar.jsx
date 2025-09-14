@@ -17,7 +17,7 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
     const intl = useIntl();
     const pantallasDashboard = [
         { nombre: intl.formatMessage({ id: 'Roles' }), url: '/tablas-maestras/rol/' },
-        { nombre: intl.formatMessage({ id: 'Palets' }), url: '/movimientos' },
+        { nombre: intl.formatMessage({ id: 'Envio Contenido' }), url: '/envio-contenido/' },
     ];
     useEffect(() => {
         //

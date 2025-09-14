@@ -154,41 +154,117 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Cancelar' }), seccion: 'Usuarios-Cancelar' },
                 { header: intl.formatMessage({ id: 'Ver perfil' }), seccion: 'Usuarios-VerPerfil' },
 
-                // Movimientos
-                { header: intl.formatMessage({ id: 'Movimientos' }), seccion: 'Movimientos' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Movimientos-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Movimientos-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Movimientos-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Movimientos-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Movimientos-Borrar' },
+                // Envio Contenido
+                { header: intl.formatMessage({ id: 'Envio Contenido' }), seccion: 'Envio Contenido' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envio Contenido-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envio Contenido-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envio Contenido-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Contenido-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Contenido-Borrar' },
 
-                // Envios
-                { header: intl.formatMessage({ id: 'Envios' }), seccion: 'Envios' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envios-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envios-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envios-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envios-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envios-Borrar' },
-                { header: intl.formatMessage({ id: 'Pallet' }), seccion: 'Envios-Pallet' },
-                { header: intl.formatMessage({ id: 'Parada' }), seccion: 'Envios-Parada' },
-                { header: intl.formatMessage({ id: 'Vehiculo' }), seccion: 'Envios-Vehiculo' },
-                { header: intl.formatMessage({ id: 'Contenido' }), seccion: 'Envios-Contenido' },
+                // Envio Configuracion Empresa
+                { header: intl.formatMessage({ id: 'Envio Configuracion Empresa' }), seccion: 'Envio Configuracion Empresa' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envio Configuracion Empresa-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envio Configuracion Empresa-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envio Configuracion Empresa-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Configuracion Empresa-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Configuracion Empresa-Borrar' },
 
-                // Pallets
-                { header: intl.formatMessage({ id: 'Pallets' }), seccion: 'Pallets' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Pallets-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Pallets-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Pallets-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Pallets-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Pallets-Borrar' },
+                // Envio Configuracion
+                { header: intl.formatMessage({ id: 'Envio Configuracion' }), seccion: 'Envio Configuracion' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envio Configuracion-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envio Configuracion-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envio Configuracion-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Configuracion-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Configuracion-Borrar' },
 
-                // Configuración General de Pallets
-                { header: intl.formatMessage({ id: 'Conf. Pallets' }), seccion: 'Conf. Pallets' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Conf. Pallets-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Conf. Pallets-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Conf. Pallets-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Conf. Pallets-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Conf. Pallets-Borrar' },
+                // Envio Movimiento
+                { header: intl.formatMessage({ id: 'Envio Movimiento' }), seccion: 'Envio Movimiento' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envio Movimiento-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envio Movimiento-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envio Movimiento-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Movimiento-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Movimiento-Borrar' },
+
+                // Envio Pallet
+                { header: intl.formatMessage({ id: 'Envio Pallet' }), seccion: 'Envio Pallet' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envio Pallet-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envio Pallet-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envio Pallet-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Pallet-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Pallet-Borrar' },
+
+                // Envio Parada
+                { header: intl.formatMessage({ id: 'Envio Parada' }), seccion: 'Envio Parada' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envio Parada-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envio Parada-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envio Parada-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Parada-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Parada-Borrar' },
+
+                // Envio Sensor
+                { header: intl.formatMessage({ id: 'Envio Sensor' }), seccion: 'Envio Sensor' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envio Sensor-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envio Sensor-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envio Sensor-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Sensor-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Sensor-Borrar' },
+
+                // Envio
+                { header: intl.formatMessage({ id: 'Envio' }), seccion: 'Envio' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envio-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envio-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envio-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio-Borrar' },
+
+                // Pallet Parametro
+                { header: intl.formatMessage({ id: 'Pallet Parametro' }), seccion: 'Pallet Parametro' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Pallet Parametro-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Pallet Parametro-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Pallet Parametro-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Pallet Parametro-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Pallet Parametro-Borrar' },
+
+                // Pallet
+                { header: intl.formatMessage({ id: 'Pallet' }), seccion: 'Pallet' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Pallet-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Pallet-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Pallet-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Pallet-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Pallet-Borrar' },
+
+                // Parametro
+                { header: intl.formatMessage({ id: 'Parametro' }), seccion: 'Parametro' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Parametro-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Parametro-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Parametro-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Parametro-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Parametro-Borrar' },
+
+                // Tipo Carroceria
+                { header: intl.formatMessage({ id: 'Tipo Carroceria' }), seccion: 'Tipo Carroceria' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipo Carroceria-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipo Carroceria-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipo Carroceria-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipo Carroceria-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipo Carroceria-Borrar' },
+
+                // Tipo Sensor
+                { header: intl.formatMessage({ id: 'Tipo Sensor' }), seccion: 'Tipo Sensor' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipo Sensor-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipo Sensor-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipo Sensor-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipo Sensor-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipo Sensor-Borrar' },
+
+                // Tipo Transporte
+                { header: intl.formatMessage({ id: 'Tipo Transporte' }), seccion: 'Tipo Transporte' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipo Transporte-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipo Transporte-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipo Transporte-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipo Transporte-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipo Transporte-Borrar' },
             ];
 
             // Obtenemos los roles

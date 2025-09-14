@@ -158,3 +158,17 @@ export function calcularDiferenciaDias(fechaISO) {
   const fechaActual = new Date();
   return differenceInDays(fechaComparacion, fechaActual);
 }
+/**
+ * Le pasamos un objeto y nos devuelve el mismo objeto pero con los valores null reemplazados por ""
+ * @param {Object} obj - El objeto a procesar.
+ * @returns {Object} - El objeto con valores null reemplazados por "".
+ */
+export function reemplazarNullPorVacio(obj) {
+  const nuevoObj = { ...obj };
+  for (const key in nuevoObj) {
+    if (nuevoObj[key] === null) {
+      nuevoObj[key] = "";
+    }
+  }
+  return nuevoObj;
+}

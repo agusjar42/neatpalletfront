@@ -113,22 +113,62 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         },
       },
       "Palets": {
-          "Envios": {
-              "path": "/envios",
+          "Envio Contenido": {
+              "path": "/envio-contenido",
               "icon": "pi pi-refresh"
           },
-          "Pallets": {
-              "path": "/pallets",
-              "icon": "pi pi-refresh"
+          "Envio Configuracion Empresa": {
+              "path": "/envio-configuracion-empresa",
+              "icon": "pi pi-building"
           },
-          "Movimientos": {
-              "path": "/movimientos",
-              "icon": "pi pi-refresh"
+          "Envio Configuracion": {
+              "path": "/envio-configuracion",
+              "icon": "pi pi-cog"
           },
-          "Conf. Pallets": {
-              "path": "/palletconfiguracion",
-              "icon": "pi pi-refresh"
+          "Envio Movimiento": {
+              "path": "/envio-movimiento",
+              "icon": "pi pi-arrow-right"
           },
+          "Envio Pallet": {
+              "path": "/envio-pallet",
+              "icon": "pi pi-box"
+          },
+          "Envio Parada": {
+              "path": "/envio-parada",
+              "icon": "pi pi-pause"
+          },
+          "Envio Sensor": {
+              "path": "/envio-sensor",
+              "icon": "pi pi-wifi"
+          },
+          "Envio": {
+              "path": "/envio",
+              "icon": "pi pi-send"
+          },
+          "Pallet Parametro": {
+              "path": "/pallet-parametro",
+              "icon": "pi pi-sliders-h"
+          },
+          "Pallet": {
+              "path": "/pallet",
+              "icon": "pi pi-th-large"
+          },
+          "Parametro": {
+              "path": "/parametro",
+              "icon": "pi pi-wrench"
+          },
+          "Tipo Carroceria": {
+              "path": "/tipo-carroceria",
+              "icon": "pi pi-car"
+          },
+          "Tipo Sensor": {
+              "path": "/tipo-sensor",
+              "icon": "pi pi-circle"
+          },
+          "Tipo Transporte": {
+              "path": "/tipo-transporte",
+              "icon": "pi pi-truck"
+          }
       }
     }
 

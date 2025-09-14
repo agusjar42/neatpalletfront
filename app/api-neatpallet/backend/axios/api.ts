@@ -687,82 +687,804 @@ export interface Envio {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof Envio
-     */
-    'anyo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Envio
-     */
-    'origen'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Envio
-     */
-    'origenCoordenadasGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Envio
-     */
-    'destino'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Envio
-     */
-    'destinoCoordenadasGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Envio
-     */
-    'fechaSalida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Envio
-     */
-    'fechaLlegada'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Envio
-     */
-    'paradasPrevistas'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Envio
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Envio
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Envio
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Envio
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
      * @type {number}
      * @memberof Envio
      */
     'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Envio
+     */
+    'origenRuta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Envio
+     */
+    'fechaLlegada'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Envio
+     */
+    'gpsRutaOrigen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Envio
+     */
+    'destinoRuta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Envio
+     */
+    'gpsRutaDestino'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Envio
+     */
+    'fechaSalida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Envio
+     */
+    'paradasPrevistas'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Envio
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Envio
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Envio
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Envio
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioConfiguracion
+ */
+export interface EnvioConfiguracion {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracion
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracion
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracion
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracion
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracion
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracion
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracion
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracion
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracion
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioConfiguracionEmpresa
+ */
+export interface EnvioConfiguracionEmpresa {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresa
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresa
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresa
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresa
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresa
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresa
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresa
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresa
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresa
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioConfiguracionEmpresaFilter
+ */
+export interface EnvioConfiguracionEmpresaFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioConfiguracionEmpresaFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioConfiguracionEmpresaFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioConfiguracionEmpresaIncludeFilterItems | string>}
+     * @memberof EnvioConfiguracionEmpresaFilter
+     */
+    'include'?: Array<EnvioConfiguracionEmpresaIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioConfiguracionEmpresaFilter1
+ */
+export interface EnvioConfiguracionEmpresaFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioConfiguracionEmpresaFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioConfiguracionEmpresaFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioConfiguracionEmpresaFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioConfiguracionEmpresaIncludeFilterItems | string>}
+     * @memberof EnvioConfiguracionEmpresaFilter1
+     */
+    'include'?: Array<EnvioConfiguracionEmpresaIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioConfiguracionEmpresaIncludeFilterItems
+ */
+export interface EnvioConfiguracionEmpresaIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresaIncludeFilterItems
+     */
+    'relation'?: EnvioConfiguracionEmpresaIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {EnvioConfiguracionEmpresaScopeFilter}
+     * @memberof EnvioConfiguracionEmpresaIncludeFilterItems
+     */
+    'scope'?: EnvioConfiguracionEmpresaScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum EnvioConfiguracionEmpresaIncludeFilterItemsRelationEnum {
+    Empresa = 'empresa'
+}
+
+/**
+ * (tsType: Partial<EnvioConfiguracionEmpresa>, schemaOptions: { partial: true })
+ * @export
+ * @interface EnvioConfiguracionEmpresaPartial
+ */
+export interface EnvioConfiguracionEmpresaPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaPartial
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresaPartial
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresaPartial
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresaPartial
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresaPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresaPartial
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioConfiguracionEmpresaScopeFilter
+ */
+export interface EnvioConfiguracionEmpresaScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioConfiguracionEmpresaScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioConfiguracionEmpresaScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof EnvioConfiguracionEmpresaScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof EnvioConfiguracionEmpresaScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: EnvioConfiguracionEmpresaWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface EnvioConfiguracionEmpresaWithRelations
+ */
+export interface EnvioConfiguracionEmpresaWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {EmpresaWithRelations}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'empresa'?: EmpresaWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'foreignKey'?: any;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioConfiguracionFilter
+ */
+export interface EnvioConfiguracionFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioConfiguracionFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioConfiguracionFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioConfiguracionIncludeFilterItems | string>}
+     * @memberof EnvioConfiguracionFilter
+     */
+    'include'?: Array<EnvioConfiguracionIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioConfiguracionFilter1
+ */
+export interface EnvioConfiguracionFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioConfiguracionFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioConfiguracionFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioConfiguracionFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioConfiguracionIncludeFilterItems | string>}
+     * @memberof EnvioConfiguracionFilter1
+     */
+    'include'?: Array<EnvioConfiguracionIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioConfiguracionIncludeFilterItems
+ */
+export interface EnvioConfiguracionIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionIncludeFilterItems
+     */
+    'relation'?: EnvioConfiguracionIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {EnvioConfiguracionScopeFilter}
+     * @memberof EnvioConfiguracionIncludeFilterItems
+     */
+    'scope'?: EnvioConfiguracionScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum EnvioConfiguracionIncludeFilterItemsRelationEnum {
+    Envio = 'envio'
+}
+
+/**
+ * (tsType: Partial<EnvioConfiguracion>, schemaOptions: { partial: true })
+ * @export
+ * @interface EnvioConfiguracionPartial
+ */
+export interface EnvioConfiguracionPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionPartial
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionPartial
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionPartial
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionPartial
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionPartial
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioConfiguracionScopeFilter
+ */
+export interface EnvioConfiguracionScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioConfiguracionScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioConfiguracionScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof EnvioConfiguracionScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof EnvioConfiguracionScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: EnvioConfiguracionWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface EnvioConfiguracionWithRelations
+ */
+export interface EnvioConfiguracionWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {EnvioWithRelations}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'envio'?: EnvioWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'foreignKey'?: any;
 }
 /**
  * 
@@ -778,76 +1500,76 @@ export interface EnvioContenido {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioContenido
-     */
-    'producto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenido
-     */
-    'referencia'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenido
-     */
-    'pesoKgs'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenido
-     */
-    'pesoTotal'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenido
-     */
-    'medidas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenido
-     */
-    'fotoProducto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenido
-     */
-    'fotoPallet'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenido
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenido
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioContenido
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioContenido
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof EnvioContenido
      */
     'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'producto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'referencia'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenido
+     */
+    'pesoKgs'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenido
+     */
+    'pesoTotal'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'medidas'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'fotoProducto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'fotoPallet'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenido
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenido
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
@@ -983,76 +1705,76 @@ export interface EnvioContenidoPartial {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioContenidoPartial
-     */
-    'producto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoPartial
-     */
-    'referencia'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoPartial
-     */
-    'pesoKgs'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoPartial
-     */
-    'pesoTotal'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoPartial
-     */
-    'medidas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoPartial
-     */
-    'fotoProducto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoPartial
-     */
-    'fotoPallet'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoPartial
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoPartial
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioContenidoPartial
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioContenidoPartial
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof EnvioContenidoPartial
      */
     'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'producto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'referencia'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPartial
+     */
+    'pesoKgs'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPartial
+     */
+    'pesoTotal'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'medidas'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'fotoProducto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'fotoPallet'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
@@ -1117,76 +1839,76 @@ export interface EnvioContenidoWithRelations {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioContenidoWithRelations
-     */
-    'producto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoWithRelations
-     */
-    'referencia'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoWithRelations
-     */
-    'pesoKgs'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoWithRelations
-     */
-    'pesoTotal'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoWithRelations
-     */
-    'medidas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoWithRelations
-     */
-    'fotoProducto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoWithRelations
-     */
-    'fotoPallet'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoWithRelations
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioContenidoWithRelations
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioContenidoWithRelations
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioContenidoWithRelations
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof EnvioContenidoWithRelations
      */
     'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'producto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'referencia'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'pesoKgs'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'pesoTotal'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'medidas'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'fotoProducto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'fotoPallet'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'fechaModificacion'?: string;
     /**
      * 
      * @type {EnvioWithRelations}
@@ -1317,13 +2039,416 @@ export interface EnvioIncludeFilterItems {
     * @enum {string}
     */
 export enum EnvioIncludeFilterItemsRelationEnum {
-    Empresa = 'empresa',
-    Contenidos = 'contenidos',
-    Paradas = 'paradas',
-    Vehiculos = 'vehiculos',
-    Pallets = 'pallets'
+    Empresa = 'empresa'
 }
 
+/**
+ * 
+ * @export
+ * @interface EnvioMovimiento
+ */
+export interface EnvioMovimiento {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimiento
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimiento
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimiento
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimiento
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimiento
+     */
+    'gps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimiento
+     */
+    'imagen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimiento
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimiento
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimiento
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimiento
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimiento
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioMovimientoFilter
+ */
+export interface EnvioMovimientoFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioMovimientoFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioMovimientoFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioMovimientoIncludeFilterItems | string>}
+     * @memberof EnvioMovimientoFilter
+     */
+    'include'?: Array<EnvioMovimientoIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioMovimientoFilter1
+ */
+export interface EnvioMovimientoFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioMovimientoFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioMovimientoFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioMovimientoFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioMovimientoIncludeFilterItems | string>}
+     * @memberof EnvioMovimientoFilter1
+     */
+    'include'?: Array<EnvioMovimientoIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioMovimientoIncludeFilterItems
+ */
+export interface EnvioMovimientoIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoIncludeFilterItems
+     */
+    'relation'?: EnvioMovimientoIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {EnvioMovimientoScopeFilter}
+     * @memberof EnvioMovimientoIncludeFilterItems
+     */
+    'scope'?: EnvioMovimientoScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum EnvioMovimientoIncludeFilterItemsRelationEnum {
+    TipoSensor = 'tipoSensor',
+    Envio = 'envio'
+}
+
+/**
+ * (tsType: Partial<EnvioMovimiento>, schemaOptions: { partial: true })
+ * @export
+ * @interface EnvioMovimientoPartial
+ */
+export interface EnvioMovimientoPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoPartial
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoPartial
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoPartial
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoPartial
+     */
+    'gps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoPartial
+     */
+    'imagen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoPartial
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoPartial
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioMovimientoScopeFilter
+ */
+export interface EnvioMovimientoScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioMovimientoScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioMovimientoScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof EnvioMovimientoScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof EnvioMovimientoScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: EnvioMovimientoWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface EnvioMovimientoWithRelations
+ */
+export interface EnvioMovimientoWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'gps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'imagen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {TipoSensorWithRelations}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'tipoSensor'?: TipoSensorWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'foreignKey'?: any;
+    /**
+     * 
+     * @type {EnvioWithRelations}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'envio'?: EnvioWithRelations;
+}
 /**
  * 
  * @export
@@ -1338,34 +2463,40 @@ export interface EnvioPallet {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioPallet
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPallet
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioPallet
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioPallet
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof EnvioPallet
      */
     'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPallet
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPallet
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPallet
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPallet
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPallet
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
@@ -1484,7 +2615,8 @@ export interface EnvioPalletIncludeFilterItems {
     * @enum {string}
     */
 export enum EnvioPalletIncludeFilterItemsRelationEnum {
-    Pallet = 'pallet'
+    Pallet = 'pallet',
+    Envio = 'envio'
 }
 
 /**
@@ -1501,34 +2633,40 @@ export interface EnvioPalletPartial {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioPalletPartial
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPalletPartial
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioPalletPartial
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioPalletPartial
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof EnvioPalletPartial
      */
     'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletPartial
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletPartial
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
@@ -1593,34 +2731,40 @@ export interface EnvioPalletWithRelations {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioPalletWithRelations
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPalletWithRelations
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioPalletWithRelations
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioPalletWithRelations
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof EnvioPalletWithRelations
      */
     'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletWithRelations
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletWithRelations
+     */
+    'fechaModificacion'?: string;
     /**
      * 
      * @type {PalletWithRelations}
@@ -1633,6 +2777,12 @@ export interface EnvioPalletWithRelations {
      * @memberof EnvioPalletWithRelations
      */
     'foreignKey'?: any;
+    /**
+     * 
+     * @type {EnvioWithRelations}
+     * @memberof EnvioPalletWithRelations
+     */
+    'envio'?: EnvioWithRelations;
 }
 /**
  * 
@@ -1648,76 +2798,76 @@ export interface EnvioParada {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioParada
-     */
-    'fecha'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParada
-     */
-    'lugarParada'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParada
-     */
-    'localizacionGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParada
-     */
-    'direccion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParada
-     */
-    'operario'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParada
-     */
-    'telefono'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParada
-     */
-    'mail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParada
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParada
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioParada
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioParada
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof EnvioParada
      */
     'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'lugarParada'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'lugarParadaGps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'direccion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'nombreOperario'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'telefonoOperario'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'emailOperario'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioParada
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioParada
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
@@ -1853,76 +3003,76 @@ export interface EnvioParadaPartial {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioParadaPartial
-     */
-    'fecha'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaPartial
-     */
-    'lugarParada'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaPartial
-     */
-    'localizacionGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaPartial
-     */
-    'direccion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaPartial
-     */
-    'operario'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaPartial
-     */
-    'telefono'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaPartial
-     */
-    'mail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaPartial
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaPartial
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioParadaPartial
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioParadaPartial
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof EnvioParadaPartial
      */
     'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'lugarParada'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'lugarParadaGps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'direccion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'nombreOperario'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'telefonoOperario'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'emailOperario'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioParadaPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioParadaPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
@@ -1987,76 +3137,76 @@ export interface EnvioParadaWithRelations {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioParadaWithRelations
-     */
-    'fecha'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaWithRelations
-     */
-    'lugarParada'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaWithRelations
-     */
-    'localizacionGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaWithRelations
-     */
-    'direccion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaWithRelations
-     */
-    'operario'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaWithRelations
-     */
-    'telefono'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaWithRelations
-     */
-    'mail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaWithRelations
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioParadaWithRelations
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioParadaWithRelations
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioParadaWithRelations
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof EnvioParadaWithRelations
      */
     'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'lugarParada'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'lugarParadaGps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'direccion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'nombreOperario'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'telefonoOperario'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'emailOperario'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioParadaWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioParadaWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'fechaModificacion'?: string;
     /**
      * 
      * @type {EnvioWithRelations}
@@ -2084,82 +3234,76 @@ export interface EnvioPartial {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioPartial
-     */
-    'anyo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPartial
-     */
-    'origen'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPartial
-     */
-    'origenCoordenadasGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPartial
-     */
-    'destino'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPartial
-     */
-    'destinoCoordenadasGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPartial
-     */
-    'fechaSalida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPartial
-     */
-    'fechaLlegada'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPartial
-     */
-    'paradasPrevistas'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioPartial
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPartial
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioPartial
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioPartial
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
      * @type {number}
      * @memberof EnvioPartial
      */
     'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPartial
+     */
+    'origenRuta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPartial
+     */
+    'fechaLlegada'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPartial
+     */
+    'gpsRutaOrigen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPartial
+     */
+    'destinoRuta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPartial
+     */
+    'gpsRutaDestino'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPartial
+     */
+    'fechaSalida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPartial
+     */
+    'paradasPrevistas'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPartial
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
@@ -2213,600 +3357,355 @@ export interface EnvioScopeFilter {
 /**
  * 
  * @export
- * @interface EnvioVehiculo
+ * @interface EnvioSensor
  */
-export interface EnvioVehiculo {
+export interface EnvioSensor {
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculo
+     * @memberof EnvioSensor
      */
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioVehiculo
+     * @type {number}
+     * @memberof EnvioSensor
      */
-    'matricula'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'tipo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'marca'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'modelo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'color'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'carroceria'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'plataformaSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'cargaMaxima'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'propietario'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'numeroServicio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'tipoTransporte'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'conductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'idConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'telefonoConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'carnetConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'gpsSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculo
-     */
-    'fechaModificacion'?: string | null;
+    'tipoSensorId'?: number;
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculo
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioVehiculo
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioVehiculo
+     * @memberof EnvioSensor
      */
     'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensor
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensor
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensor
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensor
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensor
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
  * @export
- * @interface EnvioVehiculoFilter
+ * @interface EnvioSensorFilter
  */
-export interface EnvioVehiculoFilter {
+export interface EnvioSensorFilter {
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoFilter
+     * @memberof EnvioSensorFilter
      */
     'offset'?: number;
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoFilter
+     * @memberof EnvioSensorFilter
      */
     'limit'?: number;
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoFilter
+     * @memberof EnvioSensorFilter
      */
     'skip'?: number;
     /**
      * 
      * @type {string | Array<string>}
-     * @memberof EnvioVehiculoFilter
+     * @memberof EnvioSensorFilter
      */
     'order'?: string | Array<string>;
     /**
      * 
      * @type {object | Set<string>}
-     * @memberof EnvioVehiculoFilter
+     * @memberof EnvioSensorFilter
      */
     'fields'?: object | Set<string>;
     /**
      * 
-     * @type {Array<EnvioVehiculoIncludeFilterItems | string>}
-     * @memberof EnvioVehiculoFilter
+     * @type {Array<EnvioSensorIncludeFilterItems | string>}
+     * @memberof EnvioSensorFilter
      */
-    'include'?: Array<EnvioVehiculoIncludeFilterItems | string>;
+    'include'?: Array<EnvioSensorIncludeFilterItems | string>;
 }
 /**
  * 
  * @export
- * @interface EnvioVehiculoFilter1
+ * @interface EnvioSensorFilter1
  */
-export interface EnvioVehiculoFilter1 {
+export interface EnvioSensorFilter1 {
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoFilter1
+     * @memberof EnvioSensorFilter1
      */
     'offset'?: number;
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoFilter1
+     * @memberof EnvioSensorFilter1
      */
     'limit'?: number;
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoFilter1
+     * @memberof EnvioSensorFilter1
      */
     'skip'?: number;
     /**
      * 
      * @type {string | Array<string>}
-     * @memberof EnvioVehiculoFilter1
+     * @memberof EnvioSensorFilter1
      */
     'order'?: string | Array<string>;
     /**
      * 
      * @type {{ [key: string]: object; }}
-     * @memberof EnvioVehiculoFilter1
+     * @memberof EnvioSensorFilter1
      */
     'where'?: { [key: string]: object; };
     /**
      * 
      * @type {object | Set<string>}
-     * @memberof EnvioVehiculoFilter1
+     * @memberof EnvioSensorFilter1
      */
     'fields'?: object | Set<string>;
     /**
      * 
-     * @type {Array<EnvioVehiculoIncludeFilterItems | string>}
-     * @memberof EnvioVehiculoFilter1
+     * @type {Array<EnvioSensorIncludeFilterItems | string>}
+     * @memberof EnvioSensorFilter1
      */
-    'include'?: Array<EnvioVehiculoIncludeFilterItems | string>;
+    'include'?: Array<EnvioSensorIncludeFilterItems | string>;
 }
 /**
  * 
  * @export
- * @interface EnvioVehiculoIncludeFilterItems
+ * @interface EnvioSensorIncludeFilterItems
  */
-export interface EnvioVehiculoIncludeFilterItems {
+export interface EnvioSensorIncludeFilterItems {
     /**
      * 
      * @type {string}
-     * @memberof EnvioVehiculoIncludeFilterItems
+     * @memberof EnvioSensorIncludeFilterItems
      */
-    'relation'?: EnvioVehiculoIncludeFilterItemsRelationEnum;
+    'relation'?: EnvioSensorIncludeFilterItemsRelationEnum;
     /**
      * 
-     * @type {EnvioVehiculoScopeFilter}
-     * @memberof EnvioVehiculoIncludeFilterItems
+     * @type {EnvioSensorScopeFilter}
+     * @memberof EnvioSensorIncludeFilterItems
      */
-    'scope'?: EnvioVehiculoScopeFilter;
+    'scope'?: EnvioSensorScopeFilter;
 }
 
 /**
     * @export
     * @enum {string}
     */
-export enum EnvioVehiculoIncludeFilterItemsRelationEnum {
+export enum EnvioSensorIncludeFilterItemsRelationEnum {
+    TipoSensor = 'tipoSensor',
     Envio = 'envio'
 }
 
 /**
- * (tsType: Partial<EnvioVehiculo>, schemaOptions: { partial: true })
+ * (tsType: Partial<EnvioSensor>, schemaOptions: { partial: true })
  * @export
- * @interface EnvioVehiculoPartial
+ * @interface EnvioSensorPartial
  */
-export interface EnvioVehiculoPartial {
+export interface EnvioSensorPartial {
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoPartial
+     * @memberof EnvioSensorPartial
      */
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
+     * @type {number}
+     * @memberof EnvioSensorPartial
      */
-    'matricula'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'tipo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'marca'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'modelo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'color'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'carroceria'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'plataformaSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'cargaMaxima'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'propietario'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'numeroServicio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'tipoTransporte'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'conductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'idConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'telefonoConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'carnetConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'gpsSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoPartial
-     */
-    'fechaModificacion'?: string | null;
+    'tipoSensorId'?: number;
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoPartial
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioVehiculoPartial
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioVehiculoPartial
+     * @memberof EnvioSensorPartial
      */
     'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorPartial
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorPartial
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
  * @export
- * @interface EnvioVehiculoScopeFilter
+ * @interface EnvioSensorScopeFilter
  */
-export interface EnvioVehiculoScopeFilter {
+export interface EnvioSensorScopeFilter {
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoScopeFilter
+     * @memberof EnvioSensorScopeFilter
      */
     'offset'?: number;
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoScopeFilter
+     * @memberof EnvioSensorScopeFilter
      */
     'limit'?: number;
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoScopeFilter
+     * @memberof EnvioSensorScopeFilter
      */
     'skip'?: number;
     /**
      * 
      * @type {string | Array<string>}
-     * @memberof EnvioVehiculoScopeFilter
+     * @memberof EnvioSensorScopeFilter
      */
     'order'?: string | Array<string>;
     /**
      * 
      * @type {{ [key: string]: object; }}
-     * @memberof EnvioVehiculoScopeFilter
+     * @memberof EnvioSensorScopeFilter
      */
     'where'?: { [key: string]: object; };
     /**
      * 
      * @type {any | Set<string>}
-     * @memberof EnvioVehiculoScopeFilter
+     * @memberof EnvioSensorScopeFilter
      */
     'fields'?: any | Set<string>;
     /**
      * 
      * @type {Array<{ [key: string]: object; }>}
-     * @memberof EnvioVehiculoScopeFilter
+     * @memberof EnvioSensorScopeFilter
      */
     'include'?: Array<{ [key: string]: object; }>;
 }
 /**
- * (tsType: EnvioVehiculoWithRelations, schemaOptions: { includeRelations: true })
+ * (tsType: EnvioSensorWithRelations, schemaOptions: { includeRelations: true })
  * @export
- * @interface EnvioVehiculoWithRelations
+ * @interface EnvioSensorWithRelations
  */
-export interface EnvioVehiculoWithRelations {
+export interface EnvioSensorWithRelations {
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoWithRelations
+     * @memberof EnvioSensorWithRelations
      */
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
+     * @type {number}
+     * @memberof EnvioSensorWithRelations
      */
-    'matricula'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'tipo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'marca'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'modelo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'color'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'carroceria'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'plataformaSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'cargaMaxima'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'propietario'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'numeroServicio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'tipoTransporte'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'conductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'idConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'telefonoConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'carnetConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'gpsSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'fechaModificacion'?: string | null;
+    'tipoSensorId'?: number;
     /**
      * 
      * @type {number}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioVehiculoWithRelations
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioVehiculoWithRelations
+     * @memberof EnvioSensorWithRelations
      */
     'envioId'?: number;
     /**
      * 
-     * @type {EnvioWithRelations}
-     * @memberof EnvioVehiculoWithRelations
+     * @type {string}
+     * @memberof EnvioSensorWithRelations
      */
-    'envio'?: EnvioWithRelations;
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {TipoSensorWithRelations}
+     * @memberof EnvioSensorWithRelations
+     */
+    'tipoSensor'?: TipoSensorWithRelations;
     /**
      * 
      * @type {any}
-     * @memberof EnvioVehiculoWithRelations
+     * @memberof EnvioSensorWithRelations
      */
     'foreignKey'?: any;
+    /**
+     * 
+     * @type {EnvioWithRelations}
+     * @memberof EnvioSensorWithRelations
+     */
+    'envio'?: EnvioWithRelations;
 }
 /**
  * (tsType: EnvioWithRelations, schemaOptions: { includeRelations: true })
@@ -2822,82 +3721,76 @@ export interface EnvioWithRelations {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof EnvioWithRelations
-     */
-    'anyo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioWithRelations
-     */
-    'origen'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioWithRelations
-     */
-    'origenCoordenadasGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioWithRelations
-     */
-    'destino'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioWithRelations
-     */
-    'destinoCoordenadasGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioWithRelations
-     */
-    'fechaSalida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioWithRelations
-     */
-    'fechaLlegada'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioWithRelations
-     */
-    'paradasPrevistas'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioWithRelations
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioWithRelations
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioWithRelations
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioWithRelations
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
      * @type {number}
      * @memberof EnvioWithRelations
      */
     'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioWithRelations
+     */
+    'origenRuta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioWithRelations
+     */
+    'fechaLlegada'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioWithRelations
+     */
+    'gpsRutaOrigen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioWithRelations
+     */
+    'destinoRuta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioWithRelations
+     */
+    'gpsRutaDestino'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioWithRelations
+     */
+    'fechaSalida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioWithRelations
+     */
+    'paradasPrevistas'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioWithRelations
+     */
+    'fechaModificacion'?: string;
     /**
      * 
      * @type {EmpresaWithRelations}
@@ -2910,30 +3803,6 @@ export interface EnvioWithRelations {
      * @memberof EnvioWithRelations
      */
     'foreignKey'?: any;
-    /**
-     * 
-     * @type {Array<EnvioContenidoWithRelations>}
-     * @memberof EnvioWithRelations
-     */
-    'contenidos'?: Array<EnvioContenidoWithRelations>;
-    /**
-     * 
-     * @type {Array<EnvioParadaWithRelations>}
-     * @memberof EnvioWithRelations
-     */
-    'paradas'?: Array<EnvioParadaWithRelations>;
-    /**
-     * 
-     * @type {Array<EnvioVehiculoWithRelations>}
-     * @memberof EnvioWithRelations
-     */
-    'vehiculos'?: Array<EnvioVehiculoWithRelations>;
-    /**
-     * 
-     * @type {Array<EnvioPalletWithRelations>}
-     * @memberof EnvioWithRelations
-     */
-    'pallets'?: Array<EnvioPalletWithRelations>;
 }
 /**
  * 
@@ -3964,82 +4833,186 @@ export interface NewEmpresa {
 export interface NewEnvio {
     /**
      * 
-     * @type {string}
-     * @memberof NewEnvio
-     */
-    'anyo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvio
-     */
-    'origen'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvio
-     */
-    'origenCoordenadasGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvio
-     */
-    'destino'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvio
-     */
-    'destinoCoordenadasGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvio
-     */
-    'fechaSalida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvio
-     */
-    'fechaLlegada'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvio
-     */
-    'paradasPrevistas'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvio
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvio
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvio
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvio
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
      * @type {number}
      * @memberof NewEnvio
      */
     'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvio
+     */
+    'origenRuta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvio
+     */
+    'fechaLlegada'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvio
+     */
+    'gpsRutaOrigen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvio
+     */
+    'destinoRuta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvio
+     */
+    'gpsRutaDestino'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvio
+     */
+    'fechaSalida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvio
+     */
+    'paradasPrevistas'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvio
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvio
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvio
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvio
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * (tsType: Omit<EnvioConfiguracion, \'id\'>, schemaOptions: { title: \'NewEnvioConfiguracion\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewEnvioConfiguracion
+ */
+export interface NewEnvioConfiguracion {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioConfiguracion
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioConfiguracion
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioConfiguracion
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioConfiguracion
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioConfiguracion
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioConfiguracion
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioConfiguracion
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioConfiguracion
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * (tsType: Omit<EnvioConfiguracionEmpresa, \'id\'>, schemaOptions: { title: \'NewEnvioConfiguracionEmpresa\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewEnvioConfiguracionEmpresa
+ */
+export interface NewEnvioConfiguracionEmpresa {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioConfiguracionEmpresa
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioConfiguracionEmpresa
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioConfiguracionEmpresa
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioConfiguracionEmpresa
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioConfiguracionEmpresa
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioConfiguracionEmpresa
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioConfiguracionEmpresa
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioConfiguracionEmpresa
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * (tsType: Omit<EnvioContenido, \'id\'>, schemaOptions: { title: \'NewEnvioContenido\', exclude: [ \'id\' ] })
@@ -4049,76 +5022,143 @@ export interface NewEnvio {
 export interface NewEnvioContenido {
     /**
      * 
-     * @type {string}
-     * @memberof NewEnvioContenido
-     */
-    'producto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioContenido
-     */
-    'referencia'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioContenido
-     */
-    'pesoKgs'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioContenido
-     */
-    'pesoTotal'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioContenido
-     */
-    'medidas'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioContenido
-     */
-    'fotoProducto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioContenido
-     */
-    'fotoPallet'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioContenido
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioContenido
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioContenido
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioContenido
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof NewEnvioContenido
      */
     'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'producto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'referencia'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenido
+     */
+    'pesoKgs'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenido
+     */
+    'pesoTotal'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'medidas'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'fotoProducto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'fotoPallet'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenido
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenido
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * (tsType: Omit<EnvioMovimiento, \'id\'>, schemaOptions: { title: \'NewEnvioMovimiento\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewEnvioMovimiento
+ */
+export interface NewEnvioMovimiento {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioMovimiento
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioMovimiento
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioMovimiento
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioMovimiento
+     */
+    'gps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioMovimiento
+     */
+    'imagen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioMovimiento
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioMovimiento
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioMovimiento
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioMovimiento
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioMovimiento
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * (tsType: Omit<EnvioPallet, \'id\'>, schemaOptions: { title: \'NewEnvioPallet\', exclude: [ \'id\' ] })
@@ -4128,34 +5168,40 @@ export interface NewEnvioContenido {
 export interface NewEnvioPallet {
     /**
      * 
-     * @type {string}
-     * @memberof NewEnvioPallet
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioPallet
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioPallet
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioPallet
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof NewEnvioPallet
      */
     'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioPallet
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioPallet
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioPallet
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioPallet
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioPallet
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * (tsType: Omit<EnvioParada, \'id\'>, schemaOptions: { title: \'NewEnvioParada\', exclude: [ \'id\' ] })
@@ -4165,209 +5211,125 @@ export interface NewEnvioPallet {
 export interface NewEnvioParada {
     /**
      * 
-     * @type {string}
-     * @memberof NewEnvioParada
-     */
-    'fecha'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioParada
-     */
-    'lugarParada'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioParada
-     */
-    'localizacionGps'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioParada
-     */
-    'direccion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioParada
-     */
-    'operario'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioParada
-     */
-    'telefono'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioParada
-     */
-    'mail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioParada
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioParada
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioParada
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioParada
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
      * @type {number}
      * @memberof NewEnvioParada
      */
     'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'lugarParada'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'lugarParadaGps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'direccion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'nombreOperario'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'telefonoOperario'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'emailOperario'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioParada
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioParada
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'fechaModificacion'?: string;
 }
 /**
- * (tsType: Omit<EnvioVehiculo, \'id\'>, schemaOptions: { title: \'NewEnvioVehiculo\', exclude: [ \'id\' ] })
+ * (tsType: Omit<EnvioSensor, \'id\'>, schemaOptions: { title: \'NewEnvioSensor\', exclude: [ \'id\' ] })
  * @export
- * @interface NewEnvioVehiculo
+ * @interface NewEnvioSensor
  */
-export interface NewEnvioVehiculo {
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'matricula'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'tipo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'marca'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'modelo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'color'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'carroceria'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'plataformaSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'cargaMaxima'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'propietario'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'numeroServicio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'tipoTransporte'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'conductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'idConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'telefonoConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'carnetConductor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'gpsSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioVehiculo
-     */
-    'fechaModificacion'?: string | null;
+export interface NewEnvioSensor {
     /**
      * 
      * @type {number}
-     * @memberof NewEnvioVehiculo
+     * @memberof NewEnvioSensor
      */
-    'usuCreacion'?: number | null;
+    'tipoSensorId'?: number;
     /**
      * 
      * @type {number}
-     * @memberof NewEnvioVehiculo
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioVehiculo
+     * @memberof NewEnvioSensor
      */
     'envioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioSensor
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioSensor
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioSensor
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioSensor
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioSensor
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * (tsType: Omit<Idioma, \'id\'>, schemaOptions: { title: \'NewIdioma\', exclude: [ \'id\' ] })
@@ -4561,417 +5523,168 @@ export interface NewPais {
 export interface NewPallet {
     /**
      * 
-     * @type {string}
-     * @memberof NewPallet
-     */
-    'codigo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPallet
-     */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewPallet
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewPallet
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPallet
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPallet
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
      * @type {number}
      * @memberof NewPallet
      */
     'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPallet
+     */
+    'fechaImpresion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPallet
+     */
+    'codigo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPallet
+     */
+    'alias'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPallet
+     */
+    'periodoEnvioMail'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPallet
+     */
+    'medidas'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPallet
+     */
+    'modelo'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPallet
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPallet
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPallet
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPallet
+     */
+    'fechaModificacion'?: string;
 }
 /**
- * (tsType: Omit<PalletConfiguracion, \'id\'>, schemaOptions: { title: \'NewPalletConfiguracion\', exclude: [ \'id\' ] })
+ * (tsType: Omit<PalletParametro, \'id\'>, schemaOptions: { title: \'NewPalletParametro\', exclude: [ \'id\' ] })
  * @export
- * @interface NewPalletConfiguracion
+ * @interface NewPalletParametro
  */
-export interface NewPalletConfiguracion {
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'eventoGuardadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'eventoEnviadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'resolucionPeso'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'temperaturaSinControl'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'temperaturaAmbiente'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'temperaturaRefrigerado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'temperaturaCongelado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'humedadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'calidadAirePermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'velocidadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'unidadMedida'?: string | null;
+export interface NewPalletParametro {
     /**
      * 
      * @type {number}
-     * @memberof NewPalletConfiguracion
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewPalletConfiguracion
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracion
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewPalletConfiguracion
+     * @memberof NewPalletParametro
      */
     'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPalletParametro
+     */
+    'parametroId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletParametro
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletParametro
+     */
+    'textoLibre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPalletParametro
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletParametro
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPalletParametro
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPalletParametro
+     */
+    'fechaModificacion'?: string;
 }
 /**
- * (tsType: Omit<PalletConfiguracionGeneral, \'id\'>, schemaOptions: { title: \'NewPalletConfiguracionGeneral\', exclude: [ \'id\' ] })
+ * (tsType: Omit<Parametro, \'id\'>, schemaOptions: { title: \'NewParametro\', exclude: [ \'id\' ] })
  * @export
- * @interface NewPalletConfiguracionGeneral
+ * @interface NewParametro
  */
-export interface NewPalletConfiguracionGeneral {
+export interface NewParametro {
     /**
      * 
      * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
+     * @memberof NewParametro
      */
-    'eventoGuardadoMinuto'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
+     * @memberof NewParametro
      */
-    'eventoEnviadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
-     */
-    'resolucionPeso'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
-     */
-    'temperaturaSinControl'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
-     */
-    'temperaturaAmbiente'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
-     */
-    'temperaturaRefrigerado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
-     */
-    'temperaturaCongelado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
-     */
-    'humedadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
-     */
-    'calidadAirePermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
-     */
-    'velocidadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
-     */
-    'unidadMedida'?: string | null;
+    'valorDisponible'?: string;
     /**
      * 
      * @type {number}
-     * @memberof NewPalletConfiguracionGeneral
+     * @memberof NewParametro
      */
-    'usuarioCreacion'?: number | null;
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewParametro
+     */
+    'fechaCreacion'?: string;
     /**
      * 
      * @type {number}
-     * @memberof NewPalletConfiguracionGeneral
+     * @memberof NewParametro
      */
-    'usuarioModificacion'?: number | null;
+    'usuarioModificacion'?: number;
     /**
      * 
      * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
+     * @memberof NewParametro
      */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletConfiguracionGeneral
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewPalletConfiguracionGeneral
-     */
-    'empresaId'?: number;
-}
-/**
- * (tsType: Omit<PalletsMovements, \'id\'>, schemaOptions: { title: \'NewPalletsMovements\', exclude: [ \'id\' ] })
- * @export
- * @interface NewPalletsMovements
- */
-export interface NewPalletsMovements {
-    /**
-     * 
-     * @type {number}
-     * @memberof NewPalletsMovements
-     */
-    'empresa_Id': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletsMovements
-     */
-    'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletsMovements
-     */
-    'temperature'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletsMovements
-     */
-    'humidity'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletsMovements
-     */
-    'press'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletsMovements
-     */
-    'pm2_5'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletsMovements
-     */
-    'pm5'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletsMovements
-     */
-    'pm10'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletsMovements
-     */
-    'battery_volts'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletsMovements
-     */
-    'battery_pct'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewPalletsMovements
-     */
-    'rssi'?: string | null;
-}
-/**
- * (tsType: Omit<ParametrosPallets, \'id\'>, schemaOptions: { title: \'NewParametrosPallets\', exclude: [ \'id\' ] })
- * @export
- * @interface NewParametrosPallets
- */
-export interface NewParametrosPallets {
-    /**
-     * 
-     * @type {string}
-     * @memberof NewParametrosPallets
-     */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewParametrosPallets
-     */
-    'activoSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewParametrosPallets
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewParametrosPallets
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewParametrosPallets
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewParametrosPallets
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewParametrosPallets
-     */
-    'empresaId'?: number;
-}
-/**
- * (tsType: Omit<ParametrosPalletsDetalle, \'id\'>, schemaOptions: { title: \'NewParametrosPalletsDetalle\', exclude: [ \'id\' ] })
- * @export
- * @interface NewParametrosPalletsDetalle
- */
-export interface NewParametrosPalletsDetalle {
-    /**
-     * 
-     * @type {string}
-     * @memberof NewParametrosPalletsDetalle
-     */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewParametrosPalletsDetalle
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewParametrosPalletsDetalle
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewParametrosPalletsDetalle
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewParametrosPalletsDetalle
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewParametrosPalletsDetalle
-     */
-    'parametrosPalletsId'?: number;
+    'fechaModificacion'?: string;
 }
 /**
  * (tsType: Omit<Permiso, \'id\'>, schemaOptions: { title: \'NewPermiso\', exclude: [ \'id\' ] })
@@ -5308,6 +6021,129 @@ export interface NewTipoArchivo {
      * @memberof NewTipoArchivo
      */
     'activoSn'?: string | null;
+}
+/**
+ * (tsType: Omit<TipoCarroceria, \'id\'>, schemaOptions: { title: \'NewTipoCarroceria\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTipoCarroceria
+ */
+export interface NewTipoCarroceria {
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoCarroceria
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoCarroceria
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoCarroceria
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoCarroceria
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoCarroceria
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * (tsType: Omit<TipoSensor, \'id\'>, schemaOptions: { title: \'NewTipoSensor\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTipoSensor
+ */
+export interface NewTipoSensor {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoSensor
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoSensor
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoSensor
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoSensor
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoSensor
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoSensor
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoSensor
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * (tsType: Omit<TipoTransporte, \'id\'>, schemaOptions: { title: \'NewTipoTransporte\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTipoTransporte
+ */
+export interface NewTipoTransporte {
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoTransporte
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoTransporte
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoTransporte
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoTransporte
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoTransporte
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * (tsType: Omit<Traduccion, \'id\'>, schemaOptions: { title: \'NewTraduccion\', exclude: [ \'id\' ] })
@@ -5782,1062 +6618,70 @@ export interface Pallet {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof Pallet
-     */
-    'codigo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Pallet
-     */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Pallet
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Pallet
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Pallet
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Pallet
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
      * @type {number}
      * @memberof Pallet
      */
     'empresaId'?: number;
-}
-/**
- * 
- * @export
- * @interface PalletConfiguracion
- */
-export interface PalletConfiguracion {
+    /**
+     * 
+     * @type {string}
+     * @memberof Pallet
+     */
+    'fechaImpresion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Pallet
+     */
+    'codigo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Pallet
+     */
+    'alias'?: string;
     /**
      * 
      * @type {number}
-     * @memberof PalletConfiguracion
+     * @memberof Pallet
      */
-    'id'?: number;
+    'periodoEnvioMail'?: number;
     /**
      * 
      * @type {string}
-     * @memberof PalletConfiguracion
+     * @memberof Pallet
      */
-    'eventoGuardadoMinuto'?: string | null;
+    'medidas'?: string;
     /**
      * 
      * @type {string}
-     * @memberof PalletConfiguracion
+     * @memberof Pallet
      */
-    'eventoEnviadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracion
-     */
-    'resolucionPeso'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracion
-     */
-    'temperaturaSinControl'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracion
-     */
-    'temperaturaAmbiente'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracion
-     */
-    'temperaturaRefrigerado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracion
-     */
-    'temperaturaCongelado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracion
-     */
-    'humedadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracion
-     */
-    'calidadAirePermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracion
-     */
-    'velocidadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracion
-     */
-    'unidadMedida'?: string | null;
+    'modelo'?: string;
     /**
      * 
      * @type {number}
-     * @memberof PalletConfiguracion
+     * @memberof Pallet
      */
-    'usuarioCreacion'?: number | null;
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Pallet
+     */
+    'fechaCreacion'?: string;
     /**
      * 
      * @type {number}
-     * @memberof PalletConfiguracion
+     * @memberof Pallet
      */
-    'usuarioModificacion'?: number | null;
+    'usuarioModificacion'?: number;
     /**
      * 
      * @type {string}
-     * @memberof PalletConfiguracion
+     * @memberof Pallet
      */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracion
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracion
-     */
-    'palletId'?: number;
-}
-/**
- * 
- * @export
- * @interface PalletConfiguracionFilter
- */
-export interface PalletConfiguracionFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof PalletConfiguracionFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof PalletConfiguracionFilter
-     */
-    'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<PalletConfiguracionIncludeFilterItems | string>}
-     * @memberof PalletConfiguracionFilter
-     */
-    'include'?: Array<PalletConfiguracionIncludeFilterItems | string>;
-}
-/**
- * 
- * @export
- * @interface PalletConfiguracionFilter1
- */
-export interface PalletConfiguracionFilter1 {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionFilter1
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionFilter1
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionFilter1
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof PalletConfiguracionFilter1
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof PalletConfiguracionFilter1
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof PalletConfiguracionFilter1
-     */
-    'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<PalletConfiguracionIncludeFilterItems | string>}
-     * @memberof PalletConfiguracionFilter1
-     */
-    'include'?: Array<PalletConfiguracionIncludeFilterItems | string>;
-}
-/**
- * 
- * @export
- * @interface PalletConfiguracionGeneral
- */
-export interface PalletConfiguracionGeneral {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'eventoGuardadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'eventoEnviadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'resolucionPeso'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'temperaturaSinControl'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'temperaturaAmbiente'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'temperaturaRefrigerado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'temperaturaCongelado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'humedadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'calidadAirePermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'velocidadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'unidadMedida'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneral
-     */
-    'empresaId'?: number;
-}
-/**
- * 
- * @export
- * @interface PalletConfiguracionGeneralFilter
- */
-export interface PalletConfiguracionGeneralFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof PalletConfiguracionGeneralFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof PalletConfiguracionGeneralFilter
-     */
-    'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<PalletConfiguracionGeneralIncludeFilterItems | string>}
-     * @memberof PalletConfiguracionGeneralFilter
-     */
-    'include'?: Array<PalletConfiguracionGeneralIncludeFilterItems | string>;
-}
-/**
- * 
- * @export
- * @interface PalletConfiguracionGeneralFilter1
- */
-export interface PalletConfiguracionGeneralFilter1 {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralFilter1
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralFilter1
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralFilter1
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof PalletConfiguracionGeneralFilter1
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof PalletConfiguracionGeneralFilter1
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof PalletConfiguracionGeneralFilter1
-     */
-    'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<PalletConfiguracionGeneralIncludeFilterItems | string>}
-     * @memberof PalletConfiguracionGeneralFilter1
-     */
-    'include'?: Array<PalletConfiguracionGeneralIncludeFilterItems | string>;
-}
-/**
- * 
- * @export
- * @interface PalletConfiguracionGeneralIncludeFilterItems
- */
-export interface PalletConfiguracionGeneralIncludeFilterItems {
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralIncludeFilterItems
-     */
-    'relation'?: PalletConfiguracionGeneralIncludeFilterItemsRelationEnum;
-    /**
-     * 
-     * @type {PalletConfiguracionGeneralScopeFilter}
-     * @memberof PalletConfiguracionGeneralIncludeFilterItems
-     */
-    'scope'?: PalletConfiguracionGeneralScopeFilter;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum PalletConfiguracionGeneralIncludeFilterItemsRelationEnum {
-    Empresa = 'empresa'
-}
-
-/**
- * (tsType: Partial<PalletConfiguracionGeneral>, schemaOptions: { partial: true })
- * @export
- * @interface PalletConfiguracionGeneralPartial
- */
-export interface PalletConfiguracionGeneralPartial {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'eventoGuardadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'eventoEnviadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'resolucionPeso'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'temperaturaSinControl'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'temperaturaAmbiente'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'temperaturaRefrigerado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'temperaturaCongelado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'humedadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'calidadAirePermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'velocidadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'unidadMedida'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralPartial
-     */
-    'empresaId'?: number;
-}
-/**
- * 
- * @export
- * @interface PalletConfiguracionGeneralScopeFilter
- */
-export interface PalletConfiguracionGeneralScopeFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralScopeFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralScopeFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralScopeFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof PalletConfiguracionGeneralScopeFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof PalletConfiguracionGeneralScopeFilter
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {any | Set<string>}
-     * @memberof PalletConfiguracionGeneralScopeFilter
-     */
-    'fields'?: any | Set<string>;
-    /**
-     * 
-     * @type {Array<{ [key: string]: object; }>}
-     * @memberof PalletConfiguracionGeneralScopeFilter
-     */
-    'include'?: Array<{ [key: string]: object; }>;
-}
-/**
- * (tsType: PalletConfiguracionGeneralWithRelations, schemaOptions: { includeRelations: true })
- * @export
- * @interface PalletConfiguracionGeneralWithRelations
- */
-export interface PalletConfiguracionGeneralWithRelations {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'eventoGuardadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'eventoEnviadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'resolucionPeso'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'temperaturaSinControl'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'temperaturaAmbiente'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'temperaturaRefrigerado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'temperaturaCongelado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'humedadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'calidadAirePermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'velocidadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'unidadMedida'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'empresaId'?: number;
-    /**
-     * 
-     * @type {EmpresaWithRelations}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'empresa'?: EmpresaWithRelations;
-    /**
-     * 
-     * @type {any}
-     * @memberof PalletConfiguracionGeneralWithRelations
-     */
-    'foreignKey'?: any;
-}
-/**
- * 
- * @export
- * @interface PalletConfiguracionIncludeFilterItems
- */
-export interface PalletConfiguracionIncludeFilterItems {
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionIncludeFilterItems
-     */
-    'relation'?: PalletConfiguracionIncludeFilterItemsRelationEnum;
-    /**
-     * 
-     * @type {PalletConfiguracionScopeFilter}
-     * @memberof PalletConfiguracionIncludeFilterItems
-     */
-    'scope'?: PalletConfiguracionScopeFilter;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum PalletConfiguracionIncludeFilterItemsRelationEnum {
-    Pallet = 'pallet'
-}
-
-/**
- * (tsType: Partial<PalletConfiguracion>, schemaOptions: { partial: true })
- * @export
- * @interface PalletConfiguracionPartial
- */
-export interface PalletConfiguracionPartial {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionPartial
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'eventoGuardadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'eventoEnviadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'resolucionPeso'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'temperaturaSinControl'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'temperaturaAmbiente'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'temperaturaRefrigerado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'temperaturaCongelado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'humedadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'calidadAirePermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'velocidadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'unidadMedida'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionPartial
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionPartial
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionPartial
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionPartial
-     */
-    'palletId'?: number;
-}
-/**
- * 
- * @export
- * @interface PalletConfiguracionScopeFilter
- */
-export interface PalletConfiguracionScopeFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionScopeFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionScopeFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionScopeFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof PalletConfiguracionScopeFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof PalletConfiguracionScopeFilter
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {any | Set<string>}
-     * @memberof PalletConfiguracionScopeFilter
-     */
-    'fields'?: any | Set<string>;
-    /**
-     * 
-     * @type {Array<{ [key: string]: object; }>}
-     * @memberof PalletConfiguracionScopeFilter
-     */
-    'include'?: Array<{ [key: string]: object; }>;
-}
-/**
- * (tsType: PalletConfiguracionWithRelations, schemaOptions: { includeRelations: true })
- * @export
- * @interface PalletConfiguracionWithRelations
- */
-export interface PalletConfiguracionWithRelations {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'eventoGuardadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'eventoEnviadoMinuto'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'resolucionPeso'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'temperaturaSinControl'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'temperaturaAmbiente'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'temperaturaRefrigerado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'temperaturaCongelado'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'humedadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'calidadAirePermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'velocidadPermitida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'unidadMedida'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'palletId'?: number;
-    /**
-     * 
-     * @type {PalletWithRelations}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'pallet'?: PalletWithRelations;
-    /**
-     * 
-     * @type {any}
-     * @memberof PalletConfiguracionWithRelations
-     */
-    'foreignKey'?: any;
+    'fechaModificacion'?: string;
 }
 /**
  * 
@@ -6957,10 +6801,381 @@ export interface PalletIncludeFilterItems {
     */
 export enum PalletIncludeFilterItemsRelationEnum {
     Empresa = 'empresa',
-    Configuracion = 'configuracion',
-    Envios = 'envios'
+    EnvioPallets = 'envioPallets',
+    PalletParametros = 'palletParametros'
 }
 
+/**
+ * 
+ * @export
+ * @interface PalletParametro
+ */
+export interface PalletParametro {
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametro
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametro
+     */
+    'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametro
+     */
+    'parametroId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametro
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametro
+     */
+    'textoLibre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametro
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametro
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametro
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametro
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface PalletParametroFilter
+ */
+export interface PalletParametroFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof PalletParametroFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof PalletParametroFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<PalletParametroIncludeFilterItems | string>}
+     * @memberof PalletParametroFilter
+     */
+    'include'?: Array<PalletParametroIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface PalletParametroFilter1
+ */
+export interface PalletParametroFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof PalletParametroFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof PalletParametroFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof PalletParametroFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<PalletParametroIncludeFilterItems | string>}
+     * @memberof PalletParametroFilter1
+     */
+    'include'?: Array<PalletParametroIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface PalletParametroIncludeFilterItems
+ */
+export interface PalletParametroIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametroIncludeFilterItems
+     */
+    'relation'?: PalletParametroIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {PalletParametroScopeFilter}
+     * @memberof PalletParametroIncludeFilterItems
+     */
+    'scope'?: PalletParametroScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum PalletParametroIncludeFilterItemsRelationEnum {
+    Pallet = 'pallet',
+    Parametro = 'parametro'
+}
+
+/**
+ * (tsType: Partial<PalletParametro>, schemaOptions: { partial: true })
+ * @export
+ * @interface PalletParametroPartial
+ */
+export interface PalletParametroPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroPartial
+     */
+    'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroPartial
+     */
+    'parametroId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametroPartial
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametroPartial
+     */
+    'textoLibre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametroPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametroPartial
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface PalletParametroScopeFilter
+ */
+export interface PalletParametroScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof PalletParametroScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof PalletParametroScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof PalletParametroScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof PalletParametroScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: PalletParametroWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface PalletParametroWithRelations
+ */
+export interface PalletParametroWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroWithRelations
+     */
+    'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroWithRelations
+     */
+    'parametroId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametroWithRelations
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametroWithRelations
+     */
+    'textoLibre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametroWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletParametroWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {PalletWithRelations}
+     * @memberof PalletParametroWithRelations
+     */
+    'pallet'?: PalletWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof PalletParametroWithRelations
+     */
+    'foreignKey'?: any;
+    /**
+     * 
+     * @type {ParametroWithRelations}
+     * @memberof PalletParametroWithRelations
+     */
+    'parametro'?: ParametroWithRelations;
+}
 /**
  * (tsType: Partial<Pallet>, schemaOptions: { partial: true })
  * @export
@@ -6975,46 +7190,70 @@ export interface PalletPartial {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof PalletPartial
-     */
-    'codigo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletPartial
-     */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletPartial
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletPartial
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletPartial
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletPartial
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
      * @type {number}
      * @memberof PalletPartial
      */
     'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletPartial
+     */
+    'fechaImpresion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletPartial
+     */
+    'codigo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletPartial
+     */
+    'alias'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletPartial
+     */
+    'periodoEnvioMail'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletPartial
+     */
+    'medidas'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletPartial
+     */
+    'modelo'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletPartial
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
@@ -7079,46 +7318,70 @@ export interface PalletWithRelations {
     'id'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof PalletWithRelations
-     */
-    'codigo'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletWithRelations
-     */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletWithRelations
-     */
-    'usuarioCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletWithRelations
-     */
-    'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletWithRelations
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletWithRelations
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
      * @type {number}
      * @memberof PalletWithRelations
      */
     'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletWithRelations
+     */
+    'fechaImpresion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletWithRelations
+     */
+    'codigo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletWithRelations
+     */
+    'alias'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletWithRelations
+     */
+    'periodoEnvioMail'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletWithRelations
+     */
+    'medidas'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletWithRelations
+     */
+    'modelo'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PalletWithRelations
+     */
+    'fechaModificacion'?: string;
     /**
      * 
      * @type {EmpresaWithRelations}
@@ -7131,1016 +7394,340 @@ export interface PalletWithRelations {
      * @memberof PalletWithRelations
      */
     'foreignKey'?: any;
-    /**
-     * 
-     * @type {PalletConfiguracionWithRelations}
-     * @memberof PalletWithRelations
-     */
-    'configuracion'?: PalletConfiguracionWithRelations;
     /**
      * 
      * @type {Array<EnvioPalletWithRelations>}
      * @memberof PalletWithRelations
      */
-    'envios'?: Array<EnvioPalletWithRelations>;
+    'envioPallets'?: Array<EnvioPalletWithRelations>;
+    /**
+     * 
+     * @type {Array<PalletParametroWithRelations>}
+     * @memberof PalletWithRelations
+     */
+    'palletParametros'?: Array<PalletParametroWithRelations>;
 }
 /**
  * 
  * @export
- * @interface PalletsMovements
+ * @interface Parametro
  */
-export interface PalletsMovements {
+export interface Parametro {
     /**
      * 
      * @type {number}
-     * @memberof PalletsMovements
+     * @memberof Parametro
      */
     'id'?: number;
     /**
      * 
+     * @type {string}
+     * @memberof Parametro
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Parametro
+     */
+    'valorDisponible'?: string;
+    /**
+     * 
      * @type {number}
-     * @memberof PalletsMovements
+     * @memberof Parametro
      */
-    'empresa_Id': number;
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {string}
-     * @memberof PalletsMovements
+     * @memberof Parametro
      */
-    'name'?: string | null;
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Parametro
+     */
+    'usuarioModificacion'?: number;
     /**
      * 
      * @type {string}
-     * @memberof PalletsMovements
+     * @memberof Parametro
      */
-    'temperature'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovements
-     */
-    'humidity'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovements
-     */
-    'press'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovements
-     */
-    'pm2_5'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovements
-     */
-    'pm5'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovements
-     */
-    'pm10'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovements
-     */
-    'battery_volts'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovements
-     */
-    'battery_pct'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovements
-     */
-    'rssi'?: string | null;
+    'fechaModificacion'?: string;
 }
 /**
  * 
  * @export
- * @interface PalletsMovementsFilter
+ * @interface ParametroFilter
  */
-export interface PalletsMovementsFilter {
+export interface ParametroFilter {
     /**
      * 
      * @type {number}
-     * @memberof PalletsMovementsFilter
+     * @memberof ParametroFilter
      */
     'offset'?: number;
     /**
      * 
      * @type {number}
-     * @memberof PalletsMovementsFilter
+     * @memberof ParametroFilter
      */
     'limit'?: number;
     /**
      * 
      * @type {number}
-     * @memberof PalletsMovementsFilter
+     * @memberof ParametroFilter
      */
     'skip'?: number;
     /**
      * 
      * @type {string | Array<string>}
-     * @memberof PalletsMovementsFilter
+     * @memberof ParametroFilter
      */
     'order'?: string | Array<string>;
     /**
      * 
      * @type {object | Set<string>}
-     * @memberof PalletsMovementsFilter
+     * @memberof ParametroFilter
      */
     'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<ParametroIncludeFilterItems | string>}
+     * @memberof ParametroFilter
+     */
+    'include'?: Array<ParametroIncludeFilterItems | string>;
 }
 /**
  * 
  * @export
- * @interface PalletsMovementsFilter1
+ * @interface ParametroFilter1
  */
-export interface PalletsMovementsFilter1 {
+export interface ParametroFilter1 {
     /**
      * 
      * @type {number}
-     * @memberof PalletsMovementsFilter1
+     * @memberof ParametroFilter1
      */
     'offset'?: number;
     /**
      * 
      * @type {number}
-     * @memberof PalletsMovementsFilter1
+     * @memberof ParametroFilter1
      */
     'limit'?: number;
     /**
      * 
      * @type {number}
-     * @memberof PalletsMovementsFilter1
+     * @memberof ParametroFilter1
      */
     'skip'?: number;
     /**
      * 
      * @type {string | Array<string>}
-     * @memberof PalletsMovementsFilter1
+     * @memberof ParametroFilter1
      */
     'order'?: string | Array<string>;
     /**
      * 
      * @type {{ [key: string]: object; }}
-     * @memberof PalletsMovementsFilter1
+     * @memberof ParametroFilter1
      */
     'where'?: { [key: string]: object; };
     /**
      * 
      * @type {object | Set<string>}
-     * @memberof PalletsMovementsFilter1
-     */
-    'fields'?: object | Set<string>;
-}
-/**
- * (tsType: Partial<PalletsMovements>, schemaOptions: { partial: true })
- * @export
- * @interface PalletsMovementsPartial
- */
-export interface PalletsMovementsPartial {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletsMovementsPartial
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletsMovementsPartial
-     */
-    'empresa_Id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsPartial
-     */
-    'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsPartial
-     */
-    'temperature'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsPartial
-     */
-    'humidity'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsPartial
-     */
-    'press'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsPartial
-     */
-    'pm2_5'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsPartial
-     */
-    'pm5'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsPartial
-     */
-    'pm10'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsPartial
-     */
-    'battery_volts'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsPartial
-     */
-    'battery_pct'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsPartial
-     */
-    'rssi'?: string | null;
-}
-/**
- * (tsType: PalletsMovementsWithRelations, schemaOptions: { includeRelations: true })
- * @export
- * @interface PalletsMovementsWithRelations
- */
-export interface PalletsMovementsWithRelations {
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'empresa_Id': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'temperature'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'humidity'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'press'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'pm2_5'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'pm5'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'pm10'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'battery_volts'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'battery_pct'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PalletsMovementsWithRelations
-     */
-    'rssi'?: string | null;
-}
-/**
- * 
- * @export
- * @interface ParametrosPallets
- */
-export interface ParametrosPallets {
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPallets
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPallets
-     */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPallets
-     */
-    'activoSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPallets
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPallets
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPallets
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPallets
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPallets
-     */
-    'empresaId'?: number;
-}
-/**
- * 
- * @export
- * @interface ParametrosPalletsDetalle
- */
-export interface ParametrosPalletsDetalle {
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalle
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsDetalle
-     */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalle
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalle
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsDetalle
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsDetalle
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalle
-     */
-    'parametrosPalletsId'?: number;
-}
-/**
- * 
- * @export
- * @interface ParametrosPalletsDetalleFilter
- */
-export interface ParametrosPalletsDetalleFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalleFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalleFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalleFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof ParametrosPalletsDetalleFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof ParametrosPalletsDetalleFilter
+     * @memberof ParametroFilter1
      */
     'fields'?: object | Set<string>;
     /**
      * 
-     * @type {Array<ParametrosPalletsDetalleIncludeFilterItems | string>}
-     * @memberof ParametrosPalletsDetalleFilter
+     * @type {Array<ParametroIncludeFilterItems | string>}
+     * @memberof ParametroFilter1
      */
-    'include'?: Array<ParametrosPalletsDetalleIncludeFilterItems | string>;
+    'include'?: Array<ParametroIncludeFilterItems | string>;
 }
 /**
  * 
  * @export
- * @interface ParametrosPalletsDetalleFilter1
+ * @interface ParametroIncludeFilterItems
  */
-export interface ParametrosPalletsDetalleFilter1 {
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalleFilter1
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalleFilter1
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalleFilter1
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof ParametrosPalletsDetalleFilter1
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof ParametrosPalletsDetalleFilter1
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof ParametrosPalletsDetalleFilter1
-     */
-    'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<ParametrosPalletsDetalleIncludeFilterItems | string>}
-     * @memberof ParametrosPalletsDetalleFilter1
-     */
-    'include'?: Array<ParametrosPalletsDetalleIncludeFilterItems | string>;
-}
-/**
- * 
- * @export
- * @interface ParametrosPalletsDetalleIncludeFilterItems
- */
-export interface ParametrosPalletsDetalleIncludeFilterItems {
+export interface ParametroIncludeFilterItems {
     /**
      * 
      * @type {string}
-     * @memberof ParametrosPalletsDetalleIncludeFilterItems
+     * @memberof ParametroIncludeFilterItems
      */
-    'relation'?: ParametrosPalletsDetalleIncludeFilterItemsRelationEnum;
+    'relation'?: ParametroIncludeFilterItemsRelationEnum;
     /**
      * 
-     * @type {ParametrosPalletsDetalleScopeFilter}
-     * @memberof ParametrosPalletsDetalleIncludeFilterItems
+     * @type {ParametroScopeFilter}
+     * @memberof ParametroIncludeFilterItems
      */
-    'scope'?: ParametrosPalletsDetalleScopeFilter;
+    'scope'?: ParametroScopeFilter;
 }
 
 /**
     * @export
     * @enum {string}
     */
-export enum ParametrosPalletsDetalleIncludeFilterItemsRelationEnum {
-    ParametrosPallets = 'parametrosPallets'
+export enum ParametroIncludeFilterItemsRelationEnum {
+    PalletParametros = 'palletParametros'
 }
 
 /**
- * (tsType: Partial<ParametrosPalletsDetalle>, schemaOptions: { partial: true })
+ * (tsType: Partial<Parametro>, schemaOptions: { partial: true })
  * @export
- * @interface ParametrosPalletsDetallePartial
+ * @interface ParametroPartial
  */
-export interface ParametrosPalletsDetallePartial {
+export interface ParametroPartial {
     /**
      * 
      * @type {number}
-     * @memberof ParametrosPalletsDetallePartial
+     * @memberof ParametroPartial
      */
     'id'?: number;
     /**
      * 
      * @type {string}
-     * @memberof ParametrosPalletsDetallePartial
+     * @memberof ParametroPartial
      */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetallePartial
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetallePartial
-     */
-    'usuModificacion'?: number | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ParametrosPalletsDetallePartial
+     * @memberof ParametroPartial
      */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsDetallePartial
-     */
-    'fechaModificacion'?: string | null;
+    'valorDisponible'?: string;
     /**
      * 
      * @type {number}
-     * @memberof ParametrosPalletsDetallePartial
+     * @memberof ParametroPartial
      */
-    'parametrosPalletsId'?: number;
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParametroPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ParametroPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParametroPartial
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
  * @export
- * @interface ParametrosPalletsDetalleScopeFilter
+ * @interface ParametroScopeFilter
  */
-export interface ParametrosPalletsDetalleScopeFilter {
+export interface ParametroScopeFilter {
     /**
      * 
      * @type {number}
-     * @memberof ParametrosPalletsDetalleScopeFilter
+     * @memberof ParametroScopeFilter
      */
     'offset'?: number;
     /**
      * 
      * @type {number}
-     * @memberof ParametrosPalletsDetalleScopeFilter
+     * @memberof ParametroScopeFilter
      */
     'limit'?: number;
     /**
      * 
      * @type {number}
-     * @memberof ParametrosPalletsDetalleScopeFilter
+     * @memberof ParametroScopeFilter
      */
     'skip'?: number;
     /**
      * 
      * @type {string | Array<string>}
-     * @memberof ParametrosPalletsDetalleScopeFilter
+     * @memberof ParametroScopeFilter
      */
     'order'?: string | Array<string>;
     /**
      * 
      * @type {{ [key: string]: object; }}
-     * @memberof ParametrosPalletsDetalleScopeFilter
+     * @memberof ParametroScopeFilter
      */
     'where'?: { [key: string]: object; };
     /**
      * 
      * @type {any | Set<string>}
-     * @memberof ParametrosPalletsDetalleScopeFilter
+     * @memberof ParametroScopeFilter
      */
     'fields'?: any | Set<string>;
     /**
      * 
      * @type {Array<{ [key: string]: object; }>}
-     * @memberof ParametrosPalletsDetalleScopeFilter
+     * @memberof ParametroScopeFilter
      */
     'include'?: Array<{ [key: string]: object; }>;
 }
 /**
- * (tsType: ParametrosPalletsDetalleWithRelations, schemaOptions: { includeRelations: true })
+ * (tsType: ParametroWithRelations, schemaOptions: { includeRelations: true })
  * @export
- * @interface ParametrosPalletsDetalleWithRelations
+ * @interface ParametroWithRelations
  */
-export interface ParametrosPalletsDetalleWithRelations {
+export interface ParametroWithRelations {
     /**
      * 
      * @type {number}
-     * @memberof ParametrosPalletsDetalleWithRelations
+     * @memberof ParametroWithRelations
      */
     'id'?: number;
     /**
      * 
      * @type {string}
-     * @memberof ParametrosPalletsDetalleWithRelations
+     * @memberof ParametroWithRelations
      */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalleWithRelations
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsDetalleWithRelations
-     */
-    'usuModificacion'?: number | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ParametrosPalletsDetalleWithRelations
+     * @memberof ParametroWithRelations
      */
-    'fechaCreacion'?: string | null;
+    'valorDisponible'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ParametroWithRelations
+     */
+    'usuarioCreacion'?: number;
     /**
      * 
      * @type {string}
-     * @memberof ParametrosPalletsDetalleWithRelations
+     * @memberof ParametroWithRelations
      */
-    'fechaModificacion'?: string | null;
+    'fechaCreacion'?: string;
     /**
      * 
      * @type {number}
-     * @memberof ParametrosPalletsDetalleWithRelations
+     * @memberof ParametroWithRelations
      */
-    'parametrosPalletsId'?: number;
-    /**
-     * 
-     * @type {ParametrosPalletsWithRelations}
-     * @memberof ParametrosPalletsDetalleWithRelations
-     */
-    'parametrosPallets'?: ParametrosPalletsWithRelations;
-    /**
-     * 
-     * @type {any}
-     * @memberof ParametrosPalletsDetalleWithRelations
-     */
-    'foreignKey'?: any;
-}
-/**
- * 
- * @export
- * @interface ParametrosPalletsFilter
- */
-export interface ParametrosPalletsFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof ParametrosPalletsFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof ParametrosPalletsFilter
-     */
-    'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<ParametrosPalletsIncludeFilterItems | string>}
-     * @memberof ParametrosPalletsFilter
-     */
-    'include'?: Array<ParametrosPalletsIncludeFilterItems | string>;
-}
-/**
- * 
- * @export
- * @interface ParametrosPalletsFilter1
- */
-export interface ParametrosPalletsFilter1 {
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsFilter1
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsFilter1
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsFilter1
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof ParametrosPalletsFilter1
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof ParametrosPalletsFilter1
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof ParametrosPalletsFilter1
-     */
-    'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<ParametrosPalletsIncludeFilterItems | string>}
-     * @memberof ParametrosPalletsFilter1
-     */
-    'include'?: Array<ParametrosPalletsIncludeFilterItems | string>;
-}
-/**
- * 
- * @export
- * @interface ParametrosPalletsIncludeFilterItems
- */
-export interface ParametrosPalletsIncludeFilterItems {
+    'usuarioModificacion'?: number;
     /**
      * 
      * @type {string}
-     * @memberof ParametrosPalletsIncludeFilterItems
+     * @memberof ParametroWithRelations
      */
-    'relation'?: ParametrosPalletsIncludeFilterItemsRelationEnum;
+    'fechaModificacion'?: string;
     /**
      * 
-     * @type {ParametrosPalletsScopeFilter}
-     * @memberof ParametrosPalletsIncludeFilterItems
+     * @type {Array<PalletParametroWithRelations>}
+     * @memberof ParametroWithRelations
      */
-    'scope'?: ParametrosPalletsScopeFilter;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ParametrosPalletsIncludeFilterItemsRelationEnum {
-    Empresa = 'empresa',
-    Detalles = 'detalles'
-}
-
-/**
- * (tsType: Partial<ParametrosPallets>, schemaOptions: { partial: true })
- * @export
- * @interface ParametrosPalletsPartial
- */
-export interface ParametrosPalletsPartial {
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsPartial
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsPartial
-     */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsPartial
-     */
-    'activoSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsPartial
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsPartial
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsPartial
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsPartial
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsPartial
-     */
-    'empresaId'?: number;
-}
-/**
- * 
- * @export
- * @interface ParametrosPalletsScopeFilter
- */
-export interface ParametrosPalletsScopeFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsScopeFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsScopeFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsScopeFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof ParametrosPalletsScopeFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof ParametrosPalletsScopeFilter
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {any | Set<string>}
-     * @memberof ParametrosPalletsScopeFilter
-     */
-    'fields'?: any | Set<string>;
-    /**
-     * 
-     * @type {Array<{ [key: string]: object; }>}
-     * @memberof ParametrosPalletsScopeFilter
-     */
-    'include'?: Array<{ [key: string]: object; }>;
-}
-/**
- * (tsType: ParametrosPalletsWithRelations, schemaOptions: { includeRelations: true })
- * @export
- * @interface ParametrosPalletsWithRelations
- */
-export interface ParametrosPalletsWithRelations {
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsWithRelations
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsWithRelations
-     */
-    'nombre'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsWithRelations
-     */
-    'activoSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsWithRelations
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsWithRelations
-     */
-    'usuCreacion'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametrosPalletsWithRelations
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsWithRelations
-     */
-    'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ParametrosPalletsWithRelations
-     */
-    'empresaId'?: number;
-    /**
-     * 
-     * @type {EmpresaWithRelations}
-     * @memberof ParametrosPalletsWithRelations
-     */
-    'empresa'?: EmpresaWithRelations;
-    /**
-     * 
-     * @type {any}
-     * @memberof ParametrosPalletsWithRelations
-     */
-    'foreignKey'?: any;
-    /**
-     * 
-     * @type {Array<ParametrosPalletsDetalleWithRelations>}
-     * @memberof ParametrosPalletsWithRelations
-     */
-    'detalles'?: Array<ParametrosPalletsDetalleWithRelations>;
+    'palletParametros'?: Array<PalletParametroWithRelations>;
 }
 /**
  * 
@@ -9768,6 +9355,784 @@ export interface TipoArchivoWithRelations {
      * @memberof TipoArchivoWithRelations
      */
     'activoSn'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface TipoCarroceria
+ */
+export interface TipoCarroceria {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceria
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceria
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceria
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceria
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceria
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceria
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface TipoCarroceriaFilter
+ */
+export interface TipoCarroceriaFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoCarroceriaFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoCarroceriaFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoCarroceriaFilter1
+ */
+export interface TipoCarroceriaFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoCarroceriaFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoCarroceriaFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoCarroceriaFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<TipoCarroceria>, schemaOptions: { partial: true })
+ * @export
+ * @interface TipoCarroceriaPartial
+ */
+export interface TipoCarroceriaPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceriaPartial
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceriaPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceriaPartial
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * (tsType: TipoCarroceriaWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TipoCarroceriaWithRelations
+ */
+export interface TipoCarroceriaWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceriaWithRelations
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceriaWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceriaWithRelations
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface TipoSensor
+ */
+export interface TipoSensor {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensor
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensor
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensor
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensor
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensor
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensor
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensor
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensor
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface TipoSensorFilter
+ */
+export interface TipoSensorFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoSensorFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoSensorFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<TipoSensorIncludeFilterItems | string>}
+     * @memberof TipoSensorFilter
+     */
+    'include'?: Array<TipoSensorIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoSensorFilter1
+ */
+export interface TipoSensorFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoSensorFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoSensorFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoSensorFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<TipoSensorIncludeFilterItems | string>}
+     * @memberof TipoSensorFilter1
+     */
+    'include'?: Array<TipoSensorIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoSensorIncludeFilterItems
+ */
+export interface TipoSensorIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorIncludeFilterItems
+     */
+    'relation'?: TipoSensorIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {TipoSensorScopeFilter}
+     * @memberof TipoSensorIncludeFilterItems
+     */
+    'scope'?: TipoSensorScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum TipoSensorIncludeFilterItemsRelationEnum {
+    Empresa = 'empresa',
+    EnvioSensores = 'envioSensores',
+    EnvioMovimientos = 'envioMovimientos'
+}
+
+/**
+ * (tsType: Partial<TipoSensor>, schemaOptions: { partial: true })
+ * @export
+ * @interface TipoSensorPartial
+ */
+export interface TipoSensorPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorPartial
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorPartial
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorPartial
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorPartial
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface TipoSensorScopeFilter
+ */
+export interface TipoSensorScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoSensorScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoSensorScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof TipoSensorScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof TipoSensorScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: TipoSensorWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TipoSensorWithRelations
+ */
+export interface TipoSensorWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorWithRelations
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorWithRelations
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorWithRelations
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {EmpresaWithRelations}
+     * @memberof TipoSensorWithRelations
+     */
+    'empresa'?: EmpresaWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof TipoSensorWithRelations
+     */
+    'foreignKey'?: any;
+    /**
+     * 
+     * @type {Array<EnvioSensorWithRelations>}
+     * @memberof TipoSensorWithRelations
+     */
+    'envioSensores'?: Array<EnvioSensorWithRelations>;
+    /**
+     * 
+     * @type {Array<EnvioMovimientoWithRelations>}
+     * @memberof TipoSensorWithRelations
+     */
+    'envioMovimientos'?: Array<EnvioMovimientoWithRelations>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoTransporte
+ */
+export interface TipoTransporte {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporte
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransporte
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporte
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransporte
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporte
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransporte
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface TipoTransporteFilter
+ */
+export interface TipoTransporteFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoTransporteFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoTransporteFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoTransporteFilter1
+ */
+export interface TipoTransporteFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoTransporteFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoTransporteFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoTransporteFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<TipoTransporte>, schemaOptions: { partial: true })
+ * @export
+ * @interface TipoTransportePartial
+ */
+export interface TipoTransportePartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransportePartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransportePartial
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransportePartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransportePartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransportePartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransportePartial
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * (tsType: TipoTransporteWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TipoTransporteWithRelations
+ */
+export interface TipoTransporteWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransporteWithRelations
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransporteWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransporteWithRelations
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * 
@@ -12353,6 +12718,1069 @@ export class EmpresaControllerApi extends BaseAPI {
 
 
 /**
+ * EnvioConfiguracionControllerApi - axios parameter creator
+ * @export
+ */
+export const EnvioConfiguracionControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-configuraciones/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewEnvioConfiguracion} [newEnvioConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerCreate: async (newEnvioConfiguracion?: NewEnvioConfiguracion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-configuraciones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newEnvioConfiguracion, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioConfiguracionControllerDeleteById', 'id', id)
+            const localVarPath = `/envio-configuraciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {EnvioConfiguracionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerFind: async (filter?: EnvioConfiguracionFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-configuraciones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerFindById: async (id: number, filter?: EnvioConfiguracionFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioConfiguracionControllerFindById', 'id', id)
+            const localVarPath = `/envio-configuraciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracion} [envioConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerReplaceById: async (id: number, envioConfiguracion?: EnvioConfiguracion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioConfiguracionControllerReplaceById', 'id', id)
+            const localVarPath = `/envio-configuraciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioConfiguracion, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioConfiguracionPartial} [envioConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerUpdateAll: async (where?: { [key: string]: object; }, envioConfiguracionPartial?: EnvioConfiguracionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-configuraciones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioConfiguracionPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionPartial} [envioConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerUpdateById: async (id: number, envioConfiguracionPartial?: EnvioConfiguracionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioConfiguracionControllerUpdateById', 'id', id)
+            const localVarPath = `/envio-configuraciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioConfiguracionPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EnvioConfiguracionControllerApi - functional programming interface
+ * @export
+ */
+export const EnvioConfiguracionControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EnvioConfiguracionControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewEnvioConfiguracion} [newEnvioConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionControllerCreate(newEnvioConfiguracion?: NewEnvioConfiguracion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioConfiguracion>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionControllerCreate(newEnvioConfiguracion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {EnvioConfiguracionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionControllerFind(filter?: EnvioConfiguracionFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvioConfiguracionWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionControllerFindById(id: number, filter?: EnvioConfiguracionFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioConfiguracionWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracion} [envioConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionControllerReplaceById(id: number, envioConfiguracion?: EnvioConfiguracion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionControllerReplaceById(id, envioConfiguracion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioConfiguracionPartial} [envioConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionControllerUpdateAll(where?: { [key: string]: object; }, envioConfiguracionPartial?: EnvioConfiguracionPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionControllerUpdateAll(where, envioConfiguracionPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionPartial} [envioConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionControllerUpdateById(id: number, envioConfiguracionPartial?: EnvioConfiguracionPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionControllerUpdateById(id, envioConfiguracionPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EnvioConfiguracionControllerApi - factory interface
+ * @export
+ */
+export const EnvioConfiguracionControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EnvioConfiguracionControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioConfiguracionControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewEnvioConfiguracion} [newEnvioConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerCreate(newEnvioConfiguracion?: NewEnvioConfiguracion, options?: any): AxiosPromise<EnvioConfiguracion> {
+            return localVarFp.envioConfiguracionControllerCreate(newEnvioConfiguracion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.envioConfiguracionControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EnvioConfiguracionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerFind(filter?: EnvioConfiguracionFilter1, options?: any): AxiosPromise<Array<EnvioConfiguracionWithRelations>> {
+            return localVarFp.envioConfiguracionControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerFindById(id: number, filter?: EnvioConfiguracionFilter, options?: any): AxiosPromise<EnvioConfiguracionWithRelations> {
+            return localVarFp.envioConfiguracionControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracion} [envioConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerReplaceById(id: number, envioConfiguracion?: EnvioConfiguracion, options?: any): AxiosPromise<any> {
+            return localVarFp.envioConfiguracionControllerReplaceById(id, envioConfiguracion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioConfiguracionPartial} [envioConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerUpdateAll(where?: { [key: string]: object; }, envioConfiguracionPartial?: EnvioConfiguracionPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioConfiguracionControllerUpdateAll(where, envioConfiguracionPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionPartial} [envioConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionControllerUpdateById(id: number, envioConfiguracionPartial?: EnvioConfiguracionPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.envioConfiguracionControllerUpdateById(id, envioConfiguracionPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EnvioConfiguracionControllerApi - object-oriented interface
+ * @export
+ * @class EnvioConfiguracionControllerApi
+ * @extends {BaseAPI}
+ */
+export class EnvioConfiguracionControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionControllerApi
+     */
+    public envioConfiguracionControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionControllerApiFp(this.configuration).envioConfiguracionControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewEnvioConfiguracion} [newEnvioConfiguracion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionControllerApi
+     */
+    public envioConfiguracionControllerCreate(newEnvioConfiguracion?: NewEnvioConfiguracion, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionControllerApiFp(this.configuration).envioConfiguracionControllerCreate(newEnvioConfiguracion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionControllerApi
+     */
+    public envioConfiguracionControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionControllerApiFp(this.configuration).envioConfiguracionControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EnvioConfiguracionFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionControllerApi
+     */
+    public envioConfiguracionControllerFind(filter?: EnvioConfiguracionFilter1, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionControllerApiFp(this.configuration).envioConfiguracionControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioConfiguracionFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionControllerApi
+     */
+    public envioConfiguracionControllerFindById(id: number, filter?: EnvioConfiguracionFilter, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionControllerApiFp(this.configuration).envioConfiguracionControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioConfiguracion} [envioConfiguracion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionControllerApi
+     */
+    public envioConfiguracionControllerReplaceById(id: number, envioConfiguracion?: EnvioConfiguracion, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionControllerApiFp(this.configuration).envioConfiguracionControllerReplaceById(id, envioConfiguracion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {EnvioConfiguracionPartial} [envioConfiguracionPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionControllerApi
+     */
+    public envioConfiguracionControllerUpdateAll(where?: { [key: string]: object; }, envioConfiguracionPartial?: EnvioConfiguracionPartial, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionControllerApiFp(this.configuration).envioConfiguracionControllerUpdateAll(where, envioConfiguracionPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioConfiguracionPartial} [envioConfiguracionPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionControllerApi
+     */
+    public envioConfiguracionControllerUpdateById(id: number, envioConfiguracionPartial?: EnvioConfiguracionPartial, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionControllerApiFp(this.configuration).envioConfiguracionControllerUpdateById(id, envioConfiguracionPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * EnvioConfiguracionEmpresaControllerApi - axios parameter creator
+ * @export
+ */
+export const EnvioConfiguracionEmpresaControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-configuracion-empresas/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewEnvioConfiguracionEmpresa} [newEnvioConfiguracionEmpresa] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerCreate: async (newEnvioConfiguracionEmpresa?: NewEnvioConfiguracionEmpresa, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-configuracion-empresas`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newEnvioConfiguracionEmpresa, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioConfiguracionEmpresaControllerDeleteById', 'id', id)
+            const localVarPath = `/envio-configuracion-empresas/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {EnvioConfiguracionEmpresaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerFind: async (filter?: EnvioConfiguracionEmpresaFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-configuracion-empresas`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionEmpresaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerFindById: async (id: number, filter?: EnvioConfiguracionEmpresaFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioConfiguracionEmpresaControllerFindById', 'id', id)
+            const localVarPath = `/envio-configuracion-empresas/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionEmpresaPartial} [envioConfiguracionEmpresaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerUpdateById: async (id: number, envioConfiguracionEmpresaPartial?: EnvioConfiguracionEmpresaPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioConfiguracionEmpresaControllerUpdateById', 'id', id)
+            const localVarPath = `/envio-configuracion-empresas/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioConfiguracionEmpresaPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EnvioConfiguracionEmpresaControllerApi - functional programming interface
+ * @export
+ */
+export const EnvioConfiguracionEmpresaControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EnvioConfiguracionEmpresaControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionEmpresaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionEmpresaControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewEnvioConfiguracionEmpresa} [newEnvioConfiguracionEmpresa] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionEmpresaControllerCreate(newEnvioConfiguracionEmpresa?: NewEnvioConfiguracionEmpresa, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioConfiguracionEmpresa>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionEmpresaControllerCreate(newEnvioConfiguracionEmpresa, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionEmpresaControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionEmpresaControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {EnvioConfiguracionEmpresaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionEmpresaControllerFind(filter?: EnvioConfiguracionEmpresaFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvioConfiguracionEmpresaWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionEmpresaControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionEmpresaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionEmpresaControllerFindById(id: number, filter?: EnvioConfiguracionEmpresaFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioConfiguracionEmpresaWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionEmpresaControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionEmpresaPartial} [envioConfiguracionEmpresaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioConfiguracionEmpresaControllerUpdateById(id: number, envioConfiguracionEmpresaPartial?: EnvioConfiguracionEmpresaPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioConfiguracionEmpresaControllerUpdateById(id, envioConfiguracionEmpresaPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EnvioConfiguracionEmpresaControllerApi - factory interface
+ * @export
+ */
+export const EnvioConfiguracionEmpresaControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EnvioConfiguracionEmpresaControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioConfiguracionEmpresaControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewEnvioConfiguracionEmpresa} [newEnvioConfiguracionEmpresa] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerCreate(newEnvioConfiguracionEmpresa?: NewEnvioConfiguracionEmpresa, options?: any): AxiosPromise<EnvioConfiguracionEmpresa> {
+            return localVarFp.envioConfiguracionEmpresaControllerCreate(newEnvioConfiguracionEmpresa, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.envioConfiguracionEmpresaControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EnvioConfiguracionEmpresaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerFind(filter?: EnvioConfiguracionEmpresaFilter1, options?: any): AxiosPromise<Array<EnvioConfiguracionEmpresaWithRelations>> {
+            return localVarFp.envioConfiguracionEmpresaControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionEmpresaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerFindById(id: number, filter?: EnvioConfiguracionEmpresaFilter, options?: any): AxiosPromise<EnvioConfiguracionEmpresaWithRelations> {
+            return localVarFp.envioConfiguracionEmpresaControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioConfiguracionEmpresaPartial} [envioConfiguracionEmpresaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioConfiguracionEmpresaControllerUpdateById(id: number, envioConfiguracionEmpresaPartial?: EnvioConfiguracionEmpresaPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.envioConfiguracionEmpresaControllerUpdateById(id, envioConfiguracionEmpresaPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EnvioConfiguracionEmpresaControllerApi - object-oriented interface
+ * @export
+ * @class EnvioConfiguracionEmpresaControllerApi
+ * @extends {BaseAPI}
+ */
+export class EnvioConfiguracionEmpresaControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionEmpresaControllerApi
+     */
+    public envioConfiguracionEmpresaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionEmpresaControllerApiFp(this.configuration).envioConfiguracionEmpresaControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewEnvioConfiguracionEmpresa} [newEnvioConfiguracionEmpresa] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionEmpresaControllerApi
+     */
+    public envioConfiguracionEmpresaControllerCreate(newEnvioConfiguracionEmpresa?: NewEnvioConfiguracionEmpresa, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionEmpresaControllerApiFp(this.configuration).envioConfiguracionEmpresaControllerCreate(newEnvioConfiguracionEmpresa, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionEmpresaControllerApi
+     */
+    public envioConfiguracionEmpresaControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionEmpresaControllerApiFp(this.configuration).envioConfiguracionEmpresaControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EnvioConfiguracionEmpresaFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionEmpresaControllerApi
+     */
+    public envioConfiguracionEmpresaControllerFind(filter?: EnvioConfiguracionEmpresaFilter1, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionEmpresaControllerApiFp(this.configuration).envioConfiguracionEmpresaControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioConfiguracionEmpresaFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionEmpresaControllerApi
+     */
+    public envioConfiguracionEmpresaControllerFindById(id: number, filter?: EnvioConfiguracionEmpresaFilter, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionEmpresaControllerApiFp(this.configuration).envioConfiguracionEmpresaControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioConfiguracionEmpresaPartial} [envioConfiguracionEmpresaPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioConfiguracionEmpresaControllerApi
+     */
+    public envioConfiguracionEmpresaControllerUpdateById(id: number, envioConfiguracionEmpresaPartial?: EnvioConfiguracionEmpresaPartial, options?: AxiosRequestConfig) {
+        return EnvioConfiguracionEmpresaControllerApiFp(this.configuration).envioConfiguracionEmpresaControllerUpdateById(id, envioConfiguracionEmpresaPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * EnvioContenidoControllerApi - axios parameter creator
  * @export
  */
@@ -12365,7 +13793,7 @@ export const EnvioContenidoControllerApiAxiosParamCreator = function (configurat
          * @throws {RequiredError}
          */
         envioContenidoControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-contenidos/count`;
+            const localVarPath = `/enviocontenido/count`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -12403,7 +13831,7 @@ export const EnvioContenidoControllerApiAxiosParamCreator = function (configurat
          * @throws {RequiredError}
          */
         envioContenidoControllerCreate: async (newEnvioContenido?: NewEnvioContenido, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-contenidos`;
+            const localVarPath = `/enviocontenido`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -12442,7 +13870,7 @@ export const EnvioContenidoControllerApiAxiosParamCreator = function (configurat
         envioContenidoControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('envioContenidoControllerDeleteById', 'id', id)
-            const localVarPath = `/envio-contenidos/{id}`
+            const localVarPath = `/enviocontenido/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -12477,7 +13905,7 @@ export const EnvioContenidoControllerApiAxiosParamCreator = function (configurat
          * @throws {RequiredError}
          */
         envioContenidoControllerFind: async (filter?: EnvioContenidoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-contenidos`;
+            const localVarPath = `/enviocontenido`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -12518,7 +13946,7 @@ export const EnvioContenidoControllerApiAxiosParamCreator = function (configurat
         envioContenidoControllerFindById: async (id: number, filter?: EnvioContenidoFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('envioContenidoControllerFindById', 'id', id)
-            const localVarPath = `/envio-contenidos/{id}`
+            const localVarPath = `/enviocontenido/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -12553,89 +13981,6 @@ export const EnvioContenidoControllerApiAxiosParamCreator = function (configurat
         /**
          * 
          * @param {number} id 
-         * @param {EnvioContenido} [envioContenido] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioContenidoControllerReplaceById: async (id: number, envioContenido?: EnvioContenido, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('envioContenidoControllerReplaceById', 'id', id)
-            const localVarPath = `/envio-contenidos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(envioContenido, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioContenidoPartial} [envioContenidoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioContenidoControllerUpdateAll: async (where?: { [key: string]: object; }, envioContenidoPartial?: EnvioContenidoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-contenidos`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(envioContenidoPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
          * @param {EnvioContenidoPartial} [envioContenidoPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12643,7 +13988,7 @@ export const EnvioContenidoControllerApiAxiosParamCreator = function (configurat
         envioContenidoControllerUpdateById: async (id: number, envioContenidoPartial?: EnvioContenidoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('envioContenidoControllerUpdateById', 'id', id)
-            const localVarPath = `/envio-contenidos/{id}`
+            const localVarPath = `/enviocontenido/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -12738,28 +14083,6 @@ export const EnvioContenidoControllerApiFp = function(configuration?: Configurat
         /**
          * 
          * @param {number} id 
-         * @param {EnvioContenido} [envioContenido] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioContenidoControllerReplaceById(id: number, envioContenido?: EnvioContenido, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoControllerReplaceById(id, envioContenido, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioContenidoPartial} [envioContenidoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioContenidoControllerUpdateAll(where?: { [key: string]: object; }, envioContenidoPartial?: EnvioContenidoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoControllerUpdateAll(where, envioContenidoPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
          * @param {EnvioContenidoPartial} [envioContenidoPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12823,26 +14146,6 @@ export const EnvioContenidoControllerApiFactory = function (configuration?: Conf
          */
         envioContenidoControllerFindById(id: number, filter?: EnvioContenidoFilter, options?: any): AxiosPromise<EnvioContenidoWithRelations> {
             return localVarFp.envioContenidoControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {EnvioContenido} [envioContenido] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioContenidoControllerReplaceById(id: number, envioContenido?: EnvioContenido, options?: any): AxiosPromise<any> {
-            return localVarFp.envioContenidoControllerReplaceById(id, envioContenido, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioContenidoPartial} [envioContenidoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioContenidoControllerUpdateAll(where?: { [key: string]: object; }, envioContenidoPartial?: EnvioContenidoPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.envioContenidoControllerUpdateAll(where, envioContenidoPartial, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -12923,30 +14226,6 @@ export class EnvioContenidoControllerApi extends BaseAPI {
     /**
      * 
      * @param {number} id 
-     * @param {EnvioContenido} [envioContenido] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioContenidoControllerApi
-     */
-    public envioContenidoControllerReplaceById(id: number, envioContenido?: EnvioContenido, options?: AxiosRequestConfig) {
-        return EnvioContenidoControllerApiFp(this.configuration).envioContenidoControllerReplaceById(id, envioContenido, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {EnvioContenidoPartial} [envioContenidoPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioContenidoControllerApi
-     */
-    public envioContenidoControllerUpdateAll(where?: { [key: string]: object; }, envioContenidoPartial?: EnvioContenidoPartial, options?: AxiosRequestConfig) {
-        return EnvioContenidoControllerApiFp(this.configuration).envioContenidoControllerUpdateAll(where, envioContenidoPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
      * @param {EnvioContenidoPartial} [envioContenidoPartial] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -12971,7 +14250,7 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
          * @throws {RequiredError}
          */
         envioControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio/count`;
+            const localVarPath = `/envios/count`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -13009,7 +14288,7 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
          * @throws {RequiredError}
          */
         envioControllerCreate: async (newEnvio?: NewEnvio, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio`;
+            const localVarPath = `/envios`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -13048,7 +14327,7 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
         envioControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('envioControllerDeleteById', 'id', id)
-            const localVarPath = `/envio/{id}`
+            const localVarPath = `/envios/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -13083,7 +14362,7 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
          * @throws {RequiredError}
          */
         envioControllerFind: async (filter?: EnvioFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio`;
+            const localVarPath = `/envios`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -13124,7 +14403,7 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
         envioControllerFindById: async (id: number, filter?: EnvioFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('envioControllerFindById', 'id', id)
-            const localVarPath = `/envio/{id}`
+            const localVarPath = `/envios/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -13166,7 +14445,7 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
         envioControllerReplaceById: async (id: number, envio?: Envio, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('envioControllerReplaceById', 'id', id)
-            const localVarPath = `/envio/{id}`
+            const localVarPath = `/envios/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -13205,7 +14484,7 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
          * @throws {RequiredError}
          */
         envioControllerUpdateAll: async (where?: { [key: string]: object; }, envioPartial?: EnvioPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio`;
+            const localVarPath = `/envios`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -13249,7 +14528,7 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
         envioControllerUpdateById: async (id: number, envioPartial?: EnvioPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('envioControllerUpdateById', 'id', id)
-            const localVarPath = `/envio/{id}`
+            const localVarPath = `/envios/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -13565,6 +14844,463 @@ export class EnvioControllerApi extends BaseAPI {
 
 
 /**
+ * EnvioMovimientoControllerApi - axios parameter creator
+ * @export
+ */
+export const EnvioMovimientoControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-movimientos/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewEnvioMovimiento} [newEnvioMovimiento] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerCreate: async (newEnvioMovimiento?: NewEnvioMovimiento, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-movimientos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newEnvioMovimiento, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioMovimientoControllerDeleteById', 'id', id)
+            const localVarPath = `/envio-movimientos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {EnvioMovimientoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerFind: async (filter?: EnvioMovimientoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-movimientos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioMovimientoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerFindById: async (id: number, filter?: EnvioMovimientoFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioMovimientoControllerFindById', 'id', id)
+            const localVarPath = `/envio-movimientos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioMovimientoPartial} [envioMovimientoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerUpdateById: async (id: number, envioMovimientoPartial?: EnvioMovimientoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioMovimientoControllerUpdateById', 'id', id)
+            const localVarPath = `/envio-movimientos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioMovimientoPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EnvioMovimientoControllerApi - functional programming interface
+ * @export
+ */
+export const EnvioMovimientoControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EnvioMovimientoControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioMovimientoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewEnvioMovimiento} [newEnvioMovimiento] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioMovimientoControllerCreate(newEnvioMovimiento?: NewEnvioMovimiento, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioMovimiento>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerCreate(newEnvioMovimiento, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioMovimientoControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {EnvioMovimientoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioMovimientoControllerFind(filter?: EnvioMovimientoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvioMovimientoWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioMovimientoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioMovimientoControllerFindById(id: number, filter?: EnvioMovimientoFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioMovimientoWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioMovimientoPartial} [envioMovimientoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioMovimientoControllerUpdateById(id: number, envioMovimientoPartial?: EnvioMovimientoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerUpdateById(id, envioMovimientoPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EnvioMovimientoControllerApi - factory interface
+ * @export
+ */
+export const EnvioMovimientoControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EnvioMovimientoControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioMovimientoControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewEnvioMovimiento} [newEnvioMovimiento] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerCreate(newEnvioMovimiento?: NewEnvioMovimiento, options?: any): AxiosPromise<EnvioMovimiento> {
+            return localVarFp.envioMovimientoControllerCreate(newEnvioMovimiento, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.envioMovimientoControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EnvioMovimientoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerFind(filter?: EnvioMovimientoFilter1, options?: any): AxiosPromise<Array<EnvioMovimientoWithRelations>> {
+            return localVarFp.envioMovimientoControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioMovimientoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerFindById(id: number, filter?: EnvioMovimientoFilter, options?: any): AxiosPromise<EnvioMovimientoWithRelations> {
+            return localVarFp.envioMovimientoControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioMovimientoPartial} [envioMovimientoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioMovimientoControllerUpdateById(id: number, envioMovimientoPartial?: EnvioMovimientoPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.envioMovimientoControllerUpdateById(id, envioMovimientoPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EnvioMovimientoControllerApi - object-oriented interface
+ * @export
+ * @class EnvioMovimientoControllerApi
+ * @extends {BaseAPI}
+ */
+export class EnvioMovimientoControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioMovimientoControllerApi
+     */
+    public envioMovimientoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewEnvioMovimiento} [newEnvioMovimiento] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioMovimientoControllerApi
+     */
+    public envioMovimientoControllerCreate(newEnvioMovimiento?: NewEnvioMovimiento, options?: AxiosRequestConfig) {
+        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerCreate(newEnvioMovimiento, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioMovimientoControllerApi
+     */
+    public envioMovimientoControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EnvioMovimientoFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioMovimientoControllerApi
+     */
+    public envioMovimientoControllerFind(filter?: EnvioMovimientoFilter1, options?: AxiosRequestConfig) {
+        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioMovimientoFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioMovimientoControllerApi
+     */
+    public envioMovimientoControllerFindById(id: number, filter?: EnvioMovimientoFilter, options?: AxiosRequestConfig) {
+        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioMovimientoPartial} [envioMovimientoPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioMovimientoControllerApi
+     */
+    public envioMovimientoControllerUpdateById(id: number, envioMovimientoPartial?: EnvioMovimientoPartial, options?: AxiosRequestConfig) {
+        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerUpdateById(id, envioMovimientoPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * EnvioPalletControllerApi - axios parameter creator
  * @export
  */
@@ -13765,89 +15501,6 @@ export const EnvioPalletControllerApiAxiosParamCreator = function (configuration
         /**
          * 
          * @param {number} id 
-         * @param {EnvioPallet} [envioPallet] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioPalletControllerReplaceById: async (id: number, envioPallet?: EnvioPallet, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('envioPalletControllerReplaceById', 'id', id)
-            const localVarPath = `/envio-pallets/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(envioPallet, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioPalletPartial} [envioPalletPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioPalletControllerUpdateAll: async (where?: { [key: string]: object; }, envioPalletPartial?: EnvioPalletPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-pallets`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(envioPalletPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
          * @param {EnvioPalletPartial} [envioPalletPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13950,28 +15603,6 @@ export const EnvioPalletControllerApiFp = function(configuration?: Configuration
         /**
          * 
          * @param {number} id 
-         * @param {EnvioPallet} [envioPallet] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioPalletControllerReplaceById(id: number, envioPallet?: EnvioPallet, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioPalletControllerReplaceById(id, envioPallet, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioPalletPartial} [envioPalletPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioPalletControllerUpdateAll(where?: { [key: string]: object; }, envioPalletPartial?: EnvioPalletPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioPalletControllerUpdateAll(where, envioPalletPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
          * @param {EnvioPalletPartial} [envioPalletPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -14035,26 +15666,6 @@ export const EnvioPalletControllerApiFactory = function (configuration?: Configu
          */
         envioPalletControllerFindById(id: number, filter?: EnvioPalletFilter, options?: any): AxiosPromise<EnvioPalletWithRelations> {
             return localVarFp.envioPalletControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {EnvioPallet} [envioPallet] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioPalletControllerReplaceById(id: number, envioPallet?: EnvioPallet, options?: any): AxiosPromise<any> {
-            return localVarFp.envioPalletControllerReplaceById(id, envioPallet, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioPalletPartial} [envioPalletPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioPalletControllerUpdateAll(where?: { [key: string]: object; }, envioPalletPartial?: EnvioPalletPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.envioPalletControllerUpdateAll(where, envioPalletPartial, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -14130,30 +15741,6 @@ export class EnvioPalletControllerApi extends BaseAPI {
      */
     public envioPalletControllerFindById(id: number, filter?: EnvioPalletFilter, options?: AxiosRequestConfig) {
         return EnvioPalletControllerApiFp(this.configuration).envioPalletControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {EnvioPallet} [envioPallet] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioPalletControllerApi
-     */
-    public envioPalletControllerReplaceById(id: number, envioPallet?: EnvioPallet, options?: AxiosRequestConfig) {
-        return EnvioPalletControllerApiFp(this.configuration).envioPalletControllerReplaceById(id, envioPallet, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {EnvioPalletPartial} [envioPalletPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioPalletControllerApi
-     */
-    public envioPalletControllerUpdateAll(where?: { [key: string]: object; }, envioPalletPartial?: EnvioPalletPartial, options?: AxiosRequestConfig) {
-        return EnvioPalletControllerApiFp(this.configuration).envioPalletControllerUpdateAll(where, envioPalletPartial, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -14371,89 +15958,6 @@ export const EnvioParadaControllerApiAxiosParamCreator = function (configuration
         /**
          * 
          * @param {number} id 
-         * @param {EnvioParada} [envioParada] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioParadaControllerReplaceById: async (id: number, envioParada?: EnvioParada, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('envioParadaControllerReplaceById', 'id', id)
-            const localVarPath = `/envio-paradas/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(envioParada, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioParadaPartial} [envioParadaPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioParadaControllerUpdateAll: async (where?: { [key: string]: object; }, envioParadaPartial?: EnvioParadaPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-paradas`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(envioParadaPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
          * @param {EnvioParadaPartial} [envioParadaPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -14556,28 +16060,6 @@ export const EnvioParadaControllerApiFp = function(configuration?: Configuration
         /**
          * 
          * @param {number} id 
-         * @param {EnvioParada} [envioParada] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioParadaControllerReplaceById(id: number, envioParada?: EnvioParada, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioParadaControllerReplaceById(id, envioParada, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioParadaPartial} [envioParadaPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioParadaControllerUpdateAll(where?: { [key: string]: object; }, envioParadaPartial?: EnvioParadaPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioParadaControllerUpdateAll(where, envioParadaPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
          * @param {EnvioParadaPartial} [envioParadaPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -14641,26 +16123,6 @@ export const EnvioParadaControllerApiFactory = function (configuration?: Configu
          */
         envioParadaControllerFindById(id: number, filter?: EnvioParadaFilter, options?: any): AxiosPromise<EnvioParadaWithRelations> {
             return localVarFp.envioParadaControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {EnvioParada} [envioParada] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioParadaControllerReplaceById(id: number, envioParada?: EnvioParada, options?: any): AxiosPromise<any> {
-            return localVarFp.envioParadaControllerReplaceById(id, envioParada, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioParadaPartial} [envioParadaPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioParadaControllerUpdateAll(where?: { [key: string]: object; }, envioParadaPartial?: EnvioParadaPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.envioParadaControllerUpdateAll(where, envioParadaPartial, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -14741,30 +16203,6 @@ export class EnvioParadaControllerApi extends BaseAPI {
     /**
      * 
      * @param {number} id 
-     * @param {EnvioParada} [envioParada] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioParadaControllerApi
-     */
-    public envioParadaControllerReplaceById(id: number, envioParada?: EnvioParada, options?: AxiosRequestConfig) {
-        return EnvioParadaControllerApiFp(this.configuration).envioParadaControllerReplaceById(id, envioParada, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {EnvioParadaPartial} [envioParadaPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioParadaControllerApi
-     */
-    public envioParadaControllerUpdateAll(where?: { [key: string]: object; }, envioParadaPartial?: EnvioParadaPartial, options?: AxiosRequestConfig) {
-        return EnvioParadaControllerApiFp(this.configuration).envioParadaControllerUpdateAll(where, envioParadaPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
      * @param {EnvioParadaPartial} [envioParadaPartial] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -14777,10 +16215,10 @@ export class EnvioParadaControllerApi extends BaseAPI {
 
 
 /**
- * EnvioVehiculoControllerApi - axios parameter creator
+ * EnvioSensorControllerApi - axios parameter creator
  * @export
  */
-export const EnvioVehiculoControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+export const EnvioSensorControllerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
@@ -14788,8 +16226,8 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-vehiculos/count`;
+        envioSensorControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-sensores/count`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -14822,12 +16260,12 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
         },
         /**
          * 
-         * @param {NewEnvioVehiculo} [newEnvioVehiculo] 
+         * @param {NewEnvioSensor} [newEnvioSensor] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerCreate: async (newEnvioVehiculo?: NewEnvioVehiculo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-vehiculos`;
+        envioSensorControllerCreate: async (newEnvioSensor?: NewEnvioSensor, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-sensores`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -14850,7 +16288,7 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newEnvioVehiculo, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(newEnvioSensor, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -14863,10 +16301,10 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        envioSensorControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('envioVehiculoControllerDeleteById', 'id', id)
-            const localVarPath = `/envio-vehiculos/{id}`
+            assertParamExists('envioSensorControllerDeleteById', 'id', id)
+            const localVarPath = `/envio-sensores/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -14896,12 +16334,12 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
         },
         /**
          * 
-         * @param {EnvioVehiculoFilter1} [filter] 
+         * @param {EnvioSensorFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerFind: async (filter?: EnvioVehiculoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-vehiculos`;
+        envioSensorControllerFind: async (filter?: EnvioSensorFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-sensores`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -14935,14 +16373,14 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
         /**
          * 
          * @param {number} id 
-         * @param {EnvioVehiculoFilter} [filter] 
+         * @param {EnvioSensorFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerFindById: async (id: number, filter?: EnvioVehiculoFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        envioSensorControllerFindById: async (id: number, filter?: EnvioSensorFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('envioVehiculoControllerFindById', 'id', id)
-            const localVarPath = `/envio-vehiculos/{id}`
+            assertParamExists('envioSensorControllerFindById', 'id', id)
+            const localVarPath = `/envio-sensores/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -14977,14 +16415,14 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
         /**
          * 
          * @param {number} id 
-         * @param {EnvioVehiculo} [envioVehiculo] 
+         * @param {EnvioSensor} [envioSensor] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerReplaceById: async (id: number, envioVehiculo?: EnvioVehiculo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        envioSensorControllerReplaceById: async (id: number, envioSensor?: EnvioSensor, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('envioVehiculoControllerReplaceById', 'id', id)
-            const localVarPath = `/envio-vehiculos/{id}`
+            assertParamExists('envioSensorControllerReplaceById', 'id', id)
+            const localVarPath = `/envio-sensores/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -15008,7 +16446,7 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(envioVehiculo, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(envioSensor, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -15018,12 +16456,12 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
         /**
          * 
          * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioVehiculoPartial} [envioVehiculoPartial] 
+         * @param {EnvioSensorPartial} [envioSensorPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerUpdateAll: async (where?: { [key: string]: object; }, envioVehiculoPartial?: EnvioVehiculoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-vehiculos`;
+        envioSensorControllerUpdateAll: async (where?: { [key: string]: object; }, envioSensorPartial?: EnvioSensorPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-sensores`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -15050,7 +16488,7 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(envioVehiculoPartial, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(envioSensorPartial, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -15060,14 +16498,14 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
         /**
          * 
          * @param {number} id 
-         * @param {EnvioVehiculoPartial} [envioVehiculoPartial] 
+         * @param {EnvioSensorPartial} [envioSensorPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerUpdateById: async (id: number, envioVehiculoPartial?: EnvioVehiculoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        envioSensorControllerUpdateById: async (id: number, envioSensorPartial?: EnvioSensorPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('envioVehiculoControllerUpdateById', 'id', id)
-            const localVarPath = `/envio-vehiculos/{id}`
+            assertParamExists('envioSensorControllerUpdateById', 'id', id)
+            const localVarPath = `/envio-sensores/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -15091,7 +16529,7 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(envioVehiculoPartial, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(envioSensorPartial, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -15102,11 +16540,11 @@ export const EnvioVehiculoControllerApiAxiosParamCreator = function (configurati
 };
 
 /**
- * EnvioVehiculoControllerApi - functional programming interface
+ * EnvioSensorControllerApi - functional programming interface
  * @export
  */
-export const EnvioVehiculoControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = EnvioVehiculoControllerApiAxiosParamCreator(configuration)
+export const EnvioSensorControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EnvioSensorControllerApiAxiosParamCreator(configuration)
     return {
         /**
          * 
@@ -15114,93 +16552,93 @@ export const EnvioVehiculoControllerApiFp = function(configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async envioVehiculoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioVehiculoControllerCount(where, options);
+        async envioSensorControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorControllerCount(where, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {NewEnvioVehiculo} [newEnvioVehiculo] 
+         * @param {NewEnvioSensor} [newEnvioSensor] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async envioVehiculoControllerCreate(newEnvioVehiculo?: NewEnvioVehiculo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioVehiculo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioVehiculoControllerCreate(newEnvioVehiculo, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioVehiculoControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioVehiculoControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {EnvioVehiculoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioVehiculoControllerFind(filter?: EnvioVehiculoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvioVehiculoWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioVehiculoControllerFind(filter, options);
+        async envioSensorControllerCreate(newEnvioSensor?: NewEnvioSensor, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioSensor>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorControllerCreate(newEnvioSensor, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {EnvioVehiculoFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async envioVehiculoControllerFindById(id: number, filter?: EnvioVehiculoFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioVehiculoWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioVehiculoControllerFindById(id, filter, options);
+        async envioSensorControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {EnvioSensorFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioSensorControllerFind(filter?: EnvioSensorFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvioSensorWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorControllerFind(filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {EnvioVehiculo} [envioVehiculo] 
+         * @param {EnvioSensorFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async envioVehiculoControllerReplaceById(id: number, envioVehiculo?: EnvioVehiculo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioVehiculoControllerReplaceById(id, envioVehiculo, options);
+        async envioSensorControllerFindById(id: number, filter?: EnvioSensorFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioSensorWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioSensor} [envioSensor] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioSensorControllerReplaceById(id: number, envioSensor?: EnvioSensor, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorControllerReplaceById(id, envioSensor, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioVehiculoPartial} [envioVehiculoPartial] 
+         * @param {EnvioSensorPartial} [envioSensorPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async envioVehiculoControllerUpdateAll(where?: { [key: string]: object; }, envioVehiculoPartial?: EnvioVehiculoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioVehiculoControllerUpdateAll(where, envioVehiculoPartial, options);
+        async envioSensorControllerUpdateAll(where?: { [key: string]: object; }, envioSensorPartial?: EnvioSensorPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorControllerUpdateAll(where, envioSensorPartial, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {EnvioVehiculoPartial} [envioVehiculoPartial] 
+         * @param {EnvioSensorPartial} [envioSensorPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async envioVehiculoControllerUpdateById(id: number, envioVehiculoPartial?: EnvioVehiculoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioVehiculoControllerUpdateById(id, envioVehiculoPartial, options);
+        async envioSensorControllerUpdateById(id: number, envioSensorPartial?: EnvioSensorPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorControllerUpdateById(id, envioSensorPartial, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * EnvioVehiculoControllerApi - factory interface
+ * EnvioSensorControllerApi - factory interface
  * @export
  */
-export const EnvioVehiculoControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = EnvioVehiculoControllerApiFp(configuration)
+export const EnvioSensorControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EnvioSensorControllerApiFp(configuration)
     return {
         /**
          * 
@@ -15208,176 +16646,176 @@ export const EnvioVehiculoControllerApiFactory = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.envioVehiculoControllerCount(where, options).then((request) => request(axios, basePath));
+        envioSensorControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioSensorControllerCount(where, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {NewEnvioVehiculo} [newEnvioVehiculo] 
+         * @param {NewEnvioSensor} [newEnvioSensor] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerCreate(newEnvioVehiculo?: NewEnvioVehiculo, options?: any): AxiosPromise<EnvioVehiculo> {
-            return localVarFp.envioVehiculoControllerCreate(newEnvioVehiculo, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioVehiculoControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.envioVehiculoControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {EnvioVehiculoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioVehiculoControllerFind(filter?: EnvioVehiculoFilter1, options?: any): AxiosPromise<Array<EnvioVehiculoWithRelations>> {
-            return localVarFp.envioVehiculoControllerFind(filter, options).then((request) => request(axios, basePath));
+        envioSensorControllerCreate(newEnvioSensor?: NewEnvioSensor, options?: any): AxiosPromise<EnvioSensor> {
+            return localVarFp.envioSensorControllerCreate(newEnvioSensor, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {EnvioVehiculoFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerFindById(id: number, filter?: EnvioVehiculoFilter, options?: any): AxiosPromise<EnvioVehiculoWithRelations> {
-            return localVarFp.envioVehiculoControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        envioSensorControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.envioSensorControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EnvioSensorFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorControllerFind(filter?: EnvioSensorFilter1, options?: any): AxiosPromise<Array<EnvioSensorWithRelations>> {
+            return localVarFp.envioSensorControllerFind(filter, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {EnvioVehiculo} [envioVehiculo] 
+         * @param {EnvioSensorFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerReplaceById(id: number, envioVehiculo?: EnvioVehiculo, options?: any): AxiosPromise<any> {
-            return localVarFp.envioVehiculoControllerReplaceById(id, envioVehiculo, options).then((request) => request(axios, basePath));
+        envioSensorControllerFindById(id: number, filter?: EnvioSensorFilter, options?: any): AxiosPromise<EnvioSensorWithRelations> {
+            return localVarFp.envioSensorControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioSensor} [envioSensor] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorControllerReplaceById(id: number, envioSensor?: EnvioSensor, options?: any): AxiosPromise<any> {
+            return localVarFp.envioSensorControllerReplaceById(id, envioSensor, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {{ [key: string]: object; }} [where] 
-         * @param {EnvioVehiculoPartial} [envioVehiculoPartial] 
+         * @param {EnvioSensorPartial} [envioSensorPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerUpdateAll(where?: { [key: string]: object; }, envioVehiculoPartial?: EnvioVehiculoPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.envioVehiculoControllerUpdateAll(where, envioVehiculoPartial, options).then((request) => request(axios, basePath));
+        envioSensorControllerUpdateAll(where?: { [key: string]: object; }, envioSensorPartial?: EnvioSensorPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioSensorControllerUpdateAll(where, envioSensorPartial, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {EnvioVehiculoPartial} [envioVehiculoPartial] 
+         * @param {EnvioSensorPartial} [envioSensorPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioVehiculoControllerUpdateById(id: number, envioVehiculoPartial?: EnvioVehiculoPartial, options?: any): AxiosPromise<any> {
-            return localVarFp.envioVehiculoControllerUpdateById(id, envioVehiculoPartial, options).then((request) => request(axios, basePath));
+        envioSensorControllerUpdateById(id: number, envioSensorPartial?: EnvioSensorPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.envioSensorControllerUpdateById(id, envioSensorPartial, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * EnvioVehiculoControllerApi - object-oriented interface
+ * EnvioSensorControllerApi - object-oriented interface
  * @export
- * @class EnvioVehiculoControllerApi
+ * @class EnvioSensorControllerApi
  * @extends {BaseAPI}
  */
-export class EnvioVehiculoControllerApi extends BaseAPI {
+export class EnvioSensorControllerApi extends BaseAPI {
     /**
      * 
      * @param {{ [key: string]: object; }} [where] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof EnvioVehiculoControllerApi
+     * @memberof EnvioSensorControllerApi
      */
-    public envioVehiculoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return EnvioVehiculoControllerApiFp(this.configuration).envioVehiculoControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    public envioSensorControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return EnvioSensorControllerApiFp(this.configuration).envioSensorControllerCount(where, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {NewEnvioVehiculo} [newEnvioVehiculo] 
+     * @param {NewEnvioSensor} [newEnvioSensor] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof EnvioVehiculoControllerApi
+     * @memberof EnvioSensorControllerApi
      */
-    public envioVehiculoControllerCreate(newEnvioVehiculo?: NewEnvioVehiculo, options?: AxiosRequestConfig) {
-        return EnvioVehiculoControllerApiFp(this.configuration).envioVehiculoControllerCreate(newEnvioVehiculo, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioVehiculoControllerApi
-     */
-    public envioVehiculoControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return EnvioVehiculoControllerApiFp(this.configuration).envioVehiculoControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {EnvioVehiculoFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioVehiculoControllerApi
-     */
-    public envioVehiculoControllerFind(filter?: EnvioVehiculoFilter1, options?: AxiosRequestConfig) {
-        return EnvioVehiculoControllerApiFp(this.configuration).envioVehiculoControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    public envioSensorControllerCreate(newEnvioSensor?: NewEnvioSensor, options?: AxiosRequestConfig) {
+        return EnvioSensorControllerApiFp(this.configuration).envioSensorControllerCreate(newEnvioSensor, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
-     * @param {EnvioVehiculoFilter} [filter] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof EnvioVehiculoControllerApi
+     * @memberof EnvioSensorControllerApi
      */
-    public envioVehiculoControllerFindById(id: number, filter?: EnvioVehiculoFilter, options?: AxiosRequestConfig) {
-        return EnvioVehiculoControllerApiFp(this.configuration).envioVehiculoControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    public envioSensorControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return EnvioSensorControllerApiFp(this.configuration).envioSensorControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EnvioSensorFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioSensorControllerApi
+     */
+    public envioSensorControllerFind(filter?: EnvioSensorFilter1, options?: AxiosRequestConfig) {
+        return EnvioSensorControllerApiFp(this.configuration).envioSensorControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
-     * @param {EnvioVehiculo} [envioVehiculo] 
+     * @param {EnvioSensorFilter} [filter] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof EnvioVehiculoControllerApi
+     * @memberof EnvioSensorControllerApi
      */
-    public envioVehiculoControllerReplaceById(id: number, envioVehiculo?: EnvioVehiculo, options?: AxiosRequestConfig) {
-        return EnvioVehiculoControllerApiFp(this.configuration).envioVehiculoControllerReplaceById(id, envioVehiculo, options).then((request) => request(this.axios, this.basePath));
+    public envioSensorControllerFindById(id: number, filter?: EnvioSensorFilter, options?: AxiosRequestConfig) {
+        return EnvioSensorControllerApiFp(this.configuration).envioSensorControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioSensor} [envioSensor] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioSensorControllerApi
+     */
+    public envioSensorControllerReplaceById(id: number, envioSensor?: EnvioSensor, options?: AxiosRequestConfig) {
+        return EnvioSensorControllerApiFp(this.configuration).envioSensorControllerReplaceById(id, envioSensor, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {{ [key: string]: object; }} [where] 
-     * @param {EnvioVehiculoPartial} [envioVehiculoPartial] 
+     * @param {EnvioSensorPartial} [envioSensorPartial] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof EnvioVehiculoControllerApi
+     * @memberof EnvioSensorControllerApi
      */
-    public envioVehiculoControllerUpdateAll(where?: { [key: string]: object; }, envioVehiculoPartial?: EnvioVehiculoPartial, options?: AxiosRequestConfig) {
-        return EnvioVehiculoControllerApiFp(this.configuration).envioVehiculoControllerUpdateAll(where, envioVehiculoPartial, options).then((request) => request(this.axios, this.basePath));
+    public envioSensorControllerUpdateAll(where?: { [key: string]: object; }, envioSensorPartial?: EnvioSensorPartial, options?: AxiosRequestConfig) {
+        return EnvioSensorControllerApiFp(this.configuration).envioSensorControllerUpdateAll(where, envioSensorPartial, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
-     * @param {EnvioVehiculoPartial} [envioVehiculoPartial] 
+     * @param {EnvioSensorPartial} [envioSensorPartial] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof EnvioVehiculoControllerApi
+     * @memberof EnvioSensorControllerApi
      */
-    public envioVehiculoControllerUpdateById(id: number, envioVehiculoPartial?: EnvioVehiculoPartial, options?: AxiosRequestConfig) {
-        return EnvioVehiculoControllerApiFp(this.configuration).envioVehiculoControllerUpdateById(id, envioVehiculoPartial, options).then((request) => request(this.axios, this.basePath));
+    public envioSensorControllerUpdateById(id: number, envioSensorPartial?: EnvioSensorPartial, options?: AxiosRequestConfig) {
+        return EnvioSensorControllerApiFp(this.configuration).envioSensorControllerUpdateById(id, envioSensorPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -18306,1218 +19744,6 @@ export class PaisControllerApi extends BaseAPI {
 
 
 /**
- * PalletConfiguracionControllerApi - axios parameter creator
- * @export
- */
-export const PalletConfiguracionControllerApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallet-configuraciones/count`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {NewPalletConfiguracion} [newPalletConfiguracion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerCreate: async (newPalletConfiguracion?: NewPalletConfiguracion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallet-configuraciones`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newPalletConfiguracion, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletConfiguracionControllerDeleteById', 'id', id)
-            const localVarPath = `/pallet-configuraciones/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {PalletConfiguracionFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerFind: async (filter?: PalletConfiguracionFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallet-configuraciones`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerFindById: async (id: number, filter?: PalletConfiguracionFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletConfiguracionControllerFindById', 'id', id)
-            const localVarPath = `/pallet-configuraciones/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracion} [palletConfiguracion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerReplaceById: async (id: number, palletConfiguracion?: PalletConfiguracion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletConfiguracionControllerReplaceById', 'id', id)
-            const localVarPath = `/pallet-configuraciones/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(palletConfiguracion, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {PalletConfiguracionPartial} [palletConfiguracionPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerUpdateAll: async (where?: { [key: string]: object; }, palletConfiguracionPartial?: PalletConfiguracionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallet-configuraciones`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(palletConfiguracionPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionPartial} [palletConfiguracionPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerUpdateById: async (id: number, palletConfiguracionPartial?: PalletConfiguracionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletConfiguracionControllerUpdateById', 'id', id)
-            const localVarPath = `/pallet-configuraciones/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(palletConfiguracionPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * PalletConfiguracionControllerApi - functional programming interface
- * @export
- */
-export const PalletConfiguracionControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PalletConfiguracionControllerApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionControllerCount(where, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {NewPalletConfiguracion} [newPalletConfiguracion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionControllerCreate(newPalletConfiguracion?: NewPalletConfiguracion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PalletConfiguracion>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionControllerCreate(newPalletConfiguracion, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {PalletConfiguracionFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionControllerFind(filter?: PalletConfiguracionFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PalletConfiguracionWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionControllerFind(filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionControllerFindById(id: number, filter?: PalletConfiguracionFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PalletConfiguracionWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionControllerFindById(id, filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracion} [palletConfiguracion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionControllerReplaceById(id: number, palletConfiguracion?: PalletConfiguracion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionControllerReplaceById(id, palletConfiguracion, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {PalletConfiguracionPartial} [palletConfiguracionPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionControllerUpdateAll(where?: { [key: string]: object; }, palletConfiguracionPartial?: PalletConfiguracionPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionControllerUpdateAll(where, palletConfiguracionPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionPartial} [palletConfiguracionPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionControllerUpdateById(id: number, palletConfiguracionPartial?: PalletConfiguracionPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionControllerUpdateById(id, palletConfiguracionPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * PalletConfiguracionControllerApi - factory interface
- * @export
- */
-export const PalletConfiguracionControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PalletConfiguracionControllerApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.palletConfiguracionControllerCount(where, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {NewPalletConfiguracion} [newPalletConfiguracion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerCreate(newPalletConfiguracion?: NewPalletConfiguracion, options?: any): AxiosPromise<PalletConfiguracion> {
-            return localVarFp.palletConfiguracionControllerCreate(newPalletConfiguracion, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.palletConfiguracionControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {PalletConfiguracionFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerFind(filter?: PalletConfiguracionFilter1, options?: any): AxiosPromise<Array<PalletConfiguracionWithRelations>> {
-            return localVarFp.palletConfiguracionControllerFind(filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerFindById(id: number, filter?: PalletConfiguracionFilter, options?: any): AxiosPromise<PalletConfiguracionWithRelations> {
-            return localVarFp.palletConfiguracionControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracion} [palletConfiguracion] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerReplaceById(id: number, palletConfiguracion?: PalletConfiguracion, options?: any): AxiosPromise<any> {
-            return localVarFp.palletConfiguracionControllerReplaceById(id, palletConfiguracion, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {PalletConfiguracionPartial} [palletConfiguracionPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerUpdateAll(where?: { [key: string]: object; }, palletConfiguracionPartial?: PalletConfiguracionPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.palletConfiguracionControllerUpdateAll(where, palletConfiguracionPartial, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionPartial} [palletConfiguracionPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionControllerUpdateById(id: number, palletConfiguracionPartial?: PalletConfiguracionPartial, options?: any): AxiosPromise<any> {
-            return localVarFp.palletConfiguracionControllerUpdateById(id, palletConfiguracionPartial, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * PalletConfiguracionControllerApi - object-oriented interface
- * @export
- * @class PalletConfiguracionControllerApi
- * @extends {BaseAPI}
- */
-export class PalletConfiguracionControllerApi extends BaseAPI {
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionControllerApi
-     */
-    public palletConfiguracionControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return PalletConfiguracionControllerApiFp(this.configuration).palletConfiguracionControllerCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {NewPalletConfiguracion} [newPalletConfiguracion] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionControllerApi
-     */
-    public palletConfiguracionControllerCreate(newPalletConfiguracion?: NewPalletConfiguracion, options?: AxiosRequestConfig) {
-        return PalletConfiguracionControllerApiFp(this.configuration).palletConfiguracionControllerCreate(newPalletConfiguracion, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionControllerApi
-     */
-    public palletConfiguracionControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return PalletConfiguracionControllerApiFp(this.configuration).palletConfiguracionControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {PalletConfiguracionFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionControllerApi
-     */
-    public palletConfiguracionControllerFind(filter?: PalletConfiguracionFilter1, options?: AxiosRequestConfig) {
-        return PalletConfiguracionControllerApiFp(this.configuration).palletConfiguracionControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {PalletConfiguracionFilter} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionControllerApi
-     */
-    public palletConfiguracionControllerFindById(id: number, filter?: PalletConfiguracionFilter, options?: AxiosRequestConfig) {
-        return PalletConfiguracionControllerApiFp(this.configuration).palletConfiguracionControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {PalletConfiguracion} [palletConfiguracion] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionControllerApi
-     */
-    public palletConfiguracionControllerReplaceById(id: number, palletConfiguracion?: PalletConfiguracion, options?: AxiosRequestConfig) {
-        return PalletConfiguracionControllerApiFp(this.configuration).palletConfiguracionControllerReplaceById(id, palletConfiguracion, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {PalletConfiguracionPartial} [palletConfiguracionPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionControllerApi
-     */
-    public palletConfiguracionControllerUpdateAll(where?: { [key: string]: object; }, palletConfiguracionPartial?: PalletConfiguracionPartial, options?: AxiosRequestConfig) {
-        return PalletConfiguracionControllerApiFp(this.configuration).palletConfiguracionControllerUpdateAll(where, palletConfiguracionPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {PalletConfiguracionPartial} [palletConfiguracionPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionControllerApi
-     */
-    public palletConfiguracionControllerUpdateById(id: number, palletConfiguracionPartial?: PalletConfiguracionPartial, options?: AxiosRequestConfig) {
-        return PalletConfiguracionControllerApiFp(this.configuration).palletConfiguracionControllerUpdateById(id, palletConfiguracionPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * PalletConfiguracionGeneralControllerApi - axios parameter creator
- * @export
- */
-export const PalletConfiguracionGeneralControllerApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallet-configuracion-generales/count`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {NewPalletConfiguracionGeneral} [newPalletConfiguracionGeneral] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerCreate: async (newPalletConfiguracionGeneral?: NewPalletConfiguracionGeneral, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallet-configuracion-generales`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newPalletConfiguracionGeneral, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletConfiguracionGeneralControllerDeleteById', 'id', id)
-            const localVarPath = `/pallet-configuracion-generales/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {PalletConfiguracionGeneralFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerFind: async (filter?: PalletConfiguracionGeneralFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallet-configuracion-generales`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionGeneralFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerFindById: async (id: number, filter?: PalletConfiguracionGeneralFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletConfiguracionGeneralControllerFindById', 'id', id)
-            const localVarPath = `/pallet-configuracion-generales/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionGeneral} [palletConfiguracionGeneral] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerReplaceById: async (id: number, palletConfiguracionGeneral?: PalletConfiguracionGeneral, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletConfiguracionGeneralControllerReplaceById', 'id', id)
-            const localVarPath = `/pallet-configuracion-generales/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(palletConfiguracionGeneral, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {PalletConfiguracionGeneralPartial} [palletConfiguracionGeneralPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerUpdateAll: async (where?: { [key: string]: object; }, palletConfiguracionGeneralPartial?: PalletConfiguracionGeneralPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallet-configuracion-generales`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(palletConfiguracionGeneralPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionGeneralPartial} [palletConfiguracionGeneralPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerUpdateById: async (id: number, palletConfiguracionGeneralPartial?: PalletConfiguracionGeneralPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletConfiguracionGeneralControllerUpdateById', 'id', id)
-            const localVarPath = `/pallet-configuracion-generales/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(palletConfiguracionGeneralPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * PalletConfiguracionGeneralControllerApi - functional programming interface
- * @export
- */
-export const PalletConfiguracionGeneralControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PalletConfiguracionGeneralControllerApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionGeneralControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionGeneralControllerCount(where, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {NewPalletConfiguracionGeneral} [newPalletConfiguracionGeneral] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionGeneralControllerCreate(newPalletConfiguracionGeneral?: NewPalletConfiguracionGeneral, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PalletConfiguracionGeneral>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionGeneralControllerCreate(newPalletConfiguracionGeneral, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionGeneralControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionGeneralControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {PalletConfiguracionGeneralFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionGeneralControllerFind(filter?: PalletConfiguracionGeneralFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PalletConfiguracionGeneralWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionGeneralControllerFind(filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionGeneralFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionGeneralControllerFindById(id: number, filter?: PalletConfiguracionGeneralFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PalletConfiguracionGeneralWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionGeneralControllerFindById(id, filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionGeneral} [palletConfiguracionGeneral] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionGeneralControllerReplaceById(id: number, palletConfiguracionGeneral?: PalletConfiguracionGeneral, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionGeneralControllerReplaceById(id, palletConfiguracionGeneral, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {PalletConfiguracionGeneralPartial} [palletConfiguracionGeneralPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionGeneralControllerUpdateAll(where?: { [key: string]: object; }, palletConfiguracionGeneralPartial?: PalletConfiguracionGeneralPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionGeneralControllerUpdateAll(where, palletConfiguracionGeneralPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionGeneralPartial} [palletConfiguracionGeneralPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletConfiguracionGeneralControllerUpdateById(id: number, palletConfiguracionGeneralPartial?: PalletConfiguracionGeneralPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletConfiguracionGeneralControllerUpdateById(id, palletConfiguracionGeneralPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * PalletConfiguracionGeneralControllerApi - factory interface
- * @export
- */
-export const PalletConfiguracionGeneralControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PalletConfiguracionGeneralControllerApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.palletConfiguracionGeneralControllerCount(where, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {NewPalletConfiguracionGeneral} [newPalletConfiguracionGeneral] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerCreate(newPalletConfiguracionGeneral?: NewPalletConfiguracionGeneral, options?: any): AxiosPromise<PalletConfiguracionGeneral> {
-            return localVarFp.palletConfiguracionGeneralControllerCreate(newPalletConfiguracionGeneral, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.palletConfiguracionGeneralControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {PalletConfiguracionGeneralFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerFind(filter?: PalletConfiguracionGeneralFilter1, options?: any): AxiosPromise<Array<PalletConfiguracionGeneralWithRelations>> {
-            return localVarFp.palletConfiguracionGeneralControllerFind(filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionGeneralFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerFindById(id: number, filter?: PalletConfiguracionGeneralFilter, options?: any): AxiosPromise<PalletConfiguracionGeneralWithRelations> {
-            return localVarFp.palletConfiguracionGeneralControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionGeneral} [palletConfiguracionGeneral] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerReplaceById(id: number, palletConfiguracionGeneral?: PalletConfiguracionGeneral, options?: any): AxiosPromise<any> {
-            return localVarFp.palletConfiguracionGeneralControllerReplaceById(id, palletConfiguracionGeneral, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {PalletConfiguracionGeneralPartial} [palletConfiguracionGeneralPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerUpdateAll(where?: { [key: string]: object; }, palletConfiguracionGeneralPartial?: PalletConfiguracionGeneralPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.palletConfiguracionGeneralControllerUpdateAll(where, palletConfiguracionGeneralPartial, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletConfiguracionGeneralPartial} [palletConfiguracionGeneralPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletConfiguracionGeneralControllerUpdateById(id: number, palletConfiguracionGeneralPartial?: PalletConfiguracionGeneralPartial, options?: any): AxiosPromise<any> {
-            return localVarFp.palletConfiguracionGeneralControllerUpdateById(id, palletConfiguracionGeneralPartial, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * PalletConfiguracionGeneralControllerApi - object-oriented interface
- * @export
- * @class PalletConfiguracionGeneralControllerApi
- * @extends {BaseAPI}
- */
-export class PalletConfiguracionGeneralControllerApi extends BaseAPI {
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionGeneralControllerApi
-     */
-    public palletConfiguracionGeneralControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return PalletConfiguracionGeneralControllerApiFp(this.configuration).palletConfiguracionGeneralControllerCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {NewPalletConfiguracionGeneral} [newPalletConfiguracionGeneral] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionGeneralControllerApi
-     */
-    public palletConfiguracionGeneralControllerCreate(newPalletConfiguracionGeneral?: NewPalletConfiguracionGeneral, options?: AxiosRequestConfig) {
-        return PalletConfiguracionGeneralControllerApiFp(this.configuration).palletConfiguracionGeneralControllerCreate(newPalletConfiguracionGeneral, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionGeneralControllerApi
-     */
-    public palletConfiguracionGeneralControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return PalletConfiguracionGeneralControllerApiFp(this.configuration).palletConfiguracionGeneralControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {PalletConfiguracionGeneralFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionGeneralControllerApi
-     */
-    public palletConfiguracionGeneralControllerFind(filter?: PalletConfiguracionGeneralFilter1, options?: AxiosRequestConfig) {
-        return PalletConfiguracionGeneralControllerApiFp(this.configuration).palletConfiguracionGeneralControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {PalletConfiguracionGeneralFilter} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionGeneralControllerApi
-     */
-    public palletConfiguracionGeneralControllerFindById(id: number, filter?: PalletConfiguracionGeneralFilter, options?: AxiosRequestConfig) {
-        return PalletConfiguracionGeneralControllerApiFp(this.configuration).palletConfiguracionGeneralControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {PalletConfiguracionGeneral} [palletConfiguracionGeneral] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionGeneralControllerApi
-     */
-    public palletConfiguracionGeneralControllerReplaceById(id: number, palletConfiguracionGeneral?: PalletConfiguracionGeneral, options?: AxiosRequestConfig) {
-        return PalletConfiguracionGeneralControllerApiFp(this.configuration).palletConfiguracionGeneralControllerReplaceById(id, palletConfiguracionGeneral, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {PalletConfiguracionGeneralPartial} [palletConfiguracionGeneralPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionGeneralControllerApi
-     */
-    public palletConfiguracionGeneralControllerUpdateAll(where?: { [key: string]: object; }, palletConfiguracionGeneralPartial?: PalletConfiguracionGeneralPartial, options?: AxiosRequestConfig) {
-        return PalletConfiguracionGeneralControllerApiFp(this.configuration).palletConfiguracionGeneralControllerUpdateAll(where, palletConfiguracionGeneralPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {PalletConfiguracionGeneralPartial} [palletConfiguracionGeneralPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletConfiguracionGeneralControllerApi
-     */
-    public palletConfiguracionGeneralControllerUpdateById(id: number, palletConfiguracionGeneralPartial?: PalletConfiguracionGeneralPartial, options?: AxiosRequestConfig) {
-        return PalletConfiguracionGeneralControllerApiFp(this.configuration).palletConfiguracionGeneralControllerUpdateById(id, palletConfiguracionGeneralPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
  * PalletControllerApi - axios parameter creator
  * @export
  */
@@ -19530,7 +19756,7 @@ export const PalletControllerApiAxiosParamCreator = function (configuration?: Co
          * @throws {RequiredError}
          */
         palletControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallets/count`;
+            const localVarPath = `/pallet/count`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -19568,7 +19794,7 @@ export const PalletControllerApiAxiosParamCreator = function (configuration?: Co
          * @throws {RequiredError}
          */
         palletControllerCreate: async (newPallet?: NewPallet, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallets`;
+            const localVarPath = `/pallet`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -19607,7 +19833,7 @@ export const PalletControllerApiAxiosParamCreator = function (configuration?: Co
         palletControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('palletControllerDeleteById', 'id', id)
-            const localVarPath = `/pallets/{id}`
+            const localVarPath = `/pallet/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -19642,7 +19868,7 @@ export const PalletControllerApiAxiosParamCreator = function (configuration?: Co
          * @throws {RequiredError}
          */
         palletControllerFind: async (filter?: PalletFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallets`;
+            const localVarPath = `/pallet`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -19683,7 +19909,7 @@ export const PalletControllerApiAxiosParamCreator = function (configuration?: Co
         palletControllerFindById: async (id: number, filter?: PalletFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('palletControllerFindById', 'id', id)
-            const localVarPath = `/pallets/{id}`
+            const localVarPath = `/pallet/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -19725,7 +19951,7 @@ export const PalletControllerApiAxiosParamCreator = function (configuration?: Co
         palletControllerReplaceById: async (id: number, pallet?: Pallet, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('palletControllerReplaceById', 'id', id)
-            const localVarPath = `/pallets/{id}`
+            const localVarPath = `/pallet/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -19764,7 +19990,7 @@ export const PalletControllerApiAxiosParamCreator = function (configuration?: Co
          * @throws {RequiredError}
          */
         palletControllerUpdateAll: async (where?: { [key: string]: object; }, palletPartial?: PalletPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallets`;
+            const localVarPath = `/pallet`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -19808,7 +20034,7 @@ export const PalletControllerApiAxiosParamCreator = function (configuration?: Co
         palletControllerUpdateById: async (id: number, palletPartial?: PalletPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('palletControllerUpdateById', 'id', id)
-            const localVarPath = `/pallets/{id}`
+            const localVarPath = `/pallet/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -20124,10 +20350,10 @@ export class PalletControllerApi extends BaseAPI {
 
 
 /**
- * PalletsMovementsControllerApi - axios parameter creator
+ * PalletParametroControllerApi - axios parameter creator
  * @export
  */
-export const PalletsMovementsControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+export const PalletParametroControllerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
@@ -20135,8 +20361,8 @@ export const PalletsMovementsControllerApiAxiosParamCreator = function (configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        palletsMovementsControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallets-movements/count`;
+        palletParametroControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/pallet-parametros/count`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -20169,12 +20395,12 @@ export const PalletsMovementsControllerApiAxiosParamCreator = function (configur
         },
         /**
          * 
-         * @param {Array<NewPalletsMovements>} [newPalletsMovements] 
+         * @param {NewPalletParametro} [newPalletParametro] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        palletsMovementsControllerCreate: async (newPalletsMovements?: Array<NewPalletsMovements>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallets-movements`;
+        palletParametroControllerCreate: async (newPalletParametro?: NewPalletParametro, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/pallet-parametros`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -20197,7 +20423,7 @@ export const PalletsMovementsControllerApiAxiosParamCreator = function (configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newPalletsMovements, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(newPalletParametro, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -20210,10 +20436,10 @@ export const PalletsMovementsControllerApiAxiosParamCreator = function (configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        palletsMovementsControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        palletParametroControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletsMovementsControllerDeleteById', 'id', id)
-            const localVarPath = `/pallets-movements/{id}`
+            assertParamExists('palletParametroControllerDeleteById', 'id', id)
+            const localVarPath = `/pallet-parametros/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -20243,12 +20469,12 @@ export const PalletsMovementsControllerApiAxiosParamCreator = function (configur
         },
         /**
          * 
-         * @param {PalletsMovementsFilter1} [filter] 
+         * @param {PalletParametroFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        palletsMovementsControllerFind: async (filter?: PalletsMovementsFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallets-movements`;
+        palletParametroControllerFind: async (filter?: PalletParametroFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/pallet-parametros`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -20282,14 +20508,14 @@ export const PalletsMovementsControllerApiAxiosParamCreator = function (configur
         /**
          * 
          * @param {number} id 
-         * @param {PalletsMovementsFilter} [filter] 
+         * @param {PalletParametroFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        palletsMovementsControllerFindById: async (id: number, filter?: PalletsMovementsFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        palletParametroControllerFindById: async (id: number, filter?: PalletParametroFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletsMovementsControllerFindById', 'id', id)
-            const localVarPath = `/pallets-movements/{id}`
+            assertParamExists('palletParametroControllerFindById', 'id', id)
+            const localVarPath = `/pallet-parametros/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -20324,97 +20550,14 @@ export const PalletsMovementsControllerApiAxiosParamCreator = function (configur
         /**
          * 
          * @param {number} id 
-         * @param {PalletsMovements} [palletsMovements] 
+         * @param {PalletParametroPartial} [palletParametroPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        palletsMovementsControllerReplaceById: async (id: number, palletsMovements?: PalletsMovements, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        palletParametroControllerUpdateById: async (id: number, palletParametroPartial?: PalletParametroPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletsMovementsControllerReplaceById', 'id', id)
-            const localVarPath = `/pallets-movements/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(palletsMovements, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletsMovementsControllerUpdateAll: async (where?: { [key: string]: object; }, palletsMovementsPartial?: PalletsMovementsPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pallets-movements`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(palletsMovementsPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletsMovementsControllerUpdateById: async (id: number, palletsMovementsPartial?: PalletsMovementsPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('palletsMovementsControllerUpdateById', 'id', id)
-            const localVarPath = `/pallets-movements/{id}`
+            assertParamExists('palletParametroControllerUpdateById', 'id', id)
+            const localVarPath = `/pallet-parametros/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -20438,7 +20581,7 @@ export const PalletsMovementsControllerApiAxiosParamCreator = function (configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(palletsMovementsPartial, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(palletParametroPartial, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -20449,11 +20592,11 @@ export const PalletsMovementsControllerApiAxiosParamCreator = function (configur
 };
 
 /**
- * PalletsMovementsControllerApi - functional programming interface
+ * PalletParametroControllerApi - functional programming interface
  * @export
  */
-export const PalletsMovementsControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PalletsMovementsControllerApiAxiosParamCreator(configuration)
+export const PalletParametroControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PalletParametroControllerApiAxiosParamCreator(configuration)
     return {
         /**
          * 
@@ -20461,93 +20604,71 @@ export const PalletsMovementsControllerApiFp = function(configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async palletsMovementsControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerCount(where, options);
+        async palletParametroControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletParametroControllerCount(where, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {Array<NewPalletsMovements>} [newPalletsMovements] 
+         * @param {NewPalletParametro} [newPalletParametro] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async palletsMovementsControllerCreate(newPalletsMovements?: Array<NewPalletsMovements>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PalletsMovements>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerCreate(newPalletsMovements, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletsMovementsControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {PalletsMovementsFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletsMovementsControllerFind(filter?: PalletsMovementsFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PalletsMovementsWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerFind(filter, options);
+        async palletParametroControllerCreate(newPalletParametro?: NewPalletParametro, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PalletParametro>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletParametroControllerCreate(newPalletParametro, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {PalletsMovementsFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async palletsMovementsControllerFindById(id: number, filter?: PalletsMovementsFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PalletsMovementsWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerFindById(id, filter, options);
+        async palletParametroControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletParametroControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {PalletParametroFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async palletParametroControllerFind(filter?: PalletParametroFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PalletParametroWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletParametroControllerFind(filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {PalletsMovements} [palletsMovements] 
+         * @param {PalletParametroFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async palletsMovementsControllerReplaceById(id: number, palletsMovements?: PalletsMovements, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerReplaceById(id, palletsMovements, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async palletsMovementsControllerUpdateAll(where?: { [key: string]: object; }, palletsMovementsPartial?: PalletsMovementsPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerUpdateAll(where, palletsMovementsPartial, options);
+        async palletParametroControllerFindById(id: number, filter?: PalletParametroFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PalletParametroWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletParametroControllerFindById(id, filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
+         * @param {PalletParametroPartial} [palletParametroPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async palletsMovementsControllerUpdateById(id: number, palletsMovementsPartial?: PalletsMovementsPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.palletsMovementsControllerUpdateById(id, palletsMovementsPartial, options);
+        async palletParametroControllerUpdateById(id: number, palletParametroPartial?: PalletParametroPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.palletParametroControllerUpdateById(id, palletParametroPartial, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * PalletsMovementsControllerApi - factory interface
+ * PalletParametroControllerApi - factory interface
  * @export
  */
-export const PalletsMovementsControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PalletsMovementsControllerApiFp(configuration)
+export const PalletParametroControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PalletParametroControllerApiFp(configuration)
     return {
         /**
          * 
@@ -20555,185 +20676,141 @@ export const PalletsMovementsControllerApiFactory = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        palletsMovementsControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.palletsMovementsControllerCount(where, options).then((request) => request(axios, basePath));
+        palletParametroControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.palletParametroControllerCount(where, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {Array<NewPalletsMovements>} [newPalletsMovements] 
+         * @param {NewPalletParametro} [newPalletParametro] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        palletsMovementsControllerCreate(newPalletsMovements?: Array<NewPalletsMovements>, options?: any): AxiosPromise<Array<PalletsMovements>> {
-            return localVarFp.palletsMovementsControllerCreate(newPalletsMovements, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletsMovementsControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.palletsMovementsControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {PalletsMovementsFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletsMovementsControllerFind(filter?: PalletsMovementsFilter1, options?: any): AxiosPromise<Array<PalletsMovementsWithRelations>> {
-            return localVarFp.palletsMovementsControllerFind(filter, options).then((request) => request(axios, basePath));
+        palletParametroControllerCreate(newPalletParametro?: NewPalletParametro, options?: any): AxiosPromise<PalletParametro> {
+            return localVarFp.palletParametroControllerCreate(newPalletParametro, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {PalletsMovementsFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        palletsMovementsControllerFindById(id: number, filter?: PalletsMovementsFilter, options?: any): AxiosPromise<PalletsMovementsWithRelations> {
-            return localVarFp.palletsMovementsControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        palletParametroControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.palletParametroControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {PalletParametroFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        palletParametroControllerFind(filter?: PalletParametroFilter1, options?: any): AxiosPromise<Array<PalletParametroWithRelations>> {
+            return localVarFp.palletParametroControllerFind(filter, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {PalletsMovements} [palletsMovements] 
+         * @param {PalletParametroFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        palletsMovementsControllerReplaceById(id: number, palletsMovements?: PalletsMovements, options?: any): AxiosPromise<any> {
-            return localVarFp.palletsMovementsControllerReplaceById(id, palletsMovements, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        palletsMovementsControllerUpdateAll(where?: { [key: string]: object; }, palletsMovementsPartial?: PalletsMovementsPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.palletsMovementsControllerUpdateAll(where, palletsMovementsPartial, options).then((request) => request(axios, basePath));
+        palletParametroControllerFindById(id: number, filter?: PalletParametroFilter, options?: any): AxiosPromise<PalletParametroWithRelations> {
+            return localVarFp.palletParametroControllerFindById(id, filter, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
+         * @param {PalletParametroPartial} [palletParametroPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        palletsMovementsControllerUpdateById(id: number, palletsMovementsPartial?: PalletsMovementsPartial, options?: any): AxiosPromise<any> {
-            return localVarFp.palletsMovementsControllerUpdateById(id, palletsMovementsPartial, options).then((request) => request(axios, basePath));
+        palletParametroControllerUpdateById(id: number, palletParametroPartial?: PalletParametroPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.palletParametroControllerUpdateById(id, palletParametroPartial, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * PalletsMovementsControllerApi - object-oriented interface
+ * PalletParametroControllerApi - object-oriented interface
  * @export
- * @class PalletsMovementsControllerApi
+ * @class PalletParametroControllerApi
  * @extends {BaseAPI}
  */
-export class PalletsMovementsControllerApi extends BaseAPI {
+export class PalletParametroControllerApi extends BaseAPI {
     /**
      * 
      * @param {{ [key: string]: object; }} [where] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PalletsMovementsControllerApi
+     * @memberof PalletParametroControllerApi
      */
-    public palletsMovementsControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    public palletParametroControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return PalletParametroControllerApiFp(this.configuration).palletParametroControllerCount(where, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {Array<NewPalletsMovements>} [newPalletsMovements] 
+     * @param {NewPalletParametro} [newPalletParametro] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PalletsMovementsControllerApi
+     * @memberof PalletParametroControllerApi
      */
-    public palletsMovementsControllerCreate(newPalletsMovements?: Array<NewPalletsMovements>, options?: AxiosRequestConfig) {
-        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerCreate(newPalletsMovements, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletsMovementsControllerApi
-     */
-    public palletsMovementsControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {PalletsMovementsFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletsMovementsControllerApi
-     */
-    public palletsMovementsControllerFind(filter?: PalletsMovementsFilter1, options?: AxiosRequestConfig) {
-        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    public palletParametroControllerCreate(newPalletParametro?: NewPalletParametro, options?: AxiosRequestConfig) {
+        return PalletParametroControllerApiFp(this.configuration).palletParametroControllerCreate(newPalletParametro, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
-     * @param {PalletsMovementsFilter} [filter] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PalletsMovementsControllerApi
+     * @memberof PalletParametroControllerApi
      */
-    public palletsMovementsControllerFindById(id: number, filter?: PalletsMovementsFilter, options?: AxiosRequestConfig) {
-        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    public palletParametroControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return PalletParametroControllerApiFp(this.configuration).palletParametroControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {PalletParametroFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PalletParametroControllerApi
+     */
+    public palletParametroControllerFind(filter?: PalletParametroFilter1, options?: AxiosRequestConfig) {
+        return PalletParametroControllerApiFp(this.configuration).palletParametroControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
-     * @param {PalletsMovements} [palletsMovements] 
+     * @param {PalletParametroFilter} [filter] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PalletsMovementsControllerApi
+     * @memberof PalletParametroControllerApi
      */
-    public palletsMovementsControllerReplaceById(id: number, palletsMovements?: PalletsMovements, options?: AxiosRequestConfig) {
-        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerReplaceById(id, palletsMovements, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PalletsMovementsControllerApi
-     */
-    public palletsMovementsControllerUpdateAll(where?: { [key: string]: object; }, palletsMovementsPartial?: PalletsMovementsPartial, options?: AxiosRequestConfig) {
-        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerUpdateAll(where, palletsMovementsPartial, options).then((request) => request(this.axios, this.basePath));
+    public palletParametroControllerFindById(id: number, filter?: PalletParametroFilter, options?: AxiosRequestConfig) {
+        return PalletParametroControllerApiFp(this.configuration).palletParametroControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
-     * @param {PalletsMovementsPartial} [palletsMovementsPartial] 
+     * @param {PalletParametroPartial} [palletParametroPartial] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PalletsMovementsControllerApi
+     * @memberof PalletParametroControllerApi
      */
-    public palletsMovementsControllerUpdateById(id: number, palletsMovementsPartial?: PalletsMovementsPartial, options?: AxiosRequestConfig) {
-        return PalletsMovementsControllerApiFp(this.configuration).palletsMovementsControllerUpdateById(id, palletsMovementsPartial, options).then((request) => request(this.axios, this.basePath));
+    public palletParametroControllerUpdateById(id: number, palletParametroPartial?: PalletParametroPartial, options?: AxiosRequestConfig) {
+        return PalletParametroControllerApiFp(this.configuration).palletParametroControllerUpdateById(id, palletParametroPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
 
 /**
- * ParametrosPalletsControllerApi - axios parameter creator
+ * ParametroControllerApi - axios parameter creator
  * @export
  */
-export const ParametrosPalletsControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+export const ParametroControllerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
@@ -20741,8 +20818,8 @@ export const ParametrosPalletsControllerApiAxiosParamCreator = function (configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parametrosPalletsControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/parametros-pallets/count`;
+        parametroControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/parametros/count`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -20775,12 +20852,12 @@ export const ParametrosPalletsControllerApiAxiosParamCreator = function (configu
         },
         /**
          * 
-         * @param {NewParametrosPallets} [newParametrosPallets] 
+         * @param {NewParametro} [newParametro] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parametrosPalletsControllerCreate: async (newParametrosPallets?: NewParametrosPallets, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/parametros-pallets`;
+        parametroControllerCreate: async (newParametro?: NewParametro, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/parametros`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -20803,7 +20880,7 @@ export const ParametrosPalletsControllerApiAxiosParamCreator = function (configu
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newParametrosPallets, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(newParametro, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -20816,10 +20893,10 @@ export const ParametrosPalletsControllerApiAxiosParamCreator = function (configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parametrosPalletsControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        parametroControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('parametrosPalletsControllerDeleteById', 'id', id)
-            const localVarPath = `/parametros-pallets/{id}`
+            assertParamExists('parametroControllerDeleteById', 'id', id)
+            const localVarPath = `/parametros/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -20849,12 +20926,12 @@ export const ParametrosPalletsControllerApiAxiosParamCreator = function (configu
         },
         /**
          * 
-         * @param {ParametrosPalletsFilter1} [filter] 
+         * @param {ParametroFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parametrosPalletsControllerFind: async (filter?: ParametrosPalletsFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/parametros-pallets`;
+        parametroControllerFind: async (filter?: ParametroFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/parametros`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -20888,14 +20965,14 @@ export const ParametrosPalletsControllerApiAxiosParamCreator = function (configu
         /**
          * 
          * @param {number} id 
-         * @param {ParametrosPalletsFilter} [filter] 
+         * @param {ParametroFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parametrosPalletsControllerFindById: async (id: number, filter?: ParametrosPalletsFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        parametroControllerFindById: async (id: number, filter?: ParametroFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('parametrosPalletsControllerFindById', 'id', id)
-            const localVarPath = `/parametros-pallets/{id}`
+            assertParamExists('parametroControllerFindById', 'id', id)
+            const localVarPath = `/parametros/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -20930,97 +21007,14 @@ export const ParametrosPalletsControllerApiAxiosParamCreator = function (configu
         /**
          * 
          * @param {number} id 
-         * @param {ParametrosPallets} [parametrosPallets] 
+         * @param {ParametroPartial} [parametroPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parametrosPalletsControllerReplaceById: async (id: number, parametrosPallets?: ParametrosPallets, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        parametroControllerUpdateById: async (id: number, parametroPartial?: ParametroPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('parametrosPalletsControllerReplaceById', 'id', id)
-            const localVarPath = `/parametros-pallets/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(parametrosPallets, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {ParametrosPalletsPartial} [parametrosPalletsPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsControllerUpdateAll: async (where?: { [key: string]: object; }, parametrosPalletsPartial?: ParametrosPalletsPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/parametros-pallets`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(parametrosPalletsPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ParametrosPalletsPartial} [parametrosPalletsPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsControllerUpdateById: async (id: number, parametrosPalletsPartial?: ParametrosPalletsPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('parametrosPalletsControllerUpdateById', 'id', id)
-            const localVarPath = `/parametros-pallets/{id}`
+            assertParamExists('parametroControllerUpdateById', 'id', id)
+            const localVarPath = `/parametros/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -21044,7 +21038,7 @@ export const ParametrosPalletsControllerApiAxiosParamCreator = function (configu
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(parametrosPalletsPartial, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(parametroPartial, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -21055,11 +21049,11 @@ export const ParametrosPalletsControllerApiAxiosParamCreator = function (configu
 };
 
 /**
- * ParametrosPalletsControllerApi - functional programming interface
+ * ParametroControllerApi - functional programming interface
  * @export
  */
-export const ParametrosPalletsControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ParametrosPalletsControllerApiAxiosParamCreator(configuration)
+export const ParametroControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ParametroControllerApiAxiosParamCreator(configuration)
     return {
         /**
          * 
@@ -21067,93 +21061,71 @@ export const ParametrosPalletsControllerApiFp = function(configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async parametrosPalletsControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsControllerCount(where, options);
+        async parametroControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.parametroControllerCount(where, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {NewParametrosPallets} [newParametrosPallets] 
+         * @param {NewParametro} [newParametro] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async parametrosPalletsControllerCreate(newParametrosPallets?: NewParametrosPallets, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ParametrosPallets>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsControllerCreate(newParametrosPallets, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async parametrosPalletsControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {ParametrosPalletsFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async parametrosPalletsControllerFind(filter?: ParametrosPalletsFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ParametrosPalletsWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsControllerFind(filter, options);
+        async parametroControllerCreate(newParametro?: NewParametro, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Parametro>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.parametroControllerCreate(newParametro, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {ParametrosPalletsFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async parametrosPalletsControllerFindById(id: number, filter?: ParametrosPalletsFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ParametrosPalletsWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsControllerFindById(id, filter, options);
+        async parametroControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.parametroControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {ParametroFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async parametroControllerFind(filter?: ParametroFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ParametroWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.parametroControllerFind(filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {ParametrosPallets} [parametrosPallets] 
+         * @param {ParametroFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async parametrosPalletsControllerReplaceById(id: number, parametrosPallets?: ParametrosPallets, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsControllerReplaceById(id, parametrosPallets, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {ParametrosPalletsPartial} [parametrosPalletsPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async parametrosPalletsControllerUpdateAll(where?: { [key: string]: object; }, parametrosPalletsPartial?: ParametrosPalletsPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsControllerUpdateAll(where, parametrosPalletsPartial, options);
+        async parametroControllerFindById(id: number, filter?: ParametroFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ParametroWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.parametroControllerFindById(id, filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {ParametrosPalletsPartial} [parametrosPalletsPartial] 
+         * @param {ParametroPartial} [parametroPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async parametrosPalletsControllerUpdateById(id: number, parametrosPalletsPartial?: ParametrosPalletsPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsControllerUpdateById(id, parametrosPalletsPartial, options);
+        async parametroControllerUpdateById(id: number, parametroPartial?: ParametroPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.parametroControllerUpdateById(id, parametroPartial, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * ParametrosPalletsControllerApi - factory interface
+ * ParametroControllerApi - factory interface
  * @export
  */
-export const ParametrosPalletsControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ParametrosPalletsControllerApiFp(configuration)
+export const ParametroControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ParametroControllerApiFp(configuration)
     return {
         /**
          * 
@@ -21161,712 +21133,86 @@ export const ParametrosPalletsControllerApiFactory = function (configuration?: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parametrosPalletsControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.parametrosPalletsControllerCount(where, options).then((request) => request(axios, basePath));
+        parametroControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.parametroControllerCount(where, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {NewParametrosPallets} [newParametrosPallets] 
+         * @param {NewParametro} [newParametro] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parametrosPalletsControllerCreate(newParametrosPallets?: NewParametrosPallets, options?: any): AxiosPromise<ParametrosPallets> {
-            return localVarFp.parametrosPalletsControllerCreate(newParametrosPallets, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.parametrosPalletsControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {ParametrosPalletsFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsControllerFind(filter?: ParametrosPalletsFilter1, options?: any): AxiosPromise<Array<ParametrosPalletsWithRelations>> {
-            return localVarFp.parametrosPalletsControllerFind(filter, options).then((request) => request(axios, basePath));
+        parametroControllerCreate(newParametro?: NewParametro, options?: any): AxiosPromise<Parametro> {
+            return localVarFp.parametroControllerCreate(newParametro, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {ParametrosPalletsFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parametrosPalletsControllerFindById(id: number, filter?: ParametrosPalletsFilter, options?: any): AxiosPromise<ParametrosPalletsWithRelations> {
-            return localVarFp.parametrosPalletsControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        parametroControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.parametroControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {ParametroFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        parametroControllerFind(filter?: ParametroFilter1, options?: any): AxiosPromise<Array<ParametroWithRelations>> {
+            return localVarFp.parametroControllerFind(filter, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {ParametrosPallets} [parametrosPallets] 
+         * @param {ParametroFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parametrosPalletsControllerReplaceById(id: number, parametrosPallets?: ParametrosPallets, options?: any): AxiosPromise<any> {
-            return localVarFp.parametrosPalletsControllerReplaceById(id, parametrosPallets, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {ParametrosPalletsPartial} [parametrosPalletsPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsControllerUpdateAll(where?: { [key: string]: object; }, parametrosPalletsPartial?: ParametrosPalletsPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.parametrosPalletsControllerUpdateAll(where, parametrosPalletsPartial, options).then((request) => request(axios, basePath));
+        parametroControllerFindById(id: number, filter?: ParametroFilter, options?: any): AxiosPromise<ParametroWithRelations> {
+            return localVarFp.parametroControllerFindById(id, filter, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {ParametrosPalletsPartial} [parametrosPalletsPartial] 
+         * @param {ParametroPartial} [parametroPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parametrosPalletsControllerUpdateById(id: number, parametrosPalletsPartial?: ParametrosPalletsPartial, options?: any): AxiosPromise<any> {
-            return localVarFp.parametrosPalletsControllerUpdateById(id, parametrosPalletsPartial, options).then((request) => request(axios, basePath));
+        parametroControllerUpdateById(id: number, parametroPartial?: ParametroPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.parametroControllerUpdateById(id, parametroPartial, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * ParametrosPalletsControllerApi - object-oriented interface
+ * ParametroControllerApi - object-oriented interface
  * @export
- * @class ParametrosPalletsControllerApi
+ * @class ParametroControllerApi
  * @extends {BaseAPI}
  */
-export class ParametrosPalletsControllerApi extends BaseAPI {
+export class ParametroControllerApi extends BaseAPI {
     /**
      * 
      * @param {{ [key: string]: object; }} [where] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ParametrosPalletsControllerApi
+     * @memberof ParametroControllerApi
      */
-    public parametrosPalletsControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return ParametrosPalletsControllerApiFp(this.configuration).parametrosPalletsControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    public parametroControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return ParametroControllerApiFp(this.configuration).parametroControllerCount(where, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {NewParametrosPallets} [newParametrosPallets] 
+     * @param {NewParametro} [newParametro] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ParametrosPalletsControllerApi
+     * @memberof ParametroControllerApi
      */
-    public parametrosPalletsControllerCreate(newParametrosPallets?: NewParametrosPallets, options?: AxiosRequestConfig) {
-        return ParametrosPalletsControllerApiFp(this.configuration).parametrosPalletsControllerCreate(newParametrosPallets, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParametrosPalletsControllerApi
-     */
-    public parametrosPalletsControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return ParametrosPalletsControllerApiFp(this.configuration).parametrosPalletsControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {ParametrosPalletsFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParametrosPalletsControllerApi
-     */
-    public parametrosPalletsControllerFind(filter?: ParametrosPalletsFilter1, options?: AxiosRequestConfig) {
-        return ParametrosPalletsControllerApiFp(this.configuration).parametrosPalletsControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {ParametrosPalletsFilter} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParametrosPalletsControllerApi
-     */
-    public parametrosPalletsControllerFindById(id: number, filter?: ParametrosPalletsFilter, options?: AxiosRequestConfig) {
-        return ParametrosPalletsControllerApiFp(this.configuration).parametrosPalletsControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {ParametrosPallets} [parametrosPallets] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParametrosPalletsControllerApi
-     */
-    public parametrosPalletsControllerReplaceById(id: number, parametrosPallets?: ParametrosPallets, options?: AxiosRequestConfig) {
-        return ParametrosPalletsControllerApiFp(this.configuration).parametrosPalletsControllerReplaceById(id, parametrosPallets, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {ParametrosPalletsPartial} [parametrosPalletsPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParametrosPalletsControllerApi
-     */
-    public parametrosPalletsControllerUpdateAll(where?: { [key: string]: object; }, parametrosPalletsPartial?: ParametrosPalletsPartial, options?: AxiosRequestConfig) {
-        return ParametrosPalletsControllerApiFp(this.configuration).parametrosPalletsControllerUpdateAll(where, parametrosPalletsPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {ParametrosPalletsPartial} [parametrosPalletsPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParametrosPalletsControllerApi
-     */
-    public parametrosPalletsControllerUpdateById(id: number, parametrosPalletsPartial?: ParametrosPalletsPartial, options?: AxiosRequestConfig) {
-        return ParametrosPalletsControllerApiFp(this.configuration).parametrosPalletsControllerUpdateById(id, parametrosPalletsPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * ParametrosPalletsDetalleControllerApi - axios parameter creator
- * @export
- */
-export const ParametrosPalletsDetalleControllerApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/parametros-pallets-detalles/count`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {NewParametrosPalletsDetalle} [newParametrosPalletsDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerCreate: async (newParametrosPalletsDetalle?: NewParametrosPalletsDetalle, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/parametros-pallets-detalles`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newParametrosPalletsDetalle, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('parametrosPalletsDetalleControllerDeleteById', 'id', id)
-            const localVarPath = `/parametros-pallets-detalles/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {ParametrosPalletsDetalleFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerFind: async (filter?: ParametrosPalletsDetalleFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/parametros-pallets-detalles`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ParametrosPalletsDetalleFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerFindById: async (id: number, filter?: ParametrosPalletsDetalleFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('parametrosPalletsDetalleControllerFindById', 'id', id)
-            const localVarPath = `/parametros-pallets-detalles/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ParametrosPalletsDetalle} [parametrosPalletsDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerReplaceById: async (id: number, parametrosPalletsDetalle?: ParametrosPalletsDetalle, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('parametrosPalletsDetalleControllerReplaceById', 'id', id)
-            const localVarPath = `/parametros-pallets-detalles/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(parametrosPalletsDetalle, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {ParametrosPalletsDetallePartial} [parametrosPalletsDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerUpdateAll: async (where?: { [key: string]: object; }, parametrosPalletsDetallePartial?: ParametrosPalletsDetallePartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/parametros-pallets-detalles`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(parametrosPalletsDetallePartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ParametrosPalletsDetallePartial} [parametrosPalletsDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerUpdateById: async (id: number, parametrosPalletsDetallePartial?: ParametrosPalletsDetallePartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('parametrosPalletsDetalleControllerUpdateById', 'id', id)
-            const localVarPath = `/parametros-pallets-detalles/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(parametrosPalletsDetallePartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * ParametrosPalletsDetalleControllerApi - functional programming interface
- * @export
- */
-export const ParametrosPalletsDetalleControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ParametrosPalletsDetalleControllerApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async parametrosPalletsDetalleControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsDetalleControllerCount(where, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {NewParametrosPalletsDetalle} [newParametrosPalletsDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async parametrosPalletsDetalleControllerCreate(newParametrosPalletsDetalle?: NewParametrosPalletsDetalle, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ParametrosPalletsDetalle>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsDetalleControllerCreate(newParametrosPalletsDetalle, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async parametrosPalletsDetalleControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsDetalleControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {ParametrosPalletsDetalleFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async parametrosPalletsDetalleControllerFind(filter?: ParametrosPalletsDetalleFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ParametrosPalletsDetalleWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsDetalleControllerFind(filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ParametrosPalletsDetalleFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async parametrosPalletsDetalleControllerFindById(id: number, filter?: ParametrosPalletsDetalleFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ParametrosPalletsDetalleWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsDetalleControllerFindById(id, filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ParametrosPalletsDetalle} [parametrosPalletsDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async parametrosPalletsDetalleControllerReplaceById(id: number, parametrosPalletsDetalle?: ParametrosPalletsDetalle, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsDetalleControllerReplaceById(id, parametrosPalletsDetalle, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {ParametrosPalletsDetallePartial} [parametrosPalletsDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async parametrosPalletsDetalleControllerUpdateAll(where?: { [key: string]: object; }, parametrosPalletsDetallePartial?: ParametrosPalletsDetallePartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsDetalleControllerUpdateAll(where, parametrosPalletsDetallePartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ParametrosPalletsDetallePartial} [parametrosPalletsDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async parametrosPalletsDetalleControllerUpdateById(id: number, parametrosPalletsDetallePartial?: ParametrosPalletsDetallePartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.parametrosPalletsDetalleControllerUpdateById(id, parametrosPalletsDetallePartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * ParametrosPalletsDetalleControllerApi - factory interface
- * @export
- */
-export const ParametrosPalletsDetalleControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ParametrosPalletsDetalleControllerApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.parametrosPalletsDetalleControllerCount(where, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {NewParametrosPalletsDetalle} [newParametrosPalletsDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerCreate(newParametrosPalletsDetalle?: NewParametrosPalletsDetalle, options?: any): AxiosPromise<ParametrosPalletsDetalle> {
-            return localVarFp.parametrosPalletsDetalleControllerCreate(newParametrosPalletsDetalle, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.parametrosPalletsDetalleControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {ParametrosPalletsDetalleFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerFind(filter?: ParametrosPalletsDetalleFilter1, options?: any): AxiosPromise<Array<ParametrosPalletsDetalleWithRelations>> {
-            return localVarFp.parametrosPalletsDetalleControllerFind(filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ParametrosPalletsDetalleFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerFindById(id: number, filter?: ParametrosPalletsDetalleFilter, options?: any): AxiosPromise<ParametrosPalletsDetalleWithRelations> {
-            return localVarFp.parametrosPalletsDetalleControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ParametrosPalletsDetalle} [parametrosPalletsDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerReplaceById(id: number, parametrosPalletsDetalle?: ParametrosPalletsDetalle, options?: any): AxiosPromise<any> {
-            return localVarFp.parametrosPalletsDetalleControllerReplaceById(id, parametrosPalletsDetalle, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {ParametrosPalletsDetallePartial} [parametrosPalletsDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerUpdateAll(where?: { [key: string]: object; }, parametrosPalletsDetallePartial?: ParametrosPalletsDetallePartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.parametrosPalletsDetalleControllerUpdateAll(where, parametrosPalletsDetallePartial, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ParametrosPalletsDetallePartial} [parametrosPalletsDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        parametrosPalletsDetalleControllerUpdateById(id: number, parametrosPalletsDetallePartial?: ParametrosPalletsDetallePartial, options?: any): AxiosPromise<any> {
-            return localVarFp.parametrosPalletsDetalleControllerUpdateById(id, parametrosPalletsDetallePartial, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ParametrosPalletsDetalleControllerApi - object-oriented interface
- * @export
- * @class ParametrosPalletsDetalleControllerApi
- * @extends {BaseAPI}
- */
-export class ParametrosPalletsDetalleControllerApi extends BaseAPI {
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParametrosPalletsDetalleControllerApi
-     */
-    public parametrosPalletsDetalleControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return ParametrosPalletsDetalleControllerApiFp(this.configuration).parametrosPalletsDetalleControllerCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {NewParametrosPalletsDetalle} [newParametrosPalletsDetalle] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParametrosPalletsDetalleControllerApi
-     */
-    public parametrosPalletsDetalleControllerCreate(newParametrosPalletsDetalle?: NewParametrosPalletsDetalle, options?: AxiosRequestConfig) {
-        return ParametrosPalletsDetalleControllerApiFp(this.configuration).parametrosPalletsDetalleControllerCreate(newParametrosPalletsDetalle, options).then((request) => request(this.axios, this.basePath));
+    public parametroControllerCreate(newParametro?: NewParametro, options?: AxiosRequestConfig) {
+        return ParametroControllerApiFp(this.configuration).parametroControllerCreate(newParametro, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -21874,69 +21220,45 @@ export class ParametrosPalletsDetalleControllerApi extends BaseAPI {
      * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ParametrosPalletsDetalleControllerApi
+     * @memberof ParametroControllerApi
      */
-    public parametrosPalletsDetalleControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return ParametrosPalletsDetalleControllerApiFp(this.configuration).parametrosPalletsDetalleControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    public parametroControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return ParametroControllerApiFp(this.configuration).parametroControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {ParametrosPalletsDetalleFilter1} [filter] 
+     * @param {ParametroFilter1} [filter] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ParametrosPalletsDetalleControllerApi
+     * @memberof ParametroControllerApi
      */
-    public parametrosPalletsDetalleControllerFind(filter?: ParametrosPalletsDetalleFilter1, options?: AxiosRequestConfig) {
-        return ParametrosPalletsDetalleControllerApiFp(this.configuration).parametrosPalletsDetalleControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {ParametrosPalletsDetalleFilter} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParametrosPalletsDetalleControllerApi
-     */
-    public parametrosPalletsDetalleControllerFindById(id: number, filter?: ParametrosPalletsDetalleFilter, options?: AxiosRequestConfig) {
-        return ParametrosPalletsDetalleControllerApiFp(this.configuration).parametrosPalletsDetalleControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    public parametroControllerFind(filter?: ParametroFilter1, options?: AxiosRequestConfig) {
+        return ParametroControllerApiFp(this.configuration).parametroControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
-     * @param {ParametrosPalletsDetalle} [parametrosPalletsDetalle] 
+     * @param {ParametroFilter} [filter] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ParametrosPalletsDetalleControllerApi
+     * @memberof ParametroControllerApi
      */
-    public parametrosPalletsDetalleControllerReplaceById(id: number, parametrosPalletsDetalle?: ParametrosPalletsDetalle, options?: AxiosRequestConfig) {
-        return ParametrosPalletsDetalleControllerApiFp(this.configuration).parametrosPalletsDetalleControllerReplaceById(id, parametrosPalletsDetalle, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {ParametrosPalletsDetallePartial} [parametrosPalletsDetallePartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParametrosPalletsDetalleControllerApi
-     */
-    public parametrosPalletsDetalleControllerUpdateAll(where?: { [key: string]: object; }, parametrosPalletsDetallePartial?: ParametrosPalletsDetallePartial, options?: AxiosRequestConfig) {
-        return ParametrosPalletsDetalleControllerApiFp(this.configuration).parametrosPalletsDetalleControllerUpdateAll(where, parametrosPalletsDetallePartial, options).then((request) => request(this.axios, this.basePath));
+    public parametroControllerFindById(id: number, filter?: ParametroFilter, options?: AxiosRequestConfig) {
+        return ParametroControllerApiFp(this.configuration).parametroControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
-     * @param {ParametrosPalletsDetallePartial} [parametrosPalletsDetallePartial] 
+     * @param {ParametroPartial} [parametroPartial] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ParametrosPalletsDetalleControllerApi
+     * @memberof ParametroControllerApi
      */
-    public parametrosPalletsDetalleControllerUpdateById(id: number, parametrosPalletsDetallePartial?: ParametrosPalletsDetallePartial, options?: AxiosRequestConfig) {
-        return ParametrosPalletsDetalleControllerApiFp(this.configuration).parametrosPalletsDetalleControllerUpdateById(id, parametrosPalletsDetallePartial, options).then((request) => request(this.axios, this.basePath));
+    public parametroControllerUpdateById(id: number, parametroPartial?: ParametroPartial, options?: AxiosRequestConfig) {
+        return ParametroControllerApiFp(this.configuration).parametroControllerUpdateById(id, parametroPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -26467,6 +25789,1377 @@ export class TipoArchivoControllerApi extends BaseAPI {
      */
     public tipoArchivoControllerVistaTipoArchivoEmpresaSeccionCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
         return TipoArchivoControllerApiFp(this.configuration).tipoArchivoControllerVistaTipoArchivoEmpresaSeccionCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TipoCarroceriaControllerApi - axios parameter creator
+ * @export
+ */
+export const TipoCarroceriaControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-carrocerias/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTipoCarroceria} [newTipoCarroceria] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerCreate: async (newTipoCarroceria?: NewTipoCarroceria, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-carrocerias`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTipoCarroceria, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoCarroceriaControllerDeleteById', 'id', id)
+            const localVarPath = `/tipo-carrocerias/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TipoCarroceriaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerFind: async (filter?: TipoCarroceriaFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-carrocerias`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCarroceriaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerFindById: async (id: number, filter?: TipoCarroceriaFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoCarroceriaControllerFindById', 'id', id)
+            const localVarPath = `/tipo-carrocerias/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCarroceriaPartial} [tipoCarroceriaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerUpdateById: async (id: number, tipoCarroceriaPartial?: TipoCarroceriaPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoCarroceriaControllerUpdateById', 'id', id)
+            const localVarPath = `/tipo-carrocerias/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoCarroceriaPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TipoCarroceriaControllerApi - functional programming interface
+ * @export
+ */
+export const TipoCarroceriaControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TipoCarroceriaControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCarroceriaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCarroceriaControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTipoCarroceria} [newTipoCarroceria] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCarroceriaControllerCreate(newTipoCarroceria?: NewTipoCarroceria, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoCarroceria>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCarroceriaControllerCreate(newTipoCarroceria, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCarroceriaControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCarroceriaControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TipoCarroceriaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCarroceriaControllerFind(filter?: TipoCarroceriaFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TipoCarroceriaWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCarroceriaControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCarroceriaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCarroceriaControllerFindById(id: number, filter?: TipoCarroceriaFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoCarroceriaWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCarroceriaControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCarroceriaPartial} [tipoCarroceriaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCarroceriaControllerUpdateById(id: number, tipoCarroceriaPartial?: TipoCarroceriaPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCarroceriaControllerUpdateById(id, tipoCarroceriaPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TipoCarroceriaControllerApi - factory interface
+ * @export
+ */
+export const TipoCarroceriaControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TipoCarroceriaControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoCarroceriaControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTipoCarroceria} [newTipoCarroceria] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerCreate(newTipoCarroceria?: NewTipoCarroceria, options?: any): AxiosPromise<TipoCarroceria> {
+            return localVarFp.tipoCarroceriaControllerCreate(newTipoCarroceria, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoCarroceriaControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TipoCarroceriaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerFind(filter?: TipoCarroceriaFilter1, options?: any): AxiosPromise<Array<TipoCarroceriaWithRelations>> {
+            return localVarFp.tipoCarroceriaControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCarroceriaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerFindById(id: number, filter?: TipoCarroceriaFilter, options?: any): AxiosPromise<TipoCarroceriaWithRelations> {
+            return localVarFp.tipoCarroceriaControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCarroceriaPartial} [tipoCarroceriaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCarroceriaControllerUpdateById(id: number, tipoCarroceriaPartial?: TipoCarroceriaPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoCarroceriaControllerUpdateById(id, tipoCarroceriaPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TipoCarroceriaControllerApi - object-oriented interface
+ * @export
+ * @class TipoCarroceriaControllerApi
+ * @extends {BaseAPI}
+ */
+export class TipoCarroceriaControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCarroceriaControllerApi
+     */
+    public tipoCarroceriaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TipoCarroceriaControllerApiFp(this.configuration).tipoCarroceriaControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTipoCarroceria} [newTipoCarroceria] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCarroceriaControllerApi
+     */
+    public tipoCarroceriaControllerCreate(newTipoCarroceria?: NewTipoCarroceria, options?: AxiosRequestConfig) {
+        return TipoCarroceriaControllerApiFp(this.configuration).tipoCarroceriaControllerCreate(newTipoCarroceria, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCarroceriaControllerApi
+     */
+    public tipoCarroceriaControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TipoCarroceriaControllerApiFp(this.configuration).tipoCarroceriaControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TipoCarroceriaFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCarroceriaControllerApi
+     */
+    public tipoCarroceriaControllerFind(filter?: TipoCarroceriaFilter1, options?: AxiosRequestConfig) {
+        return TipoCarroceriaControllerApiFp(this.configuration).tipoCarroceriaControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoCarroceriaFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCarroceriaControllerApi
+     */
+    public tipoCarroceriaControllerFindById(id: number, filter?: TipoCarroceriaFilter, options?: AxiosRequestConfig) {
+        return TipoCarroceriaControllerApiFp(this.configuration).tipoCarroceriaControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoCarroceriaPartial} [tipoCarroceriaPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCarroceriaControllerApi
+     */
+    public tipoCarroceriaControllerUpdateById(id: number, tipoCarroceriaPartial?: TipoCarroceriaPartial, options?: AxiosRequestConfig) {
+        return TipoCarroceriaControllerApiFp(this.configuration).tipoCarroceriaControllerUpdateById(id, tipoCarroceriaPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TipoSensorControllerApi - axios parameter creator
+ * @export
+ */
+export const TipoSensorControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-sensores/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTipoSensor} [newTipoSensor] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerCreate: async (newTipoSensor?: NewTipoSensor, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-sensores`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTipoSensor, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoSensorControllerDeleteById', 'id', id)
+            const localVarPath = `/tipo-sensores/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TipoSensorFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerFind: async (filter?: TipoSensorFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-sensores`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoSensorFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerFindById: async (id: number, filter?: TipoSensorFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoSensorControllerFindById', 'id', id)
+            const localVarPath = `/tipo-sensores/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoSensorPartial} [tipoSensorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerUpdateById: async (id: number, tipoSensorPartial?: TipoSensorPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoSensorControllerUpdateById', 'id', id)
+            const localVarPath = `/tipo-sensores/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoSensorPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TipoSensorControllerApi - functional programming interface
+ * @export
+ */
+export const TipoSensorControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TipoSensorControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoSensorControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoSensorControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTipoSensor} [newTipoSensor] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoSensorControllerCreate(newTipoSensor?: NewTipoSensor, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoSensor>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoSensorControllerCreate(newTipoSensor, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoSensorControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoSensorControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TipoSensorFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoSensorControllerFind(filter?: TipoSensorFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TipoSensorWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoSensorControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoSensorFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoSensorControllerFindById(id: number, filter?: TipoSensorFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoSensorWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoSensorControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoSensorPartial} [tipoSensorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoSensorControllerUpdateById(id: number, tipoSensorPartial?: TipoSensorPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoSensorControllerUpdateById(id, tipoSensorPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TipoSensorControllerApi - factory interface
+ * @export
+ */
+export const TipoSensorControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TipoSensorControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoSensorControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTipoSensor} [newTipoSensor] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerCreate(newTipoSensor?: NewTipoSensor, options?: any): AxiosPromise<TipoSensor> {
+            return localVarFp.tipoSensorControllerCreate(newTipoSensor, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoSensorControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TipoSensorFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerFind(filter?: TipoSensorFilter1, options?: any): AxiosPromise<Array<TipoSensorWithRelations>> {
+            return localVarFp.tipoSensorControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoSensorFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerFindById(id: number, filter?: TipoSensorFilter, options?: any): AxiosPromise<TipoSensorWithRelations> {
+            return localVarFp.tipoSensorControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoSensorPartial} [tipoSensorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoSensorControllerUpdateById(id: number, tipoSensorPartial?: TipoSensorPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoSensorControllerUpdateById(id, tipoSensorPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TipoSensorControllerApi - object-oriented interface
+ * @export
+ * @class TipoSensorControllerApi
+ * @extends {BaseAPI}
+ */
+export class TipoSensorControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoSensorControllerApi
+     */
+    public tipoSensorControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TipoSensorControllerApiFp(this.configuration).tipoSensorControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTipoSensor} [newTipoSensor] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoSensorControllerApi
+     */
+    public tipoSensorControllerCreate(newTipoSensor?: NewTipoSensor, options?: AxiosRequestConfig) {
+        return TipoSensorControllerApiFp(this.configuration).tipoSensorControllerCreate(newTipoSensor, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoSensorControllerApi
+     */
+    public tipoSensorControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TipoSensorControllerApiFp(this.configuration).tipoSensorControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TipoSensorFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoSensorControllerApi
+     */
+    public tipoSensorControllerFind(filter?: TipoSensorFilter1, options?: AxiosRequestConfig) {
+        return TipoSensorControllerApiFp(this.configuration).tipoSensorControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoSensorFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoSensorControllerApi
+     */
+    public tipoSensorControllerFindById(id: number, filter?: TipoSensorFilter, options?: AxiosRequestConfig) {
+        return TipoSensorControllerApiFp(this.configuration).tipoSensorControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoSensorPartial} [tipoSensorPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoSensorControllerApi
+     */
+    public tipoSensorControllerUpdateById(id: number, tipoSensorPartial?: TipoSensorPartial, options?: AxiosRequestConfig) {
+        return TipoSensorControllerApiFp(this.configuration).tipoSensorControllerUpdateById(id, tipoSensorPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TipoTransporteControllerApi - axios parameter creator
+ * @export
+ */
+export const TipoTransporteControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-transportes/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTipoTransporte} [newTipoTransporte] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerCreate: async (newTipoTransporte?: NewTipoTransporte, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-transportes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTipoTransporte, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoTransporteControllerDeleteById', 'id', id)
+            const localVarPath = `/tipo-transportes/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TipoTransporteFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerFind: async (filter?: TipoTransporteFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-transportes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoTransporteFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerFindById: async (id: number, filter?: TipoTransporteFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoTransporteControllerFindById', 'id', id)
+            const localVarPath = `/tipo-transportes/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoTransportePartial} [tipoTransportePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerUpdateById: async (id: number, tipoTransportePartial?: TipoTransportePartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoTransporteControllerUpdateById', 'id', id)
+            const localVarPath = `/tipo-transportes/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoTransportePartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TipoTransporteControllerApi - functional programming interface
+ * @export
+ */
+export const TipoTransporteControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TipoTransporteControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoTransporteControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoTransporteControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTipoTransporte} [newTipoTransporte] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoTransporteControllerCreate(newTipoTransporte?: NewTipoTransporte, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoTransporte>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoTransporteControllerCreate(newTipoTransporte, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoTransporteControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoTransporteControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TipoTransporteFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoTransporteControllerFind(filter?: TipoTransporteFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TipoTransporteWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoTransporteControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoTransporteFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoTransporteControllerFindById(id: number, filter?: TipoTransporteFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoTransporteWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoTransporteControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoTransportePartial} [tipoTransportePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoTransporteControllerUpdateById(id: number, tipoTransportePartial?: TipoTransportePartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoTransporteControllerUpdateById(id, tipoTransportePartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TipoTransporteControllerApi - factory interface
+ * @export
+ */
+export const TipoTransporteControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TipoTransporteControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoTransporteControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTipoTransporte} [newTipoTransporte] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerCreate(newTipoTransporte?: NewTipoTransporte, options?: any): AxiosPromise<TipoTransporte> {
+            return localVarFp.tipoTransporteControllerCreate(newTipoTransporte, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoTransporteControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TipoTransporteFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerFind(filter?: TipoTransporteFilter1, options?: any): AxiosPromise<Array<TipoTransporteWithRelations>> {
+            return localVarFp.tipoTransporteControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoTransporteFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerFindById(id: number, filter?: TipoTransporteFilter, options?: any): AxiosPromise<TipoTransporteWithRelations> {
+            return localVarFp.tipoTransporteControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoTransportePartial} [tipoTransportePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoTransporteControllerUpdateById(id: number, tipoTransportePartial?: TipoTransportePartial, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoTransporteControllerUpdateById(id, tipoTransportePartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TipoTransporteControllerApi - object-oriented interface
+ * @export
+ * @class TipoTransporteControllerApi
+ * @extends {BaseAPI}
+ */
+export class TipoTransporteControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoTransporteControllerApi
+     */
+    public tipoTransporteControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TipoTransporteControllerApiFp(this.configuration).tipoTransporteControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTipoTransporte} [newTipoTransporte] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoTransporteControllerApi
+     */
+    public tipoTransporteControllerCreate(newTipoTransporte?: NewTipoTransporte, options?: AxiosRequestConfig) {
+        return TipoTransporteControllerApiFp(this.configuration).tipoTransporteControllerCreate(newTipoTransporte, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoTransporteControllerApi
+     */
+    public tipoTransporteControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TipoTransporteControllerApiFp(this.configuration).tipoTransporteControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TipoTransporteFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoTransporteControllerApi
+     */
+    public tipoTransporteControllerFind(filter?: TipoTransporteFilter1, options?: AxiosRequestConfig) {
+        return TipoTransporteControllerApiFp(this.configuration).tipoTransporteControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoTransporteFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoTransporteControllerApi
+     */
+    public tipoTransporteControllerFindById(id: number, filter?: TipoTransporteFilter, options?: AxiosRequestConfig) {
+        return TipoTransporteControllerApiFp(this.configuration).tipoTransporteControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoTransportePartial} [tipoTransportePartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoTransporteControllerApi
+     */
+    public tipoTransporteControllerUpdateById(id: number, tipoTransportePartial?: TipoTransportePartial, options?: AxiosRequestConfig) {
+        return TipoTransporteControllerApiFp(this.configuration).tipoTransporteControllerUpdateById(id, tipoTransportePartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

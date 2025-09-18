@@ -5,7 +5,7 @@ import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { postTipoCarroceria, patchTipoCarroceria } from "@/app/api-endpoints/tipo-carroceria";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosTipoCarroceria from "./EditarDatosTipoCarroceria";
 import { useIntl } from 'react-intl';
 

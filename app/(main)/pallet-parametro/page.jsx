@@ -7,9 +7,10 @@ import { useIntl } from 'react-intl'
 const PalletParametro = () => {
     const intl = useIntl();
     const columnas = [
-        { campo: 'palletId', header: intl.formatMessage({ id: 'ID Pallet' }), tipo: 'number' },
-        { campo: 'parametroId', header: intl.formatMessage({ id: 'ID Parámetro' }), tipo: 'number' },
+        { campo: 'pallet', header: intl.formatMessage({ id: 'Pallet' }), tipo: 'string' },
+        { campo: 'parametro', header: intl.formatMessage({ id: 'Parámetro' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
+        { campo: 'textoLibre', header: intl.formatMessage({ id: 'Valor Libre' }), tipo: 'string' },
     ]
 
     return (

@@ -28,7 +28,7 @@ import es from 'react-phone-input-2/lang/es.json'
 import { useRouter } from 'next/navigation';
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
-    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos }) => {
+    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = false }) => {
     const intl = useIntl()
     const router = useRouter();
     //Crea el registro vacio con solo id para luego crear el resto de campos vacios dinamicamente
@@ -288,14 +288,20 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             const urlEncriptado = `${urlQR.normal}${btoa(urlQR.encriptado)}`;
             setUrlQREncriptado(urlEncriptado);
         }
+        //
+        //Con esta variable controlamos si queremos cargar los datos al montar el crud
+        //
+        let hayFiltrosActivos = false;
+        
         //Cada vez que se modifica lazyParams o registroResult, se obtienen los datos
-        //Solo se obtienen datos si hay algun filtro de busqueda
+        //Solo se obtienen datos si hay algun filtro de busqueda O si cargarDatosInicialmente es true
         for (const campo in parametrosCrud.filters) {
             if (parametrosCrud.filters[campo]) {
                 //Como el objeto filters es distinto para booleanos, tenemos que hacer una comprobación para aplicar bien los cambios
                 //Comprueba si es un filtro booleano
                 if (parametrosCrud.filters[campo].value) {
                     setBusquedaRealizada(true);
+                    hayFiltrosActivos = true;
                     obtenerDatos();
                     break;
                 }
@@ -303,18 +309,23 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                     //Si el filtro no es booleano
                     if (parametrosCrud.filters[campo].constraints[0].value !== null) {
                         setBusquedaRealizada(true);
+                        hayFiltrosActivos = true;
                         obtenerDatos();
                         break;
                     }
                 }
             }
-            else {
-                setBusquedaRealizada(false);
-            }
-
+        }
+        //
+        // Si no hay filtros activos pero se debe cargar inicialmente
+        //
+        if (!hayFiltrosActivos && cargarDatosInicialmente) {
+            setBusquedaRealizada(true);
+            obtenerDatos();
+        } else if (!hayFiltrosActivos && !cargarDatosInicialmente) {
+            setBusquedaRealizada(false);
         }
 
-        //obtenerDatos();
         //En caso de que haya que mostrar el resultado de una edicion de la bbdd se muestra
         if (registroResult === "editado") {
             toast.current?.show({
@@ -336,7 +347,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             obtenerDatos();
         }
         setRegistroResult("");
-    }, [registroResult, parametrosCrud]);
+    }, [registroResult, parametrosCrud, cargarDatosInicialmente]);
 
     const obtenerDatosForaneos = async () => {
         if (getRegistrosForaneos) {

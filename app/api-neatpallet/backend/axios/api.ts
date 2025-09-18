@@ -5685,6 +5685,12 @@ export interface NewParametro {
      * @memberof NewParametro
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewParametro
+     */
+    'activoSn'?: string;
 }
 /**
  * (tsType: Omit<Permiso, \'id\'>, schemaOptions: { title: \'NewPermiso\', exclude: [ \'id\' ] })
@@ -7455,6 +7461,12 @@ export interface Parametro {
      * @memberof Parametro
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Parametro
+     */
+    'activoSn'?: string;
 }
 /**
  * 
@@ -7624,6 +7636,12 @@ export interface ParametroPartial {
      * @memberof ParametroPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParametroPartial
+     */
+    'activoSn'?: string;
 }
 /**
  * 
@@ -7722,6 +7740,12 @@ export interface ParametroWithRelations {
      * @memberof ParametroWithRelations
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParametroWithRelations
+     */
+    'activoSn'?: string;
     /**
      * 
      * @type {Array<PalletParametroWithRelations>}

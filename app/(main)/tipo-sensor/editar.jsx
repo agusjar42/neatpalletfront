@@ -5,7 +5,7 @@ import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { postTipoSensor, patchTipoSensor } from "@/app/api-endpoints/tipo-sensor";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosTipoSensor from "./EditarDatosTipoSensor";
 import { useIntl } from 'react-intl';
 

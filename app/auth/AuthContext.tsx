@@ -112,7 +112,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "icon": "pi pi-users"
         },
       },
-      "Palets": {
+      "Gestión del Pallet": {
+          "Pallet Parametro": {
+              "path": "/pallet-parametro",
+              "icon": "pi pi-sliders-h"
+          },
+          "Pallet": {
+              "path": "/pallet",
+              "icon": "pi pi-th-large"
+          },
+          "Parametro": {
+              "path": "/parametro",
+              "icon": "pi pi-wrench"
+          },
+      },
+      "Arreglar": {
           "Envio Contenido": {
               "path": "/envio-contenido",
               "icon": "pi pi-refresh"
@@ -145,18 +159,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               "path": "/envio",
               "icon": "pi pi-send"
           },
-          "Pallet Parametro": {
-              "path": "/pallet-parametro",
-              "icon": "pi pi-sliders-h"
-          },
-          "Pallet": {
-              "path": "/pallet",
-              "icon": "pi pi-th-large"
-          },
-          "Parametro": {
-              "path": "/parametro",
-              "icon": "pi pi-wrench"
-          },
+
           "Tipo Carroceria": {
               "path": "/tipo-carroceria",
               "icon": "pi pi-car"

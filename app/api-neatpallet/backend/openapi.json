@@ -12047,6 +12047,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -12075,6 +12078,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -12255,6 +12261,9 @@
             "type": "string",
             "format": "date-time"
           },
+          "activoSn": {
+            "type": "string"
+          },
           "palletParametros": {
             "type": "array",
             "items": {
@@ -12292,6 +12301,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -19101,6 +19113,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -19116,7 +19131,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "activoSn"
                   ],
                   "example": "id"
                 },
@@ -19203,6 +19219,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -19218,7 +19237,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "activoSn"
                   ],
                   "example": "id"
                 },

@@ -8,6 +8,7 @@ const Parametro = () => {
     const intl = useIntl();
     const columnas = [
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
         { campo: 'valorDisponible', header: intl.formatMessage({ id: 'Valores disponibles' }), tipo: 'string' },
     ]
 

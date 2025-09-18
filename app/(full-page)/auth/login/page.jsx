@@ -9,17 +9,9 @@ import { Password } from "primereact/password";
 import Link from "next/link"; // Importa Link para la navegación
 import { useAuth } from "@/app/auth/AuthContext";
 import jwt from "@/app/auth/jwt/useJwt";
-import { postLogUsuario } from "@/app/api-endpoints/log_usuario";
-import { getIdioma } from "@/app/api-endpoints/idioma";
 import { useRouter } from 'next/navigation';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
-import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
-import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
-import { obtenerTodosLosPermisos } from "@/app/components/shared/componentes";
 const Login = () => {
-    const router = useRouter();
-    const config = jwt.jwtConfig;
     //const apiUsuarios = new UsuariosControllerApi(settings)
     const [rememberMe, setRememberMe] = useState(false);
     const { layoutConfig } = useContext(LayoutContext);

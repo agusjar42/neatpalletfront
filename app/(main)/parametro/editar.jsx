@@ -5,7 +5,7 @@ import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { postParametro, patchParametro } from "@/app/api-endpoints/parametro";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosParametro from "./EditarDatosParametro";
 import { useIntl } from 'react-intl';
 

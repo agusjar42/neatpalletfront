@@ -3,14 +3,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { postPalletParametro, patchPalletParametro } from "@/app/api-endpoints/pallet-parametro";
-import { getPallet } from "@/app/api-endpoints/pallet";
+import { getPallet, getPalletById } from "@/app/api-endpoints/pallet";
 import { getParametro } from "@/app/api-endpoints/parametro";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosPalletParametro from "./EditarDatosPalletParametro";
 import { useIntl } from 'react-intl';
 
-const EditarPalletParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarPalletParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, palletId }) => {
     const toast = useRef(null);
     const [palletParametro, setPalletParametro] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -21,9 +21,18 @@ const EditarPalletParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
 
     useEffect(() => {
         const fetchData = async () => {
-            // Cargar pallets y parámetros disponibles
-            const dataPallets = await getPallet(JSON.stringify({where: {empresaId: getUsuarioSesion()?.empresaId}}));
-            const dataParametros = await getParametro('{}');
+            //
+            //Si existe palletId significa que estamos dentro de un pallet y solo traemos ese
+            //
+            let dataPallets = [];
+            if (palletId) {
+                dataPallets[0] = await getPalletById(palletId);
+            } else {
+                dataPallets = await getPallet(JSON.stringify({
+                    where: { empresaId: getUsuarioSesion()?.empresaId }
+                }));
+            }
+            let dataParametros = await getParametro('{}');
             setPallets(dataPallets || []);
             setParametros(dataParametros || []);
 
@@ -47,6 +56,12 @@ const EditarPalletParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
         if (await validaciones()) {
             let objGuardar = { ...palletParametro };
             const usuarioActual = getUsuarioSesion()?.id;
+            //
+            //Borramos las columnas de la vista que no pertenecen a la tabla PalletParametro sino a su padre Pallet
+            //
+            delete objGuardar['pallet'];
+            delete objGuardar['parametro'];
+            delete objGuardar['idPadre'];
 
             if (idEditar === 0) {
                 delete objGuardar.id;
@@ -104,6 +119,10 @@ const EditarPalletParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                             estadoGuardando={estadoGuardando}
                             pallets={pallets}
                             parametros={parametros}
+                            {//
+                             //Si viene palletId es que estamos dentro de un pallet y se lo pasamos para que lo precargue y lo oculte
+                             //
+                             ...(palletId ? { palletId } : {})}
                         />
 
                         <div className="flex justify-content-end mt-2">

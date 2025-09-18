@@ -4,9 +4,12 @@ import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { postPallet, patchPallet } from "@/app/api-endpoints/pallet";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosPallet from "./EditarDatosPallet";
 import { useIntl } from 'react-intl';
+import EditarPalletParametros from "../pallet-parametro/editar";
+import Crud from "../../components/shared/crud";
+import { getPalletParametro, getPalletParametroCount, deletePalletParametro } from "@/app/api-endpoints/pallet-parametro";
 
 const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const toast = useRef(null);
@@ -82,6 +85,14 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
     };
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
+    //
+    //Muestra la tabla de parámetros solo si el pallet ya está creado
+    //
+    const columnas = [
+        { campo: 'parametro', header: intl.formatMessage({ id: 'Parámetro' }), tipo: 'string' },
+        { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
+        { campo: 'textoLibre', header: intl.formatMessage({ id: 'Valor Libre' }), tipo: 'string' },
+    ]
 
     return (
         <div>
@@ -95,7 +106,27 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                             setPallet={setPallet}
                             estadoGuardando={estadoGuardando}
                         />
-
+                        {//
+                        //Si el pallet ya está creado, mostramos la tabla de parámetros. Ojo en el parámetro editarComponenteParametrosExtra le pasamos el palletId para que al crear un nuevo parámetro ya venga relleno
+                        //
+                        pallet.id && <div>
+                            <Crud
+                                headerCrud={intl.formatMessage({ id: 'Parámetros' })}
+                                getRegistros={getPalletParametro}
+                                getRegistrosCount={getPalletParametroCount}
+                                botones={['nuevo','ver', 'editar', 'eliminar']}
+                                controlador={"Pallet Parametro"}
+                                editarComponente={<EditarPalletParametros />}
+                                columnas={columnas}
+                                filtradoBase={{palletId: pallet.id}}
+                                deleteRegistro={deletePalletParametro}
+                                cargarDatosInicialmente={true}
+                                editarComponenteParametrosExtra={{
+                                    palletId: pallet.id
+                                }}
+                            />
+                        </div>
+                        }
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button

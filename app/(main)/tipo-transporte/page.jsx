@@ -8,6 +8,7 @@ const TipoTransporte = () => {
     const intl = useIntl();
     const columnas = [
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ]
 
     return (

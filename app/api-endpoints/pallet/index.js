@@ -7,6 +7,11 @@ export const getPallet = async (filtro) => {
     return dataPallets
 }
 
+export const getPalletById = async (id) => {
+    const { data: dataPallet } = await apiPallet.palletControllerFindById(id)
+    return dataPallet
+}
+
 export const postPallet = async (objPallet) => {
     const { data: dataPallet } = await apiPallet.palletControllerCreate(objPallet)
     return dataPallet

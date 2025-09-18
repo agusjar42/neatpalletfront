@@ -4,7 +4,7 @@ import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { postTipoTransporte, patchTipoTransporte } from "@/app/api-endpoints/tipo-transporte";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosTipoTransporte from "./EditarDatosTipoTransporte";
 import { useIntl } from 'react-intl';
 

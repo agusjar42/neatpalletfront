@@ -6,7 +6,7 @@ import { postEnvioPallet, patchEnvioPallet } from "@/app/api-endpoints/envio-pal
 import { getEnvio } from "@/app/api-endpoints/envio";
 import { getPallet } from "@/app/api-endpoints/pallet";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioPallet from "./EditarDatosEnvioPallet";
 import { useIntl } from 'react-intl';
 
@@ -47,6 +47,12 @@ const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
         if (await validaciones()) {
             let objGuardar = { ...envioPallet };
             const usuarioActual = getUsuarioSesion()?.id;
+            //
+            //Borramos las columnas de la vista que no pertenecen a la tabla EnvioPallet sino a su padre Envio
+            //
+            delete objGuardar['aliasPallet'];
+            delete objGuardar['codigoPallet'];
+            delete objGuardar['origenRuta'];
 
             if (idEditar === 0) {
                 delete objGuardar.id;

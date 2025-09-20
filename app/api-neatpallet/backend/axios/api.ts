@@ -1548,6 +1548,42 @@ export interface EnvioContenido {
     'fotoPallet'?: string;
     /**
      * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'fotoProductoBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'fotoProductoNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'fotoProductoTipo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'fotoPalletBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'fotoPalletNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenido
+     */
+    'fotoPalletTipo'?: string;
+    /**
+     * 
      * @type {number}
      * @memberof EnvioContenido
      */
@@ -1753,6 +1789,42 @@ export interface EnvioContenidoPartial {
     'fotoPallet'?: string;
     /**
      * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'fotoProductoBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'fotoProductoNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'fotoProductoTipo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'fotoPalletBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'fotoPalletNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPartial
+     */
+    'fotoPalletTipo'?: string;
+    /**
+     * 
      * @type {number}
      * @memberof EnvioContenidoPartial
      */
@@ -1885,6 +1957,42 @@ export interface EnvioContenidoWithRelations {
      * @memberof EnvioContenidoWithRelations
      */
     'fotoPallet'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'fotoProductoBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'fotoProductoNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'fotoProductoTipo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'fotoPalletBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'fotoPalletNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'fotoPalletTipo'?: string;
     /**
      * 
      * @type {number}
@@ -2092,6 +2200,24 @@ export interface EnvioMovimiento {
     'valor'?: string;
     /**
      * 
+     * @type {string}
+     * @memberof EnvioMovimiento
+     */
+    'imagenBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimiento
+     */
+    'imagenNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimiento
+     */
+    'imagenTipo'?: string;
+    /**
+     * 
      * @type {number}
      * @memberof EnvioMovimiento
      */
@@ -2286,6 +2412,24 @@ export interface EnvioMovimientoPartial {
     'valor'?: string;
     /**
      * 
+     * @type {string}
+     * @memberof EnvioMovimientoPartial
+     */
+    'imagenBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoPartial
+     */
+    'imagenNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoPartial
+     */
+    'imagenTipo'?: string;
+    /**
+     * 
      * @type {number}
      * @memberof EnvioMovimientoPartial
      */
@@ -2406,6 +2550,24 @@ export interface EnvioMovimientoWithRelations {
      * @memberof EnvioMovimientoWithRelations
      */
     'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'imagenBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'imagenNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'imagenTipo'?: string;
     /**
      * 
      * @type {number}
@@ -5070,6 +5232,42 @@ export interface NewEnvioContenido {
     'fotoPallet'?: string;
     /**
      * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'fotoProductoBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'fotoProductoNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'fotoProductoTipo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'fotoPalletBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'fotoPalletNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenido
+     */
+    'fotoPalletTipo'?: string;
+    /**
+     * 
      * @type {number}
      * @memberof NewEnvioContenido
      */
@@ -5135,6 +5333,24 @@ export interface NewEnvioMovimiento {
      * @memberof NewEnvioMovimiento
      */
     'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioMovimiento
+     */
+    'imagenBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioMovimiento
+     */
+    'imagenNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioMovimiento
+     */
+    'imagenTipo'?: string;
     /**
      * 
      * @type {number}
@@ -6064,6 +6280,12 @@ export interface NewTipoCarroceria {
      * @memberof NewTipoCarroceria
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoCarroceria
+     */
+    'activoSn'?: string;
 }
 /**
  * (tsType: Omit<TipoSensor, \'id\'>, schemaOptions: { title: \'NewTipoSensor\', exclude: [ \'id\' ] })
@@ -6150,6 +6372,12 @@ export interface NewTipoTransporte {
      * @memberof NewTipoTransporte
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoTransporte
+     */
+    'activoSn'?: string;
 }
 /**
  * (tsType: Omit<Traduccion, \'id\'>, schemaOptions: { title: \'NewTraduccion\', exclude: [ \'id\' ] })
@@ -9422,6 +9650,12 @@ export interface TipoCarroceria {
      * @memberof TipoCarroceria
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceria
+     */
+    'activoSn'?: string;
 }
 /**
  * 
@@ -9545,6 +9779,12 @@ export interface TipoCarroceriaPartial {
      * @memberof TipoCarroceriaPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceriaPartial
+     */
+    'activoSn'?: string;
 }
 /**
  * (tsType: TipoCarroceriaWithRelations, schemaOptions: { includeRelations: true })
@@ -9588,6 +9828,12 @@ export interface TipoCarroceriaWithRelations {
      * @memberof TipoCarroceriaWithRelations
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceriaWithRelations
+     */
+    'activoSn'?: string;
 }
 /**
  * 
@@ -9991,6 +10237,12 @@ export interface TipoTransporte {
      * @memberof TipoTransporte
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransporte
+     */
+    'activoSn'?: string;
 }
 /**
  * 
@@ -10114,6 +10366,12 @@ export interface TipoTransportePartial {
      * @memberof TipoTransportePartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransportePartial
+     */
+    'activoSn'?: string;
 }
 /**
  * (tsType: TipoTransporteWithRelations, schemaOptions: { includeRelations: true })
@@ -10157,6 +10415,12 @@ export interface TipoTransporteWithRelations {
      * @memberof TipoTransporteWithRelations
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransporteWithRelations
+     */
+    'activoSn'?: string;
 }
 /**
  * 

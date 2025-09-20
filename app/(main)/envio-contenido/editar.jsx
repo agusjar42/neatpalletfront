@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import { postEnvioContenido, patchEnvioContenido } from "@/app/api-endpoints/envio-contenido";
 import { getEnvio } from "@/app/api-endpoints/envio";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioContenido from "./EditarDatosEnvioContenido";
 import { useIntl } from 'react-intl';
 
@@ -33,19 +33,30 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
 
     const validaciones = async () => {
         const validaEnvioId = envioContenido.envioId === undefined || envioContenido.envioId === "";
-        return (!validaEnvioId)
+        
+        // Convertimos a número los campos numéricos para evitar problemas
+        envioContenido.pesoKgs = Number(envioContenido.pesoKgs) || 0;
+        envioContenido.pesoTotal = Number(envioContenido.pesoTotal) || 0;
+        
+        // Borramos las columnas de la vista que no pertenecen a la tabla EnvioContenido
+        delete envioContenido.origenRuta;
+        
+        // NO borramos los campos Base64 aquí, se procesan en el backend
+        
+        return (!validaEnvioId);
     }
 
     const guardarEnvioContenido = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
+        
         if (await validaciones()) {
             let objGuardar = { ...envioContenido };
             const usuarioActual = getUsuarioSesion()?.id;
 
             if (idEditar === 0) {
-                objGuardar['usuarioCreacion'] = usuarioActual;
-                
+                delete objGuardar['id'];
+                objGuardar['usuarioCreacion'] = usuarioActual;                
                 const nuevoRegistro = await postEnvioContenido(objGuardar);
 
                 if (nuevoRegistro?.id) {
@@ -62,13 +73,24 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
                 delete objGuardar['fechaModificacion'];
+                //
+                // Si no se ha cambiado la foto del producto, no enviamos el campo
+                //
+                if (objGuardar.fotoProductoBase64 === undefined) {
+                    delete objGuardar['fotoProducto'];
+                }
+                //
+                // Si no se ha cambiado la foto del pallet, no enviamos el campo
+                //
+                if (objGuardar.fotoPalletBase64 === undefined) {
+                    delete objGuardar['fotoPallet'];
+                }
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchEnvioContenido(objGuardar.id, objGuardar);
-                setIdEditar(null)
+                setIdEditar(null);
                 setRegistroResult("editado");
             }
-        }
-        else {
+        } else {
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',

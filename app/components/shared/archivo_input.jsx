@@ -30,7 +30,7 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
                         mostrarImagen(archivoUrl);
                     }
                     else {
-                        mostrarImagen(`${(devuelveBasePath())}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`);
+                        mostrarImagen(`${(devuelveBasePath())}/multimedia/sistemaNP/imagen-no-disponible.jpeg`);
                     }
 
                 }
@@ -74,7 +74,7 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
                 );
                 setInputArchivo(_inputArchivo);
 
-                mostrarImagen(`${devuelveBasePath()}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`);
+                mostrarImagen(`${devuelveBasePath()}/multimedia/sistemaNP/imagen-no-disponible.jpeg`);
             } else {
                 const _inputArchivo = (
                     <input onChange={cambioArchivoHandler} type='file' style={{ display: 'none' }} />

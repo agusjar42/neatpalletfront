@@ -8,7 +8,7 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
     const intl = useIntl();
 
     const opcionesEnvio = envios.map(envio => ({
-        label: `${envio.id} - ${envio.descripcion || 'Sin descripción'}`,
+        label: `${envio.id} - ${envio.origenRuta || 'Sin ruta'}`,
         value: envio.id
     }));
 
@@ -26,10 +26,12 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="fecha">{intl.formatMessage({ id: 'Fecha' })}</label>
-                    <InputText value={envioParada.fecha}
+                    <InputText type="date"
+                    value={envioParada.fecha}
                         placeholder={intl.formatMessage({ id: 'Fecha de la parada' })}
                         onChange={(e) => setEnvioParada({ ...envioParada, fecha: e.target.value })}
-                        maxLength={20} />
+                        maxLength={20}
+                        style={{ textAlign: 'right' }} />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="lugarParada">{intl.formatMessage({ id: 'Lugar de parada' })}</label>
@@ -64,13 +66,14 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                     <InputText value={envioParada.telefonoOperario}
                         placeholder={intl.formatMessage({ id: 'Teléfono del operario' })}
                         onChange={(e) => setEnvioParada({ ...envioParada, telefonoOperario: e.target.value })}
-                        maxLength={20} />
+                        maxLength={20}
+                        style={{ textAlign: 'right' }} />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="emeilOperario">{intl.formatMessage({ id: 'Email del operario' })}</label>
-                    <InputText value={envioParada.emeilOperario}
+                    <label htmlFor="emailOperario">{intl.formatMessage({ id: 'Email del operario' })}</label>
+                    <InputText value={envioParada.emailOperario}
                         placeholder={intl.formatMessage({ id: 'Email del operario' })}
-                        onChange={(e) => setEnvioParada({ ...envioParada, emeilOperario: e.target.value })}
+                        onChange={(e) => setEnvioParada({ ...envioParada, emailOperario: e.target.value })}
                         maxLength={100} />
                 </div>
             </div>

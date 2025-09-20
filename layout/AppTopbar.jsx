@@ -53,7 +53,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
             setAvatar(`${devuelveBasePath()}${avatar}`);
         }
         else{
-            setAvatar(`${devuelveBasePath()}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`);
+            setAvatar(`${devuelveBasePath()}/multimedia/sistemaNP/imagen-no-disponible.jpeg`);
         }
 
     }

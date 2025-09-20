@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import { postEnvioConfiguracion, patchEnvioConfiguracion } from "@/app/api-endpoints/envio-configuracion";
 import { getEnvio } from "@/app/api-endpoints/envio";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioConfiguracion from "./EditarDatosEnvioConfiguracion";
 import { useIntl } from 'react-intl';
 
@@ -43,7 +43,11 @@ const EditarEnvioConfiguracion = ({ idEditar, setIdEditar, rowData, emptyRegistr
         if (await validaciones()) {
             let objGuardar = { ...envioConfiguracion };
             const usuarioActual = getUsuarioSesion()?.id;
-
+            //
+            //Borramos las columnas de la vista que no pertenecen a la tabla EnvioConfiguracion sino a su padre Envio
+            //
+            delete objGuardar['origenRuta'];
+            
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;

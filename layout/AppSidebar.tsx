@@ -22,7 +22,7 @@ const AppSidebar = () => {
                 {logoEmpresaUrl && (
                     <Link href="/" className="app-logo">
                         <img
-                            src={(logoEmpresaUrl !== 'null') ? `${devuelveBasePath()}${logoEmpresaUrl}` : `${devuelveBasePath()}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`}
+                            src={(logoEmpresaUrl !== 'null') ? `${devuelveBasePath()}${logoEmpresaUrl}` : `${devuelveBasePath()}/multimedia/sistemaNP/imagen-no-disponible.jpeg`}
                             alt="Logo"
                             className="app-logo-normal"
                             style={{ width: "200px", height: "80px" }}

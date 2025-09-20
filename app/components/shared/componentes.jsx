@@ -74,7 +74,7 @@ export async function obtenerArchivosSeccion(registro, seccion) {
                 if (tipoArchivo.multiple !== 'S') {
                     //Guarda el archivo redimensionado en el registro
                     let url = archivos[0].url;
-                    if (url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+                    if (url !== '/multimedia/sistemaNP/imagen-no-disponible.jpeg') {
                         if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
                             url = archivos[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
                         }
@@ -93,7 +93,7 @@ export async function obtenerArchivosSeccion(registro, seccion) {
                     const archivosArray = []
                     for (const archivo of archivos) {
                         let url = archivo.url;
-                        if (esUrlImagen(url) && url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+                        if (esUrlImagen(url) && url !== '/multimedia/sistemaNP/imagen-no-disponible.jpeg') {
                             url = archivo.url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
                         }
                         archivosArray.push({ url: url, id: archivo.id });
@@ -130,8 +130,8 @@ const comprobarImagen = (campo, cabecera) => (rowData) => {
     }
     return (
         <>
-            <a href={`${devuelveBasePath()}${rowData[campo] || "/multimedia/sistemaNLE/imagen-no-disponible.jpeg"}`} target="_blank">
-                <img src={`${devuelveBasePath()}${rowData[campo] || "/multimedia/sistemaNLE/imagen-no-disponible.jpeg"}`} alt="Imagen" style={{ width: '100px', height: 'auto' }} />
+            <a href={`${devuelveBasePath()}${rowData[campo] || "/multimedia/sistemaNP/imagen-no-disponible.jpeg"}`} target="_blank">
+                <img src={`${devuelveBasePath()}${rowData[campo] || "/multimedia/sistemaNP/imagen-no-disponible.jpeg"}`} alt="Imagen" style={{ width: '100px', height: 'auto' }} />
             </a>
             <span className="p-column-title">{cabecera}</span>
         </>

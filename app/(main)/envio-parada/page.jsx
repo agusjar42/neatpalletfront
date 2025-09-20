@@ -7,8 +7,8 @@ import { useIntl } from 'react-intl'
 const EnvioParada = () => {
     const intl = useIntl();
     const columnas = [
-        { campo: 'envioId', header: intl.formatMessage({ id: 'ID Envío' }), tipo: 'number' },
-        { campo: 'fecha', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'string' },
+        { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen Ruta' }), tipo: 'string' },
+        { campo: 'fechaEspanol', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'string' },
         { campo: 'lugarParada', header: intl.formatMessage({ id: 'Lugar' }), tipo: 'string' },
         { campo: 'nombreOperario', header: intl.formatMessage({ id: 'Operario' }), tipo: 'string' },
         { campo: 'telefonoOperario', header: intl.formatMessage({ id: 'Teléfono' }), tipo: 'string' },
@@ -21,7 +21,7 @@ const EnvioParada = () => {
                 getRegistros={getEnvioParada}
                 getRegistrosCount={getEnvioParadaCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"EnvioParada"}
+                controlador={"Envio Parada"}
                 editarComponente={<EditarEnvioParadas />}
                 columnas={columnas}
                 deleteRegistro={deleteEnvioParada}

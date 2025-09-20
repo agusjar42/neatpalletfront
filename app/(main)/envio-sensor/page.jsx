@@ -7,8 +7,8 @@ import { useIntl } from 'react-intl'
 const EnvioSensor = () => {
     const intl = useIntl();
     const columnas = [
-        { campo: 'envioId', header: intl.formatMessage({ id: 'ID Envío' }), tipo: 'number' },
-        { campo: 'tipoSensorId', header: intl.formatMessage({ id: 'ID Tipo Sensor' }), tipo: 'number' },
+        { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen Ruta' }), tipo: 'string' },
+        { campo: 'nombreSensor', header: intl.formatMessage({ id: 'Nombre Sensor' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
     ]
 
@@ -19,7 +19,7 @@ const EnvioSensor = () => {
                 getRegistros={getEnvioSensor}
                 getRegistrosCount={getEnvioSensorCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"EnvioSensor"}
+                controlador={"Envio Sensor"}
                 editarComponente={<EditarEnvioSensors />}
                 columnas={columnas}
                 deleteRegistro={deleteEnvioSensor}

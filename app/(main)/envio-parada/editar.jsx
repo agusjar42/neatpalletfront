@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import { postEnvioParada, patchEnvioParada } from "@/app/api-endpoints/envio-parada";
 import { getEnvio } from "@/app/api-endpoints/envio";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioParada from "./EditarDatosEnvioParada";
 import { useIntl } from 'react-intl';
 
@@ -32,8 +32,17 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
+        const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const validaEnvioId = envioParada.envioId === undefined || envioParada.envioId === "";
-        return (!validaEnvioId)
+        if ((envioParada.emailOperario?.length == undefined) || (envioParada.emailOperario.length > 0 && !regexEmail.test(envioParada.emailOperario))) {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'El email debe de tener el formato correcto' }),
+                life: 3000,
+            });
+        }
+        return (!validaEnvioId && !(envioParada.emailOperario.length > 0 && !regexEmail.test(envioParada.emailOperario)));
     }
 
     const guardarEnvioParada = async () => {
@@ -42,6 +51,11 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
         if (await validaciones()) {
             let objGuardar = { ...envioParada };
             const usuarioActual = getUsuarioSesion()?.id;
+            //
+            //Borramos las columnas de la vista que no pertenecen a la tabla EnvioParada sino a su padre Envio
+            //
+            delete objGuardar['origenRuta'];
+            delete objGuardar['fechaEspanol'];
 
             if (idEditar === 0) {
                 delete objGuardar.id;

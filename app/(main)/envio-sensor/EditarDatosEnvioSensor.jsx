@@ -8,14 +8,21 @@ const EditarDatosEnvioSensor = ({ envioSensor, setEnvioSensor, estadoGuardando, 
     const intl = useIntl();
 
     const opcionesEnvio = envios.map(envio => ({
-        label: `${envio.id} - ${envio.descripcion || 'Sin descripción'}`,
+        label: `${envio.id} - ${envio.origenRuta || 'Sin ruta'}`,
         value: envio.id
     }));
-
-    const opcionesTipoSensor = tiposSensor.map(tipo => ({
-        label: tipo.nombre,
-        value: tipo.id
-    }));
+    //
+    //De los Tipos de Sensor solo mostramos los activos y el que esté seleccionado (para poder editar un registro inactivo)
+    //
+    const opcionesTipoSensor = tiposSensor
+        .filter(tipo =>
+            tipo.activoSn === "S" ||
+            tipo.id === tiposSensor.tipoSensorId
+        )
+        .map(tipo => ({
+            label: tipo.nombre,
+            value: tipo.id
+        }));
 
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el sensor de envío' })}>

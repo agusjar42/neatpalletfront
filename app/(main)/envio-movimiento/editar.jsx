@@ -6,7 +6,7 @@ import { postEnvioMovimiento, patchEnvioMovimiento } from "@/app/api-endpoints/e
 import { getEnvio } from "@/app/api-endpoints/envio";
 import { getTipoSensor } from "@/app/api-endpoints/tipo-sensor";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioMovimiento from "./EditarDatosEnvioMovimiento";
 import { useIntl } from 'react-intl';
 
@@ -47,6 +47,12 @@ const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
         if (await validaciones()) {
             let objGuardar = { ...envioMovimiento };
             const usuarioActual = getUsuarioSesion()?.id;
+            //
+            //Borramos las columnas de la vista que no pertenecen a la tabla EnvioMovimiento sino a su padre Envio
+            //
+            delete objGuardar['origenRuta'];
+            delete objGuardar['nombreSensor'];
+            delete objGuardar['fechaEspanol'];
 
             if (idEditar === 0) {
                 delete objGuardar.id;
@@ -68,6 +74,12 @@ const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
                 delete objGuardar['fechaModificacion'];
+                //
+                // Si no se ha cambiado la foto del pallet, no enviamos el campo
+                //
+                if (objGuardar.fotoPalletBase64 === undefined) {
+                    delete objGuardar['fotoPallet'];
+                }
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchEnvioMovimiento(objGuardar.id, objGuardar);
                 setIdEditar(null)

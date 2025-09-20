@@ -10280,6 +10280,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -10305,6 +10308,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -10334,6 +10340,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -10363,6 +10372,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -10617,6 +10629,18 @@
           "valor": {
             "type": "string"
           },
+          "imagenBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "imagenNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "imagenTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
           "usuarioCreacion": {
             "type": "number"
           },
@@ -10751,6 +10775,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -10776,6 +10803,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -10805,6 +10835,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -10834,6 +10867,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -13631,6 +13667,18 @@
           "valor": {
             "type": "string"
           },
+          "imagenBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "imagenNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "imagenTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
           "usuarioCreacion": {
             "type": "number"
           },
@@ -13670,6 +13718,18 @@
           },
           "valor": {
             "type": "string"
+          },
+          "imagenBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "imagenNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "imagenTipo": {
+            "type": "string",
+            "maxLength": 50
           },
           "usuarioCreacion": {
             "type": "number"
@@ -13714,6 +13774,18 @@
           },
           "valor": {
             "type": "string"
+          },
+          "imagenBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "imagenNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "imagenTipo": {
+            "type": "string",
+            "maxLength": 50
           },
           "usuarioCreacion": {
             "type": "number"
@@ -13764,6 +13836,30 @@
           "fotoPallet": {
             "type": "string"
           },
+          "fotoProductoBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "fotoProductoNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "fotoProductoTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "fotoPalletBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "fotoPalletNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "fotoPalletTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
           "usuarioCreacion": {
             "type": "number"
           },
@@ -13809,6 +13905,30 @@
           },
           "fotoPallet": {
             "type": "string"
+          },
+          "fotoProductoBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "fotoProductoNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "fotoProductoTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "fotoPalletBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "fotoPalletNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "fotoPalletTipo": {
+            "type": "string",
+            "maxLength": 50
           },
           "usuarioCreacion": {
             "type": "number"
@@ -13859,6 +13979,30 @@
           },
           "fotoPallet": {
             "type": "string"
+          },
+          "fotoProductoBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "fotoProductoNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "fotoProductoTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "fotoPalletBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "fotoPalletNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "fotoPalletTipo": {
+            "type": "string",
+            "maxLength": 50
           },
           "usuarioCreacion": {
             "type": "number"
@@ -13913,6 +14057,30 @@
           },
           "fotoPallet": {
             "type": "string"
+          },
+          "fotoProductoBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "fotoProductoNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "fotoProductoTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "fotoPalletBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "fotoPalletNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "fotoPalletTipo": {
+            "type": "string",
+            "maxLength": 50
           },
           "usuarioCreacion": {
             "type": "number"
@@ -15969,6 +16137,15 @@
                   "valor": {
                     "type": "boolean"
                   },
+                  "imagenBase64": {
+                    "type": "boolean"
+                  },
+                  "imagenNombre": {
+                    "type": "boolean"
+                  },
+                  "imagenTipo": {
+                    "type": "boolean"
+                  },
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
@@ -15996,6 +16173,9 @@
                     "gps",
                     "imagen",
                     "valor",
+                    "imagenBase64",
+                    "imagenNombre",
+                    "imagenTipo",
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
@@ -16087,6 +16267,15 @@
                   "valor": {
                     "type": "boolean"
                   },
+                  "imagenBase64": {
+                    "type": "boolean"
+                  },
+                  "imagenNombre": {
+                    "type": "boolean"
+                  },
+                  "imagenTipo": {
+                    "type": "boolean"
+                  },
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
@@ -16114,6 +16303,9 @@
                     "gps",
                     "imagen",
                     "valor",
+                    "imagenBase64",
+                    "imagenNombre",
+                    "imagenTipo",
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
@@ -17165,6 +17357,24 @@
                   "fotoPallet": {
                     "type": "boolean"
                   },
+                  "fotoProductoBase64": {
+                    "type": "boolean"
+                  },
+                  "fotoProductoNombre": {
+                    "type": "boolean"
+                  },
+                  "fotoProductoTipo": {
+                    "type": "boolean"
+                  },
+                  "fotoPalletBase64": {
+                    "type": "boolean"
+                  },
+                  "fotoPalletNombre": {
+                    "type": "boolean"
+                  },
+                  "fotoPalletTipo": {
+                    "type": "boolean"
+                  },
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
@@ -17194,6 +17404,12 @@
                     "medidas",
                     "fotoProducto",
                     "fotoPallet",
+                    "fotoProductoBase64",
+                    "fotoProductoNombre",
+                    "fotoProductoTipo",
+                    "fotoPalletBase64",
+                    "fotoPalletNombre",
+                    "fotoPalletTipo",
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
@@ -17291,6 +17507,24 @@
                   "fotoPallet": {
                     "type": "boolean"
                   },
+                  "fotoProductoBase64": {
+                    "type": "boolean"
+                  },
+                  "fotoProductoNombre": {
+                    "type": "boolean"
+                  },
+                  "fotoProductoTipo": {
+                    "type": "boolean"
+                  },
+                  "fotoPalletBase64": {
+                    "type": "boolean"
+                  },
+                  "fotoPalletNombre": {
+                    "type": "boolean"
+                  },
+                  "fotoPalletTipo": {
+                    "type": "boolean"
+                  },
                   "usuarioCreacion": {
                     "type": "boolean"
                   },
@@ -17320,6 +17554,12 @@
                     "medidas",
                     "fotoProducto",
                     "fotoPallet",
+                    "fotoProductoBase64",
+                    "fotoProductoNombre",
+                    "fotoProductoTipo",
+                    "fotoPalletBase64",
+                    "fotoPalletNombre",
+                    "fotoPalletTipo",
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
@@ -20471,6 +20711,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20485,7 +20728,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "activoSn"
                   ],
                   "example": "id"
                 },
@@ -20555,6 +20799,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20569,7 +20816,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "activoSn"
                   ],
                   "example": "id"
                 },
@@ -20919,6 +21167,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20933,7 +21184,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "activoSn"
                   ],
                   "example": "id"
                 },
@@ -21003,6 +21255,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -21017,7 +21272,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "activoSn"
                   ],
                   "example": "id"
                 },

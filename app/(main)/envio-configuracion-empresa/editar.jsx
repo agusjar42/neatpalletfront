@@ -4,7 +4,7 @@ import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { postEnvioConfiguracionEmpresa, patchEnvioConfiguracionEmpresa } from "@/app/api-endpoints/envio-configuracion-empresa";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioConfiguracionEmpresa from "./EditarDatosEnvioConfiguracionEmpresa";
 import { useIntl } from 'react-intl';
 

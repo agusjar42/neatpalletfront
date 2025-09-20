@@ -32,6 +32,7 @@ const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
                         value={pallet.fechaImpresion}
                         onChange={(e) => setPallet({ ...pallet, fechaImpresion: e.target.value })}
                         maxLength={20}
+                        style={{ textAlign: 'right' }}
                     />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">

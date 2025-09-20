@@ -7,7 +7,7 @@ const EditarDatosEnvioPallet = ({ envioPallet, setEnvioPallet, estadoGuardando, 
     const intl = useIntl();
 
     const opcionesEnvio = envios.map(envio => ({
-        label: `${envio.id} - ${envio.descripcion || 'Sin descripción'}`,
+        label: `${envio.id} - ${envio.origenRuta || 'Sin ruta'}`,
         value: envio.id
     }));
 

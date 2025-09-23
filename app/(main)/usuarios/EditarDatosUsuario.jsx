@@ -4,53 +4,19 @@ import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { InputSwitch } from 'primereact/inputswitch';
 import { useIntl } from 'react-intl'
-import { InputNumber } from "primereact/inputnumber";
-import { AutoComplete } from 'primereact/autocomplete';
-import ArchivoInput from "../../components/shared/archivo_input";
-import ArchivoMultipleInput from "../../components/shared/archivo_multiple_input";
-import { MultiSelect } from 'primereact/multiselect';
+import { FileUpload } from "primereact/fileupload";
+import { Image } from 'primereact/image';
+import { Button } from "primereact/button";
 import 'react-phone-input-2/lib/bootstrap.css'
-import PhoneInput from 'react-phone-input-2'
-import es from 'react-phone-input-2/lang/es.json'
-import { getIdiomaDefecto } from "@/app/components/shared/componentes";
-import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
-import { useEffect } from "react";
+import { convertirArchivoABase64 } from "@/app/utility/Utils";
 
 const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccionado, setIdiomaSeleccionado, estadoGuardando,
     listaRoles, rolSeleccionado, setRolSeleccionado, listaTipoArchivos
 }) => {
     const intl = useIntl()
-    //Crear inputs de archivos
-    const inputsDinamicos = [];
-    for (const tipoArchivo of listaTipoArchivos) {
-        //Depende del tipo del input se genera multiple o no
-        if (tipoArchivo.multiple === 'S') {
-            inputsDinamicos.push(
-                <div className="flex flex-column field gap-2 mt-2 col-12">
-                    <label>{tipoArchivo.nombre}</label>
-                    <ArchivoMultipleInput
-                        registro={usuario}
-                        setRegistro={setUsuario}
-                        archivoTipo={tipoArchivo.tipo}
-                        campoNombre={(tipoArchivo.nombre).toLowerCase()}
-                    />
-                </div>
-            );
-        }
-        else {
-            inputsDinamicos.push(
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <ArchivoInput
-                        registro={usuario}
-                        setRegistro={setUsuario}
-                        archivoTipo={tipoArchivo.tipo}
-                        archivoHeader={tipoArchivo.nombre}
-                        campoNombre={(tipoArchivo.nombre).toLowerCase()}
-                    />
-                </div>
-            );
-        }
-    }
+    
+    // Estado para el preview del avatar
+    const [previewAvatar, setPreviewAvatar] = useState(usuario.avatarBase64 || null);
     const [dropdownAbiertoIdioma, setDropdownAbiertoIdioma] = useState(false);
     const [dropdownAbiertoRol, setDropdownAbiertoRol] = useState(false);
     //Para que el dropdown muestre el registro seleccionado aunque no este en la lista
@@ -63,6 +29,38 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
         const esTrue = valor === true ? 'S' : 'N';
         _usuario[`${nombreInputSwitch}`] = esTrue;
         setUsuario(_usuario);
+    };
+
+    // Función para manejar la selección del avatar
+    const onSelectAvatar = async (e) => {
+        if (e.files && e.files.length > 0) {
+            const file = e.files[0];
+            try {
+                const base64 = await convertirArchivoABase64(file);
+                setPreviewAvatar(base64);
+                
+                // Guardamos el base64 en el estado del usuario
+                setUsuario({ 
+                    ...usuario, 
+                    avatarBase64: base64,
+                    avatarNombre: file.name,
+                    avatarTipo: file.type
+                });
+            } catch (error) {
+                console.error('Error convirtiendo archivo a base64:', error);
+            }
+        }
+    };
+
+    // Función para limpiar el avatar
+    const limpiarAvatar = () => {
+        setPreviewAvatar(null);
+        setUsuario({
+            ...usuario,
+            avatarBase64: null,
+            avatarNombre: null,
+            avatarTipo: null
+        });
     };
 
     return (
@@ -119,9 +117,57 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                         rows={5} cols={30} maxLength={50}
                         style={{textAlign:"right"}} />
                 </div>
-                {
-                    ...inputsDinamicos //Muestra las inputs generados
-                }
+
+                {/* Sección del Avatar - Imagen actual */}
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                    <label htmlFor="avatar" className="pb-2">{intl.formatMessage({ id: 'Avatar' })}</label>
+                    {usuario.avatar && (
+                        <Image
+                            src={usuario.avatar}
+                            alt="Avatar del usuario"
+                            width="150"
+                            height="150"
+                            className="border-circle"
+                            preview
+                        />
+                    )}   
+                    <FileUpload
+                        name="avatar"
+                        accept="image/*"
+                        maxFileSize={2000000} // 2MB
+                        onSelect={onSelectAvatar}
+                        mode="basic"
+                        chooseLabel="Cambiar imagen por: "
+                        className="p-button-outlined pt-2"
+                    />
+                    
+                    {previewAvatar && (
+                        <div className="mt-2">
+                            <div className="flex justify-content-between align-items-center mb-2">
+                                <small className="text-green-600">
+                                    Avatar seleccionado: {usuario.avatarNombre}
+                                </small>
+                                <Button 
+                                    icon="pi pi-times" 
+                                    className="p-button-rounded p-button-text p-button-sm"
+                                    onClick={limpiarAvatar}
+                                    tooltip="Quitar imagen"
+                                />
+                            </div>
+                            <div className="flex justify-content-center">
+                                <Image 
+                                    src={previewAvatar} 
+                                    alt="Preview avatar" 
+                                    width="200" 
+                                    height="200"
+                                    className="border-circle"
+                                    preview 
+                                />
+                            </div>
+                        </div>
+                    )}
+                </div>
+
             </div>
         </Fieldset>
    );

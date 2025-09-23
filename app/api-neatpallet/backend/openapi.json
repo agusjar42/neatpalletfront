@@ -8761,7 +8761,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Usuario"
+                "$ref": "#/components/schemas/Usuario1"
               }
             }
           },
@@ -9609,65 +9609,6 @@
         ],
         "additionalProperties": false
       },
-      "NewUsuario": {
-        "title": "NewUsuario",
-        "type": "object",
-        "description": "(tsType: Omit<Usuario, 'id'>, schemaOptions: { title: 'NewUsuario', exclude: [ 'id' ] })",
-        "properties": {
-          "empresaId": {
-            "type": "number"
-          },
-          "rolId": {
-            "type": "number"
-          },
-          "idiomaId": {
-            "type": "number"
-          },
-          "nombre": {
-            "type": "string"
-          },
-          "mail": {
-            "type": "string"
-          },
-          "activoSn": {
-            "type": "string"
-          },
-          "telefono": {
-            "type": "string"
-          },
-          "avatar": {
-            "type": "string"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuCreacion": {
-            "type": "number"
-          },
-          "usuModificacion": {
-            "type": "number"
-          },
-          "fechaInactivo": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuInactivo": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "empresaId",
-          "rolId",
-          "idiomaId"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<Usuario, 'id'>"
-      },
       "UsuarioCredencialesWithRelations": {
         "title": "UsuarioCredencialesWithRelations",
         "type": "object",
@@ -9756,63 +9697,6 @@
         ],
         "additionalProperties": false,
         "x-typescript-type": "UsuarioWithRelations"
-      },
-      "UsuarioPartial": {
-        "title": "UsuarioPartial",
-        "type": "object",
-        "description": "(tsType: Partial<Usuario>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "empresaId": {
-            "type": "number"
-          },
-          "rolId": {
-            "type": "number"
-          },
-          "idiomaId": {
-            "type": "number"
-          },
-          "nombre": {
-            "type": "string"
-          },
-          "mail": {
-            "type": "string"
-          },
-          "activoSn": {
-            "type": "string"
-          },
-          "telefono": {
-            "type": "string"
-          },
-          "avatar": {
-            "type": "string"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuCreacion": {
-            "type": "number"
-          },
-          "usuModificacion": {
-            "type": "number"
-          },
-          "fechaInactivo": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuInactivo": {
-            "type": "number"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<Usuario>"
       },
       "UsuarioCredencialesPartial": {
         "title": "UsuarioCredencialesPartial",
@@ -21791,6 +21675,120 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<UsuarioPasswordHistorico>"
       },
+      "Usuario1": {
+        "type": "object",
+        "title": "Usuario",
+        "properties": {
+          "empresaId": {
+            "type": "number"
+          },
+          "rolId": {
+            "type": "number"
+          },
+          "idiomaId": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "mail": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string"
+          },
+          "fechaModificacion": {
+            "type": "string"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "fechaInactivo": {
+            "type": "string"
+          },
+          "usuInactivo": {
+            "type": "number"
+          },
+          "avatarBase64": {
+            "type": "string"
+          },
+          "avatarNombre": {
+            "type": "string"
+          },
+          "avatarTipo": {
+            "type": "string"
+          }
+        }
+      },
+      "UsuarioPartial": {
+        "type": "object",
+        "title": "UsuarioPartial",
+        "properties": {
+          "empresaId": {
+            "type": "number"
+          },
+          "rolId": {
+            "type": "number"
+          },
+          "idiomaId": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "mail": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string"
+          },
+          "fechaModificacion": {
+            "type": "string"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "fechaInactivo": {
+            "type": "string"
+          },
+          "usuInactivo": {
+            "type": "number"
+          },
+          "avatarBase64": {
+            "type": "string"
+          },
+          "avatarNombre": {
+            "type": "string"
+          },
+          "avatarTipo": {
+            "type": "string"
+          }
+        }
+      },
       "Usuario.ScopeFilter": {
         "type": "object",
         "properties": {
@@ -21995,6 +21993,63 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Usuario>"
+      },
+      "NewUsuario": {
+        "type": "object",
+        "title": "NewUsuario",
+        "properties": {
+          "empresaId": {
+            "type": "number"
+          },
+          "rolId": {
+            "type": "number"
+          },
+          "idiomaId": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "mail": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string"
+          },
+          "fechaModificacion": {
+            "type": "string"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "fechaInactivo": {
+            "type": "string"
+          },
+          "usuInactivo": {
+            "type": "number"
+          },
+          "avatarBase64": {
+            "type": "string"
+          },
+          "avatarNombre": {
+            "type": "string"
+          },
+          "avatarTipo": {
+            "type": "string"
+          }
+        }
       },
       "Usuario.Filter1": {
         "type": "object",

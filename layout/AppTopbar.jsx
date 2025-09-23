@@ -32,10 +32,9 @@ const AppTopbar = React.forwardRef((props, ref) => {
     const [empresaNombre, setEmpresaNombre] = useState('');
     useEffect(() => {
 
-
         const fetchData = async () => {
             await obtenerListaIdiomas();
-            await obtenerAvatarUsuario();
+            setAvatar(getUsuarioSesion()?.avatar);
             //Si el rol del usuario tiene permisos para ver la empresa
             if (await obtenerRolUsuario()) {
                 obtenerNombreEmpresa();
@@ -45,18 +44,6 @@ const AppTopbar = React.forwardRef((props, ref) => {
         }
         fetchData();
     }, []);
-
-    const obtenerAvatarUsuario = async () => {
-        let avatar = await getUsuarioAvatar(getUsuarioSesion()?.id);
-        if (avatar.length > 0){
-            avatar = avatar[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$132x32_$2');
-            setAvatar(`${devuelveBasePath()}${avatar}`);
-        }
-        else{
-            setAvatar(`${devuelveBasePath()}/multimedia/sistemaNP/imagen-no-disponible.jpeg`);
-        }
-
-    }
 
     const obtenerListaIdiomas = async () => {
         // const filtro = {

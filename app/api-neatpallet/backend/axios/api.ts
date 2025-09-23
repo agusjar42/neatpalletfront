@@ -6429,7 +6429,7 @@ export interface NewTraduccion {
     'usuModificacion'?: number | null;
 }
 /**
- * (tsType: Omit<Usuario, \'id\'>, schemaOptions: { title: \'NewUsuario\', exclude: [ \'id\' ] })
+ * 
  * @export
  * @interface NewUsuario
  */
@@ -6439,19 +6439,19 @@ export interface NewUsuario {
      * @type {number}
      * @memberof NewUsuario
      */
-    'empresaId': number;
+    'empresaId'?: number;
     /**
      * 
      * @type {number}
      * @memberof NewUsuario
      */
-    'rolId': number;
+    'rolId'?: number;
     /**
      * 
      * @type {number}
      * @memberof NewUsuario
      */
-    'idiomaId': number;
+    'idiomaId'?: number;
     /**
      * 
      * @type {string}
@@ -6518,6 +6518,24 @@ export interface NewUsuario {
      * @memberof NewUsuario
      */
     'usuInactivo'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewUsuario
+     */
+    'avatarBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewUsuario
+     */
+    'avatarNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewUsuario
+     */
+    'avatarTipo'?: string;
 }
 /**
  * (tsType: Omit<UsuarioCredenciales, \'id\'>, schemaOptions: { title: \'NewUsuarioCredenciales\', exclude: [ \'id\' ] })
@@ -10767,6 +10785,115 @@ export interface Usuario {
 /**
  * 
  * @export
+ * @interface Usuario1
+ */
+export interface Usuario1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof Usuario1
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Usuario1
+     */
+    'rolId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Usuario1
+     */
+    'idiomaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario1
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario1
+     */
+    'mail'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario1
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario1
+     */
+    'telefono'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario1
+     */
+    'avatar'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario1
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario1
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Usuario1
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Usuario1
+     */
+    'usuModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario1
+     */
+    'fechaInactivo'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Usuario1
+     */
+    'usuInactivo'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario1
+     */
+    'avatarBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario1
+     */
+    'avatarNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario1
+     */
+    'avatarTipo'?: string;
+}
+/**
+ * 
+ * @export
  * @interface UsuarioCredenciales
  */
 export interface UsuarioCredenciales {
@@ -11040,17 +11167,11 @@ export enum UsuarioIncludeFilterItemsRelationEnum {
 }
 
 /**
- * (tsType: Partial<Usuario>, schemaOptions: { partial: true })
+ * 
  * @export
  * @interface UsuarioPartial
  */
 export interface UsuarioPartial {
-    /**
-     * 
-     * @type {number}
-     * @memberof UsuarioPartial
-     */
-    'id'?: number;
     /**
      * 
      * @type {number}
@@ -11135,6 +11256,24 @@ export interface UsuarioPartial {
      * @memberof UsuarioPartial
      */
     'usuInactivo'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UsuarioPartial
+     */
+    'avatarBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UsuarioPartial
+     */
+    'avatarNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UsuarioPartial
+     */
+    'avatarTipo'?: string;
 }
 /**
  * 
@@ -29827,11 +29966,11 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         /**
          * 
          * @param {number} id 
-         * @param {Usuario} [usuario] 
+         * @param {Usuario1} [usuario1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerReplaceById: async (id: number, usuario?: Usuario, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        usuariosControllerReplaceById: async (id: number, usuario1?: Usuario1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('usuariosControllerReplaceById', 'id', id)
             const localVarPath = `/usuarios/{id}`
@@ -29858,7 +29997,7 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(usuario, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(usuario1, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -30206,12 +30345,12 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} id 
-         * @param {Usuario} [usuario] 
+         * @param {Usuario1} [usuario1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerReplaceById(id: number, usuario?: Usuario, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerReplaceById(id, usuario, options);
+        async usuariosControllerReplaceById(id: number, usuario1?: Usuario1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerReplaceById(id, usuario1, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -30372,12 +30511,12 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
         /**
          * 
          * @param {number} id 
-         * @param {Usuario} [usuario] 
+         * @param {Usuario1} [usuario1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerReplaceById(id: number, usuario?: Usuario, options?: any): AxiosPromise<any> {
-            return localVarFp.usuariosControllerReplaceById(id, usuario, options).then((request) => request(axios, basePath));
+        usuariosControllerReplaceById(id: number, usuario1?: Usuario1, options?: any): AxiosPromise<any> {
+            return localVarFp.usuariosControllerReplaceById(id, usuario1, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -30549,13 +30688,13 @@ export class UsuariosControllerApi extends BaseAPI {
     /**
      * 
      * @param {number} id 
-     * @param {Usuario} [usuario] 
+     * @param {Usuario1} [usuario1] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsuariosControllerApi
      */
-    public usuariosControllerReplaceById(id: number, usuario?: Usuario, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerReplaceById(id, usuario, options).then((request) => request(this.axios, this.basePath));
+    public usuariosControllerReplaceById(id: number, usuario1?: Usuario1, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerReplaceById(id, usuario1, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

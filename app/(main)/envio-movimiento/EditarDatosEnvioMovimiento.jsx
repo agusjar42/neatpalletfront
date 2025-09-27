@@ -122,7 +122,7 @@ const EditarDatosEnvioMovimiento = ({ envioMovimiento, setEnvioMovimiento, estad
                     <FileUpload
                         name="imagen"
                         accept="image/*"
-                        maxFileSize={2000000} // 2MB
+                        //maxFileSize={2000000} // 2MB
                         onSelect={onSelectImagen}
                         mode="basic"
                         chooseLabel="Seleccionar nueva imagen"

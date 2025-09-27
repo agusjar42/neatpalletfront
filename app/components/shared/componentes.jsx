@@ -121,7 +121,7 @@ const comprobarImagen = (campo, cabecera) => (rowData) => {
     if (rowData[campo] !== null && !esUrlImagen(rowData[campo])) {
         return (
             <>
-                <a style={{ color: 'black' }} href={`${devuelveBasePath()}${rowData[campo]}`} target="_blank">
+                <a style={{ color: 'black' }} href={`${rowData[campo]}`} target="_blank">
                     <i className="pi pi-file text-7xl"></i>
                 </a>
                 <span className="p-column-title">{cabecera}</span>
@@ -130,8 +130,8 @@ const comprobarImagen = (campo, cabecera) => (rowData) => {
     }
     return (
         <>
-            <a href={`${devuelveBasePath()}${rowData[campo] || "/multimedia/sistemaNP/imagen-no-disponible.jpeg"}`} target="_blank">
-                <img src={`${devuelveBasePath()}${rowData[campo] || "/multimedia/sistemaNP/imagen-no-disponible.jpeg"}`} alt="Imagen" style={{ width: '100px', height: 'auto' }} />
+            <a href={`${rowData[campo] || "/multimedia/sistemaNP/imagen-no-disponible.jpeg"}`} target="_blank">
+                <img src={`${rowData[campo] || "/multimedia/sistemaNP/imagen-no-disponible.jpeg"}`} alt="Imagen" style={{ width: '100px', height: 'auto' }} />
             </a>
             <span className="p-column-title">{cabecera}</span>
         </>

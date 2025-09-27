@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
@@ -7,15 +7,18 @@ import { useIntl } from 'react-intl';
 import { FileUpload } from "primereact/fileupload";
 import { Image } from 'primereact/image';
 import { Button } from "primereact/button";
+import { Toast } from "primereact/toast";
 import { convertirArchivoABase64 } from "@/app/utility/Utils";
 
 const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGuardando, envios }) => {
     const intl = useIntl();
+    const toast = useRef(null);
     
     // Estados para los previews
     const [previewFotoProducto, setPreviewFotoProducto] = useState(null);
     const [previewFotoPallet, setPreviewFotoPallet] = useState(null);
-
+    const [fotoProductoInputRef, setFotoProductoInputRef] = useState(null);
+    const [fotoPalletInputRef, setFotoPalletInputRef] = useState(null);
     const opcionesEnvio = envios.map(envio => ({
         label: `${envio.id} - ${envio.origenRuta || 'Sin ruta'}`,
         value: envio.id
@@ -25,6 +28,19 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
     const onSelectFotoProducto = async (e) => {
         if (e.files && e.files.length > 0) {
             const file = e.files[0];
+            
+            // Validar el tamaño del archivo (2MB = 2 * 1024 * 1024 bytes)
+            const maxSize = 2 * 1024 * 1024;
+            if (file.size > maxSize) {
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'La imagen no puede ser mayor a 2 MB' }),
+                    life: 3000,
+                });
+                return;
+            }
+            
             try {
                 const base64 = await convertirArchivoABase64(file);
                 setPreviewFotoProducto(base64);
@@ -38,6 +54,12 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                 });
             } catch (error) {
                 console.error('Error convirtiendo archivo a base64:', error);
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'Error procesando la imagen' }),
+                    life: 3000,
+                });
             }
         }
     };
@@ -45,6 +67,19 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
     const onSelectFotoPallet = async (e) => {
         if (e.files && e.files.length > 0) {
             const file = e.files[0];
+            
+            // Validar el tamaño del archivo (2MB = 2 * 1024 * 1024 bytes)
+            const maxSize = 2 * 1024 * 1024;
+            if (file.size > maxSize) {
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'La imagen no puede ser mayor a 2 MB' }),
+                    life: 3000,
+                });
+                return;
+            }
+            
             try {
                 const base64 = await convertirArchivoABase64(file);
                 setPreviewFotoPallet(base64);
@@ -58,6 +93,12 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                 });
             } catch (error) {
                 console.error('Error convirtiendo archivo a base64:', error);
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'Error procesando la imagen' }),
+                    life: 3000,
+                });
             }
         }
     };
@@ -84,6 +125,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
 
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el contenido' })}>
+            <Toast ref={toast} position="top-right" />
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Envío' })}*</b></label>
@@ -133,7 +175,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                 </div>
 
                 {/* Campos de rutas para mostrar las imágenes guardadas */}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="fotoProducto" className="pb-2">{intl.formatMessage({ id: 'Foto del producto' })}</label>
                     {envioContenido.fotoProducto && (
                         <Image
@@ -143,14 +185,23 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                             preview
                         />
                     )}
-                    <FileUpload
-                        name="fotoProducto"
+                    
+                    <input
+                        type="file"
                         accept="image/*"
-                        maxFileSize={2000000} // 2MB
-                        onSelect={onSelectFotoProducto}
-                        mode="basic"
-                        chooseLabel="Cambiar imagen por: "
-                        className="p-button-outlined pt-2"
+                        onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                                onSelectFotoProducto({ files: [e.target.files[0]] });
+                            }
+                        }}
+                        style={{ display: 'none' }}
+                        ref={(ref) => setFotoProductoInputRef(ref)}
+                    />
+                    <Button
+                        label="Cambiar foto por:"
+                        icon="pi pi-upload"
+                        className="p-button-outlined"
+                        onClick={() => fotoProductoInputRef?.click()}
                     />
                     
                     {previewFotoProducto && (
@@ -176,7 +227,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                     )}
                 </div>
 
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="fotoPallet" className="pb-2">{intl.formatMessage({ id: 'Foto del pallet' })}</label>
                     {envioContenido.fotoPallet && (
                         <Image
@@ -187,16 +238,24 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         />
                     )}
                     
-                    <FileUpload
-                        name="fotoPallet"
+                    <input
+                        type="file"
                         accept="image/*"
-                        maxFileSize={2000000} // 2MB
-                        onSelect={onSelectFotoPallet}
-                        mode="basic"
-                        chooseLabel="Cambiar imagen por: "
-                        className="p-button-outlined pt-2"
+                        onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                                onSelectFotoPallet({ files: [e.target.files[0]] });
+                            }
+                        }}
+                        style={{ display: 'none' }}
+                        ref={(ref) => setFotoPalletInputRef(ref)}
                     />
-                    
+                    <Button
+                        label="Cambiar foto por:"
+                        icon="pi pi-upload"
+                        className="p-button-outlined"
+                        onClick={() => fotoPalletInputRef?.click()}
+                    />
+
                     {previewFotoPallet && (
                         <div className="mt-2">
                             <div className="flex justify-content-between align-items-center mb-2">

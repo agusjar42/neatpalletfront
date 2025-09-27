@@ -31,3 +31,13 @@ export const patchEmpresa = async (idEmpresa, objEmpresa) => {
     const { data: dataEmpresa } = await apiEmpresa.empresaControllerUpdateById(idEmpresa, objEmpresa)
     return dataEmpresa
 }
+
+export const getEmpresaImagen = async (id) => {
+    const { data: dataEmpresa } = await apiEmpresa.empresaControllerObtenerEmpresaImagen(id)
+    return dataEmpresa
+}
+
+export const getEmpresaLogo = async (id) => {
+    const { data: dataEmpresa } = await apiEmpresa.empresaControllerObtenerEmpresaLogo(id)
+    return dataEmpresa
+}

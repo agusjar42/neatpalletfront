@@ -229,7 +229,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                         });
                     }
                 } else {
-                    //Si se edita un examen existente Hacemos el patch del examen
+                    //Si se edita 
                     usuarioGuardar['usuModificacion'] = usuarioCreacion;
                     if (idiomaSeleccionado) {
                         usuarioGuardar['idiomaId'] = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado)?.id;

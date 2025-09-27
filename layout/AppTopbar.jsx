@@ -28,7 +28,6 @@ const AppTopbar = React.forwardRef((props, ref) => {
 
     const [dropdownValue, setDropdownValue] = useState(null);
     const [dropdownValues, setDropdownValues] = useState([]);
-    const [logoEmpresaUrl, setLogoEmpresaUrl] = useState(null);
     const [empresaNombre, setEmpresaNombre] = useState('');
     useEffect(() => {
 

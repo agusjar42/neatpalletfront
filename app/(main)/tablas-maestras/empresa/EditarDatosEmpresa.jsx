@@ -1,46 +1,125 @@
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Password } from "primereact/password";
-import ArchivoMultipleInput from "../../../components/shared/archivo_multiple_input";
-import ArchivoInput from "../../../components/shared/archivo_input";
 import { useIntl } from 'react-intl'
 import { InputTextarea } from 'primereact/inputtextarea';
 import { InputNumber } from "primereact/inputnumber";
-const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, listaTipoArchivos }) => {
+import { FileUpload } from "primereact/fileupload";
+import { Image } from 'primereact/image';
+import { Button } from "primereact/button";
+import { Toast } from "primereact/toast";
+import { convertirArchivoABase64 } from "@/app/utility/Utils";
+const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
     const intl = useIntl()
-    //Crear inputs de archivos
-    const inputsDinamicos = [];
-    for (const tipoArchivo of listaTipoArchivos) {
-        //Depende del tipo del input se genera multiple o no
-        if (tipoArchivo.multiple === 'S') {
-            inputsDinamicos.push(
-                <div className="flex flex-column field gap-2 mt-2 col-12">
-                    <label>{tipoArchivo.nombre}</label>
-                    <ArchivoMultipleInput
-                        registro={empresa}
-                        setRegistro={setEmpresa}
-                        archivoTipo={tipoArchivo.tipo}
-                        campoNombre={(tipoArchivo.nombre).toLowerCase()}
-                    />
-                </div>
-            );
+    const toast = useRef(null);
+    
+    // Estados para el preview de las imágenes
+    const [previewImagen, setPreviewImagen] = useState(empresa.imagenBase64 || null);
+    const [previewLogo, setPreviewLogo] = useState(empresa.logoBase64 || null);
+    const [imagenInputRef, setImagenInputRef] = useState(null);
+    const [logoInputRef, setLogoInputRef] = useState(null);
+
+    // Función para manejar la selección de la imagen
+    const onSelectImagen = async (e) => {
+        if (e.files && e.files.length > 0) {
+            const file = e.files[0];
+                        
+            // Validar el tamaño del archivo (2MB = 2 * 1024 * 1024 bytes)
+            const maxSize = 2 * 1024 * 1024;
+            if (file.size > maxSize) {
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'La imagen no puede ser mayor a 2 MB' }),
+                    life: 3000,
+                });
+                return;
+            }
+
+            try {
+                const base64 = await convertirArchivoABase64(file);
+                setPreviewImagen(base64);
+                
+                // Guardamos el base64 en el estado de la empresa
+                setEmpresa({ 
+                    ...empresa, 
+                    imagenBase64: base64,
+                    imagenNombre: file.name,
+                    imagenTipo: file.type
+                });
+            } catch (error) {
+                console.error('Error convirtiendo archivo a base64:', error);
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'Error procesando la imagen' }),
+                    life: 3000,
+                });
+            }
         }
-        else {
-            inputsDinamicos.push(
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <ArchivoInput
-                        registro={empresa}
-                        setRegistro={setEmpresa}
-                        archivoTipo={tipoArchivo.tipo}
-                        archivoHeader={tipoArchivo.nombre}
-                        campoNombre={(tipoArchivo.nombre).toLowerCase()}
-                    />
-                </div>
-            );
+    };
+
+    // Función para manejar la selección del logo
+    const onSelectLogo = async (e) => {
+        if (e.files && e.files.length > 0) {
+            const file = e.files[0];
+            // Validar el tamaño del archivo (2MB = 2 * 1024 * 1024 bytes)
+            const maxSize = 2 * 1024 * 1024;
+            if (file.size > maxSize) {
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'La imagen no puede ser mayor a 2 MB' }),
+                    life: 3000,
+                });
+                return;
+            }
+            try {
+                const base64 = await convertirArchivoABase64(file);
+                setPreviewLogo(base64);
+                
+                // Guardamos el base64 en el estado de la empresa
+                setEmpresa({ 
+                    ...empresa, 
+                    logoBase64: base64,
+                    logoNombre: file.name,
+                    logoTipo: file.type
+                });
+            } catch (error) {
+                console.error('Error convirtiendo archivo a base64:', error);
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'Error procesando la imagen' }),
+                    life: 3000,
+                });
+            }
         }
-    }
+    };
+
+    // Función para limpiar la imagen
+    const limpiarImagen = () => {
+        setPreviewImagen(null);
+        setEmpresa({ 
+            ...empresa, 
+            imagenBase64: null,
+            imagenNombre: null,
+            imagenTipo: null
+        });
+    };
+
+    // Función para limpiar el logo
+    const limpiarLogo = () => {
+        setPreviewLogo(null);
+        setEmpresa({ 
+            ...empresa, 
+            logoBase64: null,
+            logoNombre: null,
+            logoTipo: null
+        });
+    };
 
     const manejarCambioInputNumber = (e, nombreInput) => {
         let valor = e.value || 0;
@@ -69,6 +148,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, listaTipoArc
 
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para la empresa' })}>
+            <Toast ref={toast} position="top-right" />
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="empresaCodigo"><b>{intl.formatMessage({ id: 'Código' })}*</b></label>
@@ -86,14 +166,6 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, listaTipoArc
                         className={`${(estadoGuardando && empresa.nombre === "") ? "p-invalid" : ""}`}
                         rows={5} cols={30} maxLength={50} />
                 </div>                
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-12">
-                    <label htmlFor="descripcion">{intl.formatMessage({ id: 'Descripción' })}</label>
-                    <InputTextarea value={empresa.descripcion} autoreresize
-                        placeholder={intl.formatMessage({ id: 'Descripción de la empresa' })}
-                        onChange={(e) => setEmpresa({ ...empresa, descripcion: e.target.value })}
-                        //className={`${(estadoGuardando && empresa.descripcion === "") ? "p-invalid" : ""}`}
-                        rows={5} cols={30} maxLength={500} />
-                </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="email"><b>{intl.formatMessage({ id: 'Email' })}*</b></label>
                     <InputText value={empresa.email}
@@ -148,11 +220,131 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, listaTipoArc
                     />
                     <small style={{ color: '#94949f', fontSize: '10px' }}> <i>{intl.formatMessage({ id: 'La cantidad de tiempo en minutos que tardará en cerrar la sesión por inactividad al usuario' })}</i> </small>
                 </div>
-                {
-                    ...inputsDinamicos //Muestra las inputs generados
-                }
-            </div>
 
+                {/* Sección de la Imagen - Imagen actual */}
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="imagen" className="pb-2">{intl.formatMessage({ id: 'Imagen' })}</label>
+                    {empresa.imagen && (
+                        <Image
+                            src={empresa.imagen}
+                            alt="Imagen de la empresa"
+                            width="150"
+                            height="150"
+                            className="border-round"
+                            preview
+                        />
+                    )}   
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                                onSelectImagen({ files: [e.target.files[0]] });
+                            }
+                        }}
+                        style={{ display: 'none' }}
+                        ref={(ref) => setImagenInputRef(ref)}
+                    />
+                    <Button
+                        label="Cambiar imagen por:"
+                        icon="pi pi-upload"
+                        className="p-button-outlined"
+                        onClick={() => imagenInputRef?.click()}
+                    />
+                    
+                    {previewImagen && (
+                        <div className="mt-2">
+                            <div className="flex justify-content-between align-items-center mb-2">
+                                <small className="text-green-600">
+                                    Imagen seleccionada: {empresa.imagenNombre}
+                                </small>
+                                <Button 
+                                    icon="pi pi-times" 
+                                    className="p-button-rounded p-button-text p-button-sm"
+                                    onClick={limpiarImagen}
+                                    tooltip="Quitar imagen"
+                                />
+                            </div>
+                            <div className="flex justify-content-center">
+                                <Image 
+                                    src={previewImagen} 
+                                    alt="Preview imagen" 
+                                    width="200" 
+                                    height="200"
+                                    className="border-round"
+                                    preview 
+                                />
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                {/* Sección del Logo - Logo actual */}
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="logo" className="pb-2">{intl.formatMessage({ id: 'Logo' })}</label>
+                    {empresa.logo && (
+                        <Image
+                            src={empresa.logo}
+                            alt="Logo de la empresa"
+                            width="150"
+                            height="150"
+                            className="border-round"
+                            preview
+                        />
+                    )}   
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                                onSelectLogo({ files: [e.target.files[0]] });
+                            }
+                        }}
+                        style={{ display: 'none' }}
+                        ref={(ref) => setLogoInputRef(ref)}
+                    />
+                    <Button
+                        label="Cambiar logo por:"
+                        icon="pi pi-upload"
+                        className="p-button-outlined"
+                        onClick={() => logoInputRef?.click()}
+                    />
+                    
+                    {previewLogo && (
+                        <div className="mt-2">
+                            <div className="flex justify-content-between align-items-center mb-2">
+                                <small className="text-green-600">
+                                    Logo seleccionado: {empresa.logoNombre}
+                                </small>
+                                <Button 
+                                    icon="pi pi-times" 
+                                    className="p-button-rounded p-button-text p-button-sm"
+                                    onClick={limpiarLogo}
+                                    tooltip="Quitar logo"
+                                />
+                            </div>
+                            <div className="flex justify-content-center">
+                                <Image 
+                                    src={previewLogo} 
+                                    alt="Preview logo" 
+                                    width="200" 
+                                    height="200"
+                                    className="border-round"
+                                    preview 
+                                />
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-12">
+                <label htmlFor="descripcion">{intl.formatMessage({ id: 'Descripción' })}</label>
+                <InputTextarea value={empresa.descripcion} autoreresize
+                    placeholder={intl.formatMessage({ id: 'Descripción de la empresa' })}
+                    onChange={(e) => setEmpresa({ ...empresa, descripcion: e.target.value })}
+                    //className={`${(estadoGuardando && empresa.descripcion === "") ? "p-invalid" : ""}`}
+                    rows={5} cols={30} maxLength={500} />
+            </div>
         </Fieldset>
     );
 };

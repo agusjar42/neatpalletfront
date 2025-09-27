@@ -434,6 +434,139 @@ export interface Empresa {
      * @memberof Empresa
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'imagen'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'logo'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface Empresa1
+ */
+export interface Empresa1 {
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'codigo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'descripcion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'email'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'password'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'servicio'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Empresa1
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Empresa1
+     */
+    'usuModificacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Empresa1
+     */
+    'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'imagen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'logo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'imagenBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'imagenNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'imagenTipo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'logoBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'logoNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'logoTipo'?: string;
 }
 /**
  * 
@@ -516,65 +649,59 @@ export interface EmpresaFilter1 {
     'fields'?: object | Set<string>;
 }
 /**
- * (tsType: Partial<Empresa>, schemaOptions: { partial: true })
+ * 
  * @export
  * @interface EmpresaPartial
  */
 export interface EmpresaPartial {
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof EmpresaPartial
      */
-    'id'?: number;
+    'codigo'?: string;
     /**
      * 
      * @type {string}
      * @memberof EmpresaPartial
      */
-    'codigo'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
      * @memberof EmpresaPartial
      */
-    'nombre'?: string | null;
+    'descripcion'?: string;
     /**
      * 
      * @type {string}
      * @memberof EmpresaPartial
      */
-    'descripcion'?: string | null;
+    'email'?: string;
     /**
      * 
      * @type {string}
      * @memberof EmpresaPartial
      */
-    'email'?: string | null;
+    'password'?: string;
     /**
      * 
      * @type {string}
      * @memberof EmpresaPartial
      */
-    'password'?: string | null;
+    'servicio'?: string;
     /**
      * 
      * @type {string}
      * @memberof EmpresaPartial
      */
-    'servicio'?: string | null;
+    'fechaCreacion'?: string;
     /**
      * 
      * @type {string}
      * @memberof EmpresaPartial
      */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EmpresaPartial
-     */
-    'fechaModificacion'?: string | null;
+    'fechaModificacion'?: string;
     /**
      * 
      * @type {number}
@@ -586,13 +713,61 @@ export interface EmpresaPartial {
      * @type {number}
      * @memberof EmpresaPartial
      */
-    'usuModificacion'?: number | null;
+    'usuModificacion'?: number;
     /**
      * 
      * @type {number}
      * @memberof EmpresaPartial
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'imagen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'logo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'imagenBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'imagenNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'imagenTipo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'logoBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'logoNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'logoTipo'?: string;
 }
 /**
  * (tsType: EmpresaWithRelations, schemaOptions: { includeRelations: true })
@@ -672,6 +847,18 @@ export interface EmpresaWithRelations {
      * @memberof EmpresaWithRelations
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'imagen'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'logo'?: string | null;
 }
 /**
  * 
@@ -4915,7 +5102,7 @@ export interface NewArchivo {
     'usuModificacion'?: number | null;
 }
 /**
- * (tsType: Omit<Empresa, \'id\'>, schemaOptions: { title: \'NewEmpresa\', exclude: [ \'id\' ] })
+ * 
  * @export
  * @interface NewEmpresa
  */
@@ -4925,67 +5112,115 @@ export interface NewEmpresa {
      * @type {string}
      * @memberof NewEmpresa
      */
-    'codigo'?: string | null;
+    'codigo'?: string;
     /**
      * 
      * @type {string}
      * @memberof NewEmpresa
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
      * @memberof NewEmpresa
      */
-    'descripcion'?: string | null;
+    'descripcion'?: string;
     /**
      * 
      * @type {string}
      * @memberof NewEmpresa
      */
-    'email'?: string | null;
+    'email'?: string;
     /**
      * 
      * @type {string}
      * @memberof NewEmpresa
      */
-    'password'?: string | null;
+    'password'?: string;
     /**
      * 
      * @type {string}
      * @memberof NewEmpresa
      */
-    'servicio'?: string | null;
+    'servicio'?: string;
     /**
      * 
      * @type {string}
      * @memberof NewEmpresa
      */
-    'fechaCreacion'?: string | null;
+    'fechaCreacion'?: string;
     /**
      * 
      * @type {string}
      * @memberof NewEmpresa
      */
-    'fechaModificacion'?: string | null;
+    'fechaModificacion'?: string;
     /**
      * 
      * @type {number}
      * @memberof NewEmpresa
      */
-    'usuCreacion': number;
+    'usuCreacion'?: number;
     /**
      * 
      * @type {number}
      * @memberof NewEmpresa
      */
-    'usuModificacion'?: number | null;
+    'usuModificacion'?: number;
     /**
      * 
      * @type {number}
      * @memberof NewEmpresa
      */
     'tiempoInactividad'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'imagen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'logo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'imagenBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'imagenNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'imagenTipo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'logoBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'logoNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'logoTipo'?: string;
 }
 /**
  * (tsType: Omit<Envio, \'id\'>, schemaOptions: { title: \'NewEnvio\', exclude: [ \'id\' ] })
@@ -12739,11 +12974,11 @@ export const EmpresaControllerApiAxiosParamCreator = function (configuration?: C
         /**
          * 
          * @param {number} id 
-         * @param {Empresa} [empresa] 
+         * @param {Empresa1} [empresa1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        empresaControllerReplaceById: async (id: number, empresa?: Empresa, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        empresaControllerReplaceById: async (id: number, empresa1?: Empresa1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('empresaControllerReplaceById', 'id', id)
             const localVarPath = `/empresas/{id}`
@@ -12770,7 +13005,7 @@ export const EmpresaControllerApiAxiosParamCreator = function (configuration?: C
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(empresa, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(empresa1, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -12924,12 +13159,12 @@ export const EmpresaControllerApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} id 
-         * @param {Empresa} [empresa] 
+         * @param {Empresa1} [empresa1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async empresaControllerReplaceById(id: number, empresa?: Empresa, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaControllerReplaceById(id, empresa, options);
+        async empresaControllerReplaceById(id: number, empresa1?: Empresa1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaControllerReplaceById(id, empresa1, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -13013,12 +13248,12 @@ export const EmpresaControllerApiFactory = function (configuration?: Configurati
         /**
          * 
          * @param {number} id 
-         * @param {Empresa} [empresa] 
+         * @param {Empresa1} [empresa1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        empresaControllerReplaceById(id: number, empresa?: Empresa, options?: any): AxiosPromise<any> {
-            return localVarFp.empresaControllerReplaceById(id, empresa, options).then((request) => request(axios, basePath));
+        empresaControllerReplaceById(id: number, empresa1?: Empresa1, options?: any): AxiosPromise<any> {
+            return localVarFp.empresaControllerReplaceById(id, empresa1, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -13109,13 +13344,13 @@ export class EmpresaControllerApi extends BaseAPI {
     /**
      * 
      * @param {number} id 
-     * @param {Empresa} [empresa] 
+     * @param {Empresa1} [empresa1] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EmpresaControllerApi
      */
-    public empresaControllerReplaceById(id: number, empresa?: Empresa, options?: AxiosRequestConfig) {
-        return EmpresaControllerApiFp(this.configuration).empresaControllerReplaceById(id, empresa, options).then((request) => request(this.axios, this.basePath));
+    public empresaControllerReplaceById(id: number, empresa1?: Empresa1, options?: AxiosRequestConfig) {
+        return EmpresaControllerApiFp(this.configuration).empresaControllerReplaceById(id, empresa1, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -601,7 +601,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Empresa"
+                "$ref": "#/components/schemas/Empresa1"
               }
             }
           },
@@ -10383,6 +10383,14 @@
           "tiempoInactividad": {
             "type": "number",
             "nullable": false
+          },
+          "imagen": {
+            "type": "string",
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -14484,129 +14492,20 @@
           "tiempoInactividad": {
             "type": "number",
             "nullable": false
+          },
+          "imagen": {
+            "type": "string",
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
           "usuCreacion"
         ],
         "additionalProperties": false
-      },
-      "NewEmpresa": {
-        "title": "NewEmpresa",
-        "type": "object",
-        "description": "(tsType: Omit<Empresa, 'id'>, schemaOptions: { title: 'NewEmpresa', exclude: [ 'id' ] })",
-        "properties": {
-          "codigo": {
-            "type": "string",
-            "nullable": true
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "descripcion": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "tiempoInactividad": {
-            "type": "number",
-            "nullable": false
-          }
-        },
-        "required": [
-          "usuCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<Empresa, 'id'>"
-      },
-      "EmpresaPartial": {
-        "title": "EmpresaPartial",
-        "type": "object",
-        "description": "(tsType: Partial<Empresa>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "codigo": {
-            "type": "string",
-            "nullable": true
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "descripcion": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "tiempoInactividad": {
-            "type": "number",
-            "nullable": false
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<Empresa>"
       },
       "Archivo": {
         "title": "Archivo",
@@ -15095,6 +14994,132 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Archivo>"
       },
+      "Empresa1": {
+        "type": "object",
+        "title": "Empresa",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "servicio": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string"
+          },
+          "fechaModificacion": {
+            "type": "string"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "tiempoInactividad": {
+            "type": "number"
+          },
+          "imagen": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "imagenBase64": {
+            "type": "string"
+          },
+          "imagenNombre": {
+            "type": "string"
+          },
+          "imagenTipo": {
+            "type": "string"
+          },
+          "logoBase64": {
+            "type": "string"
+          },
+          "logoNombre": {
+            "type": "string"
+          },
+          "logoTipo": {
+            "type": "string"
+          }
+        }
+      },
+      "EmpresaPartial": {
+        "type": "object",
+        "title": "EmpresaPartial",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "servicio": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string"
+          },
+          "fechaModificacion": {
+            "type": "string"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "tiempoInactividad": {
+            "type": "number"
+          },
+          "imagen": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "imagenBase64": {
+            "type": "string"
+          },
+          "imagenNombre": {
+            "type": "string"
+          },
+          "imagenTipo": {
+            "type": "string"
+          },
+          "logoBase64": {
+            "type": "string"
+          },
+          "logoNombre": {
+            "type": "string"
+          },
+          "logoTipo": {
+            "type": "string"
+          }
+        }
+      },
       "Empresa.Filter": {
         "type": "object",
         "title": "Empresa.Filter",
@@ -15165,6 +15190,12 @@
                   },
                   "tiempoInactividad": {
                     "type": "boolean"
+                  },
+                  "imagen": {
+                    "type": "boolean"
+                  },
+                  "logo": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -15185,7 +15216,9 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
-                    "tiempoInactividad"
+                    "tiempoInactividad",
+                    "imagen",
+                    "logo"
                   ],
                   "example": "id"
                 },
@@ -15197,6 +15230,69 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Empresa>"
+      },
+      "NewEmpresa": {
+        "type": "object",
+        "title": "NewEmpresa",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "servicio": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string"
+          },
+          "fechaModificacion": {
+            "type": "string"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "tiempoInactividad": {
+            "type": "number"
+          },
+          "imagen": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "imagenBase64": {
+            "type": "string"
+          },
+          "imagenNombre": {
+            "type": "string"
+          },
+          "imagenTipo": {
+            "type": "string"
+          },
+          "logoBase64": {
+            "type": "string"
+          },
+          "logoNombre": {
+            "type": "string"
+          },
+          "logoTipo": {
+            "type": "string"
+          }
+        }
       },
       "Empresa.Filter1": {
         "type": "object",
@@ -15273,6 +15369,12 @@
                   },
                   "tiempoInactividad": {
                     "type": "boolean"
+                  },
+                  "imagen": {
+                    "type": "boolean"
+                  },
+                  "logo": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -15293,7 +15395,9 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
-                    "tiempoInactividad"
+                    "tiempoInactividad",
+                    "imagen",
+                    "logo"
                   ],
                   "example": "id"
                 },
@@ -22194,7 +22298,7 @@
   ],
   "servers": [
     {
-      "url": "http://[::1]:8000"
+      "url": "http://localhost:8000"
     }
   ]
 }

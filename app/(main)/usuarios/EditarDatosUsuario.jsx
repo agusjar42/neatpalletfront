@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
@@ -9,15 +9,18 @@ import { Image } from 'primereact/image';
 import { Button } from "primereact/button";
 import 'react-phone-input-2/lib/bootstrap.css'
 import { convertirArchivoABase64 } from "@/app/utility/Utils";
+import { Toast } from "primereact/toast";
 
 const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccionado, setIdiomaSeleccionado, estadoGuardando,
     listaRoles, rolSeleccionado, setRolSeleccionado, listaTipoArchivos
 }) => {
     const intl = useIntl()
+    const toast = useRef(null);
     
     // Estado para el preview del avatar
     const [previewAvatar, setPreviewAvatar] = useState(usuario.avatarBase64 || null);
     const [dropdownAbiertoIdioma, setDropdownAbiertoIdioma] = useState(false);
+    const [avatarInputRef, setAvatarInputRef] = useState(null);
     const [dropdownAbiertoRol, setDropdownAbiertoRol] = useState(false);
     //Para que el dropdown muestre el registro seleccionado aunque no este en la lista
     const optionsIdioma = dropdownAbiertoIdioma ? listaIdiomas.map(registro => registro.nombre) : [idiomaSeleccionado || '', ...listaIdiomas.map(registro => registro.nombre)];
@@ -35,6 +38,19 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
     const onSelectAvatar = async (e) => {
         if (e.files && e.files.length > 0) {
             const file = e.files[0];
+                       
+            // Validar el tamaño del archivo (2MB = 2 * 1024 * 1024 bytes)
+            const maxSize = 2 * 1024 * 1024;
+            if (file.size > maxSize) {
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'La imagen no puede ser mayor a 2 MB' }),
+                    life: 3000,
+                });
+                return;
+            }
+
             try {
                 const base64 = await convertirArchivoABase64(file);
                 setPreviewAvatar(base64);
@@ -48,6 +64,12 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                 });
             } catch (error) {
                 console.error('Error convirtiendo archivo a base64:', error);
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'Error procesando la imagen' }),
+                    life: 3000,
+                });
             }
         }
     };
@@ -65,6 +87,7 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
 
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el Usuario' })}>
+            <Toast ref={toast} position="top-right" />
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="usuRol"><b>{intl.formatMessage({ id: 'Rol' })}*</b> </label>
@@ -103,13 +126,6 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                         rows={5} cols={30} maxLength={50} />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="activoSN" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
-                    <InputSwitch
-                        checked={usuario.activoSn === 'S'}
-                        onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
-                    />
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="telefono"><b>{intl.formatMessage({ id: 'Teléfono' })}*</b></label>
                     <InputText value={usuario.telefono}
                         onChange={(e) => setUsuario({ ...usuario, telefono: e.target.value })}
@@ -117,9 +133,15 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                         rows={5} cols={30} maxLength={50}
                         style={{textAlign:"right"}} />
                 </div>
-
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="activoSN" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
+                    <InputSwitch
+                        checked={usuario.activoSn === 'S'}
+                        onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
+                    />
+                </div>
                 {/* Sección del Avatar - Imagen actual */}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="avatar" className="pb-2">{intl.formatMessage({ id: 'Avatar' })}</label>
                     {usuario.avatar && (
                         <Image
@@ -131,14 +153,22 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                             preview
                         />
                     )}   
-                    <FileUpload
-                        name="avatar"
+                    <input
+                        type="file"
                         accept="image/*"
-                        maxFileSize={2000000} // 2MB
-                        onSelect={onSelectAvatar}
-                        mode="basic"
-                        chooseLabel="Cambiar imagen por: "
-                        className="p-button-outlined pt-2"
+                        onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                                onSelectAvatar({ files: [e.target.files[0]] });
+                            }
+                        }}
+                        style={{ display: 'none' }}
+                        ref={(ref) => setAvatarInputRef(ref)}
+                    />
+                    <Button
+                        label="Cambiar avatar por:"
+                        icon="pi pi-upload"
+                        className="p-button-outlined"
+                        onClick={() => avatarInputRef?.click()}
                     />
                     
                     {previewAvatar && (

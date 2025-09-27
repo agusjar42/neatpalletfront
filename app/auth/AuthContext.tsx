@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { obtenerRolDashboard } from "@/app/api-endpoints/rol";
 import Cookies from 'js-cookie';
-import { emptyCache } from '../utility/Utils';
+import { devuelveBasePath, emptyCache } from '../utility/Utils';
 import jwt from "@/app/auth/jwt/useJwt";
 import { getEmpresa } from "@/app/api-endpoints/empresa";
 import { postLogUsuario } from "@/app/api-endpoints/log_usuario";
@@ -239,7 +239,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
     if (await compruebaRolUsuario({ ...data })) {
       //Si tiene que mostrar la empresa, obtenemos el logo
-      localStorage.setItem('logoEmpresaUrl', await obtenerLogoEmpresa());
+      localStorage.setItem('logoEmpresaUrl', empresa.logo || `${(devuelveBasePath())}/multimedia/sistemaNP/imagen-no-disponible.jpeg`);
     }
 
     //Obtiene la ip del usuario usando la API de ipify, es de codigo abierto y tiene usos infinitos
@@ -269,35 +269,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
     //setMuestraEmpresa(rol[0].muestraEmpresa === 'S')
     return Array.isArray(rol) && rol[0]?.muestraEmpresa === 'S';
-  }
-
-  const obtenerLogoEmpresa = async () => {
-    //Obtiene los tipos de archivo de la seccion
-    const queryParamsTiposArchivo = {
-      where: {
-        and: {
-          nombreSeccion: 'Empresa',
-          nombre: 'Logo'
-        }
-
-      },
-      order: "orden ASC"
-    };
-    const registrosTipoArchivos = await getVistaTipoArchivoEmpresaSeccion(JSON.stringify(queryParamsTiposArchivo));
-
-    const queryParamsArchivo = {
-      where: {
-        and: {
-          tipoArchivoId: Array.isArray(registrosTipoArchivos) && registrosTipoArchivos.length > 0 ? registrosTipoArchivos[0].id : undefined,
-          tablaId: Number(localStorage.getItem('empresa'))
-        }
-      }
-    };
-    const archivoLogo = await getVistaArchivoEmpresa(JSON.stringify(queryParamsArchivo))
-    if (Array.isArray(archivoLogo) && archivoLogo.length > 0) {
-      return archivoLogo[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
-    }
-    return null;
   }
 
   const logout = (mensaje?: string) => {

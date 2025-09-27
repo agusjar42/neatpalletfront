@@ -833,31 +833,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 onClick={eliminarRegistro}
             />
         </>
-    );
-
-    const mostrarQRDialogFooter = (
-        <>
-            <div className="formgrid grid">
-                <div className="flex field gap-2 mt-2 col-2" style={{ alignItems: 'center' }}>
-                    <label htmlFor="paisNombre">{intl.formatMessage({ id: 'Email' })}</label>
-                </div>
-                <div className="flex field gap-2 mt-2 col-7">
-                    <InputText value={correoEnviarQR}
-                        style={{ width: '100%' }}
-                        onChange={(e) => setCorreoEnviarQR(e.target.value)}
-                        rows={5} cols={30} maxLength={150} />
-                </div>
-
-                <div className="flex field gap-2 mt-2 col-3">
-                    <Button
-                        label={intl.formatMessage({ id: 'Enviar' })}
-                        text
-                        onClick={enviarCorreoQR}
-                    />
-                </div>
-            </div>
-        </>
-    );
+    );    
 
     //Muestra cuantos registros tiene el paginator
     const paginatorTemplate = {
@@ -1221,34 +1197,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 header={intl.formatMessage({ id: 'Descargar archivo CSV' })}
                                 labelMostrados={intl.formatMessage({ id: 'Registros mostrados' })}
                                 labelTodos={intl.formatMessage({ id: 'Todos los registros' })}
-                            />
-                            {/* MODAL DE MOSTRAR QR */}
-                            <Dialog
-                                visible={mostarQRDialog}
-                                style={{ width: "450px" }}
-                                //header={intl.formatMessage({ id: '¿Eliminar registro?' })}
-                                modal
-                                footer={mostrarQRDialogFooter}
-                                onHide={ocultarQRDialog}
-                            >
-                                <div className="flex flex-column align-items-center justify-content-center">
-                                    <p style={{ width: '100%' }}>
-                                        {intl.formatMessage({ id: 'El sistema ha generado el siguiente Qr para completar el proceso de registro y activar una cuenta, puede escanear el código QR que se muestra a continuación con un dispositivo móvil.' })}:
-                                    </p>
-
-                                    <CodigoQR url={urlQREncriptado || ''} /><p></p>
-                                    <span style={{ width: '100%' }}>
-                                        {intl.formatMessage({ id: 'o pulsar el siguiente enlance' })}:
-                                    </span>
-                                    <a style={{ overflowWrap: 'anywhere' }} href={urlQREncriptado}>
-                                        {urlQREncriptado}
-                                    </a>
-                                    <p></p>
-                                    <p>
-                                        {intl.formatMessage({ id: 'También tiene la posibilidad de enviarlo por mail introduciendo el email destinatario en el siguiente campo' })}:
-                                    </p>
-                                </div>
-                            </Dialog>
+                            />                            
                         </div>
                     </div>
                 </div>

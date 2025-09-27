@@ -6,7 +6,7 @@ import { postEnvio, patchEnvio } from "@/app/api-endpoints/envio";
 import { getTipoTransporte } from "@/app/api-endpoints/tipo-transporte";
 import { getTipoCarroceria } from "@/app/api-endpoints/tipo-carroceria";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvio from  "./EditarDatosEnvio";
 import { useIntl } from 'react-intl';
 
@@ -36,8 +36,31 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
-        const validaDescripcion = envio.descripcion === undefined || envio.descripcion === "";
-        return (!validaDescripcion)
+        const validaorigenRuta = envio.origenRuta === undefined || envio.origenRuta === "";
+        const validaDestinoRuta = envio.destinoRuta === undefined || envio.destinoRuta === "";
+        const gpsRutaOrigen = envio.gpsRutaOrigen === undefined || envio.gpsRutaOrigen === "";
+        const gpsRutaDestino = envio.gpsRutaDestino === undefined || envio.gpsRutaDestino === "";
+        const validaFechaSalida = envio.fechaSalida === undefined || envio.fechaSalida === null || envio.fechaSalida === "";
+        const validaFechaLlegada = envio.fechaLlegada === undefined || envio.fechaLlegada === null || envio.fechaLlegada === "";
+        
+        // Validar que la fecha de llegada sea posterior a la fecha de salida
+        let fechaLlegadaPosterior = true;
+        if (!validaFechaSalida && !validaFechaLlegada) {
+            const fechaSalida = new Date(envio.fechaSalida);
+            const fechaLlegada = new Date(envio.fechaLlegada);
+            fechaLlegadaPosterior = fechaLlegada > fechaSalida;
+            
+            if (!fechaLlegadaPosterior) {
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'La fecha de llegada debe ser posterior a la fecha de salida' }),
+                    life: 3000,
+                });
+            }
+        }
+        
+        return (!validaorigenRuta && !validaDestinoRuta && !gpsRutaOrigen && !gpsRutaDestino && !validaFechaSalida && !validaFechaLlegada && fechaLlegadaPosterior)
     }
 
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
@@ -54,6 +77,13 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
         if (await validaciones()) {
             let objGuardar = { ...envio };
             const usuarioActual = getUsuarioSesion()?.id;
+            //
+            //Borramos las columnas de la vista que nos han servido de apoyo
+            //
+            delete objGuardar['fechaSalidaEspanol'];
+            delete objGuardar['fechaLlegadaEspanol'];
+            delete objGuardar['codigoEmpresa'];
+            delete objGuardar['nombreEmpresa'];
 
             if (idEditar === 0) {
                 delete objGuardar.id;
@@ -75,7 +105,6 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
                 }
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
                 delete objGuardar['fechaModificacion'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchEnvio(objGuardar.id, objGuardar);

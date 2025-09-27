@@ -65,6 +65,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/empresa",
           "icon": "pi pi-building"
         },
+        "Envío Configuracion Empresa": {
+            "path": "/envio-configuracion-empresa",
+            "icon": "pi pi-building"
+        },        
         "Log de usuarios": {
           "path": "/tablas-maestras/log_usuario",
           "icon": "pi pi-history"
@@ -76,7 +80,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         "Permisos": {
           "path": "/tablas-maestras/permiso",
           "icon": "pi pi-key"
-        }
+        },
+        "Tipo Carroceria": {
+          "path": "/tipo-carroceria",
+          "icon": "pi pi-car"
+        },
+        "Tipo Sensor": {
+          "path": "/tipo-sensor",
+          "icon": "pi pi-circle"
+        },
+        "Tipo Transporte": {
+          "path": "/tipo-transporte",
+          "icon": "pi pi-truck"
+        },
       },
       "Traducciones": {
         "Idiomas": {
@@ -108,14 +124,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               "icon": "pi pi-wrench"
           },
       },
-      "Arreglar": {
+      "Gestión del Envio": {
           "Envio Contenido": {
               "path": "/envio-contenido",
               "icon": "pi pi-refresh"
-          },
-          "Envio Configuracion Empresa": {
-              "path": "/envio-configuracion-empresa",
-              "icon": "pi pi-building"
           },
           "Envio Configuracion": {
               "path": "/envio-configuracion",
@@ -140,19 +152,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "Envio": {
               "path": "/envio",
               "icon": "pi pi-send"
-          },
-
-          "Tipo Carroceria": {
-              "path": "/tipo-carroceria",
-              "icon": "pi pi-car"
-          },
-          "Tipo Sensor": {
-              "path": "/tipo-sensor",
-              "icon": "pi pi-circle"
-          },
-          "Tipo Transporte": {
-              "path": "/tipo-transporte",
-              "icon": "pi pi-truck"
           }
       }
     }

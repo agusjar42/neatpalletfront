@@ -86,14 +86,6 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Paises-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Paises-Borrar' },
 
-                // Tipos de archivo
-                { header: intl.formatMessage({ id: 'Tipos de archivo' }), seccion: 'Tipos de archivo' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipos de archivo-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipos de archivo-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipos de archivo-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de archivo-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de archivo-Borrar' },
-
                 // Plantillas de correo
                 /*{ header: intl.formatMessage({ id: 'Plantillas de correo' }), seccion: 'Plantillas de correo' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Plantillas de correo-Acceder' },
@@ -102,21 +94,6 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Plantillas de correo-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Plantillas de correo-Borrar' },
                 */
-                // Secciones
-                { header: intl.formatMessage({ id: 'Secciones' }), seccion: 'Secciones' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Secciones-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Secciones-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Secciones-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Secciones-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Secciones-Borrar' },
-
-                // Archivos
-                { header: intl.formatMessage({ id: 'Archivos' }), seccion: 'Archivos' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Archivos-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Archivos-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Archivos-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Archivos-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Archivos-Borrar' },
 
                 // Traducciones
                 { header: intl.formatMessage({ id: 'Traducciones' }), seccion: 'Traducciones' },

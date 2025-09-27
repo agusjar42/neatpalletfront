@@ -34,6 +34,7 @@ const Usuario = () => {
 
     const columnas = [
         { campo: 'nombreRol', header: intl.formatMessage({ id: 'Rol' }), tipo: 'string' },
+        { campo: 'avatar', header: intl.formatMessage({ id: 'Avatar' }), tipo: 'imagen' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'mail', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
         { campo: 'telefono', header: intl.formatMessage({ id: 'Teléfono' }), tipo: 'string' },

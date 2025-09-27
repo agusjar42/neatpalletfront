@@ -93,7 +93,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     });
                 }
             } else {
-                objGuardar['usuarioModificacion'] = usuarioActual;
+                objGuardar['usuModificacion'] = usuarioActual;
                 delete objGuardar['fechaModificacion'];
                 //
                 // Si no se ha cambiado la foto del producto, no enviamos el campo

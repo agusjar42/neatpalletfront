@@ -10,6 +10,7 @@ const Rol = () => {
  
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
+        { campo: 'dashboardUrl', header: intl.formatMessage({ id: 'Pantalla de inicio' }), tipo: 'string' },
     ]
 
     return (

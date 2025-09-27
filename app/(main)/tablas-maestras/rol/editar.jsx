@@ -44,10 +44,11 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
 
         //Valida el bloque de nivel idioma
         const validaNombre = rol.nombre === undefined || rol.nombre === "";
+        const validaPantallaInicio = pantallaDashboardSeleccionada === null || pantallaDashboardSeleccionada === "";
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return (!validaNombre)
+        return (!validaNombre && !validaPantallaInicio)
     }
 
     const guardarRol = async () => {

@@ -24,17 +24,9 @@ const EditarDatosRol = ({ rol, setRol, estadoGuardando, pantallasDashboard, pant
                         onChange={(e) => setRol({ ...rol, nombre: e.target.value })}
                         className={`${(estadoGuardando && rol.nombre === "") ? "p-invalid" : ""}`}
                         rows={5} cols={30} maxLength={50} />
-                </div>
-                {/* <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="nombre">{intl.formatMessage({ id: 'Dashboard' })}</label>
-                    <InputText value={rol.dashboardUrl}
-                        placeholder={intl.formatMessage({ id: 'Url de la pantalla del dashboard' })}
-                        onChange={(e) => setRol({ ...rol, dashboardUrl: e.target.value })}
-                        //className={`${(estadoGuardando && rol.nombre === "") ? "p-invalid" : ""}`}
-                        rows={5} cols={30} maxLength={150}/>
-                </div> */}
+                </div>                
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="provincia">{intl.formatMessage({ id: 'Pantalla de inicio' })}</label>
+                    <label htmlFor="pantallaInicio"><b>{intl.formatMessage({ id: 'Pantalla de inicio' })}</b></label>
                     <Dropdown value={pantallaDashboardSeleccionada || ""}
                         onChange={(e) => setPantallaDashboardSeleccionada(e.value)}
                         options={pantallasDashboard ? pantallasDashboard.map(pantalla => pantalla.nombre) : []}

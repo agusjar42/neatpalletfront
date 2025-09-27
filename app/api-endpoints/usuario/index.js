@@ -23,11 +23,6 @@ export const getVistaUsuariosCount = async (filtro) => {
     return dataUsuarios
 }
 
-export const getUsuarioAvatar = async (id) => {
-    const { data: dataUsuarios } = await apiUsuario.usuariosControllerObtenerUsuarioAvatar(id)
-    return dataUsuarios
-}
-
 export const postUsuario = async (objUsuario) => {
     const { data: dataUsuario } = await apiUsuario.usuariosControllerCreate(objUsuario)
     return dataUsuario

@@ -10,8 +10,6 @@ import { getEmpresa } from "@/app/api-endpoints/empresa";
 import { postLogUsuario } from "@/app/api-endpoints/log_usuario";
 import { getIdioma } from "@/app/api-endpoints/idioma";
 import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
-import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
-import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
 import { obtenerTodosLosPermisos } from "@/app/components/shared/componentes";
 interface AuthContextProps {
   usuarioAutenticado: boolean;
@@ -71,22 +69,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/log_usuario",
           "icon": "pi pi-history"
         },
-        "Secciones": {
-          "path": "/tablas-maestras/seccion",
-          "icon": "pi pi-fw pi-bars"
-        },
-        "Tipos de archivo": {
-          "path": "/tablas-maestras/tipo_archivo",
-          "icon": "pi pi-tags"
-        },
-        "Archivos": {
-          "path": "/tablas-maestras/archivo",
-          "icon": "pi pi-file"
-        },
-        /*"Plantillas de correo": {
-          "path": "/tablas-maestras/plantilla_email",
-          "icon": "pi pi-fw pi-minus"
-        },*/
         "Roles": {
           "path": "/tablas-maestras/rol",
           "icon": "pi pi-fw pi-bars"

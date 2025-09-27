@@ -2,16 +2,11 @@ import React, { useContext, useRef, useImperativeHandle, useState, useEffect } f
 import { LayoutContext } from './context/layoutcontext';
 import { getIdiomas } from '@/app/api-endpoints/idioma';
 import { Dropdown } from 'primereact/dropdown';
-import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
-import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
 import { getEmpresa } from "@/app/api-endpoints/empresa";
 import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
-import { getUsuarioAvatar } from "@/app/api-endpoints/usuario";
-import AppBreadcrumb from './AppBreadCrumb';
-import { devuelveBasePath, getUsuarioSesion } from "@/app/utility/Utils";
-import { set } from 'date-fns';
+import { getUsuarioSesion } from "@/app/utility/Utils";
 
 const AppTopbar = React.forwardRef((props, ref) => {
     const { onMenuToggle, showProfileSidebar, showConfigSidebar } = useContext(LayoutContext);

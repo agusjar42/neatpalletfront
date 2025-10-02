@@ -8814,6 +8814,49 @@ export interface RolWithRelations {
 /**
  * 
  * @export
+ * @interface TestClaudeResponse
+ */
+export interface TestClaudeResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TestClaudeResponse
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof TestClaudeResponse
+     */
+    'message'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TestClaudeResponse
+     */
+    'response'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TestClaudeResponse
+     */
+    'model'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TestClaudeResponse
+     */
+    'timestamp'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TestClaudeResponse
+     */
+    'error'?: string;
+}
+/**
+ * 
+ * @export
  * @interface TipoCarroceria
  */
 export interface TipoCarroceria {
@@ -13157,6 +13200,43 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        envioControllerCrearEnvioConfiguracionDesdeEmpresa: async (newEnvio?: NewEnvio, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/crear-envio-configuracion-desde-empresa`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newEnvio, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewEnvio} [newEnvio] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         envioControllerCreate: async (newEnvio?: NewEnvio, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/envios`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -13455,6 +13535,16 @@ export const EnvioControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async envioControllerCrearEnvioConfiguracionDesdeEmpresa(newEnvio?: NewEnvio, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioControllerCrearEnvioConfiguracionDesdeEmpresa(newEnvio, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewEnvio} [newEnvio] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async envioControllerCreate(newEnvio?: NewEnvio, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Envio>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.envioControllerCreate(newEnvio, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
@@ -13548,6 +13638,15 @@ export const EnvioControllerApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        envioControllerCrearEnvioConfiguracionDesdeEmpresa(newEnvio?: NewEnvio, options?: any): AxiosPromise<any> {
+            return localVarFp.envioControllerCrearEnvioConfiguracionDesdeEmpresa(newEnvio, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewEnvio} [newEnvio] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         envioControllerCreate(newEnvio?: NewEnvio, options?: any): AxiosPromise<Envio> {
             return localVarFp.envioControllerCreate(newEnvio, options).then((request) => request(axios, basePath));
         },
@@ -13628,6 +13727,17 @@ export class EnvioControllerApi extends BaseAPI {
      */
     public envioControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
         return EnvioControllerApiFp(this.configuration).envioControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewEnvio} [newEnvio] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioControllerApi
+     */
+    public envioControllerCrearEnvioConfiguracionDesdeEmpresa(newEnvio?: NewEnvio, options?: AxiosRequestConfig) {
+        return EnvioControllerApiFp(this.configuration).envioControllerCrearEnvioConfiguracionDesdeEmpresa(newEnvio, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -23311,6 +23421,104 @@ export class RolControllerApi extends BaseAPI {
      */
     public rolControllerVistaEmpresaRolCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
         return RolControllerApiFp(this.configuration).rolControllerVistaEmpresaRolCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TestClaudeControllerApi - axios parameter creator
+ * @export
+ */
+export const TestClaudeControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        testClaudeControllerTestClaude: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/test-claude`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TestClaudeControllerApi - functional programming interface
+ * @export
+ */
+export const TestClaudeControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TestClaudeControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async testClaudeControllerTestClaude(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TestClaudeResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.testClaudeControllerTestClaude(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TestClaudeControllerApi - factory interface
+ * @export
+ */
+export const TestClaudeControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TestClaudeControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        testClaudeControllerTestClaude(options?: any): AxiosPromise<TestClaudeResponse> {
+            return localVarFp.testClaudeControllerTestClaude(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TestClaudeControllerApi - object-oriented interface
+ * @export
+ * @class TestClaudeControllerApi
+ * @extends {BaseAPI}
+ */
+export class TestClaudeControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TestClaudeControllerApi
+     */
+    public testClaudeControllerTestClaude(options?: AxiosRequestConfig) {
+        return TestClaudeControllerApiFp(this.configuration).testClaudeControllerTestClaude(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

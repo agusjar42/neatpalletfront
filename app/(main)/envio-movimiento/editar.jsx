@@ -10,7 +10,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioMovimiento from "./EditarDatosEnvioMovimiento";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab }) => {
     const toast = useRef(null);
     const [envioMovimiento, setEnvioMovimiento] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -105,9 +105,9 @@ const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
 
     return (
         <div>
-            <div className="grid Empresa">
+            <div className="grid envioMovimiento">
                 <div className="col-12">
-                    <div className="card">
+                    <div {...(!estoyDentroDeUnTab && { className: "card" })}>
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Movimiento de Envio' })).toLowerCase()}</h2>
                         <EditarDatosEnvioMovimiento

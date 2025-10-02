@@ -227,6 +227,37 @@
         "operationId": "CompruebaImagenController.compruebaImagenEndpoint"
       }
     },
+    "/crear-envio-configuracion-desde-empresa": {
+      "post": {
+        "x-controller-name": "EnvioController",
+        "x-operation-name": "crearEnvioConfiguracionDesdeEmpresa",
+        "tags": [
+          "EnvioController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Crear envío y configuración desde empresa"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewEnvio"
+              }
+            }
+          }
+        },
+        "operationId": "EnvioController.crearEnvioConfiguracionDesdeEmpresa"
+      }
+    },
     "/empresas/count": {
       "get": {
         "x-controller-name": "EmpresaController",
@@ -5956,6 +5987,28 @@
           }
         ],
         "operationId": "RolController.find"
+      }
+    },
+    "/test-claude": {
+      "get": {
+        "x-controller-name": "TestClaudeController",
+        "x-operation-name": "testClaude",
+        "tags": [
+          "TestClaudeController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Test Claude API Connection Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestClaudeResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "TestClaudeController.testClaude"
       }
     },
     "/tipo-carrocerias/count": {
@@ -18320,6 +18373,30 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Rol>"
+      },
+      "TestClaudeResponse": {
+        "type": "object",
+        "title": "TestClaudeResponse",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "response": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
       },
       "TipoCarroceria.Filter": {
         "type": "object",

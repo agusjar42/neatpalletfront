@@ -1,16 +1,119 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { Calendar } from 'primereact/calendar';
+import { TabView, TabPanel } from 'primereact/tabview';
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { useIntl } from 'react-intl';
+import Crud from "../../components/shared/crud";
+import { crearEnvioConfiguracionDesdeEmpresa } from "@/app/api-endpoints/envio";
+import { getEnvioConfiguracion, getEnvioConfiguracionCount, deleteEnvioConfiguracion } from "@/app/api-endpoints/envio-configuracion";
+import { getEnvioContenido, getEnvioContenidoCount, deleteEnvioContenido } from "@/app/api-endpoints/envio-contenido";
+import { getEnvioMovimiento, getEnvioMovimientoCount, deleteEnvioMovimiento } from "@/app/api-endpoints/envio-movimiento";
+import { getEnvioPallet, getEnvioPalletCount, deleteEnvioPallet } from "@/app/api-endpoints/envio-pallet";
+import { getEnvioParada, getEnvioParadaCount, deleteEnvioParada } from "@/app/api-endpoints/envio-parada";
+import EditarEnvioConfiguracion from "../envio-configuracion/editar";
+import EditarEnvioContenido from "../envio-contenido/editar";
+import EditarEnvioMovimiento from "../envio-movimiento/editar";
+import EditarEnvioPallet from "../envio-pallet/editar";
+import EditarEnvioParada from "../envio-parada/editar";
+import { getUsuarioSesion } from "@/app/utility/Utils";
+
 
 const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     const intl = useIntl();
+    const toast = useRef(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [cargandoConfiguracion, setCargandoConfiguracion] = useState(false);
+    const [refreshConfiguracion, setRefreshConfiguracion] = useState(0);
+
+    // Columnas para las diferentes tablas
+    const columnasConfiguracion = [
+        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
+        { campo: 'unidadMedida', header: intl.formatMessage({ id: 'Unidad de medida' }), tipo: 'string' },
+    ];
+
+    const columnasContenido = [
+        { campo: 'producto', header: intl.formatMessage({ id: 'Producto' }), tipo: 'string' },
+        { campo: 'referencia', header: intl.formatMessage({ id: 'Referencia' }), tipo: 'string' },
+        { campo: 'pesoKgs', header: intl.formatMessage({ id: 'Peso (Kg)' }), tipo: 'number' },
+        { campo: 'pesoTotal', header: intl.formatMessage({ id: 'Peso Total (Kg)' }), tipo: 'number' },
+        { campo: 'medidas', header: intl.formatMessage({ id: 'Medidas' }), tipo: 'string' },
+    ];
+
+    const columnasMovimiento = [
+        { campo: 'fecha', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'date' },
+        { campo: 'nombreTipoSensor', header: intl.formatMessage({ id: 'Tipo Sensor' }), tipo: 'string' },
+        { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
+        { campo: 'gps', header: intl.formatMessage({ id: 'GPS' }), tipo: 'string' },
+    ];
+
+    const columnasPallet = [
+        { campo: 'codigoPallet', header: intl.formatMessage({ id: 'Código Pallet' }), tipo: 'string' },
+        { campo: 'aliasPallet', header: intl.formatMessage({ id: 'Alias' }), tipo: 'string' },
+        { campo: 'modeloPallet', header: intl.formatMessage({ id: 'Modelo' }), tipo: 'string' },
+    ];
+
+    const columnasParada = [
+        { campo: 'fecha', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'date' },
+        { campo: 'lugarParada', header: intl.formatMessage({ id: 'Lugar' }), tipo: 'string' },
+        { campo: 'direccion', header: intl.formatMessage({ id: 'Dirección' }), tipo: 'string' },
+        { campo: 'nombreOperario', header: intl.formatMessage({ id: 'Operario' }), tipo: 'string' },
+    ];
+
+    const handleCrearConfiguracionDesdeEmpresa = () => {
+        if (!envio.id) {
+            toast.current?.show({
+                severity: 'warn',
+                summary: intl.formatMessage({ id: 'Advertencia' }),
+                detail: intl.formatMessage({ id: 'Debe guardar el envío primero' }),
+                life: 3000,
+            });
+            return;
+        }
+
+        confirmDialog({
+            message: intl.formatMessage({ id: '¿Está seguro que desea crear la configuración desde la empresa? Esto sobrescribirá la configuración actual del envío.' }),
+            header: intl.formatMessage({ id: 'Confirmación' }),
+            icon: 'pi pi-exclamation-triangle',
+            acceptLabel: intl.formatMessage({ id: 'Sí' }),
+            rejectLabel: intl.formatMessage({ id: 'No' }),
+            accept: async () => {
+                setCargandoConfiguracion(true);
+                try {
+                    const datosEnvio = {empresaId: envio.empresaId, usuarioCreacion: getUsuarioSesion()?.id};
+                    await crearEnvioConfiguracionDesdeEmpresa(datosEnvio);
+                    toast.current?.show({
+                        severity: 'success',
+                        summary: intl.formatMessage({ id: 'Éxito' }),
+                        detail: intl.formatMessage({ id: 'Configuración creada desde empresa correctamente' }),
+                        life: 3000,
+                    });
+                    // Refrescar el CRUD de configuración
+                    setRefreshConfiguracion(prev => prev + 1);
+                } catch (error) {
+                    toast.current?.show({
+                        severity: 'error',
+                        summary: intl.formatMessage({ id: 'Error' }),
+                        detail: intl.formatMessage({ id: 'Error al crear la configuración desde empresa' }),
+                        life: 3000,
+                    });
+                } finally {
+                    setCargandoConfiguracion(false);
+                }
+            }
+        });
+    };
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos del envío' })}>
-            <div className="formgrid grid">
+        <>
+            <Toast ref={toast} position="top-right" />
+            <ConfirmDialog />
+            <Fieldset legend={intl.formatMessage({ id: 'Datos del envío' })}>
+                <div className="formgrid grid">
                 {/* Primera fila */}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
                     <label htmlFor="origenRuta"><b>{intl.formatMessage({ id: 'Origen de la ruta' })}*</b></label>
@@ -41,6 +144,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         value={envio.gpsRutaOrigen || ""}
                         placeholder={intl.formatMessage({ id: 'Coordenadas GPS origen (lat, lng)' })}
                         onChange={(e) => setEnvio({ ...envio, gpsRutaOrigen: e.target.value })}
+                        className={`${(estadoGuardando && (envio.gpsRutaOrigen === "" || envio.gpsRutaOrigen === undefined)) ? "p-invalid" : ""}`}
                         maxLength={50} 
                     />
                 </div>
@@ -51,6 +155,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         value={envio.gpsRutaDestino || ""}
                         placeholder={intl.formatMessage({ id: 'Coordenadas GPS destino (lat, lng)' })}
                         onChange={(e) => setEnvio({ ...envio, gpsRutaDestino: e.target.value })}
+                        className={`${(estadoGuardando && (envio.gpsRutaDestino === "" || envio.gpsRutaDestino === undefined)) ? "p-invalid" : ""}`}
                         maxLength={50} 
                     />
                 </div>
@@ -62,6 +167,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         value={envio.fechaSalida}
                         placeholder={intl.formatMessage({ id: 'Seleccione fecha y hora de salida' })}
                         onChange={(e) => setEnvio({ ...envio, fechaSalida: e.target.value })}
+                        className={`${(estadoGuardando && (envio.fechaSalida === "" || envio.fechaSalida === undefined)) ? "p-invalid" : ""}`}
                         maxLength={20}
                         style={{ textAlign: 'right' }}
                     />
@@ -73,6 +179,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         value={envio.fechaLlegada}
                         placeholder={intl.formatMessage({ id: 'Seleccione fecha y hora de llegada' })}
                         onChange={(e) => setEnvio({ ...envio, fechaLlegada: e.target.value })}
+                        className={`${(estadoGuardando && (envio.fechaLlegada === "" || envio.fechaLlegada === undefined)) ? "p-invalid" : ""}`}
                         maxLength={20}
                         style={{ textAlign: 'right' }}
                     />
@@ -94,6 +201,195 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                 </div>
             </div>
         </Fieldset>
+
+        {/* Pestañas para bloques adicionales */}
+        <div className="mt-4">
+            <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
+                <TabPanel header={intl.formatMessage({ id: 'Configuración' })}>
+                    <div>
+                        {/* Solo mostrar la tabla de configuración si el envío ya está creado */}
+                        {envio.id ? (
+                            <>
+                                <div className="flex justify-content-end mb-3">
+                                    <Button
+                                        label={cargandoConfiguracion ? intl.formatMessage({ id: 'Creando configuración...' }) : intl.formatMessage({ id: 'Crear configuración desde empresa' })}
+                                        icon={cargandoConfiguracion ? "pi pi-spin pi-spinner" : "pi pi-copy"}
+                                        onClick={handleCrearConfiguracionDesdeEmpresa}
+                                        disabled={cargandoConfiguracion}
+                                        className="p-button-help"
+                                        tooltip={intl.formatMessage({ id: 'Copia la configuración predeterminada de la empresa a este envío' })}
+                                        tooltipOptions={{ position: 'left' }}
+                                    />
+                                </div>
+                                <Crud
+                                    key={`configuracion-${refreshConfiguracion}`}
+                                    headerCrud={intl.formatMessage({ id: 'Configuración del Envío' })}
+                                    getRegistros={getEnvioConfiguracion}
+                                    getRegistrosCount={getEnvioConfiguracionCount}
+                                    botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                    controlador={"Envio Configuracion"}
+                                    editarComponente={<EditarEnvioConfiguracion />}
+                                    columnas={columnasConfiguracion}
+                                    filtradoBase={{envioId: envio.id}}
+                                    deleteRegistro={deleteEnvioConfiguracion}
+                                    cargarDatosInicialmente={true}
+                                    editarComponenteParametrosExtra={{
+                                        envioId: envio.id,
+                                        estoyDentroDeUnTab: true
+                                    }}
+                                />
+                            </>
+                        ) : (
+                            <div className="text-center p-4">
+                                <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+                                <p className="text-gray-600">
+                                    {intl.formatMessage({ id: 'Debe guardar el envío primero para poder añadir configuración' })}
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                </TabPanel>
+                
+                <TabPanel header={intl.formatMessage({ id: 'Contenido' })}>
+                    <div>
+                        {/* Solo mostrar la tabla de contenido si el envío ya está creado */}
+                        {envio.id ? (
+                            <Crud
+                                headerCrud={intl.formatMessage({ id: 'Contenido del Envío' })}
+                                getRegistros={getEnvioContenido}
+                                getRegistrosCount={getEnvioContenidoCount}
+                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                controlador={"Envio Contenido"}
+                                editarComponente={<EditarEnvioContenido />}
+                                columnas={columnasContenido}
+                                filtradoBase={{envioId: envio.id}}
+                                deleteRegistro={deleteEnvioContenido}
+                                cargarDatosInicialmente={true}
+                                editarComponenteParametrosExtra={{
+                                    envioId: envio.id,
+                                    estoyDentroDeUnTab: true  // true si estás en cualquier tab, false si estás en la primera pestaña
+                                }}
+                            />
+                        ) : (
+                            <div className="text-center p-4">
+                                <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+                                <p className="text-gray-600">
+                                    {intl.formatMessage({ id: 'Debe guardar el envío primero para poder añadir contenido' })}
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                </TabPanel>                
+                
+                <TabPanel header={intl.formatMessage({ id: 'Movimientos' })}>
+                    <div>
+                        {/* Solo mostrar la tabla de movimientos si el envío ya está creado */}
+                        {envio.id ? (
+                            <Crud
+                                headerCrud={intl.formatMessage({ id: 'Movimientos del Envío' })}
+                                getRegistros={getEnvioMovimiento}
+                                getRegistrosCount={getEnvioMovimientoCount}
+                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                controlador={"Envio Movimiento"}
+                                editarComponente={<EditarEnvioMovimiento />}
+                                columnas={columnasMovimiento}
+                                filtradoBase={{envioId: envio.id}}
+                                deleteRegistro={deleteEnvioMovimiento}
+                                cargarDatosInicialmente={true}
+                                editarComponenteParametrosExtra={{
+                                    envioId: envio.id,
+                                    estoyDentroDeUnTab: true  // true si estás en cualquier tab, false si estás en la primera pestaña
+                                }}
+                            />
+                        ) : (
+                            <div className="text-center p-4">
+                                <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+                                <p className="text-gray-600">
+                                    {intl.formatMessage({ id: 'Debe guardar el envío primero para poder añadir movimientos' })}
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                </TabPanel>
+                
+                <TabPanel header={intl.formatMessage({ id: 'Pallets' })}>
+                    <div>
+                        {/* Solo mostrar la tabla de pallets si el envío ya está creado */}
+                        {envio.id ? (
+                            <Crud
+                                headerCrud={intl.formatMessage({ id: 'Pallets del Envío' })}
+                                getRegistros={getEnvioPallet}
+                                getRegistrosCount={getEnvioPalletCount}
+                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                controlador={"Envio Pallet"}
+                                editarComponente={<EditarEnvioPallet />}
+                                columnas={columnasPallet}
+                                filtradoBase={{envioId: envio.id}}
+                                deleteRegistro={deleteEnvioPallet}
+                                cargarDatosInicialmente={true}
+                                editarComponenteParametrosExtra={{
+                                    envioId: envio.id,
+                                    estoyDentroDeUnTab: true  // true si estás en cualquier tab, false si estás en la primera pestaña
+                                }}
+                            />
+                        ) : (
+                            <div className="text-center p-4">
+                                <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+                                <p className="text-gray-600">
+                                    {intl.formatMessage({ id: 'Debe guardar el envío primero para poder añadir pallets' })}
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                </TabPanel>
+                
+                <TabPanel header={intl.formatMessage({ id: 'Paradas' })}>
+                    <div>
+                        {/* Solo mostrar la tabla de paradas si el envío ya está creado */}
+                        {envio.id ? (
+                            <Crud
+                                headerCrud={intl.formatMessage({ id: 'Paradas del Envío' })}
+                                getRegistros={getEnvioParada}
+                                getRegistrosCount={getEnvioParadaCount}
+                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                controlador={"Envio Parada"}
+                                editarComponente={<EditarEnvioParada />}
+                                columnas={columnasParada}
+                                filtradoBase={{envioId: envio.id}}
+                                deleteRegistro={deleteEnvioParada}
+                                cargarDatosInicialmente={true}
+                                editarComponenteParametrosExtra={{
+                                    envioId: envio.id,
+                                    estoyDentroDeUnTab: true  // true si estás en cualquier tab, false si estás en la primera pestaña
+                                }}
+                            />
+                        ) : (
+                            <div className="text-center p-4">
+                                <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+                                <p className="text-gray-600">
+                                    {intl.formatMessage({ id: 'Debe guardar el envío primero para poder añadir paradas' })}
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                </TabPanel>
+                
+                <TabPanel header={intl.formatMessage({ id: 'Sensores' })}>
+                    <div>
+                        <div className="text-center p-4">
+                            <i className="pi pi-wifi text-teal-500 text-2xl mb-2"></i>
+                            <p className="text-gray-600">
+                                {intl.formatMessage({ id: 'Aquí irán los datos de los sensores IoT' })}
+                            </p>
+                            <small className="text-gray-500">
+                                {intl.formatMessage({ id: 'Funcionalidad en desarrollo: peso, temperatura, humedad, calidad del aire, humo, sonido, GPS en tiempo real, batería, etc.' })}
+                            </small>
+                        </div>
+                    </div>
+                </TabPanel>
+            </TabView>
+        </div>
+        </>
     );
 };
 

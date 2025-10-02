@@ -27,3 +27,8 @@ export const deleteEnvio = async (idEnvio) => {
     const { data: dataEnvio } = await apiEnvio.envioControllerDeleteById(idEnvio);
     return dataEnvio;
 }
+
+export const crearEnvioConfiguracionDesdeEmpresa = async (envioId) => {
+    const { data: dataEnvio } = await apiEnvio.envioControllerCrearEnvioConfiguracionDesdeEmpresa(envioId);
+    return dataEnvio;
+}

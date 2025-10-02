@@ -1107,7 +1107,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             {(idEditar === null) && (
                 <div className="grid">
                     <div className="col-12">
-                        <div className="card">
+                        <div {...(!(editarComponenteParametrosExtra?.estoyDentroDeUnTab ? editarComponenteParametrosExtra?.estoyDentroDeUnTab: false) && { className: "card" })}>
                             <Toast ref={toast} position="top-right" />
                             {/* ENCABEZADO PRINCIPAL */}
                             <DataTable

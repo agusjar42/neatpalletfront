@@ -139,13 +139,13 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Contenido-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Contenido-Borrar' },
 
-                // Envio Configuracion Empresa
-                { header: intl.formatMessage({ id: 'Envio Configuracion Empresa' }), seccion: 'Envio Configuracion Empresa' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envio Configuracion Empresa-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envio Configuracion Empresa-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envio Configuracion Empresa-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Configuracion Empresa-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Configuracion Empresa-Borrar' },
+                // Envío Configuracion Empresa
+                { header: intl.formatMessage({ id: 'Envío Configuracion Empresa' }), seccion: 'Envío Configuracion Empresa' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envío Configuracion Empresa-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envío Configuracion Empresa-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envío Configuracion Empresa-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envío Configuracion Empresa-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envío Configuracion Empresa-Borrar' },
 
                 // Envio Configuracion
                 { header: intl.formatMessage({ id: 'Envio Configuracion' }), seccion: 'Envio Configuracion' },

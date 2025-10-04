@@ -28,7 +28,7 @@ const EditarDatosEnvioSensor = ({ envioSensor, setEnvioSensor, estadoGuardando, 
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el sensor de envío' })}>
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Envío' })}*</b></label>
+                    <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioSensor.envioId || ""}
                         onChange={(e) => setEnvioSensor({ ...envioSensor, envioId: e.value })}
                         options={opcionesEnvio}

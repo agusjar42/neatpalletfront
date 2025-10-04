@@ -2,11 +2,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
+import { TabView, TabPanel } from 'primereact/tabview';
 import { postEmpresa, patchEmpresa } from "@/app/api-endpoints/empresa";
 import EditarDatosEmpresa from "./EditarDatosEmpresa";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
-import { useIntl } from 'react-intl'
+import { useIntl } from 'react-intl';
+import Crud from "../../../components/shared/crud";
+import { getEnvioConfiguracionEmpresa, getEnvioConfiguracionEmpresaCount, deleteEnvioConfiguracionEmpresa } from "@/app/api-endpoints/envio-configuracion-empresa";
+import EditarEnvioConfiguracionEmpresas from "../../envio-configuracion-empresa/editar";
 
 const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl()
@@ -14,6 +18,14 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const [empresa, setEmpresa] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    // Columnas para la tabla de envío configuración empresa
+    const columnasConfiguracionEmpresa = [
+        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
+        { campo: 'unidadMedida', header: intl.formatMessage({ id: 'Unidad de medida' }), tipo: 'string' },
+    ];
 
     useEffect(() => {
         //
@@ -131,9 +143,45 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                         <h2>{header} {(intl.formatMessage({ id: 'Empresa' })).toLowerCase()}</h2>
                         <EditarDatosEmpresa
                             empresa={empresa}
-                            setEmpresa={setEmpresa}                            
+                            setEmpresa={setEmpresa}
                             estadoGuardando={estadoGuardando}
                         />
+
+                        {/* Pestañas */}
+                        <div className="mt-4">
+                            <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
+                                <TabPanel header={intl.formatMessage({ id: 'Envío Configuración' })}>
+                                    <div>
+                                        {/* Solo mostrar la tabla si la empresa ya está creada */}
+                                        {empresa.id ? (
+                                            <Crud
+                                                headerCrud={intl.formatMessage({ id: 'Configuraciones de Empresa' })}
+                                                getRegistros={getEnvioConfiguracionEmpresa}
+                                                getRegistrosCount={getEnvioConfiguracionEmpresaCount}
+                                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                                controlador={"Envio Configuracion Empresa"}
+                                                editarComponente={<EditarEnvioConfiguracionEmpresas />}
+                                                columnas={columnasConfiguracionEmpresa}
+                                                filtradoBase={{empresa_Id: empresa.id}}
+                                                deleteRegistro={deleteEnvioConfiguracionEmpresa}
+                                                cargarDatosInicialmente={true}
+                                                editarComponenteParametrosExtra={{
+                                                    empresaId: empresa.id,
+                                                    estoyDentroDeUnTab: true
+                                                }}
+                                            />
+                                        ) : (
+                                            <div className="text-center p-4">
+                                                <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+                                                <p className="text-gray-600">
+                                                    {intl.formatMessage({ id: 'Debe guardar la empresa primero para poder añadir configuraciones' })}
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </TabPanel>
+                            </TabView>
+                        </div>
 
                         <div className="flex justify-content-end mt-2">
                             {editable && (

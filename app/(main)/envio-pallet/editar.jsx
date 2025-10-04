@@ -10,7 +10,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioPallet from "./EditarDatosEnvioPallet";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab }) => {
+const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId }) => {
     const toast = useRef(null);
     const [envioPallet, setEnvioPallet] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -36,6 +36,12 @@ const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
+        //
+        // Si estamos dentro de un tab y tenemos un envioId, lo asignamos
+        //
+        if (estoyDentroDeUnTab && envioId) {
+            envioPallet.envioId = envioId;
+        }
         const validaEnvioId = envioPallet.envioId === undefined || envioPallet.envioId === "";
         const validaPalletId = envioPallet.palletId === undefined || envioPallet.palletId === "";
         return (!validaEnvioId && !validaPalletId)
@@ -110,6 +116,7 @@ const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                             estadoGuardando={estadoGuardando}
                             envios={envios}
                             pallets={pallets}
+                            estoyDentroDeUnTab={estoyDentroDeUnTab}
                         />
 
                         <div className="flex justify-content-end mt-2">

@@ -10,7 +10,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioMovimiento from "./EditarDatosEnvioMovimiento";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab }) => {
+const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId }) => {
     const toast = useRef(null);
     const [envioMovimiento, setEnvioMovimiento] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -36,6 +36,12 @@ const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
+        //
+        // Si estamos dentro de un tab y tenemos un envioId, lo asignamos
+        //
+        if (estoyDentroDeUnTab && envioId) {
+            envioMovimiento.envioId = envioId;
+        }
         const validaEnvioId = envioMovimiento.envioId === undefined || envioMovimiento.envioId === "";
         const validaTipoSensorId = envioMovimiento.tipoSensorId === undefined || envioMovimiento.tipoSensorId === "";
         return (!validaEnvioId && !validaTipoSensorId)
@@ -116,6 +122,7 @@ const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                             estadoGuardando={estadoGuardando}
                             envios={envios}
                             tiposSensor={tiposSensor}
+                            estoyDentroDeUnTab={estoyDentroDeUnTab}
                         />
 
                         <div className="flex justify-content-end mt-2">

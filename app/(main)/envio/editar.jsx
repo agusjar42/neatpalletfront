@@ -106,6 +106,7 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
                 delete objGuardar['fechaModificacion'];
+                delete objGuardar['paradasPrevistas'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchEnvio(objGuardar.id, objGuardar);
                 setIdEditar(null)

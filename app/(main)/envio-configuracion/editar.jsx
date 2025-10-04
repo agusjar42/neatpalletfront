@@ -9,7 +9,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioConfiguracion from "./EditarDatosEnvioConfiguracion";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioConfiguracion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarEnvioConfiguracion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId }) => {
     const toast = useRef(null);
     const [envioConfiguracion, setEnvioConfiguracion] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -32,6 +32,12 @@ const EditarEnvioConfiguracion = ({ idEditar, setIdEditar, rowData, emptyRegistr
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
+        //
+        // Si estamos dentro de un tab y tenemos un envioId, lo asignamos
+        //
+        if (estoyDentroDeUnTab && envioId) {
+            envioConfiguracion.envioId = envioId;
+        }
         const validaEnvioId = envioConfiguracion.envioId === undefined || envioConfiguracion.envioId === "";
         const validaNombre = envioConfiguracion.nombre === undefined || envioConfiguracion.nombre === "";
         return (!validaEnvioId && !validaNombre)
@@ -95,7 +101,7 @@ const EditarEnvioConfiguracion = ({ idEditar, setIdEditar, rowData, emptyRegistr
         <div>
             <div className="grid Empresa">
                 <div className="col-12">
-                    <div className="card">
+                    <div {...(!estoyDentroDeUnTab && { className: "card" })}>
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Configuracion de Envio' })).toLowerCase()}</h2>
                         <EditarDatosEnvioConfiguracion
@@ -103,6 +109,7 @@ const EditarEnvioConfiguracion = ({ idEditar, setIdEditar, rowData, emptyRegistr
                             setEnvioConfiguracion={setEnvioConfiguracion}
                             estadoGuardando={estadoGuardando}
                             envios={envios}
+                            estoyDentroDeUnTab={estoyDentroDeUnTab}
                         />
 
                         <div className="flex justify-content-end mt-2">

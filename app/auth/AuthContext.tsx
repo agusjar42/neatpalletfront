@@ -64,12 +64,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         "Empresas": {
           "path": "/tablas-maestras/empresa",
           "icon": "pi pi-building"
-        },
-        "Envío Configuracion Empresa": {
-            "path": "/envio-configuracion-empresa",
-            "icon": "pi pi-building"
-        },        
-        "Log de usuarios": {
+        },    
+        "Logs de usuarios": {
           "path": "/tablas-maestras/log_usuario",
           "icon": "pi pi-history"
         },
@@ -124,7 +120,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               "icon": "pi pi-wrench"
           },
       },
-      "Gestión del Envio": {
+      "Gestión del Envio": {        
+          "Envío Configuracion Empresa": {
+              "path": "/envio-configuracion-empresa",
+              "icon": "pi pi-building"
+          },    
           "Envio Contenido": {
               "path": "/envio-contenido",
               "icon": "pi pi-refresh"

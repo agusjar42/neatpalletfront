@@ -16,7 +16,7 @@ const EnvioConfiguracion = () => {
     return (
         <div>
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Configuraciones de Envío' })}
+                headerCrud={intl.formatMessage({ id: 'Envío Configuración' })}
                 getRegistros={getEnvioConfiguracion}
                 getRegistrosCount={getEnvioConfiguracionCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}

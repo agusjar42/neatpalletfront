@@ -29,6 +29,12 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     const [cargandoConfiguracion, setCargandoConfiguracion] = useState(false);
     const [refreshConfiguracion, setRefreshConfiguracion] = useState(0);
 
+    // Estados para los contadores de cada tab (solo para Movimientos, Pallets y Paradas)
+    const [conteoMovimiento, setConteoMovimiento] = useState(0);
+    const [conteoPallet, setConteoPallet] = useState(0);
+    const [conteoParada, setConteoParada] = useState(0);
+    const [refreshConteos, setRefreshConteos] = useState(0);
+
     // Columnas para las diferentes tablas
     const columnasConfiguracion = [
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
@@ -45,7 +51,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     ];
 
     const columnasMovimiento = [
-        { campo: 'fecha', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'date' },
+        { campo: 'fechaEspanol', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'date' },
         { campo: 'nombreTipoSensor', header: intl.formatMessage({ id: 'Tipo Sensor' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
         { campo: 'gps', header: intl.formatMessage({ id: 'GPS' }), tipo: 'string' },
@@ -58,11 +64,36 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     ];
 
     const columnasParada = [
-        { campo: 'fecha', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'date' },
+        { campo: 'fechaEspanol', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'date' },
         { campo: 'lugarParada', header: intl.formatMessage({ id: 'Lugar' }), tipo: 'string' },
         { campo: 'direccion', header: intl.formatMessage({ id: 'Dirección' }), tipo: 'string' },
         { campo: 'nombreOperario', header: intl.formatMessage({ id: 'Operario' }), tipo: 'string' },
     ];
+
+    // Cargar los conteos de Movimientos, Pallets y Paradas
+    useEffect(() => {
+        const cargarConteos = async () => {
+            if (envio.id) {
+                try {
+                    const whereFiltro = { and: { envioId: envio.id } };
+
+                    const [movimientoCount, palletCount, paradaCount] = await Promise.all([
+                        getEnvioMovimientoCount(JSON.stringify(whereFiltro)),
+                        getEnvioPalletCount(JSON.stringify(whereFiltro)),
+                        getEnvioParadaCount(JSON.stringify(whereFiltro))
+                    ]);
+
+                    setConteoMovimiento(movimientoCount[0]?.count || 0);
+                    setConteoPallet(palletCount[0]?.count || 0);
+                    setConteoParada(paradaCount[0]?.count || 0);
+                } catch (error) {
+                    console.error('Error cargando conteos:', error);
+                }
+            }
+        };
+
+        cargarConteos();
+    }, [envio.id, refreshConteos, activeIndex]);
 
     const handleCrearConfiguracionDesdeEmpresa = () => {
         if (!envio.id) {
@@ -185,20 +216,22 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     />
                 </div>
 
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="paradasPrevistas">{intl.formatMessage({ id: 'Paradas previstas' })}</label>
-                    <InputNumber 
-                        value={envio.paradasPrevistas || 0}
-                        onValueChange={(e) => setEnvio({ ...envio, paradasPrevistas: e.value })}
-                        placeholder={intl.formatMessage({ id: 'Número de paradas' })}
-                        min={0}
-                        max={999}
-                        showButtons
-                        buttonLayout="horizontal"
-                        step={1}
-                        inputStyle={{ textAlign: 'right' }}
-                    />
-                </div>
+                {false && (
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                        <label htmlFor="paradasPrevistas">{intl.formatMessage({ id: 'Paradas previstas' })}</label>
+                        <InputNumber
+                            value={envio.paradasPrevistas || 0}
+                            onValueChange={(e) => setEnvio({ ...envio, paradasPrevistas: e.value })}
+                            placeholder={intl.formatMessage({ id: 'Número de paradas' })}
+                            min={0}
+                            max={999}
+                            showButtons
+                            buttonLayout="horizontal"
+                            step={1}
+                            inputStyle={{ textAlign: 'right' }}
+                        />
+                    </div>
+                )}
             </div>
         </Fieldset>
 
@@ -267,7 +300,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                 cargarDatosInicialmente={true}
                                 editarComponenteParametrosExtra={{
                                     envioId: envio.id,
-                                    estoyDentroDeUnTab: true  // true si estás en cualquier tab, false si estás en la primera pestaña
+                                    estoyDentroDeUnTab: true
                                 }}
                             />
                         ) : (
@@ -281,11 +314,12 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     </div>
                 </TabPanel>                
                 
-                <TabPanel header={intl.formatMessage({ id: 'Movimientos' })}>
+                <TabPanel header={`${intl.formatMessage({ id: 'Movimientos' })} (${conteoMovimiento})`}>
                     <div>
                         {/* Solo mostrar la tabla de movimientos si el envío ya está creado */}
                         {envio.id ? (
                             <Crud
+                                key={`movimiento-${refreshConteos}`}
                                 headerCrud={intl.formatMessage({ id: 'Movimientos del Envío' })}
                                 getRegistros={getEnvioMovimiento}
                                 getRegistrosCount={getEnvioMovimientoCount}
@@ -298,7 +332,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                 cargarDatosInicialmente={true}
                                 editarComponenteParametrosExtra={{
                                     envioId: envio.id,
-                                    estoyDentroDeUnTab: true  // true si estás en cualquier tab, false si estás en la primera pestaña
+                                    estoyDentroDeUnTab: true,
+                                    onDataChange: () => setRefreshConteos(prev => prev + 1)
                                 }}
                             />
                         ) : (
@@ -312,11 +347,12 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     </div>
                 </TabPanel>
                 
-                <TabPanel header={intl.formatMessage({ id: 'Pallets' })}>
+                <TabPanel header={`${intl.formatMessage({ id: 'Pallets' })} (${conteoPallet})`}>
                     <div>
                         {/* Solo mostrar la tabla de pallets si el envío ya está creado */}
                         {envio.id ? (
                             <Crud
+                                key={`pallet-${refreshConteos}`}
                                 headerCrud={intl.formatMessage({ id: 'Pallets del Envío' })}
                                 getRegistros={getEnvioPallet}
                                 getRegistrosCount={getEnvioPalletCount}
@@ -329,7 +365,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                 cargarDatosInicialmente={true}
                                 editarComponenteParametrosExtra={{
                                     envioId: envio.id,
-                                    estoyDentroDeUnTab: true  // true si estás en cualquier tab, false si estás en la primera pestaña
+                                    estoyDentroDeUnTab: true,
+                                    onDataChange: () => setRefreshConteos(prev => prev + 1)
                                 }}
                             />
                         ) : (
@@ -343,11 +380,12 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     </div>
                 </TabPanel>
                 
-                <TabPanel header={intl.formatMessage({ id: 'Paradas' })}>
+                <TabPanel header={`${intl.formatMessage({ id: 'Paradas' })} (${conteoParada})`}>
                     <div>
                         {/* Solo mostrar la tabla de paradas si el envío ya está creado */}
                         {envio.id ? (
                             <Crud
+                                key={`parada-${refreshConteos}`}
                                 headerCrud={intl.formatMessage({ id: 'Paradas del Envío' })}
                                 getRegistros={getEnvioParada}
                                 getRegistrosCount={getEnvioParadaCount}
@@ -360,7 +398,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                 cargarDatosInicialmente={true}
                                 editarComponenteParametrosExtra={{
                                     envioId: envio.id,
-                                    estoyDentroDeUnTab: true  // true si estás en cualquier tab, false si estás en la primera pestaña
+                                    estoyDentroDeUnTab: true,
+                                    onDataChange: () => setRefreshConteos(prev => prev + 1)
                                 }}
                             />
                         ) : (

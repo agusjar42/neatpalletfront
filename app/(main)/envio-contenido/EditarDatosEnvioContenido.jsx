@@ -10,7 +10,7 @@ import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { convertirArchivoABase64 } from "@/app/utility/Utils";
 
-const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGuardando, envios }) => {
+const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGuardando, envios, estoyDentroDeUnTab }) => {
     const intl = useIntl();
     const toast = useRef(null);
     
@@ -127,15 +127,15 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el contenido' })}>
             <Toast ref={toast} position="top-right" />
             <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Envío' })}*</b></label>
+                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioContenido.envioId || ""}
                         onChange={(e) => setEnvioContenido({ ...envioContenido, envioId: e.value })}
                         options={opcionesEnvio}
                         className={`p-column-filter ${(estadoGuardando && (envioContenido.envioId == null || envioContenido.envioId === "")) ? "p-invalid" : ""}`}
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
-                </div>
+                </div>)}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="producto">{intl.formatMessage({ id: 'Producto' })}</label>
                     <InputText value={envioContenido.producto || ''}

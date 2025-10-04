@@ -4,7 +4,7 @@ import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 
-const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, envios }) => {
+const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, envios, estoyDentroDeUnTab }) => {
     const intl = useIntl();
 
     const opcionesEnvio = envios.map(envio => ({
@@ -15,15 +15,15 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para la parada de envío' })}>
             <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Envío' })}*</b></label>
+                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioParada.envioId || ""}
                         onChange={(e) => setEnvioParada({ ...envioParada, envioId: e.value })}
                         options={opcionesEnvio}
                         className={`p-column-filter ${(estadoGuardando && (envioParada.envioId == null || envioParada.envioId === "")) ? "p-invalid" : ""}`}
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
-                </div>
+                </div>)}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="fecha">{intl.formatMessage({ id: 'Fecha' })}</label>
                     <InputText type="date"

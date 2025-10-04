@@ -8,7 +8,7 @@ import { Button } from "primereact/button";
 import { Image } from 'primereact/image';
 import { convertirArchivoABase64 } from "@/app/utility/Utils";
 
-const EditarDatosEnvioMovimiento = ({ envioMovimiento, setEnvioMovimiento, estadoGuardando, envios, tiposSensor }) => {
+const EditarDatosEnvioMovimiento = ({ envioMovimiento, setEnvioMovimiento, estadoGuardando, envios, tiposSensor, estoyDentroDeUnTab }) => {
     const intl = useIntl();
     const [previewImagen, setPreviewImagen] = React.useState(envioMovimiento.imagenBase64 || null);
 
@@ -62,15 +62,15 @@ const EditarDatosEnvioMovimiento = ({ envioMovimiento, setEnvioMovimiento, estad
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el movimiento de envío' })}>
             <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Envío' })}*</b></label>
+                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioMovimiento.envioId || ""}
                         onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, envioId: e.value })}
                         options={opcionesEnvio}
                         className={`p-column-filter ${(estadoGuardando && (envioMovimiento.envioId == null || envioMovimiento.envioId === "")) ? "p-invalid" : ""}`}
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
-                </div>
+                </div>)}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="tipoSensorId"><b>{intl.formatMessage({ id: 'Tipo de Sensor' })}*</b></label>
                     <Dropdown value={envioMovimiento.tipoSensorId || ""}

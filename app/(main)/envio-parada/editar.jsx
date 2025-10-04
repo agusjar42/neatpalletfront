@@ -9,7 +9,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioParada from "./EditarDatosEnvioParada";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab }) => {
+const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId }) => {
     const toast = useRef(null);
     const [envioParada, setEnvioParada] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -32,6 +32,12 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
+        //
+        // Si estamos dentro de un tab y tenemos un envioId, lo asignamos
+        //
+        if (estoyDentroDeUnTab && envioId) {
+            envioParada.envioId = envioId;
+        }
         const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const validaEnvioId = envioParada.envioId === undefined || envioParada.envioId === "";
         if ((envioParada.emailOperario?.length == undefined) || (envioParada.emailOperario.length > 0 && !regexEmail.test(envioParada.emailOperario))) {
@@ -112,6 +118,7 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                             setEnvioParada={setEnvioParada}
                             estadoGuardando={estadoGuardando}
                             envios={envios}
+                            estoyDentroDeUnTab={estoyDentroDeUnTab}
                         />
 
                         <div className="flex justify-content-end mt-2">

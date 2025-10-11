@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from 'primereact/dropdown';
+import { TabView, TabPanel } from 'primereact/tabview';
 import React from "react";
 import { parse } from 'json2csv';
 import {  getUsuarioSesion } from "../../utility/Utils";
@@ -11,6 +12,10 @@ import { useIntl } from 'react-intl'
 import { compruebaPermiso } from "../../api-endpoints/permisos";
 import { Tooltip } from 'primereact/tooltip';
 import { getVistaEmpresaRolPermiso } from "@/app/api-endpoints/permisos";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip as ChartTooltip, Legend } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, ChartTooltip, Legend);
 
 const templateGenerico = (campo, cabecera) => (rowData) => {
     if (rowData[campo]?.length > 30) {
@@ -138,7 +143,7 @@ const eliminarDialogFooter = (ocultarEliminarDialog, eliminar) => {
     );
 };
 
-const Header = ({ crearNuevo, generarCSV, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
+const Header = ({ crearNuevo, generarCSV, generarGrafico, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
     operadorSeleccionado, setOperadorSeleccionado, listaOperadores,
 }) => {
     const intl = useIntl()
@@ -163,6 +168,17 @@ const Header = ({ crearNuevo, generarCSV, mostrarQR, enviarCorreo, limpiarFiltro
                         icon="pi pi-download"
                         severity="success"
                         onClick={generarCSV}
+                        className="mr-2"
+                    />
+                )
+            }
+            {(generarGrafico !== null && generarGrafico !== undefined) &&     //Si no se envia la funcion de generarGrafico, no muestra el boton
+                (
+                    <Button
+                        label={`${intl.formatMessage({ id: 'Generar Gráfico' })}`}
+                        icon="pi pi-chart-bar"
+                        severity="info"
+                        onClick={generarGrafico}
                         className="mr-2"
                     />
                 )
@@ -434,13 +450,255 @@ const DescargarCSVDialog = ({
     );
 };
 
+const GenerarGraficoDialog = ({
+    visible,
+    onHide,
+    header = 'Gráfico de Datos',
+    registros,
+    columnas
+}) => {
+    // Procesar los datos para el gráfico
+    const procesarDatosPorSensor = () => {
+        console.log('Registros recibidos en GenerarGraficoDialog:', registros);
+        if (!registros || registros.length === 0) {
+            console.log('No hay registros o la longitud es 0');
+            return [];
+        }
+
+        // Agrupar registros por sensor
+        const datosPorSensor = {};
+
+        registros.forEach(registro => {
+            const sensor = registro.nombreSensor || 'Sin sensor';
+            const valor = registro.valor;
+
+            // Usar fechaEspanol si existe, sino formatear fecha
+            let fecha;
+            if (registro.fechaEspanol) {
+                fecha = registro.fechaEspanol;
+            } else if (registro.fecha) {
+                const fechaObj = new Date(registro.fecha);
+                fecha = `${fechaObj.getDate().toString().padStart(2, '0')}/${(fechaObj.getMonth() + 1).toString().padStart(2, '0')}/${fechaObj.getFullYear()} ${fechaObj.getHours().toString().padStart(2, '0')}:${fechaObj.getMinutes().toString().padStart(2, '0')}`;
+            } else {
+                fecha = 'Sin fecha';
+            }
+
+            if (!datosPorSensor[sensor]) {
+                datosPorSensor[sensor] = {
+                    nombre: sensor,
+                    fechas: [],
+                    valores: []
+                };
+            }
+
+            datosPorSensor[sensor].fechas.push(fecha);
+            datosPorSensor[sensor].valores.push(valor);
+        });
+
+        return Object.values(datosPorSensor);
+    };
+
+    const crearGraficoSensor = (datosSensor, color) => {
+        // Detectar si los valores son numéricos
+        const valorNumerico = parseFloat(datosSensor.valores[0]);
+        const esNumerico = !isNaN(valorNumerico);
+
+        const parseDate = (str) => {
+            if (!str || str === 'Sin fecha') return null;
+
+            // Manejar formato "DD/MM/YYYY HH:MM:SS" o "DD/MM/YYYY HH:MM" o "DD/MM/YYYY, HH:MM:SS" o "DD/MM/YYYY"
+            const parts = str.includes(', ') ? str.split(', ') : str.split(' ');
+
+            const datePart = parts[0];
+            const timePart = parts[1] || '00:00'; // Si no hay hora, usar 00:00
+
+            const [day, month, year] = datePart.split('/');
+            const timeComponents = timePart.split(':');
+            const hour = timeComponents[0] || '00';
+            const minute = timeComponents[1] || '00';
+
+            if (!day || !month || !year) return null;
+
+            return new Date(year, month - 1, day, hour, minute);
+        };
+
+        if (esNumerico) {
+            // Gráfico de línea/barras para valores numéricos
+            const valores = datosSensor.valores.map(v => parseFloat(v));
+
+            // Ordenar por fecha
+            const datosOrdenados = datosSensor.fechas.map((fecha, i) => ({
+                fecha,
+                valor: valores[i],
+                fechaObj: fecha
+            }))
+            .filter(d => d.fechaObj !== null)
+            .sort((a, b) => a.fechaObj - b.fechaObj);
+
+            const data = {
+                labels: datosOrdenados.map(d => d.fecha),
+                datasets: [{
+                    label: datosSensor.nombre,
+                    data: datosOrdenados.map(d => d.valor),
+                    backgroundColor: color.bg,
+                    borderColor: color.border,
+                    borderWidth: 2,
+                    tension: 0.4,
+                }]
+            };
+
+            const options = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: `${datosSensor.nombre} - Evolución`,
+                    },
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45,
+                            autoSkip: true,
+                            maxTicksLimit: 10
+                        }
+                    },
+                    y: {
+                        display: true,
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            return <Bar data={data} options={options} />;
+        } else {
+            // Para sensores categóricos, mostrar evolución temporal también
+            const datosOrdenados = datosSensor.fechas.map((fecha, i) => ({
+                fecha,
+                valor: datosSensor.valores[i],
+                fechaObj: parseDate(fecha)
+            }))
+            .filter(d => d.fechaObj !== null)
+            .sort((a, b) => a.fechaObj - b.fechaObj);
+
+            // Convertir valores categóricos a números para el gráfico
+            const valoresUnicos = [...new Set(datosOrdenados.map(d => d.valor))];
+            const valorANumero = {};
+            valoresUnicos.forEach((val, idx) => {
+                valorANumero[val] = idx + 1;
+            });
+
+            const data = {
+                labels: datosOrdenados.map(d => d.fecha),
+                datasets: [{
+                    label: datosSensor.nombre,
+                    data: datosOrdenados.map(d => valorANumero[d.valor]),
+                    backgroundColor: color.bg,
+                    borderColor: color.border,
+                    borderWidth: 2,
+                    tension: 0.4,
+                }]
+            };
+
+            const options = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: `${datosSensor.nombre} - Estados en el Tiempo`,
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const valorOriginal = datosOrdenados[context.dataIndex].valor;
+                                return `${datosSensor.nombre}: ${valorOriginal}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45,
+                            autoSkip: true,
+                            maxTicksLimit: 10
+                        }
+                    },
+                    y: {
+                        display: true,
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1,
+                            callback: function(value) {
+                                const valorTexto = Object.keys(valorANumero).find(k => valorANumero[k] === value);
+                                return valorTexto || value;
+                            }
+                        }
+                    }
+                }
+            };
+
+            return <Bar data={data} options={options} />;
+        }
+    };
+
+    const colores = [
+        { bg: 'rgba(255, 99, 132, 0.6)', border: 'rgba(255, 99, 132, 1)' },
+        { bg: 'rgba(54, 162, 235, 0.6)', border: 'rgba(54, 162, 235, 1)' },
+        { bg: 'rgba(255, 206, 86, 0.6)', border: 'rgba(255, 206, 86, 1)' },
+        { bg: 'rgba(75, 192, 192, 0.6)', border: 'rgba(75, 192, 192, 1)' },
+        { bg: 'rgba(153, 102, 255, 0.6)', border: 'rgba(153, 102, 255, 1)' },
+        { bg: 'rgba(255, 159, 64, 0.6)', border: 'rgba(255, 159, 64, 1)' },
+        { bg: 'rgba(199, 199, 199, 0.6)', border: 'rgba(199, 199, 199, 1)' },
+        { bg: 'rgba(83, 102, 255, 0.6)', border: 'rgba(83, 102, 255, 1)' },
+        { bg: 'rgba(255, 99, 255, 0.6)', border: 'rgba(255, 99, 255, 1)' },
+        { bg: 'rgba(99, 255, 132, 0.6)', border: 'rgba(99, 255, 132, 1)' },
+    ];
+
+    const sensores = procesarDatosPorSensor();
+
+    return (
+        <Dialog
+            visible={visible}
+            style={{ width: "95vw", maxWidth: "1400px" }}
+            header={header}
+            modal
+            onHide={onHide}
+        >
+            <div style={{ padding: "20px" }}>
+                {sensores.length > 0 ? (
+                    <TabView>
+                        {sensores.map((sensor, index) => (
+                            <TabPanel key={sensor.nombre} header={sensor.nombre}>
+                                <div style={{ height: "500px", padding: "20px" }}>
+                                    {crearGraficoSensor(sensor, colores[index % colores.length])}
+                                </div>
+                            </TabPanel>
+                        ))}
+                    </TabView>
+                ) : (
+                    <p>No hay datos disponibles para mostrar</p>
+                )}
+            </div>
+        </Dialog>
+    );
+};
+
 
 export {
     comprobarImagen, manejarCambioImagen, templateGenerico, ErrorDetail,
     botonesDeAccionTemplate, eliminarDialogFooter, Header, dialogFooter,
     EliminarDialog, filtroActivoSnTemplate, opcionesActivoSnTemplate,
     generarYDescargarCSV, prepararRegistrosParaCSV, DescargarCSVDialog,
-    formatearBytes, esUrlImagen, getIdiomaDefecto, tieneUsuarioPermiso,
+    GenerarGraficoDialog, formatearBytes, esUrlImagen, getIdiomaDefecto, tieneUsuarioPermiso,
     obtenerTodosLosPermisos,
 
 };

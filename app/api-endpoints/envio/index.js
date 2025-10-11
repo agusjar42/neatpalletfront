@@ -1,7 +1,8 @@
-import { EnvioControllerApi, settings } from "@/app/api-neatpallet";
+import { EnvioControllerApi, EnvioFakeDataControllerApi, settings } from "@/app/api-neatpallet";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 
 const apiEnvio = new EnvioControllerApi(settings);
+const apiEnvioFakeData = new EnvioFakeDataControllerApi(settings);
 
 export const getEnvio = async (filtro) => {
     const { data: dataEnvios } = await apiEnvio.envioControllerFind(filtro);
@@ -24,11 +25,18 @@ export const patchEnvio = async (idEnvio, objEnvio) => {
 }
 
 export const deleteEnvio = async (idEnvio) => {
-    const { data: dataEnvio } = await apiEnvio.envioControllerDeleteById(idEnvio);
+    const { data: dataEnvio } = await apiEnvioFakeData.envioFakeDataControllerBorrarEnvioCascada(idEnvio);
     return dataEnvio;
+    /*const { data: dataEnvio } = await apiEnvio.envioControllerDeleteById(idEnvio);
+    return dataEnvio;*/
 }
 
 export const crearEnvioConfiguracionDesdeEmpresa = async (envioId) => {
     const { data: dataEnvio } = await apiEnvio.envioControllerCrearEnvioConfiguracionDesdeEmpresa(envioId);
+    return dataEnvio;
+}
+
+export const generarDatosFake = async (usuarioId, empresaId) => {
+    const { data: dataEnvio } = await apiEnvioFakeData.envioFakeDataControllerGenerarDatosFake(usuarioId, empresaId);
     return dataEnvio;
 }

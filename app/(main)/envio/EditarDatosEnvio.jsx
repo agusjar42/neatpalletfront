@@ -115,7 +115,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
             accept: async () => {
                 setCargandoConfiguracion(true);
                 try {
-                    const datosEnvio = {empresaId: envio.empresaId, usuarioCreacion: getUsuarioSesion()?.id};
+                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, usuarioCreacion: getUsuarioSesion()?.id};
                     await crearEnvioConfiguracionDesdeEmpresa(datosEnvio);
                     toast.current?.show({
                         severity: 'success',
@@ -232,8 +232,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         />
                     </div>
                 )}
-            </div>
-        </Fieldset>
+                </div>
+            </Fieldset>
 
         {/* Pestañas para bloques adicionales */}
         <div className="mt-4">
@@ -259,7 +259,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                     headerCrud={intl.formatMessage({ id: 'Configuración del Envío' })}
                                     getRegistros={getEnvioConfiguracion}
                                     getRegistrosCount={getEnvioConfiguracionCount}
-                                    botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                                     controlador={"Envio Configuracion"}
                                     editarComponente={<EditarEnvioConfiguracion />}
                                     columnas={columnasConfiguracion}
@@ -291,7 +291,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                 headerCrud={intl.formatMessage({ id: 'Contenido del Envío' })}
                                 getRegistros={getEnvioContenido}
                                 getRegistrosCount={getEnvioContenidoCount}
-                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                                 controlador={"Envio Contenido"}
                                 editarComponente={<EditarEnvioContenido />}
                                 columnas={columnasContenido}
@@ -323,7 +323,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                 headerCrud={intl.formatMessage({ id: 'Movimientos del Envío' })}
                                 getRegistros={getEnvioMovimiento}
                                 getRegistrosCount={getEnvioMovimientoCount}
-                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'generarGrafico']}
                                 controlador={"Envio Movimiento"}
                                 editarComponente={<EditarEnvioMovimiento />}
                                 columnas={columnasMovimiento}
@@ -356,7 +356,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                 headerCrud={intl.formatMessage({ id: 'Pallets del Envío' })}
                                 getRegistros={getEnvioPallet}
                                 getRegistrosCount={getEnvioPalletCount}
-                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                                 controlador={"Envio Pallet"}
                                 editarComponente={<EditarEnvioPallet />}
                                 columnas={columnasPallet}
@@ -389,7 +389,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                 headerCrud={intl.formatMessage({ id: 'Paradas del Envío' })}
                                 getRegistros={getEnvioParada}
                                 getRegistrosCount={getEnvioParadaCount}
-                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                                 controlador={"Envio Parada"}
                                 editarComponente={<EditarEnvioParada />}
                                 columnas={columnasParada}

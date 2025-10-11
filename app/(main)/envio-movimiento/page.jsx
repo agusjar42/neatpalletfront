@@ -20,7 +20,7 @@ const EnvioMovimiento = () => {
                 headerCrud={intl.formatMessage({ id: 'Movimientos de Envío' })}
                 getRegistros={getEnvioMovimiento}
                 getRegistrosCount={getEnvioMovimientoCount}
-                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV', 'generarGrafico']}
                 controlador={"Envio Movimiento"}
                 editarComponente={<EditarEnvioMovimientos />}
                 columnas={columnas}

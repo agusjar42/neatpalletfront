@@ -250,7 +250,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewEnvio"
+                "$ref": "#/components/schemas/CrearEnvioConfiguracionDto"
               }
             }
           }
@@ -2293,6 +2293,81 @@
           }
         ],
         "operationId": "EnvioController.count"
+      }
+    },
+    "/envios/generar-datos-fake": {
+      "post": {
+        "x-controller-name": "EnvioFakeDataController",
+        "x-operation-name": "generarDatosFake",
+        "tags": [
+          "EnvioFakeDataController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Genera datos fake para las tablas de envío",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "usuarioCreacion",
+                  "empresaId"
+                ],
+                "properties": {
+                  "usuarioCreacion": {
+                    "type": "number"
+                  },
+                  "empresaId": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "EnvioFakeDataController.generarDatosFake"
+      }
+    },
+    "/envios/{id}/borrar-cascada": {
+      "delete": {
+        "x-controller-name": "EnvioFakeDataController",
+        "x-operation-name": "borrarEnvioCascada",
+        "tags": [
+          "EnvioFakeDataController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Borra un envío y todas sus tablas relacionadas en cascada"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EnvioFakeDataController.borrarEnvioCascada"
       }
     },
     "/envios/{id}": {
@@ -5987,28 +6062,6 @@
           }
         ],
         "operationId": "RolController.find"
-      }
-    },
-    "/test-claude": {
-      "get": {
-        "x-controller-name": "TestClaudeController",
-        "x-operation-name": "testClaude",
-        "tags": [
-          "TestClaudeController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Test Claude API Connection Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TestClaudeResponse"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "TestClaudeController.testClaude"
       }
     },
     "/tipo-carrocerias/count": {
@@ -12967,6 +13020,29 @@
         "additionalProperties": false,
         "x-typescript-type": "Omit<Envio, 'id'>"
       },
+      "CrearEnvioConfiguracionDto": {
+        "title": "CrearEnvioConfiguracionDto",
+        "type": "object",
+        "description": "(tsType: CrearEnvioConfiguracionDto, schemaOptions: { title: 'CrearEnvioConfiguracionDto' })",
+        "properties": {
+          "envioId": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "envioId",
+          "empresaId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "CrearEnvioConfiguracionDto"
+      },
       "EnvioPartial": {
         "title": "EnvioPartial",
         "type": "object",
@@ -18373,30 +18449,6 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Rol>"
-      },
-      "TestClaudeResponse": {
-        "type": "object",
-        "title": "TestClaudeResponse",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string"
-          },
-          "response": {
-            "type": "string"
-          },
-          "model": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "string"
-          },
-          "error": {
-            "type": "string"
-          }
-        }
       },
       "TipoCarroceria.Filter": {
         "type": "object",

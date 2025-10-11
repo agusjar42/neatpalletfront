@@ -5,7 +5,7 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { Toast } from "primereact/toast";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
+import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, GenerarGraficoDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 import { formatearFechaDate, formatearFechaHoraDate, formatearFechaLocal_a_toISOString, formatNumber, getUsuarioSesion } from "@/app/utility/Utils";
 import CodigoQR from "./codigo_qr";
 import { postEnviarQR } from "@/app/api-endpoints/plantilla_email";
@@ -50,6 +50,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     }
 
     const [registros, setRegistros] = useState([]);
+    const [registrosGrafico, setRegistrosGrafico] = useState([]);
     const [registro, setRegistro] = useState(emptyRegistro);
     const [registroEditarFlag, setRegistroEditarFlag] = useState(registroEditar != null);
     const [registroResult, setRegistroResult] = useState("");
@@ -58,6 +59,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     const [eliminarRegistroDialog, setEliminarRegistroDialog] = useState(false);
     const [descargarCSVDialog, setDescargarCSVDialog] = useState(false);
+    const [generarGraficoDialog, setGenerarGraficoDialog] = useState(false);
     const [mostarQRDialog, setMostarQRDialog] = useState(false);
     const [correoEnviarQR, setCorreoEnviarQR] = useState("");
     const [urlQREncriptado, setUrlQREncriptado] = useState("");
@@ -670,6 +672,49 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setDescargarCSVDialog(false);
     };
 
+    const confirmarGenerarGrafico = async () => {
+        // Cargar todos los registros sin límite para el gráfico
+        const whereFiltro = {
+            ...crearFiltros(parametrosCrud.filters, operadorSeleccionado),
+        };
+        if (filtradoBase) {
+            for (const [key, value] of Object.entries(filtradoBase)) {
+                if (key === 'or') {
+                    whereFiltro['and']["or"] = {};
+                    for (const [keyOr, valueOr] of Object.entries(value)) {
+                        whereFiltro['and']['or'][keyOr] = valueOr;
+                    }
+                } else {
+                    if (key === 'not') {
+                        whereFiltro['and']["not"] = {};
+                        for (const [keyNot, valueNot] of Object.entries(value)) {
+                            whereFiltro['and']['not'][keyNot] = valueNot;
+                        }
+                    }
+                    whereFiltro['and'][key] = value;
+                }
+            }
+        }
+
+        let order = null;
+        if (parametrosCrud.sortField !== null && parametrosCrud.sortOrder !== null) {
+            order = `${parametrosCrud.sortField} ${parametrosCrud.sortOrder === 1 ? 'ASC' : 'DESC'}`;
+        }
+
+        const queryParams = {
+            order: order,
+            where: whereFiltro
+        };
+
+        const todosLosRegistros = await getRegistros(JSON.stringify(queryParams));
+        setRegistrosGrafico(todosLosRegistros);
+        setGenerarGraficoDialog(true);
+    };
+
+    const ocultarGenerarGraficoDialog = () => {
+        setGenerarGraficoDialog(false);
+    };
+
     const editarRegistro = (registro) => {
         setEditable(true);
         setIdEditar(registro.id);
@@ -727,6 +772,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         }
         if (botones.includes('descargarCSV')) {
             propiedadesHeader['generarCSV'] = confirmarDescargarArchivoCSV
+        }
+        if (botones.includes('generarGrafico')) {
+            propiedadesHeader['generarGrafico'] = confirmarGenerarGrafico
         }
         return React.cloneElement(<Header />, propiedadesHeader);
     }
@@ -1197,7 +1245,15 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 header={intl.formatMessage({ id: 'Descargar archivo CSV' })}
                                 labelMostrados={intl.formatMessage({ id: 'Registros mostrados' })}
                                 labelTodos={intl.formatMessage({ id: 'Todos los registros' })}
-                            />                            
+                            />
+                            {/* MODAL DE (GENERAR GRAFICO) */}
+                            <GenerarGraficoDialog
+                                visible={generarGraficoDialog}
+                                onHide={ocultarGenerarGraficoDialog}
+                                registros={registrosGrafico}
+                                columnas={columnas}
+                                header={intl.formatMessage({ id: 'Gráfico de Datos' })}
+                            />
                         </div>
                     </div>
                 </div>

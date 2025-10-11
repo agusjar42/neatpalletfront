@@ -22,7 +22,7 @@ const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
     useEffect(() => {
         const fetchData = async () => {
             // Cargar envíos y tipos de sensor disponibles
-            const dataEnvios = await getEnvio('{}');
+            const dataEnvios = await getEnvio(JSON.stringify(envioId ? {where: {id: envioId}} : {}));
             const dataTiposSensor = await getTipoSensor(JSON.stringify({where: {empresaId: getUsuarioSesion()?.empresaId}}));
             setEnvios(dataEnvios || []);
             setTiposSensor(dataTiposSensor || []);
@@ -59,6 +59,7 @@ const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
             delete objGuardar['origenRuta'];
             delete objGuardar['nombreSensor'];
             delete objGuardar['fechaEspanol'];
+            delete objGuardar['nombreTipoSensor'];
 
             if (idEditar === 0) {
                 delete objGuardar.id;

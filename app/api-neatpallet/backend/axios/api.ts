@@ -1605,6 +1605,341 @@ export enum EnvioContenidoIncludeFilterItemsRelationEnum {
 }
 
 /**
+ * 
+ * @export
+ * @interface EnvioContenidoPallet
+ */
+export interface EnvioContenidoPallet {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPallet
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPallet
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPallet
+     */
+    'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPallet
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPallet
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPallet
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPallet
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioContenidoPalletFilter
+ */
+export interface EnvioContenidoPalletFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioContenidoPalletFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioContenidoPalletFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioContenidoPalletIncludeFilterItems | string>}
+     * @memberof EnvioContenidoPalletFilter
+     */
+    'include'?: Array<EnvioContenidoPalletIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioContenidoPalletFilter1
+ */
+export interface EnvioContenidoPalletFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioContenidoPalletFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioContenidoPalletFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioContenidoPalletFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioContenidoPalletIncludeFilterItems | string>}
+     * @memberof EnvioContenidoPalletFilter1
+     */
+    'include'?: Array<EnvioContenidoPalletIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioContenidoPalletIncludeFilterItems
+ */
+export interface EnvioContenidoPalletIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPalletIncludeFilterItems
+     */
+    'relation'?: EnvioContenidoPalletIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {EnvioContenidoPalletScopeFilter}
+     * @memberof EnvioContenidoPalletIncludeFilterItems
+     */
+    'scope'?: EnvioContenidoPalletScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum EnvioContenidoPalletIncludeFilterItemsRelationEnum {
+    Envio = 'envio',
+    Pallet = 'pallet'
+}
+
+/**
+ * (tsType: Partial<EnvioContenidoPallet>, schemaOptions: { partial: true })
+ * @export
+ * @interface EnvioContenidoPalletPartial
+ */
+export interface EnvioContenidoPalletPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletPartial
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletPartial
+     */
+    'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPalletPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPalletPartial
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioContenidoPalletScopeFilter
+ */
+export interface EnvioContenidoPalletScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioContenidoPalletScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioContenidoPalletScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof EnvioContenidoPalletScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof EnvioContenidoPalletScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: EnvioContenidoPalletWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface EnvioContenidoPalletWithRelations
+ */
+export interface EnvioContenidoPalletWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletWithRelations
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletWithRelations
+     */
+    'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPalletWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioContenidoPalletWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {EnvioWithRelations}
+     * @memberof EnvioContenidoPalletWithRelations
+     */
+    'envio'?: EnvioWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof EnvioContenidoPalletWithRelations
+     */
+    'foreignKey'?: any;
+    /**
+     * 
+     * @type {PalletWithRelations}
+     * @memberof EnvioContenidoPalletWithRelations
+     */
+    'pallet'?: PalletWithRelations;
+}
+/**
  * (tsType: Partial<EnvioContenido>, schemaOptions: { partial: true })
  * @export
  * @interface EnvioContenidoPartial
@@ -5153,6 +5488,49 @@ export interface NewEnvioContenido {
      * 
      * @type {string}
      * @memberof NewEnvioContenido
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * (tsType: Omit<EnvioContenidoPallet, \'id\'>, schemaOptions: { title: \'NewEnvioContenidoPallet\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewEnvioContenidoPallet
+ */
+export interface NewEnvioContenidoPallet {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenidoPallet
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenidoPallet
+     */
+    'palletId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenidoPallet
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenidoPallet
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenidoPallet
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioContenidoPallet
      */
     'fechaModificacion'?: string;
 }
@@ -13152,6 +13530,612 @@ export class EnvioContenidoControllerApi extends BaseAPI {
 
 
 /**
+ * EnvioContenidoPalletControllerApi - axios parameter creator
+ * @export
+ */
+export const EnvioContenidoPalletControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-contenido-pallets/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewEnvioContenidoPallet} [newEnvioContenidoPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerCreate: async (newEnvioContenidoPallet?: NewEnvioContenidoPallet, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-contenido-pallets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newEnvioContenidoPallet, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioContenidoPalletControllerDeleteById', 'id', id)
+            const localVarPath = `/envio-contenido-pallets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {EnvioContenidoPalletFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerFind: async (filter?: EnvioContenidoPalletFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-contenido-pallets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioContenidoPalletFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerFindById: async (id: number, filter?: EnvioContenidoPalletFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioContenidoPalletControllerFindById', 'id', id)
+            const localVarPath = `/envio-contenido-pallets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioContenidoPallet} [envioContenidoPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerReplaceById: async (id: number, envioContenidoPallet?: EnvioContenidoPallet, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioContenidoPalletControllerReplaceById', 'id', id)
+            const localVarPath = `/envio-contenido-pallets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioContenidoPallet, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioContenidoPalletPartial} [envioContenidoPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerUpdateAll: async (where?: { [key: string]: object; }, envioContenidoPalletPartial?: EnvioContenidoPalletPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-contenido-pallets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioContenidoPalletPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioContenidoPalletPartial} [envioContenidoPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerUpdateById: async (id: number, envioContenidoPalletPartial?: EnvioContenidoPalletPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioContenidoPalletControllerUpdateById', 'id', id)
+            const localVarPath = `/envio-contenido-pallets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioContenidoPalletPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EnvioContenidoPalletControllerApi - functional programming interface
+ * @export
+ */
+export const EnvioContenidoPalletControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EnvioContenidoPalletControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioContenidoPalletControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoPalletControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewEnvioContenidoPallet} [newEnvioContenidoPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioContenidoPalletControllerCreate(newEnvioContenidoPallet?: NewEnvioContenidoPallet, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioContenidoPallet>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoPalletControllerCreate(newEnvioContenidoPallet, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioContenidoPalletControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoPalletControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {EnvioContenidoPalletFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioContenidoPalletControllerFind(filter?: EnvioContenidoPalletFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvioContenidoPalletWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoPalletControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioContenidoPalletFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioContenidoPalletControllerFindById(id: number, filter?: EnvioContenidoPalletFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioContenidoPalletWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoPalletControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioContenidoPallet} [envioContenidoPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioContenidoPalletControllerReplaceById(id: number, envioContenidoPallet?: EnvioContenidoPallet, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoPalletControllerReplaceById(id, envioContenidoPallet, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioContenidoPalletPartial} [envioContenidoPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioContenidoPalletControllerUpdateAll(where?: { [key: string]: object; }, envioContenidoPalletPartial?: EnvioContenidoPalletPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoPalletControllerUpdateAll(where, envioContenidoPalletPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioContenidoPalletPartial} [envioContenidoPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioContenidoPalletControllerUpdateById(id: number, envioContenidoPalletPartial?: EnvioContenidoPalletPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoPalletControllerUpdateById(id, envioContenidoPalletPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EnvioContenidoPalletControllerApi - factory interface
+ * @export
+ */
+export const EnvioContenidoPalletControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EnvioContenidoPalletControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioContenidoPalletControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewEnvioContenidoPallet} [newEnvioContenidoPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerCreate(newEnvioContenidoPallet?: NewEnvioContenidoPallet, options?: any): AxiosPromise<EnvioContenidoPallet> {
+            return localVarFp.envioContenidoPalletControllerCreate(newEnvioContenidoPallet, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.envioContenidoPalletControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EnvioContenidoPalletFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerFind(filter?: EnvioContenidoPalletFilter1, options?: any): AxiosPromise<Array<EnvioContenidoPalletWithRelations>> {
+            return localVarFp.envioContenidoPalletControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioContenidoPalletFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerFindById(id: number, filter?: EnvioContenidoPalletFilter, options?: any): AxiosPromise<EnvioContenidoPalletWithRelations> {
+            return localVarFp.envioContenidoPalletControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioContenidoPallet} [envioContenidoPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerReplaceById(id: number, envioContenidoPallet?: EnvioContenidoPallet, options?: any): AxiosPromise<any> {
+            return localVarFp.envioContenidoPalletControllerReplaceById(id, envioContenidoPallet, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioContenidoPalletPartial} [envioContenidoPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerUpdateAll(where?: { [key: string]: object; }, envioContenidoPalletPartial?: EnvioContenidoPalletPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioContenidoPalletControllerUpdateAll(where, envioContenidoPalletPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioContenidoPalletPartial} [envioContenidoPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerUpdateById(id: number, envioContenidoPalletPartial?: EnvioContenidoPalletPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.envioContenidoPalletControllerUpdateById(id, envioContenidoPalletPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EnvioContenidoPalletControllerApi - object-oriented interface
+ * @export
+ * @class EnvioContenidoPalletControllerApi
+ * @extends {BaseAPI}
+ */
+export class EnvioContenidoPalletControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioContenidoPalletControllerApi
+     */
+    public envioContenidoPalletControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return EnvioContenidoPalletControllerApiFp(this.configuration).envioContenidoPalletControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewEnvioContenidoPallet} [newEnvioContenidoPallet] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioContenidoPalletControllerApi
+     */
+    public envioContenidoPalletControllerCreate(newEnvioContenidoPallet?: NewEnvioContenidoPallet, options?: AxiosRequestConfig) {
+        return EnvioContenidoPalletControllerApiFp(this.configuration).envioContenidoPalletControllerCreate(newEnvioContenidoPallet, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioContenidoPalletControllerApi
+     */
+    public envioContenidoPalletControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return EnvioContenidoPalletControllerApiFp(this.configuration).envioContenidoPalletControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EnvioContenidoPalletFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioContenidoPalletControllerApi
+     */
+    public envioContenidoPalletControllerFind(filter?: EnvioContenidoPalletFilter1, options?: AxiosRequestConfig) {
+        return EnvioContenidoPalletControllerApiFp(this.configuration).envioContenidoPalletControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioContenidoPalletFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioContenidoPalletControllerApi
+     */
+    public envioContenidoPalletControllerFindById(id: number, filter?: EnvioContenidoPalletFilter, options?: AxiosRequestConfig) {
+        return EnvioContenidoPalletControllerApiFp(this.configuration).envioContenidoPalletControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioContenidoPallet} [envioContenidoPallet] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioContenidoPalletControllerApi
+     */
+    public envioContenidoPalletControllerReplaceById(id: number, envioContenidoPallet?: EnvioContenidoPallet, options?: AxiosRequestConfig) {
+        return EnvioContenidoPalletControllerApiFp(this.configuration).envioContenidoPalletControllerReplaceById(id, envioContenidoPallet, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {EnvioContenidoPalletPartial} [envioContenidoPalletPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioContenidoPalletControllerApi
+     */
+    public envioContenidoPalletControllerUpdateAll(where?: { [key: string]: object; }, envioContenidoPalletPartial?: EnvioContenidoPalletPartial, options?: AxiosRequestConfig) {
+        return EnvioContenidoPalletControllerApiFp(this.configuration).envioContenidoPalletControllerUpdateAll(where, envioContenidoPalletPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioContenidoPalletPartial} [envioContenidoPalletPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioContenidoPalletControllerApi
+     */
+    public envioContenidoPalletControllerUpdateById(id: number, envioContenidoPalletPartial?: EnvioContenidoPalletPartial, options?: AxiosRequestConfig) {
+        return EnvioContenidoPalletControllerApiFp(this.configuration).envioContenidoPalletControllerUpdateById(id, envioContenidoPalletPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * EnvioControllerApi - axios parameter creator
  * @export
  */
@@ -13189,43 +14173,6 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioControllerCrearEnvioConfiguracionDesdeEmpresa: async (crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/crear-envio-configuracion-desde-empresa`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(crearEnvioConfiguracionDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -13532,16 +14479,6 @@ export const EnvioControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {NewEnvio} [newEnvio] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13635,15 +14572,6 @@ export const EnvioControllerApiFactory = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: any): AxiosPromise<any> {
-            return localVarFp.envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {NewEnvio} [newEnvio] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13728,17 +14656,6 @@ export class EnvioControllerApi extends BaseAPI {
      */
     public envioControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
         return EnvioControllerApiFp(this.configuration).envioControllerCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioControllerApi
-     */
-    public envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: AxiosRequestConfig) {
-        return EnvioControllerApiFp(this.configuration).envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -13869,6 +14786,43 @@ export const EnvioFakeDataControllerApiAxiosParamCreator = function (configurati
         },
         /**
          * 
+         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa: async (crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/crear-envio-configuracion-desde-empresa`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(crearEnvioConfiguracionDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {InlineObject1} [inlineObject1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13926,6 +14880,16 @@ export const EnvioFakeDataControllerApiFp = function(configuration?: Configurati
         },
         /**
          * 
+         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {InlineObject1} [inlineObject1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13955,6 +14919,15 @@ export const EnvioFakeDataControllerApiFactory = function (configuration?: Confi
         },
         /**
          * 
+         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: any): AxiosPromise<any> {
+            return localVarFp.envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {InlineObject1} [inlineObject1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13981,6 +14954,17 @@ export class EnvioFakeDataControllerApi extends BaseAPI {
      */
     public envioFakeDataControllerBorrarEnvioCascada(id: number, options?: AxiosRequestConfig) {
         return EnvioFakeDataControllerApiFp(this.configuration).envioFakeDataControllerBorrarEnvioCascada(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioFakeDataControllerApi
+     */
+    public envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: AxiosRequestConfig) {
+        return EnvioFakeDataControllerApiFp(this.configuration).envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

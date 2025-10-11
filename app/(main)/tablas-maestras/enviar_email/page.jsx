@@ -10,7 +10,7 @@ import EditarDatosEnvioPlantilla from "./EditarDatosEnvioPlantilla";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { borrarFichero, postSubirImagen, postSubirFichero } from "@/app/api-endpoints/ficheros"
-import { postArchivo, deleteArchivo } from "@/app/api-endpoints/archivo"
+//import { postArchivo, deleteArchivo } from "@/app/api-endpoints/archivo"
 import { useIntl } from 'react-intl';
 import { getVistaPlantillaEmailIdioma, postEnviarEmails } from "@/app/api-endpoints/plantilla_email";
 import { obtenerArchivosSeccion } from "@/app/components/shared/componentes";
@@ -236,7 +236,7 @@ const EnviarCorreoPlantilla = ({ }) => {
                     //Si es undefined, significa que no existe en el array de registro por lo que se ha eliminado
                     if (archivoExisteEnRegistro === undefined) {
                         await borrarFichero(archivoAntiguo.url);
-                        await deleteArchivo(archivoAntiguo.id);
+                        //await deleteArchivo(archivoAntiguo.id);
                         //Tambien borra la version sin redimensionar
                         //Funcion provisional porque no tengo manera de saber si x archivo de x tipo de input es imagen o no solo con el url
                         if (esUrlImagen(archivoAntiguo.url)) {
@@ -284,7 +284,7 @@ const EnviarCorreoPlantilla = ({ }) => {
             objArchivo['url'] = response.originalUrl;
             objArchivo['idTabla'] = id;
             objArchivo['tabla'] = seccion.toLowerCase();
-            await postArchivo(objArchivo);
+            //await postArchivo(objArchivo);
         }
     }
 

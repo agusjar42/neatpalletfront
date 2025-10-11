@@ -229,10 +229,10 @@
     },
     "/crear-envio-configuracion-desde-empresa": {
       "post": {
-        "x-controller-name": "EnvioController",
+        "x-controller-name": "EnvioFakeDataController",
         "x-operation-name": "crearEnvioConfiguracionDesdeEmpresa",
         "tags": [
-          "EnvioController"
+          "EnvioFakeDataController"
         ],
         "responses": {
           "204": {
@@ -255,7 +255,7 @@
             }
           }
         },
-        "operationId": "EnvioController.crearEnvioConfiguracionDesdeEmpresa"
+        "operationId": "EnvioFakeDataController.crearEnvioConfiguracionDesdeEmpresa"
       }
     },
     "/empresas/count": {
@@ -1080,6 +1080,309 @@
           }
         ],
         "operationId": "EnvioConfiguracionController.find"
+      }
+    },
+    "/envio-contenido-pallets/count": {
+      "get": {
+        "x-controller-name": "EnvioContenidoPalletController",
+        "x-operation-name": "count",
+        "tags": [
+          "EnvioContenidoPalletController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioContenidoPallet model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EnvioContenidoPallet.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EnvioContenidoPallet>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EnvioContenidoPalletController.count"
+      }
+    },
+    "/envio-contenido-pallets/{id}": {
+      "put": {
+        "x-controller-name": "EnvioContenidoPalletController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "EnvioContenidoPalletController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EnvioContenidoPallet PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvioContenidoPallet"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EnvioContenidoPalletController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "EnvioContenidoPalletController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "EnvioContenidoPalletController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EnvioContenidoPallet PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvioContenidoPalletPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EnvioContenidoPalletController.updateById"
+      },
+      "get": {
+        "x-controller-name": "EnvioContenidoPalletController",
+        "x-operation-name": "findById",
+        "tags": [
+          "EnvioContenidoPalletController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioContenidoPallet model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioContenidoPalletWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioContenidoPallet.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EnvioContenidoPalletController.findById"
+      },
+      "delete": {
+        "x-controller-name": "EnvioContenidoPalletController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "EnvioContenidoPalletController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EnvioContenidoPallet DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EnvioContenidoPalletController.deleteById"
+      }
+    },
+    "/envio-contenido-pallets": {
+      "post": {
+        "x-controller-name": "EnvioContenidoPalletController",
+        "x-operation-name": "create",
+        "tags": [
+          "EnvioContenidoPalletController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioContenidoPallet model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioContenidoPallet"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewEnvioContenidoPallet"
+              }
+            }
+          }
+        },
+        "operationId": "EnvioContenidoPalletController.create"
+      },
+      "patch": {
+        "x-controller-name": "EnvioContenidoPalletController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "EnvioContenidoPalletController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioContenidoPallet PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EnvioContenidoPallet.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EnvioContenidoPallet>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvioContenidoPalletPartial"
+              }
+            }
+          }
+        },
+        "operationId": "EnvioContenidoPalletController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "EnvioContenidoPalletController",
+        "x-operation-name": "find",
+        "tags": [
+          "EnvioContenidoPalletController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of EnvioContenidoPallet model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EnvioContenidoPalletWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioContenidoPallet.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EnvioContenidoPalletController.find"
       }
     },
     "/envio-movimientos/count": {
@@ -13093,6 +13396,136 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<Envio>"
       },
+      "EnvioContenidoPallet": {
+        "title": "EnvioContenidoPallet",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "envioId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewEnvioContenidoPallet": {
+        "title": "NewEnvioContenidoPallet",
+        "type": "object",
+        "description": "(tsType: Omit<EnvioContenidoPallet, 'id'>, schemaOptions: { title: 'NewEnvioContenidoPallet', exclude: [ 'id' ] })",
+        "properties": {
+          "envioId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<EnvioContenidoPallet, 'id'>"
+      },
+      "EnvioContenidoPalletWithRelations": {
+        "title": "EnvioContenidoPalletWithRelations",
+        "type": "object",
+        "description": "(tsType: EnvioContenidoPalletWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "envioId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "envio": {
+            "$ref": "#/components/schemas/EnvioWithRelations"
+          },
+          "foreignKey": {},
+          "pallet": {
+            "$ref": "#/components/schemas/PalletWithRelations"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "EnvioContenidoPalletWithRelations"
+      },
+      "EnvioContenidoPalletPartial": {
+        "title": "EnvioContenidoPalletPartial",
+        "type": "object",
+        "description": "(tsType: Partial<EnvioContenidoPallet>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "envioId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<EnvioContenidoPallet>"
+      },
       "Empresa": {
         "title": "Empresa",
         "type": "object",
@@ -14168,6 +14601,282 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<EnvioConfiguracion>"
+      },
+      "EnvioContenidoPallet.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "EnvioContenidoPallet.ScopeFilter"
+      },
+      "EnvioContenidoPallet.IncludeFilter.Items": {
+        "title": "EnvioContenidoPallet.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "envio",
+              "pallet"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/EnvioContenidoPallet.ScopeFilter"
+          }
+        }
+      },
+      "EnvioContenidoPallet.Filter": {
+        "type": "object",
+        "title": "EnvioContenidoPallet.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "envioId": {
+                    "type": "boolean"
+                  },
+                  "palletId": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "envioId",
+                    "palletId",
+                    "usuarioCreacion",
+                    "fechaCreacion",
+                    "usuarioModificacion",
+                    "fechaModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EnvioContenidoPallet.Fields"
+          },
+          "include": {
+            "title": "EnvioContenidoPallet.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EnvioContenidoPallet.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EnvioContenidoPallet>"
+      },
+      "EnvioContenidoPallet.Filter1": {
+        "type": "object",
+        "title": "EnvioContenidoPallet.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "EnvioContenidoPallet.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "envioId": {
+                    "type": "boolean"
+                  },
+                  "palletId": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "envioId",
+                    "palletId",
+                    "usuarioCreacion",
+                    "fechaCreacion",
+                    "usuarioModificacion",
+                    "fechaModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EnvioContenidoPallet.Fields"
+          },
+          "include": {
+            "title": "EnvioContenidoPallet.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EnvioContenidoPallet.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EnvioContenidoPallet>"
       },
       "EnvioMovimiento.ScopeFilter": {
         "type": "object",

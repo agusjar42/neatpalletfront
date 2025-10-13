@@ -78,6 +78,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Logs de usuarios-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Logs de usuarios-Borrar' },
 
+                // Logs incorrectos
+                { header: intl.formatMessage({ id: 'Logs incorrectos' }), seccion: 'Logs incorrectos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Logs incorrectos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Logs incorrectos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Logs incorrectos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Logs incorrectos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Logs incorrectos-Borrar' },
+
                 // Paises
                 { header: intl.formatMessage({ id: 'Paises' }), seccion: 'Paises' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Paises-Acceder' },

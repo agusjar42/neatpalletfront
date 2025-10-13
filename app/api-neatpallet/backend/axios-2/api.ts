@@ -18705,6 +18705,43 @@ export const LogUsuarioControllerApiAxiosParamCreator = function (configuration?
     return {
         /**
          * 
+         * @param {string} nombreArchivo 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerBorrarArchivoLog: async (nombreArchivo: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'nombreArchivo' is not null or undefined
+            assertParamExists('logUsuarioControllerBorrarArchivoLog', 'nombreArchivo', nombreArchivo)
+            const localVarPath = `/log-usuarios/borrar-log/{nombreArchivo}`
+                .replace(`{${"nombreArchivo"}}`, encodeURIComponent(String(nombreArchivo)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -18797,6 +18834,43 @@ export const LogUsuarioControllerApiAxiosParamCreator = function (configuration?
             }
 
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} nombreArchivo 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerDescargarArchivoLog: async (nombreArchivo: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'nombreArchivo' is not null or undefined
+            assertParamExists('logUsuarioControllerDescargarArchivoLog', 'nombreArchivo', nombreArchivo)
+            const localVarPath = `/log-usuarios/descargar-log/{nombreArchivo}`
+                .replace(`{${"nombreArchivo"}}`, encodeURIComponent(String(nombreArchivo)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -18926,6 +19000,39 @@ export const LogUsuarioControllerApiAxiosParamCreator = function (configuration?
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(inlineObject4, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerListarArchivosLogs: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/log-usuarios/archivos-logs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -19144,6 +19251,16 @@ export const LogUsuarioControllerApiFp = function(configuration?: Configuration)
     return {
         /**
          * 
+         * @param {string} nombreArchivo 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logUsuarioControllerBorrarArchivoLog(nombreArchivo: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logUsuarioControllerBorrarArchivoLog(nombreArchivo, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19170,6 +19287,16 @@ export const LogUsuarioControllerApiFp = function(configuration?: Configuration)
          */
         async logUsuarioControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.logUsuarioControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} nombreArchivo 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logUsuarioControllerDescargarArchivoLog(nombreArchivo: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logUsuarioControllerDescargarArchivoLog(nombreArchivo, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -19201,6 +19328,15 @@ export const LogUsuarioControllerApiFp = function(configuration?: Configuration)
          */
         async logUsuarioControllerGuardarLogEnArchivo(inlineObject4?: InlineObject4, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.logUsuarioControllerGuardarLogEnArchivo(inlineObject4, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logUsuarioControllerListarArchivosLogs(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logUsuarioControllerListarArchivosLogs(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -19268,6 +19404,15 @@ export const LogUsuarioControllerApiFactory = function (configuration?: Configur
     return {
         /**
          * 
+         * @param {string} nombreArchivo 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerBorrarArchivoLog(nombreArchivo: string, options?: any): AxiosPromise<object> {
+            return localVarFp.logUsuarioControllerBorrarArchivoLog(nombreArchivo, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19292,6 +19437,15 @@ export const LogUsuarioControllerApiFactory = function (configuration?: Configur
          */
         logUsuarioControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
             return localVarFp.logUsuarioControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} nombreArchivo 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerDescargarArchivoLog(nombreArchivo: string, options?: any): AxiosPromise<string> {
+            return localVarFp.logUsuarioControllerDescargarArchivoLog(nombreArchivo, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -19320,6 +19474,14 @@ export const LogUsuarioControllerApiFactory = function (configuration?: Configur
          */
         logUsuarioControllerGuardarLogEnArchivo(inlineObject4?: InlineObject4, options?: any): AxiosPromise<object> {
             return localVarFp.logUsuarioControllerGuardarLogEnArchivo(inlineObject4, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerListarArchivosLogs(options?: any): AxiosPromise<object> {
+            return localVarFp.logUsuarioControllerListarArchivosLogs(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -19381,6 +19543,17 @@ export const LogUsuarioControllerApiFactory = function (configuration?: Configur
 export class LogUsuarioControllerApi extends BaseAPI {
     /**
      * 
+     * @param {string} nombreArchivo 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogUsuarioControllerApi
+     */
+    public logUsuarioControllerBorrarArchivoLog(nombreArchivo: string, options?: AxiosRequestConfig) {
+        return LogUsuarioControllerApiFp(this.configuration).logUsuarioControllerBorrarArchivoLog(nombreArchivo, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {{ [key: string]: object; }} [where] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -19410,6 +19583,17 @@ export class LogUsuarioControllerApi extends BaseAPI {
      */
     public logUsuarioControllerDeleteById(id: number, options?: AxiosRequestConfig) {
         return LogUsuarioControllerApiFp(this.configuration).logUsuarioControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} nombreArchivo 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogUsuarioControllerApi
+     */
+    public logUsuarioControllerDescargarArchivoLog(nombreArchivo: string, options?: AxiosRequestConfig) {
+        return LogUsuarioControllerApiFp(this.configuration).logUsuarioControllerDescargarArchivoLog(nombreArchivo, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -19444,6 +19628,16 @@ export class LogUsuarioControllerApi extends BaseAPI {
      */
     public logUsuarioControllerGuardarLogEnArchivo(inlineObject4?: InlineObject4, options?: AxiosRequestConfig) {
         return LogUsuarioControllerApiFp(this.configuration).logUsuarioControllerGuardarLogEnArchivo(inlineObject4, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogUsuarioControllerApi
+     */
+    public logUsuarioControllerListarArchivosLogs(options?: AxiosRequestConfig) {
+        return LogUsuarioControllerApiFp(this.configuration).logUsuarioControllerListarArchivosLogs(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

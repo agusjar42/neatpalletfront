@@ -56,6 +56,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const getMenuLateral = async () => {
     // Este objeto contiene las rutas y los iconos asociados a cada permiso
     const jsonRutas: Record<string, Record<string, { path: string; icon: string }>> = {
+      "Logs": {
+        "Logs incorrectos": {
+          "path": "/logs-incorrectos",
+          "icon": "pi pi-fw pi-exclamation-triangle"
+        },
+        "Logs de usuarios": {
+          "path": "/tablas-maestras/log_usuario",
+          "icon": "pi pi-history"
+        },
+      },
       "Tablas de sistema": {
         "Paises": {
           "path": "/tablas-maestras/pais",
@@ -65,10 +75,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/empresa",
           "icon": "pi pi-building"
         },    
-        "Logs de usuarios": {
-          "path": "/tablas-maestras/log_usuario",
-          "icon": "pi pi-history"
-        },
         "Roles": {
           "path": "/tablas-maestras/rol",
           "icon": "pi pi-fw pi-bars"

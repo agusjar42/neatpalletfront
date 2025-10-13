@@ -3756,6 +3756,60 @@
         "operationId": "ListaPermisosController.find"
       }
     },
+    "/log-usuarios/archivos-logs": {
+      "get": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "listarArchivosLogs",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista todos los archivos de logs de login incorrectos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "LogUsuarioController.listarArchivosLogs"
+      }
+    },
+    "/log-usuarios/borrar-log/{nombreArchivo}": {
+      "delete": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "borrarArchivoLog",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Borra un archivo de log específico",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nombreArchivo",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "LogUsuarioController.borrarArchivoLog"
+      }
+    },
     "/log-usuarios/count": {
       "get": {
         "x-controller-name": "LogUsuarioController",
@@ -3792,6 +3846,38 @@
           }
         ],
         "operationId": "LogUsuarioController.count"
+      }
+    },
+    "/log-usuarios/descargar-log/{nombreArchivo}": {
+      "get": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "descargarArchivoLog",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Descarga un archivo de log específico",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nombreArchivo",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "LogUsuarioController.descargarArchivoLog"
       }
     },
     "/log-usuarios/guardar-archivo": {

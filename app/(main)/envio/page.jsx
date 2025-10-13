@@ -6,9 +6,13 @@ import { useIntl } from 'react-intl';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { Button } from 'primereact/button';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { Toast } from "primereact/toast";
+import { useRef, useState } from "react";
 
 const Envio = () => {
     const intl = useIntl();
+    const toast = useRef(null);
+    const [refreshKey, setRefreshKey] = useState(0);
 
     const columnas = [
         { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen' }), tipo: 'string' },
@@ -28,10 +32,22 @@ const Envio = () => {
                 try {
                     const datosSesion = getUsuarioSesion();
                     await generarDatosFake({ usuarioCreacion: datosSesion.id, empresaId: datosSesion.empresaId });
-                    alert('Datos fake generados correctamente');
+                    toast.current?.show({
+                        severity: "success",
+                        summary: "OK",
+                        detail: intl.formatMessage({ id: 'Datos fake generados correctamente' }),
+                        life: 3000,
+                    });
+                    // Recargar los datos del Crud
+                    setRefreshKey(prev => prev + 1);
                 } catch (error) {
                     console.error('Error al generar datos fake:', error);
-                    alert('Error al generar datos fake');
+                    toast.current?.show({
+                        severity: "error",
+                        summary: "Error",
+                        detail: intl.formatMessage({ id: 'Error al generar datos fake' }),
+                        life: 3000,
+                    });
                 }
             }
         });
@@ -40,6 +56,7 @@ const Envio = () => {
     return (
         <>
             <ConfirmDialog />
+            <Toast ref={toast} position="top-right" />
             <div>
                 <Button
                     label="Generar Datos Fake"
@@ -49,6 +66,7 @@ const Envio = () => {
                     className="mb-3"
                 />
                 <Crud
+                    key={`envios-${refreshKey}`}
                     headerCrud={intl.formatMessage({ id: 'Envíos' })}
                     getRegistros={getEnvio}
                     getRegistrosCount={getEnvioCount}
@@ -58,6 +76,7 @@ const Envio = () => {
                     editarComponente={<EditarEnvios />}
                     columnas={columnas}
                     deleteRegistro={deleteEnvio}
+                    cargarDatosInicialmente={true}
                 />
             </div>
         </>

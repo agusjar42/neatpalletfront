@@ -229,10 +229,10 @@
     },
     "/crear-envio-configuracion-desde-empresa": {
       "post": {
-        "x-controller-name": "EnvioFakeDataController",
+        "x-controller-name": "EnvioController",
         "x-operation-name": "crearEnvioConfiguracionDesdeEmpresa",
         "tags": [
-          "EnvioFakeDataController"
+          "EnvioController"
         ],
         "responses": {
           "204": {
@@ -255,7 +255,7 @@
             }
           }
         },
-        "operationId": "EnvioFakeDataController.crearEnvioConfiguracionDesdeEmpresa"
+        "operationId": "EnvioController.crearEnvioConfiguracionDesdeEmpresa"
       }
     },
     "/empresas/count": {
@@ -1080,6 +1080,70 @@
           }
         ],
         "operationId": "EnvioConfiguracionController.find"
+      }
+    },
+    "/envio-contenido-pallets/by-envio/{envioId}": {
+      "delete": {
+        "x-controller-name": "EnvioContenidoPalletController",
+        "x-operation-name": "deleteByEnvioId",
+        "tags": [
+          "EnvioContenidoPalletController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EnvioContenidoPallet DELETE by envioId success - deletes all pallets from all contenidos of an envio"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "envioId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EnvioContenidoPalletController.deleteByEnvioId"
+      }
+    },
+    "/envio-contenido-pallets/by-envio-contenido/{envioContenidoId}": {
+      "delete": {
+        "x-controller-name": "EnvioContenidoPalletController",
+        "x-operation-name": "deleteByEnvioContenidoId",
+        "tags": [
+          "EnvioContenidoPalletController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EnvioContenidoPallet DELETE by envioContenidoId success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "envioContenidoId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EnvioContenidoPalletController.deleteByEnvioContenidoId"
       }
     },
     "/envio-contenido-pallets/count": {
@@ -3728,6 +3792,51 @@
           }
         ],
         "operationId": "LogUsuarioController.count"
+      }
+    },
+    "/log-usuarios/guardar-archivo": {
+      "post": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "guardarLogEnArchivo",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Guarda log de login incorrecto en archivo de texto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tipo": {
+                    "type": "string"
+                  },
+                  "usuario": {
+                    "type": "string"
+                  },
+                  "ip": {
+                    "type": "string"
+                  },
+                  "mensaje": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "LogUsuarioController.guardarLogEnArchivo"
       }
     },
     "/log-usuarios/{id}": {
@@ -13403,7 +13512,7 @@
           "id": {
             "type": "number"
           },
-          "envioId": {
+          "envioContenidoId": {
             "type": "number"
           },
           "palletId": {
@@ -13431,7 +13540,7 @@
         "type": "object",
         "description": "(tsType: Omit<EnvioContenidoPallet, 'id'>, schemaOptions: { title: 'NewEnvioContenidoPallet', exclude: [ 'id' ] })",
         "properties": {
-          "envioId": {
+          "envioContenidoId": {
             "type": "number"
           },
           "palletId": {
@@ -13463,7 +13572,7 @@
           "id": {
             "type": "number"
           },
-          "envioId": {
+          "envioContenidoId": {
             "type": "number"
           },
           "palletId": {
@@ -13483,8 +13592,8 @@
             "type": "string",
             "format": "date-time"
           },
-          "envio": {
-            "$ref": "#/components/schemas/EnvioWithRelations"
+          "envioContenido": {
+            "$ref": "#/components/schemas/EnvioContenidoWithRelations"
           },
           "foreignKey": {},
           "pallet": {
@@ -13502,7 +13611,7 @@
           "id": {
             "type": "number"
           },
-          "envioId": {
+          "envioContenidoId": {
             "type": "number"
           },
           "palletId": {
@@ -14670,7 +14779,7 @@
           "relation": {
             "type": "string",
             "enum": [
-              "envio",
+              "envioContenido",
               "pallet"
             ]
           },
@@ -14717,7 +14826,7 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "envioId": {
+                  "envioContenidoId": {
                     "type": "boolean"
                   },
                   "palletId": {
@@ -14744,7 +14853,7 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "envioId",
+                    "envioContenidoId",
                     "palletId",
                     "usuarioCreacion",
                     "fechaCreacion",
@@ -14819,7 +14928,7 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "envioId": {
+                  "envioContenidoId": {
                     "type": "boolean"
                   },
                   "palletId": {
@@ -14846,7 +14955,7 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "envioId",
+                    "envioContenidoId",
                     "palletId",
                     "usuarioCreacion",
                     "fechaCreacion",
@@ -20810,7 +20919,7 @@
   ],
   "servers": [
     {
-      "url": "http://[::1]:8000"
+      "url": "http://localhost:8000"
     }
   ]
 }

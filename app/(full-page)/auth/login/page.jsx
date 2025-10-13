@@ -11,6 +11,7 @@ import { useAuth } from "@/app/auth/AuthContext";
 import jwt from "@/app/auth/jwt/useJwt";
 import { useRouter } from 'next/navigation';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { devuelveBasePath } from "@/app/utility/Utils";
 const Login = () => {
     //const apiUsuarios = new UsuariosControllerApi(settings)
     const [rememberMe, setRememberMe] = useState(false);
@@ -43,6 +44,61 @@ const Login = () => {
         }
     }, []);
 
+    //Función para guardar logs de intentos de login fallidos en archivo de texto en el servidor
+    const guardarLogLoginIncorrecto = async (tipo, usuario, password, error = null) => {
+        try {
+            //Obtener la IP del usuario
+            let ip = 'desconocida';
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                ip = data.ip;
+            } catch (e) {
+                console.error('Error al obtener IP:', e);
+            }
+
+            //Construir el mensaje del log según el tipo de error
+            let mensaje = '';
+            switch(tipo) {
+                case 'usuario_inactivo':
+                    mensaje = 'Usuario no está activo';
+                    break;
+                case 'token_undefined':
+                    mensaje = 'Token es undefined';
+                    break;
+                case 'credenciales_incorrectas':
+                    mensaje = error?.message || 'Error desconocido';
+                    break;
+                default:
+                    mensaje = 'Error desconocido';
+            }
+
+            //Enviar log al backend para guardarlo en archivo .txt
+            const backendUrl = devuelveBasePath();
+            const response = await fetch(`${backendUrl}/log-usuarios/guardar-archivo`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    tipo,
+                    usuario,
+                    ip,
+                    mensaje,
+                }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                console.log('Log guardado en archivo:', result.file);
+            } else {
+                console.error('Error al guardar log:', result.message);
+            }
+        } catch (e) {
+            console.error('Error al guardar log de login:', e);
+        }
+    }
+
     //Funcion para acotar codigo
     const loginGenerico = async (usuario, password) => {
         //
@@ -73,16 +129,24 @@ const Login = () => {
         try {
             const data = await loginGenerico(usuario, password);
             if (data.activo === false) {
+                // Log: Usuario inactivo 
+                await guardarLogLoginIncorrecto('usuario_inactivo', usuario, password);
                 setMessage('El usuario no está activo.');
+                bloquearPantalla(false);
             } else {
                 if (data.accessToken) {
                     login(data.accessToken, rememberMe, data);
                 } else {
+                    // Log: Token undefined 
+                    await guardarLogLoginIncorrecto('token_undefined', usuario, password);
                     setMessage('Error al obtener el token: es undefined');
+                    bloquearPantalla(false);
                 }
             }
-            bloquearPantalla(false);
+
         } catch (error) {
+            // Log: Credenciales incorrectas
+            await guardarLogLoginIncorrecto('credenciales_incorrectas', usuario, password, error);
             setMessage('Las credenciales del usuario son incorrectas.');
             bloquearPantalla(false);
         }

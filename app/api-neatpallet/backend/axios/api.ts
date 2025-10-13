@@ -1621,7 +1621,7 @@ export interface EnvioContenidoPallet {
      * @type {number}
      * @memberof EnvioContenidoPallet
      */
-    'envioId'?: number;
+    'envioContenidoId'?: number;
     /**
      * 
      * @type {number}
@@ -1770,7 +1770,7 @@ export interface EnvioContenidoPalletIncludeFilterItems {
     * @enum {string}
     */
 export enum EnvioContenidoPalletIncludeFilterItemsRelationEnum {
-    Envio = 'envio',
+    EnvioContenido = 'envioContenido',
     Pallet = 'pallet'
 }
 
@@ -1791,7 +1791,7 @@ export interface EnvioContenidoPalletPartial {
      * @type {number}
      * @memberof EnvioContenidoPalletPartial
      */
-    'envioId'?: number;
+    'envioContenidoId'?: number;
     /**
      * 
      * @type {number}
@@ -1889,7 +1889,7 @@ export interface EnvioContenidoPalletWithRelations {
      * @type {number}
      * @memberof EnvioContenidoPalletWithRelations
      */
-    'envioId'?: number;
+    'envioContenidoId'?: number;
     /**
      * 
      * @type {number}
@@ -1922,10 +1922,10 @@ export interface EnvioContenidoPalletWithRelations {
     'fechaModificacion'?: string;
     /**
      * 
-     * @type {EnvioWithRelations}
+     * @type {EnvioContenidoWithRelations}
      * @memberof EnvioContenidoPalletWithRelations
      */
-    'envio'?: EnvioWithRelations;
+    'envioContenido'?: EnvioContenidoWithRelations;
     /**
      * 
      * @type {any}
@@ -4486,16 +4486,28 @@ export interface InlineObject1 {
 export interface InlineObject4 {
     /**
      * 
-     * @type {Array<string>}
+     * @type {string}
      * @memberof InlineObject4
      */
-    'emails'?: Array<string>;
+    'tipo'?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof InlineObject4
      */
-    'empresaId'?: number;
+    'usuario'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject4
+     */
+    'ip'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject4
+     */
+    'mensaje'?: string;
 }
 /**
  * 
@@ -4524,16 +4536,16 @@ export interface InlineObject5 {
 export interface InlineObject6 {
     /**
      * 
-     * @type {string}
+     * @type {Array<string>}
      * @memberof InlineObject6
      */
-    'mail': string;
+    'emails'?: Array<string>;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineObject6
      */
-    'password': string;
+    'empresaId'?: number;
 }
 /**
  * 
@@ -4546,7 +4558,13 @@ export interface InlineObject7 {
      * @type {string}
      * @memberof InlineObject7
      */
-    'email'?: string;
+    'mail': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'password': string;
 }
 /**
  * 
@@ -4559,29 +4577,42 @@ export interface InlineObject8 {
      * @type {string}
      * @memberof InlineObject8
      */
+    'email'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject9
+ */
+export interface InlineObject9 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject9
+     */
     'nombre': string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject8
+     * @memberof InlineObject9
      */
     'mail': string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject8
+     * @memberof InlineObject9
      */
     'password': string;
     /**
      * 
      * @type {number}
-     * @memberof InlineObject8
+     * @memberof InlineObject9
      */
     'empresaId'?: number;
     /**
      * 
      * @type {number}
-     * @memberof InlineObject8
+     * @memberof InlineObject9
      */
     'rolId'?: number;
 }
@@ -5502,7 +5533,7 @@ export interface NewEnvioContenidoPallet {
      * @type {number}
      * @memberof NewEnvioContenidoPallet
      */
-    'envioId'?: number;
+    'envioContenidoId'?: number;
     /**
      * 
      * @type {number}
@@ -13612,6 +13643,80 @@ export const EnvioContenidoPalletControllerApiAxiosParamCreator = function (conf
         },
         /**
          * 
+         * @param {number} envioContenidoId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerDeleteByEnvioContenidoId: async (envioContenidoId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'envioContenidoId' is not null or undefined
+            assertParamExists('envioContenidoPalletControllerDeleteByEnvioContenidoId', 'envioContenidoId', envioContenidoId)
+            const localVarPath = `/envio-contenido-pallets/by-envio-contenido/{envioContenidoId}`
+                .replace(`{${"envioContenidoId"}}`, encodeURIComponent(String(envioContenidoId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} envioId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerDeleteByEnvioId: async (envioId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'envioId' is not null or undefined
+            assertParamExists('envioContenidoPalletControllerDeleteByEnvioId', 'envioId', envioId)
+            const localVarPath = `/envio-contenido-pallets/by-envio/{envioId}`
+                .replace(`{${"envioId"}}`, encodeURIComponent(String(envioId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13883,6 +13988,26 @@ export const EnvioContenidoPalletControllerApiFp = function(configuration?: Conf
         },
         /**
          * 
+         * @param {number} envioContenidoId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioContenidoPalletControllerDeleteByEnvioContenidoId(envioContenidoId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoPalletControllerDeleteByEnvioContenidoId(envioContenidoId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} envioId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioContenidoPalletControllerDeleteByEnvioId(envioId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioContenidoPalletControllerDeleteByEnvioId(envioId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13975,6 +14100,24 @@ export const EnvioContenidoPalletControllerApiFactory = function (configuration?
         },
         /**
          * 
+         * @param {number} envioContenidoId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerDeleteByEnvioContenidoId(envioContenidoId: number, options?: any): AxiosPromise<any> {
+            return localVarFp.envioContenidoPalletControllerDeleteByEnvioContenidoId(envioContenidoId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} envioId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioContenidoPalletControllerDeleteByEnvioId(envioId: number, options?: any): AxiosPromise<any> {
+            return localVarFp.envioContenidoPalletControllerDeleteByEnvioId(envioId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -14061,6 +14204,28 @@ export class EnvioContenidoPalletControllerApi extends BaseAPI {
      */
     public envioContenidoPalletControllerCreate(newEnvioContenidoPallet?: NewEnvioContenidoPallet, options?: AxiosRequestConfig) {
         return EnvioContenidoPalletControllerApiFp(this.configuration).envioContenidoPalletControllerCreate(newEnvioContenidoPallet, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} envioContenidoId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioContenidoPalletControllerApi
+     */
+    public envioContenidoPalletControllerDeleteByEnvioContenidoId(envioContenidoId: number, options?: AxiosRequestConfig) {
+        return EnvioContenidoPalletControllerApiFp(this.configuration).envioContenidoPalletControllerDeleteByEnvioContenidoId(envioContenidoId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} envioId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioContenidoPalletControllerApi
+     */
+    public envioContenidoPalletControllerDeleteByEnvioId(envioId: number, options?: AxiosRequestConfig) {
+        return EnvioContenidoPalletControllerApiFp(this.configuration).envioContenidoPalletControllerDeleteByEnvioId(envioId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -14173,6 +14338,43 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioControllerCrearEnvioConfiguracionDesdeEmpresa: async (crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/crear-envio-configuracion-desde-empresa`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(crearEnvioConfiguracionDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -14479,6 +14681,16 @@ export const EnvioControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {NewEnvio} [newEnvio] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -14572,6 +14784,15 @@ export const EnvioControllerApiFactory = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: any): AxiosPromise<any> {
+            return localVarFp.envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {NewEnvio} [newEnvio] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -14656,6 +14877,17 @@ export class EnvioControllerApi extends BaseAPI {
      */
     public envioControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
         return EnvioControllerApiFp(this.configuration).envioControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioControllerApi
+     */
+    public envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: AxiosRequestConfig) {
+        return EnvioControllerApiFp(this.configuration).envioControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -14786,43 +15018,6 @@ export const EnvioFakeDataControllerApiAxiosParamCreator = function (configurati
         },
         /**
          * 
-         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa: async (crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/crear-envio-configuracion-desde-empresa`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(crearEnvioConfiguracionDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {InlineObject1} [inlineObject1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -14880,16 +15075,6 @@ export const EnvioFakeDataControllerApiFp = function(configuration?: Configurati
         },
         /**
          * 
-         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {InlineObject1} [inlineObject1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -14919,15 +15104,6 @@ export const EnvioFakeDataControllerApiFactory = function (configuration?: Confi
         },
         /**
          * 
-         * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: any): AxiosPromise<any> {
-            return localVarFp.envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {InlineObject1} [inlineObject1] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -14954,17 +15130,6 @@ export class EnvioFakeDataControllerApi extends BaseAPI {
      */
     public envioFakeDataControllerBorrarEnvioCascada(id: number, options?: AxiosRequestConfig) {
         return EnvioFakeDataControllerApiFp(this.configuration).envioFakeDataControllerBorrarEnvioCascada(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {CrearEnvioConfiguracionDto} [crearEnvioConfiguracionDto] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioFakeDataControllerApi
-     */
-    public envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto?: CrearEnvioConfiguracionDto, options?: AxiosRequestConfig) {
-        return EnvioFakeDataControllerApiFp(this.configuration).envioFakeDataControllerCrearEnvioConfiguracionDesdeEmpresa(crearEnvioConfiguracionDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -18732,6 +18897,43 @@ export const LogUsuarioControllerApiAxiosParamCreator = function (configuration?
         },
         /**
          * 
+         * @param {InlineObject4} [inlineObject4] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerGuardarLogEnArchivo: async (inlineObject4?: InlineObject4, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/log-usuarios/guardar-archivo`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject4, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {LogUsuario} [logUsuario] 
          * @param {*} [options] Override http request option.
@@ -18993,6 +19195,16 @@ export const LogUsuarioControllerApiFp = function(configuration?: Configuration)
         },
         /**
          * 
+         * @param {InlineObject4} [inlineObject4] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logUsuarioControllerGuardarLogEnArchivo(inlineObject4?: InlineObject4, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logUsuarioControllerGuardarLogEnArchivo(inlineObject4, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {LogUsuario} [logUsuario] 
          * @param {*} [options] Override http request option.
@@ -19099,6 +19311,15 @@ export const LogUsuarioControllerApiFactory = function (configuration?: Configur
          */
         logUsuarioControllerFindById(id: number, filter?: LogUsuarioFilter, options?: any): AxiosPromise<LogUsuarioWithRelations> {
             return localVarFp.logUsuarioControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {InlineObject4} [inlineObject4] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logUsuarioControllerGuardarLogEnArchivo(inlineObject4?: InlineObject4, options?: any): AxiosPromise<object> {
+            return localVarFp.logUsuarioControllerGuardarLogEnArchivo(inlineObject4, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -19212,6 +19433,17 @@ export class LogUsuarioControllerApi extends BaseAPI {
      */
     public logUsuarioControllerFindById(id: number, filter?: LogUsuarioFilter, options?: AxiosRequestConfig) {
         return LogUsuarioControllerApiFp(this.configuration).logUsuarioControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {InlineObject4} [inlineObject4] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogUsuarioControllerApi
+     */
+    public logUsuarioControllerGuardarLogEnArchivo(inlineObject4?: InlineObject4, options?: AxiosRequestConfig) {
+        return LogUsuarioControllerApiFp(this.configuration).logUsuarioControllerGuardarLogEnArchivo(inlineObject4, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -22385,15 +22617,15 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
         /**
          * 
          * @param {string} nombrePlantilla 
-         * @param {InlineObject4} inlineObject4 
+         * @param {InlineObject5} inlineObject5 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerEnviarEmails: async (nombrePlantilla: string, inlineObject4: InlineObject4, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        plantillaEmailControllerEnviarEmails: async (nombrePlantilla: string, inlineObject5: InlineObject5, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'nombrePlantilla' is not null or undefined
             assertParamExists('plantillaEmailControllerEnviarEmails', 'nombrePlantilla', nombrePlantilla)
-            // verify required parameter 'inlineObject4' is not null or undefined
-            assertParamExists('plantillaEmailControllerEnviarEmails', 'inlineObject4', inlineObject4)
+            // verify required parameter 'inlineObject5' is not null or undefined
+            assertParamExists('plantillaEmailControllerEnviarEmails', 'inlineObject5', inlineObject5)
             const localVarPath = `/plantilla-emails/enviarEmails/{nombrePlantilla}`
                 .replace(`{${"nombrePlantilla"}}`, encodeURIComponent(String(nombrePlantilla)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -22418,7 +22650,7 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject4, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject5, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -22428,15 +22660,15 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
         /**
          * 
          * @param {string} url 
-         * @param {InlineObject5} inlineObject5 
+         * @param {InlineObject6} inlineObject6 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerEnviarQR: async (url: string, inlineObject5: InlineObject5, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        plantillaEmailControllerEnviarQR: async (url: string, inlineObject6: InlineObject6, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'url' is not null or undefined
             assertParamExists('plantillaEmailControllerEnviarQR', 'url', url)
-            // verify required parameter 'inlineObject5' is not null or undefined
-            assertParamExists('plantillaEmailControllerEnviarQR', 'inlineObject5', inlineObject5)
+            // verify required parameter 'inlineObject6' is not null or undefined
+            assertParamExists('plantillaEmailControllerEnviarQR', 'inlineObject6', inlineObject6)
             const localVarPath = `/plantilla-emails/enviarQR/{url}`
                 .replace(`{${"url"}}`, encodeURIComponent(String(url)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -22461,7 +22693,7 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject5, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject6, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -22791,23 +23023,23 @@ export const PlantillaEmailControllerApiFp = function(configuration?: Configurat
         /**
          * 
          * @param {string} nombrePlantilla 
-         * @param {InlineObject4} inlineObject4 
+         * @param {InlineObject5} inlineObject5 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject4: InlineObject4, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject4, options);
+        async plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject5: InlineObject5, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject5, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} url 
-         * @param {InlineObject5} inlineObject5 
+         * @param {InlineObject6} inlineObject6 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async plantillaEmailControllerEnviarQR(url: string, inlineObject5: InlineObject5, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarQR(url, inlineObject5, options);
+        async plantillaEmailControllerEnviarQR(url: string, inlineObject6: InlineObject6, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarQR(url, inlineObject6, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -22924,22 +23156,22 @@ export const PlantillaEmailControllerApiFactory = function (configuration?: Conf
         /**
          * 
          * @param {string} nombrePlantilla 
-         * @param {InlineObject4} inlineObject4 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject4: InlineObject4, options?: any): AxiosPromise<void> {
-            return localVarFp.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject4, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} url 
          * @param {InlineObject5} inlineObject5 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerEnviarQR(url: string, inlineObject5: InlineObject5, options?: any): AxiosPromise<void> {
-            return localVarFp.plantillaEmailControllerEnviarQR(url, inlineObject5, options).then((request) => request(axios, basePath));
+        plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject5: InlineObject5, options?: any): AxiosPromise<void> {
+            return localVarFp.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject5, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} url 
+         * @param {InlineObject6} inlineObject6 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerEnviarQR(url: string, inlineObject6: InlineObject6, options?: any): AxiosPromise<void> {
+            return localVarFp.plantillaEmailControllerEnviarQR(url, inlineObject6, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -23054,25 +23286,25 @@ export class PlantillaEmailControllerApi extends BaseAPI {
     /**
      * 
      * @param {string} nombrePlantilla 
-     * @param {InlineObject4} inlineObject4 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PlantillaEmailControllerApi
-     */
-    public plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject4: InlineObject4, options?: AxiosRequestConfig) {
-        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject4, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} url 
      * @param {InlineObject5} inlineObject5 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlantillaEmailControllerApi
      */
-    public plantillaEmailControllerEnviarQR(url: string, inlineObject5: InlineObject5, options?: AxiosRequestConfig) {
-        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarQR(url, inlineObject5, options).then((request) => request(this.axios, this.basePath));
+    public plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject5: InlineObject5, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject5, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} url 
+     * @param {InlineObject6} inlineObject6 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerEnviarQR(url: string, inlineObject6: InlineObject6, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarQR(url, inlineObject6, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -28175,53 +28407,14 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @param {InlineObject6} inlineObject6 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuariosControllerLogin: async (inlineObject6: InlineObject6, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'inlineObject6' is not null or undefined
-            assertParamExists('usuariosControllerLogin', 'inlineObject6', inlineObject6)
-            const localVarPath = `/usuarios/login`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject6, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {InlineObject7} inlineObject7 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRecuperarPassword: async (inlineObject7: InlineObject7, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        usuariosControllerLogin: async (inlineObject7: InlineObject7, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'inlineObject7' is not null or undefined
-            assertParamExists('usuariosControllerRecuperarPassword', 'inlineObject7', inlineObject7)
-            const localVarPath = `/usuarios/recuperarPassword`;
+            assertParamExists('usuariosControllerLogin', 'inlineObject7', inlineObject7)
+            const localVarPath = `/usuarios/login`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -28253,12 +28446,14 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @param {InlineObject8} [inlineObject8] 
+         * @param {InlineObject8} inlineObject8 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRegister: async (inlineObject8?: InlineObject8, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/usuarios/register`;
+        usuariosControllerRecuperarPassword: async (inlineObject8: InlineObject8, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'inlineObject8' is not null or undefined
+            assertParamExists('usuariosControllerRecuperarPassword', 'inlineObject8', inlineObject8)
+            const localVarPath = `/usuarios/recuperarPassword`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -28282,6 +28477,43 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(inlineObject8, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {InlineObject9} [inlineObject9] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usuariosControllerRegister: async (inlineObject9?: InlineObject9, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/usuarios/register`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject9, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -28629,32 +28861,32 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {InlineObject6} inlineObject6 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usuariosControllerLogin(inlineObject6: InlineObject6, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerLogin(inlineObject6, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {InlineObject7} inlineObject7 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerRecuperarPassword(inlineObject7: InlineObject7, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRecuperarPassword(inlineObject7, options);
+        async usuariosControllerLogin(inlineObject7: InlineObject7, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerLogin(inlineObject7, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {InlineObject8} [inlineObject8] 
+         * @param {InlineObject8} inlineObject8 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerRegister(inlineObject8?: InlineObject8, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRegister(inlineObject8, options);
+        async usuariosControllerRecuperarPassword(inlineObject8: InlineObject8, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRecuperarPassword(inlineObject8, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {InlineObject9} [inlineObject9] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usuariosControllerRegister(inlineObject9?: InlineObject9, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRegister(inlineObject9, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -28789,30 +29021,30 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @param {InlineObject6} inlineObject6 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuariosControllerLogin(inlineObject6: InlineObject6, options?: any): AxiosPromise<InlineResponse200> {
-            return localVarFp.usuariosControllerLogin(inlineObject6, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {InlineObject7} inlineObject7 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRecuperarPassword(inlineObject7: InlineObject7, options?: any): AxiosPromise<void> {
-            return localVarFp.usuariosControllerRecuperarPassword(inlineObject7, options).then((request) => request(axios, basePath));
+        usuariosControllerLogin(inlineObject7: InlineObject7, options?: any): AxiosPromise<InlineResponse200> {
+            return localVarFp.usuariosControllerLogin(inlineObject7, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {InlineObject8} [inlineObject8] 
+         * @param {InlineObject8} inlineObject8 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRegister(inlineObject8?: InlineObject8, options?: any): AxiosPromise<InlineResponse2001> {
-            return localVarFp.usuariosControllerRegister(inlineObject8, options).then((request) => request(axios, basePath));
+        usuariosControllerRecuperarPassword(inlineObject8: InlineObject8, options?: any): AxiosPromise<void> {
+            return localVarFp.usuariosControllerRecuperarPassword(inlineObject8, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {InlineObject9} [inlineObject9] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usuariosControllerRegister(inlineObject9?: InlineObject9, options?: any): AxiosPromise<InlineResponse2001> {
+            return localVarFp.usuariosControllerRegister(inlineObject9, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -28949,35 +29181,35 @@ export class UsuariosControllerApi extends BaseAPI {
 
     /**
      * 
-     * @param {InlineObject6} inlineObject6 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsuariosControllerApi
-     */
-    public usuariosControllerLogin(inlineObject6: InlineObject6, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerLogin(inlineObject6, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @param {InlineObject7} inlineObject7 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsuariosControllerApi
      */
-    public usuariosControllerRecuperarPassword(inlineObject7: InlineObject7, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerRecuperarPassword(inlineObject7, options).then((request) => request(this.axios, this.basePath));
+    public usuariosControllerLogin(inlineObject7: InlineObject7, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerLogin(inlineObject7, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {InlineObject8} [inlineObject8] 
+     * @param {InlineObject8} inlineObject8 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsuariosControllerApi
      */
-    public usuariosControllerRegister(inlineObject8?: InlineObject8, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerRegister(inlineObject8, options).then((request) => request(this.axios, this.basePath));
+    public usuariosControllerRecuperarPassword(inlineObject8: InlineObject8, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerRecuperarPassword(inlineObject8, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {InlineObject9} [inlineObject9] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsuariosControllerApi
+     */
+    public usuariosControllerRegister(inlineObject9?: InlineObject9, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerRegister(inlineObject9, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

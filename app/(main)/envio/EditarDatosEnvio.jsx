@@ -52,15 +52,17 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
 
     const columnasMovimiento = [
         { campo: 'fechaEspanol', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'date' },
-        { campo: 'nombreTipoSensor', header: intl.formatMessage({ id: 'Tipo Sensor' }), tipo: 'string' },
+        { campo: 'nombreSensor', header: intl.formatMessage({ id: 'Sensor' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
         { campo: 'gps', header: intl.formatMessage({ id: 'GPS' }), tipo: 'string' },
     ];
 
     const columnasPallet = [
-        { campo: 'codigoPallet', header: intl.formatMessage({ id: 'Código Pallet' }), tipo: 'string' },
-        { campo: 'aliasPallet', header: intl.formatMessage({ id: 'Alias' }), tipo: 'string' },
-        { campo: 'modeloPallet', header: intl.formatMessage({ id: 'Modelo' }), tipo: 'string' },
+        { campo: 'producto', header: intl.formatMessage({ id: 'Producto' }), tipo: 'string' },
+        { campo: 'referencia', header: intl.formatMessage({ id: 'Referencia' }), tipo: 'string' },
+        { campo: 'codigo', header: intl.formatMessage({ id: 'Código Pallet' }), tipo: 'string' },
+        { campo: 'alias', header: intl.formatMessage({ id: 'Alias' }), tipo: 'string' },
+        { campo: 'modelo', header: intl.formatMessage({ id: 'Modelo' }), tipo: 'string' },
     ];
 
     const columnasParada = [

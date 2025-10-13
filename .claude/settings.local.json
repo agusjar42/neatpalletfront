@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Read(//c/personal/oscar/project/neatpallet/**)"
+      "Read(//c/personal/oscar/project/neatpallet/**)",
+      "Bash(npm run build)"
     ],
     "deny": [],
     "ask": []

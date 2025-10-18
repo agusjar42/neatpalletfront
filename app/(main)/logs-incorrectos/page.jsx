@@ -188,10 +188,11 @@ const LogsIncorrectos = () => {
             <Toast ref={toast} position="top-right" />
 
             <div className="col-12">
-                <Card title="Logs de Intentos de Login Incorrectos">
+                <Card title="Logs del Sistema">
                     <div className="mb-3">
                         <p className="text-600 mb-3">
-                            Aquí puedes visualizar y gestionar los archivos de logs de intentos de login fallidos.
+                            Aquí puedes visualizar y gestionar los archivos de logs del sistema.
+                            Se incluyen logs de intentos de login fallidos y logs de todas las peticiones a la API.
                             Cada archivo contiene los registros de un mes específico.
                         </p>
                         <Button
@@ -221,10 +222,16 @@ const LogsIncorrectos = () => {
                             className="datatable-responsive"
                         >
                             <Column
+                                field="tipo"
+                                header="Tipo"
+                                sortable
+                                style={{ width: '15%' }}
+                            />
+                            <Column
                                 field="nombre"
                                 header="Nombre del Archivo"
                                 sortable
-                                style={{ width: '40%' }}
+                                style={{ width: '30%' }}
                             />
                             <Column
                                 field="fecha"
@@ -238,7 +245,7 @@ const LogsIncorrectos = () => {
                                 header="Tamaño"
                                 body={tamañoTemplate}
                                 sortable
-                                style={{ width: '15%' }}
+                                style={{ width: '10%' }}
                             />
                             <Column
                                 header="Acciones"

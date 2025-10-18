@@ -21005,7 +21005,7 @@
   ],
   "servers": [
     {
-      "url": "http://localhost:8000"
+      "url": "http://[::1]:8000"
     }
   ]
 }

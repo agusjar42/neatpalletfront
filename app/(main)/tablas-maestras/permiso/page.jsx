@@ -154,6 +154,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envío Configuracion Empresa-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envío Configuracion Empresa-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envío Configuracion Empresa-Borrar' },
+                //Envío Sensor Empresa
+
+                { header: intl.formatMessage({ id: 'Envío Sensor Empresa' }), seccion: 'Envío Sensor Empresa' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envío Sensor Empresa-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envío Sensor Empresa-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envío Sensor Empresa-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envío Sensor Empresa-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envío Sensor Empresa-Borrar' },
 
                 // Envio Configuracion
                 { header: intl.formatMessage({ id: 'Envio Configuracion' }), seccion: 'Envio Configuracion' },

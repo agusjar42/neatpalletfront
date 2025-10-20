@@ -11,6 +11,8 @@ import { useIntl } from 'react-intl';
 import Crud from "../../../components/shared/crud";
 import { getEnvioConfiguracionEmpresa, getEnvioConfiguracionEmpresaCount, deleteEnvioConfiguracionEmpresa } from "@/app/api-endpoints/envio-configuracion-empresa";
 import EditarEnvioConfiguracionEmpresas from "../../envio-configuracion-empresa/editar";
+import { getEnvioSensorEmpresa, getEnvioSensorEmpresaCount, deleteEnvioSensorEmpresa } from "@/app/api-endpoints/envio-sensor-empresa";
+import EditarEnvioSensorEmpresas from "../../envio-sensor-empresa/editar";
 
 const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl()
@@ -25,6 +27,12 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
         { campo: 'unidadMedida', header: intl.formatMessage({ id: 'Unidad de medida' }), tipo: 'string' },
+    ];
+
+    // Columnas para la tabla de envío sensor empresa
+    const columnasSensorEmpresa = [
+        { campo: 'nombre', header: intl.formatMessage({ id: 'Tipo de Sensor' }), tipo: 'string' },
+        { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
     ];
 
     useEffect(() => {
@@ -175,6 +183,36 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                                                 <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
                                                 <p className="text-gray-600">
                                                     {intl.formatMessage({ id: 'Debe guardar la empresa primero para poder añadir configuraciones' })}
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </TabPanel>
+                                <TabPanel header={intl.formatMessage({ id: 'Envío Sensores' })}>
+                                    <div>
+                                        {/* Solo mostrar la tabla si la empresa ya está creada */}
+                                        {empresa.id ? (
+                                            <Crud
+                                                headerCrud={intl.formatMessage({ id: 'Sensores de Empresa' })}
+                                                getRegistros={getEnvioSensorEmpresa}
+                                                getRegistrosCount={getEnvioSensorEmpresaCount}
+                                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                                controlador={"Envio Sensor Empresa"}
+                                                editarComponente={<EditarEnvioSensorEmpresas />}
+                                                columnas={columnasSensorEmpresa}
+                                                filtradoBase={{empresaId: empresa.id}}
+                                                deleteRegistro={deleteEnvioSensorEmpresa}
+                                                cargarDatosInicialmente={true}
+                                                editarComponenteParametrosExtra={{
+                                                    empresaId: empresa.id,
+                                                    estoyDentroDeUnTab: true
+                                                }}
+                                            />
+                                        ) : (
+                                            <div className="text-center p-4">
+                                                <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+                                                <p className="text-gray-600">
+                                                    {intl.formatMessage({ id: 'Debe guardar la empresa primero para poder añadir sensores' })}
                                                 </p>
                                             </div>
                                         )}

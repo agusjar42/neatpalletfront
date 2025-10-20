@@ -130,7 +130,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "Envío Configuracion Empresa": {
               "path": "/envio-configuracion-empresa",
               "icon": "pi pi-building"
-          },    
+          },
+          "Envío Sensor Empresa": {
+              "path": "/envio-sensor-empresa",
+              "icon": "pi pi-building"
+          },      
           "Envio Contenido": {
               "path": "/envio-contenido",
               "icon": "pi pi-refresh"

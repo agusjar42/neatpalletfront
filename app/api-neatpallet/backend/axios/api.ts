@@ -3786,6 +3786,359 @@ export interface EnvioSensor {
 /**
  * 
  * @export
+ * @interface EnvioSensorEmpresa
+ */
+export interface EnvioSensorEmpresa {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresa
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresa
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresa
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorEmpresa
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresa
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorEmpresa
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresa
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorEmpresa
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioSensorEmpresaFilter
+ */
+export interface EnvioSensorEmpresaFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioSensorEmpresaFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioSensorEmpresaFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioSensorEmpresaIncludeFilterItems | string>}
+     * @memberof EnvioSensorEmpresaFilter
+     */
+    'include'?: Array<EnvioSensorEmpresaIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioSensorEmpresaFilter1
+ */
+export interface EnvioSensorEmpresaFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioSensorEmpresaFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioSensorEmpresaFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioSensorEmpresaFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioSensorEmpresaIncludeFilterItems | string>}
+     * @memberof EnvioSensorEmpresaFilter1
+     */
+    'include'?: Array<EnvioSensorEmpresaIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioSensorEmpresaIncludeFilterItems
+ */
+export interface EnvioSensorEmpresaIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorEmpresaIncludeFilterItems
+     */
+    'relation'?: EnvioSensorEmpresaIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {EnvioSensorEmpresaScopeFilter}
+     * @memberof EnvioSensorEmpresaIncludeFilterItems
+     */
+    'scope'?: EnvioSensorEmpresaScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum EnvioSensorEmpresaIncludeFilterItemsRelationEnum {
+    TipoSensor = 'tipoSensor',
+    Empresa = 'empresa'
+}
+
+/**
+ * (tsType: Partial<EnvioSensorEmpresa>, schemaOptions: { partial: true })
+ * @export
+ * @interface EnvioSensorEmpresaPartial
+ */
+export interface EnvioSensorEmpresaPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaPartial
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaPartial
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorEmpresaPartial
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorEmpresaPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorEmpresaPartial
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioSensorEmpresaScopeFilter
+ */
+export interface EnvioSensorEmpresaScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioSensorEmpresaScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioSensorEmpresaScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof EnvioSensorEmpresaScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof EnvioSensorEmpresaScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: EnvioSensorEmpresaWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface EnvioSensorEmpresaWithRelations
+ */
+export interface EnvioSensorEmpresaWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {TipoSensorWithRelations}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'tipoSensor'?: TipoSensorWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'foreignKey'?: any;
+    /**
+     * 
+     * @type {EmpresaWithRelations}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'empresa'?: EmpresaWithRelations;
+}
+/**
+ * 
+ * @export
  * @interface EnvioSensorFilter
  */
 export interface EnvioSensorFilter {
@@ -5818,6 +6171,55 @@ export interface NewEnvioSensor {
      * 
      * @type {string}
      * @memberof NewEnvioSensor
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * (tsType: Omit<EnvioSensorEmpresa, \'id\'>, schemaOptions: { title: \'NewEnvioSensorEmpresa\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewEnvioSensorEmpresa
+ */
+export interface NewEnvioSensorEmpresa {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioSensorEmpresa
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioSensorEmpresa
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioSensorEmpresa
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioSensorEmpresa
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioSensorEmpresa
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioSensorEmpresa
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioSensorEmpresa
      */
     'fechaModificacion'?: string;
 }
@@ -17118,6 +17520,612 @@ export class EnvioSensorControllerApi extends BaseAPI {
      */
     public envioSensorControllerUpdateById(id: number, envioSensorPartial?: EnvioSensorPartial, options?: AxiosRequestConfig) {
         return EnvioSensorControllerApiFp(this.configuration).envioSensorControllerUpdateById(id, envioSensorPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * EnvioSensorEmpresaControllerApi - axios parameter creator
+ * @export
+ */
+export const EnvioSensorEmpresaControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-sensor-empresas/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewEnvioSensorEmpresa} [newEnvioSensorEmpresa] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerCreate: async (newEnvioSensorEmpresa?: NewEnvioSensorEmpresa, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-sensor-empresas`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newEnvioSensorEmpresa, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioSensorEmpresaControllerDeleteById', 'id', id)
+            const localVarPath = `/envio-sensor-empresas/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {EnvioSensorEmpresaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerFind: async (filter?: EnvioSensorEmpresaFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-sensor-empresas`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioSensorEmpresaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerFindById: async (id: number, filter?: EnvioSensorEmpresaFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioSensorEmpresaControllerFindById', 'id', id)
+            const localVarPath = `/envio-sensor-empresas/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioSensorEmpresa} [envioSensorEmpresa] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerReplaceById: async (id: number, envioSensorEmpresa?: EnvioSensorEmpresa, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioSensorEmpresaControllerReplaceById', 'id', id)
+            const localVarPath = `/envio-sensor-empresas/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioSensorEmpresa, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioSensorEmpresaPartial} [envioSensorEmpresaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerUpdateAll: async (where?: { [key: string]: object; }, envioSensorEmpresaPartial?: EnvioSensorEmpresaPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-sensor-empresas`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioSensorEmpresaPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioSensorEmpresaPartial} [envioSensorEmpresaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerUpdateById: async (id: number, envioSensorEmpresaPartial?: EnvioSensorEmpresaPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioSensorEmpresaControllerUpdateById', 'id', id)
+            const localVarPath = `/envio-sensor-empresas/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioSensorEmpresaPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EnvioSensorEmpresaControllerApi - functional programming interface
+ * @export
+ */
+export const EnvioSensorEmpresaControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EnvioSensorEmpresaControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioSensorEmpresaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorEmpresaControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewEnvioSensorEmpresa} [newEnvioSensorEmpresa] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioSensorEmpresaControllerCreate(newEnvioSensorEmpresa?: NewEnvioSensorEmpresa, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioSensorEmpresa>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorEmpresaControllerCreate(newEnvioSensorEmpresa, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioSensorEmpresaControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorEmpresaControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {EnvioSensorEmpresaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioSensorEmpresaControllerFind(filter?: EnvioSensorEmpresaFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvioSensorEmpresaWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorEmpresaControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioSensorEmpresaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioSensorEmpresaControllerFindById(id: number, filter?: EnvioSensorEmpresaFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioSensorEmpresaWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorEmpresaControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioSensorEmpresa} [envioSensorEmpresa] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioSensorEmpresaControllerReplaceById(id: number, envioSensorEmpresa?: EnvioSensorEmpresa, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorEmpresaControllerReplaceById(id, envioSensorEmpresa, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioSensorEmpresaPartial} [envioSensorEmpresaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioSensorEmpresaControllerUpdateAll(where?: { [key: string]: object; }, envioSensorEmpresaPartial?: EnvioSensorEmpresaPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorEmpresaControllerUpdateAll(where, envioSensorEmpresaPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioSensorEmpresaPartial} [envioSensorEmpresaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioSensorEmpresaControllerUpdateById(id: number, envioSensorEmpresaPartial?: EnvioSensorEmpresaPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioSensorEmpresaControllerUpdateById(id, envioSensorEmpresaPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EnvioSensorEmpresaControllerApi - factory interface
+ * @export
+ */
+export const EnvioSensorEmpresaControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EnvioSensorEmpresaControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioSensorEmpresaControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewEnvioSensorEmpresa} [newEnvioSensorEmpresa] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerCreate(newEnvioSensorEmpresa?: NewEnvioSensorEmpresa, options?: any): AxiosPromise<EnvioSensorEmpresa> {
+            return localVarFp.envioSensorEmpresaControllerCreate(newEnvioSensorEmpresa, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.envioSensorEmpresaControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EnvioSensorEmpresaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerFind(filter?: EnvioSensorEmpresaFilter1, options?: any): AxiosPromise<Array<EnvioSensorEmpresaWithRelations>> {
+            return localVarFp.envioSensorEmpresaControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioSensorEmpresaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerFindById(id: number, filter?: EnvioSensorEmpresaFilter, options?: any): AxiosPromise<EnvioSensorEmpresaWithRelations> {
+            return localVarFp.envioSensorEmpresaControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioSensorEmpresa} [envioSensorEmpresa] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerReplaceById(id: number, envioSensorEmpresa?: EnvioSensorEmpresa, options?: any): AxiosPromise<any> {
+            return localVarFp.envioSensorEmpresaControllerReplaceById(id, envioSensorEmpresa, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioSensorEmpresaPartial} [envioSensorEmpresaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerUpdateAll(where?: { [key: string]: object; }, envioSensorEmpresaPartial?: EnvioSensorEmpresaPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioSensorEmpresaControllerUpdateAll(where, envioSensorEmpresaPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioSensorEmpresaPartial} [envioSensorEmpresaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioSensorEmpresaControllerUpdateById(id: number, envioSensorEmpresaPartial?: EnvioSensorEmpresaPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.envioSensorEmpresaControllerUpdateById(id, envioSensorEmpresaPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EnvioSensorEmpresaControllerApi - object-oriented interface
+ * @export
+ * @class EnvioSensorEmpresaControllerApi
+ * @extends {BaseAPI}
+ */
+export class EnvioSensorEmpresaControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioSensorEmpresaControllerApi
+     */
+    public envioSensorEmpresaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return EnvioSensorEmpresaControllerApiFp(this.configuration).envioSensorEmpresaControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewEnvioSensorEmpresa} [newEnvioSensorEmpresa] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioSensorEmpresaControllerApi
+     */
+    public envioSensorEmpresaControllerCreate(newEnvioSensorEmpresa?: NewEnvioSensorEmpresa, options?: AxiosRequestConfig) {
+        return EnvioSensorEmpresaControllerApiFp(this.configuration).envioSensorEmpresaControllerCreate(newEnvioSensorEmpresa, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioSensorEmpresaControllerApi
+     */
+    public envioSensorEmpresaControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return EnvioSensorEmpresaControllerApiFp(this.configuration).envioSensorEmpresaControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EnvioSensorEmpresaFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioSensorEmpresaControllerApi
+     */
+    public envioSensorEmpresaControllerFind(filter?: EnvioSensorEmpresaFilter1, options?: AxiosRequestConfig) {
+        return EnvioSensorEmpresaControllerApiFp(this.configuration).envioSensorEmpresaControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioSensorEmpresaFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioSensorEmpresaControllerApi
+     */
+    public envioSensorEmpresaControllerFindById(id: number, filter?: EnvioSensorEmpresaFilter, options?: AxiosRequestConfig) {
+        return EnvioSensorEmpresaControllerApiFp(this.configuration).envioSensorEmpresaControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioSensorEmpresa} [envioSensorEmpresa] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioSensorEmpresaControllerApi
+     */
+    public envioSensorEmpresaControllerReplaceById(id: number, envioSensorEmpresa?: EnvioSensorEmpresa, options?: AxiosRequestConfig) {
+        return EnvioSensorEmpresaControllerApiFp(this.configuration).envioSensorEmpresaControllerReplaceById(id, envioSensorEmpresa, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {EnvioSensorEmpresaPartial} [envioSensorEmpresaPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioSensorEmpresaControllerApi
+     */
+    public envioSensorEmpresaControllerUpdateAll(where?: { [key: string]: object; }, envioSensorEmpresaPartial?: EnvioSensorEmpresaPartial, options?: AxiosRequestConfig) {
+        return EnvioSensorEmpresaControllerApiFp(this.configuration).envioSensorEmpresaControllerUpdateAll(where, envioSensorEmpresaPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioSensorEmpresaPartial} [envioSensorEmpresaPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioSensorEmpresaControllerApi
+     */
+    public envioSensorEmpresaControllerUpdateById(id: number, envioSensorEmpresaPartial?: EnvioSensorEmpresaPartial, options?: AxiosRequestConfig) {
+        return EnvioSensorEmpresaControllerApiFp(this.configuration).envioSensorEmpresaControllerUpdateById(id, envioSensorEmpresaPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

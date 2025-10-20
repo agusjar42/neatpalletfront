@@ -2103,6 +2103,309 @@
         "operationId": "EnvioParadaController.find"
       }
     },
+    "/envio-sensor-empresas/count": {
+      "get": {
+        "x-controller-name": "EnvioSensorEmpresaController",
+        "x-operation-name": "count",
+        "tags": [
+          "EnvioSensorEmpresaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioSensorEmpresa model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EnvioSensorEmpresa.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EnvioSensorEmpresa>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EnvioSensorEmpresaController.count"
+      }
+    },
+    "/envio-sensor-empresas/{id}": {
+      "put": {
+        "x-controller-name": "EnvioSensorEmpresaController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "EnvioSensorEmpresaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EnvioSensorEmpresa PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvioSensorEmpresa"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EnvioSensorEmpresaController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "EnvioSensorEmpresaController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "EnvioSensorEmpresaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EnvioSensorEmpresa PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvioSensorEmpresaPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EnvioSensorEmpresaController.updateById"
+      },
+      "get": {
+        "x-controller-name": "EnvioSensorEmpresaController",
+        "x-operation-name": "findById",
+        "tags": [
+          "EnvioSensorEmpresaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioSensorEmpresa model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioSensorEmpresaWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioSensorEmpresa.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EnvioSensorEmpresaController.findById"
+      },
+      "delete": {
+        "x-controller-name": "EnvioSensorEmpresaController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "EnvioSensorEmpresaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EnvioSensorEmpresa DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EnvioSensorEmpresaController.deleteById"
+      }
+    },
+    "/envio-sensor-empresas": {
+      "post": {
+        "x-controller-name": "EnvioSensorEmpresaController",
+        "x-operation-name": "create",
+        "tags": [
+          "EnvioSensorEmpresaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioSensorEmpresa model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioSensorEmpresa"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewEnvioSensorEmpresa"
+              }
+            }
+          }
+        },
+        "operationId": "EnvioSensorEmpresaController.create"
+      },
+      "patch": {
+        "x-controller-name": "EnvioSensorEmpresaController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "EnvioSensorEmpresaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioSensorEmpresa PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EnvioSensorEmpresa.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EnvioSensorEmpresa>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvioSensorEmpresaPartial"
+              }
+            }
+          }
+        },
+        "operationId": "EnvioSensorEmpresaController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "EnvioSensorEmpresaController",
+        "x-operation-name": "find",
+        "tags": [
+          "EnvioSensorEmpresaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of EnvioSensorEmpresa model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EnvioSensorEmpresaWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioSensorEmpresa.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EnvioSensorEmpresaController.find"
+      }
+    },
     "/envio-sensores/count": {
       "get": {
         "x-controller-name": "EnvioSensorController",
@@ -13591,6 +13894,148 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<Envio>"
       },
+      "EnvioSensorEmpresa": {
+        "title": "EnvioSensorEmpresa",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewEnvioSensorEmpresa": {
+        "title": "NewEnvioSensorEmpresa",
+        "type": "object",
+        "description": "(tsType: Omit<EnvioSensorEmpresa, 'id'>, schemaOptions: { title: 'NewEnvioSensorEmpresa', exclude: [ 'id' ] })",
+        "properties": {
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<EnvioSensorEmpresa, 'id'>"
+      },
+      "EnvioSensorEmpresaWithRelations": {
+        "title": "EnvioSensorEmpresaWithRelations",
+        "type": "object",
+        "description": "(tsType: EnvioSensorEmpresaWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tipoSensor": {
+            "$ref": "#/components/schemas/TipoSensorWithRelations"
+          },
+          "foreignKey": {},
+          "empresa": {
+            "$ref": "#/components/schemas/EmpresaWithRelations"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "EnvioSensorEmpresaWithRelations"
+      },
+      "EnvioSensorEmpresaPartial": {
+        "title": "EnvioSensorEmpresaPartial",
+        "type": "object",
+        "description": "(tsType: Partial<EnvioSensorEmpresa>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<EnvioSensorEmpresa>"
+      },
       "EnvioContenidoPallet": {
         "title": "EnvioContenidoPallet",
         "type": "object",
@@ -16003,6 +16448,290 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<EnvioParada>"
+      },
+      "EnvioSensorEmpresa.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "EnvioSensorEmpresa.ScopeFilter"
+      },
+      "EnvioSensorEmpresa.IncludeFilter.Items": {
+        "title": "EnvioSensorEmpresa.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "tipoSensor",
+              "empresa"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/EnvioSensorEmpresa.ScopeFilter"
+          }
+        }
+      },
+      "EnvioSensorEmpresa.Filter": {
+        "type": "object",
+        "title": "EnvioSensorEmpresa.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoSensorId": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoSensorId",
+                    "empresaId",
+                    "valor",
+                    "usuarioCreacion",
+                    "fechaCreacion",
+                    "usuarioModificacion",
+                    "fechaModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EnvioSensorEmpresa.Fields"
+          },
+          "include": {
+            "title": "EnvioSensorEmpresa.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EnvioSensorEmpresa.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EnvioSensorEmpresa>"
+      },
+      "EnvioSensorEmpresa.Filter1": {
+        "type": "object",
+        "title": "EnvioSensorEmpresa.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "EnvioSensorEmpresa.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoSensorId": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoSensorId",
+                    "empresaId",
+                    "valor",
+                    "usuarioCreacion",
+                    "fechaCreacion",
+                    "usuarioModificacion",
+                    "fechaModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EnvioSensorEmpresa.Fields"
+          },
+          "include": {
+            "title": "EnvioSensorEmpresa.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EnvioSensorEmpresa.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EnvioSensorEmpresa>"
       },
       "EnvioSensor.ScopeFilter": {
         "type": "object",

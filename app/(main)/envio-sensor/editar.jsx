@@ -22,11 +22,23 @@ const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
     useEffect(() => {
         const fetchData = async () => {
             // Cargar envíos disponibles
-            const dataEnvios = await getEnvio('{}');
+            const dataEnvios = await getEnvio(JSON.stringify({
+                            where: {
+                                and: {
+                                    empresa_Id: getUsuarioSesion()?.empresaId
+                                }
+                            }
+                        }));
             setEnvios(dataEnvios || []);
 
             // Cargar tipos de sensor disponibles
-            const dataTiposSensor = await getTipoSensor('{}');
+            const dataTiposSensor = await getTipoSensor(JSON.stringify({
+                            where: {
+                                and: {
+                                    empresa_Id: getUsuarioSesion()?.empresaId
+                                }
+                            }
+                        }));
             setTiposSensor(dataTiposSensor || []);
 
             if (idEditar !== 0) {

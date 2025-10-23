@@ -22,9 +22,6 @@ const EditarPais = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistro
         //Una función async devuelve una promesa, lo cual no es compatible con el comportamiento esperado de useEffect.
         //
         const fetchData = async () => {
-
-
-
             // Si el idEditar es diferente de nuevo, entonces se va a editar
             if (idEditar !== 0) {
                 // Obtenemos el registro a editar

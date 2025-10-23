@@ -20,7 +20,13 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
     useEffect(() => {
         const fetchData = async () => {
             // Cargar envíos disponibles
-            const dataEnvios = await getEnvio('{}');
+            const dataEnvios = await getEnvio(JSON.stringify({
+                                        where: {
+                                            and: {
+                                                empresa_Id: getUsuarioSesion()?.empresaId
+                                            }
+                                        }
+                                    }));
             setEnvios(dataEnvios || []);
 
             if (idEditar !== 0) {

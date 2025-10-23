@@ -22,7 +22,13 @@ const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
     useEffect(() => {
         const fetchData = async () => {
             // Cargar envíos y pallets disponibles
-            const dataEnvios = await getEnvio('{}');
+            const dataEnvios = await getEnvio(JSON.stringify({
+                                                    where: {
+                                                        and: {
+                                                            empresa_Id: getUsuarioSesion()?.empresaId
+                                                        }
+                                                    }
+                                                }));
             const dataPallets = await getPallet(JSON.stringify({where: {empresaId: getUsuarioSesion()?.empresaId}}));
             setEnvios(dataEnvios || []);
             setPallets(dataPallets || []);

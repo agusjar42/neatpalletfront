@@ -300,7 +300,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                             <>
                                 <div className="flex justify-content-end mb-3">
                                     <Button
-                                        label={cargandoConfiguracion ? intl.formatMessage({ id: 'Creando configuración...' }) : intl.formatMessage({ id: 'Crear configuración desde empresa' })}
+                                        label={cargandoConfiguracion ? intl.formatMessage({ id: 'Creando configuración...' }) : intl.formatMessage({ id: 'Clonar configuración desde empresa' })}
                                         icon={cargandoConfiguracion ? "pi pi-spin pi-spinner" : "pi pi-copy"}
                                         onClick={handleCrearConfiguracionDesdeEmpresa}
                                         disabled={cargandoConfiguracion}
@@ -475,7 +475,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                             <>
                                 <div className="flex justify-content-end mb-3">
                                     <Button
-                                        label={cargandoSensores ? intl.formatMessage({ id: 'Creando sensores...' }) : intl.formatMessage({ id: 'Crear configuración desde empresa' })}
+                                        label={cargandoSensores ? intl.formatMessage({ id: 'Creando sensores...' }) : intl.formatMessage({ id: 'Clonar sensores desde empresa' })}
                                         icon={cargandoSensores ? "pi pi-spin pi-spinner" : "pi pi-copy"}
                                         onClick={handleCrearSensoresDesdeEmpresa}
                                         disabled={cargandoSensores}

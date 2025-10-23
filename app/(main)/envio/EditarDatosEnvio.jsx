@@ -8,8 +8,9 @@ import { Toast } from 'primereact/toast';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { useIntl } from 'react-intl';
 import Crud from "../../components/shared/crud";
-import { crearEnvioConfiguracionDesdeEmpresa } from "@/app/api-endpoints/envio";
+import { crearEnvioConfiguracionDesdeEmpresa, crearEnvioSensorDesdeEmpresa } from "@/app/api-endpoints/envio";
 import { getEnvioConfiguracion, getEnvioConfiguracionCount, deleteEnvioConfiguracion } from "@/app/api-endpoints/envio-configuracion";
+import { getEnvioSensor, getEnvioSensorCount, deleteEnvioSensor } from "@/app/api-endpoints/envio-sensor";
 import { getEnvioContenido, getEnvioContenidoCount, deleteEnvioContenido } from "@/app/api-endpoints/envio-contenido";
 import { getEnvioMovimiento, getEnvioMovimientoCount, deleteEnvioMovimiento } from "@/app/api-endpoints/envio-movimiento";
 import { getEnvioPallet, getEnvioPalletCount, deleteEnvioPallet } from "@/app/api-endpoints/envio-pallet";
@@ -19,6 +20,7 @@ import EditarEnvioContenido from "../envio-contenido/editar";
 import EditarEnvioMovimiento from "../envio-movimiento/editar";
 import EditarEnvioPallet from "../envio-pallet/editar";
 import EditarEnvioParada from "../envio-parada/editar";
+import EditarEnvioSensors from "../envio-sensor/editar";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 
 
@@ -28,6 +30,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [cargandoConfiguracion, setCargandoConfiguracion] = useState(false);
     const [refreshConfiguracion, setRefreshConfiguracion] = useState(0);
+    const [cargandoSensores, setCargandoSensores] = useState(false);
+    const [refreshSensores, setRefreshSensores] = useState(0);
 
     // Estados para los contadores de cada tab (solo para Movimientos, Pallets y Paradas)
     const [conteoMovimiento, setConteoMovimiento] = useState(0);
@@ -70,6 +74,11 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
         { campo: 'lugarParada', header: intl.formatMessage({ id: 'Lugar' }), tipo: 'string' },
         { campo: 'direccion', header: intl.formatMessage({ id: 'Dirección' }), tipo: 'string' },
         { campo: 'nombreOperario', header: intl.formatMessage({ id: 'Operario' }), tipo: 'string' },
+    ];
+
+    const columnasSensorEmpresa = [
+        { campo: 'nombreSensor', header: intl.formatMessage({ id: 'Tipo de Sensor' }), tipo: 'string' },
+        { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
     ];
 
     // Cargar los conteos de Movimientos, Pallets y Paradas
@@ -136,6 +145,50 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     });
                 } finally {
                     setCargandoConfiguracion(false);
+                }
+            }
+        });
+    };
+
+    const handleCrearSensoresDesdeEmpresa = () => {
+        if (!envio.id) {
+            toast.current?.show({
+                severity: 'warn',
+                summary: intl.formatMessage({ id: 'Advertencia' }),
+                detail: intl.formatMessage({ id: 'Debe guardar el envío primero' }),
+                life: 3000,
+            });
+            return;
+        }
+
+        confirmDialog({
+            message: intl.formatMessage({ id: '¿Está seguro que desea crear los sensores desde la empresa? Esto sobrescribirá los sensores actuales del envío.' }),
+            header: intl.formatMessage({ id: 'Confirmación' }),
+            icon: 'pi pi-exclamation-triangle',
+            acceptLabel: intl.formatMessage({ id: 'Sí' }),
+            rejectLabel: intl.formatMessage({ id: 'No' }),
+            accept: async () => {
+                setCargandoSensores(true);
+                try {
+                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, usuarioCreacion: getUsuarioSesion()?.id};
+                    await crearEnvioSensorDesdeEmpresa(datosEnvio);
+                    toast.current?.show({
+                        severity: 'success',
+                        summary: intl.formatMessage({ id: 'Éxito' }),
+                        detail: intl.formatMessage({ id: 'Sensores creados desde empresa correctamente' }),
+                        life: 3000,
+                    });
+                    // Refrescar el CRUD de sensores
+                    setRefreshSensores(prev => prev + 1);
+                } catch (error) {
+                    toast.current?.show({
+                        severity: 'error',
+                        summary: intl.formatMessage({ id: 'Error' }),
+                        detail: intl.formatMessage({ id: 'Error al crear los sensores desde empresa' }),
+                        life: 3000,
+                    });
+                } finally {
+                    setCargandoSensores(false);
                 }
             }
         });
@@ -417,15 +470,46 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                 
                 <TabPanel header={intl.formatMessage({ id: 'Sensores' })}>
                     <div>
-                        <div className="text-center p-4">
-                            <i className="pi pi-wifi text-teal-500 text-2xl mb-2"></i>
-                            <p className="text-gray-600">
-                                {intl.formatMessage({ id: 'Aquí irán los datos de los sensores IoT' })}
-                            </p>
-                            <small className="text-gray-500">
-                                {intl.formatMessage({ id: 'Funcionalidad en desarrollo: peso, temperatura, humedad, calidad del aire, humo, sonido, GPS en tiempo real, batería, etc.' })}
-                            </small>
-                        </div>
+                        {/* Solo mostrar la tabla de sensores si el envío ya está creado */}
+                        {envio.id ? (
+                            <>
+                                <div className="flex justify-content-end mb-3">
+                                    <Button
+                                        label={cargandoSensores ? intl.formatMessage({ id: 'Creando sensores...' }) : intl.formatMessage({ id: 'Crear configuración desde empresa' })}
+                                        icon={cargandoSensores ? "pi pi-spin pi-spinner" : "pi pi-copy"}
+                                        onClick={handleCrearSensoresDesdeEmpresa}
+                                        disabled={cargandoSensores}
+                                        className="p-button-help"
+                                        tooltip={intl.formatMessage({ id: 'Copia la configuración predeterminada de la empresa a este envío' })}
+                                        tooltipOptions={{ position: 'left' }}
+                                    />
+                                </div>
+                                <Crud
+                                    key={`sensor-empresa-${refreshSensores}`}
+                                    headerCrud={intl.formatMessage({ id: 'Sensores del Envío' })}
+                                    getRegistros={getEnvioSensor}
+                                    getRegistrosCount={getEnvioSensorCount}
+                                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                                    controlador={"Envio Sensor Empresa"}
+                                    editarComponente={<EditarEnvioSensors />}
+                                    columnas={columnasSensorEmpresa}
+                                    filtradoBase={{envioId: envio.id}}
+                                    deleteRegistro={deleteEnvioSensor}
+                                    cargarDatosInicialmente={true}
+                                    editarComponenteParametrosExtra={{
+                                        envioId: envio.id,
+                                        estoyDentroDeUnTab: true
+                                    }}
+                                />
+                            </>
+                        ) : (
+                            <div className="text-center p-4">
+                                <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+                                <p className="text-gray-600">
+                                    {intl.formatMessage({ id: 'Debe guardar el envío primero para poder añadir sensores' })}
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </TabPanel>
             </TabView>

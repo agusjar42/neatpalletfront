@@ -258,6 +258,37 @@
         "operationId": "EnvioController.crearEnvioConfiguracionDesdeEmpresa"
       }
     },
+    "/crear-envio-sensor-desde-empresa": {
+      "post": {
+        "x-controller-name": "EnvioController",
+        "x-operation-name": "crearEnvioSensorDesdeEmpresa",
+        "tags": [
+          "EnvioController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Crear envío y sensores desde empresa"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearEnvioSensorDto"
+              }
+            }
+          }
+        },
+        "operationId": "EnvioController.crearEnvioSensorDesdeEmpresa"
+      }
+    },
     "/empresas/count": {
       "get": {
         "x-controller-name": "EmpresaController",
@@ -13843,6 +13874,29 @@
         ],
         "additionalProperties": false,
         "x-typescript-type": "CrearEnvioConfiguracionDto"
+      },
+      "CrearEnvioSensorDto": {
+        "title": "CrearEnvioSensorDto",
+        "type": "object",
+        "description": "(tsType: CrearEnvioSensorDto, schemaOptions: { title: 'CrearEnvioSensorDto' })",
+        "properties": {
+          "envioId": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "envioId",
+          "empresaId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "CrearEnvioSensorDto"
       },
       "EnvioPartial": {
         "title": "EnvioPartial",

@@ -48,6 +48,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
         if (await validaciones()) {
             let objGuardar = { ...envioSensorEmpresa };
             delete objGuardar['nombre'];
+            delete objGuardar['nombreSensor'];
             const usuarioActual = getUsuarioSesion()?.id;
 
             if (idEditar === 0) {

@@ -36,6 +36,11 @@ export const crearEnvioConfiguracionDesdeEmpresa = async (envioId) => {
     return dataEnvio;
 }
 
+export const crearEnvioSensorDesdeEmpresa = async (envioId) => {
+    const { data: dataEnvio } = await apiEnvio.envioControllerCrearEnvioSensorDesdeEmpresa(envioId);
+    return dataEnvio;
+}
+
 export const generarDatosFake = async (usuarioId, empresaId) => {
     const { data: dataEnvio } = await apiEnvioFakeData.envioFakeDataControllerGenerarDatosFake(usuarioId, empresaId);
     return dataEnvio;

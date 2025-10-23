@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postEnvioSensorEmpresa, patchEnvioSensorEmpresa } from "@/app/api-endpoints/envio-sensor-empresa";
+import { postEnvioSensorEmpresa, patchEnvioSensorEmpresa, getEnvioSensorEmpresa } from "@/app/api-endpoints/envio-sensor-empresa";
 import { getTipoSensor } from "@/app/api-endpoints/tipo-sensor";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
@@ -27,7 +27,30 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
                     }
                 }
             }));
-            setTiposSensor(dataTiposSensor || []);
+
+            // Filtrar los tipos de sensor que ya están registrados para esta empresa (excepto el que estamos editando)
+            const sensoresRegistrados = await getEnvioSensorEmpresa(JSON.stringify({
+                where: {
+                    and: {
+                        empresaId: getUsuarioSesion()?.empresaId
+                    }
+                }
+            }));
+
+            const tiposSensorFiltrados = dataTiposSensor.filter(tipo => {
+                // Si estamos editando, permitir que el tipo de sensor actual siga siendo visible
+                if (idEditar !== 0) {
+                    const registroActual = rowData.find((element) => element.id === idEditar);
+                    if (registroActual && registroActual.tipoSensorId === tipo.id) {
+                        return true;
+                    }
+                }
+                // Filtrar aquellos que ya están registrados
+                const yaRegistrado = sensoresRegistrados.some(sensor => sensor.tipoSensorId === tipo.id);
+                return !yaRegistrado;
+            });
+
+            setTiposSensor(tiposSensorFiltrados || []);
 
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
@@ -38,14 +61,44 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
-        const validaTipoSensor = envioSensorEmpresa.tipoSensorId === undefined || envioSensorEmpresa.tipoSensorId === null || envioSensorEmpresa.tipoSensorId === "";
-        return (!validaTipoSensor)
+        let validaTipoSensor = envioSensorEmpresa.tipoSensorId === undefined || envioSensorEmpresa.tipoSensorId === null || envioSensorEmpresa.tipoSensorId === "";
+        let mensajeDevuelto = validaTipoSensor ? 'Todos los campos deben de ser rellenados' : '';
+
+        if (mensajeDevuelto === '') {
+            // Si estamos creando un nuevo registro (idEditar === 0), verificar si el tipo de sensor ya existe
+            if (idEditar === 0) {
+                const sensorExistente = await verificarSensorDuplicado(envioSensorEmpresa.tipoSensorId);
+                if (sensorExistente) {
+                    mensajeDevuelto = 'Este tipo de sensor ya está registrado para la empresa';
+                }
+            }
+        }
+
+        return (mensajeDevuelto)
+    }
+
+    const verificarSensorDuplicado = async (tipoSensorId) => {
+        try {
+            const registros = await getEnvioSensorEmpresa(JSON.stringify({
+                where: {
+                    and: {
+                        empresaId: getUsuarioSesion()?.empresaId,
+                        tipoSensorId: tipoSensorId
+                    }
+                }
+            }));
+            return registros && registros.length > 0;
+        } catch (error) {
+            console.error('Error verificando sensor duplicado:', error);
+            return false;
+        }
     }
 
     const guardarEnvioSensorEmpresa = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
-        if (await validaciones()) {
+        let mensajeValidacion = await validaciones()
+        if (mensajeValidacion === '') {
             let objGuardar = { ...envioSensorEmpresa };
             delete objGuardar['nombre'];
             delete objGuardar['nombreSensor'];
@@ -84,7 +137,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
-                detail: intl.formatMessage({ id: 'Todos los campos deben de ser rellenados' }),
+                detail: intl.formatMessage({ id: mensajeValidacion}),
                 life: 3000,
             });
         }

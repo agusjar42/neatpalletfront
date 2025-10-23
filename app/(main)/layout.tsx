@@ -13,16 +13,16 @@ interface MainLayoutProps {
 export const metadata: Metadata = {
     title: "Neatpallet",
     description:
-        "Language Experiences.",
+        "Gestión inteligente de palets.",
     robots: { index: false, follow: false },
     viewport: { initialScale: 1, width: "device-width" },
     openGraph: {
         type: "website",
         title: "Neatpallet",
-        url: "https://www.primefaces.org/apollo-react",
+        url: "https://neatpallet.com/",
         description:
             "Control de movimientos de palets.",
-        images: ["https://www.primefaces.org/static/social/apollo-react.png"],
+        images: ["https://neatpallet.com/favicon.ico"],
         ttl: 604800,
     },
     icons: {

@@ -4,7 +4,7 @@ import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 
-const EditarDatosEnvioSensor = ({ envioSensor, setEnvioSensor, estadoGuardando, envios, tiposSensor }) => {
+const EditarDatosEnvioSensor = ({ envioSensor, setEnvioSensor, estadoGuardando, envios, tiposSensor, estoyDentroDeUnTab }) => {
     const intl = useIntl();
 
     const opcionesEnvio = envios.map(envio => ({
@@ -27,7 +27,7 @@ const EditarDatosEnvioSensor = ({ envioSensor, setEnvioSensor, estadoGuardando, 
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el sensor de envío' })}>
             <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioSensor.envioId || ""}
                         onChange={(e) => setEnvioSensor({ ...envioSensor, envioId: e.value })}
@@ -35,7 +35,7 @@ const EditarDatosEnvioSensor = ({ envioSensor, setEnvioSensor, estadoGuardando, 
                         className={`p-column-filter ${(estadoGuardando && (envioSensor.envioId == null || envioSensor.envioId === "")) ? "p-invalid" : ""}`}
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
-                </div>
+                </div>)}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="tipoSensorId"><b>{intl.formatMessage({ id: 'Tipo de Sensor' })}*</b></label>
                     <Dropdown value={envioSensor.tipoSensorId || ""}

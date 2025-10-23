@@ -10,7 +10,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioSensor from "./EditarDatosEnvioSensor";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId }) => {
     const toast = useRef(null);
     const [envioSensor, setEnvioSensor] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -38,6 +38,12 @@ const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
+        //
+        // Si estamos dentro de un tab y tenemos un envioId, lo asignamos
+        //
+        if (estoyDentroDeUnTab && envioId) {
+            envioSensor.envioId = envioId;
+        }
         const validaEnvioId = envioSensor.envioId === undefined || envioSensor.envioId === "";
         const validaTipoSensorId = envioSensor.tipoSensorId === undefined || envioSensor.tipoSensorId === "";
         const validaValor = envioSensor.valor === undefined || envioSensor.valor === "";
@@ -103,7 +109,7 @@ const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
         <div>
             <div className="grid EnvioSensor">
                 <div className="col-12">
-                    <div className="card">
+                    <div {...(!estoyDentroDeUnTab && { className: "card" })}>
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Sensor de Envio' })).toLowerCase()}</h2>
                         <EditarDatosEnvioSensor
@@ -112,6 +118,7 @@ const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                             estadoGuardando={estadoGuardando}
                             envios={envios}
                             tiposSensor={tiposSensor}
+                            estoyDentroDeUnTab={estoyDentroDeUnTab}
                         />
 
                         <div className="flex justify-content-end mt-2">

@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postEnvioSensor, patchEnvioSensor } from "@/app/api-endpoints/envio-sensor";
+import { postEnvioSensor, patchEnvioSensor, getEnvioSensor } from "@/app/api-endpoints/envio-sensor";
 import { getEnvio } from "@/app/api-endpoints/envio";
 import { getTipoSensor } from "@/app/api-endpoints/tipo-sensor";
 import 'primeicons/primeicons.css';
@@ -21,25 +21,62 @@ const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
 
     useEffect(() => {
         const fetchData = async () => {
-            // Cargar envíos disponibles
+            //
+            // Cargar los envíos disponibles de esta empresa
+            //
             const dataEnvios = await getEnvio(JSON.stringify({
                             where: {
                                 and: {
-                                    empresa_Id: getUsuarioSesion()?.empresaId
+                                    empresaId: getUsuarioSesion()?.empresaId
                                 }
                             }
                         }));
             setEnvios(dataEnvios || []);
-
-            // Cargar tipos de sensor disponibles
+            //
+            // Obtenemos todos los tipos de sensor disponibles para la empresa
+            //
             const dataTiposSensor = await getTipoSensor(JSON.stringify({
-                            where: {
-                                and: {
-                                    empresa_Id: getUsuarioSesion()?.empresaId
-                                }
-                            }
-                        }));
-            setTiposSensor(dataTiposSensor || []);
+                where: {
+                    and: {
+                        empresa_Id: getUsuarioSesion()?.empresaId
+                    }
+                }
+            }));
+            //
+            // Obtenemos todos los sensores ya introducidos para este envío
+            //
+            const envioIdActual = estoyDentroDeUnTab ? envioId : null;
+            if (envioIdActual) {
+                const sensoresRegistrados = await getEnvioSensor(JSON.stringify({
+                    where: {
+                        and: {
+                            envioId: envioIdActual
+                        }
+                    }
+                }));
+                //
+                // Arreglamos el desplegable de sensores para que no aparezcan los ya usados
+                //
+                const tiposSensorFiltrados = dataTiposSensor.filter(tipo => {
+                    // Si estamos editando, permitir que el tipo de sensor con el que estamos trabajando aparezca en la lista
+                    if (idEditar !== 0) {
+                        const registroActual = rowData.find((element) => element.id === idEditar);
+                        if (registroActual && registroActual.tipoSensorId === tipo.id) {
+                            return true;
+                        }
+                    }
+                    //
+                    // Quitamos los tipos de sensores que ya están usándose de la lista de disponibles
+                    //
+                    const yaRegistrado = sensoresRegistrados.some(sensor => sensor.tipoSensorId === tipo.id);
+                    return !yaRegistrado;
+                });
+
+                setTiposSensor(tiposSensorFiltrados || []);
+            } else {
+                // Si no estamos dentro de un tab, mostramos todos los tipos de sensor
+                setTiposSensor(dataTiposSensor || []);
+            }
 
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
@@ -47,7 +84,7 @@ const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
             }
         };
         fetchData();
-    }, [idEditar, rowData]);
+    }, [idEditar, rowData, estoyDentroDeUnTab, envioId]);
 
     const validaciones = async () => {
         //

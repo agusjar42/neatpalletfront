@@ -19,7 +19,9 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
 
     useEffect(() => {
         const fetchData = async () => {
-            // Cargar tipos de sensor disponibles
+            //
+            //Obtenemos todos los tipos de sensor disponibles para la empresa
+            //
             const dataTiposSensor = await getTipoSensor(JSON.stringify({
                 where: {
                     and: {
@@ -27,8 +29,9 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
                     }
                 }
             }));
-
-            // Filtrar los tipos de sensor que ya están registrados para esta empresa (excepto el que estamos editando)
+            //
+            //Obtenemos todos los sensores ya introducidos para la empresa
+            //
             const sensoresRegistrados = await getEnvioSensorEmpresa(JSON.stringify({
                 where: {
                     and: {
@@ -36,16 +39,20 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
                     }
                 }
             }));
-
+            //
+            //Arreglamos el desplegable de sensores para que no aparezcan los ya usados
+            //
             const tiposSensorFiltrados = dataTiposSensor.filter(tipo => {
-                // Si estamos editando, permitir que el tipo de sensor actual siga siendo visible
+                // Si estamos editando, permitir que el tipo de sensor con el que estamos trabajando aparezca en la lista
                 if (idEditar !== 0) {
                     const registroActual = rowData.find((element) => element.id === idEditar);
                     if (registroActual && registroActual.tipoSensorId === tipo.id) {
                         return true;
                     }
                 }
-                // Filtrar aquellos que ya están registrados
+                //
+                //Quitamos los tipos de sensores que ya están usándose de la lista de dispnibles
+                //
                 const yaRegistrado = sensoresRegistrados.some(sensor => sensor.tipoSensorId === tipo.id);
                 return !yaRegistrado;
             });

@@ -197,7 +197,6 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     return (
         <>
             <Toast ref={toast} position="top-right" />
-            <ConfirmDialog />
             <Fieldset legend={intl.formatMessage({ id: 'Datos del envío' })}>
                 <div className="formgrid grid">
                 {/* Primera fila */}

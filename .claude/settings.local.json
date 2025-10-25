@@ -4,7 +4,8 @@
       "Read(//c/personal/oscar/project/neatpallet/**)",
       "Bash(npm run build)",
       "Bash(ls:*)",
-      "Bash(find \"c:\\personal\\oscar\\project\\neatpallet\\front\\app\\(main)\\envio-configuracion-empresa\" -type f)"
+      "Bash(find \"c:\\personal\\oscar\\project\\neatpallet\\front\\app\\(main)\\envio-configuracion-empresa\" -type f)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

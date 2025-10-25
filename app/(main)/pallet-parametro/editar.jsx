@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postPalletParametro, patchPalletParametro } from "@/app/api-endpoints/pallet-parametro";
+import { postPalletParametro, patchPalletParametro, getPalletParametro } from "@/app/api-endpoints/pallet-parametro";
 import { getPallet, getPalletById } from "@/app/api-endpoints/pallet";
 import { getParametro } from "@/app/api-endpoints/parametro";
 import 'primeicons/primeicons.css';
@@ -34,7 +34,42 @@ const EditarPalletParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
             }
             let dataParametros = await getParametro('{}');
             setPallets(dataPallets || []);
-            setParametros(dataParametros || []);
+
+            //
+            // Obtenemos todos los parámetros ya introducidos para este pallet
+            //
+            const palletIdActual = palletId || (idEditar !== 0 ? rowData.find((element) => element.id === idEditar)?.palletId : null);
+            if (palletIdActual) {
+                const parametrosRegistrados = await getPalletParametro(JSON.stringify({
+                    where: {
+                        and: {
+                            palletId: palletIdActual
+                        }
+                    }
+                }));
+                //
+                // Filtramos el desplegable de parámetros para que no aparezcan los ya usados
+                //
+                const parametrosFiltrados = dataParametros.filter(param => {
+                    // Si estamos editando, permitir que el parámetro con el que estamos trabajando aparezca en la lista
+                    if (idEditar !== 0) {
+                        const registroActual = rowData.find((element) => element.id === idEditar);
+                        if (registroActual && registroActual.parametroId === param.id) {
+                            return true;
+                        }
+                    }
+                    //
+                    // Quitamos los parámetros que ya están usándose de la lista de disponibles
+                    //
+                    const yaRegistrado = parametrosRegistrados.some(pp => pp.parametroId === param.id);
+                    return !yaRegistrado;
+                });
+
+                setParametros(parametrosFiltrados || []);
+            } else {
+                // Si no estamos dentro de un pallet, mostramos todos los parámetros
+                setParametros(dataParametros || []);
+            }
 
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
@@ -83,6 +118,7 @@ const EditarPalletParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
                 delete objGuardar['fechaModificacion'];
+                delete objGuardar['activoSn'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchPalletParametro(objGuardar.id, objGuardar);
                 setIdEditar(null)

@@ -7,9 +7,9 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 const LogUsuario = () => {
     const intl = useIntl();
     const columnas = [
+        { campo: 'fechaRegistro', header: intl.formatMessage({ id: 'Fecha de registro' }), tipo: 'fechaHora' },
         { campo: 'mail', header: intl.formatMessage({ id: 'Mail' }), tipo: 'string' },
         { campo: 'nombreUsuario', header: intl.formatMessage({ id: 'Usuario' }), tipo: 'string' },
-        { campo: 'fechaRegistro', header: intl.formatMessage({ id: 'Fecha de registro' }), tipo: 'fechaHora' },
         { campo: 'ip', header: 'Ip', tipo: 'string' },
         { campo: 'masDatos', header: intl.formatMessage({ id: 'Mas datos' }), tipo: 'string' },
     ]

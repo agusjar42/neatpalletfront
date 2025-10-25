@@ -4986,13 +4986,13 @@ export interface InlineObject9 {
      * @type {number}
      * @memberof InlineObject9
      */
-    'empresaId'?: number;
+    'empresaId': number;
     /**
      * 
      * @type {number}
      * @memberof InlineObject9
      */
-    'rolId'?: number;
+    'rolId': number;
 }
 /**
  * 

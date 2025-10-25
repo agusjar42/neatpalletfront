@@ -67,7 +67,7 @@ const NewPassword: Page = () => {
 
                 //const registros = await getUsuarioPasswordHistoricosCount(JSON.stringify({ usuarioId: usuarioId, password: hashedPassword }));
 
-                const historicos = await getUsuarioPasswordHistoricos(JSON.stringify({ where: {and: { usuario_id: usuarioId }}
+                const historicos = await getUsuarioPasswordHistoricos(JSON.stringify({ where: {and: { usuarioId: usuarioId }}
         }));
 
         //Si la contraseña es valida comprobamos que no sea igual a una anterior del historico

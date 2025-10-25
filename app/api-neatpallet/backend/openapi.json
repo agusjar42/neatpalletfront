@@ -8665,8 +8665,8 @@
                   "mail",
                   "password",
                   "nombre",
-                  "empresa_id",
-                  "rol_id"
+                  "empresaId",
+                  "rolId"
                 ],
                 "properties": {
                   "nombre": {

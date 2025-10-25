@@ -115,6 +115,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             } else {
                 objGuardar['usuModificacion'] = usuarioActual;
                 delete objGuardar['fechaModificacion'];
+                delete objGuardar['fechaCreacion'];
                 //
                 // Si no se ha cambiado la foto del producto, no enviamos el campo
                 //
@@ -170,7 +171,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                                                 controlador={"Envio Configuracion Empresa"}
                                                 editarComponente={<EditarEnvioConfiguracionEmpresas />}
                                                 columnas={columnasConfiguracionEmpresa}
-                                                filtradoBase={{empresa_Id: empresa.id}}
+                                                filtradoBase={{empresaId: empresa.id}}
                                                 deleteRegistro={deleteEnvioConfiguracionEmpresa}
                                                 cargarDatosInicialmente={true}
                                                 editarComponenteParametrosExtra={{

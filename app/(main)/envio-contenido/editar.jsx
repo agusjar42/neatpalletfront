@@ -23,7 +23,7 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
             const dataEnvios = await getEnvio(JSON.stringify({
                                         where: {
                                             and: {
-                                                empresa_Id: getUsuarioSesion()?.empresaId
+                                                empresaId: getUsuarioSesion()?.empresaId
                                             }
                                         }
                                     }));

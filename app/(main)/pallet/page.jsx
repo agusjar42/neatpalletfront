@@ -22,7 +22,7 @@ const Pallet = () => {
                 getRegistrosCount={getPalletCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Pallet"}
-                filtradoBase={{empresa_Id: getUsuarioSesion()?.empresaId}}
+                filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarPallets />}
                 columnas={columnas}
                 deleteRegistro={deletePallet}

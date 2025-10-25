@@ -21,7 +21,7 @@ const EnvioConfiguracionEmpresa = () => {
                 getRegistrosCount={getEnvioConfiguracionEmpresaCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Envio Configuracion Empresa"}
-                filtradoBase={{empresa_Id: getUsuarioSesion()?.empresaId}}
+                filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarEnvioConfiguracionEmpresas />}
                 columnas={columnas}
                 deleteRegistro={deleteEnvioConfiguracionEmpresa}

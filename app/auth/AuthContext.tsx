@@ -186,7 +186,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (Array.isArray(permisos)) {
           // Si existe un permiso en el array que tenga de nombre de controlador el nombre de la subcategoria,
           // Significa que el usuario tiene acceso a esa pantalla y por lo tanto la añadimos al menu
-          if (permisos.some((permiso) => permiso.permiso_controlador === subCategoria)) {
+          if (permisos.some((permiso) => permiso.permisoControlador === subCategoria)) {
             categoriaItems.push({
               label: `${subCategoria}`,
               icon: jsonRutas[categoria][subCategoria].icon,

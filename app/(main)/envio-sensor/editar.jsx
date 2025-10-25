@@ -38,7 +38,7 @@ const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
             const dataTiposSensor = await getTipoSensor(JSON.stringify({
                 where: {
                     and: {
-                        empresa_Id: getUsuarioSesion()?.empresaId
+                        empresaId: getUsuarioSesion()?.empresaId
                     }
                 }
             }));

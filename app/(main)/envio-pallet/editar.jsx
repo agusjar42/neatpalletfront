@@ -25,7 +25,7 @@ const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
             const dataEnvios = await getEnvio(JSON.stringify({
                                                     where: {
                                                         and: {
-                                                            empresa_Id: getUsuarioSesion()?.empresaId
+                                                            empresaId: getUsuarioSesion()?.empresaId
                                                         }
                                                     }
                                                 }));

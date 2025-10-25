@@ -283,12 +283,11 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                     //Para luego poder usarlos en los dropdown de los filtros de las columnas
                     const registrosForaneo = await getRegistrosForaneos[key]();
 
-                    //Como no podemos usar el get para filtrar por empresaId, porque no sabemos si la tabla tiene la propiedad,
-                    //Primero almacenamos la propiedad empresaId o empresa_id, y asi en caso de que tengan empresa tendremos su valor
+                    //Almacenamos la propiedad empresaId del registro foráneo
                     const jsonDeForaneo = registrosForaneo.map(foraneo => ({
                         id: foraneo.id,
                         nombre: foraneo.nombre,
-                        empresaId: foraneo.empresaId || foraneo.empresa_id
+                        empresaId: foraneo.empresaId
                     })).sort((a, b) => a.nombre.localeCompare(b.nombre));
                     //Si empresaId no tiene valor, lo eliminamos del array porque significa que la tabla esa columna
                     if (!jsonDeForaneo.every(foraneo => foraneo.empresaId === undefined || foraneo.empresaId === null)) {

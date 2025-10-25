@@ -79,7 +79,7 @@ const EditarPais = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistro
             } else {
                 //Si se edita un registro existente Hacemos el patch del registro
                 objGuardar['usuModificacion'] = usuarioActual;
-                delete objGuardar.usu_modificacion
+                delete objGuardar.usuModificacion
 
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'N';

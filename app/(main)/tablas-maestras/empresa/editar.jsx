@@ -163,6 +163,18 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                                     <div>
                                         {/* Solo mostrar la tabla si la empresa ya está creada */}
                                         {empresa.id ? (
+                                            <>
+                                            {/* Bocadillo de información */}
+                                            <div className="p-mt-3">
+                                                <div
+                                                    className="flex align-items-center bg-green-100 border-round p-3 w-full"
+                                                >
+                                                    <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                                    <span>
+                                                        {intl.formatMessage({ id: 'Esta es la información que se generará por defecto en cada envío y que será la que se le pase a cada palet. Se establece aquí de forma genérica pero podrá modificarse por envío de forma individualmente.' })}
+                                                    </span>
+                                                </div>
+                                            </div>
                                             <Crud
                                                 headerCrud={intl.formatMessage({ id: 'Configuraciones de Empresa' })}
                                                 getRegistros={getEnvioConfiguracionEmpresa}
@@ -179,6 +191,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                                                     estoyDentroDeUnTab: true
                                                 }}
                                             />
+                                            </>
                                         ) : (
                                             <div className="text-center p-4">
                                                 <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
@@ -193,6 +206,18 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                                     <div>
                                         {/* Solo mostrar la tabla si la empresa ya está creada */}
                                         {empresa.id ? (
+                                            <>
+                                            {/* Bocadillo de información */}
+                                            <div className="p-mt-3">
+                                                <div
+                                                    className="flex align-items-center bg-green-100 border-round p-3 w-full"
+                                                >
+                                                    <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                                    <span>
+                                                        {intl.formatMessage({ id: 'Recuerde que solo aparecen aquí los sensores activos en la pantalla "Tipo Sensor".' })}
+                                                    </span>
+                                                </div>
+                                            </div>
                                             <Crud
                                                 headerCrud={intl.formatMessage({ id: 'Sensores de Empresa' })}
                                                 getRegistros={getEnvioSensorEmpresa}
@@ -209,6 +234,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                                                     estoyDentroDeUnTab: true
                                                 }}
                                             />
+                                            </>
                                         ) : (
                                             <div className="text-center p-4">
                                                 <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>

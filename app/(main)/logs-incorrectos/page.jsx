@@ -190,12 +190,19 @@ const LogsIncorrectos = () => {
             <div className="col-12">
                 <Card title="Logs del Sistema">
                     <div className="mb-3">
-                        <p className="text-600 mb-3">
-                            Aquí puedes visualizar y gestionar los archivos de logs del sistema.
-                            Se incluyen logs de intentos de login fallidos y logs de todas las peticiones a la API.
-                            Cada archivo contiene los registros de un mes específico.
-                        </p>
-                        <Button
+                        <div className="p-mt-3">
+                            <div
+                                className="flex align-items-center bg-green-100 border-round p-3 w-full"
+                            >
+                                <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                    <span>
+                                        Aquí se pueden visualizar y gestionar los archivos de logs del sistema.
+                                        Se incluyen logs de intentos de login fallidos y logs de todas las peticiones a la API.
+                                        Cada archivo contiene los registros de un mes específico.
+                                    </span>
+                                </div>
+                            </div>
+                            <Button
                             label="Actualizar"
                             icon="pi pi-refresh"
                             onClick={cargarArchivos}

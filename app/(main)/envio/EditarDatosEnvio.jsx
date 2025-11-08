@@ -339,6 +339,17 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                 
                 <TabPanel header={intl.formatMessage({ id: 'Contenido' })}>
                     <div>
+                        {/* Bocadillo de información */}
+                        <div className="p-mt-3">
+                            <div
+                                className="flex align-items-center bg-green-100 border-round p-3 w-full"
+                            >
+                                <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                <span>
+                                    {intl.formatMessage({ id: 'Se muestra la suma de los productos a enviar en un envío.' })}
+                                </span>
+                            </div>
+                        </div>
                         {/* Solo mostrar la tabla de contenido si el envío ya está creado */}
                         {envio.id ? (
                             <Crud
@@ -372,24 +383,47 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     <div>
                         {/* Solo mostrar la tabla de movimientos si el envío ya está creado */}
                         {envio.id ? (
-                            <Crud
-                                key={`movimiento-${refreshConteos}`}
-                                headerCrud={intl.formatMessage({ id: 'Movimientos del Envío' })}
-                                getRegistros={getEnvioMovimiento}
-                                getRegistrosCount={getEnvioMovimientoCount}
-                                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'generarGrafico']}
-                                controlador={"Envio Movimiento"}
-                                editarComponente={<EditarEnvioMovimiento />}
-                                columnas={columnasMovimiento}
-                                filtradoBase={{envioId: envio.id}}
-                                deleteRegistro={deleteEnvioMovimiento}
-                                cargarDatosInicialmente={true}
-                                editarComponenteParametrosExtra={{
-                                    envioId: envio.id,
-                                    estoyDentroDeUnTab: true,
-                                    onDataChange: () => setRefreshConteos(prev => prev + 1)
-                                }}
-                            />
+                            <>
+                                {/* Bocadillo de información */}
+                                <div className="p-mt-3">
+                                    <div
+                                        className="flex align-items-center bg-green-100 border-round p-3 w-full"
+                                    >
+                                        <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                        <span>
+                                            {intl.formatMessage({ id: 'Se muestran los movimientos del envío a partir de los valores mínimos definidos en los sensores. Ejemplo: Si el valor de la temperatura es 23 y existe un registro cuyo valor es 22 no aparecerá en esta tabla ni en los informes.' })}
+                                        </span>
+                                    </div>
+                                </div>
+                                 <div className="p-mt-3">
+                                    <div
+                                        className="flex align-items-center bg-red-100 border-round p-3 w-full"
+                                    >
+                                        <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                        <span>
+                                            {intl.formatMessage({ id: 'No veo para que sirve la imagen aquí. Igual que en otros sitios mencionados, es un valor manual que debe poner el usuario en cada movimiento y no lo veo claro.' })}
+                                        </span>
+                                    </div>
+                                </div>
+                                <Crud
+                                    key={`movimiento-${refreshConteos}`}
+                                    headerCrud={intl.formatMessage({ id: 'Movimientos del Envío' })}
+                                    getRegistros={getEnvioMovimiento}
+                                    getRegistrosCount={getEnvioMovimientoCount}
+                                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'generarGrafico']}
+                                    controlador={"Envio Movimiento"}
+                                    editarComponente={<EditarEnvioMovimiento />}
+                                    columnas={columnasMovimiento}
+                                    filtradoBase={{envioId: envio.id}}
+                                    deleteRegistro={deleteEnvioMovimiento}
+                                    cargarDatosInicialmente={true}
+                                    editarComponenteParametrosExtra={{
+                                        envioId: envio.id,
+                                        estoyDentroDeUnTab: true,
+                                        onDataChange: () => setRefreshConteos(prev => prev + 1)
+                                    }}
+                                />
+                                </>
                         ) : (
                             <div className="text-center p-4">
                                 <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
@@ -405,24 +439,48 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     <div>
                         {/* Solo mostrar la tabla de pallets si el envío ya está creado */}
                         {envio.id ? (
-                            <Crud
-                                key={`pallet-${refreshConteos}`}
-                                headerCrud={intl.formatMessage({ id: 'Pallets del Envío' })}
-                                getRegistros={getEnvioPallet}
-                                getRegistrosCount={getEnvioPalletCount}
-                                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                                controlador={"Envio Pallet"}
-                                editarComponente={<EditarEnvioPallet />}
-                                columnas={columnasPallet}
-                                filtradoBase={{envioId: envio.id}}
-                                deleteRegistro={deleteEnvioPallet}
-                                cargarDatosInicialmente={true}
-                                editarComponenteParametrosExtra={{
-                                    envioId: envio.id,
-                                    estoyDentroDeUnTab: true,
-                                    onDataChange: () => setRefreshConteos(prev => prev + 1)
-                                }}
-                            />
+                            <>
+                                {/* Bocadillo de información */}
+                                <div className="p-mt-3">
+                                    <div
+                                        className="flex align-items-center bg-green-100 border-round p-3 w-full"
+                                    >
+                                        <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                        <span>
+                                            {intl.formatMessage({ id: 'Visualización de los pallets enviados y el producto que contiene cada uno de ellos.' })}
+                                        </span>
+                                    </div>
+                                </div>
+                                {/* Bocadillo de información */}
+                                <div className="p-mt-3">
+                                    <div
+                                        className="flex align-items-center bg-red-100 border-round p-3 w-full"
+                                    >
+                                        <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                        <span>
+                                            {intl.formatMessage({ id: '¿Que pasa si lleno un pallet con diferente producto?.' })}
+                                        </span>
+                                    </div>
+                                </div>
+                                <Crud
+                                    key={`pallet-${refreshConteos}`}
+                                    headerCrud={intl.formatMessage({ id: 'Pallets del Envío' })}
+                                    getRegistros={getEnvioPallet}
+                                    getRegistrosCount={getEnvioPalletCount}
+                                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                                    controlador={"Envio Pallet"}
+                                    editarComponente={<EditarEnvioPallet />}
+                                    columnas={columnasPallet}
+                                    filtradoBase={{envioId: envio.id}}
+                                    deleteRegistro={deleteEnvioPallet}
+                                    cargarDatosInicialmente={true}
+                                    editarComponenteParametrosExtra={{
+                                        envioId: envio.id,
+                                        estoyDentroDeUnTab: true,
+                                        onDataChange: () => setRefreshConteos(prev => prev + 1)
+                                    }}
+                                />
+                            </>
                         ) : (
                             <div className="text-center p-4">
                                 <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
@@ -438,24 +496,37 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     <div>
                         {/* Solo mostrar la tabla de paradas si el envío ya está creado */}
                         {envio.id ? (
-                            <Crud
-                                key={`parada-${refreshConteos}`}
-                                headerCrud={intl.formatMessage({ id: 'Paradas del Envío' })}
-                                getRegistros={getEnvioParada}
-                                getRegistrosCount={getEnvioParadaCount}
-                                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                                controlador={"Envio Parada"}
-                                editarComponente={<EditarEnvioParada />}
-                                columnas={columnasParada}
-                                filtradoBase={{envioId: envio.id}}
-                                deleteRegistro={deleteEnvioParada}
-                                cargarDatosInicialmente={true}
-                                editarComponenteParametrosExtra={{
-                                    envioId: envio.id,
-                                    estoyDentroDeUnTab: true,
-                                    onDataChange: () => setRefreshConteos(prev => prev + 1)
-                                }}
-                            />
+                            <>
+                                {/* Bocadillo de información */}
+                                <div className="p-mt-3">
+                                    <div
+                                        className="flex align-items-center bg-red-100 border-round p-3 w-full"
+                                    >
+                                        <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                        <span>
+                                            {intl.formatMessage({ id: '¿Como se van a gestionar las paradas?. Veo esto un proceso muy manual que no se si van a querer configurarlo, de momento lo dejo parado.' })}
+                                        </span>
+                                    </div>
+                                </div>
+                                <Crud
+                                    key={`parada-${refreshConteos}`}
+                                    headerCrud={intl.formatMessage({ id: 'Paradas del Envío' })}
+                                    getRegistros={getEnvioParada}
+                                    getRegistrosCount={getEnvioParadaCount}
+                                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                                    controlador={"Envio Parada"}
+                                    editarComponente={<EditarEnvioParada />}
+                                    columnas={columnasParada}
+                                    filtradoBase={{envioId: envio.id}}
+                                    deleteRegistro={deleteEnvioParada}
+                                    cargarDatosInicialmente={true}
+                                    editarComponenteParametrosExtra={{
+                                        envioId: envio.id,
+                                        estoyDentroDeUnTab: true,
+                                        onDataChange: () => setRefreshConteos(prev => prev + 1)
+                                    }}
+                                />
+                            </>
                         ) : (
                             <div className="text-center p-4">
                                 <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
@@ -472,6 +543,18 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         {/* Solo mostrar la tabla de sensores si el envío ya está creado */}
                         {envio.id ? (
                             <>
+                                {/* Bocadillo de información */}
+                                <div className="p-mt-3">
+                                    <div
+                                        className="flex align-items-center bg-green-100 border-round p-3 w-full"
+                                    >
+                                        <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                        <span>
+                                            {intl.formatMessage({ id: 'Al crear un nuevo envío se asocian automáticamente los sensores de la empresa. Estos pueden cambiarse, eliminarse o añadirse nuevos siempre que desde la pantalla Sensores estén activos.' })}
+                                        </span>
+                                    </div>
+                                </div>
+
                                 <div className="flex justify-content-end mb-3">
                                     <Button
                                         label={cargandoSensores ? intl.formatMessage({ id: 'Creando sensores...' }) : intl.formatMessage({ id: 'Clonar sensores desde empresa' })}

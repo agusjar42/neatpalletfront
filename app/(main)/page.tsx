@@ -217,7 +217,7 @@ export default function ECommerce() {
                         color: textColor,
                         usePointStyle: true,
                         font: {
-                            weight: "700",
+                            weight: 700,
                         },
                         padding: 28,
                     },
@@ -262,7 +262,7 @@ export default function ECommerce() {
                         color: textColor,
                         usePointStyle: true,
                         font: {
-                            weight: "700",
+                            weight: 700,
                         },
                         padding: 28,
                     },
@@ -274,7 +274,7 @@ export default function ECommerce() {
                     ticks: {
                         color: textColorSecondary,
                         font: {
-                            weight: "500",
+                            weight: 500,
                         },
                     },
                     grid: {

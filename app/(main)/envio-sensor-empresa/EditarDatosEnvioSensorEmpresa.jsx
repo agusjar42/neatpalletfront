@@ -3,6 +3,7 @@ import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
+import { InputNumber } from "primereact/inputnumber";
 
 const EditarDatosEnvioSensorEmpresa = ({ envioSensorEmpresa, setEnvioSensorEmpresa, estadoGuardando, tiposSensor }) => {
     const intl = useIntl();
@@ -33,13 +34,31 @@ const EditarDatosEnvioSensorEmpresa = ({ envioSensorEmpresa, setEnvioSensorEmpre
                         placeholder={intl.formatMessage({ id: 'Seleccione un tipo de sensor' })} />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                    <label htmlFor="valor">{intl.formatMessage({ id: 'Valor' })}</label>
-                    <InputText value={envioSensorEmpresa.valor}
+                    <label htmlFor="valor" style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
+                        {intl.formatMessage({ id: 'Valor' })}
+                        {/*<span className="pi pi-info-circle text-blue-500" style={{ fontSize: "1.5em" }} />*/}
+                    </label>
+                    <InputNumber value={envioSensorEmpresa.valor}
                         placeholder={intl.formatMessage({ id: 'Valor del sensor' })}
-                        onChange={(e) => setEnvioSensorEmpresa({ ...envioSensorEmpresa, valor: e.target.value })}
-                        maxLength={50} />
+                        onChange={(e) => setEnvioSensorEmpresa({ ...envioSensorEmpresa, valor: e.value })}
+                        maxLength={50}
+                        inputStyle={{ textAlign: 'right' }} />
+                    <small className="p-text-secondary">
+                        {intl.formatMessage({ id: 'Valor mínimo a tener en cuenta en el cálculo.' })}
+                    </small>
                 </div>
             </div>
+            {/* Bocadillo de información */}
+            {/*<div className="p-mt-3">
+                <div
+                    className="flex align-items-center bg-gray-100 border-round p-3 w-full"
+                >
+                    <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                    <span>
+                        {intl.formatMessage({ id: 'Recuerde que solo puede editar los sensores activos o el sensor actualmente seleccionado.' })}
+                    </span>
+                </div>
+            </div>*/}
         </Fieldset>
     );
 };

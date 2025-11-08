@@ -15,6 +15,17 @@ const PalletParametro = () => {
 
     return (
         <div>
+            {/* Bocadillo de información */}
+            <div className="p-mt-3">
+                <div
+                    className="flex align-items-center bg-red-100 border-round p-3 w-full"
+                >
+                    <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                    <span>
+                        {intl.formatMessage({ id: 'Sección que muestra los parámetros asociados a un Pallet. Dado que la sección de Parámetro es susceptible de eliminar, esta también podría desaparecer.' })}
+                    </span>
+                </div>
+            </div>
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Parámetros de Pallet' })}
                 getRegistros={getPalletParametro}

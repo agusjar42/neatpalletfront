@@ -26,17 +26,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
   const config = jwt.jwtConfig;
 
-  useEffect(() => {
-    const token = Cookies.get('authToken');
-    //Si usuario esta autenticado o esta en la pagina de publica de autenticacion, se le permite el acceso
-    if (token || pathname.includes('/auth/')) {
-      setUsuarioAutenticado(true);
-    } else {
-      setUsuarioAutenticado(false);
-      router.push('/auth/login');
-    }
-  }, [router]);
-
   const login = async (token: string, rememberMe: boolean, data: any) => {
     Cookies.set('authToken', token, { expires: rememberMe ? 7 : undefined });
     setUsuarioAutenticado(true);
@@ -67,14 +56,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         },
       },
       "Tablas de sistema": {
-        "Paises": {
-          "path": "/tablas-maestras/pais",
-          "icon": "pi pi-fw pi-globe" // Cambiado a un icono de globo para representar países
-        },
         "Empresas": {
           "path": "/tablas-maestras/empresa",
           "icon": "pi pi-building"
-        },    
+        },
+        "Usuarios": {
+          "path": "/usuarios",
+          "icon": "pi pi-users"
+        },
         "Roles": {
           "path": "/tablas-maestras/rol",
           "icon": "pi pi-fw pi-bars"
@@ -82,7 +71,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         "Permisos": {
           "path": "/tablas-maestras/permiso",
           "icon": "pi pi-key"
+        },        
+        "Paises": {
+          "path": "/tablas-maestras/pais",
+          "icon": "pi pi-fw pi-globe"
         },
+      },
+      "Tablas Maestras": {
         "Tipo Carroceria": {
           "path": "/tipo-carroceria",
           "icon": "pi pi-car"
@@ -106,12 +101,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "icon": "pi pi-fw pi-bars"
         }
       },
-      "Otros": {
-        "Usuarios": {
-          "path": "/usuarios",
-          "icon": "pi pi-users"
-        },
-      },
       "Gestión del Pallet": {
           "Pallet Parametro": {
               "path": "/pallet-parametro",
@@ -126,8 +115,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               "icon": "pi pi-wrench"
           },
       },
-      "Gestión del Envio": {        
-          "Envío Configuracion Empresa": {
+      "Gestión del Envio": {
+          "Envio": {
+              "path": "/envio",
+              "icon": "pi pi-send"
+          }
+      },
+      "Informes": {
+        "Envío Configuracion Empresa": {
               "path": "/envio-configuracion-empresa",
               "icon": "pi pi-building"
           },
@@ -159,10 +154,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               "path": "/envio-sensor",
               "icon": "pi pi-wifi"
           },
-          "Envio": {
-              "path": "/envio",
-              "icon": "pi pi-send"
-          }
       }
     }
 
@@ -213,7 +204,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const almacenarLogin = async (data: any) => {
-    localStorage.setItem(config.storageTokenKeyName, JSON.stringify(data.accessToken));
+    localStorage.setItem(config.storageTokenKeyName, (data.accessToken));
     localStorage.setItem('userDataNeatpallet', JSON.stringify({ ...data }));
     localStorage.setItem('empresa', data.empresaId);
 

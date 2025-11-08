@@ -111,6 +111,7 @@ const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
             // Borramos las columnas de la vista que no pertenecen a la tabla envio_sensor sino a tablas relacionadas
             delete objGuardar['nombreSensor'];
             delete objGuardar['origenRuta'];
+            objGuardar["valor"] = objGuardar["valor"].toString();
 
             if (idEditar === 0) {
                 delete objGuardar.id;

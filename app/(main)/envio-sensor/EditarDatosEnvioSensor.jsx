@@ -3,6 +3,7 @@ import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
+import { InputNumber } from "primereact/inputnumber";
 
 const EditarDatosEnvioSensor = ({ envioSensor, setEnvioSensor, estadoGuardando, envios, tiposSensor, estoyDentroDeUnTab }) => {
     const intl = useIntl();
@@ -47,10 +48,14 @@ const EditarDatosEnvioSensor = ({ envioSensor, setEnvioSensor, estadoGuardando, 
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="valor">{intl.formatMessage({ id: 'Valor' })}</label>
-                    <InputText value={envioSensor.valor}
+                    <InputNumber value={envioSensor.valor}
                         placeholder={intl.formatMessage({ id: 'Valor del sensor' })}
-                        onChange={(e) => setEnvioSensor({ ...envioSensor, valor: e.target.value })}
-                        maxLength={50} />
+                        onChange={(e) => setEnvioSensor({ ...envioSensor, valor: e.value })}
+                        maxLength={50}
+                        inputStyle={{ textAlign: 'right' }} />
+                    <small className="p-text-secondary">
+                        {intl.formatMessage({ id: 'Valor mínimo a tener en cuenta en el cálculo.' })}
+                    </small>
                 </div>
             </div>
         </Fieldset>

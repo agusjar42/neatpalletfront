@@ -135,7 +135,8 @@ const Login = () => {
                 bloquearPantalla(false);
             } else {
                 if (data.accessToken) {
-                    login(data.accessToken, rememberMe, data);
+                    await login(data.accessToken, rememberMe, data);
+                    bloquearPantalla(false);
                 } else {
                     // Log: Token undefined 
                     await guardarLogLoginIncorrecto('token_undefined', usuario, password);

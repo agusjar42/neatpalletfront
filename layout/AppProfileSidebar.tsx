@@ -1,20 +1,42 @@
 import { Badge } from "primereact/badge";
 import { Sidebar } from "primereact/sidebar";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LayoutContext } from "./context/layoutcontext";
 import { useAuth } from "@/app/auth/AuthContext";
 import { useIntl } from "react-intl";
+import { getUsuarioSesion } from "@/app/utility/Utils";
+
+import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
+import Link from "next/link";
 
 const AppProfileSidebar = () => {
     const { layoutState, setLayoutState } = useContext(LayoutContext);
     const { logout } = useAuth();
     const intl = useIntl();
+    const [permisoVerPerfil, setPermisoVerPerfil] = useState<boolean | null>(null);
     const onProfileSidebarHide = () => {
         setLayoutState((prevState) => ({
             ...prevState,
             profileSidebarVisible: false,
         }));
     };
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log('Iniciando fetchData...');
+            try {
+                //Obtenemos permisos del usuario
+                const tienePermiso = Boolean(await tieneUsuarioPermiso('Neatpallet', 'Usuarios', 'VerPerfil') || false); // Convertir explícitamente a booleano
+                setPermisoVerPerfil(tienePermiso);
+                console.log('Estado actualizado a:', tienePermiso);
+            } catch (error) {
+                console.error("Error obteniendo los permisos del rol:", error);
+                setPermisoVerPerfil(false);
+            }
+
+        };
+        fetchData();
+    }, []);
+
     let sidebarContent = null;
     if (process.env.NEXT_PUBLIC_ENTORNO !== "LOCAL") {
         sidebarContent = (
@@ -40,6 +62,21 @@ const AppProfileSidebar = () => {
                                 </div>
                             </a>
                         </li>
+                        {permisoVerPerfil === true && (
+                            <li >
+                                <Link className="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150"
+                                    href={`/usuarios/?usuario=${getUsuarioSesion()?.id}`}>
+                                    <span>
+                                        <i className="pi pi-user text-xl text-primary"></i>
+                                    </span>
+                                    <div className="ml-3">
+                                        <span className="mb-2 font-semibold">
+                                            {intl.formatMessage({ id: 'Perfil' })}
+                                        </span>
+                                    </div>
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
 

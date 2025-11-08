@@ -42,6 +42,7 @@ export const compruebaPermiso = async (rolId, modulo, controlador, accion) => {
         const { data: dataPermiso } = await apiPermisos.permisoControllerBuscarPermiso(rolId, modulo, controlador, accion)
         return dataPermiso   
     } catch (error) {
-        console.log(error)
+        console.log('Error en compruebaPermiso:', error)
+        return []; // Devolver array vacío en caso de error en lugar de undefined
     }
 }

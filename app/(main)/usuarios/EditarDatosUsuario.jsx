@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
@@ -10,12 +10,16 @@ import { Button } from "primereact/button";
 import 'react-phone-input-2/lib/bootstrap.css'
 import { convertirArchivoABase64 } from "@/app/utility/Utils";
 import { Toast } from "primereact/toast";
+import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
 const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccionado, setIdiomaSeleccionado, estadoGuardando,
     listaRoles, rolSeleccionado, setRolSeleccionado, listaTipoArchivos
 }) => {
     const intl = useIntl()
     const toast = useRef(null);
+    
+    // Estado para el permiso de seleccionar rol
+    const [puedeSeleccionarRol, setPuedeSeleccionarRol] = useState(false);
     
     // Estado para el preview del avatar
     const [previewAvatar, setPreviewAvatar] = useState(usuario.avatarBase64 || null);
@@ -25,6 +29,20 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
     //Para que el dropdown muestre el registro seleccionado aunque no este en la lista
     const optionsIdioma = dropdownAbiertoIdioma ? listaIdiomas.map(registro => registro.nombre) : [idiomaSeleccionado || '', ...listaIdiomas.map(registro => registro.nombre)];
     const optionsRol = dropdownAbiertoRol ? listaRoles.map(registro => registro.nombre) : [rolSeleccionado || '', ...listaRoles.map(registro => registro.nombre)];
+
+    // useEffect para verificar el permiso de seleccionar rol
+    useEffect(() => {
+        const verificarPermiso = async () => {
+            try {
+                const tienePermiso = await tieneUsuarioPermiso('Neatpallet', 'Usuarios', 'SeleccionarRol');
+                setPuedeSeleccionarRol(Boolean(tienePermiso));
+            } catch (error) {
+                console.error("Error verificando permiso SeleccionarRol:", error);
+                setPuedeSeleccionarRol(false);
+            }
+        };
+        verificarPermiso();
+    }, []);
 
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
         const valor = (e.target && e.target.value) || "";
@@ -95,6 +113,7 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                         onChange={(e) => setRolSeleccionado(e.value)}
                         options={optionsRol}
                         onClick={() => setDropdownAbiertoRol(true)}
+                        disabled={!puedeSeleccionarRol}
                         className={`p-column-filter ${(estadoGuardando && (rolSeleccionado == null || rolSeleccionado === "")) ? "p-invalid" : ""}`}
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un rol' })} />

@@ -65,7 +65,8 @@ const AppProfileSidebar = () => {
                         {permisoVerPerfil === true && (
                             <li >
                                 <Link className="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150"
-                                    href={`/usuarios/?usuario=${getUsuarioSesion()?.id}`}>
+                                    href={`/usuarios/?usuario=${getUsuarioSesion()?.id}`}
+                                    onClick={onProfileSidebarHide}>
                                     <span>
                                         <i className="pi pi-user text-xl text-primary"></i>
                                     </span>

@@ -9,6 +9,7 @@ import { getIdiomas } from "@/app/api-endpoints/idioma";
 import { Button } from "primereact/button";
 import { getVistaUsuarios, patchUsuario, postUsuario } from "@/app/api-endpoints/usuario";
 import { getUsuarioSesion } from "@/app/utility/Utils";
+import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
 import { useRouter } from 'next/navigation';
 
@@ -169,9 +170,18 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             && !validaIdioma && !validaRol && !validaEmail && regexEmail.test(usuario.mail));
     }
 
-    const cancelarEdicion = () => {
-        setIdEditar(null)
-        //setAccion("consulta");
+    const cancelarEdicion = async () => {
+        //
+        // Verificar si el usuario tiene permisos para acceder a Usuarios
+        //
+        setIdEditar(null);
+        const tienePermiso = await tieneUsuarioPermiso('Neatpallet', 'Usuarios', 'Acceder');
+        //
+        // Si no tiene permisos, redirigir a la página principal del rol. Sino continuar con la cancelación normal
+        //
+        if (!tienePermiso) {            
+            router.push(await obtenerRolDashboard());
+        }
     };
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
 

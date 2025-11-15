@@ -144,7 +144,7 @@ const eliminarDialogFooter = (ocultarEliminarDialog, eliminar) => {
     );
 };
 
-const Header = ({ crearNuevo, generarCSV, importarCSV, generarGrafico, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
+const Header = ({ crearNuevo, generarCSV, importarCSVPallets, generarGrafico, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
     operadorSeleccionado, setOperadorSeleccionado, listaOperadores,
 }) => {
     const intl = useIntl()
@@ -173,13 +173,13 @@ const Header = ({ crearNuevo, generarCSV, importarCSV, generarGrafico, mostrarQR
                     />
                 )
             }
-            {(importarCSV !== null && importarCSV !== undefined) &&     //Si no se envia la funcion de importarCSV, no muestra el boton
+            {(importarCSVPallets !== null && importarCSVPallets !== undefined) &&     //Si no se envia la funcion de importarCSVPallets, no muestra el boton
                 (
                     <Button
-                        label={`${intl.formatMessage({ id: 'Importar' })} CSV`}
+                        label={`${intl.formatMessage({ id: 'Importar' })} CSV Pallets`}
                         icon="pi pi-upload"
                         severity="warning"
-                        onClick={importarCSV}
+                        onClick={importarCSVPallets}
                         className="mr-2"
                     />
                 )
@@ -462,7 +462,7 @@ const DescargarCSVDialog = ({
     );
 };
 
-const ImportarCSVDialog = ({
+const ImportarCSVPalletsDialog = ({
     visible,
     onHide,
     header = 'Importar archivo CSV',
@@ -491,20 +491,12 @@ const ImportarCSVDialog = ({
 
             const palletData = {
                 empresaId: empresaId,
-                codigo: fields[0] || '',
-                alias: fields[1] || '',
-                modelo: fields[2] || '',
-                medidas: fields[3] || '',
-                periodoEnvioMail: fields[4] ? parseInt(fields[4]) || 24 : 24,
-                fechaImpresion: fields[5] || new Date().toISOString()
+                codigo: fields[0] || ''
             };
 
             // Validaciones básicas
             if (!palletData.codigo) {
                 throw new Error(`Línea ${lineIndex + 1}: Código es obligatorio`);
-            }
-            if (!palletData.alias) {
-                throw new Error(`Línea ${lineIndex + 1}: Alias es obligatorio`);
             }
             if (!empresaId) {
                 throw new Error(`Línea ${lineIndex + 1}: ID de empresa no proporcionado`);
@@ -1159,7 +1151,7 @@ export {
     comprobarImagen, manejarCambioImagen, templateGenerico, ErrorDetail,
     botonesDeAccionTemplate, eliminarDialogFooter, Header, dialogFooter,
     EliminarDialog, filtroActivoSnTemplate, opcionesActivoSnTemplate,
-    generarYDescargarCSV, prepararRegistrosParaCSV, DescargarCSVDialog, ImportarCSVDialog,
+    generarYDescargarCSV, prepararRegistrosParaCSV, DescargarCSVDialog, ImportarCSVPalletsDialog,
     GenerarGraficoDialog, formatearBytes, esUrlImagen, getIdiomaDefecto, tieneUsuarioPermiso,
     obtenerTodosLosPermisos,
 

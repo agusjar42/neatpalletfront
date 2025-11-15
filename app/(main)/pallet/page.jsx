@@ -35,7 +35,7 @@ const Pallet = () => {
                 headerCrud={intl.formatMessage({ id: 'Pallets' })}
                 getRegistros={getPallet}
                 getRegistrosCount={getPalletCount}
-                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV', 'importarCSV']}
+                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV', 'importarCSVPallets']}
                 controlador={"Pallet"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarPallets />}

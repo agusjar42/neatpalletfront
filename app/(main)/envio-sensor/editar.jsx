@@ -96,8 +96,9 @@ const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
         const validaEnvioId = envioSensor.envioId === undefined || envioSensor.envioId === "";
         const validaTipoSensorId = envioSensor.tipoSensorId === undefined || envioSensor.tipoSensorId === "";
         const validaValor = envioSensor.valor === undefined || envioSensor.valor === "";
+        const validaOrden = envioSensor.orden === undefined || envioSensor.orden === null || envioSensor.orden === "";
         
-        return (!validaEnvioId && !validaTipoSensorId && !validaValor);
+        return (!validaEnvioId && !validaTipoSensorId && !validaValor && !validaOrden);
     }
 
     const guardarEnvioSensor = async () => {

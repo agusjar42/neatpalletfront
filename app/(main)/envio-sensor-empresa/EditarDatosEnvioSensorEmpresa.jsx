@@ -24,7 +24,19 @@ const EditarDatosEnvioSensorEmpresa = ({ envioSensorEmpresa, setEnvioSensorEmpre
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el sensor de empresa' })}>
             <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={envioSensorEmpresa.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden del sensor' })}
+                        onChange={(e) => setEnvioSensorEmpresa({ ...envioSensorEmpresa, orden: e.value })}
+                        className={`${(estadoGuardando && (envioSensorEmpresa.orden === "" || envioSensorEmpresa.orden === null || envioSensorEmpresa.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999}
+                        inputStyle={{ textAlign: 'right' }} />
+                </div>
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="tipoSensorId"><b>{intl.formatMessage({ id: 'Tipo de Sensor' })}*</b></label>
                     <Dropdown value={envioSensorEmpresa.tipoSensorId || ""}
                         onChange={(e) => setEnvioSensorEmpresa({ ...envioSensorEmpresa, tipoSensorId: e.value })}
@@ -33,7 +45,7 @@ const EditarDatosEnvioSensorEmpresa = ({ envioSensorEmpresa, setEnvioSensorEmpre
                         showClear
                         placeholder={intl.formatMessage({ id: 'Seleccione un tipo de sensor' })} />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="valor" style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
                         {intl.formatMessage({ id: 'Valor' })}
                         {/*<span className="pi pi-info-circle text-blue-500" style={{ fontSize: "1.5em" }} />*/}

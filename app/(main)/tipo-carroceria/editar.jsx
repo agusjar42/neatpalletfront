@@ -28,7 +28,8 @@ const EditarTipoCarroceria = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
 
     const validaciones = async () => {
         const validaNombre = tipoCarroceria.nombre === undefined || tipoCarroceria.nombre === "";
-        return (!validaNombre)
+        const validaOrden = tipoCarroceria.orden === undefined || tipoCarroceria.orden === null || tipoCarroceria.orden === "";
+        return (!validaNombre && !validaOrden)
     }
 
     const guardarTipoCarroceria = async () => {

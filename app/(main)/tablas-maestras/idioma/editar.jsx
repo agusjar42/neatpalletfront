@@ -101,11 +101,12 @@ const EditarIdioma = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
 
         //Valida que los campos no esten vacios
         const validaNombre = idioma.nombre === undefined || idioma.nombre === "";
+        const validaOrden = idioma.orden === undefined || idioma.orden === null || idioma.orden === "";
         //const validaIso = isoSeleccionado == null || isoSeleccionado === "";
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return (/*!validaIso && */!validaNombre)
+        return (/*!validaIso && */!validaNombre && !validaOrden)
     }
 
     const guardarEmpresaTransporte = async () => {

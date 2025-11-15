@@ -7,6 +7,7 @@ import { useIntl } from 'react-intl'
 const EnvioContenido = () => {
     const intl = useIntl();
     const columnas = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen Ruta' }), tipo: 'string' },
         { campo: 'producto', header: intl.formatMessage({ id: 'Producto' }), tipo: 'string' },
         { campo: 'referencia', header: intl.formatMessage({ id: 'Referencia' }), tipo: 'string' },

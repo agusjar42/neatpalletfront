@@ -7,6 +7,7 @@ import { useIntl } from 'react-intl'
 const Empresa = () => {
     const intl = useIntl()
     const columnas = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'codigo', header: intl.formatMessage({ id: 'Codigo' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'descripcion', header: intl.formatMessage({ id: 'Descripción' }), tipo: 'string' },

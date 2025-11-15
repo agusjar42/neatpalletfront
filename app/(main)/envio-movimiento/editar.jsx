@@ -44,7 +44,8 @@ const EditarEnvioMovimiento = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
         }
         const validaEnvioId = envioMovimiento.envioId === undefined || envioMovimiento.envioId === "";
         const validaTipoSensorId = envioMovimiento.tipoSensorId === undefined || envioMovimiento.tipoSensorId === "";
-        return (!validaEnvioId && !validaTipoSensorId)
+        const validaOrden = envioMovimiento.orden === undefined || envioMovimiento.orden === null || envioMovimiento.orden === "";
+        return (!validaEnvioId && !validaTipoSensorId && !validaOrden)
     }
 
     const guardarEnvioMovimiento = async () => {

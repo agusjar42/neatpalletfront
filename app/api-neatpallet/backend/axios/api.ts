@@ -161,6 +161,12 @@ export interface Empresa {
      * @memberof Empresa
      */
     'logo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Empresa
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -574,6 +580,12 @@ export interface EmpresaWithRelations {
      * @memberof EmpresaWithRelations
      */
     'logo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaWithRelations
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -659,6 +671,12 @@ export interface Envio {
      * @memberof Envio
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Envio
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -720,6 +738,12 @@ export interface EnvioConfiguracion {
      * @memberof EnvioConfiguracion
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracion
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -781,6 +805,12 @@ export interface EnvioConfiguracionEmpresa {
      * @memberof EnvioConfiguracionEmpresa
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresa
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -962,6 +992,12 @@ export interface EnvioConfiguracionEmpresaPartial {
      * @memberof EnvioConfiguracionEmpresaPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -1072,6 +1108,12 @@ export interface EnvioConfiguracionEmpresaWithRelations {
      * @memberof EnvioConfiguracionEmpresaWithRelations
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionEmpresaWithRelations
+     */
+    'orden'?: number;
     /**
      * 
      * @type {EmpresaWithRelations}
@@ -1265,6 +1307,12 @@ export interface EnvioConfiguracionPartial {
      * @memberof EnvioConfiguracionPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -1375,6 +1423,12 @@ export interface EnvioConfiguracionWithRelations {
      * @memberof EnvioConfiguracionWithRelations
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioConfiguracionWithRelations
+     */
+    'orden'?: number;
     /**
      * 
      * @type {EnvioWithRelations}
@@ -1508,6 +1562,12 @@ export interface EnvioContenido {
      * @memberof EnvioContenido
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenido
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -1677,6 +1737,12 @@ export interface EnvioContenidoPallet {
      * @memberof EnvioContenidoPallet
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPallet
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -1847,6 +1913,12 @@ export interface EnvioContenidoPalletPartial {
      * @memberof EnvioContenidoPalletPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -1945,6 +2017,12 @@ export interface EnvioContenidoPalletWithRelations {
      * @memberof EnvioContenidoPalletWithRelations
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPalletWithRelations
+     */
+    'orden'?: number;
     /**
      * 
      * @type {EnvioContenidoWithRelations}
@@ -2084,6 +2162,12 @@ export interface EnvioContenidoPartial {
      * @memberof EnvioContenidoPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -2254,6 +2338,12 @@ export interface EnvioContenidoWithRelations {
      * @memberof EnvioContenidoWithRelations
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'orden'?: number;
     /**
      * 
      * @type {EnvioWithRelations}
@@ -2477,6 +2567,12 @@ export interface EnvioMovimiento {
      * @memberof EnvioMovimiento
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimiento
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -2689,6 +2785,12 @@ export interface EnvioMovimientoPartial {
      * @memberof EnvioMovimientoPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -2829,6 +2931,12 @@ export interface EnvioMovimientoWithRelations {
      * @memberof EnvioMovimientoWithRelations
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioMovimientoWithRelations
+     */
+    'orden'?: number;
     /**
      * 
      * @type {TipoSensorWithRelations}
@@ -3267,6 +3375,12 @@ export interface EnvioParada {
      * @memberof EnvioParada
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioParada
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -3472,6 +3586,12 @@ export interface EnvioParadaPartial {
      * @memberof EnvioParadaPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioParadaPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -3608,6 +3728,12 @@ export interface EnvioParadaWithRelations {
     'fechaModificacion'?: string;
     /**
      * 
+     * @type {number}
+     * @memberof EnvioParadaWithRelations
+     */
+    'orden'?: number;
+    /**
+     * 
      * @type {EnvioWithRelations}
      * @memberof EnvioParadaWithRelations
      */
@@ -3703,6 +3829,12 @@ export interface EnvioPartial {
      * @memberof EnvioPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -3807,6 +3939,12 @@ export interface EnvioSensor {
      * @memberof EnvioSensor
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensor
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -3862,6 +4000,12 @@ export interface EnvioSensorEmpresa {
      * @memberof EnvioSensorEmpresa
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresa
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -4038,6 +4182,12 @@ export interface EnvioSensorEmpresaPartial {
      * @memberof EnvioSensorEmpresaPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -4142,6 +4292,12 @@ export interface EnvioSensorEmpresaWithRelations {
      * @memberof EnvioSensorEmpresaWithRelations
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorEmpresaWithRelations
+     */
+    'orden'?: number;
     /**
      * 
      * @type {TipoSensorWithRelations}
@@ -4336,6 +4492,12 @@ export interface EnvioSensorPartial {
      * @memberof EnvioSensorPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioSensorPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -4442,6 +4604,12 @@ export interface EnvioSensorWithRelations {
     'fechaModificacion'?: string;
     /**
      * 
+     * @type {number}
+     * @memberof EnvioSensorWithRelations
+     */
+    'orden'?: number;
+    /**
+     * 
      * @type {TipoSensorWithRelations}
      * @memberof EnvioSensorWithRelations
      */
@@ -4545,6 +4713,12 @@ export interface EnvioWithRelations {
     'fechaModificacion'?: string;
     /**
      * 
+     * @type {number}
+     * @memberof EnvioWithRelations
+     */
+    'orden'?: number;
+    /**
+     * 
      * @type {EmpresaWithRelations}
      * @memberof EnvioWithRelations
      */
@@ -4622,6 +4796,12 @@ export interface Idioma {
      * @memberof Idioma
      */
     'usuInactivo'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Idioma
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -4769,6 +4949,12 @@ export interface IdiomaPartial {
      * @memberof IdiomaPartial
      */
     'usuInactivo'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof IdiomaPartial
+     */
+    'orden'?: number | null;
 }
 /**
  * (tsType: IdiomaWithRelations, schemaOptions: { includeRelations: true })
@@ -4836,6 +5022,12 @@ export interface IdiomaWithRelations {
      * @memberof IdiomaWithRelations
      */
     'usuInactivo'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof IdiomaWithRelations
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -5674,6 +5866,12 @@ export interface NewEnvio {
      * @memberof NewEnvio
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvio
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<EnvioConfiguracion, \'id\'>, schemaOptions: { title: \'NewEnvioConfiguracion\', exclude: [ \'id\' ] })
@@ -5729,6 +5927,12 @@ export interface NewEnvioConfiguracion {
      * @memberof NewEnvioConfiguracion
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioConfiguracion
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<EnvioConfiguracionEmpresa, \'id\'>, schemaOptions: { title: \'NewEnvioConfiguracionEmpresa\', exclude: [ \'id\' ] })
@@ -5784,6 +5988,12 @@ export interface NewEnvioConfiguracionEmpresa {
      * @memberof NewEnvioConfiguracionEmpresa
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioConfiguracionEmpresa
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<EnvioContenido, \'id\'>, schemaOptions: { title: \'NewEnvioContenido\', exclude: [ \'id\' ] })
@@ -5899,6 +6109,12 @@ export interface NewEnvioContenido {
      * @memberof NewEnvioContenido
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenido
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<EnvioContenidoPallet, \'id\'>, schemaOptions: { title: \'NewEnvioContenidoPallet\', exclude: [ \'id\' ] })
@@ -5942,6 +6158,12 @@ export interface NewEnvioContenidoPallet {
      * @memberof NewEnvioContenidoPallet
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenidoPallet
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<EnvioMovimiento, \'id\'>, schemaOptions: { title: \'NewEnvioMovimiento\', exclude: [ \'id\' ] })
@@ -6027,6 +6249,12 @@ export interface NewEnvioMovimiento {
      * @memberof NewEnvioMovimiento
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioMovimiento
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<EnvioPallet, \'id\'>, schemaOptions: { title: \'NewEnvioPallet\', exclude: [ \'id\' ] })
@@ -6149,6 +6377,12 @@ export interface NewEnvioParada {
      * @memberof NewEnvioParada
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioParada
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<EnvioSensor, \'id\'>, schemaOptions: { title: \'NewEnvioSensor\', exclude: [ \'id\' ] })
@@ -6198,6 +6432,12 @@ export interface NewEnvioSensor {
      * @memberof NewEnvioSensor
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioSensor
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<EnvioSensorEmpresa, \'id\'>, schemaOptions: { title: \'NewEnvioSensorEmpresa\', exclude: [ \'id\' ] })
@@ -6247,6 +6487,12 @@ export interface NewEnvioSensorEmpresa {
      * @memberof NewEnvioSensorEmpresa
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioSensorEmpresa
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<Idioma, \'id\'>, schemaOptions: { title: \'NewIdioma\', exclude: [ \'id\' ] })
@@ -6308,6 +6554,12 @@ export interface NewIdioma {
      * @memberof NewIdioma
      */
     'usuInactivo'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewIdioma
+     */
+    'orden'?: number | null;
 }
 /**
  * (tsType: Omit<ListaPermisos, \'id\'>, schemaOptions: { title: \'NewListaPermisos\', exclude: [ \'id\' ] })
@@ -6431,6 +6683,12 @@ export interface NewPais {
      * @memberof NewPais
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPais
+     */
+    'orden'?: number | null;
 }
 /**
  * (tsType: Omit<Pallet, \'id\'>, schemaOptions: { title: \'NewPallet\', exclude: [ \'id\' ] })
@@ -6504,6 +6762,12 @@ export interface NewPallet {
      * @memberof NewPallet
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPallet
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<PalletParametro, \'id\'>, schemaOptions: { title: \'NewPalletParametro\', exclude: [ \'id\' ] })
@@ -6559,6 +6823,12 @@ export interface NewPalletParametro {
      * @memberof NewPalletParametro
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPalletParametro
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<Parametro, \'id\'>, schemaOptions: { title: \'NewParametro\', exclude: [ \'id\' ] })
@@ -6608,6 +6878,12 @@ export interface NewParametro {
      * @memberof NewParametro
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewParametro
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<Permiso, \'id\'>, schemaOptions: { title: \'NewPermiso\', exclude: [ \'id\' ] })
@@ -6834,6 +7110,12 @@ export interface NewRol {
      * @memberof NewRol
      */
     'usuInactivo'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewRol
+     */
+    'orden'?: number | null;
 }
 /**
  * (tsType: Omit<TipoCarroceria, \'id\'>, schemaOptions: { title: \'NewTipoCarroceria\', exclude: [ \'id\' ] })
@@ -6877,6 +7159,12 @@ export interface NewTipoCarroceria {
      * @memberof NewTipoCarroceria
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoCarroceria
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<TipoSensor, \'id\'>, schemaOptions: { title: \'NewTipoSensor\', exclude: [ \'id\' ] })
@@ -6926,6 +7214,12 @@ export interface NewTipoSensor {
      * @memberof NewTipoSensor
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoSensor
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<TipoTransporte, \'id\'>, schemaOptions: { title: \'NewTipoTransporte\', exclude: [ \'id\' ] })
@@ -6969,6 +7263,12 @@ export interface NewTipoTransporte {
      * @memberof NewTipoTransporte
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoTransporte
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<Traduccion, \'id\'>, schemaOptions: { title: \'NewTraduccion\', exclude: [ \'id\' ] })
@@ -7256,6 +7556,12 @@ export interface Pais {
      * @memberof Pais
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Pais
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -7391,6 +7697,12 @@ export interface PaisPartial {
      * @memberof PaisPartial
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisPartial
+     */
+    'orden'?: number | null;
 }
 /**
  * (tsType: PaisWithRelations, schemaOptions: { includeRelations: true })
@@ -7446,6 +7758,12 @@ export interface PaisWithRelations {
      * @memberof PaisWithRelations
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaisWithRelations
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -7525,6 +7843,12 @@ export interface Pallet {
      * @memberof Pallet
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Pallet
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -7708,6 +8032,12 @@ export interface PalletParametro {
      * @memberof PalletParametro
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametro
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -7890,6 +8220,12 @@ export interface PalletParametroPartial {
      * @memberof PalletParametroPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletParametroPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -8002,6 +8338,12 @@ export interface PalletParametroWithRelations {
     'fechaModificacion'?: string;
     /**
      * 
+     * @type {number}
+     * @memberof PalletParametroWithRelations
+     */
+    'orden'?: number;
+    /**
+     * 
      * @type {PalletWithRelations}
      * @memberof PalletParametroWithRelations
      */
@@ -8097,6 +8439,12 @@ export interface PalletPartial {
      * @memberof PalletPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PalletPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -8227,6 +8575,12 @@ export interface PalletWithRelations {
     'fechaModificacion'?: string;
     /**
      * 
+     * @type {number}
+     * @memberof PalletWithRelations
+     */
+    'orden'?: number;
+    /**
+     * 
      * @type {EmpresaWithRelations}
      * @memberof PalletWithRelations
      */
@@ -8304,6 +8658,12 @@ export interface Parametro {
      * @memberof Parametro
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Parametro
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -8479,6 +8839,12 @@ export interface ParametroPartial {
      * @memberof ParametroPartial
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ParametroPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -8583,6 +8949,12 @@ export interface ParametroWithRelations {
      * @memberof ParametroWithRelations
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ParametroWithRelations
+     */
+    'orden'?: number;
     /**
      * 
      * @type {Array<PalletParametroWithRelations>}
@@ -9452,6 +9824,12 @@ export interface Rol {
      * @memberof Rol
      */
     'usuInactivo'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Rol
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -9611,6 +9989,12 @@ export interface RolPartial {
      * @memberof RolPartial
      */
     'usuInactivo'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof RolPartial
+     */
+    'orden'?: number | null;
 }
 /**
  * (tsType: RolWithRelations, schemaOptions: { includeRelations: true })
@@ -9690,6 +10074,12 @@ export interface RolWithRelations {
      * @memberof RolWithRelations
      */
     'usuInactivo'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof RolWithRelations
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -9739,6 +10129,12 @@ export interface TipoCarroceria {
      * @memberof TipoCarroceria
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceria
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -9868,6 +10264,12 @@ export interface TipoCarroceriaPartial {
      * @memberof TipoCarroceriaPartial
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaPartial
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: TipoCarroceriaWithRelations, schemaOptions: { includeRelations: true })
@@ -9917,6 +10319,12 @@ export interface TipoCarroceriaWithRelations {
      * @memberof TipoCarroceriaWithRelations
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaWithRelations
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -9972,6 +10380,12 @@ export interface TipoSensor {
      * @memberof TipoSensor
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensor
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -10149,6 +10563,12 @@ export interface TipoSensorPartial {
      * @memberof TipoSensorPartial
      */
     'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoSensorPartial
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -10255,6 +10675,12 @@ export interface TipoSensorWithRelations {
     'fechaModificacion'?: string;
     /**
      * 
+     * @type {number}
+     * @memberof TipoSensorWithRelations
+     */
+    'orden'?: number;
+    /**
+     * 
      * @type {EmpresaWithRelations}
      * @memberof TipoSensorWithRelations
      */
@@ -10326,6 +10752,12 @@ export interface TipoTransporte {
      * @memberof TipoTransporte
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporte
+     */
+    'orden'?: number;
 }
 /**
  * 
@@ -10455,6 +10887,12 @@ export interface TipoTransportePartial {
      * @memberof TipoTransportePartial
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransportePartial
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: TipoTransporteWithRelations, schemaOptions: { includeRelations: true })
@@ -10504,6 +10942,12 @@ export interface TipoTransporteWithRelations {
      * @memberof TipoTransporteWithRelations
      */
     'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteWithRelations
+     */
+    'orden'?: number;
 }
 /**
  * 

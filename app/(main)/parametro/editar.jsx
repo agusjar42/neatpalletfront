@@ -28,7 +28,8 @@ const EditarParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
 
     const validaciones = async () => {
         const validaNombre = parametro.nombre === undefined || parametro.nombre === "";
-        return (!validaNombre)
+        const validaOrden = parametro.orden === undefined || parametro.orden === null || parametro.orden === "";
+        return (!validaNombre && !validaOrden)
     }
 
     const guardarParametro = async () => {

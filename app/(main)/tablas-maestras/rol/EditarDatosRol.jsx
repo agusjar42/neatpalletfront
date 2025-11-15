@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { InputSwitch } from 'primereact/inputswitch';
 import { useIntl } from 'react-intl';
@@ -17,6 +18,18 @@ const EditarDatosRol = ({ rol, setRol, estadoGuardando, pantallasDashboard, pant
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el rol' })}>
             <div className="formgrid grid">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={rol.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden del rol' })}
+                        onChange={(e) => setRol({ ...rol, orden: e.value })}
+                        className={`${(estadoGuardando && (rol.orden === "" || rol.orden === null || rol.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999}
+                        inputStyle={{ textAlign: 'right' }} />
+                </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
                     <InputText value={rol.nombre}

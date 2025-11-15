@@ -24,6 +24,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
     // Columnas para la tabla de envío configuración empresa
     const columnasConfiguracionEmpresa = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
         { campo: 'unidadMedida', header: intl.formatMessage({ id: 'Unidad de medida' }), tipo: 'string' },
@@ -31,6 +32,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
     // Columnas para la tabla de envío sensor empresa
     const columnasSensorEmpresa = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Tipo de Sensor' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
     ];
@@ -55,10 +57,11 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const validaciones = async () => {
         const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         //Valida que los campos no esten vacios
+        const validaOrden = empresa.orden === undefined || empresa.orden === null || empresa.orden === "";
         const validaCodigo = empresa.codigo === undefined || empresa.codigo === "";
         const validaNombre = empresa.nombre === undefined || empresa.nombre === "";
 
-        if (validaNombre || validaCodigo /*|| validaDescripcion || validaEmail || validaPassword || validaServicio */) {
+        if (validaNombre || validaCodigo || validaOrden /*|| validaDescripcion || validaEmail || validaPassword || validaServicio */) {
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
@@ -79,7 +82,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return (!validaNombre && !(empresa.email.length > 0 && !regexEmail.test(empresa.email))
+        return (!validaNombre && !validaCodigo && !validaOrden && !(empresa.email.length > 0 && !regexEmail.test(empresa.email))
         );
     }
 

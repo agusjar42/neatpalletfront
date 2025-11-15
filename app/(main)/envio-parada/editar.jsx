@@ -46,6 +46,7 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
         }
         const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const validaEnvioId = envioParada.envioId === undefined || envioParada.envioId === "";
+        const validaOrden = envioParada.orden === undefined || envioParada.orden === null || envioParada.orden === "";
         if ((envioParada.emailOperario?.length == undefined) || (envioParada.emailOperario.length > 0 && !regexEmail.test(envioParada.emailOperario))) {
             toast.current?.show({
                 severity: 'error',
@@ -54,7 +55,7 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                 life: 3000,
             });
         }
-        return (!validaEnvioId && !(envioParada.emailOperario.length > 0 && !regexEmail.test(envioParada.emailOperario)));
+        return (!validaEnvioId && !validaOrden && !(envioParada.emailOperario.length > 0 && !regexEmail.test(envioParada.emailOperario)));
     }
 
     const guardarEnvioParada = async () => {

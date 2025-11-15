@@ -491,12 +491,20 @@ const ImportarCSVPalletsDialog = ({
 
             const palletData = {
                 empresaId: empresaId,
-                codigo: fields[0] || ''
+                codigo: fields[0] || '',
+                alias: fields[1] || '',
+                modelo: fields[2] || '',
+                medidas: fields[3] || '',
+                periodoEnvioMail: fields[4] ? parseInt(fields[4]) || 24 : 24,
+                fechaImpresion: fields[5] || new Date().toISOString()
             };
 
             // Validaciones básicas
             if (!palletData.codigo) {
                 throw new Error(`Línea ${lineIndex + 1}: Código es obligatorio`);
+            }
+            if (!palletData.alias) {
+                throw new Error(`Línea ${lineIndex + 1}: Alias es obligatorio`);
             }
             if (!empresaId) {
                 throw new Error(`Línea ${lineIndex + 1}: ID de empresa no proporcionado`);

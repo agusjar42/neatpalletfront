@@ -11,6 +11,18 @@ const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el pallet' })}>
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={pallet.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden del pallet' })}
+                        onChange={(e) => setPallet({ ...pallet, orden: e.value })}
+                        className={`${(estadoGuardando && (pallet.orden === "" || pallet.orden === null || pallet.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999}
+                        inputStyle={{ textAlign: 'right' }} />
+                </div>
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="codigo"><b>{intl.formatMessage({ id: 'Código' })}*</b></label>
                     <InputText value={pallet.codigo}
                         placeholder={intl.formatMessage({ id: 'Código del pallet' })}

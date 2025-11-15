@@ -8,6 +8,7 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 const EnvioSensorEmpresa = () => {
     const intl = useIntl();
     const columnas = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Tipo de Sensor' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
     ]

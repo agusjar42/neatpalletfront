@@ -199,8 +199,21 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
             <Toast ref={toast} position="top-right" />
             <Fieldset legend={intl.formatMessage({ id: 'Datos del envío' })}>
                 <div className="formgrid grid">
+                {/* Campo Orden */}
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={envio.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden del envío' })}
+                        onChange={(e) => setEnvio({ ...envio, orden: e.value })}
+                        className={`${(estadoGuardando && (envio.orden === "" || envio.orden === null || envio.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999} 
+                        inputStyle={{ textAlign: 'right' }}/>
+                </div>
                 {/* Primera fila */}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="origenRuta"><b>{intl.formatMessage({ id: 'Origen de la ruta' })}*</b></label>
                     <InputText 
                         value={envio.origenRuta || ""}
@@ -211,7 +224,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     />
                 </div>
 
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="destinoRuta"><b>{intl.formatMessage({ id: 'Destino de la ruta' })}*</b></label>
                     <InputText 
                         value={envio.destinoRuta || ""}

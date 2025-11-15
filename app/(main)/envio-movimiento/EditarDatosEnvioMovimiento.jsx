@@ -1,6 +1,7 @@
 import React from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 import { FileUpload } from "primereact/fileupload";
@@ -62,7 +63,19 @@ const EditarDatosEnvioMovimiento = ({ envioMovimiento, setEnvioMovimiento, estad
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el movimiento de envío' })}>
             <div className="formgrid grid">
-                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={envioMovimiento.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden del movimiento' })}
+                        onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, orden: e.value })}
+                        className={`${(estadoGuardando && (envioMovimiento.orden === "" || envioMovimiento.orden === null || envioMovimiento.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999} 
+                        inputStyle={{ textAlign: 'right' }} />
+                </div>
+                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioMovimiento.envioId || ""}
                         onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, envioId: e.value })}
@@ -71,7 +84,7 @@ const EditarDatosEnvioMovimiento = ({ envioMovimiento, setEnvioMovimiento, estad
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
                 </div>)}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="tipoSensorId"><b>{intl.formatMessage({ id: 'Tipo de Sensor' })}*</b></label>
                     <Dropdown value={envioMovimiento.tipoSensorId || ""}
                         onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, tipoSensorId: e.value })}

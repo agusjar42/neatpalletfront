@@ -7,6 +7,7 @@ import { useIntl } from 'react-intl'
 const EnvioMovimiento = () => {
     const intl = useIntl();
     const columnas = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen Ruta' }), tipo: 'string' },
         { campo: 'nombreSensor', header: intl.formatMessage({ id: 'Nombre Sensor' }), tipo: 'string' },
         { campo: 'fechaEspanol', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'string' },

@@ -10018,6 +10018,9 @@
           },
           "activoSn": {
             "type": "string"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -10046,6 +10049,9 @@
           },
           "activoSn": {
             "type": "string"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -10078,6 +10084,9 @@
           },
           "activoSn": {
             "type": "string"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -10110,6 +10119,9 @@
           },
           "activoSn": {
             "type": "string"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -10144,6 +10156,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -10175,6 +10190,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -10242,6 +10260,10 @@
           "logo": {
             "type": "string",
             "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -10296,6 +10318,9 @@
             "type": "string",
             "format": "date-time"
           },
+          "orden": {
+            "type": "number"
+          },
           "empresa": {
             "$ref": "#/components/schemas/EmpresaWithRelations"
           },
@@ -10334,6 +10359,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           },
           "tipoSensor": {
             "$ref": "#/components/schemas/TipoSensorWithRelations"
@@ -10398,6 +10426,9 @@
             "type": "string",
             "format": "date-time"
           },
+          "orden": {
+            "type": "number"
+          },
           "tipoSensor": {
             "$ref": "#/components/schemas/TipoSensorWithRelations"
           },
@@ -10439,6 +10470,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           },
           "empresa": {
             "$ref": "#/components/schemas/EmpresaWithRelations"
@@ -10490,6 +10524,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -10521,6 +10558,9 @@
           },
           "activoSn": {
             "type": "string"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -10549,6 +10589,9 @@
           },
           "activoSn": {
             "type": "string"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -10581,6 +10624,9 @@
           },
           "activoSn": {
             "type": "string"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -10613,6 +10659,9 @@
           },
           "activoSn": {
             "type": "string"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -10672,6 +10721,10 @@
           "usuInactivo": {
             "type": "number",
             "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -10729,6 +10782,10 @@
             "nullable": true
           },
           "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          },
+          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -10795,6 +10852,10 @@
           "usuInactivo": {
             "type": "number",
             "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -10857,6 +10918,10 @@
             "nullable": true
           },
           "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          },
+          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -11441,6 +11506,9 @@
           },
           "activoSn": {
             "type": "string"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -11472,6 +11540,9 @@
           },
           "activoSn": {
             "type": "string"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -11559,6 +11630,9 @@
             "type": "string",
             "format": "date-time"
           },
+          "orden": {
+            "type": "number"
+          },
           "empresa": {
             "$ref": "#/components/schemas/EmpresaWithRelations"
           },
@@ -11613,6 +11687,9 @@
             "type": "string",
             "format": "date-time"
           },
+          "orden": {
+            "type": "number"
+          },
           "pallet": {
             "$ref": "#/components/schemas/PalletWithRelations"
           },
@@ -11655,6 +11732,9 @@
           "activoSn": {
             "type": "string"
           },
+          "orden": {
+            "type": "number"
+          },
           "palletParametros": {
             "type": "array",
             "items": {
@@ -11695,6 +11775,9 @@
           },
           "activoSn": {
             "type": "string"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -11732,6 +11815,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -11766,6 +11852,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -11804,6 +11893,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -11850,6 +11942,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -11893,6 +11988,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -11940,6 +12038,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -11982,6 +12083,10 @@
           "usuModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -12021,6 +12126,10 @@
             "nullable": false
           },
           "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -12069,6 +12178,10 @@
           "usuModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -12113,6 +12226,10 @@
             "nullable": false
           },
           "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -12442,6 +12559,10 @@
           "usuInactivo": {
             "type": "number",
             "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -12490,6 +12611,10 @@
             "nullable": true
           },
           "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          },
+          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -12547,6 +12672,10 @@
           "usuInactivo": {
             "type": "number",
             "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -12602,6 +12731,10 @@
           "usuInactivo": {
             "type": "number",
             "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -12636,6 +12769,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -12667,6 +12803,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -12702,6 +12841,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -12751,6 +12893,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -12797,6 +12942,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -12847,6 +12995,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           },
           "envio": {
             "$ref": "#/components/schemas/EnvioWithRelations"
@@ -12901,6 +13052,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -13047,6 +13201,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -13099,6 +13256,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -13155,6 +13315,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -13228,6 +13391,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -13298,6 +13464,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -13372,6 +13541,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           },
           "envio": {
             "$ref": "#/components/schemas/EnvioWithRelations"
@@ -13450,6 +13622,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -13487,6 +13662,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -13521,6 +13699,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -13559,6 +13740,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           },
           "empresa": {
             "$ref": "#/components/schemas/EmpresaWithRelations"
@@ -13601,6 +13785,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -13638,6 +13825,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -13672,6 +13862,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -13710,6 +13903,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           },
           "envio": {
             "$ref": "#/components/schemas/EnvioWithRelations"
@@ -13752,6 +13948,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -13801,6 +14000,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -13847,6 +14049,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -13943,6 +14148,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -13977,6 +14185,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -14008,6 +14219,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -14043,6 +14257,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           },
           "tipoSensor": {
             "$ref": "#/components/schemas/TipoSensorWithRelations"
@@ -14085,6 +14302,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -14116,6 +14336,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -14144,6 +14367,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -14176,6 +14402,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           },
           "envioContenido": {
             "$ref": "#/components/schemas/EnvioContenidoWithRelations"
@@ -14215,6 +14444,9 @@
           "fechaModificacion": {
             "type": "string",
             "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
           }
         },
         "additionalProperties": false,
@@ -14280,6 +14512,10 @@
           },
           "logo": {
             "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
             "nullable": true
           }
         },
@@ -14500,6 +14736,9 @@
                   },
                   "logo": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -14522,7 +14761,8 @@
                     "usuModificacion",
                     "tiempoInactividad",
                     "imagen",
-                    "logo"
+                    "logo",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -14679,6 +14919,9 @@
                   },
                   "logo": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -14701,7 +14944,8 @@
                     "usuModificacion",
                     "tiempoInactividad",
                     "imagen",
-                    "logo"
+                    "logo",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -14851,6 +15095,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -14868,7 +15115,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -14961,6 +15209,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -14978,7 +15229,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -15142,6 +15394,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -15159,7 +15414,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -15252,6 +15508,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -15269,7 +15528,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -15428,6 +15688,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -15443,7 +15706,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -15530,6 +15794,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -15545,7 +15812,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -15725,6 +15993,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -15747,7 +16018,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -15855,6 +16127,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -15877,7 +16152,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -16329,6 +16605,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -16350,7 +16629,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -16455,6 +16735,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -16476,7 +16759,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -16638,6 +16922,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -16654,7 +16941,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -16744,6 +17032,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -16760,7 +17051,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -16922,6 +17214,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -16938,7 +17233,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -17028,6 +17324,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -17044,7 +17343,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -17238,6 +17538,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -17265,7 +17568,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -17388,6 +17692,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -17415,7 +17722,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -17591,6 +17899,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -17612,7 +17923,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -17717,6 +18029,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -17738,7 +18053,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -17829,6 +18145,9 @@
                   },
                   "usuInactivo": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -17847,7 +18166,8 @@
                     "usuCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuInactivo",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -17929,6 +18249,9 @@
                   },
                   "usuInactivo": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -17947,7 +18270,8 @@
                     "usuCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuInactivo",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -18344,6 +18668,9 @@
                   },
                   "usuModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -18360,7 +18687,8 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
-                    "usuModificacion"
+                    "usuModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -18436,6 +18764,9 @@
                   },
                   "usuModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -18452,7 +18783,8 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
-                    "usuModificacion"
+                    "usuModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -18613,6 +18945,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -18633,7 +18968,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -18735,6 +19071,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -18755,7 +19094,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -18920,6 +19260,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -18937,7 +19280,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -19030,6 +19374,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -19047,7 +19394,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -19208,6 +19556,9 @@
                   },
                   "activoSn": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -19224,7 +19575,8 @@
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "activoSn"
+                    "activoSn",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -19314,6 +19666,9 @@
                   },
                   "activoSn": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -19330,7 +19685,8 @@
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "activoSn"
+                    "activoSn",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -19996,6 +20352,9 @@
                   },
                   "usuInactivo": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20016,7 +20375,8 @@
                     "usuCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuInactivo",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -20104,6 +20464,9 @@
                   },
                   "usuInactivo": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20124,7 +20487,8 @@
                     "usuCreacion",
                     "usuModificacion",
                     "fechaInactivo",
-                    "usuInactivo"
+                    "usuInactivo",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -20192,6 +20556,9 @@
                   },
                   "activoSn": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20207,7 +20574,8 @@
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "activoSn"
+                    "activoSn",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -20280,6 +20648,9 @@
                   },
                   "activoSn": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20295,7 +20666,8 @@
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "activoSn"
+                    "activoSn",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -20444,6 +20816,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20460,7 +20835,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -20550,6 +20926,9 @@
                   },
                   "fechaModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20566,7 +20945,8 @@
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
-                    "fechaModificacion"
+                    "fechaModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -20648,6 +21028,9 @@
                   },
                   "activoSn": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20663,7 +21046,8 @@
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "activoSn"
+                    "activoSn",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -20736,6 +21120,9 @@
                   },
                   "activoSn": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20751,7 +21138,8 @@
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "activoSn"
+                    "activoSn",
+                    "orden"
                   ],
                   "example": "id"
                 },

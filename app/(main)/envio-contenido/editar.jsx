@@ -45,6 +45,7 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
             envioContenido.envioId = envioId;
         }
         const validaEnvioId = envioContenido.envioId === undefined || envioContenido.envioId === "";
+        const validaOrden = envioContenido.orden === undefined || envioContenido.orden === null || envioContenido.orden === "";
         
         // Convertimos a número los campos numéricos para evitar problemas
         envioContenido.pesoKgs = Number(envioContenido.pesoKgs) || 0;
@@ -55,7 +56,7 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
         
         // NO borramos los campos Base64 aquí, se procesan en el backend
         
-        return (!validaEnvioId);
+        return (!validaEnvioId && !validaOrden);
     }
 
     const guardarEnvioContenido = async () => {

@@ -29,8 +29,19 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
+        const validaOrden = pallet.orden === undefined || pallet.orden === null || pallet.orden === "";
         const validaCodigo = pallet.codigo === undefined || pallet.codigo === "";
-        return (!validaCodigo)
+        
+        if (validaOrden || validaCodigo) {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'Todos los campos deben de ser rellenados' }),
+                life: 3000,
+            });
+        }
+        
+        return (!validaOrden && !validaCodigo);
     }
 
     const guardarPallet = async () => {
@@ -39,6 +50,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
         if (await validaciones()) {
             let objGuardar = { ...pallet };
             const usuarioActual = getUsuarioSesion()?.id;
+            delete objGuardar['fechaImpresionEspanol'];
 
             if (idEditar === 0) {
                 delete objGuardar.id;

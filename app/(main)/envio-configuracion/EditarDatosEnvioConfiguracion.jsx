@@ -1,6 +1,7 @@
 import React from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 
@@ -15,6 +16,18 @@ const EditarDatosEnvioConfiguracion = ({ envioConfiguracion, setEnvioConfiguraci
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para la configuración de envío' })}>
             <div className="formgrid grid">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={envioConfiguracion.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden de la configuración' })}
+                        onChange={(e) => setEnvioConfiguracion({ ...envioConfiguracion, orden: e.value })}
+                        className={`${(estadoGuardando && (envioConfiguracion.orden === "" || envioConfiguracion.orden === null || envioConfiguracion.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999} 
+                        inputStyle={{ textAlign: 'right' }} />
+                </div>
                 {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioConfiguracion.envioId || ""}

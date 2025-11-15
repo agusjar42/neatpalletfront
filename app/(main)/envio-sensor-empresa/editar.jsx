@@ -69,7 +69,8 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
 
     const validaciones = async () => {
         let validaTipoSensor = envioSensorEmpresa.tipoSensorId === undefined || envioSensorEmpresa.tipoSensorId === null || envioSensorEmpresa.tipoSensorId === "";
-        let mensajeDevuelto = validaTipoSensor ? 'Todos los campos deben de ser rellenados' : '';
+        let validaOrden = envioSensorEmpresa.orden === undefined || envioSensorEmpresa.orden === null || envioSensorEmpresa.orden === "";
+        let mensajeDevuelto = (validaTipoSensor || validaOrden) ? 'Todos los campos deben de ser rellenados' : '';
 
         if (mensajeDevuelto === '') {
             // Si estamos creando un nuevo registro (idEditar === 0), verificar si el tipo de sensor ya existe

@@ -40,7 +40,8 @@ const EditarEnvioConfiguracion = ({ idEditar, setIdEditar, rowData, emptyRegistr
         }
         const validaEnvioId = envioConfiguracion.envioId === undefined || envioConfiguracion.envioId === "";
         const validaNombre = envioConfiguracion.nombre === undefined || envioConfiguracion.nombre === "";
-        return (!validaEnvioId && !validaNombre)
+        const validaOrden = envioConfiguracion.orden === undefined || envioConfiguracion.orden === null || envioConfiguracion.orden === "";
+        return (!validaEnvioId && !validaNombre && !validaOrden)
     }
 
     const guardarEnvioConfiguracion = async () => {
@@ -53,7 +54,7 @@ const EditarEnvioConfiguracion = ({ idEditar, setIdEditar, rowData, emptyRegistr
             //Borramos las columnas de la vista que no pertenecen a la tabla EnvioConfiguracion sino a su padre Envio
             //
             delete objGuardar['origenRuta'];
-            
+            delete objGuardar['fechaCreacion'];
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;

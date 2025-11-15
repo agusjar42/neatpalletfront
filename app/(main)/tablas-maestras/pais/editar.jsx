@@ -37,10 +37,11 @@ const EditarPais = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistro
 
         //Valida que los campos no esten vacios
         const validaNombre = pais.nombre === undefined || pais.nombre === "";
+        const validaOrden = pais.orden === undefined || pais.orden === null || pais.orden === "";
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return !validaNombre 
+        return !validaNombre && !validaOrden 
     }
 
     const guardarPais = async () => {

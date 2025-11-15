@@ -27,7 +27,8 @@ const EditarEnvioConfiguracionEmpresa = ({ idEditar, setIdEditar, rowData, empty
 
     const validaciones = async () => {
         const validaNombre = envioConfiguracionEmpresa.nombre === undefined || envioConfiguracionEmpresa.nombre === "";
-        return (!validaNombre)
+        const validaOrden = envioConfiguracionEmpresa.orden === undefined || envioConfiguracionEmpresa.orden === null || envioConfiguracionEmpresa.orden === "";
+        return (!validaNombre && !validaOrden)
     }
 
     const guardarEnvioConfiguracionEmpresa = async () => {

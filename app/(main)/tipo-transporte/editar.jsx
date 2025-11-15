@@ -27,7 +27,8 @@ const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
 
     const validaciones = async () => {
         const validaNombre = tipoTransporte.nombre === undefined || tipoTransporte.nombre === "";
-        return (!validaNombre)
+        const validaOrden = tipoTransporte.orden === undefined || tipoTransporte.orden === null || tipoTransporte.orden === "";
+        return (!validaNombre && !validaOrden)
     }
 
     const guardarTipoTransporte = async () => {

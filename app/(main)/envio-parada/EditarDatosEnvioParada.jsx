@@ -1,6 +1,7 @@
 import React from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 
@@ -15,7 +16,19 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para la parada de envío' })}>
             <div className="formgrid grid">
-                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={envioParada.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden de la parada' })}
+                        onChange={(e) => setEnvioParada({ ...envioParada, orden: e.value })}
+                        className={`${(estadoGuardando && (envioParada.orden === "" || envioParada.orden === null || envioParada.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999}
+                        inputStyle={{ textAlign: 'right' }} />
+                </div>
+                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioParada.envioId || ""}
                         onChange={(e) => setEnvioParada({ ...envioParada, envioId: e.value })}
@@ -24,7 +37,7 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
                 </div>)}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="fecha">{intl.formatMessage({ id: 'Fecha' })}</label>
                     <InputText type="date"
                     value={envioParada.fecha}

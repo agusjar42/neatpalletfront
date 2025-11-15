@@ -1,5 +1,6 @@
 import React from "react";
 import { Fieldset } from 'primereact/fieldset';
+import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 
@@ -19,7 +20,7 @@ const EditarDatosEnvioPallet = ({ envioPallet, setEnvioPallet, estadoGuardando, 
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el envío de pallet' })}>
             <div className="formgrid grid">
-                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioPallet.envioId || ""}
                         onChange={(e) => setEnvioPallet({ ...envioPallet, envioId: e.value })}
@@ -28,7 +29,7 @@ const EditarDatosEnvioPallet = ({ envioPallet, setEnvioPallet, estadoGuardando, 
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
                 </div>)}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="palletId"><b>{intl.formatMessage({ id: 'Pallet' })}*</b></label>
                     <Dropdown value={envioPallet.palletId || ""}
                         onChange={(e) => setEnvioPallet({ ...envioPallet, palletId: e.value })}

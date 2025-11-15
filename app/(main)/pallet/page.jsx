@@ -8,6 +8,7 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 const Pallet = () => {
     const intl = useIntl();
     const columnas = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'codigo', header: intl.formatMessage({ id: 'Código' }), tipo: 'string' },
         { campo: 'alias', header: intl.formatMessage({ id: 'Alias' }), tipo: 'string' },
         { campo: 'modelo', header: intl.formatMessage({ id: 'Modelo' }), tipo: 'string' },

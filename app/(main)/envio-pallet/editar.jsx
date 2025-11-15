@@ -9,6 +9,7 @@ import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioPallet from "./EditarDatosEnvioPallet";
 import { useIntl } from 'react-intl';
+import { get } from "http";
 
 const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId }) => {
     const toast = useRef(null);
@@ -50,21 +51,16 @@ const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
         }
         const validaEnvioId = envioPallet.envioId === undefined || envioPallet.envioId === "";
         const validaPalletId = envioPallet.palletId === undefined || envioPallet.palletId === "";
-        return (!validaEnvioId && !validaPalletId)
+        const validaOrden = envioPallet.orden === undefined || envioPallet.orden === null || envioPallet.orden === "";
+        return (!validaEnvioId && !validaPalletId && !validaOrden)
     }
 
     const guardarEnvioPallet = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
         if (await validaciones()) {
-            let objGuardar = { ...envioPallet };
             const usuarioActual = getUsuarioSesion()?.id;
-            //
-            //Borramos las columnas de la vista que no pertenecen a la tabla EnvioPallet sino a su padre Envio
-            //
-            delete objGuardar['aliasPallet'];
-            delete objGuardar['codigoPallet'];
-            delete objGuardar['origenRuta'];
+            let objGuardar = { id: envioPallet.id, palletId: envioPallet.palletId, envioId: envioPallet.envioId };
 
             if (idEditar === 0) {
                 delete objGuardar.id;
@@ -85,7 +81,6 @@ const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                 }
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
-                delete objGuardar['fechaModificacion'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchEnvioPallet(objGuardar.id, objGuardar);
                 setIdEditar(null)

@@ -36,6 +36,7 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
+        const validaOrden = envio.orden === undefined || envio.orden === null || envio.orden === "";
         const validaorigenRuta = envio.origenRuta === undefined || envio.origenRuta === "";
         const validaDestinoRuta = envio.destinoRuta === undefined || envio.destinoRuta === "";
         const gpsRutaOrigen = envio.gpsRutaOrigen === undefined || envio.gpsRutaOrigen === "";
@@ -60,7 +61,7 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
             }
         }
         
-        return (!validaorigenRuta && !validaDestinoRuta && !gpsRutaOrigen && !gpsRutaDestino && !validaFechaSalida && !validaFechaLlegada && fechaLlegadaPosterior)
+        return (!validaOrden && !validaorigenRuta && !validaDestinoRuta && !gpsRutaOrigen && !gpsRutaDestino && !validaFechaSalida && !validaFechaLlegada && fechaLlegadaPosterior)
     }
 
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {

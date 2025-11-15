@@ -1,6 +1,7 @@
 import React from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { useIntl } from 'react-intl';
 import { InputSwitch } from "primereact/inputswitch";
 
@@ -18,7 +19,19 @@ const EditarDatosTipoTransporte = ({ tipoTransporte, setTipoTransporte, estadoGu
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el tipo de transporte' })}>
             <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={tipoTransporte.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden del tipo de transporte' })}
+                        onChange={(e) => setTipoTransporte({ ...tipoTransporte, orden: e.value })}
+                        className={`${(estadoGuardando && (tipoTransporte.orden === "" || tipoTransporte.orden === null || tipoTransporte.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999} 
+                        inputStyle={{ textAlign: 'right' }}/>
+                </div>
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
                     <InputText value={tipoTransporte.nombre}
                         placeholder={intl.formatMessage({ id: 'Nombre del tipo de transporte' })}

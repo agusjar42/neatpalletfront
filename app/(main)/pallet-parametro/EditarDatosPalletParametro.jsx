@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
@@ -50,19 +51,31 @@ const EditarDatosPalletParametro = ({ palletParametro, setPalletParametro, estad
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el parámetro del pallet' })}>
             <div className="formgrid grid">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={palletParametro.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden del parámetro' })}
+                        onChange={(e) => setPalletParametro({ ...palletParametro, orden: e.value })}
+                        className={`${(estadoGuardando && (palletParametro.orden === "" || palletParametro.orden === null || palletParametro.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999} 
+                        inputStyle={{ textAlign: 'right' }}/>
+                </div>
                 {/* Solo mostrar el desplegable Pallet si palletId viene vacio */}
                 {(!palletId) && (
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-5">
                         <label htmlFor="palletId"><b>{intl.formatMessage({ id: 'Pallet' })}*</b></label>
                         <Dropdown value={palletParametro.palletId || ""}
                             onChange={(e) => setPalletParametro({ ...palletParametro, palletId: e.value })}
                             options={opcionesPallet}
                             className={`p-column-filter ${(estadoGuardando && (palletParametro.palletId == null || palletParametro.palletId === "")) ? "p-invalid" : ""}`}
                             showClear
-                            placeholder={intl.formatMessage({ id: 'Selecciona un pallet' })} />
-                    </div>
+                        placeholder={intl.formatMessage({ id: 'Selecciona un pallet' })} />
+                </div>
                 )}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-5">
                     <label htmlFor="parametroId"><b>{intl.formatMessage({ id: 'Parámetro' })}*</b></label>
                     <Dropdown value={palletParametro.parametroId || ""}
                         onChange={(e) => setPalletParametro({ ...palletParametro, parametroId: e.value })}

@@ -127,6 +127,18 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el contenido' })}>
             <Toast ref={toast} position="top-right" />
             <div className="formgrid grid">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={envioContenido.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden del contenido' })}
+                        onChange={(e) => setEnvioContenido({ ...envioContenido, orden: e.value })}
+                        className={`${(estadoGuardando && (envioContenido.orden === "" || envioContenido.orden === null || envioContenido.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999} 
+                        inputStyle={{ textAlign: 'right' }}/>
+                </div>
                 {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioContenido.envioId || ""}
@@ -136,6 +148,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
                 </div>)}
+                
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="producto">{intl.formatMessage({ id: 'Producto' })}</label>
                     <InputText value={envioContenido.producto || ''}

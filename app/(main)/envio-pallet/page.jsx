@@ -8,8 +8,8 @@ const EnvioPallet = () => {
     const intl = useIntl();
     const columnas = [
         { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen Ruta' }), tipo: 'string' },
-        { campo: 'codigoPallet', header: intl.formatMessage({ id: 'Código Pallet' }), tipo: 'string' },
-        { campo: 'aliasPallet', header: intl.formatMessage({ id: 'Alias Pallet' }), tipo: 'string' },
+        { campo: 'codigo', header: intl.formatMessage({ id: 'Código Pallet' }), tipo: 'string' },
+        { campo: 'alias', header: intl.formatMessage({ id: 'Alias Pallet' }), tipo: 'string' },
     ]
 
     return (

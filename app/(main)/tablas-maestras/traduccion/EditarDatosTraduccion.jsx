@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 import { getIdiomas } from "@/app/api-endpoints/idioma";

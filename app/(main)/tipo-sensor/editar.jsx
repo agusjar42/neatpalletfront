@@ -28,7 +28,8 @@ const EditarTipoSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
 
     const validaciones = async () => {
         const validaNombre = tipoSensor.nombre === undefined || tipoSensor.nombre === "";
-        return (!validaNombre)
+        const validaOrden = tipoSensor.orden === undefined || tipoSensor.orden === null || tipoSensor.orden === "";
+        return (!validaNombre && !validaOrden)
     }
 
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {

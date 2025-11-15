@@ -22,6 +22,18 @@ const EditarDatosPais = ({ pais, setPais, estadoGuardando }) => {
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el pais' })}>
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={pais.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden del pais' })}
+                        onChange={(e) => setPais({ ...pais, orden: e.value })}
+                        className={`${(estadoGuardando && (pais.orden === "" || pais.orden === null || pais.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999}
+                        inputStyle={{ textAlign: 'right' }} />
+                </div>
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="paisNombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
                     <InputText value={pais.nombre}
                         placeholder={intl.formatMessage({ id: 'Nombre del pais' })}

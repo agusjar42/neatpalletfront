@@ -1,6 +1,7 @@
 import React from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { useIntl } from 'react-intl';
 
 const EditarDatosEnvioConfiguracionEmpresa = ({ envioConfiguracionEmpresa, setEnvioConfiguracionEmpresa, estadoGuardando }) => {
@@ -9,6 +10,18 @@ const EditarDatosEnvioConfiguracionEmpresa = ({ envioConfiguracionEmpresa, setEn
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para la configuración de empresa' })}>
             <div className="formgrid grid">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={envioConfiguracionEmpresa.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden de la configuración' })}
+                        onChange={(e) => setEnvioConfiguracionEmpresa({ ...envioConfiguracionEmpresa, orden: e.value })}
+                        className={`${(estadoGuardando && (envioConfiguracionEmpresa.orden === "" || envioConfiguracionEmpresa.orden === null || envioConfiguracionEmpresa.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999}
+                        inputStyle={{ textAlign: 'right' }} />
+                </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
                     <InputText value={envioConfiguracionEmpresa.nombre}

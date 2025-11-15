@@ -28,6 +28,18 @@ const EditarDatosEnvioSensor = ({ envioSensor, setEnvioSensor, estadoGuardando, 
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el sensor de envío' })}>
             <div className="formgrid grid">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={envioSensor.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden del sensor' })}
+                        onChange={(e) => setEnvioSensor({ ...envioSensor, orden: e.value })}
+                        className={`${(estadoGuardando && (envioSensor.orden === "" || envioSensor.orden === null || envioSensor.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999}
+                        inputStyle={{ textAlign: 'right' }} />
+                </div>
                 {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioSensor.envioId || ""}

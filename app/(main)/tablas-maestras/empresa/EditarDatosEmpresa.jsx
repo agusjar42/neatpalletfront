@@ -151,6 +151,18 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
             <Toast ref={toast} position="top-right" />
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="empresaOrden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+                    <InputNumber value={empresa.orden}
+                        placeholder={intl.formatMessage({ id: 'Orden de la empresa' })}
+                        onChange={(e) => setEmpresa({ ...empresa, orden: e.value })}
+                        className={`${(estadoGuardando && (empresa.orden === "" || empresa.orden === null || empresa.orden === undefined)) ? "p-invalid" : ""}`}
+                        mode="decimal"
+                        useGrouping={false}
+                        min={0}
+                        max={99999}
+                        inputStyle={{ textAlign: 'right' }} />
+                </div>
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="empresaCodigo"><b>{intl.formatMessage({ id: 'Código' })}*</b></label>
                     <InputText value={empresa.codigo}
                         placeholder={intl.formatMessage({ id: 'Código de la empresa' })}

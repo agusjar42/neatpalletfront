@@ -82,7 +82,8 @@ const EditarPalletParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
     const validaciones = async () => {
         const validaPalletId = palletParametro.palletId === undefined || palletParametro.palletId === "";
         const validaParametroId = palletParametro.parametroId === undefined || palletParametro.parametroId === "";
-        return (!validaPalletId && !validaParametroId)
+        const validaOrden = palletParametro.orden === undefined || palletParametro.orden === null || palletParametro.orden === "";
+        return (!validaPalletId && !validaParametroId && !validaOrden)
     }
 
     const guardarPalletParametro = async () => {

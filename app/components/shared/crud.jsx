@@ -5,7 +5,7 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { Toast } from "primereact/toast";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, GenerarGraficoDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
+import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, ImportarCSVDialog, GenerarGraficoDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 import { formatearFechaDate, formatearFechaHoraDate, formatearFechaLocal_a_toISOString, formatNumber, getUsuarioSesion } from "@/app/utility/Utils";
 import CodigoQR from "./codigo_qr";
 import { postEnviarQR } from "@/app/api-endpoints/plantilla_email";
@@ -59,6 +59,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     const [eliminarRegistroDialog, setEliminarRegistroDialog] = useState(false);
     const [descargarCSVDialog, setDescargarCSVDialog] = useState(false);
+    const [importarCSVDialog, setImportarCSVDialog] = useState(false);
     const [generarGraficoDialog, setGenerarGraficoDialog] = useState(false);
     const [mostarQRDialog, setMostarQRDialog] = useState(false);
     const [correoEnviarQR, setCorreoEnviarQR] = useState("");
@@ -671,6 +672,14 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setDescargarCSVDialog(false);
     };
 
+    const confirmarImportarArchivoCSV = () => {
+        setImportarCSVDialog(true);
+    };
+
+    const ocultarImportarCSVDialog = () => {
+        setImportarCSVDialog(false);
+    };
+
     const confirmarGenerarGrafico = async () => {
         // Cargar todos los registros sin límite para el gráfico
         const whereFiltro = {
@@ -771,6 +780,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         }
         if (botones.includes('descargarCSV')) {
             propiedadesHeader['generarCSV'] = confirmarDescargarArchivoCSV
+        }
+        if (botones.includes('importarCSV')) {
+            propiedadesHeader['importarCSV'] = confirmarImportarArchivoCSV
         }
         if (botones.includes('generarGrafico')) {
             propiedadesHeader['generarGrafico'] = confirmarGenerarGrafico
@@ -1244,6 +1256,21 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 header={intl.formatMessage({ id: 'Descargar archivo CSV' })}
                                 labelMostrados={intl.formatMessage({ id: 'Registros mostrados' })}
                                 labelTodos={intl.formatMessage({ id: 'Todos los registros' })}
+                            />
+                            {/* MODAL DE (IMPORTAR CSV) */}
+                            <ImportarCSVDialog
+                                visible={importarCSVDialog}
+                                onHide={ocultarImportarCSVDialog}
+                                header={intl.formatMessage({ id: 'Importar archivo CSV' })}
+                                labelSeleccionar={intl.formatMessage({ id: 'Seleccionar archivo' })}
+                                labelProcesar={intl.formatMessage({ id: 'Procesar archivo' })}
+                                empresaId={filtradoBase?.empresaId}
+                                onCSVProcessed={(results) => {
+                                    // Recargar los datos después del procesamiento exitoso
+                                    if (results.created > 0 || results.updated > 0) {
+                                        obtenerDatos();
+                                    }
+                                }}
                             />
                             {/* MODAL DE (GENERAR GRAFICO) */}
                             <GenerarGraficoDialog

@@ -5,7 +5,8 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from 'primereact/dropdown';
 import { TabView, TabPanel } from 'primereact/tabview';
-import React from "react";
+import { Toast } from "primereact/toast";
+import React, { useState, useRef } from "react";
 import { parse } from 'json2csv';
 import {  getUsuarioSesion } from "../../utility/Utils";
 import { useIntl } from 'react-intl'
@@ -143,7 +144,7 @@ const eliminarDialogFooter = (ocultarEliminarDialog, eliminar) => {
     );
 };
 
-const Header = ({ crearNuevo, generarCSV, generarGrafico, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
+const Header = ({ crearNuevo, generarCSV, importarCSV, generarGrafico, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
     operadorSeleccionado, setOperadorSeleccionado, listaOperadores,
 }) => {
     const intl = useIntl()
@@ -168,6 +169,17 @@ const Header = ({ crearNuevo, generarCSV, generarGrafico, mostrarQR, enviarCorre
                         icon="pi pi-download"
                         severity="success"
                         onClick={generarCSV}
+                        className="mr-2"
+                    />
+                )
+            }
+            {(importarCSV !== null && importarCSV !== undefined) &&     //Si no se envia la funcion de importarCSV, no muestra el boton
+                (
+                    <Button
+                        label={`${intl.formatMessage({ id: 'Importar' })} CSV`}
+                        icon="pi pi-upload"
+                        severity="warning"
+                        onClick={importarCSV}
                         className="mr-2"
                     />
                 )
@@ -450,6 +462,456 @@ const DescargarCSVDialog = ({
     );
 };
 
+const ImportarCSVDialog = ({
+    visible,
+    onHide,
+    header = 'Importar archivo CSV',
+    labelSeleccionar = 'Seleccionar archivo',
+    labelProcesar = 'Procesar archivo',
+    onCSVProcessed = null,
+    empresaId = null
+}) => {
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [csvData, setCsvData] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [processResults, setProcessResults] = useState({ created: 0, updated: 0, errors: [] });
+    const fileInputRef = useRef(null);
+    const toast = useRef(null);
+
+    // Función para parsear una línea de CSV a objeto Pallet
+    const parseCSVLineToPallet = (line, lineIndex) => {
+        try {
+            // Dividir la línea por comas, manejando comillas
+            const fields = line.split(',').map(field => field.trim().replace(/^"|"$/g, ''));
+            
+            if (fields.length < 4) {
+                throw new Error(`Línea ${lineIndex + 1}: No tiene suficientes columnas (mínimo 4: código, alias, modelo, medidas)`);
+            }
+
+            const palletData = {
+                empresaId: empresaId,
+                codigo: fields[0] || '',
+                alias: fields[1] || '',
+                modelo: fields[2] || '',
+                medidas: fields[3] || '',
+                periodoEnvioMail: fields[4] ? parseInt(fields[4]) || 24 : 24,
+                fechaImpresion: fields[5] || new Date().toISOString()
+            };
+
+            // Validaciones básicas
+            if (!palletData.codigo) {
+                throw new Error(`Línea ${lineIndex + 1}: Código es obligatorio`);
+            }
+            if (!palletData.alias) {
+                throw new Error(`Línea ${lineIndex + 1}: Alias es obligatorio`);
+            }
+            if (!empresaId) {
+                throw new Error(`Línea ${lineIndex + 1}: ID de empresa no proporcionado`);
+            }
+
+            return palletData;
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    // Función para validar si el archivo es CSV
+    const isCSVFile = (file) => {
+        // Verificar extensión
+        const fileName = file.name.toLowerCase();
+        const hasCSVExtension = fileName.endsWith('.csv');
+        
+        // Verificar tipo MIME (algunos navegadores pueden no detectarlo correctamente)
+        const hasCSVMimeType = file.type === 'text/csv' || 
+                               file.type === 'application/csv' || 
+                               file.type === 'text/plain' ||
+                               file.type === '';
+        
+        return hasCSVExtension && hasCSVMimeType;
+    };
+
+    // Función para leer y procesar el archivo CSV
+    const readCSVFile = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            
+            reader.onload = (e) => {
+                try {
+                    const text = e.target.result;
+                    const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
+                    resolve(lines);
+                } catch (error) {
+                    reject(new Error('Error al leer el archivo: ' + error.message));
+                }
+            };
+            
+            reader.onerror = () => {
+                reject(new Error('Error al leer el archivo'));
+            };
+            
+            reader.readAsText(file, 'UTF-8');
+        });
+    };
+
+    const handleFileSelect = (event) => {
+        const file = event.target.files[0];
+        
+        if (!file) {
+            setSelectedFile(null);
+            setErrorMessage('');
+            setCsvData([]);
+            return;
+        }
+
+        // Validar que sea un archivo CSV
+        if (!isCSVFile(file)) {
+            setErrorMessage('Por favor, seleccione un archivo CSV válido');
+            setSelectedFile(null);
+            setCsvData([]);
+            
+            // Mostrar toast de error
+            if (toast.current) {
+                toast.current.show({
+                    severity: 'error',
+                    summary: 'Error de archivo',
+                    detail: 'El archivo seleccionado no es un CSV válido',
+                    life: 3000
+                });
+            }
+            return;
+        }
+
+        // Validar tamaño del archivo (máximo 10MB)
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        if (file.size > maxSize) {
+            setErrorMessage('El archivo es demasiado grande. Máximo permitido: 10MB');
+            setSelectedFile(null);
+            setCsvData([]);
+            
+            if (toast.current) {
+                toast.current.show({
+                    severity: 'error',
+                    summary: 'Error de tamaño',
+                    detail: 'El archivo excede el tamaño máximo permitido (10MB)',
+                    life: 3000
+                });
+            }
+            return;
+        }
+
+        setSelectedFile(file);
+        setErrorMessage('');
+        setCsvData([]);
+    };
+
+    const handleFileUpload = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
+    const handleProcessFile = async () => {
+        if (!selectedFile) {
+            return;
+        }
+
+        if (!empresaId) {
+            setErrorMessage('ID de empresa no proporcionado');
+            if (toast.current) {
+                toast.current.show({
+                    severity: 'error',
+                    summary: 'Error de configuración',
+                    detail: 'ID de empresa no proporcionado',
+                    life: 3000
+                });
+            }
+            return;
+        }
+        
+        setIsProcessing(true);
+        setErrorMessage('');
+        setProcessResults({ created: 0, updated: 0, errors: [] });
+        
+        try {
+            // Importar la función upsert dinámicamente
+            const { upsertPalletFromCSV } = await import('@/app/api-endpoints/pallet');
+            
+            // Leer y procesar el archivo CSV
+            const lines = await readCSVFile(selectedFile);
+            
+            if (lines.length === 0) {
+                throw new Error('El archivo CSV está vacío');
+            }
+
+            // Guardar las líneas en el estado
+            setCsvData(lines);
+
+            let dataLines = lines;
+            let startIndex = 0;
+
+            // Verificar si la primera línea es un header y saltarla
+            const firstLine = lines[0].toLowerCase();
+            if (firstLine.includes('codigo') || firstLine.includes('alias') || 
+                firstLine.includes('empresa') || firstLine.includes('modelo')) {
+                startIndex = 1;
+                dataLines = lines.slice(1);
+            }
+
+            if (dataLines.length === 0) {
+                throw new Error('No hay datos para procesar (solo header encontrado)');
+            }
+
+            const results = { created: 0, updated: 0, errors: [] };
+
+            // Procesar cada línea del CSV
+            for (let i = 0; i < dataLines.length; i++) {
+                const line = dataLines[i];
+                const lineNumber = startIndex + i + 1;
+
+                try {
+                    // Convertir línea a objeto pallet
+                    const palletData = parseCSVLineToPallet(line, i + startIndex);
+                    
+                    // Enviar al backend para insertar o actualizar
+                    const result = await upsertPalletFromCSV(palletData);
+                    
+                    if (result.action === 'created') {
+                        results.created++;
+                    } else if (result.action === 'updated') {
+                        results.updated++;
+                    }
+
+                    console.log(`Línea ${lineNumber}: ${result.action} - ${palletData.codigo}`);
+                    
+                } catch (error) {
+                    const errorMsg = `Línea ${lineNumber}: ${error.message}`;
+                    results.errors.push(errorMsg);
+                    console.error(errorMsg, error);
+                }
+            }
+
+            setProcessResults(results);
+
+            // Mostrar mensaje de éxito
+            const totalProcessed = results.created + results.updated;
+            if (toast.current) {
+                if (results.errors.length === 0) {
+                    toast.current.show({
+                        severity: 'success',
+                        summary: 'Procesamiento completado',
+                        detail: `${totalProcessed} registros procesados: ${results.created} creados, ${results.updated} actualizados`,
+                        life: 5000
+                    });
+                } else {
+                    toast.current.show({
+                        severity: 'warn',
+                        summary: 'Procesamiento completado con errores',
+                        detail: `${totalProcessed} registros procesados, ${results.errors.length} errores`,
+                        life: 5000
+                    });
+                }
+            }
+
+            // Llamar callback si se proporciona
+            if (onCSVProcessed) {
+                onCSVProcessed(results);
+            }
+            
+        } catch (error) {
+            console.error('Error al procesar archivo:', error);
+            setErrorMessage(error.message);
+            setCsvData([]);
+            
+            if (toast.current) {
+                toast.current.show({
+                    severity: 'error',
+                    summary: 'Error de procesamiento',
+                    detail: error.message,
+                    life: 3000
+                });
+            }
+        } finally {
+            setIsProcessing(false);
+        }
+    };
+
+    const handleHide = () => {
+        setSelectedFile(null);
+        setIsProcessing(false);
+        setErrorMessage('');
+        setCsvData([]);
+        setProcessResults({ created: 0, updated: 0, errors: [] });
+        onHide();
+    };
+
+    const footer = (
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
+            <Button
+                label={labelSeleccionar}
+                icon="pi pi-upload"
+                text
+                style={{ whiteSpace: 'nowrap' }}
+                onClick={handleFileUpload}
+                disabled={isProcessing}
+            />
+            <Button
+                label={labelProcesar}
+                icon="pi pi-cog"
+                text
+                style={{ whiteSpace: 'nowrap' }}
+                onClick={handleProcessFile}
+                disabled={!selectedFile || isProcessing}
+                loading={isProcessing}
+            />
+        </div>
+    );
+
+    return (
+        <Dialog
+            visible={visible}
+            style={{ width: "500px" }}
+            header={header}
+            modal
+            footer={footer}
+            onHide={handleHide}
+        >
+            <Toast ref={toast} />
+            <div style={{ textAlign: 'center', padding: '20px' }}>
+                <input
+                    type="file"
+                    accept=".csv"
+                    onChange={handleFileSelect}
+                    ref={fileInputRef}
+                    style={{ display: 'none' }}
+                />
+                
+                {/* Mensaje de error */}
+                {errorMessage && (
+                    <div style={{ 
+                        backgroundColor: '#ffebee', 
+                        color: '#c62828', 
+                        padding: '10px', 
+                        borderRadius: '4px', 
+                        marginBottom: '15px',
+                        fontSize: '14px'
+                    }}>
+                        <i className="pi pi-exclamation-triangle" style={{ marginRight: '8px' }}></i>
+                        {errorMessage}
+                    </div>
+                )}
+
+                {/* Estado del archivo */}
+                {selectedFile ? (
+                    <div>
+                        <i className="pi pi-file" style={{ fontSize: '3rem', color: '#4caf50', marginBottom: '10px' }}></i>
+                        <p style={{ fontSize: '16px', margin: '10px 0' }}>
+                            Archivo seleccionado: <strong>{selectedFile.name}</strong>
+                        </p>
+                        <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
+                            Tamaño: {(selectedFile.size / 1024).toFixed(2)} KB
+                        </p>
+                        
+                        {/* Información del procesamiento */}
+                        {csvData.length > 0 && !isProcessing && (
+                            <div>
+                                <div style={{ 
+                                    backgroundColor: '#e8f5e8', 
+                                    color: '#2e7d32', 
+                                    padding: '10px', 
+                                    borderRadius: '4px', 
+                                    fontSize: '14px',
+                                    marginTop: '10px'
+                                }}>
+                                    <i className="pi pi-check-circle" style={{ marginRight: '8px' }}></i>
+                                    Archivo leído exitosamente: {csvData.length} líneas encontradas
+                                </div>
+                                
+                                {/* Resultados del procesamiento */}
+                                {(processResults.created > 0 || processResults.updated > 0 || processResults.errors.length > 0) && (
+                                    <div style={{ marginTop: '15px' }}>
+                                        <h4 style={{ margin: '0 0 10px 0', color: '#333' }}>Resultados del Procesamiento:</h4>
+                                        
+                                        {/* Estadísticas */}
+                                        <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '10px' }}>
+                                            <div style={{ textAlign: 'center' }}>
+                                                <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#4caf50' }}>
+                                                    {processResults.created}
+                                                </div>
+                                                <div style={{ fontSize: '12px', color: '#666' }}>Creados</div>
+                                            </div>
+                                            <div style={{ textAlign: 'center' }}>
+                                                <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2196f3' }}>
+                                                    {processResults.updated}
+                                                </div>
+                                                <div style={{ fontSize: '12px', color: '#666' }}>Actualizados</div>
+                                            </div>
+                                            <div style={{ textAlign: 'center' }}>
+                                                <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#f44336' }}>
+                                                    {processResults.errors.length}
+                                                </div>
+                                                <div style={{ fontSize: '12px', color: '#666' }}>Errores</div>
+                                            </div>
+                                        </div>
+                                        
+                                        {/* Lista de errores */}
+                                        {processResults.errors.length > 0 && (
+                                            <div style={{
+                                                backgroundColor: '#ffebee',
+                                                border: '1px solid #ffcdd2',
+                                                borderRadius: '4px',
+                                                padding: '10px',
+                                                marginTop: '10px',
+                                                textAlign: 'left',
+                                                maxHeight: '150px',
+                                                overflowY: 'auto'
+                                            }}>
+                                                <div style={{ fontWeight: 'bold', color: '#c62828', marginBottom: '5px' }}>
+                                                    Errores encontrados:
+                                                </div>
+                                                {processResults.errors.map((error, index) => (
+                                                    <div key={index} style={{ fontSize: '12px', color: '#c62828', marginBottom: '3px' }}>
+                                                        • {error}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div>
+                        <i className="pi pi-cloud-upload" style={{ fontSize: '3rem', color: '#ccc', marginBottom: '10px' }}></i>
+                        <p style={{ fontSize: '16px', color: '#666' }}>
+                            Seleccione un archivo CSV para procesar
+                        </p>
+                        <p style={{ fontSize: '12px', color: '#999', marginTop: '10px' }}>
+                            Formatos soportados: .csv (máximo 10MB)
+                        </p>
+                    </div>
+                )}
+
+                {/* Estado de procesamiento */}
+                {isProcessing && (
+                    <div style={{ 
+                        backgroundColor: '#fff3e0', 
+                        color: '#ef6c00', 
+                        padding: '10px', 
+                        borderRadius: '4px', 
+                        marginTop: '15px',
+                        fontSize: '14px'
+                    }}>
+                        <i className="pi pi-spinner pi-spin" style={{ marginRight: '8px' }}></i>
+                        Procesando archivo...
+                    </div>
+                )}
+            </div>
+        </Dialog>
+    );
+};
+
 const GenerarGraficoDialog = ({
     visible,
     onHide,
@@ -697,7 +1159,7 @@ export {
     comprobarImagen, manejarCambioImagen, templateGenerico, ErrorDetail,
     botonesDeAccionTemplate, eliminarDialogFooter, Header, dialogFooter,
     EliminarDialog, filtroActivoSnTemplate, opcionesActivoSnTemplate,
-    generarYDescargarCSV, prepararRegistrosParaCSV, DescargarCSVDialog,
+    generarYDescargarCSV, prepararRegistrosParaCSV, DescargarCSVDialog, ImportarCSVDialog,
     GenerarGraficoDialog, formatearBytes, esUrlImagen, getIdiomaDefecto, tieneUsuarioPermiso,
     obtenerTodosLosPermisos,
 

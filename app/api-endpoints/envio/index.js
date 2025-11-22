@@ -45,3 +45,23 @@ export const generarDatosFake = async (usuarioId, empresaId) => {
     const { data: dataEnvio } = await apiEnvioFakeData.envioFakeDataControllerGenerarDatosFake(usuarioId, empresaId);
     return dataEnvio;
 }
+
+export const getResumenEnvio = async (idEnvio) => {
+    const { data: dataResumenEnvio } = await apiEnvio.envioControllerResumenEnvio(idEnvio);
+    return dataResumenEnvio;
+}
+
+export const getResumenEnvioCount = async (idEnvio) => {
+    const { data: dataResumenEnvioContador } = await apiEnvio.envioControllerResumenEnvioCount(idEnvio);
+    return dataResumenEnvioContador;
+}
+
+export const getResumenEnvioPallet = async (idPallet) => {
+    const { data: dataResumenEnvioPallet } = await apiEnvio.envioControllerResumenEnvioPallet(idPallet);
+    return dataResumenEnvioPallet;
+}
+
+export const getResumenEnvioPalletCount = async (idPallet) => {
+    const { data: dataResumenEnvioPalletContador } = await apiEnvio.envioControllerResumenEnvioPalletCount(idPallet);
+    return dataResumenEnvioPalletContador;
+}

@@ -258,6 +258,16 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipo Transporte-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipo Transporte-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipo Transporte-Borrar' },
+                
+                // Resumen envio
+                { header: intl.formatMessage({ id: 'Resumen Envío' }), seccion: 'Resumen Envío' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Resumen Envío-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Resumen Envío-Ver' },
+                
+                // Resumen envió Pallet
+                { header: intl.formatMessage({ id: 'Resumen Envío Pallet' }), seccion: 'Resumen Envío Pallet' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Resumen Envío Pallet-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Resumen Envío Pallet-Ver' },
             ];
 
             // Obtenemos los roles

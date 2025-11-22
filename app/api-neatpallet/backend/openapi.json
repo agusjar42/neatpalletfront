@@ -6593,6 +6593,148 @@
         "operationId": "RefrescarTokenController.find"
       }
     },
+    "/resumen-envio/count": {
+      "get": {
+        "x-controller-name": "EnvioController",
+        "x-operation-name": "resumenEnvioCount",
+        "tags": [
+          "EnvioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resumen de envío count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "EnvioController.resumenEnvioCount"
+      }
+    },
+    "/resumen-envio/{id}": {
+      "get": {
+        "x-controller-name": "EnvioController",
+        "x-operation-name": "resumenEnvio",
+        "tags": [
+          "EnvioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resumen de envío con eventos y alarmas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "eventosGuardados": {
+                        "type": "number"
+                      },
+                      "eventosEnviados": {
+                        "type": "number"
+                      },
+                      "totalAlarmas": {
+                        "type": "number"
+                      },
+                      "bateriaActual": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EnvioController.resumenEnvio"
+      }
+    },
+    "/resumen-envio-pallet/count": {
+      "get": {
+        "x-controller-name": "EnvioController",
+        "x-operation-name": "resumenEnvioPalletCount",
+        "tags": [
+          "EnvioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resumen de envío pallet count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "EnvioController.resumenEnvioPalletCount"
+      }
+    },
+    "/resumen-envio-pallet/{id}": {
+      "get": {
+        "x-controller-name": "EnvioController",
+        "x-operation-name": "resumenEnvioPallet",
+        "tags": [
+          "EnvioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resumen de envío pallet con eventos y alarmas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "eventosGuardados": {
+                        "type": "number"
+                      },
+                      "eventosEnviados": {
+                        "type": "number"
+                      },
+                      "totalAlarmas": {
+                        "type": "number"
+                      },
+                      "bateriaActual": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EnvioController.resumenEnvioPallet"
+      }
+    },
     "/roles/count": {
       "get": {
         "x-controller-name": "RolController",
@@ -10283,6 +10425,9 @@
           "empresaId": {
             "type": "number"
           },
+          "numero": {
+            "type": "string"
+          },
           "origenRuta": {
             "type": "string"
           },
@@ -13394,6 +13539,9 @@
           },
           "orden": {
             "type": "number"
+          },
+          "cantidad": {
+            "type": "number"
           }
         },
         "additionalProperties": false
@@ -13466,6 +13614,9 @@
             "format": "date-time"
           },
           "orden": {
+            "type": "number"
+          },
+          "cantidad": {
             "type": "number"
           }
         },
@@ -13543,6 +13694,9 @@
             "format": "date-time"
           },
           "orden": {
+            "type": "number"
+          },
+          "cantidad": {
             "type": "number"
           },
           "envio": {
@@ -13624,6 +13778,9 @@
             "format": "date-time"
           },
           "orden": {
+            "type": "number"
+          },
+          "cantidad": {
             "type": "number"
           }
         },
@@ -13966,6 +14123,9 @@
           "empresaId": {
             "type": "number"
           },
+          "numero": {
+            "type": "string"
+          },
           "origenRuta": {
             "type": "string"
           },
@@ -14014,6 +14174,9 @@
         "properties": {
           "empresaId": {
             "type": "number"
+          },
+          "numero": {
+            "type": "string"
           },
           "origenRuta": {
             "type": "string"
@@ -14113,6 +14276,9 @@
           },
           "empresaId": {
             "type": "number"
+          },
+          "numero": {
+            "type": "string"
           },
           "origenRuta": {
             "type": "string"
@@ -17541,6 +17707,9 @@
                   },
                   "orden": {
                     "type": "boolean"
+                  },
+                  "cantidad": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -17569,7 +17738,8 @@
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "orden"
+                    "orden",
+                    "cantidad"
                   ],
                   "example": "id"
                 },
@@ -17695,6 +17865,9 @@
                   },
                   "orden": {
                     "type": "boolean"
+                  },
+                  "cantidad": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -17723,7 +17896,8 @@
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "orden"
+                    "orden",
+                    "cantidad"
                   ],
                   "example": "id"
                 },
@@ -17867,6 +18041,9 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "numero": {
+                    "type": "boolean"
+                  },
                   "origenRuta": {
                     "type": "boolean"
                   },
@@ -17913,6 +18090,7 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "numero",
                     "origenRuta",
                     "fechaLlegada",
                     "gpsRutaOrigen",
@@ -17997,6 +18175,9 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "numero": {
+                    "type": "boolean"
+                  },
                   "origenRuta": {
                     "type": "boolean"
                   },
@@ -18043,6 +18224,7 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "numero",
                     "origenRuta",
                     "fechaLlegada",
                     "gpsRutaOrigen",

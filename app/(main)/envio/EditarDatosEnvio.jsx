@@ -212,7 +212,16 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         max={99999} 
                         inputStyle={{ textAlign: 'right' }}/>
                 </div>
-                {/* Primera fila */}
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="numero"><b>{intl.formatMessage({ id: 'Numero' })}*</b></label>
+                    <InputText 
+                        value={envio.numero || ""}
+                        placeholder={intl.formatMessage({ id: 'Ingrese el numero' })}
+                        onChange={(e) => setEnvio({ ...envio, numero: e.target.value })}
+                        className={`${(estadoGuardando && (envio.numero === "" || envio.numero === undefined)) ? "p-invalid" : ""}`}
+                        maxLength={50} 
+                    />
+                </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="origenRuta"><b>{intl.formatMessage({ id: 'Origen de la ruta' })}*</b></label>
                     <InputText 
@@ -261,7 +270,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                 {/* Tercera fila */}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="fechaSalida"><b>{intl.formatMessage({ id: 'Fecha de salida' })}*</b></label>
-                    <InputText type="date"
+                    <InputText type="datetime-local"
                         value={envio.fechaSalida}
                         placeholder={intl.formatMessage({ id: 'Seleccione fecha y hora de salida' })}
                         onChange={(e) => setEnvio({ ...envio, fechaSalida: e.target.value })}
@@ -273,7 +282,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
 
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="fechaLlegada"><b>{intl.formatMessage({ id: 'Fecha de llegada' })}*</b></label>
-                    <InputText type="date"
+                    <InputText type="datetime-local"
                         value={envio.fechaLlegada}
                         placeholder={intl.formatMessage({ id: 'Seleccione fecha y hora de llegada' })}
                         onChange={(e) => setEnvio({ ...envio, fechaLlegada: e.target.value })}
@@ -602,6 +611,51 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                 <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
                                 <p className="text-gray-600">
                                     {intl.formatMessage({ id: 'Debe guardar el envío primero para poder añadir sensores' })}
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                </TabPanel>
+                
+                <TabPanel header={intl.formatMessage({ id: 'Resumen Envío' })}>
+                    <div>
+                        {/* Solo mostrar la tabla de resumen si el envío ya está creado */}
+                        {envio.id ? (
+                            <>
+                                {/* Bocadillo de información */}
+                                <div className="p-mt-3">
+                                    <div
+                                        className="flex align-items-center bg-green-100 border-round p-3 w-full"
+                                    >
+                                        <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                        <span>
+                                            {intl.formatMessage({ id: 'Resumen general del envío mostrando eventos guardados, eventos enviados, total de alarmas y batería actual.' })}
+                                        </span>
+                                    </div>
+                                </div>
+                                <Crud
+                                    headerCrud={intl.formatMessage({ id: 'Resumen del Envío' })}
+                                    getRegistros={(filtro) => import("@/app/api-endpoints/envio").then(m => m.getResumenEnvio(envio.id))}
+                                    getRegistrosCount={(filtro) => import("@/app/api-endpoints/envio").then(m => m.getResumenEnvioCount(envio.id))}
+                                    botones={['ver', 'descargarCSV']}
+                                    controlador={"Resumen Envio"}
+                                    editarComponente={null}
+                                    columnas={[
+                                        { campo: 'eventosGuardados', header: intl.formatMessage({ id: 'Eventos Guardados' }), tipo: 'number' },
+                                        { campo: 'eventosEnviados', header: intl.formatMessage({ id: 'Eventos Enviados' }), tipo: 'number' },
+                                        { campo: 'totalAlarmas', header: intl.formatMessage({ id: 'Total Alarmas' }), tipo: 'number' },
+                                        { campo: 'bateriaActual', header: intl.formatMessage({ id: 'Batería Actual' }), tipo: 'number' }
+                                    ]}
+                                    filtradoBase={{envioId: envio.id}}
+                                    cargarDatosInicialmente={true}
+                                    soloLectura={true}
+                                />
+                            </>
+                        ) : (
+                            <div className="text-center p-4">
+                                <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+                                <p className="text-gray-600">
+                                    {intl.formatMessage({ id: 'Debe guardar el envío primero para poder ver el resumen' })}
                                 </p>
                             </div>
                         )}

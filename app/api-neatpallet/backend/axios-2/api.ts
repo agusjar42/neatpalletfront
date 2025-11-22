@@ -610,6 +610,12 @@ export interface Envio {
      * @type {string}
      * @memberof Envio
      */
+    'numero'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Envio
+     */
     'origenRuta'?: string;
     /**
      * 
@@ -1568,6 +1574,12 @@ export interface EnvioContenido {
      * @memberof EnvioContenido
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenido
+     */
+    'cantidad'?: number;
 }
 /**
  * 
@@ -2168,6 +2180,12 @@ export interface EnvioContenidoPartial {
      * @memberof EnvioContenidoPartial
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPartial
+     */
+    'cantidad'?: number;
 }
 /**
  * 
@@ -2344,6 +2362,12 @@ export interface EnvioContenidoWithRelations {
      * @memberof EnvioContenidoWithRelations
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'cantidad'?: number;
     /**
      * 
      * @type {EnvioWithRelations}
@@ -3768,6 +3792,12 @@ export interface EnvioPartial {
      * @type {string}
      * @memberof EnvioPartial
      */
+    'numero'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPartial
+     */
     'origenRuta'?: string;
     /**
      * 
@@ -4650,6 +4680,12 @@ export interface EnvioWithRelations {
      * @type {string}
      * @memberof EnvioWithRelations
      */
+    'numero'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioWithRelations
+     */
     'origenRuta'?: string;
     /**
      * 
@@ -5194,28 +5230,28 @@ export interface InlineObject9 {
 export interface InlineResponse200 {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineResponse200
      */
-    'accessToken'?: string;
+    'eventosGuardados'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineResponse200
      */
-    'expiresIn'?: string;
+    'eventosEnviados'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineResponse200
      */
-    'refreshToken'?: string;
+    'totalAlarmas'?: number;
     /**
      * 
-     * @type {Usuario}
+     * @type {number}
      * @memberof InlineResponse200
      */
-    'userData'?: Usuario;
+    'bateriaActual'?: number;
 }
 /**
  * 
@@ -5225,14 +5261,45 @@ export interface InlineResponse200 {
 export interface InlineResponse2001 {
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof InlineResponse2001
+     */
+    'accessToken'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2001
+     */
+    'expiresIn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2001
+     */
+    'refreshToken'?: string;
+    /**
+     * 
+     * @type {Usuario}
+     * @memberof InlineResponse2001
+     */
+    'userData'?: Usuario;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse2002
+ */
+export interface InlineResponse2002 {
+    /**
+     * 
+     * @type {object}
+     * @memberof InlineResponse2002
      */
     'user'?: object;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse2001
+     * @memberof InlineResponse2002
      */
     'token'?: string;
 }
@@ -5805,6 +5872,12 @@ export interface NewEnvio {
      * @type {string}
      * @memberof NewEnvio
      */
+    'numero'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvio
+     */
     'origenRuta'?: string;
     /**
      * 
@@ -6115,6 +6188,12 @@ export interface NewEnvioContenido {
      * @memberof NewEnvioContenido
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenido
+     */
+    'cantidad'?: number;
 }
 /**
  * (tsType: Omit<EnvioContenidoPallet, \'id\'>, schemaOptions: { title: \'NewEnvioContenidoPallet\', exclude: [ \'id\' ] })
@@ -15486,6 +15565,146 @@ export const EnvioControllerApiAxiosParamCreator = function (configuration?: Con
         },
         /**
          * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioControllerResumenEnvio: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioControllerResumenEnvio', 'id', id)
+            const localVarPath = `/resumen-envio/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioControllerResumenEnvioCount: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/resumen-envio/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioControllerResumenEnvioPallet: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioControllerResumenEnvioPallet', 'id', id)
+            const localVarPath = `/resumen-envio-pallet/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioControllerResumenEnvioPalletCount: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/resumen-envio-pallet/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {EnvioPartial} [envioPartial] 
          * @param {*} [options] Override http request option.
@@ -15661,6 +15880,44 @@ export const EnvioControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioControllerResumenEnvio(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse200>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioControllerResumenEnvio(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioControllerResumenEnvioCount(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioControllerResumenEnvioCount(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioControllerResumenEnvioPallet(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse200>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioControllerResumenEnvioPallet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioControllerResumenEnvioPalletCount(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioControllerResumenEnvioPalletCount(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {EnvioPartial} [envioPartial] 
          * @param {*} [options] Override http request option.
@@ -15764,6 +16021,40 @@ export const EnvioControllerApiFactory = function (configuration?: Configuration
          */
         envioControllerReplaceById(id: number, envio?: Envio, options?: any): AxiosPromise<any> {
             return localVarFp.envioControllerReplaceById(id, envio, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioControllerResumenEnvio(id: number, options?: any): AxiosPromise<Array<InlineResponse200>> {
+            return localVarFp.envioControllerResumenEnvio(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioControllerResumenEnvioCount(options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioControllerResumenEnvioCount(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioControllerResumenEnvioPallet(id: number, options?: any): AxiosPromise<Array<InlineResponse200>> {
+            return localVarFp.envioControllerResumenEnvioPallet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioControllerResumenEnvioPalletCount(options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioControllerResumenEnvioPalletCount(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -15883,6 +16174,48 @@ export class EnvioControllerApi extends BaseAPI {
      */
     public envioControllerReplaceById(id: number, envio?: Envio, options?: AxiosRequestConfig) {
         return EnvioControllerApiFp(this.configuration).envioControllerReplaceById(id, envio, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioControllerApi
+     */
+    public envioControllerResumenEnvio(id: number, options?: AxiosRequestConfig) {
+        return EnvioControllerApiFp(this.configuration).envioControllerResumenEnvio(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioControllerApi
+     */
+    public envioControllerResumenEnvioCount(options?: AxiosRequestConfig) {
+        return EnvioControllerApiFp(this.configuration).envioControllerResumenEnvioCount(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioControllerApi
+     */
+    public envioControllerResumenEnvioPallet(id: number, options?: AxiosRequestConfig) {
+        return EnvioControllerApiFp(this.configuration).envioControllerResumenEnvioPallet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioControllerApi
+     */
+    public envioControllerResumenEnvioPalletCount(options?: AxiosRequestConfig) {
+        return EnvioControllerApiFp(this.configuration).envioControllerResumenEnvioPalletCount(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -30603,7 +30936,7 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerLogin(inlineObject7: InlineObject7, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
+        async usuariosControllerLogin(inlineObject7: InlineObject7, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerLogin(inlineObject7, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -30623,7 +30956,7 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerRegister(inlineObject9?: InlineObject9, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
+        async usuariosControllerRegister(inlineObject9?: InlineObject9, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRegister(inlineObject9, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -30763,7 +31096,7 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerLogin(inlineObject7: InlineObject7, options?: any): AxiosPromise<InlineResponse200> {
+        usuariosControllerLogin(inlineObject7: InlineObject7, options?: any): AxiosPromise<InlineResponse2001> {
             return localVarFp.usuariosControllerLogin(inlineObject7, options).then((request) => request(axios, basePath));
         },
         /**
@@ -30781,7 +31114,7 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRegister(inlineObject9?: InlineObject9, options?: any): AxiosPromise<InlineResponse2001> {
+        usuariosControllerRegister(inlineObject9?: InlineObject9, options?: any): AxiosPromise<InlineResponse2002> {
             return localVarFp.usuariosControllerRegister(inlineObject9, options).then((request) => request(axios, basePath));
         },
         /**

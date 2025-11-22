@@ -50,6 +50,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
         { campo: 'producto', header: intl.formatMessage({ id: 'Producto' }), tipo: 'string' },
         { campo: 'referencia', header: intl.formatMessage({ id: 'Referencia' }), tipo: 'string' },
         { campo: 'pesoKgs', header: intl.formatMessage({ id: 'Peso (Kg)' }), tipo: 'number' },
+        { campo: 'cantidad', header: intl.formatMessage({ id: 'Cantidad' }), tipo: 'number' },
         { campo: 'pesoTotal', header: intl.formatMessage({ id: 'Peso Total (Kg)' }), tipo: 'number' },
         { campo: 'medidas', header: intl.formatMessage({ id: 'Medidas' }), tipo: 'string' },
     ];

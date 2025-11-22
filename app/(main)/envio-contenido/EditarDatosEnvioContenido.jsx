@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
@@ -23,6 +23,20 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         label: `${envio.id} - ${envio.origenRuta || 'Sin ruta'}`,
         value: envio.id
     }));
+
+    // Efecto para calcular el peso total automáticamente
+    useEffect(() => {
+        const peso = envioContenido.pesoKgs || 0;
+        const cantidad = envioContenido.cantidad || 0;
+        const pesoTotalCalculado = peso * cantidad;
+        
+        if (pesoTotalCalculado !== envioContenido.pesoTotal) {
+            setEnvioContenido(prev => ({
+                ...prev,
+                pesoTotal: pesoTotalCalculado
+            }));
+        }
+    }, [envioContenido.pesoKgs, envioContenido.cantidad]);
 
 
     const onSelectFotoProducto = async (e) => {
@@ -172,12 +186,26 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         inputStyle={{ textAlign: 'right' }} />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="pesoTotal">{intl.formatMessage({ id: 'Peso Total (Kg)' })}</label>
-                    <InputNumber value={envioContenido.pesoTotal}
-                        placeholder={intl.formatMessage({ id: 'Peso total en kilogramos' })}
-                        onValueChange={(e) => setEnvioContenido({ ...envioContenido, pesoTotal: e.value })}
-                        minFractionDigits={2} maxFractionDigits={2} min={0}
+                    <label htmlFor="cantidad">{intl.formatMessage({ id: 'Cantidad' })}</label>
+                    <InputNumber value={envioContenido.cantidad || 0}
+                        placeholder={intl.formatMessage({ id: 'Cantidad del producto' })}
+                        onValueChange={(e) => setEnvioContenido({ ...envioContenido, cantidad: e.value })}
+                        minFractionDigits={0} maxFractionDigits={0} min={0}
                         inputStyle={{ textAlign: 'right' }} />
+                </div>
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="pesoTotal">{intl.formatMessage({ id: 'Peso Total (Kg)' })}</label>
+                    <InputNumber 
+                        value={envioContenido.pesoTotal || 0}
+                        placeholder={intl.formatMessage({ id: 'Peso total calculado automáticamente' })}
+                        minFractionDigits={2} 
+                        maxFractionDigits={2} 
+                        min={0}
+                        disabled
+                        inputStyle={{ textAlign: 'right', backgroundColor: '#f8f9fa' }} 
+                        tooltip={intl.formatMessage({ id: 'Campo calculado automáticamente: Peso × Cantidad' })}
+                        tooltipOptions={{ position: 'top' }}
+                    />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="medidas">{intl.formatMessage({ id: 'Medidas' })}</label>

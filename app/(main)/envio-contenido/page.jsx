@@ -12,6 +12,7 @@ const EnvioContenido = () => {
         { campo: 'producto', header: intl.formatMessage({ id: 'Producto' }), tipo: 'string' },
         { campo: 'referencia', header: intl.formatMessage({ id: 'Referencia' }), tipo: 'string' },
         { campo: 'pesoKgs', header: intl.formatMessage({ id: 'Peso (Kg)' }), tipo: 'number' },
+        { campo: 'cantidad', header: intl.formatMessage({ id: 'Cantidad' }), tipo: 'number' },
         { campo: 'pesoTotal', header: intl.formatMessage({ id: 'Peso Total (Kg)' }), tipo: 'number' },
     ]
 
@@ -24,6 +25,7 @@ const EnvioContenido = () => {
                 [intl.formatMessage({ id: 'Producto' })]: registro.producto,
                 [intl.formatMessage({ id: 'Referencia' })]: registro.referencia,
                 [intl.formatMessage({ id: 'Peso (Kg)' })]: registro.pesoKgs,
+                [intl.formatMessage({ id: 'Cantidad' })]: registro.cantidad,
                 [intl.formatMessage({ id: 'Peso Total (Kg)' })]: registro.pesoTotal,
             };
         });

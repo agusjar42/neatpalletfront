@@ -39,7 +39,7 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                 </div>)}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="fecha">{intl.formatMessage({ id: 'Fecha' })}</label>
-                    <InputText type="date"
+                    <InputText type="datetime-local"
                     value={envioParada.fecha}
                         placeholder={intl.formatMessage({ id: 'Fecha de la parada' })}
                         onChange={(e) => setEnvioParada({ ...envioParada, fecha: e.target.value })}

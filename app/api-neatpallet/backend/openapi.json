@@ -195,6 +195,309 @@
         "operationId": "TraduccionController.buscarTraduccion"
       }
     },
+    "/clientes/count": {
+      "get": {
+        "x-controller-name": "ClienteController",
+        "x-operation-name": "count",
+        "tags": [
+          "ClienteController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Cliente.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Cliente>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ClienteController.count"
+      }
+    },
+    "/clientes/{id}": {
+      "put": {
+        "x-controller-name": "ClienteController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "ClienteController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Cliente PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cliente"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ClienteController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "ClienteController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "ClienteController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Cliente PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientePartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ClienteController.updateById"
+      },
+      "get": {
+        "x-controller-name": "ClienteController",
+        "x-operation-name": "findById",
+        "tags": [
+          "ClienteController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ClienteController.findById"
+      },
+      "delete": {
+        "x-controller-name": "ClienteController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "ClienteController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Cliente DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ClienteController.deleteById"
+      }
+    },
+    "/clientes": {
+      "post": {
+        "x-controller-name": "ClienteController",
+        "x-operation-name": "create",
+        "tags": [
+          "ClienteController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCliente"
+              }
+            }
+          }
+        },
+        "operationId": "ClienteController.create"
+      },
+      "patch": {
+        "x-controller-name": "ClienteController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "ClienteController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Cliente.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Cliente>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientePartial"
+              }
+            }
+          }
+        },
+        "operationId": "ClienteController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "ClienteController",
+        "x-operation-name": "find",
+        "tags": [
+          "ClienteController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Cliente model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClienteWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ClienteController.find"
+      }
+    },
     "/compruebaImagen/{imagenUrl}": {
       "get": {
         "x-controller-name": "CompruebaImagenController",
@@ -4522,6 +4825,612 @@
           }
         ],
         "operationId": "LogUsuarioController.find"
+      }
+    },
+    "/lugar-paradas/count": {
+      "get": {
+        "x-controller-name": "LugarParadaController",
+        "x-operation-name": "count",
+        "tags": [
+          "LugarParadaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LugarParada model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "LugarParada.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<LugarParada>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "LugarParadaController.count"
+      }
+    },
+    "/lugar-paradas/{id}": {
+      "put": {
+        "x-controller-name": "LugarParadaController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "LugarParadaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "LugarParada PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LugarParada"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "LugarParadaController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "LugarParadaController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "LugarParadaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "LugarParada PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LugarParadaPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "LugarParadaController.updateById"
+      },
+      "get": {
+        "x-controller-name": "LugarParadaController",
+        "x-operation-name": "findById",
+        "tags": [
+          "LugarParadaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LugarParada model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LugarParadaWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LugarParada.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "LugarParadaController.findById"
+      },
+      "delete": {
+        "x-controller-name": "LugarParadaController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "LugarParadaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "LugarParada DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "LugarParadaController.deleteById"
+      }
+    },
+    "/lugar-paradas": {
+      "post": {
+        "x-controller-name": "LugarParadaController",
+        "x-operation-name": "create",
+        "tags": [
+          "LugarParadaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LugarParada model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LugarParada"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewLugarParada"
+              }
+            }
+          }
+        },
+        "operationId": "LugarParadaController.create"
+      },
+      "patch": {
+        "x-controller-name": "LugarParadaController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "LugarParadaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LugarParada PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "LugarParada.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<LugarParada>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LugarParadaPartial"
+              }
+            }
+          }
+        },
+        "operationId": "LugarParadaController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "LugarParadaController",
+        "x-operation-name": "find",
+        "tags": [
+          "LugarParadaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of LugarParada model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LugarParadaWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LugarParada.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "LugarParadaController.find"
+      }
+    },
+    "/operarios/count": {
+      "get": {
+        "x-controller-name": "OperarioController",
+        "x-operation-name": "count",
+        "tags": [
+          "OperarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operario model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Operario.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Operario>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "OperarioController.count"
+      }
+    },
+    "/operarios/{id}": {
+      "put": {
+        "x-controller-name": "OperarioController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "OperarioController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Operario PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Operario"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "OperarioController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "OperarioController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "OperarioController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Operario PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OperarioPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "OperarioController.updateById"
+      },
+      "get": {
+        "x-controller-name": "OperarioController",
+        "x-operation-name": "findById",
+        "tags": [
+          "OperarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operario model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperarioWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operario.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "OperarioController.findById"
+      },
+      "delete": {
+        "x-controller-name": "OperarioController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "OperarioController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Operario DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "OperarioController.deleteById"
+      }
+    },
+    "/operarios": {
+      "post": {
+        "x-controller-name": "OperarioController",
+        "x-operation-name": "create",
+        "tags": [
+          "OperarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operario model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operario"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOperario"
+              }
+            }
+          }
+        },
+        "operationId": "OperarioController.create"
+      },
+      "patch": {
+        "x-controller-name": "OperarioController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "OperarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operario PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Operario.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Operario>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OperarioPartial"
+              }
+            }
+          }
+        },
+        "operationId": "OperarioController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "OperarioController",
+        "x-operation-name": "find",
+        "tags": [
+          "OperarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Operario model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OperarioWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operario.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "OperarioController.find"
       }
     },
     "/paises/count": {
@@ -11455,8 +12364,80 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<RefrescarToken>"
       },
-      "Producto": {
-        "title": "Producto",
+      "Empresa": {
+        "title": "Empresa",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "tiempoInactividad": {
+            "type": "number",
+            "nullable": false
+          },
+          "imagen": {
+            "type": "string",
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "usuCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "Cliente": {
+        "title": "Cliente",
         "type": "object",
         "properties": {
           "id": {
@@ -11471,6 +12452,14 @@
             "type": "string",
             "nullable": true
           },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "mail": {
+            "type": "string",
+            "nullable": true
+          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -11488,16 +12477,22 @@
           "usuModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
           }
         },
         "additionalProperties": false
       },
-      "NewProducto": {
-        "title": "NewProducto",
+      "Producto": {
+        "title": "Producto",
         "type": "object",
-        "description": "(tsType: Omit<Producto, 'id'>, schemaOptions: { title: 'NewProducto', exclude: [ 'id' ] })",
         "properties": {
-          "empresaId": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "clienteId": {
             "type": "number",
             "nullable": false
           },
@@ -11522,10 +12517,101 @@
           "usuModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewProducto": {
+        "title": "NewProducto",
+        "type": "object",
+        "description": "(tsType: Omit<Producto, 'id'>, schemaOptions: { title: 'NewProducto', exclude: [ 'id' ] })",
+        "properties": {
+          "clienteId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
           }
         },
         "additionalProperties": false,
         "x-typescript-type": "Omit<Producto, 'id'>"
+      },
+      "ClienteWithRelations": {
+        "title": "ClienteWithRelations",
+        "type": "object",
+        "description": "(tsType: ClienteWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "mail": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "foreignKey": {}
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "ClienteWithRelations"
       },
       "ProductoWithRelations": {
         "title": "ProductoWithRelations",
@@ -11536,7 +12622,7 @@
             "type": "number",
             "nullable": false
           },
-          "empresaId": {
+          "clienteId": {
             "type": "number",
             "nullable": false
           },
@@ -11561,7 +12647,11 @@
           "usuModificacion": {
             "type": "number",
             "nullable": true
-          }
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          },
+          "foreignKey": {}
         },
         "additionalProperties": false,
         "x-typescript-type": "ProductoWithRelations"
@@ -11575,7 +12665,7 @@
             "type": "number",
             "nullable": false
           },
-          "empresaId": {
+          "clienteId": {
             "type": "number",
             "nullable": false
           },
@@ -11600,6 +12690,9 @@
           "usuModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
           }
         },
         "additionalProperties": false,
@@ -12834,6 +13927,396 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<Pais>"
+      },
+      "Operario": {
+        "title": "Operario",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "clienteId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewOperario": {
+        "title": "NewOperario",
+        "type": "object",
+        "description": "(tsType: Omit<Operario, 'id'>, schemaOptions: { title: 'NewOperario', exclude: [ 'id' ] })",
+        "properties": {
+          "clienteId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Operario, 'id'>"
+      },
+      "OperarioWithRelations": {
+        "title": "OperarioWithRelations",
+        "type": "object",
+        "description": "(tsType: OperarioWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "clienteId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          },
+          "foreignKey": {}
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "OperarioWithRelations"
+      },
+      "OperarioPartial": {
+        "title": "OperarioPartial",
+        "type": "object",
+        "description": "(tsType: Partial<Operario>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "clienteId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Operario>"
+      },
+      "LugarParada": {
+        "title": "LugarParada",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "clienteId": {
+            "type": "number",
+            "nullable": false
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccionGps": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewLugarParada": {
+        "title": "NewLugarParada",
+        "type": "object",
+        "description": "(tsType: Omit<LugarParada, 'id'>, schemaOptions: { title: 'NewLugarParada', exclude: [ 'id' ] })",
+        "properties": {
+          "clienteId": {
+            "type": "number",
+            "nullable": false
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccionGps": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<LugarParada, 'id'>"
+      },
+      "LugarParadaWithRelations": {
+        "title": "LugarParadaWithRelations",
+        "type": "object",
+        "description": "(tsType: LugarParadaWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "clienteId": {
+            "type": "number",
+            "nullable": false
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccionGps": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          },
+          "foreignKey": {}
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "LugarParadaWithRelations"
+      },
+      "LugarParadaPartial": {
+        "title": "LugarParadaPartial",
+        "type": "object",
+        "description": "(tsType: Partial<LugarParada>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "clienteId": {
+            "type": "number",
+            "nullable": false
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccionGps": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<LugarParada>"
       },
       "LogUsuario": {
         "title": "LogUsuario",
@@ -15071,35 +16554,24 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<EnvioContenidoPallet>"
       },
-      "Empresa": {
-        "title": "Empresa",
+      "NewCliente": {
+        "title": "NewCliente",
         "type": "object",
+        "description": "(tsType: Omit<Cliente, 'id'>, schemaOptions: { title: 'NewCliente', exclude: [ 'id' ] })",
         "properties": {
-          "id": {
+          "empresaId": {
             "type": "number",
             "nullable": false
-          },
-          "codigo": {
-            "type": "string",
-            "nullable": true
           },
           "nombre": {
             "type": "string",
             "nullable": true
           },
-          "descripcion": {
+          "telefono": {
             "type": "string",
             "nullable": true
           },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
+          "mail": {
             "type": "string",
             "nullable": true
           },
@@ -15115,33 +16587,68 @@
           },
           "usuCreacion": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "usuModificacion": {
             "type": "number",
             "nullable": true
           },
-          "tiempoInactividad": {
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Cliente, 'id'>"
+      },
+      "ClientePartial": {
+        "title": "ClientePartial",
+        "type": "object",
+        "description": "(tsType: Partial<Cliente>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
             "type": "number",
             "nullable": false
           },
-          "imagen": {
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
             "type": "string",
             "nullable": true
           },
-          "logo": {
+          "telefono": {
             "type": "string",
             "nullable": true
           },
-          "orden": {
+          "mail": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
             "type": "number",
             "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
           }
         },
-        "required": [
-          "usuCreacion"
-        ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Cliente>"
       },
       "loopback.Count": {
         "type": "object",
@@ -15152,6 +16659,305 @@
             "type": "number"
           }
         }
+      },
+      "Cliente.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "Cliente.ScopeFilter"
+      },
+      "Cliente.IncludeFilter.Items": {
+        "title": "Cliente.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "empresa"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Cliente.ScopeFilter"
+          }
+        }
+      },
+      "Cliente.Filter": {
+        "type": "object",
+        "title": "Cliente.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "telefono": {
+                    "type": "boolean"
+                  },
+                  "mail": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "empresa": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "telefono",
+                    "mail",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "empresa"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Cliente.Fields"
+          },
+          "include": {
+            "title": "Cliente.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Cliente.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Cliente>"
+      },
+      "Cliente.Filter1": {
+        "type": "object",
+        "title": "Cliente.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "Cliente.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "telefono": {
+                    "type": "boolean"
+                  },
+                  "mail": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "empresa": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "telefono",
+                    "mail",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "empresa"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Cliente.Fields"
+          },
+          "include": {
+            "title": "Cliente.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Cliente.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Cliente>"
       },
       "Empresa1": {
         "type": "object",
@@ -19245,6 +21051,604 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<LogUsuario>"
       },
+      "LugarParada.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "LugarParada.ScopeFilter"
+      },
+      "LugarParada.IncludeFilter.Items": {
+        "title": "LugarParada.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "cliente"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/LugarParada.ScopeFilter"
+          }
+        }
+      },
+      "LugarParada.Filter": {
+        "type": "object",
+        "title": "LugarParada.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "clienteId": {
+                    "type": "boolean"
+                  },
+                  "direccion": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "direccionGps": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "cliente": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "clienteId",
+                    "direccion",
+                    "nombre",
+                    "direccionGps",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "cliente"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "LugarParada.Fields"
+          },
+          "include": {
+            "title": "LugarParada.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/LugarParada.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<LugarParada>"
+      },
+      "LugarParada.Filter1": {
+        "type": "object",
+        "title": "LugarParada.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "LugarParada.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "clienteId": {
+                    "type": "boolean"
+                  },
+                  "direccion": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "direccionGps": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "cliente": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "clienteId",
+                    "direccion",
+                    "nombre",
+                    "direccionGps",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "cliente"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "LugarParada.Fields"
+          },
+          "include": {
+            "title": "LugarParada.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/LugarParada.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<LugarParada>"
+      },
+      "Operario.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "Operario.ScopeFilter"
+      },
+      "Operario.IncludeFilter.Items": {
+        "title": "Operario.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "cliente"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Operario.ScopeFilter"
+          }
+        }
+      },
+      "Operario.Filter": {
+        "type": "object",
+        "title": "Operario.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "clienteId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "telefono": {
+                    "type": "boolean"
+                  },
+                  "email": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "cliente": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "clienteId",
+                    "nombre",
+                    "telefono",
+                    "email",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "cliente"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Operario.Fields"
+          },
+          "include": {
+            "title": "Operario.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Operario.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Operario>"
+      },
+      "Operario.Filter1": {
+        "type": "object",
+        "title": "Operario.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "Operario.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "clienteId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "telefono": {
+                    "type": "boolean"
+                  },
+                  "email": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "cliente": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "clienteId",
+                    "nombre",
+                    "telefono",
+                    "email",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "cliente"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Operario.Fields"
+          },
+          "include": {
+            "title": "Operario.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Operario.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Operario>"
+      },
       "Pais.Filter": {
         "type": "object",
         "title": "Pais.Filter",
@@ -20778,6 +23182,82 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<PlantillaEmail>"
       },
+      "Producto.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "Producto.ScopeFilter"
+      },
+      "Producto.IncludeFilter.Items": {
+        "title": "Producto.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "cliente"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Producto.ScopeFilter"
+          }
+        }
+      },
       "Producto.Filter": {
         "type": "object",
         "title": "Producto.Filter",
@@ -20816,7 +23296,7 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "empresaId": {
+                  "clienteId": {
                     "type": "boolean"
                   },
                   "nombre": {
@@ -20833,6 +23313,9 @@
                   },
                   "usuModificacion": {
                     "type": "boolean"
+                  },
+                  "cliente": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20843,12 +23326,13 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "empresaId",
+                    "clienteId",
                     "nombre",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
-                    "usuModificacion"
+                    "usuModificacion",
+                    "cliente"
                   ],
                   "example": "id"
                 },
@@ -20856,6 +23340,20 @@
               }
             ],
             "title": "Producto.Fields"
+          },
+          "include": {
+            "title": "Producto.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Producto.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
           }
         },
         "additionalProperties": false,
@@ -20904,7 +23402,7 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "empresaId": {
+                  "clienteId": {
                     "type": "boolean"
                   },
                   "nombre": {
@@ -20921,6 +23419,9 @@
                   },
                   "usuModificacion": {
                     "type": "boolean"
+                  },
+                  "cliente": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20931,12 +23432,13 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "empresaId",
+                    "clienteId",
                     "nombre",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
-                    "usuModificacion"
+                    "usuModificacion",
+                    "cliente"
                   ],
                   "example": "id"
                 },
@@ -20944,6 +23446,20 @@
               }
             ],
             "title": "Producto.Fields"
+          },
+          "include": {
+            "title": "Producto.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Producto.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
           }
         },
         "additionalProperties": false,

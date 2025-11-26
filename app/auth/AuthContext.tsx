@@ -90,6 +90,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tipo-transporte",
           "icon": "pi pi-truck"
         },
+        "Operario": {
+          "path": "/operario",
+          "icon": "pi pi-truck"
+        },
+        "Lugar Parada": {
+          "path": "/lugar-parada",
+          "icon": "pi pi-truck"
+        },
+        "Producto": {
+          "path": "/producto",
+          "icon": "pi pi-truck"
+        },
+        "Cliente": {
+          "path": "/cliente",
+          "icon": "pi pi-truck"
+        },
       },
       "Traducciones": {
         "Idiomas": {

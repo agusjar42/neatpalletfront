@@ -1,0 +1,30 @@
+"use client";
+import { getProducto, getProductoCount, deleteProducto } from "@/app/api-endpoints/producto";
+import EditarProductos from "./editar";
+import Crud from "../../components/shared/crud";
+import { useIntl } from 'react-intl';
+
+const Producto = () => {
+    const intl = useIntl();
+    const columnas = [
+        { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Cliente' }), tipo: 'string' },
+        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' }
+    ];
+
+    return (
+        <div>
+            <Crud
+                headerCrud={intl.formatMessage({ id: 'Productos' })}
+                getRegistros={getProducto}
+                getRegistrosCount={getProductoCount}
+                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
+                controlador={"Producto"}
+                editarComponente={<EditarProductos />}
+                columnas={columnas}
+                deleteRegistro={deleteProducto}
+            />
+        </div>
+    );
+};
+
+export default Producto;

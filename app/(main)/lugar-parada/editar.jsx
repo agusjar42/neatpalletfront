@@ -80,6 +80,10 @@ const EditarLugarParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                 if (nuevoRegistro?.id) {
                     setRegistroResult("insertado");
                     setIdEditar(null);
+                    // Llamar al callback para actualizar conteos
+                    if (onDataChange) {
+                        onDataChange();
+                    }
                 } else {
                     toast.current?.show({
                         severity: 'error',
@@ -100,6 +104,10 @@ const EditarLugarParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                 await patchLugarParada(idEditar, objGuardar);
                 setIdEditar(null);
                 setRegistroResult("editado");
+                // Llamar al callback para actualizar conteos
+                if (onDataChange) {
+                    onDataChange();
+                }
             }
         } else {
             toast.current?.show({

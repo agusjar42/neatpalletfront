@@ -92,6 +92,10 @@ const EditarOperario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 if (nuevoRegistro?.id) {
                     setRegistroResult("insertado");
                     setIdEditar(null);
+                    // Llamar al callback para actualizar conteos
+                    if (onDataChange) {
+                        onDataChange();
+                    }
                 } else {
                     toast.current?.show({
                         severity: 'error',
@@ -112,6 +116,10 @@ const EditarOperario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 await patchOperario(idEditar, objGuardar);
                 setIdEditar(null);
                 setRegistroResult("editado");
+                // Llamar al callback para actualizar conteos
+                if (onDataChange) {
+                    onDataChange();
+                }
             }
         } else {
             toast.current?.show({

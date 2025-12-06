@@ -25,7 +25,7 @@ import es from 'react-phone-input-2/lang/es.json'
 import { useRouter } from 'next/navigation';
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
-    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = false }) => {
+    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = false, onDataChange }) => {
     const intl = useIntl()
     const router = useRouter();
     //Crea el registro vacio con solo id para luego crear el resto de campos vacios dinamicamente
@@ -851,6 +851,10 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             });
             setRegistro(emptyRegistro);
             obtenerDatos();
+            // Llamar al callback para actualizar conteos
+            if (onDataChange) {
+                onDataChange();
+            }
         } catch (error) {
             //Si ha habido un error borrando el registro lo muestra
             if (error.message === 'Request failed with status code 500' || error.response.data.error.message === "No se pudo eliminar el registro porque tiene otros registros relacionados.") {

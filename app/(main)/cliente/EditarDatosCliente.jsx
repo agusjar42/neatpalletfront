@@ -129,6 +129,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                                         filtradoBase={{clienteId: cliente.id}}
                                         deleteRegistro={deleteOperario}
                                         cargarDatosInicialmente={true}
+                                        onDataChange={() => setRefreshConteos(prev => prev + 1)}
                                         editarComponenteParametrosExtra={{
                                             clienteId: cliente.id,
                                             estoyDentroDeUnTab: true,
@@ -173,6 +174,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                                         filtradoBase={{clienteId: cliente.id}}
                                         deleteRegistro={deleteLugarParada}
                                         cargarDatosInicialmente={true}
+                                        onDataChange={() => setRefreshConteos(prev => prev + 1)}
                                         editarComponenteParametrosExtra={{
                                             clienteId: cliente.id,
                                             estoyDentroDeUnTab: true,
@@ -217,6 +219,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                                         filtradoBase={{clienteId: cliente.id}}
                                         deleteRegistro={deleteProducto}
                                         cargarDatosInicialmente={true}
+                                        onDataChange={() => setRefreshConteos(prev => prev + 1)}
                                         editarComponenteParametrosExtra={{
                                             clienteId: cliente.id,
                                             estoyDentroDeUnTab: true,

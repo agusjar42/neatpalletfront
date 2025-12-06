@@ -80,6 +80,10 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 if (nuevoRegistro?.id) {
                     setRegistroResult("insertado");
                     setIdEditar(null);
+                    // Llamar al callback para actualizar conteos
+                    if (onDataChange) {
+                        onDataChange();
+                    }
                 } else {
                     toast.current?.show({
                         severity: 'error',
@@ -100,6 +104,10 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 await patchProducto(idEditar, objGuardar);
                 setIdEditar(null);
                 setRegistroResult("editado");
+                // Llamar al callback para actualizar conteos
+                if (onDataChange) {
+                    onDataChange();
+                }
             }
         } else {
             toast.current?.show({

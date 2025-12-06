@@ -20,7 +20,7 @@ const Operario = () => {
                 getRegistros={getOperario}
                 getRegistrosCount={getOperarioCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"Operario"}
+                controlador={"Operarios"}
                 editarComponente={<EditarOperarios />}
                 columnas={columnas}
                 deleteRegistro={deleteOperario}

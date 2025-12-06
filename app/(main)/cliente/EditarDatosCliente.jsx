@@ -7,9 +7,10 @@ import Crud from "../../components/shared/crud";
 import { getOperario, getOperarioCount, deleteOperario } from "@/app/api-endpoints/operario";
 import { getLugarParada, getLugarParadaCount, deleteLugarParada } from "@/app/api-endpoints/lugar-parada";
 import { getProducto, getProductoCount, deleteProducto } from "@/app/api-endpoints/producto";
-import EditarOperario from "../operario/editar";
-import EditarLugarParada from "../lugar-parada/editar";
-import EditarProducto from "../producto/editar";
+import EditarOperarios from "../operario/editar";
+import EditarLugarParadas from "../lugar-parada/editar";
+import EditarProductos from "../producto/editar";
+import { InputNumber } from "primereact/inputnumber";
 
 const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
     const intl = useIntl();
@@ -43,16 +44,15 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
         const actualizarConteos = async () => {
             if (cliente.id) {
                 try {
-                    const filtroOperario = { where: { clienteId: cliente.id } };
-                    const conteoOp = await getOperarioCount(JSON.stringify(filtroOperario));
+                    const whereFiltro = { and: { clienteId: cliente.id } };
+                    const [conteoOp, conteoLug, conteoProd] = await Promise.all([
+                        getOperarioCount(JSON.stringify(whereFiltro)),
+                        getLugarParadaCount(JSON.stringify(whereFiltro)),
+                        getProductoCount(JSON.stringify(whereFiltro))
+                    ]);
+                    
                     setConteoOperarios(conteoOp?.count || 0);
-
-                    const filtroLugar = { where: { clienteId: cliente.id } };
-                    const conteoLug = await getLugarParadaCount(JSON.stringify(filtroLugar));
                     setConteoLugares(conteoLug?.count || 0);
-
-                    const filtroProducto = { where: { clienteId: cliente.id } };
-                    const conteoProd = await getProductoCount(JSON.stringify(filtroProducto));
                     setConteoProductos(conteoProd?.count || 0);
                 } catch (error) {
                     console.error('Error al obtener conteos:', error);
@@ -85,6 +85,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                             placeholder={intl.formatMessage({ id: 'Teléfono del cliente' })}
                             onChange={(e) => setCliente({ ...cliente, telefono: e.target.value })}
                             maxLength={50} 
+                            style={{ textAlign: 'right' }}
                         />
                     </div>
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
@@ -116,14 +117,14 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                                             </span>
                                         </div>
                                     </div>
-                                    <Crud
+                                    {<Crud
                                         key={`operario-${refreshConteos}`}
                                         headerCrud={intl.formatMessage({ id: 'Operarios del Cliente' })}
                                         getRegistros={getOperario}
                                         getRegistrosCount={getOperarioCount}
                                         botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                                        controlador={"Operario"}
-                                        editarComponente={<EditarOperario />}
+                                        controlador={"Operarios"}
+                                        editarComponente={<EditarOperarios />}
                                         columnas={columnasOperario}
                                         filtradoBase={{clienteId: cliente.id}}
                                         deleteRegistro={deleteOperario}
@@ -133,7 +134,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                                             estoyDentroDeUnTab: true,
                                             onDataChange: () => setRefreshConteos(prev => prev + 1)
                                         }}
-                                    />
+                                    />}
                                 </>
                             ) : (
                                 <div className="text-center p-4">
@@ -160,14 +161,14 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                                             </span>
                                         </div>
                                     </div>
-                                    <Crud
+                                    {<Crud
                                         key={`lugar-parada-${refreshConteos}`}
                                         headerCrud={intl.formatMessage({ id: 'Lugares de Parada del Cliente' })}
                                         getRegistros={getLugarParada}
                                         getRegistrosCount={getLugarParadaCount}
                                         botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                                         controlador={"Lugar Parada"}
-                                        editarComponente={<EditarLugarParada />}
+                                        editarComponente={<EditarLugarParadas />}
                                         columnas={columnasLugarParada}
                                         filtradoBase={{clienteId: cliente.id}}
                                         deleteRegistro={deleteLugarParada}
@@ -177,7 +178,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                                             estoyDentroDeUnTab: true,
                                             onDataChange: () => setRefreshConteos(prev => prev + 1)
                                         }}
-                                    />
+                                    />}
                                 </>
                             ) : (
                                 <div className="text-center p-4">
@@ -204,14 +205,14 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                                             </span>
                                         </div>
                                     </div>
-                                    <Crud
+                                    {<Crud
                                         key={`producto-${refreshConteos}`}
                                         headerCrud={intl.formatMessage({ id: 'Productos del Cliente' })}
                                         getRegistros={getProducto}
                                         getRegistrosCount={getProductoCount}
                                         botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                                        controlador={"Producto"}
-                                        editarComponente={<EditarProducto />}
+                                        controlador={"Productos"}
+                                        editarComponente={<EditarProductos />}
                                         columnas={columnasProducto}
                                         filtradoBase={{clienteId: cliente.id}}
                                         deleteRegistro={deleteProducto}
@@ -221,7 +222,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                                             estoyDentroDeUnTab: true,
                                             onDataChange: () => setRefreshConteos(prev => prev + 1)
                                         }}
-                                    />
+                                    />}
                                 </>
                             ) : (
                                 <div className="text-center p-4">

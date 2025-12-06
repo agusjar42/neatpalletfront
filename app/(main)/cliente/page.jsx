@@ -11,7 +11,6 @@ const Cliente = () => {
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'telefono', header: intl.formatMessage({ id: 'Teléfono' }), tipo: 'string' },
         { campo: 'mail', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
-        { campo: 'empresaNombre', header: intl.formatMessage({ id: 'Empresa' }), tipo: 'string' }
     ];
 
     return (
@@ -21,7 +20,7 @@ const Cliente = () => {
                 getRegistros={getCliente}
                 getRegistrosCount={getClienteCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"Cliente"}
+                controlador={"Clientes"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarClientes />}
                 columnas={columnas}

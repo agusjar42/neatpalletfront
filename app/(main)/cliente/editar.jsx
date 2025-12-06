@@ -29,11 +29,22 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
+        const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         // Validaciones básicas
         const validaNombre = cliente.nombre === undefined || cliente.nombre === "";
+        let validaEmail = false;
         
+        if (cliente.mail && !regexEmail.test(cliente.mail)) {
+            validaEmail = true;
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'El email debe de tener el formato correcto' }),
+                life: 3000,
+            });
+        }
         // Si existe algún campo vacío entonces no se puede guardar
-        return (!validaNombre)
+        return (!validaNombre && !validaEmail)
     }
 
     const guardarCliente = async () => {
@@ -57,41 +68,42 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
                 //Si se crea el registro mostramos el toast
                 if (nuevoRegistro?.id) {
-                    toast.current.show({ severity: 'success', summary: intl.formatMessage({ id: 'Éxito' }), detail: intl.formatMessage({ id: 'Cliente creado correctamente' }), life: 3000 });
-                    setRegistroResult(nuevoRegistro);
-                    setIdEditar(nuevoRegistro.id);
-                    setCliente(nuevoRegistro);
+                    setRegistroResult("insertado");
+                    setIdEditar(null);
                 } else {
-                    toast.current.show({ severity: 'error', summary: intl.formatMessage({ id: 'Error' }), detail: intl.formatMessage({ id: 'Error al crear cliente' }), life: 3000 });
+                    toast.current?.show({
+                        severity: 'error',
+                        summary: 'ERROR',
+                        detail: intl.formatMessage({ id: 'Ha ocurrido un error creando el registro' }),
+                        life: 3000,
+                    });
                 }
             } else {
                 // Elimino y añado los campos que no se necesitan para el update
-                delete objGuardar.empresaNombre;
+                delete objGuardar.clienteNombre;
                 delete objGuardar.fechaCreacion;
                 delete objGuardar.fechaModificacion;
                 delete objGuardar.usuCreacion;
                 objGuardar['usuModificacion'] = usuarioActual;
 
                 // Hacemos el update del registro
-                const registroActualizado = await patchCliente(idEditar, objGuardar);
-
-                //Si se crea el registro mostramos el toast
-                if (registroActualizado?.id) {
-                    toast.current.show({ severity: 'success', summary: intl.formatMessage({ id: 'Éxito' }), detail: intl.formatMessage({ id: 'Cliente actualizado correctamente' }), life: 3000 });
-                    setRegistroResult(registroActualizado);
-                } else {
-                    toast.current.show({ severity: 'error', summary: intl.formatMessage({ id: 'Error' }), detail: intl.formatMessage({ id: 'Error al actualizar cliente' }), life: 3000 });
-                }
+                await patchCliente(idEditar, objGuardar);
+                setIdEditar(null);
+                setRegistroResult("editado");
             }
         } else {
-            toast.current.show({ severity: 'error', summary: intl.formatMessage({ id: 'Error' }), detail: intl.formatMessage({ id: 'Debe completar todos los campos obligatorios' }), life: 3000 });
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'Todos los campos deben de ser rellenados' }),
+                life: 3000,
+            });
         }
         setEstadoGuardandoBoton(false);
-        setEstadoGuardando(false);
     };
 
     const cancelarEdicion = () => {
-        setIdEditar(0);
+        setIdEditar(null);
     };
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });

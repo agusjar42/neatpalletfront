@@ -18,7 +18,7 @@ const Producto = () => {
                 getRegistros={getProducto}
                 getRegistrosCount={getProductoCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"Producto"}
+                controlador={"Productos"}
                 editarComponente={<EditarProductos />}
                 columnas={columnas}
                 deleteRegistro={deleteProducto}

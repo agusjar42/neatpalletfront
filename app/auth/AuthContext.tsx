@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tipo-transporte",
           "icon": "pi pi-truck"
         },
-        "Operario": {
+        "Operarios": {
           "path": "/operario",
           "icon": "pi pi-truck"
         },
@@ -98,11 +98,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/lugar-parada",
           "icon": "pi pi-truck"
         },
-        "Producto": {
+        "Productos": {
           "path": "/producto",
           "icon": "pi pi-truck"
         },
-        "Cliente": {
+        "Clientes": {
           "path": "/cliente",
           "icon": "pi pi-truck"
         },

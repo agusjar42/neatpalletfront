@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
-import { postLugarParada, patchLugarParada } from "@/app/api-endpoints/lugar-parada";
+import { postLugarParada, patchLugarParada } from "@/app/api-endpoints/lugar-parada/index.js";
+import { getCliente } from "@/app/api-endpoints/cliente/index.js";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import EditarDatosLugarParada from "./EditarDatosLugarParada";
@@ -14,10 +15,21 @@ const EditarLugarParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
     const [lugarParada, setLugarParada] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [clientes, setClientes] = useState([]);
     const intl = useIntl();
 
     useEffect(() => {
         const fetchData = async () => {
+            // Cargar clientes disponibles
+            const dataClientes = await getCliente(JSON.stringify({
+                                        where: {
+                                            and: {
+                                                empresaId: getUsuarioSesion()?.empresaId
+                                            }
+                                        }
+                                    }));
+            setClientes(dataClientes || []);
+
             // Si el idEditar es diferente de nuevo, entonces se va a editar
             if (idEditar !== 0) {
                 // Obtenemos el registro a editar
@@ -32,6 +44,12 @@ const EditarLugarParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
     }, [idEditar, rowData, clienteId, emptyRegistro]);
 
     const validaciones = async () => {
+        //
+        // Si estamos dentro de un tab y tenemos un clienteId, lo asignamos
+        //
+        if (estoyDentroDeUnTab && clienteId) {
+            lugarParada.clienteId = clienteId;
+        }
         // Validaciones básicas
         const validaNombre = lugarParada.nombre === undefined || lugarParada.nombre === "";
         const validaClienteId = lugarParada.clienteId === undefined || lugarParada.clienteId === null;
@@ -60,13 +78,15 @@ const EditarLugarParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
 
                 //Si se crea el registro mostramos el toast
                 if (nuevoRegistro?.id) {
-                    toast.current.show({ severity: 'success', summary: intl.formatMessage({ id: 'Éxito' }), detail: intl.formatMessage({ id: 'Lugar de parada creado correctamente' }), life: 3000 });
-                    setRegistroResult(nuevoRegistro);
-                    if (onDataChange) onDataChange();
-                    setIdEditar(nuevoRegistro.id);
-                    setLugarParada(nuevoRegistro);
+                    setRegistroResult("insertado");
+                    setIdEditar(null);
                 } else {
-                    toast.current.show({ severity: 'error', summary: intl.formatMessage({ id: 'Error' }), detail: intl.formatMessage({ id: 'Error al crear lugar de parada' }), life: 3000 });
+                    toast.current?.show({
+                        severity: 'error',
+                        summary: 'ERROR',
+                        detail: intl.formatMessage({ id: 'Ha ocurrido un error creando el registro' }),
+                        life: 3000,
+                    });
                 }
             } else {
                 // Elimino y añado los campos que no se necesitan para el update
@@ -77,26 +97,23 @@ const EditarLugarParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                 objGuardar['usuModificacion'] = usuarioActual;
 
                 // Hacemos el update del registro
-                const registroActualizado = await patchLugarParada(idEditar, objGuardar);
-
-                //Si se crea el registro mostramos el toast
-                if (registroActualizado?.id) {
-                    toast.current.show({ severity: 'success', summary: intl.formatMessage({ id: 'Éxito' }), detail: intl.formatMessage({ id: 'Lugar de parada actualizado correctamente' }), life: 3000 });
-                    setRegistroResult(registroActualizado);
-                    if (onDataChange) onDataChange();
-                } else {
-                    toast.current.show({ severity: 'error', summary: intl.formatMessage({ id: 'Error' }), detail: intl.formatMessage({ id: 'Error al actualizar lugar de parada' }), life: 3000 });
-                }
+                await patchLugarParada(idEditar, objGuardar);
+                setIdEditar(null);
+                setRegistroResult("editado");
             }
         } else {
-            toast.current.show({ severity: 'error', summary: intl.formatMessage({ id: 'Error' }), detail: intl.formatMessage({ id: 'Debe completar todos los campos obligatorios' }), life: 3000 });
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'Todos los campos deben de ser rellenados' }),
+                life: 3000,
+            });
         }
         setEstadoGuardandoBoton(false);
-        setEstadoGuardando(false);
     };
 
     const cancelarEdicion = () => {
-        setIdEditar(0);
+        setIdEditar(null);
     };
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
@@ -113,6 +130,7 @@ const EditarLugarParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                             setLugarParada={setLugarParada}
                             estadoGuardando={estadoGuardando}
                             estoyDentroDeUnTab={estoyDentroDeUnTab}
+                            clientes={clientes}
                         />
 
                         <div className="flex justify-content-end mt-2">

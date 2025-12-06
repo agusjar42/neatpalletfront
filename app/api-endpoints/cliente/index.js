@@ -1,67 +1,34 @@
-// NOTA: Los endpoints de Cliente aún no están implementados en el backend
-// Estos son endpoints de ejemplo hasta que se implemente el ClienteControllerApi
+import { ClienteControllerApi, settings } from "@/app/api-neatpallet";
+import { getUsuarioSesion } from "@/app/utility/Utils";
+
+const apiCliente = new ClienteControllerApi(settings);
 
 export const getCliente = async (filtro) => {
-    console.warn('ClienteControllerApi no implementado aún');
-    // Datos de ejemplo para desarrollo
-    return [
-        {
-            id: 1,
-            nombre: "Cliente Ejemplo 1",
-            telefono: "123456789", 
-            mail: "cliente1@ejemplo.com",
-            empresaId: 1,
-            empresaNombre: "Empresa 1"
-        },
-        {
-            id: 2,
-            nombre: "Cliente Ejemplo 2", 
-            telefono: "987654321",
-            mail: "cliente2@ejemplo.com",
-            empresaId: 1,
-            empresaNombre: "Empresa 1"
-        }
-    ];
+    const { data: dataClientes } = await apiCliente.clienteControllerFind(filtro);
+    return dataClientes;
 }
 
 export const getClienteCount = async (filtro) => {
-    console.warn('ClienteControllerApi no implementado aún');
-    return { count: 2 };
+    const { data: dataCount } = await apiCliente.clienteControllerCount(filtro);
+    return dataCount;
 }
 
 export const postCliente = async (objCliente) => {
-    console.warn('ClienteControllerApi no implementado aún');
-    return { 
-        ...objCliente, 
-        id: Math.floor(Math.random() * 1000) + 3,
-        fechaCreacion: new Date().toISOString(),
-        empresaNombre: "Empresa 1"
-    };
+    const { data: dataCliente } = await apiCliente.clienteControllerCreate(objCliente);
+    return dataCliente;
 }
 
 export const patchCliente = async (idCliente, objCliente) => {
-    console.warn('ClienteControllerApi no implementado aún');
-    return { 
-        ...objCliente, 
-        id: idCliente,
-        fechaModificacion: new Date().toISOString(),
-        empresaNombre: "Empresa 1"
-    };
+    const { data: dataCliente } = await apiCliente.clienteControllerUpdateById(idCliente, objCliente);   
+    return dataCliente;
 }
 
 export const deleteCliente = async (idCliente) => {
-    console.warn('ClienteControllerApi no implementado aún');
-    return { success: true, id: idCliente };
+    const { data: dataCliente } = await apiCliente.clienteControllerDeleteById(idCliente);
+    return dataCliente;
 }
 
 export const getClienteById = async (idCliente) => {
-    console.warn('ClienteControllerApi no implementado aún');
-    return {
-        id: idCliente,
-        nombre: `Cliente ${idCliente}`,
-        telefono: "123456789",
-        mail: `cliente${idCliente}@ejemplo.com`,
-        empresaId: 1,
-        empresaNombre: "Empresa 1"
-    };
+    const { data: dataCliente } = await apiCliente.clienteControllerFindById(idCliente);
+    return dataCliente;
 }

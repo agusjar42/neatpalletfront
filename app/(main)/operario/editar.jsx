@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
-import { postOperario, patchOperario } from "@/app/api-endpoints/operario";
+import { postOperario, patchOperario } from "@/app/api-endpoints/operario/index.js";
+import { getCliente } from "@/app/api-endpoints/cliente/index.js";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import EditarDatosOperario from "./EditarDatosOperario";
@@ -14,10 +15,21 @@ const EditarOperario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
     const [operario, setOperario] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [clientes, setClientes] = useState([]);
     const intl = useIntl();
 
     useEffect(() => {
         const fetchData = async () => {
+            // Cargar clientes disponibles
+            const dataClientes = await getCliente(JSON.stringify({
+                                        where: {
+                                            and: {
+                                                empresaId: getUsuarioSesion()?.empresaId
+                                            }
+                                        }
+                                    }));
+            setClientes(dataClientes || []);
+
             // Si el idEditar es diferente de nuevo, entonces se va a editar
             if (idEditar !== 0) {
                 // Obtenemos el registro a editar
@@ -32,12 +44,30 @@ const EditarOperario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
     }, [idEditar, rowData, clienteId, emptyRegistro]);
 
     const validaciones = async () => {
+        const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        //
+        // Si estamos dentro de un tab y tenemos un clienteId, lo asignamos
+        //
+        if (estoyDentroDeUnTab && clienteId) {
+            operario.clienteId = clienteId;
+        }
         // Validaciones básicas
         const validaNombre = operario.nombre === undefined || operario.nombre === "";
         const validaClienteId = operario.clienteId === undefined || operario.clienteId === null;
+        let validaEmail = false;
         
+        if (operario.email && !regexEmail.test(operario.email)) {
+            validaEmail = true;
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'El email debe de tener el formato correcto' }),
+                life: 3000,
+            });
+        }
+
         // Si existe algún campo vacío entonces no se puede guardar
-        return (!validaNombre && !validaClienteId)
+        return (!validaNombre && !validaClienteId && !validaEmail)
     }
 
     const guardarOperario = async () => {
@@ -60,13 +90,15 @@ const EditarOperario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
 
                 //Si se crea el registro mostramos el toast
                 if (nuevoRegistro?.id) {
-                    toast.current.show({ severity: 'success', summary: intl.formatMessage({ id: 'Éxito' }), detail: intl.formatMessage({ id: 'Operario creado correctamente' }), life: 3000 });
-                    setRegistroResult(nuevoRegistro);
-                    if (onDataChange) onDataChange();
-                    setIdEditar(nuevoRegistro.id);
-                    setOperario(nuevoRegistro);
+                    setRegistroResult("insertado");
+                    setIdEditar(null);
                 } else {
-                    toast.current.show({ severity: 'error', summary: intl.formatMessage({ id: 'Error' }), detail: intl.formatMessage({ id: 'Error al crear operario' }), life: 3000 });
+                    toast.current?.show({
+                        severity: 'error',
+                        summary: 'ERROR',
+                        detail: intl.formatMessage({ id: 'Ha ocurrido un error creando el registro' }),
+                        life: 3000,
+                    });
                 }
             } else {
                 // Elimino y añado los campos que no se necesitan para el update
@@ -77,26 +109,23 @@ const EditarOperario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 objGuardar['usuModificacion'] = usuarioActual;
 
                 // Hacemos el update del registro
-                const registroActualizado = await patchOperario(idEditar, objGuardar);
-
-                //Si se crea el registro mostramos el toast
-                if (registroActualizado?.id) {
-                    toast.current.show({ severity: 'success', summary: intl.formatMessage({ id: 'Éxito' }), detail: intl.formatMessage({ id: 'Operario actualizado correctamente' }), life: 3000 });
-                    setRegistroResult(registroActualizado);
-                    if (onDataChange) onDataChange();
-                } else {
-                    toast.current.show({ severity: 'error', summary: intl.formatMessage({ id: 'Error' }), detail: intl.formatMessage({ id: 'Error al actualizar operario' }), life: 3000 });
-                }
+                await patchOperario(idEditar, objGuardar);
+                setIdEditar(null);
+                setRegistroResult("editado");
             }
         } else {
-            toast.current.show({ severity: 'error', summary: intl.formatMessage({ id: 'Error' }), detail: intl.formatMessage({ id: 'Debe completar todos los campos obligatorios' }), life: 3000 });
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'Todos los campos deben de ser rellenados' }),
+                life: 3000,
+            });
         }
         setEstadoGuardandoBoton(false);
-        setEstadoGuardando(false);
     };
 
     const cancelarEdicion = () => {
-        setIdEditar(0);
+        setIdEditar(null);
     };
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
@@ -113,6 +142,7 @@ const EditarOperario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                             setOperario={setOperario}
                             estadoGuardando={estadoGuardando}
                             estoyDentroDeUnTab={estoyDentroDeUnTab}
+                            clientes={clientes}
                         />
 
                         <div className="flex justify-content-end mt-2">

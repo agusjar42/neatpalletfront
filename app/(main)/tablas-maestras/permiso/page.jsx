@@ -270,12 +270,12 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Resumen Envío Pallet-Ver' },
                 
                 // Operario
-                { header: intl.formatMessage({ id: 'Operario' }), seccion: 'Operario' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Operario-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Operario-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Operario-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Operario-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Operario-Borrar' },
+                { header: intl.formatMessage({ id: 'Operarios' }), seccion: 'Operarios' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Operarios-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Operarios-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Operarios-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Operarios-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Operarios-Borrar' },
                 
                 // Lugar Parada
                 { header: intl.formatMessage({ id: 'Lugar Parada' }), seccion: 'Lugar Parada' },
@@ -286,20 +286,20 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Lugar Parada-Borrar' },
                 
                 // Producto
-                { header: intl.formatMessage({ id: 'Producto' }), seccion: 'Producto' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Producto-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Producto-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Producto-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Producto-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Producto-Borrar' },
+                { header: intl.formatMessage({ id: 'Productos' }), seccion: 'Productos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Productos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Productos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Productos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Productos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Productos-Borrar' },
                 
                 // Cliente
-                { header: intl.formatMessage({ id: 'Cliente' }), seccion: 'Cliente' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Cliente-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Cliente-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Cliente-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Cliente-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Cliente-Borrar' },
+                { header: intl.formatMessage({ id: 'Clientes' }), seccion: 'Clientes' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Clientes-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Clientes-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Clientes-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Clientes-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Clientes-Borrar' },
 
             ];
 

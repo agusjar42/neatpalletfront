@@ -45,6 +45,7 @@ const EditarDatosOperario = ({ operario, setOperario, estadoGuardando, estoyDent
                         placeholder={intl.formatMessage({ id: 'Teléfono del operario' })}
                         onChange={(e) => setOperario({ ...operario, telefono: e.target.value })}
                         maxLength={50} 
+                        style={{ textAlign: 'right' }} 
                     />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">

@@ -10,8 +10,8 @@ import AppSidebar from './AppSidebar';
 import AppTopbar from './AppTopbar';
 import AppFooter from './AppFooter';
 import { LayoutContext } from './context/layoutcontext';
+import { useAuth } from '@/app/auth/AuthContext';
 import type { AppTopbarRef, ChildContainerProps } from '@/types';
-import { getUsuarioSesion } from '@/app/utility/Utils';
 
 const LayoutContainer = (props: ChildContainerProps) => {
     const {
@@ -23,6 +23,7 @@ const LayoutContainer = (props: ChildContainerProps) => {
         isHorizontal,
         isDesktop,
     } = useContext(LayoutContext);
+    const { usuarioAutenticado, isInitialized } = useAuth();
     const topbarRef = useRef<AppTopbarRef>(null);
     const sidebarRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
@@ -176,7 +177,7 @@ const LayoutContainer = (props: ChildContainerProps) => {
 
     return (
         <React.Fragment>
-            {getUsuarioSesion() && <div className={classNames("layout-container", containerClass)}>
+            {isInitialized && usuarioAutenticado && <div className={classNames("layout-container", containerClass)}>
                 <div
                     ref={sidebarRef}
                     className="layout-sidebar"
@@ -195,7 +196,7 @@ const LayoutContainer = (props: ChildContainerProps) => {
                 <div className="layout-mask"></div>
 
             </div>}
-            {getUsuarioSesion() === null && 
+            {isInitialized && !usuarioAutenticado && 
            <div className="layout-content">{props.children}</div>}
 
         </React.Fragment>

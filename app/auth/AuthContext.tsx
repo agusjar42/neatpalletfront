@@ -13,6 +13,7 @@ import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
 import { obtenerTodosLosPermisos } from "@/app/components/shared/componentes";
 interface AuthContextProps {
   usuarioAutenticado: boolean;
+  isInitialized: boolean;
   login: (token: string, rememberMe: boolean, data: any) => void;
   loginSinDashboard: (token: string, rememberMe: boolean, data: any) => void;
   logout: () => void;
@@ -22,9 +23,50 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [usuarioAutenticado, setUsuarioAutenticado] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const config = jwt.jwtConfig;
+
+  // Verificar si el usuario está autenticado al inicializar la aplicación
+  useEffect(() => {
+    const verificarAutenticacion = () => {
+      const token = Cookies.get('authToken');
+      const userData = localStorage.getItem('userDataNeatpallet');
+      
+      if (token && userData) {
+        // Verificar que el token no haya expirado (opcional)
+        try {
+          const parsedUserData = JSON.parse(userData);
+          if (parsedUserData) {
+            setUsuarioAutenticado(true);
+          }
+        } catch (error) {
+          // Si hay error al parsear los datos, limpiar y mantener como no autenticado
+          Cookies.remove('authToken');
+          localStorage.removeItem('userDataNeatpallet');
+          setUsuarioAutenticado(false);
+        }
+      } else {
+        setUsuarioAutenticado(false);
+      }
+      setIsInitialized(true);
+    };
+
+    verificarAutenticacion();
+  }, []);
+
+  // Redirigir a login si no está autenticado y está en una ruta protegida
+  useEffect(() => {
+    if (isInitialized) {
+      const rutasPublicas = ['/auth/login', '/auth/register', '/landing'];
+      const esRutaPublica = rutasPublicas.some(ruta => pathname.startsWith(ruta));
+      
+      if (!usuarioAutenticado && !esRutaPublica) {
+        router.push('/auth/login');
+      }
+    }
+  }, [usuarioAutenticado, isInitialized, pathname, router]);
 
   const login = async (token: string, rememberMe: boolean, data: any) => {
     Cookies.set('authToken', token, { expires: rememberMe ? 7 : undefined });
@@ -290,7 +332,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ usuarioAutenticado, login, logout, loginSinDashboard }}>
+    <AuthContext.Provider value={{ usuarioAutenticado, isInitialized, login, logout, loginSinDashboard }}>
       {children}
     </AuthContext.Provider>
   );

@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Redirigir a login si no está autenticado y está en una ruta protegida
   useEffect(() => {
     if (isInitialized) {
-      const rutasPublicas = ['/auth/login', '/auth/register', '/landing'];
+      const rutasPublicas = ['/auth/login', '/auth/register', '/landing', '/pages/notfound', '/not-found'];
       const esRutaPublica = rutasPublicas.some(ruta => pathname.startsWith(ruta));
       
       if (!usuarioAutenticado && !esRutaPublica) {

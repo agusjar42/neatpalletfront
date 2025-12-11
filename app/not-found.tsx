@@ -1,8 +1,8 @@
 import type { Page } from "@/types";
-import NotFound from "./(full-page)/pages/notfound/page";
+import NotFoundPage from "./(main)/pages/notfound/page";
 
 const Custom404: Page = () => {
-    return <NotFound />;
+    return <NotFoundPage />;
 };
 
 export default Custom404;

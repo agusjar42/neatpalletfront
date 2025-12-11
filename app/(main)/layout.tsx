@@ -1,7 +1,6 @@
 "use client"
 
 import { ReactNode, useEffect } from 'react';
-import { Metadata } from "next";
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation'
 import { useAuth } from "../auth/AuthContext";
@@ -10,50 +9,10 @@ interface MainLayoutProps {
     children: React.ReactNode;
 }
 
-export const metadata: Metadata = {
-    title: "Neatpallet",
-    description:
-        "Gestión inteligente de palets.",
-    robots: { index: false, follow: false },
-    viewport: { initialScale: 1, width: "device-width" },
-    openGraph: {
-        type: "website",
-        title: "Neatpallet",
-        url: "https://neatpallet.com/",
-        description:
-            "Control de movimientos de palets.",
-        images: ["https://neatpallet.com/favicon.ico"],
-        ttl: 604800,
-    },
-    icons: {
-        icon: "/favicon.ico",
-    },
-};
-
 export default function MainLayout({ children }: MainLayoutProps) {
-    const ProtectedRoute = ({ children }: MainLayoutProps) => {
-        const { usuarioAutenticado } = useAuth();
-        const router = useRouter();
-        const pathname = usePathname();
-
-        useEffect(() => {
-            if (!usuarioAutenticado && pathname !== '/auth/login') {
-                router.push('/auth/login');
-            } else {
-                router.push(pathname);
-            }
-        }, [usuarioAutenticado, pathname, router]);
-
-        if (!usuarioAutenticado && pathname !== '/auth/login') {
-            return null; // O un componente de carga
-        }
-
-        return <>{children}</>;
-    };
-
     return (
-            <ProtectedRoute>
-                    {children}
-            </ProtectedRoute>
+        <div>
+            {children}
+        </div>
     );
 }

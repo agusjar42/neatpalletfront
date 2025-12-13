@@ -37,6 +37,7 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
 
     const validaciones = async () => {
         const validaOrden = envio.orden === undefined || envio.orden === null || envio.orden === "";
+        const validaClienteId = envio.clienteId === undefined || envio.clienteId === null || envio.clienteId === "";
         const validaorigenRuta = envio.origenRuta === undefined || envio.origenRuta === "";
         const validaDestinoRuta = envio.destinoRuta === undefined || envio.destinoRuta === "";
         const gpsRutaOrigen = envio.gpsRutaOrigen === undefined || envio.gpsRutaOrigen === "";
@@ -61,7 +62,7 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
             }
         }
         
-        return (!validaOrden && !validaorigenRuta && !validaDestinoRuta && !gpsRutaOrigen && !gpsRutaDestino && !validaFechaSalida && !validaFechaLlegada && fechaLlegadaPosterior)
+        return (!validaOrden && !validaClienteId && !validaorigenRuta && !validaDestinoRuta && !gpsRutaOrigen && !gpsRutaDestino && !validaFechaSalida && !validaFechaLlegada && fechaLlegadaPosterior)
     }
 
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
@@ -85,6 +86,7 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
             delete objGuardar['fechaLlegadaEspanol'];
             delete objGuardar['codigoEmpresa'];
             delete objGuardar['nombreEmpresa'];
+            delete objGuardar['clienteNombre'];
 
             if (idEditar === 0) {
                 delete objGuardar.id;

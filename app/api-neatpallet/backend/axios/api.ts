@@ -983,6 +983,12 @@ export interface Envio {
     'empresaId'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof Envio
+     */
+    'clienteId'?: number;
+    /**
+     * 
      * @type {string}
      * @memberof Envio
      */
@@ -2874,7 +2880,8 @@ export interface EnvioIncludeFilterItems {
     * @enum {string}
     */
 export enum EnvioIncludeFilterItemsRelationEnum {
-    Empresa = 'empresa'
+    Empresa = 'empresa',
+    Cliente = 'cliente'
 }
 
 /**
@@ -4165,6 +4172,12 @@ export interface EnvioPartial {
     'empresaId'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof EnvioPartial
+     */
+    'clienteId'?: number;
+    /**
+     * 
      * @type {string}
      * @memberof EnvioPartial
      */
@@ -5053,6 +5066,12 @@ export interface EnvioWithRelations {
     'empresaId'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof EnvioWithRelations
+     */
+    'clienteId'?: number;
+    /**
+     * 
      * @type {string}
      * @memberof EnvioWithRelations
      */
@@ -5141,6 +5160,12 @@ export interface EnvioWithRelations {
      * @memberof EnvioWithRelations
      */
     'foreignKey'?: any;
+    /**
+     * 
+     * @type {ClienteWithRelations}
+     * @memberof EnvioWithRelations
+     */
+    'cliente'?: ClienteWithRelations;
 }
 /**
  * 
@@ -6680,6 +6705,12 @@ export interface NewEnvio {
      * @memberof NewEnvio
      */
     'empresaId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvio
+     */
+    'clienteId'?: number;
     /**
      * 
      * @type {string}

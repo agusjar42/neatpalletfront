@@ -11626,6 +11626,129 @@
         "additionalProperties": false,
         "x-typescript-type": "EmpresaWithRelations"
       },
+      "Empresa": {
+        "title": "Empresa",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "tiempoInactividad": {
+            "type": "number",
+            "nullable": false
+          },
+          "imagen": {
+            "type": "string",
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "usuCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "ClienteWithRelations": {
+        "title": "ClienteWithRelations",
+        "type": "object",
+        "description": "(tsType: ClienteWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "mail": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "foreignKey": {}
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "ClienteWithRelations"
+      },
       "EnvioWithRelations": {
         "title": "EnvioWithRelations",
         "type": "object",
@@ -11635,6 +11758,9 @@
             "type": "number"
           },
           "empresaId": {
+            "type": "number"
+          },
+          "clienteId": {
             "type": "number"
           },
           "numero": {
@@ -11681,7 +11807,10 @@
           "empresa": {
             "$ref": "#/components/schemas/EmpresaWithRelations"
           },
-          "foreignKey": {}
+          "foreignKey": {},
+          "cliente": {
+            "$ref": "#/components/schemas/ClienteWithRelations"
+          }
         },
         "additionalProperties": false,
         "x-typescript-type": "EnvioWithRelations"
@@ -12364,78 +12493,6 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<RefrescarToken>"
       },
-      "Empresa": {
-        "title": "Empresa",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "codigo": {
-            "type": "string",
-            "nullable": true
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "descripcion": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "tiempoInactividad": {
-            "type": "number",
-            "nullable": false
-          },
-          "imagen": {
-            "type": "string",
-            "nullable": true
-          },
-          "logo": {
-            "type": "string",
-            "nullable": true
-          },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "usuCreacion"
-        ],
-        "additionalProperties": false
-      },
       "Cliente": {
         "title": "Cliente",
         "type": "object",
@@ -12561,57 +12618,6 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Omit<Producto, 'id'>"
-      },
-      "ClienteWithRelations": {
-        "title": "ClienteWithRelations",
-        "type": "object",
-        "description": "(tsType: ClienteWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "empresaId": {
-            "type": "number",
-            "nullable": false
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "telefono": {
-            "type": "string",
-            "nullable": true
-          },
-          "mail": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "empresa": {
-            "$ref": "#/components/schemas/Empresa"
-          },
-          "foreignKey": {}
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "ClienteWithRelations"
       },
       "ProductoWithRelations": {
         "title": "ProductoWithRelations",
@@ -16059,6 +16065,9 @@
           "empresaId": {
             "type": "number"
           },
+          "clienteId": {
+            "type": "number"
+          },
           "numero": {
             "type": "string"
           },
@@ -16109,6 +16118,9 @@
         "description": "(tsType: Omit<Envio, 'id'>, schemaOptions: { title: 'NewEnvio', exclude: [ 'id' ] })",
         "properties": {
           "empresaId": {
+            "type": "number"
+          },
+          "clienteId": {
             "type": "number"
           },
           "numero": {
@@ -16211,6 +16223,9 @@
             "type": "number"
           },
           "empresaId": {
+            "type": "number"
+          },
+          "clienteId": {
             "type": "number"
           },
           "numero": {
@@ -20251,7 +20266,8 @@
           "relation": {
             "type": "string",
             "enum": [
-              "empresa"
+              "empresa",
+              "cliente"
             ]
           },
           "scope": {
@@ -20298,6 +20314,9 @@
                     "type": "boolean"
                   },
                   "empresaId": {
+                    "type": "boolean"
+                  },
+                  "clienteId": {
                     "type": "boolean"
                   },
                   "numero": {
@@ -20349,6 +20368,7 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "clienteId",
                     "numero",
                     "origenRuta",
                     "fechaLlegada",
@@ -20434,6 +20454,9 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "clienteId": {
+                    "type": "boolean"
+                  },
                   "numero": {
                     "type": "boolean"
                   },
@@ -20483,6 +20506,7 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "clienteId",
                     "numero",
                     "origenRuta",
                     "fechaLlegada",

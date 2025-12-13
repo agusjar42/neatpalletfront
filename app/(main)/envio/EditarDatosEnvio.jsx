@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
+import { Dropdown } from 'primereact/dropdown';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
@@ -15,6 +16,7 @@ import { getEnvioContenido, getEnvioContenidoCount, deleteEnvioContenido } from 
 import { getEnvioMovimiento, getEnvioMovimientoCount, deleteEnvioMovimiento } from "@/app/api-endpoints/envio-movimiento";
 import { getEnvioPallet, getEnvioPalletCount, deleteEnvioPallet } from "@/app/api-endpoints/envio-pallet";
 import { getEnvioParada, getEnvioParadaCount, deleteEnvioParada } from "@/app/api-endpoints/envio-parada";
+import { getCliente } from "@/app/api-endpoints/cliente";
 import EditarEnvioConfiguracion from "../envio-configuracion/editar";
 import EditarEnvioContenido from "../envio-contenido/editar";
 import EditarEnvioMovimiento from "../envio-movimiento/editar";
@@ -32,6 +34,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     const [refreshConfiguracion, setRefreshConfiguracion] = useState(0);
     const [cargandoSensores, setCargandoSensores] = useState(false);
     const [refreshSensores, setRefreshSensores] = useState(0);
+    const [clientes, setClientes] = useState([]);
 
     // Estados para los contadores de cada tab (solo para Movimientos, Pallets y Paradas)
     const [conteoMovimiento, setConteoMovimiento] = useState(0);
@@ -82,6 +85,21 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
     ];
 
+    // Cargar clientes al inicializar el componente
+    useEffect(() => {
+        const cargarClientes = async () => {
+            try {
+                const empresaId = getUsuarioSesion()?.empresaId;
+                const filtroClientes = JSON.stringify({ where: { and: { empresaId: empresaId } } });
+                const dataClientes = await getCliente(filtroClientes);
+                setClientes(dataClientes || []);
+            } catch (error) {
+                console.error('Error cargando clientes:', error);
+            }
+        };
+        cargarClientes();
+    }, []);
+
     // Cargar los conteos de Movimientos, Pallets y Paradas
     useEffect(() => {
         const cargarConteos = async () => {
@@ -127,7 +145,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
             accept: async () => {
                 setCargandoConfiguracion(true);
                 try {
-                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, usuarioCreacion: getUsuarioSesion()?.id};
+                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, clienteId: envio.clienteId, usuarioCreacion: getUsuarioSesion()?.id};
                     await crearEnvioConfiguracionDesdeEmpresa(datosEnvio);
                     toast.current?.show({
                         severity: 'success',
@@ -171,7 +189,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
             accept: async () => {
                 setCargandoSensores(true);
                 try {
-                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, usuarioCreacion: getUsuarioSesion()?.id};
+                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, clienteId: envio.clienteId, usuarioCreacion: getUsuarioSesion()?.id};
                     await crearEnvioSensorDesdeEmpresa(datosEnvio);
                     toast.current?.show({
                         severity: 'success',
@@ -213,7 +231,21 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         max={99999} 
                         inputStyle={{ textAlign: 'right' }}/>
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                    <label htmlFor="clienteId"><b>{intl.formatMessage({ id: 'Cliente' })}*</b></label>
+                    <Dropdown 
+                        value={envio.clienteId}
+                        options={clientes}
+                        onChange={(e) => setEnvio({ ...envio, clienteId: e.value })}
+                        optionLabel="nombre"
+                        optionValue="id"
+                        placeholder={intl.formatMessage({ id: 'Seleccione un cliente' })}
+                        className={`${(estadoGuardando && (envio.clienteId === "" || envio.clienteId === null || envio.clienteId === undefined)) ? "p-invalid" : ""}`}
+                        filter
+                        showClear
+                    />
+                </div>
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="numero"><b>{intl.formatMessage({ id: 'Numero' })}*</b></label>
                     <InputText 
                         value={envio.numero || ""}
@@ -223,7 +255,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         maxLength={50} 
                     />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="origenRuta"><b>{intl.formatMessage({ id: 'Origen de la ruta' })}*</b></label>
                     <InputText 
                         value={envio.origenRuta || ""}
@@ -234,7 +266,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     />
                 </div>
 
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="destinoRuta"><b>{intl.formatMessage({ id: 'Destino de la ruta' })}*</b></label>
                     <InputText 
                         value={envio.destinoRuta || ""}
@@ -246,7 +278,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                 </div>
 
                 {/* Segunda fila */}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="gpsRutaOrigen"><b>{intl.formatMessage({ id: 'GPS Ruta Origen' })}*</b></label>
                     <InputText 
                         value={envio.gpsRutaOrigen || ""}
@@ -257,7 +289,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     />
                 </div>
 
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="gpsRutaDestino"><b>{intl.formatMessage({ id: 'GPS Ruta Destino' })}*</b></label>
                     <InputText 
                         value={envio.gpsRutaDestino || ""}
@@ -269,7 +301,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                 </div>
 
                 {/* Tercera fila */}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="fechaSalida"><b>{intl.formatMessage({ id: 'Fecha de salida' })}*</b></label>
                     <InputText type="datetime-local"
                         value={envio.fechaSalida}
@@ -281,7 +313,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     />
                 </div>
 
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="fechaLlegada"><b>{intl.formatMessage({ id: 'Fecha de llegada' })}*</b></label>
                     <InputText type="datetime-local"
                         value={envio.fechaLlegada}
@@ -294,7 +326,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                 </div>
 
                 {false && (
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                         <label htmlFor="paradasPrevistas">{intl.formatMessage({ id: 'Paradas previstas' })}</label>
                         <InputNumber
                             value={envio.paradasPrevistas || 0}

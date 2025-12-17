@@ -15420,8 +15420,11 @@
           "envioId": {
             "type": "number"
           },
-          "producto": {
-            "type": "string"
+          "productoId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
           },
           "referencia": {
             "type": "string"
@@ -15496,8 +15499,11 @@
           "envioId": {
             "type": "number"
           },
-          "producto": {
-            "type": "string"
+          "productoId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
           },
           "referencia": {
             "type": "string"
@@ -15576,8 +15582,11 @@
           "envioId": {
             "type": "number"
           },
-          "producto": {
-            "type": "string"
+          "productoId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
           },
           "referencia": {
             "type": "string"
@@ -15644,7 +15653,13 @@
           "envio": {
             "$ref": "#/components/schemas/EnvioWithRelations"
           },
-          "foreignKey": {}
+          "foreignKey": {},
+          "producto": {
+            "$ref": "#/components/schemas/ProductoWithRelations"
+          },
+          "pallet": {
+            "$ref": "#/components/schemas/PalletWithRelations"
+          }
         },
         "additionalProperties": false,
         "x-typescript-type": "EnvioContenidoWithRelations"
@@ -15660,8 +15675,11 @@
           "envioId": {
             "type": "number"
           },
-          "producto": {
-            "type": "string"
+          "productoId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
           },
           "referencia": {
             "type": "string"
@@ -19879,7 +19897,9 @@
           "relation": {
             "type": "string",
             "enum": [
-              "envio"
+              "envio",
+              "producto",
+              "pallet"
             ]
           },
           "scope": {
@@ -19928,7 +19948,10 @@
                   "envioId": {
                     "type": "boolean"
                   },
-                  "producto": {
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "palletId": {
                     "type": "boolean"
                   },
                   "referencia": {
@@ -19995,7 +20018,8 @@
                   "enum": [
                     "id",
                     "envioId",
-                    "producto",
+                    "productoId",
+                    "palletId",
                     "referencia",
                     "pesoKgs",
                     "pesoTotal",
@@ -20086,7 +20110,10 @@
                   "envioId": {
                     "type": "boolean"
                   },
-                  "producto": {
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "palletId": {
                     "type": "boolean"
                   },
                   "referencia": {
@@ -20153,7 +20180,8 @@
                   "enum": [
                     "id",
                     "envioId",
-                    "producto",
+                    "productoId",
+                    "palletId",
                     "referencia",
                     "pesoKgs",
                     "pesoTotal",

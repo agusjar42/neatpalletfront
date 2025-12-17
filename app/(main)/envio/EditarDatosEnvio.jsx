@@ -50,7 +50,9 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     ];
 
     const columnasContenido = [
-        { campo: 'producto', header: intl.formatMessage({ id: 'Producto' }), tipo: 'string' },
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
+        { campo: 'nombreProducto', header: intl.formatMessage({ id: 'Producto' }), tipo: 'string' },
+        { campo: 'codigoPallet', header: intl.formatMessage({ id: 'Código Pallet' }), tipo: 'string' },
         { campo: 'referencia', header: intl.formatMessage({ id: 'Referencia' }), tipo: 'string' },
         { campo: 'pesoKgs', header: intl.formatMessage({ id: 'Peso (Kg)' }), tipo: 'number' },
         { campo: 'cantidad', header: intl.formatMessage({ id: 'Cantidad' }), tipo: 'number' },
@@ -66,7 +68,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     ];
 
     const columnasPallet = [
-        { campo: 'producto', header: intl.formatMessage({ id: 'Producto' }), tipo: 'string' },
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
+        { campo: 'nombreProducto', header: intl.formatMessage({ id: 'Producto' }), tipo: 'string' },
         { campo: 'referencia', header: intl.formatMessage({ id: 'Referencia' }), tipo: 'string' },
         { campo: 'codigo', header: intl.formatMessage({ id: 'Código Pallet' }), tipo: 'string' },
         { campo: 'alias', header: intl.formatMessage({ id: 'Alias' }), tipo: 'string' },
@@ -407,22 +410,35 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         </div>
                         {/* Solo mostrar la tabla de contenido si el envío ya está creado */}
                         {envio.id ? (
-                            <Crud
-                                headerCrud={intl.formatMessage({ id: 'Contenido del Envío' })}
-                                getRegistros={getEnvioContenido}
-                                getRegistrosCount={getEnvioContenidoCount}
-                                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                                controlador={"Envio Contenido"}
-                                editarComponente={<EditarEnvioContenido />}
-                                columnas={columnasContenido}
-                                filtradoBase={{envioId: envio.id}}
-                                deleteRegistro={deleteEnvioContenido}
-                                cargarDatosInicialmente={true}
-                                editarComponenteParametrosExtra={{
-                                    envioId: envio.id,
-                                    estoyDentroDeUnTab: true
-                                }}
-                            />
+                            <>
+                                {!envio.clienteId && (
+                                    <div className="p-mt-3">
+                                        <div className="flex align-items-center bg-orange-100 border-round p-3 w-full">
+                                            <span className="pi pi-exclamation-triangle text-orange-600 mr-2" style={{ fontSize: "1.5em" }} />
+                                            <span className="text-orange-700">
+                                                {intl.formatMessage({ id: 'Debe seleccionar un cliente para el envío antes de poder añadir contenido' })}
+                                            </span>
+                                        </div>
+                                    </div>
+                                )}
+                                <Crud
+                                    headerCrud={intl.formatMessage({ id: 'Contenido del Envío' })}
+                                    getRegistros={getEnvioContenido}
+                                    getRegistrosCount={getEnvioContenidoCount}
+                                    botones={envio.clienteId ? ['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV'] : ['ver', 'editar', 'eliminar', 'descargarCSV']}
+                                    controlador={"Envio Contenido"}
+                                    editarComponente={<EditarEnvioContenido />}
+                                    columnas={columnasContenido}
+                                    filtradoBase={{envioId: envio.id}}
+                                    deleteRegistro={deleteEnvioContenido}
+                                    cargarDatosInicialmente={true}
+                                    editarComponenteParametrosExtra={{
+                                        envioId: envio.id,
+                                        clienteId: envio.clienteId,
+                                        estoyDentroDeUnTab: true
+                                    }}
+                                />
+                            </>
                         ) : (
                             <div className="text-center p-4">
                                 <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
@@ -490,7 +506,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                     </div>
                 </TabPanel>
                 
-                <TabPanel header={`${intl.formatMessage({ id: 'Pallets' })} (${conteoPallet})`}>
+                <TabPanel header={`${intl.formatMessage({ id: 'Pallets' })} (${conteoPallet})`} style={{display:"none"}}> 
                     <div>
                         {/* Solo mostrar la tabla de pallets si el envío ya está creado */}
                         {envio.id ? (

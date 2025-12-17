@@ -9,7 +9,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioContenido from "./EditarDatosEnvioContenido";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId }) => {
+const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId, clienteId }) => {
     const toast = useRef(null);
     const [envioContenido, setEnvioContenido] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -46,6 +46,8 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
         }
         const validaEnvioId = envioContenido.envioId === undefined || envioContenido.envioId === "";
         const validaOrden = envioContenido.orden === undefined || envioContenido.orden === null || envioContenido.orden === "";
+        const validaProductoId = envioContenido.productoId === undefined || envioContenido.productoId === null || envioContenido.productoId === "";
+        const validaPalletId = envioContenido.palletId === undefined || envioContenido.palletId === null || envioContenido.palletId === "";
         
         // Convertimos a número los campos numéricos para evitar problemas
         envioContenido.pesoKgs = Number(envioContenido.pesoKgs) || 0;
@@ -53,10 +55,11 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
         
         // Borramos las columnas de la vista que no pertenecen a la tabla EnvioContenido
         delete envioContenido.origenRuta;
+        delete envioContenido.producto; // Se elimina porque es solo para mostrar, el importante es productoId
         
         // NO borramos los campos Base64 aquí, se procesan en el backend
         
-        return (!validaEnvioId && !validaOrden);
+        return (!validaEnvioId && !validaOrden && !validaProductoId && !validaPalletId);
     }
 
     const guardarEnvioContenido = async () => {
@@ -66,6 +69,9 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
         if (await validaciones()) {
             let objGuardar = { ...envioContenido };
             const usuarioActual = getUsuarioSesion()?.id;
+            delete objGuardar['nombreProducto']; 
+            delete objGuardar['codigoPallet'];
+            objGuardar['cantidad'] = Number(objGuardar['cantidad']) || 0;
 
             if (idEditar === 0) {
                 delete objGuardar['id'];
@@ -133,6 +139,7 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                             estadoGuardando={estadoGuardando}
                             envios={envios}
                             estoyDentroDeUnTab={estoyDentroDeUnTab}
+                            clienteId={clienteId}
                         />
 
                         <div className="flex justify-content-end mt-2">

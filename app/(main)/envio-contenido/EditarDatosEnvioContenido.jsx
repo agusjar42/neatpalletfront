@@ -8,9 +8,11 @@ import { FileUpload } from "primereact/fileupload";
 import { Image } from 'primereact/image';
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
-import { convertirArchivoABase64 } from "@/app/utility/Utils";
+import { convertirArchivoABase64, getUsuarioSesion } from "@/app/utility/Utils";
+import { getProducto } from "@/app/api-endpoints/producto";
+import { getPallet } from "@/app/api-endpoints/pallet";
 
-const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGuardando, envios, estoyDentroDeUnTab }) => {
+const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGuardando, envios, estoyDentroDeUnTab, clienteId }) => {
     const intl = useIntl();
     const toast = useRef(null);
     
@@ -19,10 +21,50 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
     const [previewFotoPallet, setPreviewFotoPallet] = useState(null);
     const [fotoProductoInputRef, setFotoProductoInputRef] = useState(null);
     const [fotoPalletInputRef, setFotoPalletInputRef] = useState(null);
+    const [productos, setProductos] = useState([]);
+    const [pallets, setPallets] = useState([]);
     const opcionesEnvio = envios.map(envio => ({
         label: `${envio.id} - ${envio.origenRuta || 'Sin ruta'}`,
         value: envio.id
     }));
+
+    // Cargar productos filtrados por cliente
+    useEffect(() => {
+        const cargarProductos = async () => {
+            if (clienteId) {
+                try {
+                    const filtroProductos = JSON.stringify({ where: { and: { clienteId: clienteId } } });
+                    const dataProductos = await getProducto(filtroProductos);
+                    setProductos(dataProductos || []);
+                } catch (error) {
+                    console.error('Error cargando productos:', error);
+                }
+            }
+        };
+        cargarProductos();
+    }, [clienteId]);
+
+    // Cargar pallets filtrados por empresa (ya que los pallets pertenecen a la empresa)
+    useEffect(() => {
+        const cargarPallets = async () => {
+            try {
+                const empresaId = getUsuarioSesion()?.empresaId;
+                if (empresaId) {
+                    const filtroPallets = JSON.stringify({ where: { and: { empresaId: empresaId } } });
+                    const dataPallets = await getPallet(filtroPallets);
+                    // Formatear pallets para el dropdown
+                    const palletsFormateados = dataPallets?.map(pallet => ({
+                        ...pallet,
+                        label: `${pallet.codigo} - ${pallet.alias || 'Sin alias'}`
+                    })) || [];
+                    setPallets(palletsFormateados);
+                }
+            } catch (error) {
+                console.error('Error cargando pallets:', error);
+            }
+        };
+        cargarPallets();
+    }, []);
 
     // Efecto para calcular el peso total automáticamente
     useEffect(() => {
@@ -38,6 +80,28 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         }
     }, [envioContenido.pesoKgs, envioContenido.cantidad]);
 
+
+    // Manejar la selección de producto
+    const handleProductoChange = (e) => {
+        const productoSeleccionado = productos.find(p => p.id === e.value);
+        if (productoSeleccionado) {
+            setEnvioContenido({
+                ...envioContenido,
+                productoId: e.value,
+                producto: productoSeleccionado.nombre,
+                referencia: productoSeleccionado.referencia,
+                pesoKgs: productoSeleccionado.peso || 0
+            });
+        }
+    };
+
+    // Manejar la selección de pallet
+    const handlePalletChange = (e) => {
+        setEnvioContenido({
+            ...envioContenido,
+            palletId: e.value
+        });
+    };
 
     const onSelectFotoProducto = async (e) => {
         if (e.files && e.files.length > 0) {
@@ -141,7 +205,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el contenido' })}>
             <Toast ref={toast} position="top-right" />
             <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
                     <InputNumber value={envioContenido.orden}
                         placeholder={intl.formatMessage({ id: 'Orden del contenido' })}
@@ -153,7 +217,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         max={99999} 
                         inputStyle={{ textAlign: 'right' }}/>
                 </div>
-                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioContenido.envioId || ""}
                         onChange={(e) => setEnvioContenido({ ...envioContenido, envioId: e.value })}
@@ -163,21 +227,49 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
                 </div>)}
                 
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="producto">{intl.formatMessage({ id: 'Producto' })}</label>
-                    <InputText value={envioContenido.producto || ''}
-                        placeholder={intl.formatMessage({ id: 'Nombre del producto' })}
-                        onChange={(e) => setEnvioContenido({ ...envioContenido, producto: e.target.value })}
-                        maxLength={50} />
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                    <label htmlFor="productoId"><b>{intl.formatMessage({ id: 'Producto' })}*</b></label>
+                    <Dropdown 
+                        value={envioContenido.productoId}
+                        options={productos}
+                        onChange={handleProductoChange}
+                        optionLabel="nombre"
+                        optionValue="id"
+                        placeholder={intl.formatMessage({ id: 'Seleccione un producto' })}
+                        className={`${(estadoGuardando && (envioContenido.productoId === "" || envioContenido.productoId === null || envioContenido.productoId === undefined)) ? "p-invalid" : ""}`}
+                        filter
+                        showClear
+                        disabled={!clienteId}
+                    />
+                    {!clienteId && (
+                        <small className="text-orange-600">
+                            {intl.formatMessage({ id: 'Debe seleccionar un cliente en el envío para ver los productos disponibles' })}
+                        </small>
+                    )}
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                    <label htmlFor="palletId"><b>{intl.formatMessage({ id: 'Pallet' })}*</b></label>
+                    <Dropdown 
+                        value={envioContenido.palletId}
+                        options={pallets}
+                        onChange={handlePalletChange}
+                        optionLabel="label"
+                        optionValue="id"
+                        placeholder={intl.formatMessage({ id: 'Seleccione un pallet' })}
+                        className={`${(estadoGuardando && (envioContenido.palletId === "" || envioContenido.palletId === null || envioContenido.palletId === undefined)) ? "p-invalid" : ""}`}
+                        filter
+                        showClear
+                    />
+                </div>
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="referencia">{intl.formatMessage({ id: 'Referencia' })}</label>
                     <InputText value={envioContenido.referencia || ''}
-                        placeholder={intl.formatMessage({ id: 'Referencia del producto' })}
-                        onChange={(e) => setEnvioContenido({ ...envioContenido, referencia: e.target.value })}
+                        placeholder={intl.formatMessage({ id: 'Se completa automáticamente al seleccionar producto' })}
+                        disabled
+                        style={{ backgroundColor: '#f8f9fa' }}
                         maxLength={50} />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="pesoKgs">{intl.formatMessage({ id: 'Peso (Kg)' })}</label>
                     <InputNumber value={envioContenido.pesoKgs}
                         placeholder={intl.formatMessage({ id: 'Peso en kilogramos' })}
@@ -185,7 +277,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         minFractionDigits={2} maxFractionDigits={2} min={0}
                         inputStyle={{ textAlign: 'right' }} />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="cantidad">{intl.formatMessage({ id: 'Cantidad' })}</label>
                     <InputNumber value={envioContenido.cantidad || 0}
                         placeholder={intl.formatMessage({ id: 'Cantidad del producto' })}
@@ -193,7 +285,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         minFractionDigits={0} maxFractionDigits={0} min={0}
                         inputStyle={{ textAlign: 'right' }} />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="pesoTotal">{intl.formatMessage({ id: 'Peso Total (Kg)' })}</label>
                     <InputNumber 
                         value={envioContenido.pesoTotal || 0}

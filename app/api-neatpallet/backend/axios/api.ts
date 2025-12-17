@@ -1850,10 +1850,16 @@ export interface EnvioContenido {
     'envioId'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof EnvioContenido
      */
-    'producto'?: string;
+    'productoId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenido
+     */
+    'palletId'?: number;
     /**
      * 
      * @type {string}
@@ -2080,7 +2086,9 @@ export interface EnvioContenidoIncludeFilterItems {
     * @enum {string}
     */
 export enum EnvioContenidoIncludeFilterItemsRelationEnum {
-    Envio = 'envio'
+    Envio = 'envio',
+    Producto = 'producto',
+    Pallet = 'pallet'
 }
 
 /**
@@ -2456,10 +2464,16 @@ export interface EnvioContenidoPartial {
     'envioId'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof EnvioContenidoPartial
      */
-    'producto'?: string;
+    'productoId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoPartial
+     */
+    'palletId'?: number;
     /**
      * 
      * @type {string}
@@ -2638,10 +2652,16 @@ export interface EnvioContenidoWithRelations {
     'envioId'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof EnvioContenidoWithRelations
      */
-    'producto'?: string;
+    'productoId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'palletId'?: number;
     /**
      * 
      * @type {string}
@@ -2762,6 +2782,18 @@ export interface EnvioContenidoWithRelations {
      * @memberof EnvioContenidoWithRelations
      */
     'foreignKey'?: any;
+    /**
+     * 
+     * @type {ProductoWithRelations}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'producto'?: ProductoWithRelations;
+    /**
+     * 
+     * @type {PalletWithRelations}
+     * @memberof EnvioContenidoWithRelations
+     */
+    'pallet'?: PalletWithRelations;
 }
 /**
  * 
@@ -6926,10 +6958,16 @@ export interface NewEnvioContenido {
     'envioId'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof NewEnvioContenido
      */
-    'producto'?: string;
+    'productoId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioContenido
+     */
+    'palletId'?: number;
     /**
      * 
      * @type {string}

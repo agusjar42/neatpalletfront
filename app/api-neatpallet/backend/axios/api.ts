@@ -3756,10 +3756,10 @@ export interface EnvioParada {
     'fecha'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof EnvioParada
      */
-    'lugarParada'?: string;
+    'lugarParadaId'?: number;
     /**
      * 
      * @type {string}
@@ -3938,7 +3938,8 @@ export interface EnvioParadaIncludeFilterItems {
     * @enum {string}
     */
 export enum EnvioParadaIncludeFilterItemsRelationEnum {
-    Envio = 'envio'
+    Envio = 'envio',
+    LugarParada = 'lugarParada'
 }
 
 /**
@@ -3967,10 +3968,10 @@ export interface EnvioParadaPartial {
     'fecha'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof EnvioParadaPartial
      */
-    'lugarParada'?: string;
+    'lugarParadaId'?: number;
     /**
      * 
      * @type {string}
@@ -4107,10 +4108,10 @@ export interface EnvioParadaWithRelations {
     'fecha'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof EnvioParadaWithRelations
      */
-    'lugarParada'?: string;
+    'lugarParadaId'?: number;
     /**
      * 
      * @type {string}
@@ -4183,6 +4184,12 @@ export interface EnvioParadaWithRelations {
      * @memberof EnvioParadaWithRelations
      */
     'foreignKey'?: any;
+    /**
+     * 
+     * @type {LugarParadaWithRelations}
+     * @memberof EnvioParadaWithRelations
+     */
+    'lugarParada'?: LugarParadaWithRelations;
 }
 /**
  * (tsType: Partial<Envio>, schemaOptions: { partial: true })
@@ -7280,10 +7287,10 @@ export interface NewEnvioParada {
     'fecha'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof NewEnvioParada
      */
-    'lugarParada'?: string;
+    'lugarParadaId'?: number;
     /**
      * 
      * @type {string}

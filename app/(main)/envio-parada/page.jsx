@@ -10,7 +10,7 @@ const EnvioParada = () => {
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen Ruta' }), tipo: 'string' },
         { campo: 'fechaEspanol', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'string' },
-        { campo: 'lugarParada', header: intl.formatMessage({ id: 'Lugar' }), tipo: 'string' },
+        { campo: 'lugarParadaNombre', header: intl.formatMessage({ id: 'Lugar' }), tipo: 'string' },
         { campo: 'nombreOperario', header: intl.formatMessage({ id: 'Operario' }), tipo: 'string' },
         { campo: 'telefonoOperario', header: intl.formatMessage({ id: 'Teléfono' }), tipo: 'string' },
     ]

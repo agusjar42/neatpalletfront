@@ -78,7 +78,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
 
     const columnasParada = [
         { campo: 'fechaEspanol', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'date' },
-        { campo: 'lugarParada', header: intl.formatMessage({ id: 'Lugar' }), tipo: 'string' },
+        { campo: 'lugarParadaNombre', header: intl.formatMessage({ id: 'Lugar' }), tipo: 'string' },
         { campo: 'direccion', header: intl.formatMessage({ id: 'Dirección' }), tipo: 'string' },
         { campo: 'nombreOperario', header: intl.formatMessage({ id: 'Operario' }), tipo: 'string' },
     ];

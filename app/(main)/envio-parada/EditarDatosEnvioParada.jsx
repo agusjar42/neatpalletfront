@@ -1,16 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
+import { getLugarParada } from '@/app/api-endpoints/lugar-parada';
+import { getUsuarioSesion } from '@/app/utility/Utils';
 
-const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, envios, estoyDentroDeUnTab }) => {
+const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, envios, estoyDentroDeUnTab, envioId }) => {
     const intl = useIntl();
+    const [lugaresParada, setLugaresParada] = useState([]);
 
     const opcionesEnvio = envios.map(envio => ({
         label: `${envio.id} - ${envio.origenRuta || 'Sin ruta'}`,
         value: envio.id
+    }));
+
+    // Función para cargar lugares de parada según el cliente del envío
+    useEffect(() => {
+        const cargarLugaresParada = async () => {
+            if (envioParada.envioId || envioId) {
+                try {
+                    // Buscar el envío seleccionado para obtener su clienteId
+                    const envioSeleccionado = envios.find(env => env.id === (envioParada.envioId || envioId));
+                    if (envioSeleccionado && envioSeleccionado.clienteId) {
+                        const filtro = JSON.stringify({
+                            where: {
+                                and: { clienteId: envioSeleccionado.clienteId }
+                            }
+                        });
+                        const lugares = await getLugarParada(filtro);
+                        setLugaresParada(lugares || []);
+                    }
+                } catch (error) {
+                    console.error('Error al cargar lugares de parada:', error);
+                }
+            }
+        };
+        cargarLugaresParada();
+    }, [envioParada.envioId, envioId, envios]);
+
+    // Función para manejar la selección del lugar de parada
+    const onLugarParadaChange = (e) => {
+        const lugarSeleccionado = lugaresParada.find(lugar => lugar.id === e.value);
+        if (lugarSeleccionado) {
+            setEnvioParada({
+                ...envioParada,
+                lugarParadaId: e.value,
+                direccion: lugarSeleccionado.direccion || '',
+                lugarParadaGps: lugarSeleccionado.direccionGps  || ''
+            });
+        } else {
+            setEnvioParada({ ...envioParada, lugarParadaId: e.value });
+        }
+    };
+
+    const opcionesLugarParada = lugaresParada.map(lugar => ({
+        label: lugar.nombre,
+        value: lugar.id
     }));
 
     return (
@@ -47,11 +94,16 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                         style={{ textAlign: 'right' }} />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="lugarParada">{intl.formatMessage({ id: 'Lugar de parada' })}</label>
-                    <InputText value={envioParada.lugarParada}
-                        placeholder={intl.formatMessage({ id: 'Lugar de la parada' })}
-                        onChange={(e) => setEnvioParada({ ...envioParada, lugarParada: e.target.value })}
-                        maxLength={50} />
+                    <label htmlFor="lugarParadaId">{intl.formatMessage({ id: 'Lugar de parada' })}</label>
+                    <Dropdown 
+                        value={envioParada.lugarParadaId}
+                        options={opcionesLugarParada}
+                        onChange={onLugarParadaChange}
+                        placeholder={intl.formatMessage({ id: 'Seleccionar lugar de parada' })}
+                        filter
+                        showClear
+                        className={`${(estadoGuardando && !envioParada.lugarParadaId) ? "p-invalid" : ""}`}
+                    />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="lugarParadaGps">{intl.formatMessage({ id: 'GPS de la parada' })}</label>

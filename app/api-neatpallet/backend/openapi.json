@@ -14949,8 +14949,8 @@
           "fecha": {
             "type": "string"
           },
-          "lugarParada": {
-            "type": "string"
+          "lugarParadaId": {
+            "type": "number"
           },
           "lugarParadaGps": {
             "type": "string"
@@ -14998,8 +14998,8 @@
           "fecha": {
             "type": "string"
           },
-          "lugarParada": {
-            "type": "string"
+          "lugarParadaId": {
+            "type": "number"
           },
           "lugarParadaGps": {
             "type": "string"
@@ -15051,8 +15051,8 @@
           "fecha": {
             "type": "string"
           },
-          "lugarParada": {
-            "type": "string"
+          "lugarParadaId": {
+            "type": "number"
           },
           "lugarParadaGps": {
             "type": "string"
@@ -15089,7 +15089,10 @@
           "envio": {
             "$ref": "#/components/schemas/EnvioWithRelations"
           },
-          "foreignKey": {}
+          "foreignKey": {},
+          "lugarParada": {
+            "$ref": "#/components/schemas/LugarParadaWithRelations"
+          }
         },
         "additionalProperties": false,
         "x-typescript-type": "EnvioParadaWithRelations"
@@ -15108,8 +15111,8 @@
           "fecha": {
             "type": "string"
           },
-          "lugarParada": {
-            "type": "string"
+          "lugarParadaId": {
+            "type": "number"
           },
           "lugarParadaGps": {
             "type": "string"
@@ -18982,7 +18985,8 @@
           "relation": {
             "type": "string",
             "enum": [
-              "envio"
+              "envio",
+              "lugarParada"
             ]
           },
           "scope": {
@@ -19034,7 +19038,7 @@
                   "fecha": {
                     "type": "boolean"
                   },
-                  "lugarParada": {
+                  "lugarParadaId": {
                     "type": "boolean"
                   },
                   "lugarParadaGps": {
@@ -19078,7 +19082,7 @@
                     "id",
                     "envioId",
                     "fecha",
-                    "lugarParada",
+                    "lugarParadaId",
                     "lugarParadaGps",
                     "direccion",
                     "nombreOperario",
@@ -19164,7 +19168,7 @@
                   "fecha": {
                     "type": "boolean"
                   },
-                  "lugarParada": {
+                  "lugarParadaId": {
                     "type": "boolean"
                   },
                   "lugarParadaGps": {
@@ -19208,7 +19212,7 @@
                     "id",
                     "envioId",
                     "fecha",
-                    "lugarParada",
+                    "lugarParadaId",
                     "lugarParadaGps",
                     "direccion",
                     "nombreOperario",

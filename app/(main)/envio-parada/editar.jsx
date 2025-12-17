@@ -126,6 +126,7 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                             estadoGuardando={estadoGuardando}
                             envios={envios}
                             estoyDentroDeUnTab={estoyDentroDeUnTab}
+                            envioId={envioId}
                         />
 
                         <div className="flex justify-content-end mt-2">

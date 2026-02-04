@@ -131,7 +131,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         "Tipo Transporte": {
           "path": "/tipo-transporte",
           "icon": "pi pi-truck"
-        },
+        },/*
         "Operarios": {
           "path": "/operario",
           "icon": "pi pi-truck"
@@ -143,7 +143,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         "Productos": {
           "path": "/producto",
           "icon": "pi pi-truck"
-        },
+        },*/
         "Clientes": {
           "path": "/cliente",
           "icon": "pi pi-truck"
@@ -160,10 +160,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
       },
       "Gestión del Pallet": {
-          "Pallet Parametro": {
+          /*"Pallet Parametro": {
               "path": "/pallet-parametro",
               "icon": "pi pi-sliders-h"
-          },
+          },*/
           "Pallet": {
               "path": "/pallet",
               "icon": "pi pi-th-large"

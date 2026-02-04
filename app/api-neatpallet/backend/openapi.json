@@ -14958,8 +14958,8 @@
           "direccion": {
             "type": "string"
           },
-          "nombreOperario": {
-            "type": "string"
+          "operarioId": {
+            "type": "number"
           },
           "telefonoOperario": {
             "type": "string"
@@ -15007,8 +15007,8 @@
           "direccion": {
             "type": "string"
           },
-          "nombreOperario": {
-            "type": "string"
+          "operarioId": {
+            "type": "number"
           },
           "telefonoOperario": {
             "type": "string"
@@ -15060,8 +15060,8 @@
           "direccion": {
             "type": "string"
           },
-          "nombreOperario": {
-            "type": "string"
+          "operarioId": {
+            "type": "number"
           },
           "telefonoOperario": {
             "type": "string"
@@ -15092,6 +15092,9 @@
           "foreignKey": {},
           "lugarParada": {
             "$ref": "#/components/schemas/LugarParadaWithRelations"
+          },
+          "operario": {
+            "$ref": "#/components/schemas/OperarioWithRelations"
           }
         },
         "additionalProperties": false,
@@ -15120,8 +15123,8 @@
           "direccion": {
             "type": "string"
           },
-          "nombreOperario": {
-            "type": "string"
+          "operarioId": {
+            "type": "number"
           },
           "telefonoOperario": {
             "type": "string"
@@ -18986,7 +18989,8 @@
             "type": "string",
             "enum": [
               "envio",
-              "lugarParada"
+              "lugarParada",
+              "operario"
             ]
           },
           "scope": {
@@ -19047,7 +19051,7 @@
                   "direccion": {
                     "type": "boolean"
                   },
-                  "nombreOperario": {
+                  "operarioId": {
                     "type": "boolean"
                   },
                   "telefonoOperario": {
@@ -19085,7 +19089,7 @@
                     "lugarParadaId",
                     "lugarParadaGps",
                     "direccion",
-                    "nombreOperario",
+                    "operarioId",
                     "telefonoOperario",
                     "emailOperario",
                     "usuarioCreacion",
@@ -19177,7 +19181,7 @@
                   "direccion": {
                     "type": "boolean"
                   },
-                  "nombreOperario": {
+                  "operarioId": {
                     "type": "boolean"
                   },
                   "telefonoOperario": {
@@ -19215,7 +19219,7 @@
                     "lugarParadaId",
                     "lugarParadaGps",
                     "direccion",
-                    "nombreOperario",
+                    "operarioId",
                     "telefonoOperario",
                     "emailOperario",
                     "usuarioCreacion",

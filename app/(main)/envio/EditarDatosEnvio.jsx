@@ -77,10 +77,11 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     ];
 
     const columnasParada = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'fechaEspanol', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'date' },
         { campo: 'lugarParadaNombre', header: intl.formatMessage({ id: 'Lugar' }), tipo: 'string' },
         { campo: 'direccion', header: intl.formatMessage({ id: 'Dirección' }), tipo: 'string' },
-        { campo: 'nombreOperario', header: intl.formatMessage({ id: 'Operario' }), tipo: 'string' },
+        { campo: 'operarioNombre', header: intl.formatMessage({ id: 'Operario' }), tipo: 'string' },
     ];
 
     const columnasSensorEmpresa = [

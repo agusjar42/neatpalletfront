@@ -3774,10 +3774,10 @@ export interface EnvioParada {
     'direccion'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof EnvioParada
      */
-    'nombreOperario'?: string;
+    'operarioId'?: number;
     /**
      * 
      * @type {string}
@@ -3939,7 +3939,8 @@ export interface EnvioParadaIncludeFilterItems {
     */
 export enum EnvioParadaIncludeFilterItemsRelationEnum {
     Envio = 'envio',
-    LugarParada = 'lugarParada'
+    LugarParada = 'lugarParada',
+    Operario = 'operario'
 }
 
 /**
@@ -3986,10 +3987,10 @@ export interface EnvioParadaPartial {
     'direccion'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof EnvioParadaPartial
      */
-    'nombreOperario'?: string;
+    'operarioId'?: number;
     /**
      * 
      * @type {string}
@@ -4126,10 +4127,10 @@ export interface EnvioParadaWithRelations {
     'direccion'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof EnvioParadaWithRelations
      */
-    'nombreOperario'?: string;
+    'operarioId'?: number;
     /**
      * 
      * @type {string}
@@ -4190,6 +4191,12 @@ export interface EnvioParadaWithRelations {
      * @memberof EnvioParadaWithRelations
      */
     'lugarParada'?: LugarParadaWithRelations;
+    /**
+     * 
+     * @type {OperarioWithRelations}
+     * @memberof EnvioParadaWithRelations
+     */
+    'operario'?: OperarioWithRelations;
 }
 /**
  * (tsType: Partial<Envio>, schemaOptions: { partial: true })
@@ -7305,10 +7312,10 @@ export interface NewEnvioParada {
     'direccion'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof NewEnvioParada
      */
-    'nombreOperario'?: string;
+    'operarioId'?: number;
     /**
      * 
      * @type {string}

@@ -63,7 +63,7 @@ const EditarDatosEnvioMovimiento = ({ envioMovimiento, setEnvioMovimiento, estad
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para el movimiento de envío' })}>
             <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
                     <InputNumber value={envioMovimiento.orden}
                         placeholder={intl.formatMessage({ id: 'Orden del movimiento' })}
@@ -75,7 +75,7 @@ const EditarDatosEnvioMovimiento = ({ envioMovimiento, setEnvioMovimiento, estad
                         max={99999} 
                         inputStyle={{ textAlign: 'right' }} />
                 </div>
-                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
                     <Dropdown value={envioMovimiento.envioId || ""}
                         onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, envioId: e.value })}
@@ -84,7 +84,7 @@ const EditarDatosEnvioMovimiento = ({ envioMovimiento, setEnvioMovimiento, estad
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
                 </div>)}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="tipoSensorId"><b>{intl.formatMessage({ id: 'Tipo de Sensor' })}*</b></label>
                     <Dropdown value={envioMovimiento.tipoSensorId || ""}
                         onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, tipoSensorId: e.value })}

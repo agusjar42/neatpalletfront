@@ -47,6 +47,14 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
         const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const validaEnvioId = envioParada.envioId === undefined || envioParada.envioId === "";
         const validaOrden = envioParada.orden === undefined || envioParada.orden === null || envioParada.orden === "";
+        
+        const validalugarParadaId = envioParada.lugarParadaId === undefined || envioParada.lugarParadaId === null || envioParada.lugarParadaId === "";
+        const validalugarParadaGps = envioParada.lugarParadaGps === undefined || envioParada.lugarParadaGps === null || envioParada.lugarParadaGps === "";
+        const validadireccion = envioParada.direccion === undefined || envioParada.direccion === null || envioParada.direccion === "";
+        const validaoperarioId = envioParada.operarioId === undefined || envioParada.operarioId === null || envioParada.operarioId === "";
+        const validatelefonoOperario = envioParada.telefonoOperario === undefined || envioParada.telefonoOperario === null || envioParada.telefonoOperario === "";
+        const validaemailOperario = envioParada.emailOperario === undefined || envioParada.emailOperario === null || envioParada.emailOperario === "";
+
         if ((envioParada.emailOperario?.length == undefined) || (envioParada.emailOperario.length > 0 && !regexEmail.test(envioParada.emailOperario))) {
             toast.current?.show({
                 severity: 'error',
@@ -55,7 +63,9 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                 life: 3000,
             });
         }
-        return (!validaEnvioId && !validaOrden && !(envioParada.emailOperario.length > 0 && !regexEmail.test(envioParada.emailOperario)));
+        return (!validaEnvioId && !validaOrden && !validadireccion && !validaemailOperario && 
+                !validalugarParadaId && !validalugarParadaGps && !validadireccion && !validaoperarioId && 
+                !validatelefonoOperario && !(envioParada.emailOperario.length > 0 && !regexEmail.test(envioParada.emailOperario)));
     }
 
     const guardarEnvioParada = async () => {
@@ -69,6 +79,8 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
             //
             delete objGuardar['origenRuta'];
             delete objGuardar['fechaEspanol'];
+            delete objGuardar['lugarParadaNombre'];
+            delete objGuardar['operarioNombre'];
 
             if (idEditar === 0) {
                 delete objGuardar.id;

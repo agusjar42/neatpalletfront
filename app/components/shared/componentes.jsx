@@ -79,17 +79,31 @@ const manejarCambioImagen = (event) => {
 
 const tieneUsuarioPermiso = async (modulo, controlador, permiso) => {
     const usuario = getUsuarioSesion();
+    
+    // Validar si existe usuario y rolId
+    if (!usuario || !usuario.rolId) {
+        console.warn('No se encontró usuario o rolId en la sesión');
+        return false; // o lanzar error según tu lógica de negocio
+    }
+    
     return await compruebaPermiso(usuario.rolId, modulo, controlador, permiso);
 }
 
 const obtenerTodosLosPermisos = async (accion) => {
     const usuario = getUsuarioSesion();
+    
+    // Validar si existe usuario y sus propiedades requeridas
+    if (!usuario || !usuario.rolId || !usuario.empresaId) {
+        console.warn('No se encontró usuario, rolId o empresaId en la sesión');
+        return []; // retornar array vacío o lanzar error según tu lógica
+    }
+    
     const permisos = await getVistaEmpresaRolPermiso(JSON.stringify({
         where: {
             and: {
                 rolId: usuario.rolId,
                 permisoAccion: accion,
-                empresaId: getUsuarioSesion().empresaId
+                empresaId: usuario.empresaId
             }
         }
     }));

@@ -32,7 +32,7 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                     if (envioSeleccionado && envioSeleccionado.clienteId) {
                         const filtro = JSON.stringify({
                             where: {
-                                and: { clienteId: envioSeleccionado.clienteId }
+                                and: { clienteId: envioSeleccionado.clienteId, activoSN: 'S' }
                             }
                         });
                         const lugares = await getLugarParada(filtro);
@@ -55,7 +55,7 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                     if (envioSeleccionado && envioSeleccionado.clienteId) {
                         const filtro = JSON.stringify({
                             where: {
-                                and: { clienteId: envioSeleccionado.clienteId }
+                                and: { clienteId: envioSeleccionado.clienteId, activoSN: 'S'}
                             }
                         });
                         const operariosData = await getOperario(filtro);

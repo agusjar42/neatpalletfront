@@ -117,9 +117,9 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         getEnvioParadaCount(JSON.stringify(whereFiltro))
                     ]);
 
-                    setConteoMovimiento(movimientoCount[0]?.count || 0);
-                    setConteoPallet(palletCount[0]?.count || 0);
-                    setConteoParada(paradaCount[0]?.count || 0);
+                    setConteoMovimiento(movimientoCount?.count || 0);
+                    setConteoPallet(palletCount?.count || 0);
+                    setConteoParada(paradaCount?.count || 0);
                 } catch (error) {
                     console.error('Error cargando conteos:', error);
                 }

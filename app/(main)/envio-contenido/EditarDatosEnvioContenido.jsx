@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, act } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
@@ -33,7 +33,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         const cargarProductos = async () => {
             if (clienteId) {
                 try {
-                    const filtroProductos = JSON.stringify({ where: { and: { clienteId: clienteId } } });
+                    const filtroProductos = JSON.stringify({ where: { and: { clienteId: clienteId, activoSN: 'S' } } });
                     const dataProductos = await getProducto(filtroProductos);
                     setProductos(dataProductos || []);
                 } catch (error) {

@@ -10,7 +10,8 @@ const LugarParada = () => {
         { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Cliente' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'direccion', header: intl.formatMessage({ id: 'Dirección' }), tipo: 'string' },
-        { campo: 'direccionGps', header: intl.formatMessage({ id: 'Dirección GPS' }), tipo: 'string' }
+        { campo: 'direccionGps', header: intl.formatMessage({ id: 'Dirección GPS' }), tipo: 'string' },
+        { campo: 'activoSN', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' }
     ];
 
     return (

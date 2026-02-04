@@ -12575,6 +12575,10 @@
             "type": "number",
             "nullable": true
           },
+          "activoSN": {
+            "type": "string",
+            "nullable": true
+          },
           "cliente": {
             "$ref": "#/components/schemas/Cliente"
           }
@@ -12610,6 +12614,10 @@
           },
           "usuModificacion": {
             "type": "number",
+            "nullable": true
+          },
+          "activoSN": {
+            "type": "string",
             "nullable": true
           },
           "cliente": {
@@ -12654,6 +12662,10 @@
             "type": "number",
             "nullable": true
           },
+          "activoSN": {
+            "type": "string",
+            "nullable": true
+          },
           "cliente": {
             "$ref": "#/components/schemas/Cliente"
           },
@@ -12695,6 +12707,10 @@
           },
           "usuModificacion": {
             "type": "number",
+            "nullable": true
+          },
+          "activoSN": {
+            "type": "string",
             "nullable": true
           },
           "cliente": {
@@ -13976,6 +13992,10 @@
             "type": "number",
             "nullable": true
           },
+          "activoSN": {
+            "type": "string",
+            "nullable": true
+          },
           "cliente": {
             "$ref": "#/components/schemas/Cliente"
           }
@@ -14019,6 +14039,10 @@
           },
           "usuModificacion": {
             "type": "number",
+            "nullable": true
+          },
+          "activoSN": {
+            "type": "string",
             "nullable": true
           },
           "cliente": {
@@ -14069,6 +14093,10 @@
           },
           "usuModificacion": {
             "type": "number",
+            "nullable": true
+          },
+          "activoSN": {
+            "type": "string",
             "nullable": true
           },
           "cliente": {
@@ -14122,6 +14150,10 @@
             "type": "number",
             "nullable": true
           },
+          "activoSN": {
+            "type": "string",
+            "nullable": true
+          },
           "cliente": {
             "$ref": "#/components/schemas/Cliente"
           }
@@ -14171,6 +14203,10 @@
             "type": "number",
             "nullable": true
           },
+          "activoSN": {
+            "type": "string",
+            "nullable": true
+          },
           "cliente": {
             "$ref": "#/components/schemas/Cliente"
           }
@@ -14214,6 +14250,10 @@
           },
           "usuModificacion": {
             "type": "number",
+            "nullable": true
+          },
+          "activoSN": {
+            "type": "string",
             "nullable": true
           },
           "cliente": {
@@ -14266,6 +14306,10 @@
             "type": "number",
             "nullable": true
           },
+          "activoSN": {
+            "type": "string",
+            "nullable": true
+          },
           "cliente": {
             "$ref": "#/components/schemas/Cliente"
           },
@@ -14315,6 +14359,10 @@
           },
           "usuModificacion": {
             "type": "number",
+            "nullable": true
+          },
+          "activoSN": {
+            "type": "string",
             "nullable": true
           },
           "cliente": {
@@ -21249,6 +21297,9 @@
                   "usuModificacion": {
                     "type": "boolean"
                   },
+                  "activoSN": {
+                    "type": "boolean"
+                  },
                   "cliente": {
                     "type": "boolean"
                   }
@@ -21269,6 +21320,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
+                    "activoSN",
                     "cliente"
                   ],
                   "example": "id"
@@ -21363,6 +21415,9 @@
                   "usuModificacion": {
                     "type": "boolean"
                   },
+                  "activoSN": {
+                    "type": "boolean"
+                  },
                   "cliente": {
                     "type": "boolean"
                   }
@@ -21383,6 +21438,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
+                    "activoSN",
                     "cliente"
                   ],
                   "example": "id"
@@ -21548,6 +21604,9 @@
                   "usuModificacion": {
                     "type": "boolean"
                   },
+                  "activoSN": {
+                    "type": "boolean"
+                  },
                   "cliente": {
                     "type": "boolean"
                   }
@@ -21568,6 +21627,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
+                    "activoSN",
                     "cliente"
                   ],
                   "example": "id"
@@ -21662,6 +21722,9 @@
                   "usuModificacion": {
                     "type": "boolean"
                   },
+                  "activoSN": {
+                    "type": "boolean"
+                  },
                   "cliente": {
                     "type": "boolean"
                   }
@@ -21682,6 +21745,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
+                    "activoSN",
                     "cliente"
                   ],
                   "example": "id"
@@ -23374,6 +23438,9 @@
                   "usuModificacion": {
                     "type": "boolean"
                   },
+                  "activoSN": {
+                    "type": "boolean"
+                  },
                   "cliente": {
                     "type": "boolean"
                   }
@@ -23392,6 +23459,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
+                    "activoSN",
                     "cliente"
                   ],
                   "example": "id"
@@ -23480,6 +23548,9 @@
                   "usuModificacion": {
                     "type": "boolean"
                   },
+                  "activoSN": {
+                    "type": "boolean"
+                  },
                   "cliente": {
                     "type": "boolean"
                   }
@@ -23498,6 +23569,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
+                    "activoSN",
                     "cliente"
                   ],
                   "example": "id"

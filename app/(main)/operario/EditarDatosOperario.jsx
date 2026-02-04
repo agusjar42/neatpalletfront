@@ -2,6 +2,7 @@ import React from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
+import { InputSwitch } from 'primereact/inputswitch';
 import { useIntl } from 'react-intl';
 
 const EditarDatosOperario = ({ operario, setOperario, estadoGuardando, estoyDentroDeUnTab, clientes }) => {
@@ -11,6 +12,14 @@ const EditarDatosOperario = ({ operario, setOperario, estadoGuardando, estoyDent
         label: cliente.nombre,
         value: cliente.id
     })) : [];
+
+    const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
+        const valor = (e.target && e.target.value) || "";
+        let _operario = { ...operario };
+        const esTrue = valor === true ? 'S' : 'N';
+        _operario[`${nombreInputSwitch}`] = esTrue;
+        setOperario(_operario);
+    };
 
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos del operario' })}>
@@ -55,6 +64,13 @@ const EditarDatosOperario = ({ operario, setOperario, estadoGuardando, estoyDent
                         placeholder={intl.formatMessage({ id: 'Email del operario' })}
                         onChange={(e) => setOperario({ ...operario, email: e.target.value })}
                         maxLength={250} 
+                    />
+                </div>
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="activoSN" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
+                    <InputSwitch
+                        checked={operario.activoSN === 'S'}
+                        onChange={(e) => manejarCambioInputSwitch(e, "activoSN")}
                     />
                 </div>
             </div>

@@ -27,16 +27,20 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'telefono', header: intl.formatMessage({ id: 'Teléfono' }), tipo: 'string' },
         { campo: 'email', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
+        { campo: 'activoSN', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ];
 
     const columnasLugarParada = [
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'direccion', header: intl.formatMessage({ id: 'Dirección' }), tipo: 'string' },
         { campo: 'direccionGps', header: intl.formatMessage({ id: 'Dirección GPS' }), tipo: 'string' },
+        { campo: 'activoSN', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
+
     ];
 
     const columnasProducto = [
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'activoSN', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ];
 
     // Efecto para actualizar conteos cuando se carga el cliente

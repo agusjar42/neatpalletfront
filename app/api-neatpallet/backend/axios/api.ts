@@ -6243,6 +6243,12 @@ export interface LugarParada {
     'usuModificacion'?: number | null;
     /**
      * 
+     * @type {string}
+     * @memberof LugarParada
+     */
+    'activoSN'?: string | null;
+    /**
+     * 
      * @type {Cliente}
      * @memberof LugarParada
      */
@@ -6430,6 +6436,12 @@ export interface LugarParadaPartial {
     'usuModificacion'?: number | null;
     /**
      * 
+     * @type {string}
+     * @memberof LugarParadaPartial
+     */
+    'activoSN'?: string | null;
+    /**
+     * 
      * @type {Cliente}
      * @memberof LugarParadaPartial
      */
@@ -6544,6 +6556,12 @@ export interface LugarParadaWithRelations {
      * @memberof LugarParadaWithRelations
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LugarParadaWithRelations
+     */
+    'activoSN'?: string | null;
     /**
      * 
      * @type {Cliente}
@@ -7666,6 +7684,12 @@ export interface NewLugarParada {
     'usuModificacion'?: number | null;
     /**
      * 
+     * @type {string}
+     * @memberof NewLugarParada
+     */
+    'activoSN'?: string | null;
+    /**
+     * 
      * @type {Cliente}
      * @memberof NewLugarParada
      */
@@ -7725,6 +7749,12 @@ export interface NewOperario {
      * @memberof NewOperario
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewOperario
+     */
+    'activoSN'?: string | null;
     /**
      * 
      * @type {Cliente}
@@ -8158,6 +8188,12 @@ export interface NewProducto {
      * @memberof NewProducto
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProducto
+     */
+    'activoSN'?: string | null;
     /**
      * 
      * @type {Cliente}
@@ -8710,6 +8746,12 @@ export interface Operario {
     'usuModificacion'?: number | null;
     /**
      * 
+     * @type {string}
+     * @memberof Operario
+     */
+    'activoSN'?: string | null;
+    /**
+     * 
      * @type {Cliente}
      * @memberof Operario
      */
@@ -8897,6 +8939,12 @@ export interface OperarioPartial {
     'usuModificacion'?: number | null;
     /**
      * 
+     * @type {string}
+     * @memberof OperarioPartial
+     */
+    'activoSN'?: string | null;
+    /**
+     * 
      * @type {Cliente}
      * @memberof OperarioPartial
      */
@@ -9011,6 +9059,12 @@ export interface OperarioWithRelations {
      * @memberof OperarioWithRelations
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof OperarioWithRelations
+     */
+    'activoSN'?: string | null;
     /**
      * 
      * @type {Cliente}
@@ -11163,6 +11217,12 @@ export interface Producto {
     'usuModificacion'?: number | null;
     /**
      * 
+     * @type {string}
+     * @memberof Producto
+     */
+    'activoSN'?: string | null;
+    /**
+     * 
      * @type {Cliente}
      * @memberof Producto
      */
@@ -11338,6 +11398,12 @@ export interface ProductoPartial {
     'usuModificacion'?: number | null;
     /**
      * 
+     * @type {string}
+     * @memberof ProductoPartial
+     */
+    'activoSN'?: string | null;
+    /**
+     * 
      * @type {Cliente}
      * @memberof ProductoPartial
      */
@@ -11440,6 +11506,12 @@ export interface ProductoWithRelations {
      * @memberof ProductoWithRelations
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoWithRelations
+     */
+    'activoSN'?: string | null;
     /**
      * 
      * @type {Cliente}

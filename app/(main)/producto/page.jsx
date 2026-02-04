@@ -9,7 +9,7 @@ const Producto = () => {
     const columnas = [
         { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Cliente' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' }
-    ];
+        ];
 
     return (
         <div>

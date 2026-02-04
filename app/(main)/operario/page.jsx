@@ -10,7 +10,8 @@ const Operario = () => {
         { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Cliente' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'telefono', header: intl.formatMessage({ id: 'Teléfono' }), tipo: 'string' },
-        { campo: 'email', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' }
+        { campo: 'email', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
+        { campo: 'activoSN', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' }
     ];
 
     return (

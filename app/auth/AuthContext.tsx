@@ -87,133 +87,121 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const getMenuLateral = async () => {
     // Este objeto contiene las rutas y los iconos asociados a cada permiso
     const jsonRutas: Record<string, Record<string, { path: string; icon: string }>> = {
-      "Logs": {
-        "Logs incorrectos": {
-          "path": "/logs-incorrectos",
-          "icon": "pi pi-fw pi-exclamation-triangle"
-        },
-        "Logs de usuarios": {
-          "path": "/tablas-maestras/log_usuario",
-          "icon": "pi pi-history"
-        },
-      },
-      "Tablas de sistema": {
-        "Empresas": {
-          "path": "/tablas-maestras/empresa",
-          "icon": "pi pi-building"
-        },
-        "Usuarios": {
-          "path": "/usuarios",
-          "icon": "pi pi-users"
-        },
-        "Roles": {
-          "path": "/tablas-maestras/rol",
-          "icon": "pi pi-fw pi-bars"
-        },
-        "Permisos": {
-          "path": "/tablas-maestras/permiso",
-          "icon": "pi pi-key"
-        },        
-        "Paises": {
-          "path": "/tablas-maestras/pais",
-          "icon": "pi pi-fw pi-globe"
-        },
-      },
-      "Tablas Maestras": {
-        "Tipo Carroceria": {
-          "path": "/tipo-carroceria",
-          "icon": "pi pi-car"
-        },
-        "Tipo Sensor": {
-          "path": "/tipo-sensor",
-          "icon": "pi pi-circle"
-        },
-        "Tipo Transporte": {
-          "path": "/tipo-transporte",
-          "icon": "pi pi-truck"
-        },/*
-        "Operarios": {
-          "path": "/operario",
-          "icon": "pi pi-truck"
-        },
-        "Lugar Parada": {
-          "path": "/lugar-parada",
-          "icon": "pi pi-truck"
-        },
-        "Productos": {
-          "path": "/producto",
-          "icon": "pi pi-truck"
-        },*/
-        "Clientes": {
-          "path": "/cliente",
-          "icon": "pi pi-truck"
-        },
-      },
-      "Traducciones": {
-        "Idiomas": {
-          "path": "/tablas-maestras/idioma",
-          "icon": "pi pi-language"
-        },
-        "Traducciones": {
-          "path": "/tablas-maestras/traduccion",
-          "icon": "pi pi-fw pi-bars"
-        }
-      },
-      "Gestión del Pallet": {
-          /*"Pallet Parametro": {
-              "path": "/pallet-parametro",
-              "icon": "pi pi-sliders-h"
-          },*/
-          "Pallet": {
-              "path": "/pallet",
-              "icon": "pi pi-th-large"
-          },
-          "Parametro": {
-              "path": "/parametro",
-              "icon": "pi pi-wrench"
-          },
-      },
-      "Gestión del Envio": {
-          "Envio": {
-              "path": "/envio",
-              "icon": "pi pi-send"
-          }
-      },
-      "Informes": {
-        "Envío Configuracion Empresa": {
-              "path": "/envio-configuracion-empresa",
-              "icon": "pi pi-building"
-          },
-          "Envío Sensor Empresa": {
-              "path": "/envio-sensor-empresa",
-              "icon": "pi pi-building"
-          },      
-          "Envio Contenido": {
-              "path": "/envio-contenido",
-              "icon": "pi pi-refresh"
-          },
-          "Envio Configuracion": {
-              "path": "/envio-configuracion",
-              "icon": "pi pi-cog"
-          },
-          "Envio Movimiento": {
-              "path": "/envio-movimiento",
-              "icon": "pi pi-arrow-right"
-          },
-          "Envio Pallet": {
-              "path": "/envio-pallet",
-              "icon": "pi pi-box"
-          },
-          "Envio Parada": {
-              "path": "/envio-parada",
-              "icon": "pi pi-pause"
-          },
-          "Envio Sensor": {
-              "path": "/envio-sensor",
-              "icon": "pi pi-wifi"
-          },
-      }
+
+  "Sistema": {
+    "Empresas": {
+      path: "/tablas-maestras/empresa",
+      icon: "pi pi-building"
+    },
+    "Usuarios": {
+      path: "/usuarios",
+      icon: "pi pi-users"
+    },
+    "Roles": {
+      path: "/tablas-maestras/rol",
+      icon: "pi pi-bars"
+    },
+    "Permisos": {
+      path: "/tablas-maestras/permiso",
+      icon: "pi pi-key"
+    },
+    "Países": {
+      path: "/tablas-maestras/pais",
+      icon: "pi pi-globe"
+    },
+  },
+
+  "Configuración": {
+    "Parámetros": {
+      path: "/parametro",
+      icon: "pi pi-wrench"
+    },
+    "Idiomas": {
+      path: "/tablas-maestras/idioma",
+      icon: "pi pi-language"
+    },
+    "Traducciones": {
+      path: "/tablas-maestras/traduccion",
+      icon: "pi pi-bars"
     }
+  },
+
+  "Datos Maestros": {
+    "Clientes": {
+      path: "/cliente",
+      icon: "pi pi-users"
+    },
+    "Tipo Carrocería": {
+      path: "/tipo-carroceria",
+      icon: "pi pi-car"
+    },
+    "Tipo Sensor": {
+      path: "/tipo-sensor",
+      icon: "pi pi-circle"
+    },
+    "Tipo Transporte": {
+      path: "/tipo-transporte",
+      icon: "pi pi-truck"
+    }
+  },
+
+  "Operativa": {
+    "Pallet": {
+      path: "/pallet",
+      icon: "pi pi-th-large"
+    },
+    "Envíos": {
+      path: "/envio",
+      icon: "pi pi-send"
+    }
+  },
+
+  "Informes": {
+    "Configuración Empresa": {
+      path: "/envio-configuracion-empresa",
+      icon: "pi pi-building"
+    },
+    "Sensor Empresa": {
+      path: "/envio-sensor-empresa",
+      icon: "pi pi-building"
+    },
+    "Contenido": {
+      path: "/envio-contenido",
+      icon: "pi pi-refresh"
+    },
+    "Configuración": {
+      path: "/envio-configuracion",
+      icon: "pi pi-cog"
+    },
+    "Movimientos": {
+      path: "/envio-movimiento",
+      icon: "pi pi-arrow-right"
+    },
+    "Pallet": {
+      path: "/envio-pallet",
+      icon: "pi pi-box"
+    },
+    "Paradas": {
+      path: "/envio-parada",
+      icon: "pi pi-pause"
+    },
+    "Sensores": {
+      path: "/envio-sensor",
+      icon: "pi pi-wifi"
+    },
+  },
+
+  "Logs": {
+    "Logs incorrectos": {
+      path: "/logs-incorrectos",
+      icon: "pi pi-exclamation-triangle"
+    },
+    "Logs de usuarios": {
+      path: "/tablas-maestras/log_usuario",
+      icon: "pi pi-history"
+    }
+  }
+};
 
     // Obtener los permisos del usuario actual de "Acceder" a las rutas
     const permisos = await obtenerTodosLosPermisos('Acceder');

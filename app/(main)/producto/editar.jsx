@@ -65,6 +65,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             // Obtenemos el registro actual y solo entramos si tiene nombre
             let objGuardar = { ...producto };
             const usuarioActual = getUsuarioSesion()?.id;
+            objGuardar.pesoKgs = Number(objGuardar.pesoKgs) || 0;
 
             // Si estoy insertando uno nuevo
             if (idEditar === 0) {

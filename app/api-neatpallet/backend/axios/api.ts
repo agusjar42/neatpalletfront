@@ -8196,6 +8196,12 @@ export interface NewProducto {
     'activoSN'?: string | null;
     /**
      * 
+     * @type {number}
+     * @memberof NewProducto
+     */
+    'pesoKgs'?: number;
+    /**
+     * 
      * @type {Cliente}
      * @memberof NewProducto
      */
@@ -11223,6 +11229,12 @@ export interface Producto {
     'activoSN'?: string | null;
     /**
      * 
+     * @type {number}
+     * @memberof Producto
+     */
+    'pesoKgs'?: number;
+    /**
+     * 
      * @type {Cliente}
      * @memberof Producto
      */
@@ -11404,6 +11416,12 @@ export interface ProductoPartial {
     'activoSN'?: string | null;
     /**
      * 
+     * @type {number}
+     * @memberof ProductoPartial
+     */
+    'pesoKgs'?: number;
+    /**
+     * 
      * @type {Cliente}
      * @memberof ProductoPartial
      */
@@ -11512,6 +11530,12 @@ export interface ProductoWithRelations {
      * @memberof ProductoWithRelations
      */
     'activoSN'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoWithRelations
+     */
+    'pesoKgs'?: number;
     /**
      * 
      * @type {Cliente}

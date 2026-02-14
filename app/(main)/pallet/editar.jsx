@@ -121,7 +121,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                         {//
                         //Si el pallet ya está creado, mostramos la tabla de parámetros. Ojo en el parámetro editarComponenteParametrosExtra le pasamos el palletId para que al crear un nuevo parámetro ya venga relleno
                         //
-                        pallet.id && <div>
+                        pallet.id && <div><br></br>
                             <Crud
                                 headerCrud={intl.formatMessage({ id: 'Parámetros' })}
                                 getRegistros={getPalletParametro}

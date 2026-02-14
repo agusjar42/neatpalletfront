@@ -12579,6 +12579,9 @@
             "type": "string",
             "nullable": true
           },
+          "pesoKgs": {
+            "type": "number"
+          },
           "cliente": {
             "$ref": "#/components/schemas/Cliente"
           }
@@ -12619,6 +12622,9 @@
           "activoSN": {
             "type": "string",
             "nullable": true
+          },
+          "pesoKgs": {
+            "type": "number"
           },
           "cliente": {
             "$ref": "#/components/schemas/Cliente"
@@ -12666,6 +12672,9 @@
             "type": "string",
             "nullable": true
           },
+          "pesoKgs": {
+            "type": "number"
+          },
           "cliente": {
             "$ref": "#/components/schemas/Cliente"
           },
@@ -12712,6 +12721,9 @@
           "activoSN": {
             "type": "string",
             "nullable": true
+          },
+          "pesoKgs": {
+            "type": "number"
           },
           "cliente": {
             "$ref": "#/components/schemas/Cliente"
@@ -23441,6 +23453,9 @@
                   "activoSN": {
                     "type": "boolean"
                   },
+                  "pesoKgs": {
+                    "type": "boolean"
+                  },
                   "cliente": {
                     "type": "boolean"
                   }
@@ -23460,6 +23475,7 @@
                     "usuCreacion",
                     "usuModificacion",
                     "activoSN",
+                    "pesoKgs",
                     "cliente"
                   ],
                   "example": "id"
@@ -23551,6 +23567,9 @@
                   "activoSN": {
                     "type": "boolean"
                   },
+                  "pesoKgs": {
+                    "type": "boolean"
+                  },
                   "cliente": {
                     "type": "boolean"
                   }
@@ -23570,6 +23589,7 @@
                     "usuCreacion",
                     "usuModificacion",
                     "activoSN",
+                    "pesoKgs",
                     "cliente"
                   ],
                   "example": "id"

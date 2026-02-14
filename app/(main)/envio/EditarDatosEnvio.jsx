@@ -44,6 +44,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
 
     // Columnas para las diferentes tablas
     const columnasConfiguracion = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
         { campo: 'unidadMedida', header: intl.formatMessage({ id: 'Unidad de medida' }), tipo: 'string' },
@@ -85,6 +86,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     ];
 
     const columnasSensorEmpresa = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombreSensor', header: intl.formatMessage({ id: 'Tipo de Sensor' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
     ];
@@ -149,7 +151,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
             accept: async () => {
                 setCargandoConfiguracion(true);
                 try {
-                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, clienteId: envio.clienteId, usuarioCreacion: getUsuarioSesion()?.id};
+                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, usuarioCreacion: getUsuarioSesion()?.id};
                     await crearEnvioConfiguracionDesdeEmpresa(datosEnvio);
                     toast.current?.show({
                         severity: 'success',
@@ -193,7 +195,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
             accept: async () => {
                 setCargandoSensores(true);
                 try {
-                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, clienteId: envio.clienteId, usuarioCreacion: getUsuarioSesion()?.id};
+                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, usuarioCreacion: getUsuarioSesion()?.id};
                     await crearEnvioSensorDesdeEmpresa(datosEnvio);
                     toast.current?.show({
                         severity: 'success',

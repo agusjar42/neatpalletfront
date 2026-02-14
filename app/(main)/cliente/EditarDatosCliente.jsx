@@ -41,6 +41,8 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
     const columnasProducto = [
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'activoSN', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
+        { campo: 'pesoKgs', header: intl.formatMessage({ id: 'Peso (Kg)' }), tipo: 'number' }
+
     ];
 
     // Efecto para actualizar conteos cuando se carga el cliente

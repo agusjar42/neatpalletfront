@@ -90,7 +90,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                 productoId: e.value,
                 producto: productoSeleccionado.nombre,
                 referencia: productoSeleccionado.referencia,
-                pesoKgs: productoSeleccionado.peso || 0
+                pesoKgs: productoSeleccionado.pesoKgs || 0
             });
         }
     };
@@ -225,7 +225,31 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         className={`p-column-filter ${(estadoGuardando && (envioContenido.envioId == null || envioContenido.envioId === "")) ? "p-invalid" : ""}`}
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
-                </div>)}
+                </div>)}                
+
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                    <label htmlFor="palletId"><b>{intl.formatMessage({ id: 'Pallet' })}*</b></label>
+                    <Dropdown 
+                        value={envioContenido.palletId}
+                        options={pallets}
+                        onChange={handlePalletChange}
+                        optionLabel="label"
+                        optionValue="id"
+                        placeholder={intl.formatMessage({ id: 'Seleccione un pallet' })}
+                        className={`${(estadoGuardando && (envioContenido.palletId === "" || envioContenido.palletId === null || envioContenido.palletId === undefined)) ? "p-invalid" : ""}`}
+                        filter
+                        showClear
+                    />
+                </div>
+
+                {/*<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
+                    <label htmlFor="referencia">{intl.formatMessage({ id: 'Referencia' })}</label>
+                    <InputText value={envioContenido.referencia || ''}
+                        placeholder={intl.formatMessage({ id: 'Se completa automáticamente al seleccionar producto' })}
+                        disabled
+                        style={{ backgroundColor: '#f8f9fa' }}
+                        maxLength={50} />
+                </div> */}
                 
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="productoId"><b>{intl.formatMessage({ id: 'Producto' })}*</b></label>
@@ -247,28 +271,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         </small>
                     )}
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
-                    <label htmlFor="palletId"><b>{intl.formatMessage({ id: 'Pallet' })}*</b></label>
-                    <Dropdown 
-                        value={envioContenido.palletId}
-                        options={pallets}
-                        onChange={handlePalletChange}
-                        optionLabel="label"
-                        optionValue="id"
-                        placeholder={intl.formatMessage({ id: 'Seleccione un pallet' })}
-                        className={`${(estadoGuardando && (envioContenido.palletId === "" || envioContenido.palletId === null || envioContenido.palletId === undefined)) ? "p-invalid" : ""}`}
-                        filter
-                        showClear
-                    />
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
-                    <label htmlFor="referencia">{intl.formatMessage({ id: 'Referencia' })}</label>
-                    <InputText value={envioContenido.referencia || ''}
-                        placeholder={intl.formatMessage({ id: 'Se completa automáticamente al seleccionar producto' })}
-                        disabled
-                        style={{ backgroundColor: '#f8f9fa' }}
-                        maxLength={50} />
-                </div>
+
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="pesoKgs">{intl.formatMessage({ id: 'Peso (Kg)' })}</label>
                     <InputNumber value={envioContenido.pesoKgs}

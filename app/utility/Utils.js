@@ -119,7 +119,7 @@ export function devuelveBasePath() {
 }
 
 // Limpia la cache de la aplicacion
-export async function emptyCache() {
+export async function emptyCache(options = { reload: true }) {
   if ('caches' in window) {
     // Elimino todas las caches de forma asíncrona usando (Promise.All)
     caches.keys().then((names) => {
@@ -127,7 +127,7 @@ export async function emptyCache() {
     }).then(() => {
       console.log('Caches eliminadas');
       // Una vez eliminadas, recargo la página
-      window.location.reload();
+      if (options?.reload !== false) window.location.reload();
     }).catch((error) => {
       console.error("Error al eliminar caches: ", error);
     });

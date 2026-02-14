@@ -146,6 +146,12 @@ const CrudIconos = ({ getRegistros, editarComponente, editarComponenteParametros
         setRegistros(registros);
     }
     const obtenerPermisos = async () => {
+        const isLoggingOut = typeof window !== 'undefined' && sessionStorage.getItem('np_logging_out') === '1';
+        const hasSession = typeof window !== 'undefined' && Boolean(localStorage.getItem('userDataNeatpallet'));
+        if (isLoggingOut || !hasSession) {
+            return;
+        }
+
         //Obtiene los permisos del usuario
         if (!registroEditar) {
             const sePuedeAcceder = await tieneUsuarioPermiso('Neatpallet', controlador, 'acceder')

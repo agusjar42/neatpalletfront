@@ -184,6 +184,20 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     };
 
     const obtenerPermisos = async () => {
+        const isLoggingOut = typeof window !== 'undefined' && sessionStorage.getItem('np_logging_out') === '1';
+        const hasSession = typeof window !== 'undefined' && Boolean(localStorage.getItem('userDataNeatpallet'));
+        if (isLoggingOut || !hasSession) {
+            setPuedeCrear(false);
+            setPuedeVer(false);
+            setPuedeEditar(false);
+            setPuedeBorrar(false);
+            setPuedePallet(false);
+            setPuedeParada(false);
+            setPuedeVehiculo(false);
+            setPuedeContenido(false);
+            return;
+        }
+
         //Obtiene los permisos del usuario
         if (!registroEditar) {
             const sePuedeAcceder = await tieneUsuarioPermiso('Neatpallet', controlador, 'acceder')

@@ -1,5 +1,5 @@
 "use client"
-import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { obtenerRolDashboard } from "@/app/api-endpoints/rol";
@@ -16,7 +16,7 @@ interface AuthContextProps {
   isInitialized: boolean;
   login: (token: string, rememberMe: boolean, data: any) => void;
   loginSinDashboard: (token: string, rememberMe: boolean, data: any) => void;
-  logout: () => void;
+  logout: (mensaje?: string) => void;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
   const config = jwt.jwtConfig;
+  const isLoggingOutRef = useRef(false);
 
   // Verificar si el usuario está autenticado al inicializar la aplicación
   useEffect(() => {
@@ -72,13 +73,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const esRutaPublica = rutasPublicas.some(ruta => pathname.startsWith(ruta));
       
       if (!usuarioAutenticado && !esRutaPublica) {
-        router.push('/auth/login');
+        router.replace('/auth/login');
       }
     }
   }, [usuarioAutenticado, isInitialized, pathname, router]);
 
   const login = async (token: string, rememberMe: boolean, data: any) => {
     Cookies.set('authToken', token, { expires: rememberMe ? 7 : undefined });
+    isLoggingOutRef.current = false;
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('np_logging_out');
+    }
     setUsuarioAutenticado(true);
     await almacenarLogin(data);
     router.push(await obtenerRolDashboard());
@@ -88,6 +93,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const loginSinDashboard = async (token: string, rememberMe: boolean, data: any) => {
     Cookies.set('authToken', token, { expires: rememberMe ? 7 : undefined });
     await almacenarLogin(data);
+    isLoggingOutRef.current = false;
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('np_logging_out');
+    }
     setUsuarioAutenticado(true);
     //router.push(await obtenerRolDashboard());
   };
@@ -256,6 +265,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     }
     localStorage.setItem('menuLateral', JSON.stringify([jsonPermisos]));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('menuLateralUpdated'));
+    }
   }
 
   const almacenarLogin = async (data: any) => {
@@ -309,22 +321,31 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const logout = (mensaje?: string) => {
+    if (isLoggingOutRef.current) return;
+    isLoggingOutRef.current = true;
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('np_logging_out', '1');
+    }
+
     //Vaciamos localStorage y cookies
     Cookies.remove('authToken');
     localStorage.clear();
 
-    // Limio la caché y espero a que devuelva la respuesta para luego hacer el dispatch
-    emptyCache().then(() => {
-      //Marcamos el usuario como no logeado
-      setUsuarioAutenticado(false);
-      router.push('/auth/login');
-      //En local esto no funciona porque el debugger esta roto y recarga la pagina siempre, en DEV si que funciona, paz y tranquilidad
-      if (typeof mensaje === 'string' && mensaje) {
-        localStorage.setItem('toastMensaje', mensaje);
-      }
-    }).catch((error) => {
+    // Vacía la caché en segundo plano (sin recargar la página)
+    if (typeof mensaje === 'string' && mensaje) {
+      localStorage.setItem('toastMensaje', mensaje);
+    }
+
+    setUsuarioAutenticado(false);
+    router.replace('/auth/login');
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('authLoggedOut'));
+    }
+
+    emptyCache({ reload: false }).catch((error) => {
       console.error("Error al vaciar el cache: ", error)
-    })
+    });
 
   };
 

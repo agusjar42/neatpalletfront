@@ -20,6 +20,11 @@ const AppProfileSidebar = () => {
             profileSidebarVisible: false,
         }));
     };
+
+    const handleLogout = () => {
+        onProfileSidebarHide();
+        logout();
+    };
     useEffect(() => {
         const fetchData = async () => {
             console.log('Iniciando fetchData...');
@@ -50,7 +55,7 @@ const AppProfileSidebar = () => {
 
                     <ul className="list-none m-0 p-0">
 
-                        <li onClick={logout}>
+                        <li onClick={handleLogout}>
                             <a className="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150">
                                 <span>
                                     <i className="pi pi-power-off text-xl text-primary"></i>
@@ -98,7 +103,7 @@ const AppProfileSidebar = () => {
                     </span>
 
                     <ul className="list-none m-0 p-0">
-                        <li onClick={logout}>
+                        <li onClick={handleLogout}>
                             <a className="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150">
                                 <span>
                                     <i className="pi pi-power-off text-xl text-primary"></i>
@@ -140,7 +145,7 @@ const AppProfileSidebar = () => {
                                 </div>
                             </a>
                         </li>
-                        <li onClick={logout}>
+                        <li onClick={handleLogout}>
                             <a className="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150">
                                 <span>
                                     <i className="pi pi-power-off text-xl text-primary"></i>

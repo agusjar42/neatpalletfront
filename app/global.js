@@ -12,6 +12,11 @@ const AutoLogout = () => {
 
   useEffect(() => {
     const resetearTiempo = () => {
+      // Siempre limpia el temporizador existente (por ejemplo tras logout manual)
+      if (timeoutId.current) {
+        clearTimeout(timeoutId.current);
+        timeoutId.current = null;
+      }
       //
       //Si el usuario esta logeado entonces se ejecuta el temporizador
       //
@@ -21,10 +26,6 @@ const AutoLogout = () => {
         const tiempoEsperaMinutos = localStorage.getItem('tiempoDeEsperaInactividad')
         if (tiempoEsperaMinutos) {
           inactivityTimeout = tiempoEsperaMinutos * 60 * 1000; // Convertimos el tiempo Real de inactividad configurado a milisegundos
-        }
-        // Limpia el temporizador existente
-        if (timeoutId.current) {
-          clearTimeout(timeoutId.current);
         }
         // Inicia un nuevo temporizador
         timeoutId.current = setTimeout(() => {
@@ -49,6 +50,14 @@ const AutoLogout = () => {
       window.addEventListener(event, resetearTiempo);
     });
 
+    const handleLoggedOut = () => {
+      if (timeoutId.current) {
+        clearTimeout(timeoutId.current);
+        timeoutId.current = null;
+      }
+    };
+    window.addEventListener('authLoggedOut', handleLoggedOut);
+
     // Inicia el temporizador por primera vez
     resetearTiempo();
 
@@ -60,6 +69,7 @@ const AutoLogout = () => {
       eventos.forEach((event) => {
         window.removeEventListener(event, resetearTiempo);
       });
+      window.removeEventListener('authLoggedOut', handleLoggedOut);
     };
   }, [logout, intl]);
 

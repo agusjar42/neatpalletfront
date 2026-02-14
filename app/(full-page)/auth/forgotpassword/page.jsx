@@ -19,7 +19,7 @@ const ForgotPassword = () => {
     // Manejar envío de correo
     const handleSubmit = async () => {
         bloquearPantalla(true);
-        const response = await recuperarPasswordUsuario(JSON.stringify({ email: email }))
+        const response = await recuperarPasswordUsuario(JSON.stringify({ where: { and: { email: email } } }));
         //Error que lanza el visual sin motivo aparente, pero el codigo funciona
         if (response?.status === "OK") {
             //Crea la cookie con el correo para la siguiente pantalla

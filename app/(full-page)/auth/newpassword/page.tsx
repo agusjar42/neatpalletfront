@@ -2,12 +2,14 @@
 import type { Page } from "@/types";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { useContext, useEffect, useState } from "react";
 import { LayoutContext } from "../../../../layout/context/layoutcontext";
 import { getUsuarioPasswordHistoricos, postUsuarioPasswordHistorico } from "@/app/api-endpoints/usuario_password_historico";
 import { getUsuarios, patchUsuarioCredenciales } from "@/app/api-endpoints/usuario";
 import bcrypt from 'bcryptjs';
+import axios from 'axios';
 
 const NewPassword: Page = () => {
     const router = useRouter();
@@ -17,6 +19,7 @@ const NewPassword: Page = () => {
     const [contrasenya1, setContrasenya1] = useState("");
     const [contrasenya2, setContrasenya2] = useState("");
     const [usuarioId, setUsuarioId] = useState(0);
+    const [emailManual, setEmailManual] = useState("");
     const [deshabilitarBoton, setDeshabilitarBoton] = useState(false);
 
     useEffect(() => {
@@ -28,11 +31,6 @@ const NewPassword: Page = () => {
 
             //Ahora que se ha guardado el id de usuario, se borra la variable
             localStorage.removeItem('usuario');
-        }
-        else {
-            //Si no existe la variable, muestra la pantalla de error porque significa que el usuario ha entrado
-            //escribiendo directamente el URL
-            window.location.href = "/auth/login/";
         }
     }, []);
 
@@ -50,6 +48,36 @@ const NewPassword: Page = () => {
     //Verifica si las contraseñas son iguales y validas
     const manejarValidacionContrasenyas = async () => {
         bloquearPantalla(true);
+        let usuarioIdEfectivo = usuarioId;
+        if (!usuarioIdEfectivo || Number.isNaN(usuarioIdEfectivo) || usuarioIdEfectivo <= 0) {
+            const email = (emailManual || "").trim().toLowerCase();
+            if (!email) {
+                setMessage('Introduce el email para cambiar la contraseña.');
+                bloquearPantalla(false);
+                return;
+            }
+
+            let usuarios;
+            try {
+                usuarios = await getUsuarios(JSON.stringify({ where: { and: { mail: email } } }));
+            } catch (error) {
+                const httpStatus = axios.isAxiosError(error) ? error.response?.status : undefined;
+                setMessage(
+                    httpStatus === 401
+                        ? 'No autorizado (401) al buscar el usuario por email.'
+                        : 'No se pudo buscar el usuario por email.'
+                );
+                bloquearPantalla(false);
+                return;
+            }
+            if (!Array.isArray(usuarios) || usuarios.length === 0 || !usuarios[0]?.id) {
+                setMessage('No existe ningún usuario con ese email.');
+                bloquearPantalla(false);
+                return;
+            }
+
+            usuarioIdEfectivo = usuarios[0].id;
+        }
         //Valida si las contraseñas son iguales
         if (contrasenya1 === contrasenya2) {
             if (
@@ -67,38 +95,34 @@ const NewPassword: Page = () => {
 
                 //const registros = await getUsuarioPasswordHistoricosCount(JSON.stringify({ usuarioId: usuarioId, password: hashedPassword }));
 
-                const historicos = await getUsuarioPasswordHistoricos(JSON.stringify({ where: {and: { usuarioId: usuarioId }}
-        }));
+                const historicos = await getUsuarioPasswordHistoricos(JSON.stringify({ where: {and: { usuarioId: usuarioIdEfectivo }}}));
+           
 
-        //Si la contraseña es valida comprobamos que no sea igual a una anterior del historico
-        for (const historico of historicos) {
-            if (historico.password) {
-                const match = await bcrypt.compare(contrasenya1, historico.password);
-                if (match) {
-                    setMessage('La contraseña no puede ser igual a una anterior');
-                    bloquearPantalla(false);
-                    return;
+                //Si la contraseña es valida comprobamos que no sea igual a una anterior del historico
+                for (const historico of historicos) {
+                    if (historico.password) {
+                        const match = await bcrypt.compare(contrasenya1, historico.password);
+                        if (match) {
+                            setMessage('La contraseña no puede ser igual a una anterior');
+                            bloquearPantalla(false);
+                            return;
+                        }
+                    }
                 }
+
+                // Si no hay registros previos con la misma contraseña, se guarda la nueva contraseña
+                await postUsuarioPasswordHistorico({ usuarioId: usuarioIdEfectivo, password: hashedPassword, usuCreacion: usuarioIdEfectivo });
+                await patchUsuarioCredenciales(usuarioIdEfectivo, JSON.stringify({ password: hashedPassword }));
+
+                localStorage.setItem('toastMensaje', 'Contraseña actualizada correctamente');
+                router.push('/auth/login');
+            } else {
+            setMessage('La contraseña debe tener al menos 1 mayúscula, 1 minúscula, 1 número y tener de 8 a 12 caracteres');
             }
+        } else {
+            setMessage('Las contraseñas no son iguales')
         }
-
-        // Si no hay registros previos con la misma contraseña, se guarda la nueva contraseña
-        await postUsuarioPasswordHistorico({ usuarioId: usuarioId, password: hashedPassword, usuCreacion: usuarioId });
-        await patchUsuarioCredenciales(usuarioId, JSON.stringify({ password: hashedPassword }));
-
-        localStorage.setItem('toastMensaje', 'Contraseña actualizada correctamente');
-        router.push('/auth/login');
         bloquearPantalla(false);
-
-    } else {
-        setMessage('La contraseña debe tener al menos 1 mayúscula, 1 minúscula, 1 número y tener de 8 a 12 caracteres');
-    bloquearPantalla(false);
-}
-        }
-        else {
-    setMessage('Las contraseñas no son iguales')
-    bloquearPantalla(false);
-}
     }
 
 return (
@@ -138,11 +162,26 @@ return (
                         Nueva contraseña
                     </div>
                     <span className="text-600 font-medium">
-                        Introduce su nueva contraseña
+                        Introduce tu nueva contraseña
                     </span>
                     {message && <p style={{ color: 'red', maxWidth: '350px' }}>{message}</p>}
                 </div>
                 <div className="flex flex-column">
+                    {usuarioId <= 0 && (
+                        <span className="p-input-icon-left w-full mb-4">
+                            <i className="pi pi-envelope z-2"></i>
+                            <InputText
+                                id="email"
+                                className="w-full md:w-25rem"
+                                value={emailManual}
+                                onChange={(e) => setEmailManual(e.target.value)}
+                                placeholder="Email"
+                                inputMode="email"
+                                disabled={deshabilitarBoton}
+                                style={{ paddingLeft: "2.5rem" }}
+                            />
+                        </span>
+                    )}
                     <span className="p-input-icon-left w-full mb-4">
                         <i className="pi pi-lock z-2"></i>
                         <Password

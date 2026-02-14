@@ -56,10 +56,10 @@ const NotFoundPage = () => {
                         <p className="text-sm text-500 mb-2">Enlaces útiles:</p>
                         <div className="flex flex-wrap justify-content-center gap-2">
                             <Button 
-                                label="Dashboard" 
+                                label="Inicio" 
                                 link
                                 className="p-button-text text-xs"
-                                onClick={() => router.push('/dashboard-banking')}
+                                onClick={goHome}
                             />
                             <Button 
                                 label="Productos" 

@@ -27,12 +27,10 @@ const AppProfileSidebar = () => {
     };
     useEffect(() => {
         const fetchData = async () => {
-            console.log('Iniciando fetchData...');
             try {
                 //Obtenemos permisos del usuario
                 const tienePermiso = Boolean(await tieneUsuarioPermiso('Neatpallet', 'Usuarios', 'VerPerfil') || false); // Convertir explícitamente a booleano
                 setPermisoVerPerfil(tienePermiso);
-                console.log('Estado actualizado a:', tienePermiso);
             } catch (error) {
                 console.error("Error obteniendo los permisos del rol:", error);
                 setPermisoVerPerfil(false);

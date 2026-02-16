@@ -92,6 +92,10 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         if (await validaciones()) {
             // Obtenemos el registro actual y solo entramos si tiene nombre y contenido
             let objGuardar = { ...empresa };
+                if ((objGuardar.tiempoInactividad || "").length === 0) {
+                    objGuardar.tiempoInactividad = 0;
+                }
+
             const usuarioActual = getUsuarioSesion()?.id;
 
             // Si estoy insertando uno nuevo

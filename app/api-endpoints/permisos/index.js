@@ -3,8 +3,8 @@ import { settings, PermisoControllerApi, ListaPermisosControllerApi } from "@/ap
 const apiPermisos = new PermisoControllerApi(settings)
 const apiListaPermisos = new ListaPermisosControllerApi(settings)
 
-export const getPermiso= async () => {
-    const { data: dataPermisos } = await apiPermisos.permisoControllerFind()
+export const getPermiso= async (filtro) => {
+    const { data: dataPermisos } = await apiPermisos.permisoControllerFind(filtro)
     return dataPermisos
 }
 

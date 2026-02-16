@@ -16,9 +16,36 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
     const [pantallaDashboardSeleccionada, setPantallaDashboardSeleccionada] = useState(null);
     const intl = useIntl();
     const pantallasDashboard = [
+        { nombre: intl.formatMessage({ id: 'Empresas' }), url: '/tablas-maestras/empresa/' },
+        { nombre: intl.formatMessage({ id: 'Usuarios' }), url: '/usuarios/' },
         { nombre: intl.formatMessage({ id: 'Roles' }), url: '/tablas-maestras/rol/' },
+        { nombre: intl.formatMessage({ id: 'Permisos' }), url: '/tablas-maestras/permiso/' },
+        { nombre: intl.formatMessage({ id: 'Países' }), url: '/tablas-maestras/pais/' },
+
+        { nombre: intl.formatMessage({ id: 'Parámetros' }), url: '/parametro/' },
+        { nombre: intl.formatMessage({ id: 'Idiomas' }), url: '/tablas-maestras/idioma/' },
+        { nombre: intl.formatMessage({ id: 'Traducciones' }), url: '/tablas-maestras/traduccion/' },
+
+        { nombre: intl.formatMessage({ id: 'Clientes' }), url: '/cliente/' },
+        { nombre: intl.formatMessage({ id: 'Tipo Carrocería' }), url: '/tipo-carroceria/' },
+        { nombre: intl.formatMessage({ id: 'Tipo Sensor' }), url: '/tipo-sensor/' },
+        { nombre: intl.formatMessage({ id: 'Tipo Transporte' }), url: '/tipo-transporte/' },
+
+        { nombre: intl.formatMessage({ id: 'Pallet' }), url: '/pallet/' },
+        { nombre: intl.formatMessage({ id: 'Envíos' }), url: '/envio/' },
+
+        { nombre: intl.formatMessage({ id: 'Configuración Empresa' }), url: '/envio-configuracion-empresa/' },
+        { nombre: intl.formatMessage({ id: 'Sensor Empresa' }), url: '/envio-sensor-empresa/' },
         { nombre: intl.formatMessage({ id: 'Envío Contenido' }), url: '/envio-contenido/' },
-        { nombre: intl.formatMessage({ id: 'Envío' }), url: '/envio/' },
+        { nombre: intl.formatMessage({ id: 'Configuración' }), url: '/envio-configuracion/' },
+        { nombre: intl.formatMessage({ id: 'Movimientos' }), url: '/envio-movimiento/' },
+        { nombre: intl.formatMessage({ id: 'Pallet Informe' }), url: '/envio-pallet/' },
+        { nombre: intl.formatMessage({ id: 'Paradas' }), url: '/envio-parada/' },
+        { nombre: intl.formatMessage({ id: 'Sensores' }), url: '/envio-sensor/' },
+
+        { nombre: intl.formatMessage({ id: 'Logs incorrectos' }), url: '/logs-incorrectos/' },
+        { nombre: intl.formatMessage({ id: 'Logs de usuarios' }), url: '/tablas-maestras/log_usuario/' },
+
     ];
     useEffect(() => {
         //

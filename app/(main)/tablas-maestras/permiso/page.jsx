@@ -13,7 +13,7 @@ import { Column } from "primereact/column";
 import { Dialog } from "primereact/dialog";
 import { Badge } from 'primereact/badge';
 import { Toast } from "primereact/toast";
-import { getPermiso, postPermiso, patchPermiso, deletePermiso, getVistaEmpresaRolPermiso, getListaPermisos } from "@/app/api-endpoints/permisos";
+import { getPermiso, postPermiso, deletePermiso, getVistaEmpresaRolPermiso, getListaPermisos } from "@/app/api-endpoints/permisos";
 import { getRol, getNombreRol } from "@/app/api-endpoints/rol";
 import { formatearFechaLocal_a_toISOString, getUsuarioSesion } from "@/app/utility/Utils";
 import { AutoComplete } from "primereact/autocomplete";
@@ -47,8 +47,6 @@ const Permiso = () => {
     };
 
     //Lista donde se iran añadiendo los nuevos permisos
-
-
 
     const obtenerDatos = async () => {
         try {
@@ -304,14 +302,21 @@ const Permiso = () => {
             ];
 
             // Obtenemos los roles
-            const filtroRol = { where: { empresaId: getUsuarioSesion().empresaId } };
-            const registrosRoles = await getRol(JSON.stringify(filtroRol));
-            const nombresColumnas = Array.from(new Set(registrosRoles.map(registro => registro.nombre)));
+            const filtroRol = { where: { and: { empresaId: getUsuarioSesion().empresaId } } };
+            const registrosRolesRespuesta = await getRol(JSON.stringify(filtroRol));
+            let registrosRoles = registrosRolesRespuesta;
+            if (typeof registrosRolesRespuesta === 'string') {
+                try {
+                    registrosRoles = JSON.parse(registrosRolesRespuesta);
+                } catch {
+                    registrosRoles = [];
+                }
+            }
+
+            const nombresColumnas = Array.from(new Set((registrosRoles ?? []).map(registro => registro.nombre)));
             // Crear un objeto para almacenar las acciones por controlador
             setColumnaPrincipal(listaPermisos);
             setColumnasRoles(nombresColumnas);
-            const registros = await getPermiso();
-            setPermisos(registros);
 
             //Obtener los datos del usuario
             const storedData = localStorage.getItem('userDataNeatpallet');

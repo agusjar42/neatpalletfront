@@ -22,10 +22,14 @@ import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
 import { borrarFichero } from "@/app/api-endpoints/ficheros"
 import { useIntl } from 'react-intl'
 import { devuelveBasePath } from "@/app/utility/Utils"
+import { useRouter } from 'next/navigation';
+import { useAuth } from "@/app/auth/AuthContext";
 
 const CrudIconos = ({ getRegistros, editarComponente, editarComponenteParametrosExtra, filtradoBase, controlador,
     registroEditar, headerCrud, campoIcono, jsonIconos, campoIconoCustom, seccion, iconoPorDefecto, headerNuevo }) => {
     const intl = useIntl()
+    const router = useRouter();
+    const { usuarioAutenticado, isInitialized } = useAuth();
     const toast = useRef(null);
     const [registros, setRegistros] = useState([]);
     const [registroResult, setRegistroResult] = useState("");
@@ -146,6 +150,9 @@ const CrudIconos = ({ getRegistros, editarComponente, editarComponenteParametros
         setRegistros(registros);
     }
     const obtenerPermisos = async () => {
+        if (!isInitialized || !usuarioAutenticado) {
+            return;
+        }
         const isLoggingOut = typeof window !== 'undefined' && sessionStorage.getItem('np_logging_out') === '1';
         const hasSession = typeof window !== 'undefined' && Boolean(localStorage.getItem('userDataNeatpallet'));
         if (isLoggingOut || !hasSession) {
@@ -156,8 +163,9 @@ const CrudIconos = ({ getRegistros, editarComponente, editarComponenteParametros
         if (!registroEditar) {
             const sePuedeAcceder = await tieneUsuarioPermiso('Neatpallet', controlador, 'acceder')
             if (!sePuedeAcceder) {
-                //Si no puede acceder, redirige a la pantalla de error
-                window.location.href = '/error';
+                //Si no puede acceder, redirige a la pantalla de acceso denegado
+                router.replace('/auth/access/');
+                return;
             }
         }
 
@@ -169,7 +177,7 @@ const CrudIconos = ({ getRegistros, editarComponente, editarComponenteParametros
 
     useEffect(() => {
         //Si no hay un controlador declarado, no se revisan los permisos
-        if (controlador) {
+        if (controlador && isInitialized && usuarioAutenticado) {
             obtenerPermisos()
         }
         obtenerDatos();
@@ -202,7 +210,7 @@ const CrudIconos = ({ getRegistros, editarComponente, editarComponenteParametros
         }
 
         setRegistroResult("");
-    }, [registroResult]);
+    }, [registroResult, controlador, isInitialized, usuarioAutenticado]);
 
     //Evento que maneja el cambio de tamaño de la pantalla
     window.addEventListener('resize', () => {

@@ -53,7 +53,7 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return !validaClave && !validaOrden // (!validaClave && !validaValor && !validaIdioma)
+        return !validaClave  // (!validaClave && !validaValor && !validaIdioma)
     }
 
     const guardarCodigoPostal = async () => {

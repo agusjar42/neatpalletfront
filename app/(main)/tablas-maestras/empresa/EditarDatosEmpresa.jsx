@@ -188,7 +188,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
                         rows={5} cols={30} maxLength={120} />
                     <small style={{ color: '#94949f', fontSize: '10px' }}> <i>{intl.formatMessage({ id: 'Dirección de la cuenta de email que se va a usar para enviar correos automatizados' })}</i> </small>
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                { /*<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="descripcion">{intl.formatMessage({ id: 'Contraseña del email' })}</label>
                     <Password
                         value={empresa.password}
@@ -205,7 +205,8 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
                     />
                     <small style={{ color: '#94949f', fontSize: '10px' }}> <i>{intl.formatMessage({ id: 'Contraseña de la cuenta de email que se va a usar para enviar correos automatizados' })}</i> </small>
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                */}
+                {/*<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="email">{intl.formatMessage({ id: 'Servicio de email' })}</label>
                     <InputText value={empresa.servicio}
                         placeholder={intl.formatMessage({ id: 'Servicio de email' })}
@@ -216,6 +217,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
                     />
                     <small style={{ color: '#94949f', fontSize: '10px' }}> <i>{intl.formatMessage({ id: 'El servicio que utiliza la cuenta de email, ejemplo: "smtp.gmail.com"' })}</i> </small>
                 </div>
+                */}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="tiempoInactividad" className="block">{intl.formatMessage({ id: 'Minutos de inactividad' })}</label>
                     <InputNumber

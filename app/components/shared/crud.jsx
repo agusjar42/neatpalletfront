@@ -23,11 +23,13 @@ import { formatPhoneNumberIntl } from 'react-phone-number-input'
 import PhoneInput from 'react-phone-input-2'
 import es from 'react-phone-input-2/lang/es.json'
 import { useRouter } from 'next/navigation';
+import { useAuth } from "@/app/auth/AuthContext";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
     parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = false, onDataChange }) => {
     const intl = useIntl()
     const router = useRouter();
+    const { usuarioAutenticado, isInitialized } = useAuth();
     //Crea el registro vacio con solo id para luego crear el resto de campos vacios dinamicamente
     let emptyRegistro = {
         id: ""
@@ -184,6 +186,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     };
 
     const obtenerPermisos = async () => {
+        if (!isInitialized || !usuarioAutenticado) {
+            return;
+        }
         const isLoggingOut = typeof window !== 'undefined' && sessionStorage.getItem('np_logging_out') === '1';
         const hasSession = typeof window !== 'undefined' && Boolean(localStorage.getItem('userDataNeatpallet'));
         if (isLoggingOut || !hasSession) {
@@ -202,8 +207,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         if (!registroEditar) {
             const sePuedeAcceder = await tieneUsuarioPermiso('Neatpallet', controlador, 'acceder')
             if (!sePuedeAcceder) {
-                //Si no puede acceder, redirige a la pantalla de error
-                window.location.href = '/error';
+                //Si no puede acceder, redirige a la pantalla de acceso denegado
+                router.replace('/auth/access/');
+                return;
             }
         }
 
@@ -219,7 +225,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     useEffect(() => {
         //Si no hay un controlador declarado, no se revisan los permisos
-        if (controlador) {
+        if (controlador && isInitialized && usuarioAutenticado) {
             obtenerPermisos()
         }
         //Si hay que obtener los datos foraneos, se obtienen al montar el componente
@@ -288,7 +294,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             obtenerDatos();
         }
         setRegistroResult("");
-    }, [registroResult, parametrosCrud, cargarDatosInicialmente]);
+    }, [registroResult, parametrosCrud, cargarDatosInicialmente, controlador, isInitialized, usuarioAutenticado]);
 
     const obtenerDatosForaneos = async () => {
         if (getRegistrosForaneos) {

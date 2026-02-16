@@ -9,7 +9,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioSensorEmpresa from "./EditarDatosEnvioSensorEmpresa";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, empresaId }) => {
     const toast = useRef(null);
     const [envioSensorEmpresa, setEnvioSensorEmpresa] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -25,7 +25,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
             const dataTiposSensor = await getTipoSensor(JSON.stringify({
                 where: {
                     and: {
-                        empresaId: getUsuarioSesion()?.empresaId
+                        empresaId: empresaId ?? getUsuarioSesion()?.empresaId
                     }
                 }
             }));
@@ -35,7 +35,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
             const sensoresRegistrados = await getEnvioSensorEmpresa(JSON.stringify({
                 where: {
                     and: {
-                        empresaId: getUsuarioSesion()?.empresaId
+                        empresaId: empresaId ?? getUsuarioSesion()?.empresaId
                     }
                 }
             }));
@@ -90,7 +90,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
             const registros = await getEnvioSensorEmpresa(JSON.stringify({
                 where: {
                     and: {
-                        empresaId: getUsuarioSesion()?.empresaId,
+                        empresaId: empresaId ?? getUsuarioSesion()?.empresaId,
                         tipoSensorId: tipoSensorId
                     }
                 }
@@ -116,7 +116,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                objGuardar['empresaId'] = empresaId ?? getUsuarioSesion()?.empresaId;
 
                 const nuevoRegistro = await postEnvioSensorEmpresa(objGuardar);
 
@@ -133,7 +133,6 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
                 }
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
                 delete objGuardar['fechaModificacion'];
                 delete objGuardar['activoSn'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);

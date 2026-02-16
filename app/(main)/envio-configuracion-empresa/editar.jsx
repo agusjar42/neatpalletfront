@@ -8,7 +8,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioConfiguracionEmpresa from "./EditarDatosEnvioConfiguracionEmpresa";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioConfiguracionEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarEnvioConfiguracionEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, empresaId }) => {
     const toast = useRef(null);
     const [envioConfiguracionEmpresa, setEnvioConfiguracionEmpresa] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -41,8 +41,8 @@ const EditarEnvioConfiguracionEmpresa = ({ idEditar, setIdEditar, rowData, empty
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
-                
+                objGuardar['empresaId'] = empresaId ?? getUsuarioSesion()?.empresaId;
+                 
                 const nuevoRegistro = await postEnvioConfiguracionEmpresa(objGuardar);
 
                 if (nuevoRegistro?.id) {
@@ -58,7 +58,6 @@ const EditarEnvioConfiguracionEmpresa = ({ idEditar, setIdEditar, rowData, empty
                 }
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
                 delete objGuardar['fechaModificacion'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchEnvioConfiguracionEmpresa(objGuardar.id, objGuardar);

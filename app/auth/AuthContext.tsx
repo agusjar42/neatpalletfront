@@ -15,7 +15,6 @@ interface AuthContextProps {
   usuarioAutenticado: boolean;
   isInitialized: boolean;
   login: (token: string, rememberMe: boolean, data: any) => void;
-  loginSinDashboard: (token: string, rememberMe: boolean, data: any) => void;
   logout: (mensaje?: string) => void;
 }
 
@@ -87,18 +86,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUsuarioAutenticado(true);
     await almacenarLogin(data);
     router.push(await obtenerRolDashboard());
-  };
-
-  //Login que se usa cuando no queremos redirigir al usuario, util para cuando queremos entrar para hacer el registro del usuario
-  const loginSinDashboard = async (token: string, rememberMe: boolean, data: any) => {
-    Cookies.set('authToken', token, { expires: rememberMe ? 7 : undefined });
-    await almacenarLogin(data);
-    isLoggingOutRef.current = false;
-    if (typeof window !== 'undefined') {
-      sessionStorage.removeItem('np_logging_out');
-    }
-    setUsuarioAutenticado(true);
-    //router.push(await obtenerRolDashboard());
   };
 
   //Obtenemos el menu lateral a en base a los permisos del usuario
@@ -279,6 +266,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (data && data.idiomaId) {
       const idioma = await getIdioma(data.idiomaId);
       localStorage.setItem('idioma', idioma.iso || '');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('idioma-changed', { detail: idioma.iso || '' }));
+      }
     }
 
     //Obtiene el timer de la empresa del usuario
@@ -350,7 +340,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ usuarioAutenticado, isInitialized, login, logout, loginSinDashboard }}>
+    <AuthContext.Provider value={{ usuarioAutenticado, isInitialized, login, logout}}>
       {children}
     </AuthContext.Provider>
   );

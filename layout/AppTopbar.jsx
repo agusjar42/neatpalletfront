@@ -40,22 +40,45 @@ const AppTopbar = React.forwardRef((props, ref) => {
     }, []);
 
     const obtenerListaIdiomas = async () => {
-        // const filtro = {
-        //     where: {
-        //         and: {
-        //             activo_sn: 'S'
-        //         }
-        //     }
-        // }
-        // const registrosIdiomas = await getIdiomas(JSON.stringify(filtro));
+        //
+        //Obtenemos todos los idiomas
+        //
         const registrosIdiomas = await getIdiomas();
-        const jsonDeIdiomas = registrosIdiomas.map((idioma) => ({
+        //
+        //Sacamos los datos del idioma del usuario logueado
+        //
+        const userDataNeatpalletRaw = localStorage.getItem('userDataNeatpallet');
+        const userDataNeatpallet = userDataNeatpalletRaw ? JSON.parse(userDataNeatpalletRaw) : {};
+        const idiomaIdUsuario = userDataNeatpallet?.idiomaId;
+        //
+        //Filtramos para quitar los inactivos, a no ser que el idioma inactivo sea el del usuario, en ese caso lo dejamos para que pueda seguir usándolo aunque esté inactivo.
+        //
+        const registrosIdiomasFiltrados = registrosIdiomas.filter((idioma) => {
+            if (idioma?.activoSn === 'S') return true;
+            if (idiomaIdUsuario == null) return false;
+            return String(idioma.id) === String(idiomaIdUsuario);
+        });
+        //
+        //Ordenamos alfabéticamente por nombre
+        //
+        const jsonDeIdiomas = registrosIdiomasFiltrados.map((idioma) => ({
             name: idioma.nombre,
-            code: idioma.iso
-        })).sort((a, b) => a.name.localeCompare(b.name));;
-        const idiomaGuardado = localStorage.getItem("idioma");
-        if (idiomaGuardado) {
-            const idiomaEncontrado = jsonDeIdiomas.find((idioma) => idioma.code === idiomaGuardado);
+            code: idioma.iso,
+            id: idioma.id
+        })).sort((a, b) => a.name.localeCompare(b.name));
+
+        const idiomaCodeGuardado = localStorage.getItem("idioma");
+        if (idiomaIdUsuario != null) {
+            const idiomaEncontrado = jsonDeIdiomas.find((idioma) => String(idioma.id) === String(idiomaIdUsuario));
+            if (idiomaEncontrado) {
+                setDropdownValue(idiomaEncontrado);
+                if (idiomaEncontrado.code && idiomaEncontrado.code !== idiomaCodeGuardado) {
+                    localStorage.setItem("idioma", idiomaEncontrado.code);
+                    window.dispatchEvent(new CustomEvent('idioma-changed', { detail: idiomaEncontrado.code }));
+                }
+            }
+        } else if (idiomaCodeGuardado) {
+            const idiomaEncontrado = jsonDeIdiomas.find((idioma) => idioma.code === idiomaCodeGuardado);
             if (idiomaEncontrado) {
                 setDropdownValue(idiomaEncontrado);
             }
@@ -87,7 +110,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
     const cambiarIdioma = (idioma) => {
         setDropdownValue(idioma);
         localStorage.setItem("idioma", idioma.code);
-        window.location.reload();
+        window.dispatchEvent(new CustomEvent('idioma-changed', { detail: idioma.code }));
     }
 
     return (

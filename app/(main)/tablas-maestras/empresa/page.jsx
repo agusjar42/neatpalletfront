@@ -29,19 +29,45 @@ const Empresa = () => {
 
     return (
         <div>
-            <Crud
-                headerCrud={intl.formatMessage({ id: 'Empresas' })}
-                seccion={"Empresa"}
-                getRegistros={getEmpresas}
-                getRegistrosCount={getEmpresasCount}
-                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"Empresas"}
-                empresaId={null}
-                editarComponente={<EditarEmpresa />}
-                columnas={columnas}
-                deleteRegistro={deleteEmpresa}
-                procesarDatosParaCSV={procesarDatosParaCSV}
-            />
+            {//                
+            //Si estoy entrando en la vista de usuarios y soy administrador no filtro por empresa mostrando todos los usuarios del sistema
+            //
+            }
+            {(JSON.parse(localStorage.getItem('userDataNeatpallet'))?.["usuarioAdmin"] || "N") === "S" &&
+                <Crud
+                    headerCrud={intl.formatMessage({ id: 'Empresas' })}
+                    seccion={"Empresa"}
+                    getRegistros={getEmpresas}
+                    getRegistrosCount={getEmpresasCount}
+                    botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
+                    controlador={"Empresas"}
+                    editarComponente={<EditarEmpresa />}
+                    columnas={columnas}
+                    deleteRegistro={deleteEmpresa}
+                    procesarDatosParaCSV={procesarDatosParaCSV}
+                />
+            }
+            {//                
+            //Si estoy entrando en la vista de usuarios y NO soy administrador filtro por empresa mostrando solo los usuarios de la empresa
+            //
+            }
+            {(JSON.parse(localStorage.getItem('userDataNeatpallet'))?.["usuarioAdmin"] || "N") !== "S" &&
+                <Crud
+                    headerCrud={intl.formatMessage({ id: 'Empresas' })}
+                    seccion={"Empresa"}
+                    getRegistros={getEmpresas}
+                    getRegistrosCount={getEmpresasCount}
+                    botones={['ver', 'editar', 'eliminar', 'descargarCSV']}
+                    filtradoBase={{
+                        id: Number(localStorage.getItem('empresa'))
+                    }}
+                    controlador={"Empresas"}
+                    editarComponente={<EditarEmpresa />}
+                    columnas={columnas}
+                    deleteRegistro={deleteEmpresa}
+                    procesarDatosParaCSV={procesarDatosParaCSV}
+                />
+            }
         </div>
     );
 };

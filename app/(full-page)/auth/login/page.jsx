@@ -19,7 +19,7 @@ const Login = () => {
     const [message, setMessage] = useState("");
     const dark = layoutConfig.colorScheme !== "light";
 
-    const { loginSinDashboard, login } = useAuth();
+    const { login } = useAuth();
     const toast = useRef(null);
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');

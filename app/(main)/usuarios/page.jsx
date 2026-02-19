@@ -32,6 +32,16 @@ const Usuario = () => {
         }
     }, []);
 
+    const columnasUsuarioAdmin = [
+        { campo: 'nombreEmpresa', header: intl.formatMessage({ id: 'Empresa' }), tipo: 'string' },
+        { campo: 'nombreRol', header: intl.formatMessage({ id: 'Rol' }), tipo: 'string' },
+        { campo: 'avatar', header: intl.formatMessage({ id: 'Avatar' }), tipo: 'imagen' },
+        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'mail', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
+        { campo: 'telefono', header: intl.formatMessage({ id: 'Teléfono' }), tipo: 'string' },
+        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
+    ]
+
     const columnas = [
         { campo: 'nombreRol', header: intl.formatMessage({ id: 'Rol' }), tipo: 'string' },
         { campo: 'avatar', header: intl.formatMessage({ id: 'Avatar' }), tipo: 'imagen' },
@@ -64,10 +74,27 @@ const Usuario = () => {
                 />
             )}
             {//                
-            //Si estoy entrando en la vista de usuarios
+            //Si estoy entrando en la vista de usuarios y soy administrador no filtro por empresa mostrando todos los usuarios del sistema
             //
             }
-            {(isNaN(idUsuario) && searchParams.get("usuario") == null && localStorage.getItem("usuarioId") == null) &&
+            {(isNaN(idUsuario) && searchParams.get("usuario") == null && localStorage.getItem("usuarioId") == null && JSON.parse(localStorage.getItem('userDataNeatpallet'))?.["usuarioAdmin"] === "S") &&
+                <Crud
+                    headerCrud={intl.formatMessage({ id: 'Usuarios' })}
+                    getRegistros={getVistaUsuarios}
+                    getRegistrosCount={getVistaUsuariosCount}
+                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                    controlador={"Usuarios"}
+                    editarComponente={<EditarUsuario />}
+                    seccion={"Usuario"}
+                    columnas={columnasUsuarioAdmin}
+                    deleteRegistro={deleteUsuario}
+                />
+            }
+            {//                
+            //Si estoy entrando en la vista de usuarios y NO soy administrador filtro por empresa mostrando solo los usuarios de la empresa
+            //
+            }
+            {(isNaN(idUsuario) && searchParams.get("usuario") == null && localStorage.getItem("usuarioId") == null && JSON.parse(localStorage.getItem('userDataNeatpallet'))?.["usuarioAdmin"] !== "S") &&
                 <Crud
                     headerCrud={intl.formatMessage({ id: 'Usuarios' })}
                     getRegistros={getVistaUsuarios}
@@ -83,6 +110,7 @@ const Usuario = () => {
                     deleteRegistro={deleteUsuario}
                 />
             }
+
         </div>
     );
 };

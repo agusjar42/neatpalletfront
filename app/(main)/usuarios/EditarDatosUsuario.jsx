@@ -11,6 +11,7 @@ import 'react-phone-input-2/lib/bootstrap.css'
 import { convertirArchivoABase64 } from "@/app/utility/Utils";
 import { Toast } from "primereact/toast";
 import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
+import { getUsuarios } from "@/app/api-endpoints/usuario";
 
 const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccionado, setIdiomaSeleccionado, estadoGuardando,
     listaRoles, rolSeleccionado, setRolSeleccionado, listaTipoArchivos
@@ -44,12 +45,30 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
         verificarPermiso();
     }, []);
 
-    const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
-        const valor = (e.target && e.target.value) || "";
-        let _usuario = { ...usuario };
-        const esTrue = valor === true ? 'S' : 'N';
-        _usuario[`${nombreInputSwitch}`] = esTrue;
-        setUsuario(_usuario);
+    const manejarCambioInputSwitch = async (e, nombreInputSwitch) => {
+        //
+        //Si voy a desactivar el switch de usuarioAdmin, verifico si el usuario es el único admin que queda en el sistema, si es así muestro un mensaje advirtiendo que no es posible
+        //
+        let permiteDesactivar = true;
+        if (nombreInputSwitch === "usuarioAdmin" && e.target && e.target.value === false) {
+            const usuariosAdmin = await getUsuarios(JSON.stringify({ where: { and: { empresaId: usuario.empresaId, usuarioAdmin: 'S' } } }));
+            if (usuariosAdmin.length === 1 && usuariosAdmin[0].id === usuario.id) {
+                permiteDesactivar = false;
+                toast.current?.show({
+                    severity: 'warn',
+                    summary: 'ADVERTENCIA',
+                    detail: intl.formatMessage({ id: 'No puede desactivar este switch, porque no existe ningún otro usuario con privilegios de administrador. Activelo en otro si quiere desactivar este' }),
+                life: 3000,
+                });
+            }
+        }
+        if (permiteDesactivar) {
+            const valor = (e.target && e.target.value) || "";
+            let _usuario = { ...usuario };
+            const esTrue = valor === true ? 'S' : 'N';
+            _usuario[`${nombreInputSwitch}`] = esTrue;
+            setUsuario(_usuario);
+        }
     };
 
     // Función para manejar la selección del avatar
@@ -159,6 +178,15 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                         onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
                     />
                 </div>
+                {(JSON.parse(localStorage.getItem('userDataNeatpallet'))?.["usuarioAdmin"] || "N") === "S" && (
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                        <label htmlFor="usuarioAdmin" className="font-bold block">{intl.formatMessage({ id: 'Usuario Admin' })}</label>
+                        <InputSwitch
+                            checked={usuario.usuarioAdmin === 'S'}
+                            onChange={(e) => manejarCambioInputSwitch(e, "usuarioAdmin")}
+                        />
+                    </div>
+                )}
                 {/* Sección del Avatar - Imagen actual */}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="avatar" className="pb-2">{intl.formatMessage({ id: 'Avatar' })}</label>

@@ -13,14 +13,12 @@ import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
 import { useRouter } from 'next/navigation';
 
-const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion,
-    editable, setRegistroEditarFlag, tipo, rol, crudDerivado }) => {
+const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, editable }) => {
     const intl = useIntl();
     const toast = useRef(null);
     const router = useRouter();
     const [usuario, setUsuario] = useState(emptyRegistro);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
-    const [listaEmpresas, setListaEmpresas] = useState([]);
     const [empresaSeleccionada, setEmpresaSeleccionada] = useState(null);
     const [listaRoles, setListaRoles] = useState([]);
     const [rolSeleccionado, setRolSeleccionado] = useState(null);
@@ -33,25 +31,16 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             //
             //****************************************************************************************************
             //
-            // Obtenemos todas las empresas
-            //
-            const registrosEmpresas = await getEmpresas();
-            const jsonEmpresas = registrosEmpresas.map(empresa => ({
-                nombre: empresa.nombre,
-                id: empresa.id,
-                activoSn: empresa.activoSn
-            }));
-            //Quitamos los registros inactivos y ordenamos
-            const jsonEmpresasActivas = jsonEmpresas
-                .filter(registro => registro.activoSn === 'S')
-                .sort((a, b) => a.nombre.localeCompare(b.nombre));
-            setListaEmpresas(jsonEmpresasActivas);
-            //
-            //****************************************************************************************************
-            //
             // Obtenemos todos los roles
             //
-            const filtroRol = { where: { empresaId: getUsuarioSesion().empresaId } };
+            let empresaFiltrar = null;
+            if (idEditar === 0) {
+                empresaFiltrar = getUsuarioSesion()?.empresaId || null;
+            } else {
+                const usuarioEditar = rowData.find((element) => element.id === idEditar);
+                empresaFiltrar = usuarioEditar?.empresaId || null;
+            }
+            const filtroRol = { where: { and: { empresaId: empresaFiltrar } } };
             const registrosRoles = await getRol(JSON.stringify(filtroRol));
 
             const jsonRoles = registrosRoles.map(rol => ({
@@ -200,7 +189,8 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     empresaId: getUsuarioSesion()?.empresaId,
                     avatarBase64: objGuardar.avatarBase64,
                     avatarNombre: objGuardar.avatarNombre,
-                    avatarTipo: objGuardar.avatarTipo
+                    avatarTipo: objGuardar.avatarTipo,
+                    usuarioAdmin: objGuardar.usuarioAdmin
                 }
                 // Si estoy insertando uno nuevo
                 if (idEditar === 0) {
@@ -290,7 +280,6 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                         <EditarDatosUsuario
                             usuario={usuario}
                             setUsuario={setUsuario}
-                            listaEmpresas={listaEmpresas}
                             empresaSeleccionada={empresaSeleccionada}
                             setEmpresaSeleccionada={setEmpresaSeleccionada}
                             listaRoles={listaRoles}

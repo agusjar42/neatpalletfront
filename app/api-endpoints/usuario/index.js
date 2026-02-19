@@ -8,11 +8,6 @@ export const getUsuarios = async (filtro) => {
     return dataUsuarios
 }
 
-export const getUsuariosCount = async (filtro) => {
-    const { data: dataUsuarios } = await apiUsuario.usuariosControllerCount(filtro)
-    return dataUsuarios
-}
-
 export const getVistaUsuarios = async (filtro) => {
     const { data: dataUsuarios } = await apiUsuario.usuariosControllerVistaEmpresaRolUsuario(filtro)
     return dataUsuarios

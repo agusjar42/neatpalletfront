@@ -4,6 +4,7 @@ import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { TabView, TabPanel } from 'primereact/tabview';
 import { postEmpresa, patchEmpresa } from "@/app/api-endpoints/empresa";
+import { getVistaUsuariosCount } from "@/app/api-endpoints/usuario";
 import EditarDatosEmpresa from "./EditarDatosEmpresa";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
@@ -56,6 +57,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
     const validaciones = async () => {
         const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const emailEmpresa = (empresa.email ?? "").trim();
         //Valida que los campos no esten vacios
         const validaOrden = empresa.orden === undefined || empresa.orden === null || empresa.orden === "";
         const validaCodigo = empresa.codigo === undefined || empresa.codigo === "";
@@ -70,7 +72,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             });
         }
         
-        if ((empresa.email?.length == undefined) || (empresa.email.length > 0 && !regexEmail.test(empresa.email))) {
+        if ((empresa.email?.length == undefined) || (emailEmpresa.length > 0 && !regexEmail.test(emailEmpresa))) {
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
@@ -79,10 +81,36 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             });
         }
 
+        if (emailEmpresa.length > 0 && regexEmail.test(emailEmpresa)) {
+            try {
+                const filtroUsuarios = JSON.stringify({ and: { mail: emailEmpresa } });
+                const usuariosCountResponse = await getVistaUsuariosCount(filtroUsuarios);
+                const usuariosCount = usuariosCountResponse?.count ?? usuariosCountResponse ?? 0;
+                if (usuariosCount > 0) {
+                    toast.current?.show({
+                        severity: 'error',
+                        summary: 'ERROR',
+                        detail: intl.formatMessage({ id: 'El email de la empresa no puede coincidir con el email de un usuario' }),
+                        life: 3000,
+                    });
+                    return false;
+                }
+            } catch (error) {
+                console.error("Error comprobando email de empresa contra usuarios", error);
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'No se ha podido validar el email contra usuarios. Inténtelo de nuevo.' }),
+                    life: 3000,
+                });
+                return false;
+            }
+        }
+
         //
         //Si existe algún bloque vacio entonces no se puede guardar
         //
-        return (!validaNombre && !validaCodigo && !validaOrden && !(empresa.email.length > 0 && !regexEmail.test(empresa.email))
+        return (!validaNombre && !validaCodigo && !validaOrden && !(emailEmpresa.length > 0 && !regexEmail.test(emailEmpresa))
         );
     }
 

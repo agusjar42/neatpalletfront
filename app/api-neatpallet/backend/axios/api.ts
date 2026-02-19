@@ -13272,6 +13272,12 @@ export interface Usuario {
      * @memberof Usuario
      */
     'usuInactivo'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Usuario
+     */
+    'usuarioAdmin'?: string;
 }
 /**
  * 
@@ -14174,6 +14180,12 @@ export interface UsuarioWithRelations {
      * @memberof UsuarioWithRelations
      */
     'usuInactivo'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UsuarioWithRelations
+     */
+    'usuarioAdmin'?: string;
     /**
      * 
      * @type {UsuarioCredencialesWithRelations}

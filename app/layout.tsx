@@ -17,6 +17,7 @@ import IntlProviderWrapper from '@/app/utility/Traducciones.js'; //-> Archivo co
 
 import locales from "@/app/utility/locales.json"; //-> Archivo Json con la configuración de PrimeReact de palabras traducidas al español
 import AutoLogout from './global';
+import { getIdiomaDefecto } from '@/app/components/shared/componentes';
 
 interface RootLayoutProps {
     children: React.ReactNode;
@@ -24,8 +25,32 @@ interface RootLayoutProps {
 //-> Añadimos el AbilityProvider en el Layout Principal, este archivo es el principal de la aplicación, por lo que se envuelve con AbilityProvider
 export default function RootLayout({ children }: RootLayoutProps) {
     useEffect(() => {
-        addLocale("es", locales["es"]); // -> Añadimos lenguaje español
-        locale("es"); //-> Configuramos por defecto el lenguaje añadido
+        Object.keys(locales || {}).forEach((key) => {
+            addLocale(key, (locales as any)[key]);
+        });
+
+        const applyLocale = (nextLocale: string) => {
+            if (!nextLocale) return;
+
+            const hasPrimeLocale = Object.prototype.hasOwnProperty.call(locales || {}, nextLocale);
+            if (hasPrimeLocale) {
+                locale(nextLocale);
+                return;
+            }
+
+            // Fallback: PrimeReact solo tiene configurado 'es' en `app/utility/locales.json`
+            locale('es');
+        };
+
+        applyLocale(getIdiomaDefecto());
+
+        const handleIdiomaChanged = (event: any) => {
+            const nextLocale = event?.detail;
+            if (typeof nextLocale === 'string') applyLocale(nextLocale);
+        };
+
+        window.addEventListener('idioma-changed', handleIdiomaChanged);
+        return () => window.removeEventListener('idioma-changed', handleIdiomaChanged);
     }, []);
 
     return (

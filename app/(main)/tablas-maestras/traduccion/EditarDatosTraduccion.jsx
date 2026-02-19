@@ -19,7 +19,8 @@ const EditarDatosTraduccion = ({ traduccion, setTraduccion, estadoGuardando, idi
                         placeholder={intl.formatMessage({ id: 'Clave de la traducción' })}
                         onChange={(e) => setTraduccion({ ...traduccion, clave: e.target.value })}
                         className={`${(estadoGuardando && traduccion.clave === "") ? "p-invalid" : ""}`}
-                        rows={5} cols={30} />
+                        rows={5} cols={30}
+                        disabled={true} />
                 </div>
 
                 {idiomas.map(idioma => (

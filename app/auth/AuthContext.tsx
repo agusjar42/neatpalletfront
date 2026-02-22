@@ -147,7 +147,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     "Tipo Transporte": {
       path: "/tipo-transporte",
       icon: "pi pi-truck"
-    }
+    },
+    "Parámetros permitidos de Pallet": {
+      path: "/parametro",
+      icon: "pi pi-box"
+    },
   },
 
   "Operativa": {

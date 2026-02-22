@@ -85,12 +85,12 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Logs incorrectos-Borrar' },
 
                 // Paises
-                { header: intl.formatMessage({ id: 'Paises' }), seccion: 'Paises' },
+                /*{ header: intl.formatMessage({ id: 'Paises' }), seccion: 'Paises' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Paises-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Paises-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Paises-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Paises-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Paises-Borrar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Paises-Borrar' },*/
 
                 // Plantillas de correo
                 /*{ header: intl.formatMessage({ id: 'Plantillas de correo' }), seccion: 'Plantillas de correo' },
@@ -152,8 +152,8 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envío Configuracion Empresa-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envío Configuracion Empresa-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envío Configuracion Empresa-Borrar' },
-                //Envío Sensor Empresa
 
+                //Envío Sensor Empresa
                 { header: intl.formatMessage({ id: 'Envío Sensor Empresa' }), seccion: 'Envío Sensor Empresa' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envío Sensor Empresa-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envío Sensor Empresa-Ver' },
@@ -202,12 +202,12 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Sensor-Borrar' },
 
                 // Envio
-                { header: intl.formatMessage({ id: 'Envio' }), seccion: 'Envio' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envio-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envio-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envio-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio-Borrar' },
+                { header: intl.formatMessage({ id: 'Envíos' }), seccion: 'Envíos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envíos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envíos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envíos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envíos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envíos-Borrar' },
 
                 // Pallet Parametro
                 { header: intl.formatMessage({ id: 'Pallet Parametro' }), seccion: 'Pallet Parametro' },
@@ -298,6 +298,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Clientes-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Clientes-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Clientes-Borrar' },
+
+                //Parámetros permitidos de Pallet
+                { header: intl.formatMessage({ id: 'Parámetros permitidos de Pallet' }), seccion: 'Parámetros permitidos de Pallet' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Parámetros permitidos de Pallet-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Parámetros permitidos de Pallet-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Parámetros permitidos de Pallet-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Parámetros permitidos de Pallet-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Parámetros permitidos de Pallet-Borrar' },
 
             ];
 

@@ -16,7 +16,7 @@ const Parametro = () => {
     return (
         <div>
             {/* Bocadillo de información */}
-            <div className="p-mt-3">
+            {/*<div className="p-mt-3">
                 <div
                     className="flex align-items-center bg-red-100 border-round p-3 w-full"
                 >
@@ -25,13 +25,13 @@ const Parametro = () => {
                         {intl.formatMessage({ id: 'Sección desde la que se pueden cargar los parámetros disponibles de un Palet, Pantalla 1 tabla Parámetros del documento "Análisis de trazabilidad de ruta". El problema con esto es que, actualmente, deben modificarse uno a uno en cada cambio de estado, de momento se deja así pero esta pantalla podría eliminarse en el futuro y que esta información se rellene automáticamente.' })}
                     </span>
                 </div>
-            </div>
+            </div>*/}
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Parametro' })}
+                headerCrud={intl.formatMessage({ id: 'Parámetros permitidos de Pallet' })}
                 getRegistros={getParametro}
                 getRegistrosCount={getParametroCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"Parametro"}
+                controlador={"Parámetros permitidos de Pallet"}
                 editarComponente={<EditarParametro />}
                 columnas={columnas}
                 deleteRegistro={deleteParametro}

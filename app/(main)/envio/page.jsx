@@ -74,7 +74,7 @@ const Envio = () => {
                     getRegistros={getEnvio}
                     getRegistrosCount={getEnvioCount}
                     botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                    controlador={"Envios"}
+                    controlador={"Envíos"}
                     filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                     editarComponente={<EditarEnvios />}
                     columnas={columnas}

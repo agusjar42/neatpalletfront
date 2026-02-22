@@ -505,12 +505,13 @@ const ImportarCSVPalletsDialog = ({
 
             const palletData = {
                 empresaId: empresaId,
-                codigo: fields[0] || '',
-                alias: fields[1] || '',
-                modelo: fields[2] || '',
-                medidas: fields[3] || '',
-                periodoEnvioMail: fields[4] ? parseInt(fields[4]) || 24 : 24,
-                fechaImpresion: fields[5] || new Date().toISOString()
+                orden: fields[0],
+                codigo: fields[1] || '',
+                alias: fields[2] || '',
+                modelo: fields[3] || '',
+                medidas: fields[4] || '',
+                periodoEnvioMail: fields[5] ? parseInt(fields[5]) || 24 : 24,
+                fechaImpresion: fields[6] || new Date().toISOString()
             };
 
             // Validaciones básicas

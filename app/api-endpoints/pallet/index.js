@@ -38,15 +38,28 @@ export const getPalletCount = async (filtros) => {
 
 export const upsertPalletFromCSV = async (palletData) => {
     try {
+        // Normaliza tipos antes de llamar al backend (CSV suele traer strings)
+        const normalizedPalletData = {
+            ...palletData,
+            orden:
+                palletData?.orden === "" || palletData?.orden === null || palletData?.orden === undefined
+                    ? palletData?.orden
+                    : Number(palletData.orden),
+        };
+
+        if (
+            normalizedPalletData.orden !== "" &&
+            normalizedPalletData.orden !== null &&
+            normalizedPalletData.orden !== undefined &&
+            Number.isNaN(normalizedPalletData.orden)
+        ) {
+            throw new Error(`Campo 'orden' inválido: ${palletData.orden}`);
+        }
         // Primero buscamos si existe un pallet con el mismo código en la empresa
         const filtro = JSON.stringify({
             where: {
                 and: {
-                    codigo: palletData.codigo,
-                    empresaId: palletData.empresaId,
-                    alias: palletData.alias,
-                    modelo: palletData.modelo,
-                    medidas: palletData.medidas 
+                    codigo: normalizedPalletData.codigo
                 }
             }
         });
@@ -56,11 +69,11 @@ export const upsertPalletFromCSV = async (palletData) => {
         if (existingPallets && existingPallets.length > 0) {
             // Si existe, actualizamos el primer registro encontrado
             const existingPallet = existingPallets[0];
-            const { data: updatedPallet } = await apiPallet.palletControllerUpdateById(existingPallet.id, palletData);
+            const { data: updatedPallet } = await apiPallet.palletControllerUpdateById(existingPallet.id, normalizedPalletData);
             return { action: 'updated', data: updatedPallet };
         } else {
             // Si no existe, creamos uno nuevo
-            const { data: newPallet } = await apiPallet.palletControllerCreate(palletData);
+            const { data: newPallet } = await apiPallet.palletControllerCreate(normalizedPalletData);
             return { action: 'created', data: newPallet };
         }
     } catch (error) {

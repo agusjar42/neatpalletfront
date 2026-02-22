@@ -20,6 +20,7 @@ const Pallet = () => {
     const procesarDatosParaCSV = (registros) => {
         return registros.map(registro => {
             return {
+                [intl.formatMessage({ id: 'Orden' })]: registro.orden,
                 [intl.formatMessage({ id: 'Código' })]: registro.codigo,
                 [intl.formatMessage({ id: 'Alias' })]: registro.alias,
                 [intl.formatMessage({ id: 'Modelo' })]: registro.modelo,

@@ -136,7 +136,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       path: "/cliente",
       icon: "pi pi-users"
     },
-    "Tipo Carrocería": {
+    "Tipos de Carrocería": {
       path: "/tipo-carroceria",
       icon: "pi pi-car"
     },

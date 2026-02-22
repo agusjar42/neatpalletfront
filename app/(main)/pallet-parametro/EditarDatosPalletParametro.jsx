@@ -65,7 +65,7 @@ const EditarDatosPalletParametro = ({ palletParametro, setPalletParametro, estad
                 </div>
                 {/* Solo mostrar el desplegable Pallet si palletId viene vacio */}
                 {(!palletId) && (
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-5">
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                         <label htmlFor="palletId"><b>{intl.formatMessage({ id: 'Pallet' })}*</b></label>
                         <Dropdown value={palletParametro.palletId || ""}
                             onChange={(e) => setPalletParametro({ ...palletParametro, palletId: e.value })}
@@ -75,7 +75,7 @@ const EditarDatosPalletParametro = ({ palletParametro, setPalletParametro, estad
                         placeholder={intl.formatMessage({ id: 'Selecciona un pallet' })} />
                 </div>
                 )}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-5">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="parametroId"><b>{intl.formatMessage({ id: 'Parámetro' })}*</b></label>
                     <Dropdown value={palletParametro.parametroId || ""}
                         onChange={(e) => setPalletParametro({ ...palletParametro, parametroId: e.value })}
@@ -84,7 +84,7 @@ const EditarDatosPalletParametro = ({ palletParametro, setPalletParametro, estad
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona' })} />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="valor">{intl.formatMessage({ id: 'Valor' })}</label>
                     <Dropdown value={palletParametro.valor || ""}
                         onChange={(e) => setPalletParametro({ ...palletParametro, valor: e.value })}
@@ -93,7 +93,9 @@ const EditarDatosPalletParametro = ({ palletParametro, setPalletParametro, estad
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un parámetro' })} />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+            </div>
+            <div className="formgrid grid">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-12">
                     <label htmlFor="textoLibre">{intl.formatMessage({ id: 'Texto libre' })}</label>
                     <InputTextarea value={palletParametro.textoLibre}
                         placeholder={intl.formatMessage({ id: 'Texto libre adicional' })}

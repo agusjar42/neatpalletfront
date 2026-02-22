@@ -19,7 +19,7 @@ const TipoCarroceria = () => {
                 getRegistros={getTipoCarroceria}
                 getRegistrosCount={getTipoCarroceriaCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"Tipo Carroceria"}
+                controlador={"Tipos de Carrocería"}
                 editarComponente={<EditarTipoCarroceria />}
                 columnas={columnas}
                 deleteRegistro={deleteTipoCarroceria}

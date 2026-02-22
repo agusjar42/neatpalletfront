@@ -233,13 +233,13 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Parametro-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Parametro-Borrar' },
 
-                // Tipo Carroceria
-                { header: intl.formatMessage({ id: 'Tipo Carroceria' }), seccion: 'Tipo Carroceria' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipo Carroceria-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipo Carroceria-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipo Carroceria-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipo Carroceria-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipo Carroceria-Borrar' },
+                // Tipos de Carrocería
+                { header: intl.formatMessage({ id: 'Tipos de Carrocería' }), seccion: 'Tipos de Carrocería' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipos de Carrocería-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipos de Carrocería-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipos de Carrocería-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de Carrocería-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de Carrocería-Borrar' },
 
                 // Tipo Sensor
                 { header: intl.formatMessage({ id: 'Tipo Sensor' }), seccion: 'Tipo Sensor' },

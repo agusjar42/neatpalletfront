@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postPallet, patchPallet } from "@/app/api-endpoints/pallet";
+import { postPallet, patchPallet, getPalletCount, getPallet } from "@/app/api-endpoints/pallet";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosPallet from "./EditarDatosPallet";
@@ -29,6 +29,35 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
+        let existeCodigo = false;
+        //
+        //Comprobamos que el campo código no exista en el sistema, ya que debe ser único por empresa
+        //
+        const filtro = JSON.stringify({
+            where: {
+                and: {
+                    empresaId: pallet.empresaId,
+                    codigo: pallet.codigo,
+                }
+            }
+        });
+        
+        const palletsConCodigoIgual = await getPallet(filtro);
+        palletsConCodigoIgual.map(p => {
+            //
+            // Si el pallet encontrado es el mismo que estamos editando, lo ignoramos. Sino mostramos error y no guardamos
+            //
+            if (p.id !== pallet.id) {                
+                existeCodigo = true;
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'Ha introducido el código de un palet ya existente, cámbielo para continuar.' }),
+                    life: 3000,
+                });
+            }
+        });
+
         const validaOrden = pallet.orden === undefined || pallet.orden === null || pallet.orden === "";
         const validaCodigo = pallet.codigo === undefined || pallet.codigo === "";
         
@@ -41,7 +70,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
             });
         }
         
-        return (!validaOrden && !validaCodigo);
+        return (!validaOrden && !validaCodigo && !existeCodigo);
     }
 
     const guardarPallet = async () => {
@@ -80,14 +109,6 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                 setIdEditar(null)
                 setRegistroResult("editado");
             }
-        }
-        else {
-            toast.current?.show({
-                severity: 'error',
-                summary: 'ERROR',
-                detail: intl.formatMessage({ id: 'Todos los campos deben de ser rellenados' }),
-                life: 3000,
-            });
         }
         setEstadoGuardandoBoton(false);
     };

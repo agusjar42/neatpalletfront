@@ -110,6 +110,15 @@ const AppTopbar = React.forwardRef((props, ref) => {
     const cambiarIdioma = (idioma) => {
         setDropdownValue(idioma);
         localStorage.setItem("idioma", idioma.code);
+        const userDataNeatpalletRaw = localStorage.getItem('userDataNeatpallet');
+        if (userDataNeatpalletRaw) {
+            try {
+                const userDataNeatpallet = JSON.parse(userDataNeatpalletRaw);
+                localStorage.setItem('userDataNeatpallet', JSON.stringify({ ...userDataNeatpallet, idiomaId: idioma.id }));
+            } catch (e) {
+                // Ignorar si el JSON está corrupto
+            }
+        }
         window.dispatchEvent(new CustomEvent('idioma-changed', { detail: idioma.code }));
     }
 

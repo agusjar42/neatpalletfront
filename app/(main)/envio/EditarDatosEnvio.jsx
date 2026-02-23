@@ -62,8 +62,9 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     ];
 
     const columnasMovimiento = [
+        { campo: 'palletCodigo', header: intl.formatMessage({ id: 'Código Pallet' }), tipo: 'string' },
         { campo: 'fechaEspanol', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'date' },
-        { campo: 'nombreSensor', header: intl.formatMessage({ id: 'Sensor' }), tipo: 'string' },
+        { campo: 'nombreSensor', header: intl.formatMessage({ id: 'Tipo de Sensor' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
         { campo: 'gps', header: intl.formatMessage({ id: 'GPS' }), tipo: 'string' },
     ];
@@ -130,6 +131,19 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
 
         cargarConteos();
     }, [envio.id, refreshConteos, activeIndex]);
+
+    const getMovimientosEnvio = async (filtro) => {
+        const queryParams = JSON.parse(filtro);
+        const where = queryParams?.where?.and ? queryParams.where.and : (queryParams?.where || {});
+        queryParams.where = { and: { ...where, envioId: envio.id } };
+        return await getEnvioMovimiento(JSON.stringify(queryParams));
+    };
+
+    const getMovimientosEnvioCount = async (filtros) => {
+        const whereFiltro = JSON.parse(filtros);
+        const where = whereFiltro?.and ? whereFiltro.and : (whereFiltro || {});
+        return await getEnvioMovimientoCount(JSON.stringify({ and: { ...where, envioId: envio.id } }));
+    };
 
     const handleCrearConfiguracionDesdeEmpresa = () => {
         if (!envio.id) {
@@ -469,26 +483,15 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                         </span>
                                     </div>
                                 </div>
-                                 <div className="p-mt-3">
-                                    <div
-                                        className="flex align-items-center bg-red-100 border-round p-3 w-full"
-                                    >
-                                        <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
-                                        <span>
-                                            {intl.formatMessage({ id: 'No veo para que sirve la imagen aquí. Igual que en otros sitios mencionados, es un valor manual que debe poner el usuario en cada movimiento y no lo veo claro.' })}
-                                        </span>
-                                    </div>
-                                </div>
                                 <Crud
                                     key={`movimiento-${refreshConteos}`}
                                     headerCrud={intl.formatMessage({ id: 'Movimientos del Envío' })}
-                                    getRegistros={getEnvioMovimiento}
-                                    getRegistrosCount={getEnvioMovimientoCount}
+                                    getRegistros={getMovimientosEnvio}
+                                    getRegistrosCount={getMovimientosEnvioCount}
                                     botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'generarGrafico']}
                                     controlador={"Envio Movimiento"}
                                     editarComponente={<EditarEnvioMovimiento />}
                                     columnas={columnasMovimiento}
-                                    filtradoBase={{envioId: envio.id}}
                                     deleteRegistro={deleteEnvioMovimiento}
                                     cargarDatosInicialmente={true}
                                     editarComponenteParametrosExtra={{
@@ -571,17 +574,6 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                         {/* Solo mostrar la tabla de paradas si el envío ya está creado */}
                         {envio.id ? (
                             <>
-                                {/* Bocadillo de información */}
-                                <div className="p-mt-3">
-                                    <div
-                                        className="flex align-items-center bg-red-100 border-round p-3 w-full"
-                                    >
-                                        <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
-                                        <span>
-                                            {intl.formatMessage({ id: '¿Como se van a gestionar las paradas?. Veo esto un proceso muy manual que no se si van a querer configurarlo, de momento lo dejo parado.' })}
-                                        </span>
-                                    </div>
-                                </div>
                                 <Crud
                                     key={`parada-${refreshConteos}`}
                                     headerCrud={intl.formatMessage({ id: 'Paradas del Envío' })}
@@ -685,6 +677,17 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                         </span>
                                     </div>
                                 </div>
+                                {/* Bocadillo de información */}
+                                <div className="p-mt-3">
+                                    <div
+                                        className="flex align-items-center bg-red-100 border-round p-3 w-full"
+                                    >
+                                        <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
+                                        <span>
+                                            {intl.formatMessage({ id: '------ATENCIÓN------ATENCIÓN------Los datos aquí mostrados son de prueba hasta que esté conectado el pallet a la placa.------ATENCIÓN------ATENCIÓN------' })}
+                                        </span>
+                                    </div>
+                                </div>
                                 <Crud
                                     headerCrud={intl.formatMessage({ id: 'Resumen del Envío' })}
                                     getRegistros={(filtro) => import("@/app/api-endpoints/envio").then(m => m.getResumenEnvio(envio.id))}
@@ -693,6 +696,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                                     controlador={"Resumen Envio"}
                                     editarComponente={null}
                                     columnas={[
+                                        { campo: 'pallet', header: intl.formatMessage({ id: 'Pallet' }), tipo: 'string' },
                                         { campo: 'eventosGuardados', header: intl.formatMessage({ id: 'Eventos Guardados' }), tipo: 'number' },
                                         { campo: 'eventosEnviados', header: intl.formatMessage({ id: 'Eventos Enviados' }), tipo: 'number' },
                                         { campo: 'totalAlarmas', header: intl.formatMessage({ id: 'Total Alarmas' }), tipo: 'number' },

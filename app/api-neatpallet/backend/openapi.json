@@ -1785,14 +1785,14 @@
     },
     "/envio-movimientos/count": {
       "get": {
-        "x-controller-name": "EnvioMovimientoController",
+        "x-controller-name": "EnvioPalletMovimientoController",
         "x-operation-name": "count",
         "tags": [
-          "EnvioMovimientoController"
+          "EnvioPalletMovimientoController"
         ],
         "responses": {
           "200": {
-            "description": "EnvioMovimiento model count",
+            "description": "EnvioPalletMovimiento model count",
             "content": {
               "application/json": {
                 "schema": {
@@ -1810,23 +1810,23 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "title": "EnvioMovimiento.WhereFilter",
+                  "title": "EnvioPalletMovimiento.WhereFilter",
                   "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<EnvioMovimiento>"
+                  "x-typescript-type": "@loopback/repository#Where<EnvioPalletMovimiento>"
                 }
               }
             }
           }
         ],
-        "operationId": "EnvioMovimientoController.count"
+        "operationId": "EnvioPalletMovimientoController.count"
       }
     },
     "/envio-movimientos/{id}": {
       "patch": {
-        "x-controller-name": "EnvioMovimientoController",
+        "x-controller-name": "EnvioPalletMovimientoController",
         "x-operation-name": "updateById",
         "tags": [
-          "EnvioMovimientoController"
+          "EnvioPalletMovimientoController"
         ],
         "responses": {
           "204": {
@@ -1834,7 +1834,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "EnvioMovimiento PATCH success"
+                  "description": "EnvioPalletMovimiento PATCH success"
                 }
               }
             }
@@ -1854,27 +1854,27 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EnvioMovimientoPartial"
+                "$ref": "#/components/schemas/EnvioPalletMovimientoPartial"
               }
             }
           },
           "x-parameter-index": 1
         },
-        "operationId": "EnvioMovimientoController.updateById"
+        "operationId": "EnvioPalletMovimientoController.updateById"
       },
       "get": {
-        "x-controller-name": "EnvioMovimientoController",
+        "x-controller-name": "EnvioPalletMovimientoController",
         "x-operation-name": "findById",
         "tags": [
-          "EnvioMovimientoController"
+          "EnvioPalletMovimientoController"
         ],
         "responses": {
           "200": {
-            "description": "EnvioMovimiento model instance",
+            "description": "EnvioPalletMovimiento model instance",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EnvioMovimientoWithRelations"
+                  "$ref": "#/components/schemas/EnvioPalletMovimientoWithRelations"
                 }
               }
             }
@@ -1895,19 +1895,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EnvioMovimiento.Filter"
+                  "$ref": "#/components/schemas/EnvioPalletMovimiento.Filter"
                 }
               }
             }
           }
         ],
-        "operationId": "EnvioMovimientoController.findById"
+        "operationId": "EnvioPalletMovimientoController.findById"
       },
       "delete": {
-        "x-controller-name": "EnvioMovimientoController",
+        "x-controller-name": "EnvioPalletMovimientoController",
         "x-operation-name": "deleteById",
         "tags": [
-          "EnvioMovimientoController"
+          "EnvioPalletMovimientoController"
         ],
         "responses": {
           "204": {
@@ -1915,7 +1915,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "EnvioMovimiento DELETE success"
+                  "description": "EnvioPalletMovimiento DELETE success"
                 }
               }
             }
@@ -1931,23 +1931,23 @@
             "required": true
           }
         ],
-        "operationId": "EnvioMovimientoController.deleteById"
+        "operationId": "EnvioPalletMovimientoController.deleteById"
       }
     },
     "/envio-movimientos": {
       "post": {
-        "x-controller-name": "EnvioMovimientoController",
+        "x-controller-name": "EnvioPalletMovimientoController",
         "x-operation-name": "create",
         "tags": [
-          "EnvioMovimientoController"
+          "EnvioPalletMovimientoController"
         ],
         "responses": {
           "200": {
-            "description": "EnvioMovimiento model instance",
+            "description": "EnvioPalletMovimiento model instance",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EnvioMovimiento"
+                  "$ref": "#/components/schemas/EnvioPalletMovimiento"
                 }
               }
             }
@@ -1957,28 +1957,28 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewEnvioMovimiento"
+                "$ref": "#/components/schemas/NewEnvioPalletMovimiento"
               }
             }
           }
         },
-        "operationId": "EnvioMovimientoController.create"
+        "operationId": "EnvioPalletMovimientoController.create"
       },
       "get": {
-        "x-controller-name": "EnvioMovimientoController",
+        "x-controller-name": "EnvioPalletMovimientoController",
         "x-operation-name": "find",
         "tags": [
-          "EnvioMovimientoController"
+          "EnvioPalletMovimientoController"
         ],
         "responses": {
           "200": {
-            "description": "Array of EnvioMovimiento model instances",
+            "description": "Array of EnvioPalletMovimiento model instances",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/EnvioMovimientoWithRelations"
+                    "$ref": "#/components/schemas/EnvioPalletMovimientoWithRelations"
                   }
                 }
               }
@@ -1992,13 +1992,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EnvioMovimiento.Filter1"
+                  "$ref": "#/components/schemas/EnvioPalletMovimiento.Filter1"
                 }
               }
             }
           }
         ],
-        "operationId": "EnvioMovimientoController.find"
+        "operationId": "EnvioPalletMovimientoController.find"
       }
     },
     "/envio-pallets/count": {
@@ -11678,78 +11678,6 @@
         "additionalProperties": false,
         "x-typescript-type": "EmpresaWithRelations"
       },
-      "Empresa": {
-        "title": "Empresa",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "codigo": {
-            "type": "string",
-            "nullable": true
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "descripcion": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "tiempoInactividad": {
-            "type": "number",
-            "nullable": false
-          },
-          "imagen": {
-            "type": "string",
-            "nullable": true
-          },
-          "logo": {
-            "type": "string",
-            "nullable": true
-          },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "usuCreacion"
-        ],
-        "additionalProperties": false
-      },
       "ClienteWithRelations": {
         "title": "ClienteWithRelations",
         "type": "object",
@@ -11794,7 +11722,7 @@
             "nullable": true
           },
           "empresa": {
-            "$ref": "#/components/schemas/Empresa"
+            "$ref": "#/components/schemas/EmpresaWithRelations"
           },
           "foreignKey": {}
         },
@@ -11912,10 +11840,207 @@
         "additionalProperties": false,
         "x-typescript-type": "EnvioSensorWithRelations"
       },
-      "EnvioMovimientoWithRelations": {
-        "title": "EnvioMovimientoWithRelations",
+      "ParametroWithRelations": {
+        "title": "ParametroWithRelations",
         "type": "object",
-        "description": "(tsType: EnvioMovimientoWithRelations, schemaOptions: { includeRelations: true })",
+        "description": "(tsType: ParametroWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "valorDisponible": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "palletParametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PalletParametroWithRelations"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "ParametroWithRelations"
+      },
+      "PalletParametroWithRelations": {
+        "title": "PalletParametroWithRelations",
+        "type": "object",
+        "description": "(tsType: PalletParametroWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          },
+          "parametroId": {
+            "type": "number"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "textoLibre": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "pallet": {
+            "$ref": "#/components/schemas/PalletWithRelations"
+          },
+          "foreignKey": {},
+          "parametro": {
+            "$ref": "#/components/schemas/ParametroWithRelations"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "PalletParametroWithRelations"
+      },
+      "PalletWithRelations": {
+        "title": "PalletWithRelations",
+        "type": "object",
+        "description": "(tsType: PalletWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "fechaImpresion": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "periodoEnvioMail": {
+            "type": "number"
+          },
+          "medidas": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/EmpresaWithRelations"
+          },
+          "foreignKey": {},
+          "envioPallets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnvioPalletWithRelations"
+            }
+          },
+          "palletParametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PalletParametroWithRelations"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "PalletWithRelations"
+      },
+      "EnvioPalletWithRelations": {
+        "title": "EnvioPalletWithRelations",
+        "type": "object",
+        "description": "(tsType: EnvioPalletWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          },
+          "envioId": {
+            "type": "number"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pallet": {
+            "$ref": "#/components/schemas/PalletWithRelations"
+          },
+          "foreignKey": {},
+          "envio": {
+            "$ref": "#/components/schemas/EnvioWithRelations"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "EnvioPalletWithRelations"
+      },
+      "EnvioPalletMovimientoWithRelations": {
+        "title": "EnvioPalletMovimientoWithRelations",
+        "type": "object",
+        "description": "(tsType: EnvioPalletMovimientoWithRelations, schemaOptions: { includeRelations: true })",
         "properties": {
           "id": {
             "type": "number"
@@ -11923,7 +12048,7 @@
           "tipoSensorId": {
             "type": "number"
           },
-          "envioId": {
+          "envioPalletId": {
             "type": "number"
           },
           "fecha": {
@@ -11971,12 +12096,12 @@
             "$ref": "#/components/schemas/TipoSensorWithRelations"
           },
           "foreignKey": {},
-          "envio": {
-            "$ref": "#/components/schemas/EnvioWithRelations"
+          "envioPallet": {
+            "$ref": "#/components/schemas/EnvioPalletWithRelations"
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "EnvioMovimientoWithRelations"
+        "x-typescript-type": "EnvioPalletMovimientoWithRelations"
       },
       "TipoSensorWithRelations": {
         "title": "TipoSensorWithRelations",
@@ -12022,10 +12147,10 @@
               "$ref": "#/components/schemas/EnvioSensorWithRelations"
             }
           },
-          "envioMovimientos": {
+          "envioPalletMovimientos": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EnvioMovimientoWithRelations"
+              "$ref": "#/components/schemas/EnvioPalletMovimientoWithRelations"
             }
           }
         },
@@ -12545,54 +12670,6 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<RefrescarToken>"
       },
-      "Cliente": {
-        "title": "Cliente",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "empresaId": {
-            "type": "number",
-            "nullable": false
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "telefono": {
-            "type": "string",
-            "nullable": true
-          },
-          "mail": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "empresa": {
-            "$ref": "#/components/schemas/Empresa"
-          }
-        },
-        "additionalProperties": false
-      },
       "Producto": {
         "title": "Producto",
         "type": "object",
@@ -12602,8 +12679,7 @@
             "nullable": false
           },
           "clienteId": {
-            "type": "number",
-            "nullable": false
+            "type": "number"
           },
           "nombre": {
             "type": "string",
@@ -12633,9 +12709,6 @@
           },
           "pesoKgs": {
             "type": "number"
-          },
-          "cliente": {
-            "$ref": "#/components/schemas/Cliente"
           }
         },
         "additionalProperties": false
@@ -12646,8 +12719,7 @@
         "description": "(tsType: Omit<Producto, 'id'>, schemaOptions: { title: 'NewProducto', exclude: [ 'id' ] })",
         "properties": {
           "clienteId": {
-            "type": "number",
-            "nullable": false
+            "type": "number"
           },
           "nombre": {
             "type": "string",
@@ -12677,9 +12749,6 @@
           },
           "pesoKgs": {
             "type": "number"
-          },
-          "cliente": {
-            "$ref": "#/components/schemas/Cliente"
           }
         },
         "additionalProperties": false,
@@ -12695,8 +12764,7 @@
             "nullable": false
           },
           "clienteId": {
-            "type": "number",
-            "nullable": false
+            "type": "number"
           },
           "nombre": {
             "type": "string",
@@ -12728,7 +12796,7 @@
             "type": "number"
           },
           "cliente": {
-            "$ref": "#/components/schemas/Cliente"
+            "$ref": "#/components/schemas/ClienteWithRelations"
           },
           "foreignKey": {}
         },
@@ -12745,8 +12813,7 @@
             "nullable": false
           },
           "clienteId": {
-            "type": "number",
-            "nullable": false
+            "type": "number"
           },
           "nombre": {
             "type": "string",
@@ -12776,9 +12843,6 @@
           },
           "pesoKgs": {
             "type": "number"
-          },
-          "cliente": {
-            "$ref": "#/components/schemas/Cliente"
           }
         },
         "additionalProperties": false,
@@ -13325,203 +13389,6 @@
         "additionalProperties": false,
         "x-typescript-type": "Omit<Parametro, 'id'>"
       },
-      "EnvioPalletWithRelations": {
-        "title": "EnvioPalletWithRelations",
-        "type": "object",
-        "description": "(tsType: EnvioPalletWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "palletId": {
-            "type": "number"
-          },
-          "envioId": {
-            "type": "number"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "pallet": {
-            "$ref": "#/components/schemas/PalletWithRelations"
-          },
-          "foreignKey": {},
-          "envio": {
-            "$ref": "#/components/schemas/EnvioWithRelations"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "EnvioPalletWithRelations"
-      },
-      "PalletWithRelations": {
-        "title": "PalletWithRelations",
-        "type": "object",
-        "description": "(tsType: PalletWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "empresaId": {
-            "type": "number"
-          },
-          "fechaImpresion": {
-            "type": "string"
-          },
-          "codigo": {
-            "type": "string"
-          },
-          "alias": {
-            "type": "string"
-          },
-          "periodoEnvioMail": {
-            "type": "number"
-          },
-          "medidas": {
-            "type": "string"
-          },
-          "modelo": {
-            "type": "string"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          },
-          "empresa": {
-            "$ref": "#/components/schemas/EmpresaWithRelations"
-          },
-          "foreignKey": {},
-          "envioPallets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EnvioPalletWithRelations"
-            }
-          },
-          "palletParametros": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PalletParametroWithRelations"
-            }
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "PalletWithRelations"
-      },
-      "PalletParametroWithRelations": {
-        "title": "PalletParametroWithRelations",
-        "type": "object",
-        "description": "(tsType: PalletParametroWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "palletId": {
-            "type": "number"
-          },
-          "parametroId": {
-            "type": "number"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "textoLibre": {
-            "type": "string"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          },
-          "pallet": {
-            "$ref": "#/components/schemas/PalletWithRelations"
-          },
-          "foreignKey": {},
-          "parametro": {
-            "$ref": "#/components/schemas/ParametroWithRelations"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "PalletParametroWithRelations"
-      },
-      "ParametroWithRelations": {
-        "title": "ParametroWithRelations",
-        "type": "object",
-        "description": "(tsType: ParametroWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "nombre": {
-            "type": "string"
-          },
-          "valorDisponible": {
-            "type": "string"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "activoSn": {
-            "type": "string"
-          },
-          "orden": {
-            "type": "number"
-          },
-          "palletParametros": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PalletParametroWithRelations"
-            }
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "ParametroWithRelations"
-      },
       "ParametroPartial": {
         "title": "ParametroPartial",
         "type": "object",
@@ -14059,9 +13926,6 @@
           "activoSN": {
             "type": "string",
             "nullable": true
-          },
-          "cliente": {
-            "$ref": "#/components/schemas/Cliente"
           }
         },
         "additionalProperties": false
@@ -14108,9 +13972,6 @@
           "activoSN": {
             "type": "string",
             "nullable": true
-          },
-          "cliente": {
-            "$ref": "#/components/schemas/Cliente"
           }
         },
         "additionalProperties": false,
@@ -14162,11 +14023,7 @@
           "activoSN": {
             "type": "string",
             "nullable": true
-          },
-          "cliente": {
-            "$ref": "#/components/schemas/Cliente"
-          },
-          "foreignKey": {}
+          }
         },
         "additionalProperties": false,
         "x-typescript-type": "OperarioWithRelations"
@@ -14217,9 +14074,6 @@
           "activoSN": {
             "type": "string",
             "nullable": true
-          },
-          "cliente": {
-            "$ref": "#/components/schemas/Cliente"
           }
         },
         "additionalProperties": false,
@@ -14270,9 +14124,6 @@
           "activoSN": {
             "type": "string",
             "nullable": true
-          },
-          "cliente": {
-            "$ref": "#/components/schemas/Cliente"
           }
         },
         "additionalProperties": false
@@ -14319,9 +14170,6 @@
           "activoSN": {
             "type": "string",
             "nullable": true
-          },
-          "cliente": {
-            "$ref": "#/components/schemas/Cliente"
           }
         },
         "additionalProperties": false,
@@ -14373,11 +14221,7 @@
           "activoSN": {
             "type": "string",
             "nullable": true
-          },
-          "cliente": {
-            "$ref": "#/components/schemas/Cliente"
-          },
-          "foreignKey": {}
+          }
         },
         "additionalProperties": false,
         "x-typescript-type": "LugarParadaWithRelations"
@@ -14428,9 +14272,6 @@
           "activoSN": {
             "type": "string",
             "nullable": true
-          },
-          "cliente": {
-            "$ref": "#/components/schemas/Cliente"
           }
         },
         "additionalProperties": false,
@@ -15265,6 +15106,178 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<EnvioParada>"
       },
+      "EnvioPalletMovimiento": {
+        "title": "EnvioPalletMovimiento",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "envioPalletId": {
+            "type": "number"
+          },
+          "fecha": {
+            "type": "string"
+          },
+          "gps": {
+            "type": "string"
+          },
+          "imagen": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "imagenBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "imagenNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "imagenTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewEnvioPalletMovimiento": {
+        "title": "NewEnvioPalletMovimiento",
+        "type": "object",
+        "description": "(tsType: Omit<EnvioPalletMovimiento, 'id'>, schemaOptions: { title: 'NewEnvioPalletMovimiento', exclude: [ 'id' ] })",
+        "properties": {
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "envioPalletId": {
+            "type": "number"
+          },
+          "fecha": {
+            "type": "string"
+          },
+          "gps": {
+            "type": "string"
+          },
+          "imagen": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "imagenBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "imagenNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "imagenTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<EnvioPalletMovimiento, 'id'>"
+      },
+      "EnvioPalletMovimientoPartial": {
+        "title": "EnvioPalletMovimientoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<EnvioPalletMovimiento>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "envioPalletId": {
+            "type": "number"
+          },
+          "fecha": {
+            "type": "string"
+          },
+          "gps": {
+            "type": "string"
+          },
+          "imagen": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "imagenBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "imagenNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "imagenTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<EnvioPalletMovimiento>"
+      },
       "EnvioPallet": {
         "title": "EnvioPallet",
         "type": "object",
@@ -15355,178 +15368,6 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<EnvioPallet>"
-      },
-      "EnvioMovimiento": {
-        "title": "EnvioMovimiento",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "tipoSensorId": {
-            "type": "number"
-          },
-          "envioId": {
-            "type": "number"
-          },
-          "fecha": {
-            "type": "string"
-          },
-          "gps": {
-            "type": "string"
-          },
-          "imagen": {
-            "type": "string"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "imagenBase64": {
-            "type": "string",
-            "maxLength": 10000000
-          },
-          "imagenNombre": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "imagenTipo": {
-            "type": "string",
-            "maxLength": 50
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          }
-        },
-        "additionalProperties": false
-      },
-      "NewEnvioMovimiento": {
-        "title": "NewEnvioMovimiento",
-        "type": "object",
-        "description": "(tsType: Omit<EnvioMovimiento, 'id'>, schemaOptions: { title: 'NewEnvioMovimiento', exclude: [ 'id' ] })",
-        "properties": {
-          "tipoSensorId": {
-            "type": "number"
-          },
-          "envioId": {
-            "type": "number"
-          },
-          "fecha": {
-            "type": "string"
-          },
-          "gps": {
-            "type": "string"
-          },
-          "imagen": {
-            "type": "string"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "imagenBase64": {
-            "type": "string",
-            "maxLength": 10000000
-          },
-          "imagenNombre": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "imagenTipo": {
-            "type": "string",
-            "maxLength": 50
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<EnvioMovimiento, 'id'>"
-      },
-      "EnvioMovimientoPartial": {
-        "title": "EnvioMovimientoPartial",
-        "type": "object",
-        "description": "(tsType: Partial<EnvioMovimiento>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "tipoSensorId": {
-            "type": "number"
-          },
-          "envioId": {
-            "type": "number"
-          },
-          "fecha": {
-            "type": "string"
-          },
-          "gps": {
-            "type": "string"
-          },
-          "imagen": {
-            "type": "string"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "imagenBase64": {
-            "type": "string",
-            "maxLength": 10000000
-          },
-          "imagenNombre": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "imagenTipo": {
-            "type": "string",
-            "maxLength": 50
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<EnvioMovimiento>"
       },
       "EnvioContenido": {
         "title": "EnvioContenido",
@@ -16705,6 +16546,123 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<EnvioContenidoPallet>"
       },
+      "Empresa": {
+        "title": "Empresa",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "tiempoInactividad": {
+            "type": "number",
+            "nullable": false
+          },
+          "imagen": {
+            "type": "string",
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "usuCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "Cliente": {
+        "title": "Cliente",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "mail": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "NewCliente": {
         "title": "NewCliente",
         "type": "object",
@@ -16743,9 +16701,6 @@
           "usuModificacion": {
             "type": "number",
             "nullable": true
-          },
-          "empresa": {
-            "$ref": "#/components/schemas/Empresa"
           }
         },
         "additionalProperties": false,
@@ -16793,9 +16748,6 @@
           "usuModificacion": {
             "type": "number",
             "nullable": true
-          },
-          "empresa": {
-            "$ref": "#/components/schemas/Empresa"
           }
         },
         "additionalProperties": false,
@@ -16948,9 +16900,6 @@
                   },
                   "usuModificacion": {
                     "type": "boolean"
-                  },
-                  "empresa": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -16968,8 +16917,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
-                    "usuModificacion",
-                    "empresa"
+                    "usuModificacion"
                   ],
                   "example": "id"
                 },
@@ -17062,9 +17010,6 @@
                   },
                   "usuModificacion": {
                     "type": "boolean"
-                  },
-                  "empresa": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -17082,8 +17027,7 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
-                    "usuModificacion",
-                    "empresa"
+                    "usuModificacion"
                   ],
                   "example": "id"
                 },
@@ -18428,7 +18372,7 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<EnvioContenidoPallet>"
       },
-      "EnvioMovimiento.ScopeFilter": {
+      "EnvioPalletMovimiento.ScopeFilter": {
         "type": "object",
         "properties": {
           "offset": {
@@ -18487,27 +18431,27 @@
           }
         },
         "additionalProperties": false,
-        "title": "EnvioMovimiento.ScopeFilter"
+        "title": "EnvioPalletMovimiento.ScopeFilter"
       },
-      "EnvioMovimiento.IncludeFilter.Items": {
-        "title": "EnvioMovimiento.IncludeFilter.Items",
+      "EnvioPalletMovimiento.IncludeFilter.Items": {
+        "title": "EnvioPalletMovimiento.IncludeFilter.Items",
         "type": "object",
         "properties": {
           "relation": {
             "type": "string",
             "enum": [
               "tipoSensor",
-              "envio"
+              "envioPallet"
             ]
           },
           "scope": {
-            "$ref": "#/components/schemas/EnvioMovimiento.ScopeFilter"
+            "$ref": "#/components/schemas/EnvioPalletMovimiento.ScopeFilter"
           }
         }
       },
-      "EnvioMovimiento.Filter": {
+      "EnvioPalletMovimiento.Filter": {
         "type": "object",
-        "title": "EnvioMovimiento.Filter",
+        "title": "EnvioPalletMovimiento.Filter",
         "properties": {
           "offset": {
             "type": "integer",
@@ -18546,7 +18490,7 @@
                   "tipoSensorId": {
                     "type": "boolean"
                   },
-                  "envioId": {
+                  "envioPalletId": {
                     "type": "boolean"
                   },
                   "fecha": {
@@ -18595,7 +18539,7 @@
                   "enum": [
                     "id",
                     "tipoSensorId",
-                    "envioId",
+                    "envioPalletId",
                     "fecha",
                     "gps",
                     "imagen",
@@ -18614,15 +18558,15 @@
                 "uniqueItems": true
               }
             ],
-            "title": "EnvioMovimiento.Fields"
+            "title": "EnvioPalletMovimiento.Fields"
           },
           "include": {
-            "title": "EnvioMovimiento.IncludeFilter",
+            "title": "EnvioPalletMovimiento.IncludeFilter",
             "type": "array",
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/EnvioMovimiento.IncludeFilter.Items"
+                  "$ref": "#/components/schemas/EnvioPalletMovimiento.IncludeFilter.Items"
                 },
                 {
                   "type": "string"
@@ -18632,11 +18576,11 @@
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<EnvioMovimiento>"
+        "x-typescript-type": "@loopback/repository#Filter<EnvioPalletMovimiento>"
       },
-      "EnvioMovimiento.Filter1": {
+      "EnvioPalletMovimiento.Filter1": {
         "type": "object",
-        "title": "EnvioMovimiento.Filter",
+        "title": "EnvioPalletMovimiento.Filter",
         "properties": {
           "offset": {
             "type": "integer",
@@ -18665,7 +18609,7 @@
             ]
           },
           "where": {
-            "title": "EnvioMovimiento.WhereFilter",
+            "title": "EnvioPalletMovimiento.WhereFilter",
             "type": "object",
             "additionalProperties": true
           },
@@ -18680,7 +18624,7 @@
                   "tipoSensorId": {
                     "type": "boolean"
                   },
-                  "envioId": {
+                  "envioPalletId": {
                     "type": "boolean"
                   },
                   "fecha": {
@@ -18729,7 +18673,7 @@
                   "enum": [
                     "id",
                     "tipoSensorId",
-                    "envioId",
+                    "envioPalletId",
                     "fecha",
                     "gps",
                     "imagen",
@@ -18748,15 +18692,15 @@
                 "uniqueItems": true
               }
             ],
-            "title": "EnvioMovimiento.Fields"
+            "title": "EnvioPalletMovimiento.Fields"
           },
           "include": {
-            "title": "EnvioMovimiento.IncludeFilter",
+            "title": "EnvioPalletMovimiento.IncludeFilter",
             "type": "array",
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/EnvioMovimiento.IncludeFilter.Items"
+                  "$ref": "#/components/schemas/EnvioPalletMovimiento.IncludeFilter.Items"
                 },
                 {
                   "type": "string"
@@ -18766,7 +18710,7 @@
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<EnvioMovimiento>"
+        "x-typescript-type": "@loopback/repository#Filter<EnvioPalletMovimiento>"
       },
       "EnvioPallet.ScopeFilter": {
         "type": "object",
@@ -21331,82 +21275,6 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<LogUsuario>"
       },
-      "LugarParada.ScopeFilter": {
-        "type": "object",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {},
-                "additionalProperties": true
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "uniqueItems": true
-              }
-            ]
-          },
-          "include": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {},
-              "additionalProperties": true
-            }
-          }
-        },
-        "additionalProperties": false,
-        "title": "LugarParada.ScopeFilter"
-      },
-      "LugarParada.IncludeFilter.Items": {
-        "title": "LugarParada.IncludeFilter.Items",
-        "type": "object",
-        "properties": {
-          "relation": {
-            "type": "string",
-            "enum": [
-              "cliente"
-            ]
-          },
-          "scope": {
-            "$ref": "#/components/schemas/LugarParada.ScopeFilter"
-          }
-        }
-      },
       "LugarParada.Filter": {
         "type": "object",
         "title": "LugarParada.Filter",
@@ -21471,9 +21339,6 @@
                   },
                   "activoSN": {
                     "type": "boolean"
-                  },
-                  "cliente": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -21492,8 +21357,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
-                    "activoSN",
-                    "cliente"
+                    "activoSN"
                   ],
                   "example": "id"
                 },
@@ -21501,20 +21365,6 @@
               }
             ],
             "title": "LugarParada.Fields"
-          },
-          "include": {
-            "title": "LugarParada.IncludeFilter",
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/LugarParada.IncludeFilter.Items"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            }
           }
         },
         "additionalProperties": false,
@@ -21589,9 +21439,6 @@
                   },
                   "activoSN": {
                     "type": "boolean"
-                  },
-                  "cliente": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -21610,8 +21457,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
-                    "activoSN",
-                    "cliente"
+                    "activoSN"
                   ],
                   "example": "id"
                 },
@@ -21619,100 +21465,10 @@
               }
             ],
             "title": "LugarParada.Fields"
-          },
-          "include": {
-            "title": "LugarParada.IncludeFilter",
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/LugarParada.IncludeFilter.Items"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            }
           }
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<LugarParada>"
-      },
-      "Operario.ScopeFilter": {
-        "type": "object",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {},
-                "additionalProperties": true
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "uniqueItems": true
-              }
-            ]
-          },
-          "include": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {},
-              "additionalProperties": true
-            }
-          }
-        },
-        "additionalProperties": false,
-        "title": "Operario.ScopeFilter"
-      },
-      "Operario.IncludeFilter.Items": {
-        "title": "Operario.IncludeFilter.Items",
-        "type": "object",
-        "properties": {
-          "relation": {
-            "type": "string",
-            "enum": [
-              "cliente"
-            ]
-          },
-          "scope": {
-            "$ref": "#/components/schemas/Operario.ScopeFilter"
-          }
-        }
       },
       "Operario.Filter": {
         "type": "object",
@@ -21778,9 +21534,6 @@
                   },
                   "activoSN": {
                     "type": "boolean"
-                  },
-                  "cliente": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -21799,8 +21552,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
-                    "activoSN",
-                    "cliente"
+                    "activoSN"
                   ],
                   "example": "id"
                 },
@@ -21808,20 +21560,6 @@
               }
             ],
             "title": "Operario.Fields"
-          },
-          "include": {
-            "title": "Operario.IncludeFilter",
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/Operario.IncludeFilter.Items"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            }
           }
         },
         "additionalProperties": false,
@@ -21896,9 +21634,6 @@
                   },
                   "activoSN": {
                     "type": "boolean"
-                  },
-                  "cliente": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -21917,8 +21652,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
-                    "activoSN",
-                    "cliente"
+                    "activoSN"
                   ],
                   "example": "id"
                 },
@@ -21926,20 +21660,6 @@
               }
             ],
             "title": "Operario.Fields"
-          },
-          "include": {
-            "title": "Operario.IncludeFilter",
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/Operario.IncludeFilter.Items"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            }
           }
         },
         "additionalProperties": false,
@@ -23519,9 +23239,6 @@
                   },
                   "pesoKgs": {
                     "type": "boolean"
-                  },
-                  "cliente": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -23539,8 +23256,7 @@
                     "usuCreacion",
                     "usuModificacion",
                     "activoSN",
-                    "pesoKgs",
-                    "cliente"
+                    "pesoKgs"
                   ],
                   "example": "id"
                 },
@@ -23633,9 +23349,6 @@
                   },
                   "pesoKgs": {
                     "type": "boolean"
-                  },
-                  "cliente": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -23653,8 +23366,7 @@
                     "usuCreacion",
                     "usuModificacion",
                     "activoSN",
-                    "pesoKgs",
-                    "cliente"
+                    "pesoKgs"
                   ],
                   "example": "id"
                 },
@@ -24288,7 +24000,7 @@
             "enum": [
               "empresa",
               "envioSensores",
-              "envioMovimientos"
+              "envioPalletMovimientos"
             ]
           },
           "scope": {

@@ -8,9 +8,9 @@ const EnvioMovimiento = () => {
     const intl = useIntl();
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
-        { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen Ruta' }), tipo: 'string' },
-        { campo: 'nombreSensor', header: intl.formatMessage({ id: 'Nombre Sensor' }), tipo: 'string' },
-        { campo: 'fechaEspanol', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'string' },
+        { campo: 'envioPalletId', header: intl.formatMessage({ id: 'Envio Pallet' }), tipo: 'string' },
+        { campo: 'tipoSensorId', header: intl.formatMessage({ id: 'Tipo de Sensor' }), tipo: 'string' },
+        { campo: 'fecha', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'string' },
         { campo: 'gps', header: intl.formatMessage({ id: 'GPS' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
     ]

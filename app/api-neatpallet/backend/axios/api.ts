@@ -81,12 +81,6 @@ export interface Cliente {
      * @memberof Cliente
      */
     'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {Empresa}
-     * @memberof Cliente
-     */
-    'empresa'?: Empresa;
 }
 /**
  * 
@@ -268,12 +262,6 @@ export interface ClientePartial {
      * @memberof ClientePartial
      */
     'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {Empresa}
-     * @memberof ClientePartial
-     */
-    'empresa'?: Empresa;
 }
 /**
  * 
@@ -386,10 +374,10 @@ export interface ClienteWithRelations {
     'usuModificacion'?: number | null;
     /**
      * 
-     * @type {Empresa}
+     * @type {EmpresaWithRelations}
      * @memberof ClienteWithRelations
      */
-    'empresa'?: Empresa;
+    'empresa'?: EmpresaWithRelations;
     /**
      * 
      * @type {any}
@@ -2919,485 +2907,6 @@ export enum EnvioIncludeFilterItemsRelationEnum {
 /**
  * 
  * @export
- * @interface EnvioMovimiento
- */
-export interface EnvioMovimiento {
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimiento
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimiento
-     */
-    'tipoSensorId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimiento
-     */
-    'envioId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimiento
-     */
-    'fecha'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimiento
-     */
-    'gps'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimiento
-     */
-    'imagen'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimiento
-     */
-    'valor'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimiento
-     */
-    'imagenBase64'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimiento
-     */
-    'imagenNombre'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimiento
-     */
-    'imagenTipo'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimiento
-     */
-    'usuarioCreacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimiento
-     */
-    'fechaCreacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimiento
-     */
-    'usuarioModificacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimiento
-     */
-    'fechaModificacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimiento
-     */
-    'orden'?: number;
-}
-/**
- * 
- * @export
- * @interface EnvioMovimientoFilter
- */
-export interface EnvioMovimientoFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof EnvioMovimientoFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof EnvioMovimientoFilter
-     */
-    'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<EnvioMovimientoIncludeFilterItems | string>}
-     * @memberof EnvioMovimientoFilter
-     */
-    'include'?: Array<EnvioMovimientoIncludeFilterItems | string>;
-}
-/**
- * 
- * @export
- * @interface EnvioMovimientoFilter1
- */
-export interface EnvioMovimientoFilter1 {
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoFilter1
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoFilter1
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoFilter1
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof EnvioMovimientoFilter1
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof EnvioMovimientoFilter1
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof EnvioMovimientoFilter1
-     */
-    'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<EnvioMovimientoIncludeFilterItems | string>}
-     * @memberof EnvioMovimientoFilter1
-     */
-    'include'?: Array<EnvioMovimientoIncludeFilterItems | string>;
-}
-/**
- * 
- * @export
- * @interface EnvioMovimientoIncludeFilterItems
- */
-export interface EnvioMovimientoIncludeFilterItems {
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoIncludeFilterItems
-     */
-    'relation'?: EnvioMovimientoIncludeFilterItemsRelationEnum;
-    /**
-     * 
-     * @type {EnvioMovimientoScopeFilter}
-     * @memberof EnvioMovimientoIncludeFilterItems
-     */
-    'scope'?: EnvioMovimientoScopeFilter;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum EnvioMovimientoIncludeFilterItemsRelationEnum {
-    TipoSensor = 'tipoSensor',
-    Envio = 'envio'
-}
-
-/**
- * (tsType: Partial<EnvioMovimiento>, schemaOptions: { partial: true })
- * @export
- * @interface EnvioMovimientoPartial
- */
-export interface EnvioMovimientoPartial {
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoPartial
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoPartial
-     */
-    'tipoSensorId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoPartial
-     */
-    'envioId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoPartial
-     */
-    'fecha'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoPartial
-     */
-    'gps'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoPartial
-     */
-    'imagen'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoPartial
-     */
-    'valor'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoPartial
-     */
-    'imagenBase64'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoPartial
-     */
-    'imagenNombre'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoPartial
-     */
-    'imagenTipo'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoPartial
-     */
-    'usuarioCreacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoPartial
-     */
-    'fechaCreacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoPartial
-     */
-    'usuarioModificacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoPartial
-     */
-    'fechaModificacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoPartial
-     */
-    'orden'?: number;
-}
-/**
- * 
- * @export
- * @interface EnvioMovimientoScopeFilter
- */
-export interface EnvioMovimientoScopeFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoScopeFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoScopeFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoScopeFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof EnvioMovimientoScopeFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof EnvioMovimientoScopeFilter
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {any | Set<string>}
-     * @memberof EnvioMovimientoScopeFilter
-     */
-    'fields'?: any | Set<string>;
-    /**
-     * 
-     * @type {Array<{ [key: string]: object; }>}
-     * @memberof EnvioMovimientoScopeFilter
-     */
-    'include'?: Array<{ [key: string]: object; }>;
-}
-/**
- * (tsType: EnvioMovimientoWithRelations, schemaOptions: { includeRelations: true })
- * @export
- * @interface EnvioMovimientoWithRelations
- */
-export interface EnvioMovimientoWithRelations {
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'tipoSensorId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'envioId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'fecha'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'gps'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'imagen'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'valor'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'imagenBase64'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'imagenNombre'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'imagenTipo'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'usuarioCreacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'fechaCreacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'usuarioModificacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'fechaModificacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'orden'?: number;
-    /**
-     * 
-     * @type {TipoSensorWithRelations}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'tipoSensor'?: TipoSensorWithRelations;
-    /**
-     * 
-     * @type {any}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'foreignKey'?: any;
-    /**
-     * 
-     * @type {EnvioWithRelations}
-     * @memberof EnvioMovimientoWithRelations
-     */
-    'envio'?: EnvioWithRelations;
-}
-/**
- * 
- * @export
  * @interface EnvioPallet
  */
 export interface EnvioPallet {
@@ -3565,6 +3074,485 @@ export enum EnvioPalletIncludeFilterItemsRelationEnum {
     Envio = 'envio'
 }
 
+/**
+ * 
+ * @export
+ * @interface EnvioPalletMovimiento
+ */
+export interface EnvioPalletMovimiento {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimiento
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimiento
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimiento
+     */
+    'envioPalletId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimiento
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimiento
+     */
+    'gps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimiento
+     */
+    'imagen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimiento
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimiento
+     */
+    'imagenBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimiento
+     */
+    'imagenNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimiento
+     */
+    'imagenTipo'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimiento
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimiento
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimiento
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimiento
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimiento
+     */
+    'orden'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioPalletMovimientoFilter
+ */
+export interface EnvioPalletMovimientoFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioPalletMovimientoFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioPalletMovimientoFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioPalletMovimientoIncludeFilterItems | string>}
+     * @memberof EnvioPalletMovimientoFilter
+     */
+    'include'?: Array<EnvioPalletMovimientoIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioPalletMovimientoFilter1
+ */
+export interface EnvioPalletMovimientoFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioPalletMovimientoFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioPalletMovimientoFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioPalletMovimientoFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioPalletMovimientoIncludeFilterItems | string>}
+     * @memberof EnvioPalletMovimientoFilter1
+     */
+    'include'?: Array<EnvioPalletMovimientoIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioPalletMovimientoIncludeFilterItems
+ */
+export interface EnvioPalletMovimientoIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoIncludeFilterItems
+     */
+    'relation'?: EnvioPalletMovimientoIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {EnvioPalletMovimientoScopeFilter}
+     * @memberof EnvioPalletMovimientoIncludeFilterItems
+     */
+    'scope'?: EnvioPalletMovimientoScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum EnvioPalletMovimientoIncludeFilterItemsRelationEnum {
+    TipoSensor = 'tipoSensor',
+    EnvioPallet = 'envioPallet'
+}
+
+/**
+ * (tsType: Partial<EnvioPalletMovimiento>, schemaOptions: { partial: true })
+ * @export
+ * @interface EnvioPalletMovimientoPartial
+ */
+export interface EnvioPalletMovimientoPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'envioPalletId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'gps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'imagen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'imagenBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'imagenNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'imagenTipo'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoPartial
+     */
+    'orden'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioPalletMovimientoScopeFilter
+ */
+export interface EnvioPalletMovimientoScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioPalletMovimientoScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioPalletMovimientoScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof EnvioPalletMovimientoScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof EnvioPalletMovimientoScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: EnvioPalletMovimientoWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface EnvioPalletMovimientoWithRelations
+ */
+export interface EnvioPalletMovimientoWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'envioPalletId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'gps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'imagen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'imagenBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'imagenNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'imagenTipo'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {TipoSensorWithRelations}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'tipoSensor'?: TipoSensorWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'foreignKey'?: any;
+    /**
+     * 
+     * @type {EnvioPalletWithRelations}
+     * @memberof EnvioPalletMovimientoWithRelations
+     */
+    'envioPallet'?: EnvioPalletWithRelations;
+}
 /**
  * (tsType: Partial<EnvioPallet>, schemaOptions: { partial: true })
  * @export
@@ -6247,12 +6235,6 @@ export interface LugarParada {
      * @memberof LugarParada
      */
     'activoSN'?: string | null;
-    /**
-     * 
-     * @type {Cliente}
-     * @memberof LugarParada
-     */
-    'cliente'?: Cliente;
 }
 /**
  * 
@@ -6290,12 +6272,6 @@ export interface LugarParadaFilter {
      * @memberof LugarParadaFilter
      */
     'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<LugarParadaIncludeFilterItems | string>}
-     * @memberof LugarParadaFilter
-     */
-    'include'?: Array<LugarParadaIncludeFilterItems | string>;
 }
 /**
  * 
@@ -6339,41 +6315,7 @@ export interface LugarParadaFilter1 {
      * @memberof LugarParadaFilter1
      */
     'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<LugarParadaIncludeFilterItems | string>}
-     * @memberof LugarParadaFilter1
-     */
-    'include'?: Array<LugarParadaIncludeFilterItems | string>;
 }
-/**
- * 
- * @export
- * @interface LugarParadaIncludeFilterItems
- */
-export interface LugarParadaIncludeFilterItems {
-    /**
-     * 
-     * @type {string}
-     * @memberof LugarParadaIncludeFilterItems
-     */
-    'relation'?: LugarParadaIncludeFilterItemsRelationEnum;
-    /**
-     * 
-     * @type {LugarParadaScopeFilter}
-     * @memberof LugarParadaIncludeFilterItems
-     */
-    'scope'?: LugarParadaScopeFilter;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum LugarParadaIncludeFilterItemsRelationEnum {
-    Cliente = 'cliente'
-}
-
 /**
  * (tsType: Partial<LugarParada>, schemaOptions: { partial: true })
  * @export
@@ -6440,61 +6382,6 @@ export interface LugarParadaPartial {
      * @memberof LugarParadaPartial
      */
     'activoSN'?: string | null;
-    /**
-     * 
-     * @type {Cliente}
-     * @memberof LugarParadaPartial
-     */
-    'cliente'?: Cliente;
-}
-/**
- * 
- * @export
- * @interface LugarParadaScopeFilter
- */
-export interface LugarParadaScopeFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof LugarParadaScopeFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof LugarParadaScopeFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof LugarParadaScopeFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof LugarParadaScopeFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof LugarParadaScopeFilter
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {any | Set<string>}
-     * @memberof LugarParadaScopeFilter
-     */
-    'fields'?: any | Set<string>;
-    /**
-     * 
-     * @type {Array<{ [key: string]: object; }>}
-     * @memberof LugarParadaScopeFilter
-     */
-    'include'?: Array<{ [key: string]: object; }>;
 }
 /**
  * (tsType: LugarParadaWithRelations, schemaOptions: { includeRelations: true })
@@ -6562,18 +6449,6 @@ export interface LugarParadaWithRelations {
      * @memberof LugarParadaWithRelations
      */
     'activoSN'?: string | null;
-    /**
-     * 
-     * @type {Cliente}
-     * @memberof LugarParadaWithRelations
-     */
-    'cliente'?: Cliente;
-    /**
-     * 
-     * @type {any}
-     * @memberof LugarParadaWithRelations
-     */
-    'foreignKey'?: any;
 }
 /**
  * (tsType: Omit<Cliente, \'id\'>, schemaOptions: { title: \'NewCliente\', exclude: [ \'id\' ] })
@@ -6629,12 +6504,6 @@ export interface NewCliente {
      * @memberof NewCliente
      */
     'usuModificacion'?: number | null;
-    /**
-     * 
-     * @type {Empresa}
-     * @memberof NewCliente
-     */
-    'empresa'?: Empresa;
 }
 /**
  * 
@@ -7183,97 +7052,6 @@ export interface NewEnvioContenidoPallet {
     'orden'?: number;
 }
 /**
- * (tsType: Omit<EnvioMovimiento, \'id\'>, schemaOptions: { title: \'NewEnvioMovimiento\', exclude: [ \'id\' ] })
- * @export
- * @interface NewEnvioMovimiento
- */
-export interface NewEnvioMovimiento {
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioMovimiento
-     */
-    'tipoSensorId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioMovimiento
-     */
-    'envioId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioMovimiento
-     */
-    'fecha'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioMovimiento
-     */
-    'gps'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioMovimiento
-     */
-    'imagen'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioMovimiento
-     */
-    'valor'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioMovimiento
-     */
-    'imagenBase64'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioMovimiento
-     */
-    'imagenNombre'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioMovimiento
-     */
-    'imagenTipo'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioMovimiento
-     */
-    'usuarioCreacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioMovimiento
-     */
-    'fechaCreacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioMovimiento
-     */
-    'usuarioModificacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewEnvioMovimiento
-     */
-    'fechaModificacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewEnvioMovimiento
-     */
-    'orden'?: number;
-}
-/**
  * (tsType: Omit<EnvioPallet, \'id\'>, schemaOptions: { title: \'NewEnvioPallet\', exclude: [ \'id\' ] })
  * @export
  * @interface NewEnvioPallet
@@ -7315,6 +7093,97 @@ export interface NewEnvioPallet {
      * @memberof NewEnvioPallet
      */
     'fechaModificacion'?: string;
+}
+/**
+ * (tsType: Omit<EnvioPalletMovimiento, \'id\'>, schemaOptions: { title: \'NewEnvioPalletMovimiento\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewEnvioPalletMovimiento
+ */
+export interface NewEnvioPalletMovimiento {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'envioPalletId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'gps'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'imagen'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'imagenBase64'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'imagenNombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'imagenTipo'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioPalletMovimiento
+     */
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<EnvioParada, \'id\'>, schemaOptions: { title: \'NewEnvioParada\', exclude: [ \'id\' ] })
@@ -7712,12 +7581,6 @@ export interface NewLugarParada {
      * @memberof NewLugarParada
      */
     'activoSN'?: string | null;
-    /**
-     * 
-     * @type {Cliente}
-     * @memberof NewLugarParada
-     */
-    'cliente'?: Cliente;
 }
 /**
  * (tsType: Omit<Operario, \'id\'>, schemaOptions: { title: \'NewOperario\', exclude: [ \'id\' ] })
@@ -7779,12 +7642,6 @@ export interface NewOperario {
      * @memberof NewOperario
      */
     'activoSN'?: string | null;
-    /**
-     * 
-     * @type {Cliente}
-     * @memberof NewOperario
-     */
-    'cliente'?: Cliente;
 }
 /**
  * (tsType: Omit<Pais, \'id\'>, schemaOptions: { title: \'NewPais\', exclude: [ \'id\' ] })
@@ -8224,12 +8081,6 @@ export interface NewProducto {
      * @memberof NewProducto
      */
     'pesoKgs'?: number;
-    /**
-     * 
-     * @type {Cliente}
-     * @memberof NewProducto
-     */
-    'cliente'?: Cliente;
 }
 /**
  * (tsType: Omit<RefrescarToken, \'id\'>, schemaOptions: { title: \'NewRefrescarToken\', exclude: [ \'id\' ] })
@@ -8780,12 +8631,6 @@ export interface Operario {
      * @memberof Operario
      */
     'activoSN'?: string | null;
-    /**
-     * 
-     * @type {Cliente}
-     * @memberof Operario
-     */
-    'cliente'?: Cliente;
 }
 /**
  * 
@@ -8823,12 +8668,6 @@ export interface OperarioFilter {
      * @memberof OperarioFilter
      */
     'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<OperarioIncludeFilterItems | string>}
-     * @memberof OperarioFilter
-     */
-    'include'?: Array<OperarioIncludeFilterItems | string>;
 }
 /**
  * 
@@ -8872,41 +8711,7 @@ export interface OperarioFilter1 {
      * @memberof OperarioFilter1
      */
     'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<OperarioIncludeFilterItems | string>}
-     * @memberof OperarioFilter1
-     */
-    'include'?: Array<OperarioIncludeFilterItems | string>;
 }
-/**
- * 
- * @export
- * @interface OperarioIncludeFilterItems
- */
-export interface OperarioIncludeFilterItems {
-    /**
-     * 
-     * @type {string}
-     * @memberof OperarioIncludeFilterItems
-     */
-    'relation'?: OperarioIncludeFilterItemsRelationEnum;
-    /**
-     * 
-     * @type {OperarioScopeFilter}
-     * @memberof OperarioIncludeFilterItems
-     */
-    'scope'?: OperarioScopeFilter;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum OperarioIncludeFilterItemsRelationEnum {
-    Cliente = 'cliente'
-}
-
 /**
  * (tsType: Partial<Operario>, schemaOptions: { partial: true })
  * @export
@@ -8973,61 +8778,6 @@ export interface OperarioPartial {
      * @memberof OperarioPartial
      */
     'activoSN'?: string | null;
-    /**
-     * 
-     * @type {Cliente}
-     * @memberof OperarioPartial
-     */
-    'cliente'?: Cliente;
-}
-/**
- * 
- * @export
- * @interface OperarioScopeFilter
- */
-export interface OperarioScopeFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof OperarioScopeFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof OperarioScopeFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof OperarioScopeFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof OperarioScopeFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof OperarioScopeFilter
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {any | Set<string>}
-     * @memberof OperarioScopeFilter
-     */
-    'fields'?: any | Set<string>;
-    /**
-     * 
-     * @type {Array<{ [key: string]: object; }>}
-     * @memberof OperarioScopeFilter
-     */
-    'include'?: Array<{ [key: string]: object; }>;
 }
 /**
  * (tsType: OperarioWithRelations, schemaOptions: { includeRelations: true })
@@ -9095,18 +8845,6 @@ export interface OperarioWithRelations {
      * @memberof OperarioWithRelations
      */
     'activoSN'?: string | null;
-    /**
-     * 
-     * @type {Cliente}
-     * @memberof OperarioWithRelations
-     */
-    'cliente'?: Cliente;
-    /**
-     * 
-     * @type {any}
-     * @memberof OperarioWithRelations
-     */
-    'foreignKey'?: any;
 }
 /**
  * 
@@ -11257,12 +10995,6 @@ export interface Producto {
      * @memberof Producto
      */
     'pesoKgs'?: number;
-    /**
-     * 
-     * @type {Cliente}
-     * @memberof Producto
-     */
-    'cliente'?: Cliente;
 }
 /**
  * 
@@ -11444,12 +11176,6 @@ export interface ProductoPartial {
      * @memberof ProductoPartial
      */
     'pesoKgs'?: number;
-    /**
-     * 
-     * @type {Cliente}
-     * @memberof ProductoPartial
-     */
-    'cliente'?: Cliente;
 }
 /**
  * 
@@ -11562,10 +11288,10 @@ export interface ProductoWithRelations {
     'pesoKgs'?: number;
     /**
      * 
-     * @type {Cliente}
+     * @type {ClienteWithRelations}
      * @memberof ProductoWithRelations
      */
-    'cliente'?: Cliente;
+    'cliente'?: ClienteWithRelations;
     /**
      * 
      * @type {any}
@@ -12488,7 +12214,7 @@ export interface TipoSensorIncludeFilterItems {
 export enum TipoSensorIncludeFilterItemsRelationEnum {
     Empresa = 'empresa',
     EnvioSensores = 'envioSensores',
-    EnvioMovimientos = 'envioMovimientos'
+    EnvioPalletMovimientos = 'envioPalletMovimientos'
 }
 
 /**
@@ -12681,10 +12407,10 @@ export interface TipoSensorWithRelations {
     'envioSensores'?: Array<EnvioSensorWithRelations>;
     /**
      * 
-     * @type {Array<EnvioMovimientoWithRelations>}
+     * @type {Array<EnvioPalletMovimientoWithRelations>}
      * @memberof TipoSensorWithRelations
      */
-    'envioMovimientos'?: Array<EnvioMovimientoWithRelations>;
+    'envioPalletMovimientos'?: Array<EnvioPalletMovimientoWithRelations>;
 }
 /**
  * 
@@ -18938,463 +18664,6 @@ export class EnvioFakeDataControllerApi extends BaseAPI {
 
 
 /**
- * EnvioMovimientoControllerApi - axios parameter creator
- * @export
- */
-export const EnvioMovimientoControllerApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-movimientos/count`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {NewEnvioMovimiento} [newEnvioMovimiento] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerCreate: async (newEnvioMovimiento?: NewEnvioMovimiento, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-movimientos`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newEnvioMovimiento, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('envioMovimientoControllerDeleteById', 'id', id)
-            const localVarPath = `/envio-movimientos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {EnvioMovimientoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerFind: async (filter?: EnvioMovimientoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/envio-movimientos`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {EnvioMovimientoFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerFindById: async (id: number, filter?: EnvioMovimientoFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('envioMovimientoControllerFindById', 'id', id)
-            const localVarPath = `/envio-movimientos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {EnvioMovimientoPartial} [envioMovimientoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerUpdateById: async (id: number, envioMovimientoPartial?: EnvioMovimientoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('envioMovimientoControllerUpdateById', 'id', id)
-            const localVarPath = `/envio-movimientos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(envioMovimientoPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * EnvioMovimientoControllerApi - functional programming interface
- * @export
- */
-export const EnvioMovimientoControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = EnvioMovimientoControllerApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioMovimientoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerCount(where, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {NewEnvioMovimiento} [newEnvioMovimiento] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioMovimientoControllerCreate(newEnvioMovimiento?: NewEnvioMovimiento, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioMovimiento>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerCreate(newEnvioMovimiento, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioMovimientoControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {EnvioMovimientoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioMovimientoControllerFind(filter?: EnvioMovimientoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvioMovimientoWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerFind(filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {EnvioMovimientoFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioMovimientoControllerFindById(id: number, filter?: EnvioMovimientoFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioMovimientoWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerFindById(id, filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {EnvioMovimientoPartial} [envioMovimientoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async envioMovimientoControllerUpdateById(id: number, envioMovimientoPartial?: EnvioMovimientoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.envioMovimientoControllerUpdateById(id, envioMovimientoPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * EnvioMovimientoControllerApi - factory interface
- * @export
- */
-export const EnvioMovimientoControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = EnvioMovimientoControllerApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.envioMovimientoControllerCount(where, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {NewEnvioMovimiento} [newEnvioMovimiento] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerCreate(newEnvioMovimiento?: NewEnvioMovimiento, options?: any): AxiosPromise<EnvioMovimiento> {
-            return localVarFp.envioMovimientoControllerCreate(newEnvioMovimiento, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.envioMovimientoControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {EnvioMovimientoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerFind(filter?: EnvioMovimientoFilter1, options?: any): AxiosPromise<Array<EnvioMovimientoWithRelations>> {
-            return localVarFp.envioMovimientoControllerFind(filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {EnvioMovimientoFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerFindById(id: number, filter?: EnvioMovimientoFilter, options?: any): AxiosPromise<EnvioMovimientoWithRelations> {
-            return localVarFp.envioMovimientoControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {EnvioMovimientoPartial} [envioMovimientoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        envioMovimientoControllerUpdateById(id: number, envioMovimientoPartial?: EnvioMovimientoPartial, options?: any): AxiosPromise<any> {
-            return localVarFp.envioMovimientoControllerUpdateById(id, envioMovimientoPartial, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * EnvioMovimientoControllerApi - object-oriented interface
- * @export
- * @class EnvioMovimientoControllerApi
- * @extends {BaseAPI}
- */
-export class EnvioMovimientoControllerApi extends BaseAPI {
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioMovimientoControllerApi
-     */
-    public envioMovimientoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {NewEnvioMovimiento} [newEnvioMovimiento] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioMovimientoControllerApi
-     */
-    public envioMovimientoControllerCreate(newEnvioMovimiento?: NewEnvioMovimiento, options?: AxiosRequestConfig) {
-        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerCreate(newEnvioMovimiento, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioMovimientoControllerApi
-     */
-    public envioMovimientoControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {EnvioMovimientoFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioMovimientoControllerApi
-     */
-    public envioMovimientoControllerFind(filter?: EnvioMovimientoFilter1, options?: AxiosRequestConfig) {
-        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {EnvioMovimientoFilter} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioMovimientoControllerApi
-     */
-    public envioMovimientoControllerFindById(id: number, filter?: EnvioMovimientoFilter, options?: AxiosRequestConfig) {
-        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {EnvioMovimientoPartial} [envioMovimientoPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof EnvioMovimientoControllerApi
-     */
-    public envioMovimientoControllerUpdateById(id: number, envioMovimientoPartial?: EnvioMovimientoPartial, options?: AxiosRequestConfig) {
-        return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerUpdateById(id, envioMovimientoPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
  * EnvioPalletControllerApi - axios parameter creator
  * @export
  */
@@ -19847,6 +19116,463 @@ export class EnvioPalletControllerApi extends BaseAPI {
      */
     public envioPalletControllerUpdateById(id: number, envioPalletPartial?: EnvioPalletPartial, options?: AxiosRequestConfig) {
         return EnvioPalletControllerApiFp(this.configuration).envioPalletControllerUpdateById(id, envioPalletPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * EnvioPalletMovimientoControllerApi - axios parameter creator
+ * @export
+ */
+export const EnvioPalletMovimientoControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-movimientos/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewEnvioPalletMovimiento} [newEnvioPalletMovimiento] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerCreate: async (newEnvioPalletMovimiento?: NewEnvioPalletMovimiento, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-movimientos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newEnvioPalletMovimiento, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioPalletMovimientoControllerDeleteById', 'id', id)
+            const localVarPath = `/envio-movimientos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {EnvioPalletMovimientoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerFind: async (filter?: EnvioPalletMovimientoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-movimientos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioPalletMovimientoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerFindById: async (id: number, filter?: EnvioPalletMovimientoFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioPalletMovimientoControllerFindById', 'id', id)
+            const localVarPath = `/envio-movimientos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioPalletMovimientoPartial} [envioPalletMovimientoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerUpdateById: async (id: number, envioPalletMovimientoPartial?: EnvioPalletMovimientoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioPalletMovimientoControllerUpdateById', 'id', id)
+            const localVarPath = `/envio-movimientos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioPalletMovimientoPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EnvioPalletMovimientoControllerApi - functional programming interface
+ * @export
+ */
+export const EnvioPalletMovimientoControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EnvioPalletMovimientoControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioPalletMovimientoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioPalletMovimientoControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewEnvioPalletMovimiento} [newEnvioPalletMovimiento] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioPalletMovimientoControllerCreate(newEnvioPalletMovimiento?: NewEnvioPalletMovimiento, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioPalletMovimiento>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioPalletMovimientoControllerCreate(newEnvioPalletMovimiento, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioPalletMovimientoControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioPalletMovimientoControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {EnvioPalletMovimientoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioPalletMovimientoControllerFind(filter?: EnvioPalletMovimientoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvioPalletMovimientoWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioPalletMovimientoControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioPalletMovimientoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioPalletMovimientoControllerFindById(id: number, filter?: EnvioPalletMovimientoFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioPalletMovimientoWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioPalletMovimientoControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioPalletMovimientoPartial} [envioPalletMovimientoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioPalletMovimientoControllerUpdateById(id: number, envioPalletMovimientoPartial?: EnvioPalletMovimientoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioPalletMovimientoControllerUpdateById(id, envioPalletMovimientoPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EnvioPalletMovimientoControllerApi - factory interface
+ * @export
+ */
+export const EnvioPalletMovimientoControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EnvioPalletMovimientoControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioPalletMovimientoControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewEnvioPalletMovimiento} [newEnvioPalletMovimiento] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerCreate(newEnvioPalletMovimiento?: NewEnvioPalletMovimiento, options?: any): AxiosPromise<EnvioPalletMovimiento> {
+            return localVarFp.envioPalletMovimientoControllerCreate(newEnvioPalletMovimiento, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.envioPalletMovimientoControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EnvioPalletMovimientoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerFind(filter?: EnvioPalletMovimientoFilter1, options?: any): AxiosPromise<Array<EnvioPalletMovimientoWithRelations>> {
+            return localVarFp.envioPalletMovimientoControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioPalletMovimientoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerFindById(id: number, filter?: EnvioPalletMovimientoFilter, options?: any): AxiosPromise<EnvioPalletMovimientoWithRelations> {
+            return localVarFp.envioPalletMovimientoControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioPalletMovimientoPartial} [envioPalletMovimientoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioPalletMovimientoControllerUpdateById(id: number, envioPalletMovimientoPartial?: EnvioPalletMovimientoPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.envioPalletMovimientoControllerUpdateById(id, envioPalletMovimientoPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EnvioPalletMovimientoControllerApi - object-oriented interface
+ * @export
+ * @class EnvioPalletMovimientoControllerApi
+ * @extends {BaseAPI}
+ */
+export class EnvioPalletMovimientoControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioPalletMovimientoControllerApi
+     */
+    public envioPalletMovimientoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return EnvioPalletMovimientoControllerApiFp(this.configuration).envioPalletMovimientoControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewEnvioPalletMovimiento} [newEnvioPalletMovimiento] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioPalletMovimientoControllerApi
+     */
+    public envioPalletMovimientoControllerCreate(newEnvioPalletMovimiento?: NewEnvioPalletMovimiento, options?: AxiosRequestConfig) {
+        return EnvioPalletMovimientoControllerApiFp(this.configuration).envioPalletMovimientoControllerCreate(newEnvioPalletMovimiento, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioPalletMovimientoControllerApi
+     */
+    public envioPalletMovimientoControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return EnvioPalletMovimientoControllerApiFp(this.configuration).envioPalletMovimientoControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EnvioPalletMovimientoFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioPalletMovimientoControllerApi
+     */
+    public envioPalletMovimientoControllerFind(filter?: EnvioPalletMovimientoFilter1, options?: AxiosRequestConfig) {
+        return EnvioPalletMovimientoControllerApiFp(this.configuration).envioPalletMovimientoControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioPalletMovimientoFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioPalletMovimientoControllerApi
+     */
+    public envioPalletMovimientoControllerFindById(id: number, filter?: EnvioPalletMovimientoFilter, options?: AxiosRequestConfig) {
+        return EnvioPalletMovimientoControllerApiFp(this.configuration).envioPalletMovimientoControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioPalletMovimientoPartial} [envioPalletMovimientoPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioPalletMovimientoControllerApi
+     */
+    public envioPalletMovimientoControllerUpdateById(id: number, envioPalletMovimientoPartial?: EnvioPalletMovimientoPartial, options?: AxiosRequestConfig) {
+        return EnvioPalletMovimientoControllerApiFp(this.configuration).envioPalletMovimientoControllerUpdateById(id, envioPalletMovimientoPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

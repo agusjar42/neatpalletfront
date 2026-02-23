@@ -3,9 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
-import { getResumenEnvioPallet } from "@/app/api-endpoints/resumen-envio-pallet";
+import { getResumenEnvioPallet } from "@/app/api-endpoints/envio";
 import 'primeicons/primeicons.css';
-import { getUsuarioSesion } from "@/app/utility/Utils";
 import EditarDatosResumenEnvioPallet from "./EditarDatosResumenEnvioPallet";
 import { useIntl } from 'react-intl';
 

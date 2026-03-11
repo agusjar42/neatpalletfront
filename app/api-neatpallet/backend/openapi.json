@@ -10,6 +10,147 @@
     }
   },
   "paths": {
+    "/auth/password/forgot": {
+      "post": {
+        "x-controller-name": "AuthPasswordController",
+        "x-operation-name": "forgot",
+        "tags": [
+          "AuthPasswordController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Neutral response to avoid account enumeration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          },
+          "description": "Request a password reset link",
+          "required": true
+        },
+        "operationId": "AuthPasswordController.forgot"
+      }
+    },
+    "/auth/password/reset": {
+      "post": {
+        "x-controller-name": "AuthPasswordController",
+        "x-operation-name": "reset",
+        "tags": [
+          "AuthPasswordController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Password updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid/expired/used token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Password policy violation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "token",
+                  "newPassword"
+                ],
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "newPassword": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          },
+          "description": "Reset password using a valid reset token",
+          "required": true
+        },
+        "operationId": "AuthPasswordController.reset"
+      }
+    },
     "/avatar-upload/{folderPathDir}/{fileName}": {
       "post": {
         "x-controller-name": "FileUploadController",
@@ -12607,6 +12748,50 @@
           "refreshToken": {
             "type": "string",
             "nullable": true
+          },
+          "tipoToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "hashToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaExpiracion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaUso": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ipSolicitud": {
+            "type": "string",
+            "nullable": true
+          },
+          "agenteUsuario": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -12622,6 +12807,50 @@
           },
           "refreshToken": {
             "type": "string",
+            "nullable": true
+          },
+          "tipoToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "hashToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaExpiracion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaUso": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ipSolicitud": {
+            "type": "string",
+            "nullable": true
+          },
+          "agenteUsuario": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -12644,6 +12873,50 @@
           "refreshToken": {
             "type": "string",
             "nullable": true
+          },
+          "tipoToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "hashToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaExpiracion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaUso": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ipSolicitud": {
+            "type": "string",
+            "nullable": true
+          },
+          "agenteUsuario": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -12664,6 +12937,50 @@
           },
           "refreshToken": {
             "type": "string",
+            "nullable": true
+          },
+          "tipoToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "hashToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaExpiracion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaUso": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ipSolicitud": {
+            "type": "string",
+            "nullable": true
+          },
+          "agenteUsuario": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -23436,6 +23753,36 @@
                   },
                   "refreshToken": {
                     "type": "boolean"
+                  },
+                  "tipoToken": {
+                    "type": "boolean"
+                  },
+                  "hashToken": {
+                    "type": "boolean"
+                  },
+                  "fechaExpiracion": {
+                    "type": "boolean"
+                  },
+                  "fechaUso": {
+                    "type": "boolean"
+                  },
+                  "ipSolicitud": {
+                    "type": "boolean"
+                  },
+                  "agenteUsuario": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -23447,7 +23794,17 @@
                   "enum": [
                     "id",
                     "usuarioId",
-                    "refreshToken"
+                    "refreshToken",
+                    "tipoToken",
+                    "hashToken",
+                    "fechaExpiracion",
+                    "fechaUso",
+                    "ipSolicitud",
+                    "agenteUsuario",
+                    "usuarioCreacion",
+                    "fechaCreacion",
+                    "usuarioModificacion",
+                    "fechaModificacion"
                   ],
                   "example": "id"
                 },
@@ -23508,6 +23865,36 @@
                   },
                   "refreshToken": {
                     "type": "boolean"
+                  },
+                  "tipoToken": {
+                    "type": "boolean"
+                  },
+                  "hashToken": {
+                    "type": "boolean"
+                  },
+                  "fechaExpiracion": {
+                    "type": "boolean"
+                  },
+                  "fechaUso": {
+                    "type": "boolean"
+                  },
+                  "ipSolicitud": {
+                    "type": "boolean"
+                  },
+                  "agenteUsuario": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -23519,7 +23906,17 @@
                   "enum": [
                     "id",
                     "usuarioId",
-                    "refreshToken"
+                    "refreshToken",
+                    "tipoToken",
+                    "hashToken",
+                    "fechaExpiracion",
+                    "fechaUso",
+                    "ipSolicitud",
+                    "agenteUsuario",
+                    "usuarioCreacion",
+                    "fechaCreacion",
+                    "usuarioModificacion",
+                    "fechaModificacion"
                   ],
                   "example": "id"
                 },

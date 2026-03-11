@@ -65,6 +65,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         '/auth/forgotpassword',
         '/auth/verification',
         '/auth/newpassword',
+        '/forgot-password',
+        '/reset-password',
         '/landing',
         '/pages/notfound',
         '/not-found',

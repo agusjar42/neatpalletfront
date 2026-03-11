@@ -269,7 +269,7 @@ const Login = () => {
                                 ) : (
                                     <Link
                                         id="restablecerLink"
-                                        href="/auth/newpassword/"
+                                        href="/forgot-password"
                                         className="text-600 cursor-pointer hover:text-primary ml-auto transition-colors transition-duration-300"
                                     >
                                         Restablecer contraseña

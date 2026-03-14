@@ -1,0 +1,565 @@
+﻿¿Eliminar
+¿Eliminar registro?
+¿Esta seguro de que desea eliminar el siguiente registro
+¿Está seguro que desea crear la configuración desde la empresa? Esto sobrescribirá la configuración actual del envío.
+¿Está seguro que desea crear los sensores desde la empresa? Esto sobrescribirá los sensores actuales del envío.
+¿Estás seguro de que quieres borrar el archivo
+¿Estás seguro de que quieres generar datos fake?
+¿Has olvidado tu contraseña?
+¿Que pasa si lleno un pallet con diferente producto?.
+a
+Abjasio
+Acceder
+Acciones
+Activo
+Actualizados
+Actualizar
+Advertencia
+Afar
+Afrikaans
+Ahora el restablecimiento de contraseña se hace desde el enlace del email.
+Aimara
+Al crear un nuevo envío se asocian automáticamente los sensores de la empresa. Estos pueden cambiarse, eliminarse o añadirse nuevos siempre que desde la pantalla Sensores estén activos.
+Albanez
+Aleman
+Alias
+Alias del pallet
+Alias Pallet
+Amarico
+AND
+AND NOT
+Aplicar
+Aquí se pueden visualizar y gestionar los archivos de logs del sistema.
+Arabe
+Aragones
+Archivo borrado correctamente
+Archivo descargado correctamente
+Archivo inválido
+Archivo leído exitosamente:
+Archivo seleccionado:
+Armenio
+Asames
+Avatar
+Azeri
+Batería Actual
+Bengali
+Bielorruso
+Borrar
+Bulgaro
+Buscar
+Buscar por
+Buscar por palabra clave
+Cada archivo contiene los registros de un mes específico.
+Cambiar imagen por
+Campo calculado automáticamente: Peso × Cantidad
+Cancelar
+Cantidad
+Cantidad del producto
+Cargando...
+Catalan
+Cerrar sesion
+Checo
+Chino
+Clave
+Clave de la traducción
+Cliente
+Clientes
+Clonar configuración desde empresa
+Clonar sensores desde empresa
+Codigo
+Código
+Código de la empresa
+Código del pallet
+Código Pallet
+Configuración
+Configuración creada desde empresa correctamente
+Configuracion de Empresa
+Configuracion de Envio
+Configuración del Envío
+Configuración Empresa
+Configuraciones de Empresa
+Confirmación
+Confirmación de borrado
+Contenido
+Contenido del Envío
+Contraseña
+Contraseña de la cuenta de email que se va a usar para enviar correos automatizados
+Contraseña del email
+Contraseña restablecida
+Controlador
+Coordenadas GPS
+Coordenadas GPS de la parada
+Coordenadas GPS destino (lat, lng)
+Coordenadas GPS origen (lat, lng)
+Copia la configuración predeterminada de la empresa a este envío
+Coreano
+Creados
+Creando configuración...
+Creando sensores...
+Croata
+Danes
+Datos del cliente
+Datos del envío
+Datos del lugar de parada
+Datos del operario
+Datos del producto
+Datos del resumen de envío
+Datos del resumen de envío pallet
+Datos fake generados correctamente
+Datos para el contenido
+Datos para el envío de pallet
+Datos para el idioma
+Datos para el movimiento de envÃ­o
+Datos para el pais
+Datos para el pallet
+Datos para el parámetro
+Datos para el parámetro del pallet
+Datos para el rol
+Datos para el sensor de empresa
+Datos para el sensor de envío
+Datos para el tipo de carrocería
+Datos para el tipo de sensor
+Datos para el tipo de transporte
+Datos para el Usuario
+Datos para la configuración de empresa
+Datos para la configuración de envío
+Datos para la empresa
+Datos para la parada de envío
+Datos para la traducción
+de
+Debe guardar el cliente primero para poder gestionar lugares de parada
+Debe guardar el cliente primero para poder gestionar operarios
+Debe guardar el cliente primero para poder gestionar productos
+Debe guardar el envío primero
+Debe guardar el envío primero para poder añadir configuración
+Debe guardar el envío primero para poder añadir contenido
+Debe guardar el envío primero para poder añadir movimientos
+Debe guardar el envío primero para poder añadir pallets
+Debe guardar el envío primero para poder añadir paradas
+Debe guardar el envío primero para poder añadir sensores
+Debe guardar el envío primero para poder ver el resumen
+Debe guardar la empresa primero para poder añadir configuraciones
+Debe guardar la empresa primero para poder añadir sensores
+Debe seleccionar un cliente en el envío para ver los productos disponibles
+Debe seleccionar un cliente para el envío antes de poder añadir contenido
+Descargar
+Descargar archivo CSV
+desconocida
+Descripción
+Descripción de la empresa
+Destino
+Destino de la ruta
+Día previamente disponible que ha sido reservado para un evento
+Dirección
+Dirección completa del lugar de parada
+Dirección de la cuenta de email que se va a usar para enviar correos automatizados
+Dirección de la parada
+Dirección GPS
+Disponible
+Editar
+El archivo CSV está vacío
+El archivo es demasiado grande. Máximo permitido: 10MB
+El archivo excede el tamaño máximo permitido (10MB)
+El archivo seleccionado no es un CSV válido
+El email de la empresa no puede coincidir con el email de un usuario
+El email debe de tener el formato correcto
+El email no debe estar registrado en el sistema.
+El enlace de restablecimiento no es válido o ha caducado. Solicita uno nuevo.
+El registro no se puede eliminar porque tiene otros registros hijos.
+El servicio que utiliza la cuenta de email, ejemplo: "smtp.gmail.com"
+El tamaño total de los archivos seleccionados excede el limite de
+El usuario no está activo.
+Elegir
+Eliminar
+Email
+Email de la empresa
+Email del cliente
+Email del operario
+Email enviado correctamente.
+Empresa
+Empresas
+Enlaces útiles:
+Enviando...
+Enviar correos
+Enviar enlace
+Envio
+Envio Configuracion
+Envío Configuración
+Envío Configuracion Empresa
+Envio Contenido
+Envío Contenido
+Envio Movimiento
+Envio Pallet
+Envio Parada
+Envio Sensor
+Envío Sensor Empresa
+Envío Sensores
+Envíos
+Envíos de Pallet
+Error
+Error al borrar archivo:
+Error al borrar el archivo
+Error al cargar archivos:
+Error al cargar el resumen
+Error al cargar los archivos de logs
+Error al conectar con el servidor
+Error al crear la configuración desde empresa
+Error al crear los sensores desde empresa
+Error al descargar archivo:
+Error al descargar el archivo
+Error al generar datos fake
+Error al guardar log de login:
+Error al guardar log:
+Error al obtener el token: es undefined
+Error al obtener IP:
+Error al procesar archivo:
+Error de archivo
+Error de configuración
+Error de procesamiento
+Error de tamaño
+Error desconocido
+Error procesando la imagen
+Errores
+Errores encontrados:
+Eslovaco
+Esloveno
+Español
+Esta acción no se puede deshacer.
+Esta es la información que se generará por defecto en cada envío y que será la que se le pase a cada palet. Se establece aquí de forma genérica pero podrá modificarse por envío de forma individualmente.
+Esta pantalla ha cambiado
+Este enlace no es válido. Solicita un nuevo enlace de restablecimiento.
+Estonio
+Euskera
+Eventos Enviados
+Eventos Guardados
+Éxito
+Falta el token
+Fecha
+Fecha de Impresión
+Fecha de la parada
+Fecha de llegada
+Fecha de Modificación
+Fecha de registro
+Fecha de salida
+Fecha del movimiento
+Fecha llegada
+Fecha salida
+Fines
+Formatos soportados: .csv (máximo 10MB)
+Foto del pallet
+Foto del producto
+Frances
+Gallego
+Generar Datos Fake
+Generar Gráfico
+Gestión de lugares de parada asociados al cliente.
+Gestión de operarios asociados al cliente.
+Gestión de productos asociados al cliente.
+GPS
+GPS de la parada
+GPS Ruta Destino
+GPS Ruta Origen
+Gráfico de Datos
+Griego
+Guardando
+Guardar
+Ha introducido el código de un palet ya existente, cámbielo para continuar.
+Ha ocurrido un error creando el registro
+Hebreo
+Hindi
+Horas entre envíos de mail
+Hoy
+Hungaro
+ID
+ID de empresa no proporcionado
+Idioma
+Idiomas
+Imagen
+Importar
+Importar archivo CSV
+Indonesio
+Ingles
+Ingrese el destino
+Ingrese el numero
+Ingrese el origen
+Iniciar sesión
+Inicio
+Introduce tu email y te enviaremos un enlace para restablecerla.
+Introduce tu nueva contraseña.
+Ir a solicitar enlace
+Ir al inicio
+Ir al login
+Iso
+Iso del pais
+Italiano
+Japones
+Kazajo
+La cantidad de tiempo en minutos que tardará en cerrar la sesión por inactividad al usuario
+La fecha de llegada debe ser posterior a la fecha de salida
+La imagen no puede ser mayor a 2 MB
+Las contraseñas no coinciden.
+Las credenciales del usuario son incorrectas.
+Leton
+Límite excedido
+Limpiar
+Limpiar filtros
+líneas encontradas
+Lituano
+Lo sentimos, la página que buscas no existe o ha sido movida.
+Log de usuarios
+Log guardado en archivo:
+Logo
+Logs de usuarios
+Logs del Sistema
+Logs incorrectos
+Lugar
+Lugar de parada
+Lugar Parada
+Lugares de Parada
+Lugares de Parada del Cliente
+Macedonio
+Mail
+Malayo
+Maltes
+Mas datos
+Medidas
+Medidas del pallet
+Medidas del producto
+Minutos de inactividad
+Modelo
+Modelo del pallet
+Mostrando
+Mostrar
+Movimiento de Envio
+Movimientos
+Movimientos de Envío
+Movimientos del Envío
+Muestra el nombre de la empresa
+No
+No disponible
+No ha sido posible eliminar el registro ya que tiene dependencias.
+No hay archivos de logs disponibles
+No hay datos disponibles para mostrar
+No hay datos para procesar (solo header encontrado)
+No puede desactivar este switch, porque no existe ningún otro usuario con privilegios de administrador. Activelo en otro si quiere desactivar este
+No se encontraron archivos
+No se ha podido validar el email contra usuarios. Inténtelo de nuevo.
+No se han encontrado registros
+No se pudo enviar el enlace por un problema de red. Inténtalo de nuevo.
+No se pudo restablecer la contraseña por un problema de red. Inténtalo de nuevo.
+No se pudo restablecer la contraseña. Motivo del servidor:
+No se puede eliminar permisos del rol de Sistemas
+Nombre
+Nombre de la configuración
+Nombre de la empresa
+Nombre del Archivo
+Nombre del cliente
+Nombre del idioma
+Nombre del lugar de parada
+Nombre del operario
+Nombre del pais
+Nombre del parámetro
+Nombre del producto
+Nombre del rol
+Nombre del tipo de carrocería
+Nombre del tipo de sensor
+Nombre del tipo de transporte
+Nombre Sensor
+Noruego
+Nueva
+Nueva contraseña
+Nuevo
+Numero
+Número de paradas
+Opciones
+OpcionesActivoSN
+Operario
+Operarios
+Operarios del Cliente
+OR
+OR NOT
+Orden
+Orden de la configuración
+Orden de la empresa
+Orden de la parada
+Orden del contenido
+Orden del envío
+Orden del idioma
+Orden del movimiento
+Orden del pais
+Orden del pallet
+Orden del parámetro
+Orden del rol
+Orden del sensor
+Orden del tipo de carrocería
+Orden del tipo de sensor
+Orden del tipo de transporte
+Origen
+Origen de la ruta
+Origen Ruta
+Página no encontrada
+Pais
+Paises
+Países
+Pallet
+Pallet Informe
+Pallet Parametro
+Pallets
+Pallets asociados
+Pallets del Envío
+Pantalla de inicio
+Parada de Envio
+Paradas
+Paradas de Envío
+Paradas del Envío
+Paradas previstas
+Parametro
+Parámetro
+Parámetros
+Parámetros de Pallet
+Parámetros permitidos de Pallet
+Perfil
+Periodo envío mail (horas)
+Período envío mail (horas)
+Permisos
+Peso (Kg)
+Peso del producto
+Peso en kilogramos
+Peso Total (Kg)
+Peso total calculado automáticamente
+Plantillas de correo
+Polaco
+Por favor ingresa tus credenciales
+Por favor, seleccione un archivo CSV válido
+Portugues
+Procesamiento completado con errores
+Procesando archivo...
+Procesar archivo
+Producto
+Productos
+Productos del Cliente
+Realiza una búsqueda para mostrar los datos
+Recuérdame
+Recuerde que solo aparecen aquí los sensores activos en la pantalla "Tipo Sensor".
+Recuerde que solo puede editar los sensores activos o el sensor actualmente seleccionado.
+Referencia
+Registro editado correctamente
+Registro elmininado correctamente.
+Registro insertado correctamente
+registros
+Registros mostrados
+Repite la contraseña
+Restablecer contraseña
+Restableciendo...
+Resultados del Procesamiento:
+Resumen del Envío
+Resumen Envío
+Resumen Envío Pallet
+Resumen general del envío mostrando eventos guardados, eventos enviados, total de alarmas y batería actual.
+Rol
+Roles
+Rumano
+Ruso
+Se completa automáticamente al seleccionar producto
+Se incluyen logs de intentos de login fallidos y logs de todas las peticiones a la API.
+Se muestra la suma de los productos a enviar en un envío.
+Se muestran los movimientos del envío a partir de los valores mínimos definidos en los sensores. Ejemplo: Si el valor de la temperatura es 23 y existe un registro cuyo valor es 22 no aparecerá en esta tabla ni en los informes.
+Sección desde la que se pueden cargar los parámetros disponibles de un Palet, Pantalla 1 tabla Parámetros del documento "Análisis de trazabilidad de ruta". El problema con esto es que, actualmente, deben modificarse uno a uno en cada cambio de estado, de momento se deja así pero esta pantalla podría eliminarse en el futuro y que esta información se rellene automáticamente.
+Sección que muestra los parámetros asociados a un Pallet. Dado que la sección de Parámetro es susceptible de eliminar, esta también podría desaparecer.
+Selecciona
+Selecciona un envÃ­o pallet
+Selecciona un envío
+Selecciona un idioma
+Selecciona un pallet
+Selecciona un parámetro
+Selecciona un rol
+Selecciona un tipo de sensor
+Selecciona una opción
+Selecciona una pantalla de inicio
+Seleccionar archivo
+Seleccionar lugar de parada
+Seleccionar operador
+Seleccionar operario
+Seleccionar rol
+Seleccionar tipo
+Seleccione fecha y hora de llegada
+Seleccione fecha y hora de salida
+Seleccione un archivo
+Seleccione un archivo CSV para procesar
+Seleccione un cliente
+Seleccione un pallet
+Seleccione un producto
+Seleccione un tipo de sensor
+Sensor de Empresa
+Sensor de Envio
+Sensor Empresa
+Sensores
+Sensores creados desde empresa correctamente
+Sensores de Empresa
+Sensores de Envío
+Sensores del Envío
+Serbio
+Servicio de email
+Sesión cerrada por inactividad
+SI
+Sí
+Si existe una cuenta para ese email, hemos enviado un enlace de restablecimiento.
+Sí, borrar
+Significado de los colores:
+Sin fecha
+Sin sensor
+Solicitar enlace
+Solicitar nuevo enlace
+Solo se pueden insertar imagenes en el campo
+Sueco
+Sugerencia: usa al menos 8 caracteres.
+Tailandes
+Tamaño
+Tamaño:
+Teléfono
+Teléfono del cliente
+Teléfono del operario
+Texto libre
+Texto libre adicional
+Tipo
+Tipo Carroceria
+Tipo Carrocería
+Tipo de Sensor
+Tipo Sensor
+Tipo Transporte
+Tipos de Carrocería
+Tipos de Sensor
+Tipos de Transporte
+Todos los campos deben de ser rellenados
+Todos los campos obligatorios deben ser rellenados
+Todos los registros
+Total Alarmas
+Traducción
+Traducciones
+Tu sesión ha expirado. Por favor, inicia sesión nuevamente.
+Turco
+Ucraniano
+Unidad de medida
+Urdu
+Usuario
+Usuario Admin
+Usuario no está activo
+Usuarios
+Valor
+Valor de la configuración
+Valor de la traducción en
+Valor del sensor
+Valor Libre
+Valor mínimo a tener en cuenta en el cálculo.
+Valores disponibles
+Valores disponibles para el parametro
+Vehiculo
+Ver
+Ver perfil
+Vietnamita
+Visualización de los pallets enviados y el producto que contiene cada uno de ellos.
+Volver al login
+Volver atrás
+Ya puedes iniciar sesión con tu nueva contraseña.
+Yoruba
+Zulu

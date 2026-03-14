@@ -26,11 +26,11 @@ const Envio = () => {
 
     const handleGenerarDatosFake = () => {
         confirmDialog({
-            message: '¿Estás seguro de que quieres generar datos fake?',
-            header: 'Confirmación',
+            message: intl.formatMessage({ id: '¿Estás seguro de que quieres generar datos fake?' }),
+            header: intl.formatMessage({ id: 'Confirmación' }),
             icon: 'pi pi-exclamation-triangle',
-            acceptLabel: 'Sí',
-            rejectLabel: 'No',
+            acceptLabel: intl.formatMessage({ id: 'Sí' }),
+            rejectLabel: intl.formatMessage({ id: 'No' }),
             accept: async () => {
                 try {
                     const datosSesion = getUsuarioSesion();
@@ -62,7 +62,7 @@ const Envio = () => {
             <Toast ref={toast} position="top-right" />
             <div>
                 <Button
-                    label="Generar Datos Fake"
+                    label={intl.formatMessage({ id: "Generar Datos Fake" })}
                     icon="pi pi-database"
                     severity="danger"
                     onClick={handleGenerarDatosFake}

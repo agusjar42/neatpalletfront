@@ -6,9 +6,11 @@ import { useContext, useMemo, useState } from "react";
 import { LayoutContext } from "../../../layout/context/layoutcontext";
 import axios from "axios";
 import { resetPassword } from "@/app/api-endpoints/auth";
+import { useIntl } from "react-intl";
 
 const ResetPasswordPage = () => {
   const router = useRouter();
+  const intl = useIntl();
   const searchParams = useSearchParams();
   const token = (searchParams.get("token") || "").trim();
 
@@ -20,6 +22,7 @@ const ResetPasswordPage = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showRequestNewLink, setShowRequestNewLink] = useState(false);
 
   const passwordsMatch = useMemo(() => newPassword === confirmPassword, [newPassword, confirmPassword]);
   const canSubmit = token.length > 0 && newPassword.length > 0 && confirmPassword.length > 0 && passwordsMatch && !loading;
@@ -27,6 +30,7 @@ const ResetPasswordPage = () => {
   const handleSubmit = async () => {
     if (!canSubmit) return;
     setErrorMessage(null);
+    setShowRequestNewLink(false);
     setLoading(true);
     document.body.style.cursor = "wait";
 
@@ -38,11 +42,16 @@ const ResetPasswordPage = () => {
       const isNetworkFailure = axios.isAxiosError(error) && !error.response;
 
       if (httpStatus === 400) {
-        setErrorMessage("El enlace de restablecimiento no es válido o ha caducado. Solicita uno nuevo.");
+        setShowRequestNewLink(true);
+        setErrorMessage(intl.formatMessage({ id: "El enlace de restablecimiento no es válido o ha caducado. Solicita uno nuevo." }));
       } else if (isNetworkFailure) {
-        setErrorMessage("No se pudo restablecer la contraseña por un problema de red. Inténtalo de nuevo.");
+        setErrorMessage(intl.formatMessage({ id: "No se pudo restablecer la contraseña por un problema de red. Inténtalo de nuevo." }));
       } else {
-        setErrorMessage("No se pudo restablecer la contraseña. Motivo del servidor: " + (axios.isAxiosError(error) && error.response?.data?.error?.message ? error.response.data.error.message : "Error desconocido"));
+        const serverReason =
+          axios.isAxiosError(error) && error.response?.data?.error?.message
+            ? error.response.data.error.message
+            : intl.formatMessage({ id: "Error desconocido" });
+        setErrorMessage(`${intl.formatMessage({ id: "No se pudo restablecer la contraseña. Motivo del servidor:" })} ${serverReason}`);
       }
     } finally {
       setLoading(false);
@@ -81,28 +90,28 @@ const ResetPasswordPage = () => {
         <div className="border-1 surface-border surface-card border-round py-7 px-4 md:px-7 z-1">
           {!token ? (
             <div className="flex flex-column gap-3" style={{ maxWidth: "30rem" }}>
-              <div className="text-900 text-xl font-bold">Falta el token</div>
+              <div className="text-900 text-xl font-bold">{intl.formatMessage({ id: "Falta el token" })}</div>
               <span className="text-600 font-medium">
-                Este enlace no es válido. Solicita un nuevo enlace de restablecimiento.
+                {intl.formatMessage({ id: "Este enlace no es válido. Solicita un nuevo enlace de restablecimiento." })}
               </span>
-              <Button label="Ir a solicitar enlace" className="w-full" onClick={() => router.push("/forgot-password")} />
+              <Button label={intl.formatMessage({ id: "Ir a solicitar enlace" })} className="w-full" onClick={() => router.push("/forgot-password")} />
             </div>
           ) : success ? (
             <div className="flex flex-column gap-3" style={{ maxWidth: "30rem" }}>
-              <div className="text-900 text-xl font-bold">Contraseña restablecida</div>
-              <span className="text-600 font-medium">Ya puedes iniciar sesión con tu nueva contraseña.</span>
-              <Button label="Ir al login" className="w-full" onClick={() => router.push("/auth/login")} />
+              <div className="text-900 text-xl font-bold">{intl.formatMessage({ id: "Contraseña restablecida" })}</div>
+              <span className="text-600 font-medium">{intl.formatMessage({ id: "Ya puedes iniciar sesión con tu nueva contraseña." })}</span>
+              <Button label={intl.formatMessage({ id: "Ir al login" })} className="w-full" onClick={() => router.push("/auth/login")} />
             </div>
           ) : (
             <div className="flex flex-column">
               <div className="mb-4">
-                <div className="text-900 text-xl font-bold mb-2">Restablecer contraseña</div>
-                <span className="text-600 font-medium">Introduce tu nueva contraseña.</span>
-                <div className="text-600 text-sm mt-2">Sugerencia: usa al menos 8 caracteres.</div>
+                <div className="text-900 text-xl font-bold mb-2">{intl.formatMessage({ id: "Restablecer contraseña" })}</div>
+                <span className="text-600 font-medium">{intl.formatMessage({ id: "Introduce tu nueva contraseña." })}</span>
+                <div className="text-600 text-sm mt-2">{intl.formatMessage({ id: "Sugerencia: usa al menos 8 caracteres." })}</div>
                 {errorMessage && <p style={{ color: "red", maxWidth: "30rem" }}>{errorMessage}</p>}
-                {errorMessage?.includes("caducado") && (
+                {showRequestNewLink && (
                   <Button
-                    label="Solicitar nuevo enlace"
+                    label={intl.formatMessage({ id: "Solicitar nuevo enlace" })}
                     outlined
                     className="mt-2"
                     onClick={() => router.push("/forgot-password")}
@@ -120,7 +129,7 @@ const ResetPasswordPage = () => {
                   inputClassName="w-full md:w-25rem"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="Nueva contraseña"
+                  placeholder={intl.formatMessage({ id: "Nueva contraseña" })}
                   toggleMask
                   feedback={false}
                   inputStyle={{ paddingLeft: "2.5rem" }}
@@ -137,7 +146,7 @@ const ResetPasswordPage = () => {
                   inputClassName="w-full md:w-25rem"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="Repite la contraseña"
+                  placeholder={intl.formatMessage({ id: "Repite la contraseña" })}
                   toggleMask
                   feedback={false}
                   inputStyle={{ paddingLeft: "2.5rem" }}
@@ -146,19 +155,19 @@ const ResetPasswordPage = () => {
               </span>
 
               {!passwordsMatch && confirmPassword.length > 0 && (
-                <p style={{ color: "red", maxWidth: "30rem" }}>Las contraseñas no coinciden.</p>
+                <p style={{ color: "red", maxWidth: "30rem" }}>{intl.formatMessage({ id: "Las contraseñas no coinciden." })}</p>
               )}
 
               <div className="flex gap-2 justify-content-between mt-2">
                 <Button
-                  label="Cancelar"
+                  label={intl.formatMessage({ id: "Cancelar" })}
                   outlined
                   className="w-6"
                   onClick={() => router.push("/auth/login")}
                   disabled={loading}
                 />
                 <Button
-                  label={loading ? "Restableciendo..." : "Restablecer contraseña"}
+                  label={loading ? intl.formatMessage({ id: "Restableciendo..." }) : intl.formatMessage({ id: "Restablecer contraseña" })}
                   className="w-6"
                   onClick={handleSubmit}
                   disabled={!canSubmit}
@@ -173,4 +182,3 @@ const ResetPasswordPage = () => {
 };
 
 export default ResetPasswordPage;
-

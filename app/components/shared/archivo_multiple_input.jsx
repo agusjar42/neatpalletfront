@@ -96,7 +96,7 @@ const ArchivoMultipleInput = ({ registro, setRegistro, campoNombre, archivoTipo,
                 // Notificar al usuario si el tipo de archivo no es valido
                 toast.current.show({
                     severity: 'error',
-                    summary: 'Archivo invalido',
+                    summary: intl.formatMessage({ id: 'Archivo inválido' }),
                     detail: intl.formatMessage({ id: 'Solo se pueden insertar imagenes en el campo' }),
                     life: 3000,
                 });
@@ -106,7 +106,7 @@ const ArchivoMultipleInput = ({ registro, setRegistro, campoNombre, archivoTipo,
                 // Notificar al usuario si el tamaño total excede el límite
                 toast.current.show({
                     severity: 'error',
-                    summary: 'Límite excedido',
+                    summary: intl.formatMessage({ id: 'Límite excedido' }),
                     detail: `${intl.formatMessage({ id: 'El tamaño total de los archivos seleccionados excede el limite de' })} ${formatearBytes(espacioMaximo)}.`,
                     life: 3000,
                 });

@@ -9,8 +9,10 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { devuelveBasePath } from "@/app/utility/Utils";
 import axios from 'axios';
+import { useIntl } from "react-intl";
 
 const LogsIncorrectos = () => {
+    const intl = useIntl();
     const [archivos, setArchivos] = useState([]);
     const [loading, setLoading] = useState(true);
     const toast = useRef(null);
@@ -30,17 +32,17 @@ const LogsIncorrectos = () => {
             } else {
                 toast.current?.show({
                     severity: "error",
-                    summary: "Error",
-                    detail: "Error al cargar los archivos de logs",
+                    summary: intl.formatMessage({ id: "Error" }),
+                    detail: intl.formatMessage({ id: "Error al cargar los archivos de logs" }),
                     life: 3000,
                 });
             }
         } catch (error) {
-            console.error('Error al cargar archivos:', error);
+            console.error(intl.formatMessage({ id: "Error al cargar archivos:" }), error);
             toast.current?.show({
                 severity: "error",
-                summary: "Error",
-                detail: "Error al conectar con el servidor",
+                summary: intl.formatMessage({ id: "Error" }),
+                detail: intl.formatMessage({ id: "Error al conectar con el servidor" }),
                 life: 3000,
             });
         } finally {
@@ -72,16 +74,16 @@ const LogsIncorrectos = () => {
 
             toast.current?.show({
                 severity: "success",
-                summary: "Éxito",
-                detail: "Archivo descargado correctamente",
+                summary: intl.formatMessage({ id: "Éxito" }),
+                detail: intl.formatMessage({ id: "Archivo descargado correctamente" }),
                 life: 3000,
             });
         } catch (error) {
-            console.error('Error al descargar archivo:', error);
+            console.error(intl.formatMessage({ id: "Error al descargar archivo:" }), error);
             toast.current?.show({
                 severity: "error",
-                summary: "Error",
-                detail: "Error al descargar el archivo",
+                summary: intl.formatMessage({ id: "Error" }),
+                detail: intl.formatMessage({ id: "Error al descargar el archivo" }),
                 life: 3000,
             });
         }
@@ -89,11 +91,11 @@ const LogsIncorrectos = () => {
 
     const borrarArchivo = (nombreArchivo) => {
         confirmDialog({
-            message: `¿Estás seguro de que quieres borrar el archivo "${nombreArchivo}"? Esta acción no se puede deshacer.`,
-            header: 'Confirmación de borrado',
+            message: `${intl.formatMessage({ id: "¿Estás seguro de que quieres borrar el archivo" })} "${nombreArchivo}"? ${intl.formatMessage({ id: "Esta acción no se puede deshacer." })}`,
+            header: intl.formatMessage({ id: "Confirmación de borrado" }),
             icon: 'pi pi-exclamation-triangle',
-            acceptLabel: 'Sí, borrar',
-            rejectLabel: 'Cancelar',
+            acceptLabel: intl.formatMessage({ id: "Sí, borrar" }),
+            rejectLabel: intl.formatMessage({ id: "Cancelar" }),
             acceptClassName: 'p-button-danger',
             accept: async () => {
                 try {
@@ -103,8 +105,8 @@ const LogsIncorrectos = () => {
                     if (response.data.success) {
                         toast.current?.show({
                             severity: "success",
-                            summary: "Éxito",
-                            detail: "Archivo borrado correctamente",
+                            summary: intl.formatMessage({ id: "Éxito" }),
+                            detail: intl.formatMessage({ id: "Archivo borrado correctamente" }),
                             life: 3000,
                         });
                         // Recargar la lista de archivos
@@ -112,17 +114,17 @@ const LogsIncorrectos = () => {
                     } else {
                         toast.current?.show({
                             severity: "error",
-                            summary: "Error",
-                            detail: response.data.message || "Error al borrar el archivo",
+                            summary: intl.formatMessage({ id: "Error" }),
+                            detail: response.data.message || intl.formatMessage({ id: "Error al borrar el archivo" }),
                             life: 3000,
                         });
                     }
                 } catch (error) {
-                    console.error('Error al borrar archivo:', error);
+                    console.error(intl.formatMessage({ id: "Error al borrar archivo:" }), error);
                     toast.current?.show({
                         severity: "error",
-                        summary: "Error",
-                        detail: "Error al conectar con el servidor",
+                        summary: intl.formatMessage({ id: "Error" }),
+                        detail: intl.formatMessage({ id: "Error al conectar con el servidor" }),
                         life: 3000,
                     });
                 }
@@ -157,7 +159,7 @@ const LogsIncorrectos = () => {
                     rounded
                     outlined
                     severity="success"
-                    tooltip="Descargar"
+                    tooltip={intl.formatMessage({ id: "Descargar" })}
                     tooltipOptions={{ position: 'top' }}
                     onClick={() => descargarArchivo(rowData.nombre)}
                 />
@@ -166,7 +168,7 @@ const LogsIncorrectos = () => {
                     rounded
                     outlined
                     severity="danger"
-                    tooltip="Borrar"
+                    tooltip={intl.formatMessage({ id: "Borrar" })}
                     tooltipOptions={{ position: 'top' }}
                     onClick={() => borrarArchivo(rowData.nombre)}
                 />
@@ -188,7 +190,7 @@ const LogsIncorrectos = () => {
             <Toast ref={toast} position="top-right" />
 
             <div className="col-12">
-                <Card title="Logs del Sistema">
+                <Card title={intl.formatMessage({ id: "Logs del Sistema" })}>
                     <div className="mb-3">
                         <div className="p-mt-3">
                             <div
@@ -196,14 +198,14 @@ const LogsIncorrectos = () => {
                             >
                                 <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
                                     <span>
-                                        Aquí se pueden visualizar y gestionar los archivos de logs del sistema.
-                                        Se incluyen logs de intentos de login fallidos y logs de todas las peticiones a la API.
-                                        Cada archivo contiene los registros de un mes específico.
+                                        {intl.formatMessage({ id: "Aquí se pueden visualizar y gestionar los archivos de logs del sistema." })}{" "}
+                                        {intl.formatMessage({ id: "Se incluyen logs de intentos de login fallidos y logs de todas las peticiones a la API." })}{" "}
+                                        {intl.formatMessage({ id: "Cada archivo contiene los registros de un mes específico." })}
                                     </span>
                                 </div>
                             </div>
                             <Button
-                            label="Actualizar"
+                            label={intl.formatMessage({ id: "Actualizar" })}
                             icon="pi pi-refresh"
                             onClick={cargarArchivos}
                             className="mb-3"
@@ -217,7 +219,7 @@ const LogsIncorrectos = () => {
                     ) : archivos.length === 0 ? (
                         <div className="text-center p-5">
                             <i className="pi pi-inbox" style={{ fontSize: '3rem', color: 'var(--text-color-secondary)' }}></i>
-                            <p className="text-600 mt-3">No hay archivos de logs disponibles</p>
+                            <p className="text-600 mt-3">{intl.formatMessage({ id: "No hay archivos de logs disponibles" })}</p>
                         </div>
                     ) : (
                         <DataTable
@@ -225,37 +227,37 @@ const LogsIncorrectos = () => {
                             paginator
                             rows={10}
                             dataKey="nombre"
-                            emptyMessage="No se encontraron archivos"
+                            emptyMessage={intl.formatMessage({ id: "No se encontraron archivos" })}
                             className="datatable-responsive"
                         >
                             <Column
                                 field="tipo"
-                                header="Tipo"
+                                header={intl.formatMessage({ id: "Tipo" })}
                                 sortable
                                 style={{ width: '15%' }}
                             />
                             <Column
                                 field="nombre"
-                                header="Nombre del Archivo"
+                                header={intl.formatMessage({ id: "Nombre del Archivo" })}
                                 sortable
                                 style={{ width: '30%' }}
                             />
                             <Column
                                 field="fecha"
-                                header="Fecha de Modificación"
+                                header={intl.formatMessage({ id: "Fecha de Modificación" })}
                                 body={fechaTemplate}
                                 sortable
                                 style={{ width: '25%' }}
                             />
                             <Column
                                 field="tamaño"
-                                header="Tamaño"
+                                header={intl.formatMessage({ id: "Tamaño" })}
                                 body={tamañoTemplate}
                                 sortable
                                 style={{ width: '10%' }}
                             />
                             <Column
-                                header="Acciones"
+                                header={intl.formatMessage({ id: "Acciones" })}
                                 body={accionesTemplate}
                                 exportable={false}
                                 style={{ width: '20%' }}

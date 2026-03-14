@@ -434,9 +434,9 @@ const descargarCSV = async (registros = [], columnas, procesarDatosParaCSV, getR
 const DescargarCSVDialog = ({
     visible,
     onHide,
-    header = intl.formatMessage({ id: 'Descargar archivo CSV' }),
-    labelMostrados = intl.formatMessage({ id: 'Registros mostrados' }),
-    labelTodos = intl.formatMessage({ id: 'Todos los registros' }),
+    header,
+    labelMostrados,
+    labelTodos,
     registros,
     getRegistros,
     setDescargarCSVDialog,
@@ -444,17 +444,21 @@ const DescargarCSVDialog = ({
     procesarDatosParaCSV,
     columnas
 }) => {
+    const intl = useIntl();
+    const resolvedHeader = header ?? intl.formatMessage({ id: 'Descargar archivo CSV' });
+    const resolvedLabelMostrados = labelMostrados ?? intl.formatMessage({ id: 'Registros mostrados' });
+    const resolvedLabelTodos = labelTodos ?? intl.formatMessage({ id: 'Todos los registros' });
     const footer = (
         <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
             <Button
-                label={labelMostrados}
+                label={resolvedLabelMostrados}
                 icon="pi pi-download"
                 text
                 style={{ whiteSpace: 'nowrap' }}
                 onClick={() => descargarCSV(registros, columnas, procesarDatosParaCSV, getRegistros, setDescargarCSVDialog, nombreArchivo)}
             />
             <Button
-                label={labelTodos}
+                label={resolvedLabelTodos}
                 icon="pi pi-download"
                 text
                 style={{ whiteSpace: 'nowrap' }}
@@ -467,7 +471,7 @@ const DescargarCSVDialog = ({
         <Dialog
             visible={visible}
             style={{ width: "450px" }}
-            header={header}
+            header={resolvedHeader}
             modal
             footer={footer}
             onHide={onHide}
@@ -479,12 +483,16 @@ const DescargarCSVDialog = ({
 const ImportarCSVPalletsDialog = ({
     visible,
     onHide,
-    header = 'Importar archivo CSV',
-    labelSeleccionar = 'Seleccionar archivo',
-    labelProcesar = 'Procesar archivo',
+    header,
+    labelSeleccionar,
+    labelProcesar,
     onCSVProcessed = null,
     empresaId = null
 }) => {
+    const intl = useIntl();
+    const resolvedHeader = header ?? intl.formatMessage({ id: 'Importar archivo CSV' });
+    const resolvedLabelSeleccionar = labelSeleccionar ?? intl.formatMessage({ id: 'Seleccionar archivo' });
+    const resolvedLabelProcesar = labelProcesar ?? intl.formatMessage({ id: 'Procesar archivo' });
     const [selectedFile, setSelectedFile] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [csvData, setCsvData] = useState([]);
@@ -581,7 +589,7 @@ const ImportarCSVPalletsDialog = ({
 
         // Validar que sea un archivo CSV
         if (!isCSVFile(file)) {
-            setErrorMessage('Por favor, seleccione un archivo CSV válido');
+            setErrorMessage(intl.formatMessage({ id: 'Por favor, seleccione un archivo CSV válido' }));
             setSelectedFile(null);
             setCsvData([]);
             
@@ -589,8 +597,8 @@ const ImportarCSVPalletsDialog = ({
             if (toast.current) {
                 toast.current.show({
                     severity: 'error',
-                    summary: 'Error de archivo',
-                    detail: 'El archivo seleccionado no es un CSV válido',
+                    summary: intl.formatMessage({ id: 'Error de archivo' }),
+                    detail: intl.formatMessage({ id: 'El archivo seleccionado no es un CSV válido' }),
                     life: 3000
                 });
             }
@@ -600,15 +608,15 @@ const ImportarCSVPalletsDialog = ({
         // Validar tamaño del archivo (máximo 10MB)
         const maxSize = 10 * 1024 * 1024; // 10MB
         if (file.size > maxSize) {
-            setErrorMessage('El archivo es demasiado grande. Máximo permitido: 10MB');
+            setErrorMessage(intl.formatMessage({ id: 'El archivo es demasiado grande. Máximo permitido: 10MB' }));
             setSelectedFile(null);
             setCsvData([]);
             
             if (toast.current) {
                 toast.current.show({
                     severity: 'error',
-                    summary: 'Error de tamaño',
-                    detail: 'El archivo excede el tamaño máximo permitido (10MB)',
+                    summary: intl.formatMessage({ id: 'Error de tamaño' }),
+                    detail: intl.formatMessage({ id: 'El archivo excede el tamaño máximo permitido (10MB)' }),
                     life: 3000
                 });
             }
@@ -632,12 +640,12 @@ const ImportarCSVPalletsDialog = ({
         }
 
         if (!empresaId) {
-            setErrorMessage('ID de empresa no proporcionado');
+            setErrorMessage(intl.formatMessage({ id: 'ID de empresa no proporcionado' }));
             if (toast.current) {
                 toast.current.show({
                     severity: 'error',
-                    summary: 'Error de configuración',
-                    detail: 'ID de empresa no proporcionado',
+                    summary: intl.formatMessage({ id: 'Error de configuración' }),
+                    detail: intl.formatMessage({ id: 'ID de empresa no proporcionado' }),
                     life: 3000
                 });
             }
@@ -656,7 +664,7 @@ const ImportarCSVPalletsDialog = ({
             const lines = await readCSVFile(selectedFile);
             
             if (lines.length === 0) {
-                throw new Error('El archivo CSV está vacío');
+                throw new Error(intl.formatMessage({ id: 'El archivo CSV está vacío' }));
             }
 
             // Guardar las líneas en el estado
@@ -674,7 +682,7 @@ const ImportarCSVPalletsDialog = ({
             }
 
             if (dataLines.length === 0) {
-                throw new Error('No hay datos para procesar (solo header encontrado)');
+                throw new Error(intl.formatMessage({ id: 'No hay datos para procesar (solo header encontrado)' }));
             }
 
             const results = { created: 0, updated: 0, errors: [] };
@@ -721,7 +729,7 @@ const ImportarCSVPalletsDialog = ({
                 } else {
                     toast.current.show({
                         severity: 'warn',
-                        summary: 'Procesamiento completado con errores',
+                        summary: intl.formatMessage({ id: 'Procesamiento completado con errores' }),
                         detail: `${totalProcessed} registros procesados, ${results.errors.length} errores`,
                         life: 5000
                     });
@@ -734,14 +742,14 @@ const ImportarCSVPalletsDialog = ({
             }
             
         } catch (error) {
-            console.error('Error al procesar archivo:', error);
+            console.error(intl.formatMessage({ id: 'Error al procesar archivo:' }), error);
             setErrorMessage(error.message);
             setCsvData([]);
             
             if (toast.current) {
                 toast.current.show({
                     severity: 'error',
-                    summary: 'Error de procesamiento',
+                    summary: intl.formatMessage({ id: 'Error de procesamiento' }),
                     detail: error.message,
                     life: 3000
                 });
@@ -763,7 +771,7 @@ const ImportarCSVPalletsDialog = ({
     const footer = (
         <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
             <Button
-                label={labelSeleccionar}
+                label={resolvedLabelSeleccionar}
                 icon="pi pi-upload"
                 text
                 style={{ whiteSpace: 'nowrap' }}
@@ -771,7 +779,7 @@ const ImportarCSVPalletsDialog = ({
                 disabled={isProcessing}
             />
             <Button
-                label={labelProcesar}
+                label={resolvedLabelProcesar}
                 icon="pi pi-cog"
                 text
                 style={{ whiteSpace: 'nowrap' }}
@@ -786,7 +794,7 @@ const ImportarCSVPalletsDialog = ({
         <Dialog
             visible={visible}
             style={{ width: "500px" }}
-            header={header}
+            header={resolvedHeader}
             modal
             footer={footer}
             onHide={handleHide}
@@ -821,31 +829,31 @@ const ImportarCSVPalletsDialog = ({
                     <div>
                         <i className="pi pi-file" style={{ fontSize: '3rem', color: '#4caf50', marginBottom: '10px' }}></i>
                         <p style={{ fontSize: '16px', margin: '10px 0' }}>
-                            Archivo seleccionado: <strong>{selectedFile.name}</strong>
+                            {intl.formatMessage({ id: 'Archivo seleccionado:' })} <strong>{selectedFile.name}</strong>
                         </p>
                         <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
-                            Tamaño: {(selectedFile.size / 1024).toFixed(2)} KB
+                            {intl.formatMessage({ id: 'Tamaño:' })} {(selectedFile.size / 1024).toFixed(2)} KB
                         </p>
                         
                         {/* Información del procesamiento */}
                         {csvData.length > 0 && !isProcessing && (
                             <div>
-                                <div style={{ 
-                                    backgroundColor: '#e8f5e8', 
-                                    color: '#2e7d32', 
-                                    padding: '10px', 
+                                    <div style={{ 
+                                        backgroundColor: '#e8f5e8', 
+                                        color: '#2e7d32', 
+                                        padding: '10px', 
                                     borderRadius: '4px', 
                                     fontSize: '14px',
                                     marginTop: '10px'
                                 }}>
                                     <i className="pi pi-check-circle" style={{ marginRight: '8px' }}></i>
-                                    Archivo leído exitosamente: {csvData.length} líneas encontradas
+                                    {intl.formatMessage({ id: 'Archivo leído exitosamente:' })} {csvData.length} {intl.formatMessage({ id: 'líneas encontradas' })}
                                 </div>
                                 
                                 {/* Resultados del procesamiento */}
                                 {(processResults.created > 0 || processResults.updated > 0 || processResults.errors.length > 0) && (
                                     <div style={{ marginTop: '15px' }}>
-                                        <h4 style={{ margin: '0 0 10px 0', color: '#333' }}>Resultados del Procesamiento:</h4>
+                                        <h4 style={{ margin: '0 0 10px 0', color: '#333' }}>{intl.formatMessage({ id: 'Resultados del Procesamiento:' })}</h4>
                                         
                                         {/* Estadísticas */}
                                         <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '10px' }}>
@@ -853,19 +861,19 @@ const ImportarCSVPalletsDialog = ({
                                                 <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#4caf50' }}>
                                                     {processResults.created}
                                                 </div>
-                                                <div style={{ fontSize: '12px', color: '#666' }}>Creados</div>
+                                                <div style={{ fontSize: '12px', color: '#666' }}>{intl.formatMessage({ id: 'Creados' })}</div>
                                             </div>
                                             <div style={{ textAlign: 'center' }}>
                                                 <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2196f3' }}>
                                                     {processResults.updated}
                                                 </div>
-                                                <div style={{ fontSize: '12px', color: '#666' }}>Actualizados</div>
+                                                <div style={{ fontSize: '12px', color: '#666' }}>{intl.formatMessage({ id: 'Actualizados' })}</div>
                                             </div>
                                             <div style={{ textAlign: 'center' }}>
                                                 <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#f44336' }}>
                                                     {processResults.errors.length}
                                                 </div>
-                                                <div style={{ fontSize: '12px', color: '#666' }}>Errores</div>
+                                                <div style={{ fontSize: '12px', color: '#666' }}>{intl.formatMessage({ id: 'Errores' })}</div>
                                             </div>
                                         </div>
                                         
@@ -882,7 +890,7 @@ const ImportarCSVPalletsDialog = ({
                                                 overflowY: 'auto'
                                             }}>
                                                 <div style={{ fontWeight: 'bold', color: '#c62828', marginBottom: '5px' }}>
-                                                    Errores encontrados:
+                                                    {intl.formatMessage({ id: 'Errores encontrados:' })}
                                                 </div>
                                                 {processResults.errors.map((error, index) => (
                                                     <div key={index} style={{ fontSize: '12px', color: '#c62828', marginBottom: '3px' }}>
@@ -900,10 +908,10 @@ const ImportarCSVPalletsDialog = ({
                     <div>
                         <i className="pi pi-cloud-upload" style={{ fontSize: '3rem', color: '#ccc', marginBottom: '10px' }}></i>
                         <p style={{ fontSize: '16px', color: '#666' }}>
-                            Seleccione un archivo CSV para procesar
+                            {intl.formatMessage({ id: 'Seleccione un archivo CSV para procesar' })}
                         </p>
                         <p style={{ fontSize: '12px', color: '#999', marginTop: '10px' }}>
-                            Formatos soportados: .csv (máximo 10MB)
+                            {intl.formatMessage({ id: 'Formatos soportados: .csv (máximo 10MB)' })}
                         </p>
                     </div>
                 )}
@@ -919,7 +927,7 @@ const ImportarCSVPalletsDialog = ({
                         fontSize: '14px'
                     }}>
                         <i className="pi pi-spinner pi-spin" style={{ marginRight: '8px' }}></i>
-                        Procesando archivo...
+                        {intl.formatMessage({ id: 'Procesando archivo...' })}
                     </div>
                 )}
             </div>
@@ -930,10 +938,14 @@ const ImportarCSVPalletsDialog = ({
 const GenerarGraficoDialog = ({
     visible,
     onHide,
-    header = 'Gráfico de Datos',
+    header,
     registros,
     columnas
 }) => {
+    const intl = useIntl();
+    const resolvedHeader = header ?? intl.formatMessage({ id: 'Gráfico de Datos' });
+    const labelSinSensor = intl.formatMessage({ id: 'Sin sensor' });
+    const labelSinFecha = intl.formatMessage({ id: 'Sin fecha' });
     // Procesar los datos para el gráfico
     const procesarDatosPorSensor = () => {
         console.log('Registros recibidos en GenerarGraficoDialog:', registros);
@@ -946,7 +958,7 @@ const GenerarGraficoDialog = ({
         const datosPorSensor = {};
 
         registros.forEach(registro => {
-            const sensor = registro.nombreSensor || 'Sin sensor';
+            const sensor = registro.nombreSensor || labelSinSensor;
             const valor = registro.valor;
 
             // Usar fechaEspanol si existe, sino formatear fecha
@@ -957,7 +969,7 @@ const GenerarGraficoDialog = ({
                 const fechaObj = new Date(registro.fecha);
                 fecha = `${fechaObj.getDate().toString().padStart(2, '0')}/${(fechaObj.getMonth() + 1).toString().padStart(2, '0')}/${fechaObj.getFullYear()} ${fechaObj.getHours().toString().padStart(2, '0')}:${fechaObj.getMinutes().toString().padStart(2, '0')}`;
             } else {
-                fecha = 'Sin fecha';
+                fecha = labelSinFecha;
             }
 
             if (!datosPorSensor[sensor]) {
@@ -981,7 +993,7 @@ const GenerarGraficoDialog = ({
         const esNumerico = !isNaN(valorNumerico);
 
         const parseDate = (str) => {
-            if (!str || str === 'Sin fecha') return null;
+            if (!str || str === labelSinFecha) return null;
 
             // Manejar formato "DD/MM/YYYY HH:MM:SS" o "DD/MM/YYYY HH:MM" o "DD/MM/YYYY, HH:MM:SS" o "DD/MM/YYYY"
             const parts = str.includes(', ') ? str.split(', ') : str.split(' ');
@@ -1146,7 +1158,7 @@ const GenerarGraficoDialog = ({
         <Dialog
             visible={visible}
             style={{ width: "95vw", maxWidth: "1400px" }}
-            header={header}
+            header={resolvedHeader}
             modal
             onHide={onHide}
         >
@@ -1162,7 +1174,7 @@ const GenerarGraficoDialog = ({
                         ))}
                     </TabView>
                 ) : (
-                    <p>No hay datos disponibles para mostrar</p>
+                    <p>{intl.formatMessage({ id: 'No hay datos disponibles para mostrar' })}</p>
                 )}
             </div>
         </Dialog>

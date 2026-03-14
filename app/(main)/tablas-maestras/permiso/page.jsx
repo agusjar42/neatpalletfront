@@ -421,7 +421,7 @@ const Permiso = () => {
                         await obtenerDatos();
                     }
                 } else {
-                    toast.current.show({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar permisos del rol de Sistemas' });
+                    toast.current.show({ severity: 'error', summary: intl.formatMessage({ id: 'Error' }), detail: intl.formatMessage({ id: 'No se puede eliminar permisos del rol de Sistemas' }) });
                     await obtenerDatos();
                 }
             }

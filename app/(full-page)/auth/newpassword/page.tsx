@@ -4,9 +4,11 @@ import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
 import { useContext, useEffect } from "react";
 import { LayoutContext } from "../../../../layout/context/layoutcontext";
+import { useIntl } from "react-intl";
 
 const NewPassword: Page = () => {
   const router = useRouter();
+  const intl = useIntl();
   const { layoutConfig } = useContext(LayoutContext);
   const dark = layoutConfig.colorScheme !== "light";
 
@@ -43,13 +45,13 @@ const NewPassword: Page = () => {
 
       <div className="px-5 min-h-screen flex justify-content-center align-items-center">
         <div className="border-1 surface-border surface-card border-round py-7 px-4 md:px-7 z-1">
-          <div className="text-900 text-xl font-bold mb-2">Esta pantalla ha cambiado</div>
+          <div className="text-900 text-xl font-bold mb-2">{intl.formatMessage({ id: "Esta pantalla ha cambiado" })}</div>
           <span className="text-600 font-medium">
-            Ahora el restablecimiento de contraseña se hace desde el enlace del email.
+            {intl.formatMessage({ id: "Ahora el restablecimiento de contraseña se hace desde el enlace del email." })}
           </span>
           <div className="flex gap-2 justify-content-between mt-4">
-            <Button label="Solicitar enlace" className="w-6" onClick={() => router.push("/forgot-password")} />
-            <Button label="Volver al login" outlined className="w-6" onClick={() => router.push("/auth/login")} />
+            <Button label={intl.formatMessage({ id: "Solicitar enlace" })} className="w-6" onClick={() => router.push("/forgot-password")} />
+            <Button label={intl.formatMessage({ id: "Volver al login" })} outlined className="w-6" onClick={() => router.push("/auth/login")} />
           </div>
         </div>
       </div>
@@ -58,4 +60,3 @@ const NewPassword: Page = () => {
 };
 
 export default NewPassword;
-

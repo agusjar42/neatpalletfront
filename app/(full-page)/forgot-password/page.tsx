@@ -6,9 +6,11 @@ import { useContext, useMemo, useState } from "react";
 import { LayoutContext } from "../../../layout/context/layoutcontext";
 import axios from "axios";
 import { requestPasswordReset } from "@/app/api-endpoints/auth";
+import { useIntl } from "react-intl";
 
 const ForgotPasswordPage = () => {
   const router = useRouter();
+  const intl = useIntl();
   const { layoutConfig } = useContext(LayoutContext);
   const dark = layoutConfig.colorScheme !== "light";
 
@@ -18,8 +20,8 @@ const ForgotPasswordPage = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const successMessage = useMemo(
-    () => "Si existe una cuenta para ese email, hemos enviado un enlace de restablecimiento.",
-    []
+    () => intl.formatMessage({ id: "Si existe una cuenta para ese email, hemos enviado un enlace de restablecimiento." }),
+    [intl]
   );
 
   const handleSubmit = async () => {
@@ -34,7 +36,7 @@ const ForgotPasswordPage = () => {
     } catch (error) {
       const isNetworkFailure = axios.isAxiosError(error) && !error.response;
       if (isNetworkFailure) {
-        setNetworkError("No se pudo enviar el enlace por un problema de red. Inténtalo de nuevo.");
+        setNetworkError(intl.formatMessage({ id: "No se pudo enviar el enlace por un problema de red. Inténtalo de nuevo." }));
       } else {
         setSubmitted(true);
       }
@@ -74,9 +76,9 @@ const ForgotPasswordPage = () => {
       <div className="px-5 min-h-screen flex justify-content-center align-items-center">
         <div className="border-1 surface-border surface-card border-round py-7 px-4 md:px-7 z-1">
           <div className="mb-4">
-            <div className="text-900 text-xl font-bold mb-2">¿Has olvidado tu contraseña?</div>
+            <div className="text-900 text-xl font-bold mb-2">{intl.formatMessage({ id: "¿Has olvidado tu contraseña?" })}</div>
             <span className="text-600 font-medium">
-              Introduce tu email y te enviaremos un enlace para restablecerla.
+              {intl.formatMessage({ id: "Introduce tu email y te enviaremos un enlace para restablecerla." })}
             </span>
           </div>
 
@@ -85,7 +87,7 @@ const ForgotPasswordPage = () => {
               <p className="m-0 text-700" style={{ maxWidth: "30rem" }}>
                 {successMessage}
               </p>
-              <Button label="Volver al login" className="w-full" onClick={() => router.push("/auth/login")} />
+              <Button label={intl.formatMessage({ id: "Volver al login" })} className="w-full" onClick={() => router.push("/auth/login")} />
             </div>
           ) : (
             <div className="flex flex-column">
@@ -104,14 +106,14 @@ const ForgotPasswordPage = () => {
               </span>
               <div className="flex gap-2 justify-content-between">
                 <Button
-                  label="Volver al login"
+                  label={intl.formatMessage({ id: "Volver al login" })}
                   outlined
                   className="w-6"
                   onClick={() => router.push("/auth/login")}
                   disabled={loading}
                 />
                 <Button
-                  label={loading ? "Enviando..." : "Enviar enlace"}
+                  label={loading ? intl.formatMessage({ id: "Enviando..." }) : intl.formatMessage({ id: "Enviar enlace" })}
                   className="w-6"
                   onClick={handleSubmit}
                   disabled={loading}
@@ -126,4 +128,3 @@ const ForgotPasswordPage = () => {
 };
 
 export default ForgotPasswordPage;
-

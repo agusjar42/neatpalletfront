@@ -12,8 +12,10 @@ import jwt from "@/app/auth/jwt/useJwt";
 import { useRouter } from 'next/navigation';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { devuelveBasePath } from "@/app/utility/Utils";
+import { useIntl } from "react-intl";
 const Login = () => {
     //const apiUsuarios = new UsuariosControllerApi(settings)
+    const intl = useIntl();
     const [rememberMe, setRememberMe] = useState(false);
     const { layoutConfig } = useContext(LayoutContext);
     const [message, setMessage] = useState("");
@@ -48,29 +50,29 @@ const Login = () => {
     const guardarLogLoginIncorrecto = async (tipo, usuario, password, error = null) => {
         try {
             //Obtener la IP del usuario
-            let ip = 'desconocida';
+            let ip = intl.formatMessage({ id: 'desconocida' });
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
                 const data = await response.json();
                 ip = data.ip;
             } catch (e) {
-                console.error('Error al obtener IP:', e);
+                console.error(intl.formatMessage({ id: 'Error al obtener IP:' }), e);
             }
 
             //Construir el mensaje del log según el tipo de error
             let mensaje = '';
             switch(tipo) {
                 case 'usuario_inactivo':
-                    mensaje = 'Usuario no está activo';
+                    mensaje = intl.formatMessage({ id: 'Usuario no está activo' });
                     break;
                 case 'token_undefined':
                     mensaje = 'Token es undefined';
                     break;
                 case 'credenciales_incorrectas':
-                    mensaje = error?.message || 'Error desconocido';
+                    mensaje = error?.message || intl.formatMessage({ id: 'Error desconocido' });
                     break;
                 default:
-                    mensaje = 'Error desconocido';
+                    mensaje = intl.formatMessage({ id: 'Error desconocido' });
             }
 
             //Enviar log al backend para guardarlo en archivo .txt
@@ -90,12 +92,12 @@ const Login = () => {
 
             const result = await response.json();
             if (result.success) {
-                console.log('Log guardado en archivo:', result.file);
+                console.log(intl.formatMessage({ id: 'Log guardado en archivo:' }), result.file);
             } else {
-                console.error('Error al guardar log:', result.message);
+                console.error(intl.formatMessage({ id: 'Error al guardar log:' }), result.message);
             }
         } catch (e) {
-            console.error('Error al guardar log de login:', e);
+            console.error(intl.formatMessage({ id: 'Error al guardar log de login:' }), e);
         }
     }
 
@@ -131,7 +133,7 @@ const Login = () => {
             if (data.activo === false) {
                 // Log: Usuario inactivo 
                 await guardarLogLoginIncorrecto('usuario_inactivo', usuario, password);
-                setMessage('El usuario no está activo.');
+                setMessage(intl.formatMessage({ id: 'El usuario no está activo.' }));
                 bloquearPantalla(false);
             } else {
                 if (data.accessToken) {
@@ -140,7 +142,7 @@ const Login = () => {
                 } else {
                     // Log: Token undefined 
                     await guardarLogLoginIncorrecto('token_undefined', usuario, password);
-                    setMessage('Error al obtener el token: es undefined');
+                    setMessage(intl.formatMessage({ id: 'Error al obtener el token: es undefined' }));
                     bloquearPantalla(false);
                 }
             }
@@ -148,7 +150,7 @@ const Login = () => {
         } catch (error) {
             // Log: Credenciales incorrectas
             await guardarLogLoginIncorrecto('credenciales_incorrectas', usuario, password, error);
-            setMessage('Las credenciales del usuario son incorrectas.');
+            setMessage(intl.formatMessage({ id: 'Las credenciales del usuario son incorrectas.' }));
             bloquearPantalla(false);
         }
     }
@@ -203,10 +205,10 @@ const Login = () => {
                     <div className="border-1 surface-border surface-card border-round py-7 px-4 md:px-7 z-1">
                         <div className="mb-4">
                             <div className="text-900 text-xl font-bold mb-2">
-                                Iniciar sesión
+                                {intl.formatMessage({ id: 'Iniciar sesión' })}
                             </div>
                             <span className="text-600 font-medium">
-                                Por favor ingresa tus credenciales
+                                {intl.formatMessage({ id: 'Por favor ingresa tus credenciales' })}
                             </span>
                         </div>
                         <div className="flex flex-column">
@@ -230,7 +232,7 @@ const Login = () => {
                                     type="text"
                                     inputClassName="w-full md:w-25rem"
                                     onChange={(e) => setPassword(e.target.value)}
-                                    placeholder='Contraseña'
+                                    placeholder={intl.formatMessage({ id: 'Contraseña' })}
                                     toggleMask
                                     feedback={false}
                                     inputStyle={{ paddingLeft: "2.5rem" }}
@@ -251,7 +253,7 @@ const Login = () => {
                                         htmlFor="checkbox"
                                         className="text-900 font-medium mr-8"
                                     >
-                                        Recuérdame
+                                        {intl.formatMessage({ id: 'Recuérdame' })}
                                     </label>
                                 </div>
                                 {deshabilitarLink ? (
@@ -264,7 +266,7 @@ const Login = () => {
                                             transition: 'color 0.3s',
                                         }}
                                     >
-                                        Restablecer contraseña
+                                        {intl.formatMessage({ id: 'Restablecer contraseña' })}
                                     </span>
                                 ) : (
                                     <Link
@@ -272,12 +274,12 @@ const Login = () => {
                                         href="/forgot-password"
                                         className="text-600 cursor-pointer hover:text-primary ml-auto transition-colors transition-duration-300"
                                     >
-                                        Restablecer contraseña
+                                        {intl.formatMessage({ id: 'Restablecer contraseña' })}
                                     </Link>
                                 )}
                             </div>
                             <Button
-                                label={deshabilitarBoton ? 'Cargando...' : 'Iniciar sesión'}
+                                label={deshabilitarBoton ? intl.formatMessage({ id: 'Cargando...' }) : intl.formatMessage({ id: 'Iniciar sesión' })}
                                 className="w-full"
                                 onClick={manejarLogin}
                                 disabled={deshabilitarBoton}
@@ -291,7 +293,7 @@ const Login = () => {
                         <ProgressSpinner
 
                         />
-                        <h2 className="mt-3">Cargando...</h2>
+                        <h2 className="mt-3">{intl.formatMessage({ id: 'Cargando...' })}</h2>
                     </div>
                 )}
 

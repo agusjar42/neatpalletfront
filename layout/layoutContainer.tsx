@@ -28,6 +28,20 @@ const LayoutContainer = (props: ChildContainerProps) => {
     const sidebarRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
     const searchParams = useSearchParams();
+
+    const rutasPublicas = [
+        "/auth/login",
+        "/auth/register",
+        "/auth/forgotpassword",
+        "/auth/verification",
+        "/auth/newpassword",
+        "/forgot-password",
+        "/reset-password",
+        "/landing",
+        "/pages/notfound",
+        "/not-found",
+    ];
+    const esRutaPublica = rutasPublicas.some((ruta) => pathname?.startsWith(ruta));
     const [bindMenuOutsideClickListener, unbindMenuOutsideClickListener] = useEventListener({
         type: "click",
         listener: (event) => {
@@ -177,7 +191,7 @@ const LayoutContainer = (props: ChildContainerProps) => {
 
     return (
         <React.Fragment>
-            {isInitialized && usuarioAutenticado && <div className={classNames("layout-container", containerClass)}>
+            {isInitialized && usuarioAutenticado && !esRutaPublica && <div className={classNames("layout-container", containerClass)}>
                 <div
                     ref={sidebarRef}
                     className="layout-sidebar"
@@ -196,7 +210,7 @@ const LayoutContainer = (props: ChildContainerProps) => {
                 <div className="layout-mask"></div>
 
             </div>}
-            {isInitialized && !usuarioAutenticado && 
+            {isInitialized && (!usuarioAutenticado || esRutaPublica) && 
            <div className="layout-content">{props.children}</div>}
 
         </React.Fragment>

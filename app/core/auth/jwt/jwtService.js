@@ -19,6 +19,8 @@ export default class JwtService {
 
   subscribers = [] //-> Lista de suscriptores para manejar la actualización del token de acceso.
 
+  refreshTokenPromise = null //-> Promesa compartida para evitar cuelgues si el refresh falla.
+
   //El constructor permite sobrescribir la configuración de JWT.
   constructor(jwtOverrideConfig) {
     this.jwtConfig = { ...this.jwtConfig, ...jwtOverrideConfig }
@@ -40,33 +42,59 @@ export default class JwtService {
     // Intercepta todas las respuestas.
     axios.interceptors.response.use(
       response => response,
-      error => {
+      async error => {
         const { config, response } = error
         const originalRequest = config
 
         // Si una respuesta tiene un estado 401 (no autorizado), intenta refrescar el token.
         if (response && response.status === 401) {
-          if (!this.isAlreadyFetchingAccessToken) {
-            this.isAlreadyFetchingAccessToken = true
-            this.refreshToken().then(r => {
-              this.isAlreadyFetchingAccessToken = false
+          const url = String(originalRequest?.url ?? '')
+          const isLoginRequest = url.includes('/usuarios/login')
+          const isRefreshRequest = url.includes(this.jwtConfig.refreshEndpoint) || url.includes('/jwt/refresh-token')
+          const hasRefreshToken = Boolean(this.getRefreshToken())
 
-              // Actualiza accessToken en el localStorage
-              this.setToken(r.data.accessToken)
-              this.setRefreshToken(r.data.refreshToken)
-
-              this.onAccessTokenFetched(r.data.accessToken)
-            })
+          // No intentar refresh durante el login (credenciales incorrectas) ni si no hay refreshToken.
+          // Antes, al fallar el refresh, la promesa quedaba pendiente y la UI se quedaba esperando.
+          if (isLoginRequest || isRefreshRequest || !hasRefreshToken) {
+            return Promise.reject(error)
           }
-          // Si se obtiene un nuevo token, reintenta la solicitud original con el nuevo token.
-          const retryOriginalRequest = new Promise(resolve => {
-            this.addSubscriber(accessToken => {
-              // Cambia el encabezado de la Authorization
-              originalRequest.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
-              resolve(this.axios(originalRequest))
-            })
-          })
-          return retryOriginalRequest
+
+          // Evitar bucles de reintento.
+          if (originalRequest?._retry) {
+            return Promise.reject(error)
+          }
+          originalRequest._retry = true
+
+          try {
+            if (!this.refreshTokenPromise) {
+              this.isAlreadyFetchingAccessToken = true
+              this.refreshTokenPromise = this.refreshToken()
+                .then(r => {
+                  const newAccessToken = r?.data?.accessToken
+                  const newRefreshToken = r?.data?.refreshToken
+
+                  if (!newAccessToken) {
+                    throw new Error('refreshToken: accessToken missing')
+                  }
+
+                  this.setToken(newAccessToken)
+                  if (newRefreshToken) this.setRefreshToken(newRefreshToken)
+                  this.onAccessTokenFetched(newAccessToken)
+                  return newAccessToken
+                })
+                .finally(() => {
+                  this.isAlreadyFetchingAccessToken = false
+                  this.refreshTokenPromise = null
+                })
+            }
+
+            const accessToken = await this.refreshTokenPromise
+            originalRequest.headers = originalRequest.headers ?? {}
+            originalRequest.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
+            return axios(originalRequest)
+          } catch (refreshError) {
+            return Promise.reject(error)
+          }
         }
         if (error) {
           // const objetoJson = JSON.stringify(error.response.data.error)

@@ -11,6 +11,8 @@ import LayoutContainer from "@/layout/layoutContainer";
 import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
 import "primereact/resources/primereact.css";
+import "leaflet/dist/leaflet.css";
+import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import "../styles/demo/Demos.scss";
 import "../styles/layout/layout.scss";
 import IntlProviderWrapper from '@/app/utility/Traducciones.js'; //-> Archivo con la configuración de las traducciones

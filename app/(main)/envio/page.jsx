@@ -7,12 +7,40 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 import { Button } from 'primereact/button';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from "primereact/toast";
-import { useRef, useState } from "react";
+import { Dialog } from "primereact/dialog";
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+
+const MapView = dynamic(() => import("@/app/components/map/MapView"), {
+    ssr: false,
+});
+
+const plannedRoute = [
+    [39.4699, -0.3763],
+    [39.4720, -0.3810],
+    [39.4750, -0.3900],
+];
+
+const realRoute = [
+    [39.4699, -0.3763],
+    [39.4705, -0.3775],
+    [39.4718, -0.3801],
+    [39.4730, -0.3830],
+    [39.4750, -0.3900],
+];
 
 const Envio = () => {
     const intl = useIntl();
     const toast = useRef(null);
     const [refreshKey, setRefreshKey] = useState(0);
+    const [verRutaDialog, setVerRutaDialog] = useState(false);
+    const [mostrarAccionesRuta, setMostrarAccionesRuta] = useState(false);
+
+    useEffect(() => {
+        if (!mostrarAccionesRuta) {
+            setVerRutaDialog(false);
+        }
+    }, [mostrarAccionesRuta]);
 
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
@@ -56,10 +84,33 @@ const Envio = () => {
         });
     };
 
+    const handleGenerarRuta = () => {
+        setVerRutaDialog(true);
+    };
+
+    const handleGenerarInforme = () => {
+        window.open("/analisis_trazabilidad_ruta.pdf", "_blank");
+    };
+
     return (
         <>
             <ConfirmDialog />
             <Toast ref={toast} position="top-right" />
+            <Dialog
+                header={intl.formatMessage({ id: "Ver ruta" })}
+                visible={verRutaDialog}
+                onHide={() => setVerRutaDialog(false)}
+                modal
+                maximizable
+                style={{ width: "92vw" }}
+                contentStyle={{ padding: "1rem" }}
+            >
+                <MapView
+                    center={[39.4699, -0.3763]}
+                    plannedRoute={plannedRoute}
+                    realRoute={realRoute}
+                />
+            </Dialog>
             <div>
                 <Button
                     label={intl.formatMessage({ id: "Generar Datos Fake" })}
@@ -68,6 +119,24 @@ const Envio = () => {
                     onClick={handleGenerarDatosFake}
                     className="mb-3"
                 />
+                {mostrarAccionesRuta && (
+                    <>
+                        <Button
+                            label={intl.formatMessage({ id: "Ver ruta" })}
+                            icon="pi pi-map"
+                            severity="info"
+                            onClick={handleGenerarRuta}
+                            className="mb-3 mx-2"
+                        />
+                        <Button
+                            label={intl.formatMessage({ id: "Generar informe" })}
+                            icon="pi pi-file"
+                            severity="warning"
+                            onClick={handleGenerarInforme}
+                            className="mb-3"
+                        />
+                    </>
+                )}
                 <Crud
                     key={`envios-${refreshKey}`}
                     headerCrud={intl.formatMessage({ id: 'Envíos' })}
@@ -76,7 +145,7 @@ const Envio = () => {
                     botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                     controlador={"Envíos"}
                     filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
-                    editarComponente={<EditarEnvios />}
+                    editarComponente={<EditarEnvios onModoEdicionChange={setMostrarAccionesRuta} />}
                     columnas={columnas}
                     deleteRegistro={deleteEnvio}
                     cargarDatosInicialmente={true}

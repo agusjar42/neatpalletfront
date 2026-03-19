@@ -10,7 +10,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvio from  "./EditarDatosEnvio";
 import { useIntl } from 'react-intl';
 
-const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, onModoEdicionChange }) => {
     const toast = useRef(null);
     const [envio, setEnvio] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -34,6 +34,12 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
         };
         fetchData();
     }, [idEditar, rowData]);
+
+    useEffect(() => {
+        if (!onModoEdicionChange) return;
+        onModoEdicionChange(idEditar > 0 && editable);
+        return () => onModoEdicionChange(false);
+    }, [idEditar, editable, onModoEdicionChange]);
 
     const validaciones = async () => {
         const validaOrden = envio.orden === undefined || envio.orden === null || envio.orden === "";

@@ -53,8 +53,7 @@ const EditarDatosPalletParametro = ({ palletParametro, setPalletParametro, estad
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={palletParametro.orden}
-                        placeholder={intl.formatMessage({ id: 'Orden del parámetro' })}
+                    <InputNumber value={palletParametro.orden === '' || palletParametro.orden === undefined ? null : palletParametro.orden}
                         onChange={(e) => setPalletParametro({ ...palletParametro, orden: e.value })}
                         className={`${(estadoGuardando && (palletParametro.orden === "" || palletParametro.orden === null || palletParametro.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"

@@ -2,9 +2,10 @@ import React from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
+import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 
-const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
+const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando, mostrarSelectorEmpresa = false, empresas = [] }) => {
     const intl = useIntl();
 
     return (
@@ -12,7 +13,8 @@ const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={pallet.orden}
+                    <InputNumber
+                        value={pallet.orden}
                         placeholder={intl.formatMessage({ id: 'Orden del pallet' })}
                         onChange={(e) => setPallet({ ...pallet, orden: e.value })}
                         className={`${(estadoGuardando && (pallet.orden === "" || pallet.orden === null || pallet.orden === undefined)) ? "p-invalid" : ""}`}
@@ -20,22 +22,27 @@ const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
                         useGrouping={false}
                         min={0}
                         max={99999}
-                        inputStyle={{ textAlign: 'right' }} />
+                        inputStyle={{ textAlign: 'right' }}
+                    />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="codigo"><b>{intl.formatMessage({ id: 'Código' })}*</b></label>
-                    <InputText value={pallet.codigo}
+                    <InputText
+                        value={pallet.codigo}
                         placeholder={intl.formatMessage({ id: 'Código del pallet' })}
                         onChange={(e) => setPallet({ ...pallet, codigo: e.target.value })}
                         className={`${(estadoGuardando && pallet.codigo === "") ? "p-invalid" : ""}`}
-                        maxLength={50} />
+                        maxLength={50}
+                    />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="alias">{intl.formatMessage({ id: 'Alias' })}</label>
-                    <InputText value={pallet.alias}
+                    <InputText
+                        value={pallet.alias}
                         placeholder={intl.formatMessage({ id: 'Alias del pallet' })}
                         onChange={(e) => setPallet({ ...pallet, alias: e.target.value })}
-                        maxLength={50} />
+                        maxLength={50}
+                    />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="fechaImpresion">{intl.formatMessage({ id: 'Fecha de impresión' })}</label>
@@ -49,27 +56,51 @@ const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="medidas">{intl.formatMessage({ id: 'Medidas' })}</label>
-                    <InputText value={pallet.medidas}
+                    <InputText
+                        value={pallet.medidas}
                         placeholder={intl.formatMessage({ id: 'Medidas del pallet' })}
                         onChange={(e) => setPallet({ ...pallet, medidas: e.target.value })}
-                        maxLength={50} />
+                        maxLength={50}
+                    />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="modelo">{intl.formatMessage({ id: 'Modelo' })}</label>
-                    <InputText value={pallet.modelo}
+                    <InputText
+                        value={pallet.modelo}
                         placeholder={intl.formatMessage({ id: 'Modelo del pallet' })}
                         onChange={(e) => setPallet({ ...pallet, modelo: e.target.value })}
-                        maxLength={50} />
+                        maxLength={50}
+                    />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="periodoEnvioMail">{intl.formatMessage({ id: 'Período envío mail (horas)' })}</label>
-                    <InputNumber value={pallet.periodoEnvioMail}
+                    <InputNumber
+                        value={pallet.periodoEnvioMail}
                         placeholder={intl.formatMessage({ id: 'Horas entre envíos de mail' })}
                         onValueChange={(e) => setPallet({ ...pallet, periodoEnvioMail: e.value })}
-                        min={0} max={9999}
+                        min={0}
+                        max={9999}
                         inputStyle={{ textAlign: 'right' }}
-                        />
+                    />
                 </div>
+                {mostrarSelectorEmpresa && (
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                        <label htmlFor="empresaId">{intl.formatMessage({ id: 'Empresa asignada' })}</label>
+                        <Dropdown
+                            id="empresaId"
+                            value={pallet.empresaId ?? null}
+                            options={[
+                                { id: null, nombre: intl.formatMessage({ id: 'Sin asignar' }) },
+                                ...empresas,
+                            ]}
+                            optionLabel="nombre"
+                            optionValue="id"
+                            placeholder={intl.formatMessage({ id: 'Selecciona empresa (opcional)' })}
+                            onChange={(e) => setPallet({ ...pallet, empresaId: e.value })}
+                            className="w-full"
+                        />
+                    </div>
+                )}
             </div>
         </Fieldset>
     );

@@ -13,7 +13,7 @@ import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
 import { useRouter } from 'next/navigation';
 
-const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, editable }) => {
+const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, editable, empresaId }) => {
     const intl = useIntl();
     const toast = useRef(null);
     const router = useRouter();
@@ -35,7 +35,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             //
             let empresaFiltrar = null;
             if (idEditar === 0) {
-                empresaFiltrar = getUsuarioSesion()?.empresaId || null;
+                empresaFiltrar = (empresaId ?? getUsuarioSesion()?.empresaId) || null;
             } else {
                 const usuarioEditar = rowData.find((element) => element.id === idEditar);
                 empresaFiltrar = usuarioEditar?.empresaId || null;
@@ -186,7 +186,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     nombre: objGuardar.nombre,
                     mail: objGuardar.mail,
                     activoSn: objGuardar.activoSn,
-                    empresaId: getUsuarioSesion()?.empresaId,
+                    empresaId: empresaId ?? getUsuarioSesion()?.empresaId,
                     avatarBase64: objGuardar.avatarBase64,
                     avatarNombre: objGuardar.avatarNombre,
                     avatarTipo: objGuardar.avatarTipo,
@@ -240,7 +240,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     }
                     usuarioGuardar.id = objGuardar.id;
 
-                    usuarioGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                    usuarioGuardar['empresaId'] = empresaId ?? getUsuarioSesion()?.empresaId;
 
                     if (objGuardar.telefono && objGuardar.telefono.length > 0) {
                         usuarioGuardar.telefono = objGuardar.telefono;

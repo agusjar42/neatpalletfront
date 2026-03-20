@@ -17,7 +17,7 @@ const LogUsuario = () => {
     return (
         <div>
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Log de usuarios' })}
+                headerCrud={intl.formatMessage({ id: 'Logs de usuario' })}
                 getRegistros={getVistaLogUsuarioUsuarios}
                 getRegistrosCount={getVistaLogUsuarioUsuariosCount}
                 botones={['descargarCSV']}

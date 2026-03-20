@@ -7,12 +7,9 @@ import { useIntl } from 'react-intl'
 const Empresa = () => {
     const intl = useIntl()
     const columnas = [
-        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
-        { campo: 'codigo', header: intl.formatMessage({ id: 'Codigo' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'email', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
         { campo: 'descripcion', header: intl.formatMessage({ id: 'Descripción' }), tipo: 'string' },
-        { campo: 'imagen', header: intl.formatMessage({ id: 'Imagen' }), tipo: 'imagen' },
-        { campo: 'logo', header: intl.formatMessage({ id: 'Logo' }), tipo: 'imagen' },
     ]
 
     // Esta función transforma los registros para su exportación en formato CSV,

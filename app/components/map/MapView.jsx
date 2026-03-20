@@ -1,37 +1,47 @@
-﻿"use client";
+"use client";
 
 import { useMemo } from "react";
 import L from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import PlannedRoute from "./PlannedRoute";
-import RealRoute from "./RealRoute";
 
-const MapView = ({ plannedRoute, realRoute, center = [39.4699, -0.3763] }) => {
-    const markerIcon = useMemo(
-        () =>
-            L.icon({
-                iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-                iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-                shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-                popupAnchor: [1, -34],
-                shadowSize: [41, 41],
-            }),
-        []
-    );
+const buildNumberedIcon = (numero, tipo = "normal") =>
+    L.divIcon({
+        className: "map-number-marker",
+        html: `<div style="
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            border: 2px solid #ffffff;
+            background: ${tipo === "edge" ? "#0f766e" : "#334155"};
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+        ">${numero}</div>`,
+        iconSize: [30, 30],
+        iconAnchor: [15, 15],
+    });
 
-    if (!plannedRoute?.length || !realRoute?.length) {
+const MapView = ({ routePoints, plannedRoute, realRoute, center = [39.4699, -0.3763] }) => {
+    const puntos = useMemo(() => {
+        if (Array.isArray(routePoints) && routePoints.length > 0) return routePoints;
+        if (Array.isArray(realRoute) && realRoute.length > 0) return realRoute;
+        if (Array.isArray(plannedRoute) && plannedRoute.length > 0) return plannedRoute;
+        return [];
+    }, [routePoints, realRoute, plannedRoute]);
+
+    if (puntos.length < 2) {
         return null;
     }
 
-    const checkpoints = plannedRoute.slice(1, -1);
-    const startPoint = plannedRoute[0];
-    const destinationPoint = plannedRoute[plannedRoute.length - 1];
+    const centerFinal = center ?? puntos[0];
 
     return (
         <MapContainer
-            center={center}
+            center={centerFinal}
             zoom={14}
             scrollWheelZoom={true}
             style={{ height: "520px", width: "100%", borderRadius: "12px" }}
@@ -40,19 +50,28 @@ const MapView = ({ plannedRoute, realRoute, center = [39.4699, -0.3763] }) => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <PlannedRoute plannedRoute={plannedRoute} />
-            <RealRoute realRoute={realRoute} />
-            <Marker position={startPoint} icon={markerIcon}>
-                <Popup>Start</Popup>
-            </Marker>
-            {checkpoints.map((point, index) => (
-                <Marker key={`checkpoint-${index}`} position={point} icon={markerIcon}>
-                    <Popup>{`Checkpoint ${index + 1}`}</Popup>
-                </Marker>
-            ))}
-            <Marker position={destinationPoint} icon={markerIcon}>
-                <Popup>Destination</Popup>
-            </Marker>
+            {puntos.map((punto, index) => {
+                const esPrimero = index === 0;
+                const esUltimo = index === puntos.length - 1;
+                const titulo = esPrimero ? "Punto A" : esUltimo ? "Punto B" : `Punto ${index + 1}`;
+                return (
+                    <Marker
+                        key={`point-${index}`}
+                        position={punto}
+                        icon={buildNumberedIcon(index + 1, esPrimero || esUltimo ? "edge" : "normal")}
+                    >
+                        <Popup>
+                            <div style={{ minWidth: "150px" }}>
+                                <strong>{titulo}</strong>
+                                <br />
+                                Lat: {Number(punto[0]).toFixed(5)}
+                                <br />
+                                Lng: {Number(punto[1]).toFixed(5)}
+                            </div>
+                        </Popup>
+                    </Marker>
+                );
+            })}
         </MapContainer>
     );
 };

@@ -26,7 +26,7 @@ import EditarEnvioSensors from "../envio-sensor/editar";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 
 
-const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
+const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
     const intl = useIntl();
     const toast = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -96,8 +96,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
     useEffect(() => {
         const cargarClientes = async () => {
             try {
-                const empresaId = getUsuarioSesion()?.empresaId;
-                const filtroClientes = JSON.stringify({ where: { and: { empresaId: empresaId } } });
+                const empresaContexto = empresaId ?? getUsuarioSesion()?.empresaId;
+                const filtroClientes = JSON.stringify({ where: { and: { empresaId: empresaContexto } } });
                 const dataClientes = await getCliente(filtroClientes);
                 setClientes(dataClientes || []);
             } catch (error) {
@@ -241,8 +241,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando }) => {
                 {/* Campo Orden */}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={envio.orden}
-                        placeholder={intl.formatMessage({ id: 'Orden del envío' })}
+                    <InputNumber value={envio.orden === '' || envio.orden === undefined ? null : envio.orden}
                         onChange={(e) => setEnvio({ ...envio, orden: e.value })}
                         className={`${(estadoGuardando && (envio.orden === "" || envio.orden === null || envio.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"

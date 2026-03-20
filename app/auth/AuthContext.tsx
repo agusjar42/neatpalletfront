@@ -89,133 +89,143 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await almacenarLogin(data);
     router.push(await obtenerRolDashboard());
   };
-
   //Obtenemos el menu lateral a en base a los permisos del usuario
   const getMenuLateral = async () => {
-    // Este objeto contiene las rutas y los iconos asociados a cada permiso
-    const jsonRutas: Record<string, Record<string, { path: string; icon: string }>> = {
+    type MenuItem = {
+      label: string;
+      path: string;
+      icon: string;
+      permisoControlador: string;
+    };
 
-  "Sistema": {
-    "Empresas": {
-      path: "/tablas-maestras/empresa",
-      icon: "pi pi-building"
-    },
-    "Usuarios": {
-      path: "/usuarios",
-      icon: "pi pi-users"
-    },
-    "Roles": {
-      path: "/tablas-maestras/rol",
-      icon: "pi pi-bars"
-    },
-    "Permisos": {
-      path: "/tablas-maestras/permiso",
-      icon: "pi pi-key"
-    },
-    "Países": {
-      path: "/tablas-maestras/pais",
-      icon: "pi pi-globe"
-    },
-  },
+    // Unificamos configuracion y ocultamos pantallas redundantes del menu principal.
+    const jsonRutas: Record<string, MenuItem[]> = {
+      "Empresa": [
+        {
+          label: "Empresas",
+          path: "/tablas-maestras/empresa",
+          icon: "pi pi-building",
+          permisoControlador: "Empresas",
+        },
+      ],
+      "Configuracion": [
+        {
+          label: "Roles",
+          path: "/tablas-maestras/rol",
+          icon: "pi pi-bars",
+          permisoControlador: "Roles",
+        },
+        {
+          label: "Permisos",
+          path: "/tablas-maestras/permiso",
+          icon: "pi pi-key",
+          permisoControlador: "Permisos",
+        },
+        {
+          label: "Paises",
+          path: "/tablas-maestras/pais",
+          icon: "pi pi-globe",
+          permisoControlador: "Países",
+        },
+        {
+          label: "Parametros",
+          path: "/parametro",
+          icon: "pi pi-wrench",
+          permisoControlador: "Parametro",
+        },
+        {
+          label: "Idiomas",
+          path: "/tablas-maestras/idioma",
+          icon: "pi pi-language",
+          permisoControlador: "Idiomas",
+        },
+        {
+          label: "Traducciones",
+          path: "/tablas-maestras/traduccion",
+          icon: "pi pi-bars",
+          permisoControlador: "Traducciones",
+        },
+        {
+          label: "Tipos de sensor",
+          path: "/tipo-sensor",
+          icon: "pi pi-circle",
+          permisoControlador: "Tipo Sensor",
+        },
+        {
+          label: "Tipos de carroceria",
+          path: "/tipo-carroceria",
+          icon: "pi pi-car",
+          permisoControlador: "Tipos de Carrocería",
+        },
+        {
+          label: "Tipo de transporte",
+          path: "/tipo-transporte",
+          icon: "pi pi-truck",
+          permisoControlador: "Tipo Transporte",
+        },
+        {
+          label: "Parametros permitidos de pallet",
+          path: "/pallet-parametro",
+          icon: "pi pi-box",
+          permisoControlador: "Parámetros permitidos de Pallet",
+        },
+        {
+          label: "Eventos configuracion",
+          path: "/eventos-configuracion",
+          icon: "pi pi-bell",
+          permisoControlador: "Eventos Configuracion",
+        },
+      ],
+      "Operativa": [
+        {
+          label: "Pallet global",
+          path: "/pallet",
+          icon: "pi pi-th-large",
+          permisoControlador: "Pallet",
+        },
+      ],
+      "Informes": [
+        {
+          label: "Informes contenido",
+          path: "/envio-contenido",
+          icon: "pi pi-refresh",
+          permisoControlador: "Envio Contenido",
+        },
+        {
+          label: "Informes movimientos",
+          path: "/envio-movimiento",
+          icon: "pi pi-arrow-right",
+          permisoControlador: "Envio Movimiento",
+        },
+        {
+          label: "Informes pallets",
+          path: "/envio-pallet",
+          icon: "pi pi-box",
+          permisoControlador: "Envio Pallet",
+        },
+      ],
+      "Logs": [
+        {
+          label: "Logs de sistema",
+          path: "/logs-incorrectos",
+          icon: "pi pi-exclamation-triangle",
+          permisoControlador: "Logs incorrectos",
+        },
+        {
+          label: "Logs de usuario",
+          path: "/tablas-maestras/log_usuario",
+          icon: "pi pi-history",
+          permisoControlador: "Logs de usuarios",
+        },
+      ],
+    };
 
-  "Configuración": {
-    "Parámetros": {
-      path: "/parametro",
-      icon: "pi pi-wrench"
-    },
-    "Idiomas": {
-      path: "/tablas-maestras/idioma",
-      icon: "pi pi-language"
-    },
-    "Traducciones": {
-      path: "/tablas-maestras/traduccion",
-      icon: "pi pi-bars"
-    }
-  },
-
-  "Datos Maestros": {
-    "Clientes": {
-      path: "/cliente",
-      icon: "pi pi-users"
-    },
-    "Tipos de Carrocería": {
-      path: "/tipo-carroceria",
-      icon: "pi pi-car"
-    },
-    "Tipo Sensor": {
-      path: "/tipo-sensor",
-      icon: "pi pi-circle"
-    },
-    "Tipo Transporte": {
-      path: "/tipo-transporte",
-      icon: "pi pi-truck"
-    },
-    "Parámetros permitidos de Pallet": {
-      path: "/parametro",
-      icon: "pi pi-box"
-    },
-  },
-
-  "Operativa": {
-    "Pallet": {
-      path: "/pallet",
-      icon: "pi pi-th-large"
-    },
-    "Envíos": {
-      path: "/envio",
-      icon: "pi pi-send"
-    }
-  },
-
-  "Informes": {
-    "Configuración Empresa": {
-      path: "/envio-configuracion-empresa",
-      icon: "pi pi-building"
-    },
-    "Sensor Empresa": {
-      path: "/envio-sensor-empresa",
-      icon: "pi pi-building"
-    },
-    "Contenido": {
-      path: "/envio-contenido",
-      icon: "pi pi-refresh"
-    },
-    "Configuración": {
-      path: "/envio-configuracion",
-      icon: "pi pi-cog"
-    },
-    "Movimientos": {
-      path: "/envio-movimiento",
-      icon: "pi pi-arrow-right"
-    },
-    "Pallet": {
-      path: "/envio-pallet",
-      icon: "pi pi-box"
-    },
-    "Paradas": {
-      path: "/envio-parada",
-      icon: "pi pi-pause"
-    },
-    "Sensores": {
-      path: "/envio-sensor",
-      icon: "pi pi-wifi"
-    },
-  },
-
-  "Logs": {
-    "Logs incorrectos": {
-      path: "/logs-incorrectos",
-      icon: "pi pi-exclamation-triangle"
-    },
-    "Logs de usuarios": {
-      path: "/tablas-maestras/log_usuario",
-      icon: "pi pi-history"
-    }
-  }
-};
-
-    // Obtener los permisos del usuario actual de "Acceder" a las rutas
+    // Obtener los permisos del usuario actual de "Acceder"
     const permisos = await obtenerTodosLosPermisos('Acceder');
+    const permisosControlador = new Set(
+      Array.isArray(permisos) ? permisos.map((permiso) => permiso.permisoControlador) : []
+    );
+
     // Declaramos el objeto que sera el menu final y le ponemos un titulo de menu
     const jsonPermisos: {
       label: string;
@@ -230,33 +240,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // Recorremos las categorias y subcategorias del objeto jsonRutas
     for (const categoria in jsonRutas) {
       const categoriaItems = [];
-      for (const subCategoria in jsonRutas[categoria] as Record<string, { path: string; icon: string }>) {
-        if (Array.isArray(permisos)) {
-          // Si existe un permiso en el array que tenga de nombre de controlador el nombre de la subcategoria,
-          // Significa que el usuario tiene acceso a esa pantalla y por lo tanto la añadimos al menu
-          if (permisos.some((permiso) => permiso.permisoControlador === subCategoria)) {
-            categoriaItems.push({
-              label: `${subCategoria}`,
-              icon: jsonRutas[categoria][subCategoria].icon,
-              // command: () => {
-              //     router.push(jsonRutas[categoria][subCategoria].path, { shallow: true });
-              // },
-              to: jsonRutas[categoria][subCategoria].path,
-            });
-          }
+      for (const item of jsonRutas[categoria]) {
+        if (permisosControlador.has(item.permisoControlador)) {
+          categoriaItems.push({
+            label: item.label,
+            icon: item.icon,
+            to: item.path,
+          });
         }
       }
-      //Construimos las categorias que tendran sus items
       const categoriaJson = {
         label: `${categoria}`,
         icon: "pi pi-fw pi-minus",
         items: categoriaItems
-      }
-      // Si la categoria no tiene items, no la añadimos al menu
+      };
       if (categoriaItems.length > 0) {
         jsonPermisos['items'].push(categoriaJson);
       }
     }
+
     localStorage.setItem('menuLateral', JSON.stringify([jsonPermisos]));
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new Event('menuLateralUpdated'));
@@ -359,3 +361,4 @@ export const useAuth = () => {
   }
   return context;
 };
+

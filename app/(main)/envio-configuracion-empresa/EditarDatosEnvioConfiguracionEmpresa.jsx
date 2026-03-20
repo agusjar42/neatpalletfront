@@ -12,8 +12,7 @@ const EditarDatosEnvioConfiguracionEmpresa = ({ envioConfiguracionEmpresa, setEn
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={envioConfiguracionEmpresa.orden}
-                        placeholder={intl.formatMessage({ id: 'Orden de la configuración' })}
+                    <InputNumber value={envioConfiguracionEmpresa.orden === '' || envioConfiguracionEmpresa.orden === undefined ? null : envioConfiguracionEmpresa.orden}
                         onChange={(e) => setEnvioConfiguracionEmpresa({ ...envioConfiguracionEmpresa, orden: e.value })}
                         className={`${(estadoGuardando && (envioConfiguracionEmpresa.orden === "" || envioConfiguracionEmpresa.orden === null || envioConfiguracionEmpresa.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"

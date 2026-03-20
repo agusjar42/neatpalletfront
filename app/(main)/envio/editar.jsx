@@ -10,7 +10,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvio from  "./EditarDatosEnvio";
 import { useIntl } from 'react-intl';
 
-const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, onModoEdicionChange }) => {
+const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, onModoEdicionChange, empresaId }) => {
     const toast = useRef(null);
     const [envio, setEnvio] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -97,7 +97,7 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                objGuardar['empresaId'] = empresaId ?? getUsuarioSesion()?.empresaId;
                 
                 const nuevoRegistro = await postEnvio(objGuardar);
 
@@ -153,6 +153,7 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
                             manejarCambioInputSwitch={manejarCambioInputSwitch}
                             tiposTransporte={tiposTransporte}
                             tiposCarroceria={tiposCarroceria}
+                            empresaId={empresaId}
                         />
 
                         <div className="flex justify-content-end mt-2">

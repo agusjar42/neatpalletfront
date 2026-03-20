@@ -122,28 +122,22 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
     };
 
     const manejarCambioInputNumber = (e, nombreInput) => {
-        let valor = e.value || 0;
+        let valor = e.value;
+        if (valor === undefined) {
+            valor = null;
+        }
+
         //Evitamos que el valor sea mayor al maximo permitido, por algun motivo el maximo no se aplica en el input si se escriben muchos numeros de golpe
-        const maximo = parseInt(e.originalEvent.target.max)
-        if(valor > maximo){
-            valor = maximo;
-            e.originalEvent.target.value = maximo.toLocaleString('es-ES');
+        if (e.originalEvent?.target?.max && valor !== null) {
+            const maximo = parseInt(e.originalEvent.target.max)
+            if(valor > maximo){
+                valor = maximo;
+                e.originalEvent.target.value = maximo.toLocaleString('es-ES');
+            }
         }
         let _empresa = { ...empresa };
         _empresa[`${nombreInput}`] = valor;
         setEmpresa(_empresa);
-    };
-
-    const manejarFocusInputNumber = (e) => {
-        if (e.target.value === '0') {
-            e.target.value = "";
-        }
-    };
-
-    const manejarBlurInputNumber = (e) => {
-        if (e.target.value === '') {
-            e.target.value = 0;
-        }
     };
 
     return (
@@ -152,8 +146,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="empresaOrden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={empresa.orden}
-                        placeholder={intl.formatMessage({ id: 'Orden de la empresa' })}
+                    <InputNumber value={empresa.orden === '' || empresa.orden === undefined ? null : empresa.orden}
                         onChange={(e) => setEmpresa({ ...empresa, orden: e.value })}
                         className={`${(estadoGuardando && (empresa.orden === "" || empresa.orden === null || empresa.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"
@@ -222,10 +215,8 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
                     <label htmlFor="tiempoInactividad" className="block">{intl.formatMessage({ id: 'Minutos de inactividad' })}</label>
                     <InputNumber
                         id="tiempoInactividad"
-                        value={empresa.tiempoInactividad || 0 }
+                        value={empresa.tiempoInactividad ?? 60}
                         onChange={(e) => manejarCambioInputNumber(e, "tiempoInactividad")}
-                        onFocus={manejarFocusInputNumber}
-                        onBlur={manejarBlurInputNumber}
                         maxFractionDigits={0}
                         min={0}
                         max={99999999}
@@ -358,6 +349,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
                     onChange={(e) => setEmpresa({ ...empresa, descripcion: e.target.value })}
                     //className={`${(estadoGuardando && empresa.descripcion === "") ? "p-invalid" : ""}`}
                     rows={5} cols={30} maxLength={500} />
+                    <small style={{ color: '#94949f', fontSize: '10px' }}> <i>{intl.formatMessage({ id: 'Máximo 500 caracteres' })}</i> </small>
             </div>
         </Fieldset>
     );

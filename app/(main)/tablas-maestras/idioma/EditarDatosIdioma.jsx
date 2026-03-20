@@ -34,8 +34,7 @@ const EditarDatosIdioma = ({ idioma, setIdioma, estadoGuardando, isoIdiomas, set
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={idioma.orden}
-                        placeholder={intl.formatMessage({ id: 'Orden del idioma' })}
+                    <InputNumber value={idioma.orden === '' || idioma.orden === undefined ? null : idioma.orden}
                         onChange={(e) => setIdioma({ ...idioma, orden: e.value })}
                         className={`${(estadoGuardando && (idioma.orden === "" || idioma.orden === null || idioma.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"

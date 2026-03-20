@@ -13,8 +13,7 @@ const EditarDatosTipoSensor = ({ tipoSensor, setTipoSensor, estadoGuardando, man
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={tipoSensor.orden}
-                        placeholder={intl.formatMessage({ id: 'Orden del tipo de sensor' })}
+                    <InputNumber value={tipoSensor.orden === '' || tipoSensor.orden === undefined ? null : tipoSensor.orden}
                         onChange={(e) => setTipoSensor({ ...tipoSensor, orden: e.value })}
                         className={`${(estadoGuardando && (tipoSensor.orden === "" || tipoSensor.orden === null || tipoSensor.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"

@@ -18,7 +18,7 @@ const EnvioMovimiento = () => {
     return (
         <div>
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Movimientos de Envío' })}
+                headerCrud={intl.formatMessage({ id: 'Informes movimientos' })}
                 getRegistros={getEnvioMovimiento}
                 getRegistrosCount={getEnvioMovimientoCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV', 'generarGrafico']}
@@ -32,3 +32,4 @@ const EnvioMovimiento = () => {
 };
 
 export default EnvioMovimiento;
+

@@ -26,7 +26,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from "@/app/auth/AuthContext";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
-    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = false, onDataChange }) => {
+    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = true, onDataChange }) => {
     const intl = useIntl()
     const router = useRouter();
     const { usuarioAutenticado, isInitialized } = useAuth();
@@ -89,7 +89,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         const primeraColumnaNoImagen = columnas.find(columna => columna.tipo !== 'imagen');
         return {
             first: 0,
-            rows: 10,
+            rows: 100,
             sortField: primeraColumnaNoImagen ? primeraColumnaNoImagen.campo : columnas[0].campo, // Por defecto se ordena por la primera columna que no sea de tipo "imagen", si no existe, la primera columna
             sortOrder: 1, // Por defecto se ordena en ascendente
             filters: filtros,
@@ -1201,7 +1201,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 value={registros}
                                 filters={parametrosCrud.filters}
                                 removableSort
-                                rowsPerPageOptions={[5, 10, 25]}
+                                rowsPerPageOptions={[25, 50, 100, 200]}
                                 //currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
                                 lazy
                                 rows={parametrosCrud.rows}
@@ -1212,17 +1212,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 onFilter={manejarCambioFiltro}
                                 sortField={parametrosCrud.sortField}
                                 sortOrder={parametrosCrud.sortOrder}
-                                emptyMessage={
-                                    busquedaRealizada ?
-                                        <span>{intl.formatMessage({ id: 'No se han encontrado registros' })}</span> :
-                                        <div className="w-100" style={{
-                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                            height: '35px', backgroundColor: '#10b981', marginTop: '-0.5rem', marginRight: '-1rem', marginBottom: '-0.5rem', marginLeft: '-1rem'
-                                        }}>
-                                            <span style={{ color: 'white', fontWeight: 'bold' }}>{intl.formatMessage({ id: 'Realiza una búsqueda para mostrar los datos' })}</span>
-                                        </div>
-
-                                }
+                                emptyMessage={<span>{intl.formatMessage({ id: 'No se han encontrado registros' })}</span>}
                             >
                                 {
                                     ...columnasDinamicas //Muestra las columnas generadas
@@ -1241,7 +1231,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 first={parametrosCrud.first}
                                 rows={parametrosCrud.rows}
                                 totalRecords={totalRegistros}
-                                rowsPerPageOptions={[5, 10, 20]}
+                                rowsPerPageOptions={[25, 50, 100, 200]}
                                 onPageChange={manejarCambioDePagina}
                                 template={paginatorTemplate}
                             />

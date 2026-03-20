@@ -10,12 +10,14 @@ import { useIntl } from 'react-intl';
 import EditarPalletParametros from "../pallet-parametro/editar";
 import Crud from "../../components/shared/crud";
 import { getPalletParametro, getPalletParametroCount, deletePalletParametro } from "@/app/api-endpoints/pallet-parametro";
+import { getEmpresas } from "@/app/api-endpoints/empresa";
 
-const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, empresaId }) => {
     const toast = useRef(null);
     const [pallet, setPallet] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [empresasDisponibles, setEmpresasDisponibles] = useState([]);
     const intl = useIntl();
 
     useEffect(() => {
@@ -28,19 +30,27 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
         fetchData();
     }, [idEditar, rowData]);
 
+    useEffect(() => {
+        const obtenerEmpresas = async () => {
+            if (empresaId) {
+                return;
+            }
+            const empresas = await getEmpresas();
+            setEmpresasDisponibles(Array.isArray(empresas) ? empresas : []);
+        };
+        obtenerEmpresas();
+    }, [empresaId]);
+
     const validaciones = async () => {
         let existeCodigo = false;
         //
         //Comprobamos que el campo código no exista en el sistema, ya que debe ser único por empresa
         //
-        const filtro = JSON.stringify({
-            where: {
-                and: {
-                    empresaId: pallet.empresaId,
-                    codigo: pallet.codigo,
-                }
-            }
-        });
+        const empresaContexto = empresaId ?? pallet.empresaId ?? null;
+        const where = empresaContexto === null
+            ? { and: { codigo: pallet.codigo } }
+            : { and: { empresaId: empresaContexto, codigo: pallet.codigo } };
+        const filtro = JSON.stringify({ where });
         
         const palletsConCodigoIgual = await getPallet(filtro);
         palletsConCodigoIgual.map(p => {
@@ -84,7 +94,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                objGuardar['empresaId'] = empresaId ?? objGuardar['empresaId'] ?? null;
                 objGuardar['periodoEnvioMail'] = objGuardar['periodoEnvioMail'] ? objGuardar['periodoEnvioMail'] : 0;
                 
                 const nuevoRegistro = await postPallet(objGuardar);
@@ -102,7 +112,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                 }
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                objGuardar['empresaId'] = empresaId ?? objGuardar['empresaId'] ?? null;
                 delete objGuardar['fechaModificacion'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchPallet(objGuardar.id, objGuardar);
@@ -138,6 +148,8 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                             pallet={pallet}
                             setPallet={setPallet}
                             estadoGuardando={estadoGuardando}
+                            mostrarSelectorEmpresa={!empresaId}
+                            empresas={empresasDisponibles}
                         />
                         {//
                         //Si el pallet ya está creado, mostramos la tabla de parámetros. Ojo en el parámetro editarComponenteParametrosExtra le pasamos el palletId para que al crear un nuevo parámetro ya venga relleno

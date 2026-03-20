@@ -20,15 +20,9 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
     useEffect(() => {
         const fetchData = async () => {
             //
-            //Obtenemos todos los tipos de sensor disponibles para la empresa
+            //Obtenemos todos los tipos de sensor del catalogo global
             //
-            const dataTiposSensor = await getTipoSensor(JSON.stringify({
-                where: {
-                    and: {
-                        empresaId: empresaId ?? getUsuarioSesion()?.empresaId
-                    }
-                }
-            }));
+            const dataTiposSensor = await getTipoSensor(JSON.stringify({}));
             //
             //Obtenemos todos los sensores ya introducidos para la empresa
             //

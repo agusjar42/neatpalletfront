@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import dynamic from "next/dynamic";
 
@@ -6,13 +6,7 @@ const MapView = dynamic(() => import("@/app/components/map/MapView"), {
     ssr: false,
 });
 
-const plannedRoute = [
-    [39.4699, -0.3763],
-    [39.4720, -0.3810],
-    [39.4750, -0.3900],
-];
-
-const realRoute = [
+const routePoints = [
     [39.4699, -0.3763],
     [39.4705, -0.3775],
     [39.4718, -0.3801],
@@ -25,40 +19,34 @@ const SeguimientoRutasPage = () => {
         <div className="grid">
             <div className="col-12">
                 <div className="card">
-                    <h5 className="m-0 mb-3">Seguimiento de pallet (MVP)</h5>
+                    <h5 className="m-0 mb-3">Seguimiento de pallet</h5>
                     <p className="mt-0 mb-4">
-                        Ruta planificada con OSRM y ruta real simulada con puntos GPS.
+                        Se muestran Punto A, Punto B y los puntos intermedios numerados.
                     </p>
-                    <MapView
-                        center={[39.4699, -0.3763]}
-                        plannedRoute={plannedRoute}
-                        realRoute={realRoute}
-                    />
-                    <div className="flex flex-wrap gap-4 mt-3">
-                        <span className="inline-flex align-items-center gap-2">
-                            <span
-                                style={{
-                                    width: "14px",
-                                    height: "4px",
-                                    background: "#2563eb",
-                                    borderRadius: "999px",
-                                    display: "inline-block",
-                                }}
-                            />
-                            Ruta planificada
-                        </span>
-                        <span className="inline-flex align-items-center gap-2">
-                            <span
-                                style={{
-                                    width: "14px",
-                                    height: "4px",
-                                    background: "#ef4444",
-                                    borderRadius: "999px",
-                                    display: "inline-block",
-                                }}
-                            />
-                            Ruta real
-                        </span>
+
+                    <div className="grid">
+                        <div className="col-12 lg:col-8">
+                            <MapView center={routePoints[0]} routePoints={routePoints} />
+                        </div>
+                        <div className="col-12 lg:col-4">
+                            <div className="surface-ground border-round p-3 h-full">
+                                <h6 className="mt-0 mb-3">Panel de puntos</h6>
+                                <div className="flex flex-column gap-2">
+                                    {routePoints.map((point, index) => {
+                                        const isFirst = index === 0;
+                                        const isLast = index === routePoints.length - 1;
+                                        const title = isFirst ? "Punto A" : isLast ? "Punto B" : `Punto ${index + 1}`;
+                                        return (
+                                            <div key={`route-point-${index}`} className="p-2 border-round surface-card border-1 border-200">
+                                                <div className="font-semibold">{title}</div>
+                                                <div className="text-sm text-700">Lat: {Number(point[0]).toFixed(5)}</div>
+                                                <div className="text-sm text-700">Lng: {Number(point[1]).toFixed(5)}</div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

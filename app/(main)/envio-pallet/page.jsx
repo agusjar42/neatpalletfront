@@ -15,7 +15,7 @@ const EnvioPallet = () => {
     return (
         <div>
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Envíos de Pallet' })}
+                headerCrud={intl.formatMessage({ id: 'Informes pallets' })}
                 getRegistros={getEnvioPallet}
                 getRegistrosCount={getEnvioPalletCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}

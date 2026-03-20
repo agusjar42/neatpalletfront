@@ -20,8 +20,7 @@ const EditarDatosRol = ({ rol, setRol, estadoGuardando, pantallasDashboard, pant
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={rol.orden}
-                        placeholder={intl.formatMessage({ id: 'Orden del rol' })}
+                    <InputNumber value={rol.orden === '' || rol.orden === undefined ? null : rol.orden}
                         onChange={(e) => setRol({ ...rol, orden: e.value })}
                         className={`${(estadoGuardando && (rol.orden === "" || rol.orden === null || rol.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"

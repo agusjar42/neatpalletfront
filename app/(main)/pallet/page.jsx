@@ -3,7 +3,6 @@ import { getPallet, getPalletCount, deletePallet } from "@/app/api-endpoints/pal
 import EditarPallets from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'
-import { getUsuarioSesion } from "@/app/utility/Utils";
 
 const Pallet = () => {
     const intl = useIntl();
@@ -13,6 +12,7 @@ const Pallet = () => {
         { campo: 'alias', header: intl.formatMessage({ id: 'Alias' }), tipo: 'string' },
         { campo: 'modelo', header: intl.formatMessage({ id: 'Modelo' }), tipo: 'string' },
         { campo: 'medidas', header: intl.formatMessage({ id: 'Medidas' }), tipo: 'string' },
+        { campo: 'empresaId', header: intl.formatMessage({ id: 'Empresa asignada' }), tipo: 'string' },
     ]
 
     // Esta función transforma los registros para su exportación en formato CSV,
@@ -34,12 +34,11 @@ const Pallet = () => {
     return (
         <div>
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Pallets' })}
+                headerCrud={intl.formatMessage({ id: 'Stock global de pallets' })}
                 getRegistros={getPallet}
                 getRegistrosCount={getPalletCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV', 'importarCSVPallets']}
                 controlador={"Pallet"}
-                filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarPallets />}
                 columnas={columnas}
                 deleteRegistro={deletePallet}
@@ -50,3 +49,4 @@ const Pallet = () => {
 };
 
 export default Pallet;
+

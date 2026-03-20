@@ -30,8 +30,7 @@ const EditarDatosEnvioSensor = ({ envioSensor, setEnvioSensor, estadoGuardando, 
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={envioSensor.orden}
-                        placeholder={intl.formatMessage({ id: 'Orden del sensor' })}
+                    <InputNumber value={envioSensor.orden === '' || envioSensor.orden === undefined ? null : envioSensor.orden}
                         onChange={(e) => setEnvioSensor({ ...envioSensor, orden: e.value })}
                         className={`${(estadoGuardando && (envioSensor.orden === "" || envioSensor.orden === null || envioSensor.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"

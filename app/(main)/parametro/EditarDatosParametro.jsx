@@ -22,8 +22,7 @@ const EditarDatosParametro = ({ parametro, setParametro, estadoGuardando }) => {
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={parametro.orden}
-                        placeholder={intl.formatMessage({ id: 'Orden del parámetro' })}
+                    <InputNumber value={parametro.orden === '' || parametro.orden === undefined ? null : parametro.orden}
                         onChange={(e) => setParametro({ ...parametro, orden: e.value })}
                         className={`${(estadoGuardando && (parametro.orden === "" || parametro.orden === null || parametro.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"

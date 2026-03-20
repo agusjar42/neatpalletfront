@@ -4,18 +4,28 @@ import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { TabView, TabPanel } from 'primereact/tabview';
 import { postEmpresa, patchEmpresa } from "@/app/api-endpoints/empresa";
-import { getVistaUsuariosCount } from "@/app/api-endpoints/usuario";
+import { getVistaUsuarios, getVistaUsuariosCount, deleteUsuario } from "@/app/api-endpoints/usuario";
+import { getCliente, getClienteCount, deleteCliente } from "@/app/api-endpoints/cliente";
+import { getEnvio, getEnvioCount, deleteEnvio } from "@/app/api-endpoints/envio";
+import { getEnvioSensorEmpresa, getEnvioSensorEmpresaCount, deleteEnvioSensorEmpresa } from "@/app/api-endpoints/envio-sensor-empresa";
+import { getPallet, getPalletCount, deletePallet } from "@/app/api-endpoints/pallet";
+import { getTipoCarroceria, getTipoCarroceriaCount, deleteTipoCarroceria } from "@/app/api-endpoints/tipo-carroceria";
+import { getTipoTransporte, getTipoTransporteCount, deleteTipoTransporte } from "@/app/api-endpoints/tipo-transporte";
+import { getEventoConfiguracion, getEventoConfiguracionCount } from "@/app/api-endpoints/evento-configuracion";
 import EditarDatosEmpresa from "./EditarDatosEmpresa";
+import EditarUsuario from "../../usuarios/editar";
+import EditarCliente from "../../cliente/editar";
+import EditarEnvio from "../../envio/editar";
+import EditarEnvioSensorEmpresa from "../../envio-sensor-empresa/editar";
+import EditarPallet from "../../pallet/editar";
+import EditarTipoCarroceria from "../../tipo-carroceria/editar";
+import EditarTipoTransporte from "../../tipo-transporte/editar";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 import Crud from "../../../components/shared/crud";
-import { getEnvioConfiguracionEmpresa, getEnvioConfiguracionEmpresaCount, deleteEnvioConfiguracionEmpresa } from "@/app/api-endpoints/envio-configuracion-empresa";
-import EditarEnvioConfiguracionEmpresas from "../../envio-configuracion-empresa/editar";
-import { getEnvioSensorEmpresa, getEnvioSensorEmpresaCount, deleteEnvioSensorEmpresa } from "@/app/api-endpoints/envio-sensor-empresa";
-import EditarEnvioSensorEmpresas from "../../envio-sensor-empresa/editar";
 
-const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, editable }) => {
     const intl = useIntl()
     const toast = useRef(null);
     const [empresa, setEmpresa] = useState(emptyRegistro);
@@ -23,33 +33,63 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
 
-    // Columnas para la tabla de envío configuración empresa
-    const columnasConfiguracionEmpresa = [
-        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
+    const columnasUsuariosEmpresa = [
+        { campo: 'nombreRol', header: intl.formatMessage({ id: 'Rol' }), tipo: 'string' },
+        { campo: 'avatar', header: intl.formatMessage({ id: 'Avatar' }), tipo: 'imagen' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
-        { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
-        { campo: 'unidadMedida', header: intl.formatMessage({ id: 'Unidad de medida' }), tipo: 'string' },
+        { campo: 'mail', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
+        { campo: 'telefono', header: intl.formatMessage({ id: 'Teléfono' }), tipo: 'string' },
+        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ];
 
-    // Columnas para la tabla de envío sensor empresa
+    const columnasPuntosEntrega = [
+        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'telefono', header: intl.formatMessage({ id: 'Teléfono' }), tipo: 'string' },
+        { campo: 'mail', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
+    ];
+
+    const columnasEnvio = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
+        { campo: 'numero', header: intl.formatMessage({ id: 'Numero' }), tipo: 'string' },
+        { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Cliente' }), tipo: 'string' },
+        { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen' }), tipo: 'string' },
+        { campo: 'destinoRuta', header: intl.formatMessage({ id: 'Destino' }), tipo: 'string' },
+        { campo: 'fechaSalidaEspanol', header: intl.formatMessage({ id: 'Fecha salida' }), tipo: 'string' },
+        { campo: 'fechaLlegadaEspanol', header: intl.formatMessage({ id: 'Fecha llegada' }), tipo: 'string' }
+    ];
+
     const columnasSensorEmpresa = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Tipo de Sensor' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
     ];
 
+    const columnasPalletAsignado = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
+        { campo: 'codigo', header: intl.formatMessage({ id: 'Código' }), tipo: 'string' },
+        { campo: 'alias', header: intl.formatMessage({ id: 'Alias' }), tipo: 'string' },
+        { campo: 'modelo', header: intl.formatMessage({ id: 'Modelo' }), tipo: 'string' },
+        { campo: 'medidas', header: intl.formatMessage({ id: 'Medidas' }), tipo: 'string' },
+    ];
+
+    const columnasCatalogosGlobales = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
+        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
+    ];
+
+    const columnasEventoConfiguracion = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
+        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
+        { campo: 'unidadMedida', header: intl.formatMessage({ id: 'Unidad de medida' }), tipo: 'string' },
+    ];
+
     useEffect(() => {
-        //
-        //Lo marcamos aquí como saync ya que useEffect no permite ser async porque espera que la función que le pases devueva undefined o una función para limpiar el efecto. 
-        //Una función async devuelve una promesa, lo cual no es compatible con el comportamiento esperado de useEffect.
-        //
         const fetchData = async () => {
-            
-            // Si el idEditar es diferente de nuevo, entonces se va a editar
             if (idEditar !== 0) {
-                // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
-                setEmpresa(registro);                
+                setEmpresa(registro);
             }
         };
         fetchData();
@@ -58,12 +98,13 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const validaciones = async () => {
         const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const emailEmpresa = (empresa.email ?? "").trim();
-        //Valida que los campos no esten vacios
+        const descripcionEmpresa = (empresa.descripcion ?? "").trim();
         const validaOrden = empresa.orden === undefined || empresa.orden === null || empresa.orden === "";
         const validaCodigo = empresa.codigo === undefined || empresa.codigo === "";
         const validaNombre = empresa.nombre === undefined || empresa.nombre === "";
+        const validaDescripcionLongitud = descripcionEmpresa.length > 500;
 
-        if (validaNombre || validaCodigo || validaOrden /*|| validaDescripcion || validaEmail || validaPassword || validaServicio */) {
+        if (validaNombre || validaCodigo || validaOrden) {
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
@@ -71,7 +112,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 life: 3000,
             });
         }
-        
+
         if ((empresa.email?.length == undefined) || (emailEmpresa.length > 0 && !regexEmail.test(emailEmpresa))) {
             toast.current?.show({
                 severity: 'error',
@@ -81,7 +122,16 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             });
         }
 
-        if (emailEmpresa.length > 0 && regexEmail.test(emailEmpresa)) {
+        if (validaDescripcionLongitud) {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'La descripcion no puede superar los 500 caracteres' }),
+                life: 3000,
+            });
+        }
+
+        /*if (emailEmpresa.length > 0 && regexEmail.test(emailEmpresa)) {
             try {
                 const filtroUsuarios = JSON.stringify({ and: { mail: emailEmpresa } });
                 const usuariosCountResponse = await getVistaUsuariosCount(filtroUsuarios);
@@ -105,12 +155,14 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 });
                 return false;
             }
-        }
+        }*/
 
-        //
-        //Si existe algún bloque vacio entonces no se puede guardar
-        //
-        return (!validaNombre && !validaCodigo && !validaOrden && !(emailEmpresa.length > 0 && !regexEmail.test(emailEmpresa))
+        return (
+            !validaNombre &&
+            !validaCodigo &&
+            !validaOrden &&
+            !(emailEmpresa.length > 0 && !regexEmail.test(emailEmpresa)) &&
+            !validaDescripcionLongitud
         );
     }
 
@@ -118,25 +170,18 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
         if (await validaciones()) {
-            // Obtenemos el registro actual y solo entramos si tiene nombre y contenido
             let objGuardar = { ...empresa };
-                if ((objGuardar.tiempoInactividad || "").length === 0) {
-                    objGuardar.tiempoInactividad = 0;
-                }
+            if ((objGuardar.tiempoInactividad || "").length === 0) {
+                objGuardar.tiempoInactividad = 60;
+            }
 
             const usuarioActual = getUsuarioSesion()?.id;
 
-            // Si estoy insertando uno nuevo
             if (idEditar === 0) {
-                // Elimino y añado los campos que no se necesitan
                 delete objGuardar.id;
                 objGuardar['usuCreacion'] = usuarioActual;
-                // Hacemos el insert del registro
                 const nuevoRegistro = await postEmpresa(objGuardar);
-
-                //Si se crea el registro mostramos el toast
                 if (nuevoRegistro?.id) {
-                    //Usamos una variable que luego se cargara en el useEffect de la pagina principal para mostrar el toast
                     setRegistroResult("insertado");
                     setIdEditar(null);
                 } else {
@@ -151,32 +196,33 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 objGuardar['usuModificacion'] = usuarioActual;
                 delete objGuardar['fechaModificacion'];
                 delete objGuardar['fechaCreacion'];
-                //
-                // Si no se ha cambiado la foto del producto, no enviamos el campo
-                //
                 if (objGuardar.imagenBase64 === undefined) {
                     delete objGuardar['imagen'];
                 }
-                //
-                // Si no se ha cambiado la foto del pallet, no enviamos el campo
-                //
                 if (objGuardar.logoBase64 === undefined) {
                     delete objGuardar['logo'];
                 }
                 objGuardar = reemplazarNullPorVacio(objGuardar);
-                await patchEmpresa(objGuardar.id, objGuardar);                
+                await patchEmpresa(objGuardar.id, objGuardar);
                 setIdEditar(null)
                 setRegistroResult("editado");
             }
         }
         setEstadoGuardandoBoton(false);
     };
-    
+
     const cancelarEdicion = () => {
         setIdEditar(null)
     };
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nueva' });
+
+    const renderTabNoDisponible = (mensaje) => (
+        <div className="text-center p-4">
+            <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+            <p className="text-gray-600">{mensaje}</p>
+        </div>
+    );
 
     return (
         <div>
@@ -191,94 +237,133 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                             estadoGuardando={estadoGuardando}
                         />
 
-                        {/* Pestañas */}
                         <div className="mt-4">
                             <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-                                <TabPanel header={intl.formatMessage({ id: 'Envío Configuración' })}>
-                                    <div>
-                                        {/* Solo mostrar la tabla si la empresa ya está creada */}
-                                        {empresa.id ? (
-                                            <>
-                                            {/* Bocadillo de información */}
-                                            <div className="p-mt-3">
-                                                <div
-                                                    className="flex align-items-center bg-green-100 border-round p-3 w-full"
-                                                >
-                                                    <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
-                                                    <span>
-                                                        {intl.formatMessage({ id: 'Esta es la información que se generará por defecto en cada envío y que será la que se le pase a cada palet. Se establece aquí de forma genérica pero podrá modificarse por envío de forma individualmente.' })}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <Crud
-                                                headerCrud={intl.formatMessage({ id: 'Configuraciones de Empresa' })}
-                                                getRegistros={getEnvioConfiguracionEmpresa}
-                                                getRegistrosCount={getEnvioConfiguracionEmpresaCount}
-                                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
-                                                controlador={"Envio Configuracion Empresa"}
-                                                editarComponente={<EditarEnvioConfiguracionEmpresas />}
-                                                columnas={columnasConfiguracionEmpresa}
-                                                filtradoBase={{empresaId: empresa.id}}
-                                                deleteRegistro={deleteEnvioConfiguracionEmpresa}
-                                                cargarDatosInicialmente={true}
-                                                editarComponenteParametrosExtra={{
-                                                    empresaId: empresa.id,
-                                                    estoyDentroDeUnTab: true
-                                                }}
-                                            />
-                                            </>
-                                        ) : (
-                                            <div className="text-center p-4">
-                                                <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
-                                                <p className="text-gray-600">
-                                                    {intl.formatMessage({ id: 'Debe guardar la empresa primero para poder añadir configuraciones' })}
-                                                </p>
-                                            </div>
-                                        )}
-                                    </div>
+                                <TabPanel header={intl.formatMessage({ id: 'Usuarios de empresa' })}>
+                                    {empresa.id ? (
+                                        <Crud
+                                            headerCrud={intl.formatMessage({ id: 'Usuarios de empresa' })}
+                                            getRegistros={getVistaUsuarios}
+                                            getRegistrosCount={getVistaUsuariosCount}
+                                            botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                                            controlador={"Usuarios"}
+                                            editarComponente={<EditarUsuario />}
+                                            columnas={columnasUsuariosEmpresa}
+                                            filtradoBase={{ empresaId: empresa.id }}
+                                            deleteRegistro={deleteUsuario}
+                                            editarComponenteParametrosExtra={{ empresaId: empresa.id, estoyDentroDeUnTab: true }}
+                                        />
+                                    ) : renderTabNoDisponible(intl.formatMessage({ id: 'Debe guardar la empresa primero para poder gestionar usuarios' }))}
                                 </TabPanel>
-                                <TabPanel header={intl.formatMessage({ id: 'Envío Sensores' })}>
-                                    <div>
-                                        {/* Solo mostrar la tabla si la empresa ya está creada */}
-                                        {empresa.id ? (
-                                            <>
-                                            {/* Bocadillo de información */}
-                                            <div className="p-mt-3">
-                                                <div
-                                                    className="flex align-items-center bg-green-100 border-round p-3 w-full"
-                                                >
-                                                    <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
-                                                    <span>
-                                                        {intl.formatMessage({ id: 'Recuerde que solo aparecen aquí los sensores activos en la pantalla "Tipo Sensor".' })}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <Crud
-                                                headerCrud={intl.formatMessage({ id: 'Sensores de Empresa' })}
-                                                getRegistros={getEnvioSensorEmpresa}
-                                                getRegistrosCount={getEnvioSensorEmpresaCount}
-                                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
-                                                controlador={"Envio Sensor Empresa"}
-                                                editarComponente={<EditarEnvioSensorEmpresas />}
-                                                columnas={columnasSensorEmpresa}
-                                                filtradoBase={{empresaId: empresa.id}}
-                                                deleteRegistro={deleteEnvioSensorEmpresa}
-                                                cargarDatosInicialmente={true}
-                                                editarComponenteParametrosExtra={{
-                                                    empresaId: empresa.id,
-                                                    estoyDentroDeUnTab: true
-                                                }}
-                                            />
-                                            </>
-                                        ) : (
-                                            <div className="text-center p-4">
-                                                <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
-                                                <p className="text-gray-600">
-                                                    {intl.formatMessage({ id: 'Debe guardar la empresa primero para poder añadir sensores' })}
-                                                </p>
-                                            </div>
-                                        )}
-                                    </div>
+
+                                <TabPanel header={intl.formatMessage({ id: 'Puntos de entrega' })}>
+                                    {empresa.id ? (
+                                        <Crud
+                                            headerCrud={intl.formatMessage({ id: 'Puntos de entrega' })}
+                                            getRegistros={getCliente}
+                                            getRegistrosCount={getClienteCount}
+                                            botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                                            controlador={"Clientes"}
+                                            editarComponente={<EditarCliente />}
+                                            columnas={columnasPuntosEntrega}
+                                            filtradoBase={{ empresaId: empresa.id }}
+                                            deleteRegistro={deleteCliente}
+                                            editarComponenteParametrosExtra={{ empresaId: empresa.id, estoyDentroDeUnTab: true }}
+                                        />
+                                    ) : renderTabNoDisponible(intl.formatMessage({ id: 'Debe guardar la empresa primero para poder gestionar puntos de entrega' }))}
+                                </TabPanel>
+
+                                <TabPanel header={intl.formatMessage({ id: 'Envíos' })}>
+                                    {empresa.id ? (
+                                        <Crud
+                                            headerCrud={intl.formatMessage({ id: 'Envíos' })}
+                                            getRegistros={getEnvio}
+                                            getRegistrosCount={getEnvioCount}
+                                            botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                                            controlador={"Envíos"}
+                                            editarComponente={<EditarEnvio />}
+                                            columnas={columnasEnvio}
+                                            filtradoBase={{ empresaId: empresa.id }}
+                                            deleteRegistro={deleteEnvio}
+                                            editarComponenteParametrosExtra={{ empresaId: empresa.id, estoyDentroDeUnTab: true }}
+                                        />
+                                    ) : renderTabNoDisponible(intl.formatMessage({ id: 'Debe guardar la empresa primero para poder gestionar envíos' }))}
+                                </TabPanel>
+
+                                <TabPanel header={intl.formatMessage({ id: 'Envío sensores' })}>
+                                    {empresa.id ? (
+                                        <Crud
+                                            headerCrud={intl.formatMessage({ id: 'Sensores de empresa' })}
+                                            getRegistros={getEnvioSensorEmpresa}
+                                            getRegistrosCount={getEnvioSensorEmpresaCount}
+                                            botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                            controlador={"Envio Sensor Empresa"}
+                                            editarComponente={<EditarEnvioSensorEmpresa />}
+                                            columnas={columnasSensorEmpresa}
+                                            filtradoBase={{ empresaId: empresa.id }}
+                                            deleteRegistro={deleteEnvioSensorEmpresa}
+                                            editarComponenteParametrosExtra={{ empresaId: empresa.id, estoyDentroDeUnTab: true }}
+                                        />
+                                    ) : renderTabNoDisponible(intl.formatMessage({ id: 'Debe guardar la empresa primero para poder gestionar sensores' }))}
+                                </TabPanel>
+
+                                <TabPanel header={intl.formatMessage({ id: 'Pallets asignados a empresa' })}>
+                                    {empresa.id ? (
+                                        <Crud
+                                            headerCrud={intl.formatMessage({ id: 'Pallets asignados a empresa' })}
+                                            getRegistros={getPallet}
+                                            getRegistrosCount={getPalletCount}
+                                            botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'importarCSVPallets']}
+                                            controlador={"Pallet"}
+                                            editarComponente={<EditarPallet />}
+                                            columnas={columnasPalletAsignado}
+                                            filtradoBase={{ empresaId: empresa.id }}
+                                            deleteRegistro={deletePallet}
+                                            editarComponenteParametrosExtra={{ empresaId: empresa.id, estoyDentroDeUnTab: true }}
+                                        />
+                                    ) : renderTabNoDisponible(intl.formatMessage({ id: 'Debe guardar la empresa primero para poder gestionar pallets asignados' }))}
+                                </TabPanel>
+
+                                <TabPanel header={intl.formatMessage({ id: 'Tipos de carrocería' })}>
+                                    <Crud
+                                        headerCrud={intl.formatMessage({ id: 'Tipos de Carrocería' })}
+                                        getRegistros={getTipoCarroceria}
+                                        getRegistrosCount={getTipoCarroceriaCount}
+                                        botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                                        controlador={"Tipos de Carrocería"}
+                                        editarComponente={<EditarTipoCarroceria />}
+                                        columnas={columnasCatalogosGlobales}
+                                        deleteRegistro={deleteTipoCarroceria}
+                                        editarComponenteParametrosExtra={{ estoyDentroDeUnTab: true }}
+                                    />
+                                </TabPanel>
+
+                                <TabPanel header={intl.formatMessage({ id: 'Tipo de transporte' })}>
+                                    <Crud
+                                        headerCrud={intl.formatMessage({ id: 'Tipos de Transporte' })}
+                                        getRegistros={getTipoTransporte}
+                                        getRegistrosCount={getTipoTransporteCount}
+                                        botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                                        controlador={"Tipo Transporte"}
+                                        editarComponente={<EditarTipoTransporte />}
+                                        columnas={columnasCatalogosGlobales}
+                                        deleteRegistro={deleteTipoTransporte}
+                                        editarComponenteParametrosExtra={{ estoyDentroDeUnTab: true }}
+                                    />
+                                </TabPanel>
+
+                                <TabPanel header={intl.formatMessage({ id: 'Configuración de eventos' })}>
+                                    <Crud
+                                        headerCrud={intl.formatMessage({ id: 'Configuración de eventos (solo lectura)' })}
+                                        getRegistros={getEventoConfiguracion}
+                                        getRegistrosCount={getEventoConfiguracionCount}
+                                        botones={[]}
+                                        controlador={"Eventos Configuracion"}
+                                        editarComponente={<div />}
+                                        columnas={columnasEventoConfiguracion}
+                                        deleteRegistro={() => { }}
+                                        editarComponenteParametrosExtra={{ estoyDentroDeUnTab: true }}
+                                    />
                                 </TabPanel>
                             </TabView>
                         </div>

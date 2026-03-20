@@ -3,7 +3,6 @@ import { getTipoSensor, getTipoSensorCount, deleteTipoSensor } from "@/app/api-e
 import EditarTipoSensors from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'
-import { getUsuarioSesion } from "@/app/utility/Utils";
 
 const TipoSensor = () => {
     const intl = useIntl();
@@ -21,7 +20,6 @@ const TipoSensor = () => {
                 getRegistrosCount={getTipoSensorCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Tipo Sensor"}
-                filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarTipoSensors />}
                 columnas={columnas}
                 deleteRegistro={deleteTipoSensor}

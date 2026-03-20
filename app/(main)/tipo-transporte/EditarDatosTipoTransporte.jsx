@@ -21,8 +21,7 @@ const EditarDatosTipoTransporte = ({ tipoTransporte, setTipoTransporte, estadoGu
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={tipoTransporte.orden}
-                        placeholder={intl.formatMessage({ id: 'Orden del tipo de transporte' })}
+                    <InputNumber value={tipoTransporte.orden === '' || tipoTransporte.orden === undefined ? null : tipoTransporte.orden}
                         onChange={(e) => setTipoTransporte({ ...tipoTransporte, orden: e.value })}
                         className={`${(estadoGuardando && (tipoTransporte.orden === "" || tipoTransporte.orden === null || tipoTransporte.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"

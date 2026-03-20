@@ -82,6 +82,13 @@ Ejecutar proyecto en modo Producción (Local)
 
 Abrir con tu navegador para ver el resultado. [http://localhost:3000](http://localhost:3000)
 
+## Refactor safety (Step 1 smoke)
+
+Run file-existence smoke checks before major navigation refactors:
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\refactor-step1-smoke.ps1
+```
+
 
 ## Compilar y Desplegar en el servidor
 Para compilar el proyecto debemos usar el comando:

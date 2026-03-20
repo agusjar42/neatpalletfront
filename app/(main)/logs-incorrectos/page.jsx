@@ -190,7 +190,7 @@ const LogsIncorrectos = () => {
             <Toast ref={toast} position="top-right" />
 
             <div className="col-12">
-                <Card title={intl.formatMessage({ id: "Logs del Sistema" })}>
+                <Card title={intl.formatMessage({ id: "Logs de sistema" })}>
                     <div className="mb-3">
                         <div className="p-mt-3">
                             <div

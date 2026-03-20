@@ -207,8 +207,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={envioContenido.orden}
-                        placeholder={intl.formatMessage({ id: 'Orden del contenido' })}
+                    <InputNumber value={envioContenido.orden === '' || envioContenido.orden === undefined ? null : envioContenido.orden}
                         onChange={(e) => setEnvioContenido({ ...envioContenido, orden: e.value })}
                         className={`${(estadoGuardando && (envioContenido.orden === "" || envioContenido.orden === null || envioContenido.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"

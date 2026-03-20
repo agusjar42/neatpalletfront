@@ -169,6 +169,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Configuracion-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Configuracion-Borrar' },
 
+                // Eventos Configuracion
+                { header: intl.formatMessage({ id: 'Eventos Configuracion' }), seccion: 'Eventos Configuracion' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Eventos Configuracion-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Eventos Configuracion-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Eventos Configuracion-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Eventos Configuracion-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Eventos Configuracion-Borrar' },
+
                 // Envio Movimiento
                 { header: intl.formatMessage({ id: 'Envio Movimiento' }), seccion: 'Envio Movimiento' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envio Movimiento-Acceder' },

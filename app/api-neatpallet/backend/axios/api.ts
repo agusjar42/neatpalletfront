@@ -5204,6 +5204,287 @@ export interface EnvioWithRelations {
 /**
  * 
  * @export
+ * @interface EventoConfiguracion
+ */
+export interface EventoConfiguracion {
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracion
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracion
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracion
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracion
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracion
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracion
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracion
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracion
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracion
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracion
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EventoConfiguracionFilter
+ */
+export interface EventoConfiguracionFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EventoConfiguracionFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EventoConfiguracionFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface EventoConfiguracionFilter1
+ */
+export interface EventoConfiguracionFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EventoConfiguracionFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EventoConfiguracionFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EventoConfiguracionFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<EventoConfiguracion>, schemaOptions: { partial: true })
+ * @export
+ * @interface EventoConfiguracionPartial
+ */
+export interface EventoConfiguracionPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionPartial
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionPartial
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionPartial
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionPartial
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionPartial
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionPartial
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * (tsType: EventoConfiguracionWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface EventoConfiguracionWithRelations
+ */
+export interface EventoConfiguracionWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionWithRelations
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionWithRelations
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionWithRelations
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionWithRelations
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionWithRelations
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EventoConfiguracionWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EventoConfiguracionWithRelations
+     */
+    'fechaModificacion'?: string;
+}
+/**
+ * 
+ * @export
  * @interface Idioma
  */
 export interface Idioma {
@@ -6496,6 +6777,85 @@ export interface LugarParadaWithRelations {
     'activoSN'?: string | null;
 }
 /**
+ * 
+ * @export
+ * @interface MqttMessageLog
+ */
+export interface MqttMessageLog {
+    /**
+     * 
+     * @type {number}
+     * @memberof MqttMessageLog
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MqttMessageLog
+     */
+    'topic': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MqttMessageLog
+     */
+    'dedupKey': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MqttMessageLog
+     */
+    'payloadRaw': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof MqttMessageLog
+     */
+    'payloadJson'?: object | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof MqttMessageLog
+     */
+    'qos'?: number | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MqttMessageLog
+     */
+    'retain'?: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MqttMessageLog
+     */
+    'receivedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MqttMessageLog
+     */
+    'brokerHost': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MqttMessageLog
+     */
+    'clientId'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MqttMessageLog
+     */
+    'parseError'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MqttMessageLog
+     */
+    'deviceId'?: string | null;
+}
+/**
  * (tsType: Omit<Cliente, \'id\'>, schemaOptions: { title: \'NewCliente\', exclude: [ \'id\' ] })
  * @export
  * @interface NewCliente
@@ -7424,6 +7784,67 @@ export interface NewEnvioSensorEmpresa {
      * @memberof NewEnvioSensorEmpresa
      */
     'orden'?: number;
+}
+/**
+ * (tsType: Omit<EventoConfiguracion, \'id\'>, schemaOptions: { title: \'NewEventoConfiguracion\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewEventoConfiguracion
+ */
+export interface NewEventoConfiguracion {
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEventoConfiguracion
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEventoConfiguracion
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEventoConfiguracion
+     */
+    'unidadMedida'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEventoConfiguracion
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEventoConfiguracion
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEventoConfiguracion
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEventoConfiguracion
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEventoConfiguracion
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEventoConfiguracion
+     */
+    'fechaModificacion'?: string;
 }
 /**
  * (tsType: Omit<Idioma, \'id\'>, schemaOptions: { title: \'NewIdioma\', exclude: [ \'id\' ] })
@@ -8388,6 +8809,12 @@ export interface NewTipoSensor {
      * @memberof NewTipoSensor
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoSensor
+     */
+    'valorDefecto'?: string;
 }
 /**
  * (tsType: Omit<TipoTransporte, \'id\'>, schemaOptions: { title: \'NewTipoTransporte\', exclude: [ \'id\' ] })
@@ -12379,6 +12806,12 @@ export interface TipoSensor {
      * @memberof TipoSensor
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensor
+     */
+    'valorDefecto'?: string;
 }
 /**
  * 
@@ -12562,6 +12995,12 @@ export interface TipoSensorPartial {
      * @memberof TipoSensorPartial
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorPartial
+     */
+    'valorDefecto'?: string;
 }
 /**
  * 
@@ -12672,6 +13111,12 @@ export interface TipoSensorWithRelations {
      * @memberof TipoSensorWithRelations
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorWithRelations
+     */
+    'valorDefecto'?: string;
     /**
      * 
      * @type {EmpresaWithRelations}
@@ -21708,6 +22153,612 @@ export class EnvioSensorEmpresaControllerApi extends BaseAPI {
 
 
 /**
+ * EventoConfiguracionControllerApi - axios parameter creator
+ * @export
+ */
+export const EventoConfiguracionControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/evento-configuraciones/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewEventoConfiguracion} [newEventoConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerCreate: async (newEventoConfiguracion?: NewEventoConfiguracion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/evento-configuraciones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newEventoConfiguracion, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('eventoConfiguracionControllerDeleteById', 'id', id)
+            const localVarPath = `/evento-configuraciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {EventoConfiguracionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerFind: async (filter?: EventoConfiguracionFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/evento-configuraciones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EventoConfiguracionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerFindById: async (id: number, filter?: EventoConfiguracionFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('eventoConfiguracionControllerFindById', 'id', id)
+            const localVarPath = `/evento-configuraciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EventoConfiguracion} [eventoConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerReplaceById: async (id: number, eventoConfiguracion?: EventoConfiguracion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('eventoConfiguracionControllerReplaceById', 'id', id)
+            const localVarPath = `/evento-configuraciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(eventoConfiguracion, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EventoConfiguracionPartial} [eventoConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerUpdateAll: async (where?: { [key: string]: object; }, eventoConfiguracionPartial?: EventoConfiguracionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/evento-configuraciones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(eventoConfiguracionPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EventoConfiguracionPartial} [eventoConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerUpdateById: async (id: number, eventoConfiguracionPartial?: EventoConfiguracionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('eventoConfiguracionControllerUpdateById', 'id', id)
+            const localVarPath = `/evento-configuraciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(eventoConfiguracionPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EventoConfiguracionControllerApi - functional programming interface
+ * @export
+ */
+export const EventoConfiguracionControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EventoConfiguracionControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async eventoConfiguracionControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.eventoConfiguracionControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewEventoConfiguracion} [newEventoConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async eventoConfiguracionControllerCreate(newEventoConfiguracion?: NewEventoConfiguracion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EventoConfiguracion>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.eventoConfiguracionControllerCreate(newEventoConfiguracion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async eventoConfiguracionControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.eventoConfiguracionControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {EventoConfiguracionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async eventoConfiguracionControllerFind(filter?: EventoConfiguracionFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EventoConfiguracionWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.eventoConfiguracionControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EventoConfiguracionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async eventoConfiguracionControllerFindById(id: number, filter?: EventoConfiguracionFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EventoConfiguracionWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.eventoConfiguracionControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EventoConfiguracion} [eventoConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async eventoConfiguracionControllerReplaceById(id: number, eventoConfiguracion?: EventoConfiguracion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.eventoConfiguracionControllerReplaceById(id, eventoConfiguracion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EventoConfiguracionPartial} [eventoConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async eventoConfiguracionControllerUpdateAll(where?: { [key: string]: object; }, eventoConfiguracionPartial?: EventoConfiguracionPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.eventoConfiguracionControllerUpdateAll(where, eventoConfiguracionPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EventoConfiguracionPartial} [eventoConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async eventoConfiguracionControllerUpdateById(id: number, eventoConfiguracionPartial?: EventoConfiguracionPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.eventoConfiguracionControllerUpdateById(id, eventoConfiguracionPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EventoConfiguracionControllerApi - factory interface
+ * @export
+ */
+export const EventoConfiguracionControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EventoConfiguracionControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.eventoConfiguracionControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewEventoConfiguracion} [newEventoConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerCreate(newEventoConfiguracion?: NewEventoConfiguracion, options?: any): AxiosPromise<EventoConfiguracion> {
+            return localVarFp.eventoConfiguracionControllerCreate(newEventoConfiguracion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.eventoConfiguracionControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EventoConfiguracionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerFind(filter?: EventoConfiguracionFilter1, options?: any): AxiosPromise<Array<EventoConfiguracionWithRelations>> {
+            return localVarFp.eventoConfiguracionControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EventoConfiguracionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerFindById(id: number, filter?: EventoConfiguracionFilter, options?: any): AxiosPromise<EventoConfiguracionWithRelations> {
+            return localVarFp.eventoConfiguracionControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EventoConfiguracion} [eventoConfiguracion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerReplaceById(id: number, eventoConfiguracion?: EventoConfiguracion, options?: any): AxiosPromise<any> {
+            return localVarFp.eventoConfiguracionControllerReplaceById(id, eventoConfiguracion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EventoConfiguracionPartial} [eventoConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerUpdateAll(where?: { [key: string]: object; }, eventoConfiguracionPartial?: EventoConfiguracionPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.eventoConfiguracionControllerUpdateAll(where, eventoConfiguracionPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EventoConfiguracionPartial} [eventoConfiguracionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventoConfiguracionControllerUpdateById(id: number, eventoConfiguracionPartial?: EventoConfiguracionPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.eventoConfiguracionControllerUpdateById(id, eventoConfiguracionPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EventoConfiguracionControllerApi - object-oriented interface
+ * @export
+ * @class EventoConfiguracionControllerApi
+ * @extends {BaseAPI}
+ */
+export class EventoConfiguracionControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EventoConfiguracionControllerApi
+     */
+    public eventoConfiguracionControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return EventoConfiguracionControllerApiFp(this.configuration).eventoConfiguracionControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewEventoConfiguracion} [newEventoConfiguracion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EventoConfiguracionControllerApi
+     */
+    public eventoConfiguracionControllerCreate(newEventoConfiguracion?: NewEventoConfiguracion, options?: AxiosRequestConfig) {
+        return EventoConfiguracionControllerApiFp(this.configuration).eventoConfiguracionControllerCreate(newEventoConfiguracion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EventoConfiguracionControllerApi
+     */
+    public eventoConfiguracionControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return EventoConfiguracionControllerApiFp(this.configuration).eventoConfiguracionControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EventoConfiguracionFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EventoConfiguracionControllerApi
+     */
+    public eventoConfiguracionControllerFind(filter?: EventoConfiguracionFilter1, options?: AxiosRequestConfig) {
+        return EventoConfiguracionControllerApiFp(this.configuration).eventoConfiguracionControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EventoConfiguracionFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EventoConfiguracionControllerApi
+     */
+    public eventoConfiguracionControllerFindById(id: number, filter?: EventoConfiguracionFilter, options?: AxiosRequestConfig) {
+        return EventoConfiguracionControllerApiFp(this.configuration).eventoConfiguracionControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EventoConfiguracion} [eventoConfiguracion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EventoConfiguracionControllerApi
+     */
+    public eventoConfiguracionControllerReplaceById(id: number, eventoConfiguracion?: EventoConfiguracion, options?: AxiosRequestConfig) {
+        return EventoConfiguracionControllerApiFp(this.configuration).eventoConfiguracionControllerReplaceById(id, eventoConfiguracion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {EventoConfiguracionPartial} [eventoConfiguracionPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EventoConfiguracionControllerApi
+     */
+    public eventoConfiguracionControllerUpdateAll(where?: { [key: string]: object; }, eventoConfiguracionPartial?: EventoConfiguracionPartial, options?: AxiosRequestConfig) {
+        return EventoConfiguracionControllerApiFp(this.configuration).eventoConfiguracionControllerUpdateAll(where, eventoConfiguracionPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EventoConfiguracionPartial} [eventoConfiguracionPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EventoConfiguracionControllerApi
+     */
+    public eventoConfiguracionControllerUpdateById(id: number, eventoConfiguracionPartial?: EventoConfiguracionPartial, options?: AxiosRequestConfig) {
+        return EventoConfiguracionControllerApiFp(this.configuration).eventoConfiguracionControllerUpdateById(id, eventoConfiguracionPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * FileUploadControllerApi - axios parameter creator
  * @export
  */
@@ -24887,6 +25938,247 @@ export class LugarParadaControllerApi extends BaseAPI {
      */
     public lugarParadaControllerUpdateById(id: number, lugarParadaPartial?: LugarParadaPartial, options?: AxiosRequestConfig) {
         return LugarParadaControllerApiFp(this.configuration).lugarParadaControllerUpdateById(id, lugarParadaPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * MqttMessageLogControllerApi - axios parameter creator
+ * @export
+ */
+export const MqttMessageLogControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        mqttMessageLogControllerFind: async (page?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/mqtt-logs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        mqttMessageLogControllerFindById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('mqttMessageLogControllerFindById', 'id', id)
+            const localVarPath = `/mqtt-logs/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        mqttMessageLogControllerStatus: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/mqtt/status`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * MqttMessageLogControllerApi - functional programming interface
+ * @export
+ */
+export const MqttMessageLogControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MqttMessageLogControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async mqttMessageLogControllerFind(page?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MqttMessageLog>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.mqttMessageLogControllerFind(page, limit, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async mqttMessageLogControllerFindById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MqttMessageLog>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.mqttMessageLogControllerFindById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async mqttMessageLogControllerStatus(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.mqttMessageLogControllerStatus(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * MqttMessageLogControllerApi - factory interface
+ * @export
+ */
+export const MqttMessageLogControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MqttMessageLogControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        mqttMessageLogControllerFind(page?: number, limit?: number, options?: any): AxiosPromise<Array<MqttMessageLog>> {
+            return localVarFp.mqttMessageLogControllerFind(page, limit, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        mqttMessageLogControllerFindById(id: number, options?: any): AxiosPromise<MqttMessageLog> {
+            return localVarFp.mqttMessageLogControllerFindById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        mqttMessageLogControllerStatus(options?: any): AxiosPromise<object> {
+            return localVarFp.mqttMessageLogControllerStatus(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * MqttMessageLogControllerApi - object-oriented interface
+ * @export
+ * @class MqttMessageLogControllerApi
+ * @extends {BaseAPI}
+ */
+export class MqttMessageLogControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MqttMessageLogControllerApi
+     */
+    public mqttMessageLogControllerFind(page?: number, limit?: number, options?: AxiosRequestConfig) {
+        return MqttMessageLogControllerApiFp(this.configuration).mqttMessageLogControllerFind(page, limit, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MqttMessageLogControllerApi
+     */
+    public mqttMessageLogControllerFindById(id: number, options?: AxiosRequestConfig) {
+        return MqttMessageLogControllerApiFp(this.configuration).mqttMessageLogControllerFindById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MqttMessageLogControllerApi
+     */
+    public mqttMessageLogControllerStatus(options?: AxiosRequestConfig) {
+        return MqttMessageLogControllerApiFp(this.configuration).mqttMessageLogControllerStatus(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

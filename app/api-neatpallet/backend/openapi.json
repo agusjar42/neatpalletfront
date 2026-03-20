@@ -3780,6 +3780,309 @@
         "operationId": "EnvioController.find"
       }
     },
+    "/evento-configuraciones/count": {
+      "get": {
+        "x-controller-name": "EventoConfiguracionController",
+        "x-operation-name": "count",
+        "tags": [
+          "EventoConfiguracionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EventoConfiguracion model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EventoConfiguracion.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EventoConfiguracion>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EventoConfiguracionController.count"
+      }
+    },
+    "/evento-configuraciones/{id}": {
+      "put": {
+        "x-controller-name": "EventoConfiguracionController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "EventoConfiguracionController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EventoConfiguracion PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventoConfiguracion"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EventoConfiguracionController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "EventoConfiguracionController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "EventoConfiguracionController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EventoConfiguracion PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventoConfiguracionPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EventoConfiguracionController.updateById"
+      },
+      "get": {
+        "x-controller-name": "EventoConfiguracionController",
+        "x-operation-name": "findById",
+        "tags": [
+          "EventoConfiguracionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EventoConfiguracion model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventoConfiguracionWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventoConfiguracion.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EventoConfiguracionController.findById"
+      },
+      "delete": {
+        "x-controller-name": "EventoConfiguracionController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "EventoConfiguracionController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EventoConfiguracion DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EventoConfiguracionController.deleteById"
+      }
+    },
+    "/evento-configuraciones": {
+      "post": {
+        "x-controller-name": "EventoConfiguracionController",
+        "x-operation-name": "create",
+        "tags": [
+          "EventoConfiguracionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EventoConfiguracion model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventoConfiguracion"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewEventoConfiguracion"
+              }
+            }
+          }
+        },
+        "operationId": "EventoConfiguracionController.create"
+      },
+      "patch": {
+        "x-controller-name": "EventoConfiguracionController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "EventoConfiguracionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EventoConfiguracion PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EventoConfiguracion.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EventoConfiguracion>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventoConfiguracionPartial"
+              }
+            }
+          }
+        },
+        "operationId": "EventoConfiguracionController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "EventoConfiguracionController",
+        "x-operation-name": "find",
+        "tags": [
+          "EventoConfiguracionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of EventoConfiguracion model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventoConfiguracionWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventoConfiguracion.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EventoConfiguracionController.find"
+      }
+    },
     "/files/{imagen}": {
       "delete": {
         "x-controller-name": "FileUploadController",
@@ -5315,6 +5618,101 @@
           }
         ],
         "operationId": "LugarParadaController.find"
+      }
+    },
+    "/mqtt/status": {
+      "get": {
+        "x-controller-name": "MqttMessageLogController",
+        "x-operation-name": "status",
+        "tags": [
+          "MqttMessageLogController"
+        ],
+        "responses": {
+          "200": {
+            "description": "MQTT subscriber status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "MqttMessageLogController.status"
+      }
+    },
+    "/mqtt-logs/{id}": {
+      "get": {
+        "x-controller-name": "MqttMessageLogController",
+        "x-operation-name": "findById",
+        "tags": [
+          "MqttMessageLogController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Single MQTT message log record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MqttMessageLog"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "MqttMessageLogController.findById"
+      }
+    },
+    "/mqtt-logs": {
+      "get": {
+        "x-controller-name": "MqttMessageLogController",
+        "x-operation-name": "find",
+        "tags": [
+          "MqttMessageLogController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of MQTT message logs (newest first)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MqttMessageLog"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "MqttMessageLogController.find"
       }
     },
     "/operarios/count": {
@@ -11706,6 +12104,9 @@
           },
           "orden": {
             "type": "number"
+          },
+          "valorDefecto": {
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -11740,6 +12141,9 @@
           },
           "orden": {
             "type": "number"
+          },
+          "valorDefecto": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -12278,6 +12682,9 @@
           "orden": {
             "type": "number"
           },
+          "valorDefecto": {
+            "type": "string"
+          },
           "empresa": {
             "$ref": "#/components/schemas/EmpresaWithRelations"
           },
@@ -12331,6 +12738,9 @@
           },
           "orden": {
             "type": "number"
+          },
+          "valorDefecto": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -14396,6 +14806,69 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<Operario>"
       },
+      "MqttMessageLog": {
+        "title": "MqttMessageLog",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "topic": {
+            "type": "string",
+            "nullable": false
+          },
+          "dedupKey": {
+            "type": "string",
+            "nullable": false
+          },
+          "payloadRaw": {
+            "type": "string",
+            "nullable": false
+          },
+          "payloadJson": {
+            "type": "object",
+            "nullable": true
+          },
+          "qos": {
+            "type": "number",
+            "nullable": true
+          },
+          "retain": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "receivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "brokerHost": {
+            "type": "string",
+            "nullable": false
+          },
+          "clientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "parseError": {
+            "type": "string",
+            "nullable": true
+          },
+          "deviceId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "topic",
+          "dedupKey",
+          "payloadRaw",
+          "receivedAt",
+          "brokerHost"
+        ],
+        "additionalProperties": false
+      },
       "LugarParada": {
         "title": "LugarParada",
         "type": "object",
@@ -15096,6 +15569,165 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<Idioma>"
+      },
+      "EventoConfiguracion": {
+        "title": "EventoConfiguracion",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "unidadMedida": {
+            "type": "string"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewEventoConfiguracion": {
+        "title": "NewEventoConfiguracion",
+        "type": "object",
+        "description": "(tsType: Omit<EventoConfiguracion, 'id'>, schemaOptions: { title: 'NewEventoConfiguracion', exclude: [ 'id' ] })",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "unidadMedida": {
+            "type": "string"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<EventoConfiguracion, 'id'>"
+      },
+      "EventoConfiguracionWithRelations": {
+        "title": "EventoConfiguracionWithRelations",
+        "type": "object",
+        "description": "(tsType: EventoConfiguracionWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "unidadMedida": {
+            "type": "string"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "EventoConfiguracionWithRelations"
+      },
+      "EventoConfiguracionPartial": {
+        "title": "EventoConfiguracionPartial",
+        "type": "object",
+        "description": "(tsType: Partial<EventoConfiguracion>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "unidadMedida": {
+            "type": "string"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<EventoConfiguracion>"
       },
       "EnvioSensor": {
         "title": "EnvioSensor",
@@ -20967,6 +21599,201 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Envio>"
       },
+      "EventoConfiguracion.Filter": {
+        "type": "object",
+        "title": "EventoConfiguracion.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "unidadMedida": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "nombre",
+                    "valor",
+                    "unidadMedida",
+                    "orden",
+                    "activoSn",
+                    "usuarioCreacion",
+                    "fechaCreacion",
+                    "usuarioModificacion",
+                    "fechaModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EventoConfiguracion.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EventoConfiguracion>"
+      },
+      "EventoConfiguracion.Filter1": {
+        "type": "object",
+        "title": "EventoConfiguracion.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "EventoConfiguracion.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "unidadMedida": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "nombre",
+                    "valor",
+                    "unidadMedida",
+                    "orden",
+                    "activoSn",
+                    "usuarioCreacion",
+                    "fechaCreacion",
+                    "usuarioModificacion",
+                    "fechaModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EventoConfiguracion.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EventoConfiguracion>"
+      },
       "Permiso.Filter": {
         "type": "object",
         "title": "Permiso.Filter",
@@ -24466,6 +25293,9 @@
                   },
                   "orden": {
                     "type": "boolean"
+                  },
+                  "valorDefecto": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -24483,7 +25313,8 @@
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "orden"
+                    "orden",
+                    "valorDefecto"
                   ],
                   "example": "id"
                 },
@@ -24576,6 +25407,9 @@
                   },
                   "orden": {
                     "type": "boolean"
+                  },
+                  "valorDefecto": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -24593,7 +25427,8 @@
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "orden"
+                    "orden",
+                    "valorDefecto"
                   ],
                   "example": "id"
                 },

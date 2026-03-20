@@ -31,6 +31,15 @@ const EditarDatosTipoSensor = ({ tipoSensor, setTipoSensor, estadoGuardando, man
                         maxLength={50} />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="valorDefecto">{intl.formatMessage({ id: 'Valor Defecto' })}</label>
+                    <InputText value={tipoSensor.valorDefecto}
+                        placeholder={intl.formatMessage({ id: 'Valor defecto del tipo de sensor' })}
+                        onChange={(e) => setTipoSensor({ ...tipoSensor, valorDefecto: e.target.value })}
+                        className={`${(estadoGuardando && tipoSensor.valorDefecto === "") ? "p-invalid" : ""}`}
+                        maxLength={50} />
+                    <small style={{ color: '#94949f', fontSize: '10px' }}> <i>{intl.formatMessage({ id: 'Este campo se copiará en una empresa en su creación' })}</i> </small>
+                </div>
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="activoSn" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
                     <InputSwitch
                         checked={tipoSensor.activoSn === 'S'}

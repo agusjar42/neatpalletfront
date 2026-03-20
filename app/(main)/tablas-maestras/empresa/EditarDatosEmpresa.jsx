@@ -141,7 +141,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
     };
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos para la empresa' })}>
+        <Fieldset legend={intl.formatMessage({ id: 'Datos para la empresa' })} toggleable collapsed>
             <Toast ref={toast} position="top-right" />
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">

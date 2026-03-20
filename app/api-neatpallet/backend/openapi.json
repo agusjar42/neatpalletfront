@@ -12121,9 +12121,6 @@
           "id": {
             "type": "number"
           },
-          "empresaId": {
-            "type": "number"
-          },
           "nombre": {
             "type": "string"
           },
@@ -12158,9 +12155,6 @@
         "type": "object",
         "description": "(tsType: Omit<TipoSensor, 'id'>, schemaOptions: { title: 'NewTipoSensor', exclude: [ 'id' ] })",
         "properties": {
-          "empresaId": {
-            "type": "number"
-          },
           "nombre": {
             "type": "string"
           },
@@ -12698,9 +12692,6 @@
           "id": {
             "type": "number"
           },
-          "empresaId": {
-            "type": "number"
-          },
           "nombre": {
             "type": "string"
           },
@@ -12727,10 +12718,6 @@
           "valorDefecto": {
             "type": "string"
           },
-          "empresa": {
-            "$ref": "#/components/schemas/EmpresaWithRelations"
-          },
-          "foreignKey": {},
           "envioSensores": {
             "type": "array",
             "items": {
@@ -12753,9 +12740,6 @@
         "description": "(tsType: Partial<TipoSensor>, schemaOptions: { partial: true })",
         "properties": {
           "id": {
-            "type": "number"
-          },
-          "empresaId": {
             "type": "number"
           },
           "nombre": {
@@ -25264,7 +25248,6 @@
           "relation": {
             "type": "string",
             "enum": [
-              "empresa",
               "envioSensores",
               "envioPalletMovimientos"
             ]
@@ -25312,9 +25295,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "empresaId": {
-                    "type": "boolean"
-                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -25348,7 +25328,6 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "empresaId",
                     "nombre",
                     "activoSn",
                     "usuarioCreacion",
@@ -25426,9 +25405,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "empresaId": {
-                    "type": "boolean"
-                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -25462,7 +25438,6 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "empresaId",
                     "nombre",
                     "activoSn",
                     "usuarioCreacion",

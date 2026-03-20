@@ -50,8 +50,6 @@ const EditarTipoSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
-                
                 const nuevoRegistro = await postTipoSensor(objGuardar);
 
                 if (nuevoRegistro?.id) {
@@ -67,7 +65,6 @@ const EditarTipoSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                 }
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;                
                 delete objGuardar['fechaModificacion'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchTipoSensor(objGuardar.id, objGuardar);

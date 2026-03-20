@@ -8782,12 +8782,6 @@ export interface NewTipoCarroceria {
 export interface NewTipoSensor {
     /**
      * 
-     * @type {number}
-     * @memberof NewTipoSensor
-     */
-    'empresaId'?: number;
-    /**
-     * 
      * @type {string}
      * @memberof NewTipoSensor
      */
@@ -12779,12 +12773,6 @@ export interface TipoSensor {
     'id'?: number;
     /**
      * 
-     * @type {number}
-     * @memberof TipoSensor
-     */
-    'empresaId'?: number;
-    /**
-     * 
      * @type {string}
      * @memberof TipoSensor
      */
@@ -12949,7 +12937,6 @@ export interface TipoSensorIncludeFilterItems {
     * @enum {string}
     */
 export enum TipoSensorIncludeFilterItemsRelationEnum {
-    Empresa = 'empresa',
     EnvioSensores = 'envioSensores',
     EnvioPalletMovimientos = 'envioPalletMovimientos'
 }
@@ -12966,12 +12953,6 @@ export interface TipoSensorPartial {
      * @memberof TipoSensorPartial
      */
     'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoSensorPartial
-     */
-    'empresaId'?: number;
     /**
      * 
      * @type {string}
@@ -13084,12 +13065,6 @@ export interface TipoSensorWithRelations {
     'id'?: number;
     /**
      * 
-     * @type {number}
-     * @memberof TipoSensorWithRelations
-     */
-    'empresaId'?: number;
-    /**
-     * 
      * @type {string}
      * @memberof TipoSensorWithRelations
      */
@@ -13136,18 +13111,6 @@ export interface TipoSensorWithRelations {
      * @memberof TipoSensorWithRelations
      */
     'valorDefecto'?: string;
-    /**
-     * 
-     * @type {EmpresaWithRelations}
-     * @memberof TipoSensorWithRelations
-     */
-    'empresa'?: EmpresaWithRelations;
-    /**
-     * 
-     * @type {any}
-     * @memberof TipoSensorWithRelations
-     */
-    'foreignKey'?: any;
     /**
      * 
      * @type {Array<EnvioSensorWithRelations>}

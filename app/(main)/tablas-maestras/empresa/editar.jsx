@@ -3,11 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { TabView, TabPanel } from 'primereact/tabview';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { postEmpresa, patchEmpresa } from "@/app/api-endpoints/empresa";
 import { getVistaUsuarios, getVistaUsuariosCount, deleteUsuario } from "@/app/api-endpoints/usuario";
 import { getCliente, getClienteCount, deleteCliente } from "@/app/api-endpoints/cliente";
 import { getEnvio, getEnvioCount, deleteEnvio } from "@/app/api-endpoints/envio";
-import { getEnvioSensorEmpresa, getEnvioSensorEmpresaCount, deleteEnvioSensorEmpresa } from "@/app/api-endpoints/envio-sensor-empresa";
+import { getEnvioSensorEmpresa, getEnvioSensorEmpresaCount, deleteEnvioSensorEmpresa, crearEnvioSensorEmpresaDesdetipoSensor } from "@/app/api-endpoints/envio-sensor-empresa";
 import { getPallet, getPalletCount, deletePallet } from "@/app/api-endpoints/pallet";
 import { getTipoCarroceria, getTipoCarroceriaCount, deleteTipoCarroceria } from "@/app/api-endpoints/tipo-carroceria";
 import { getTipoTransporte, getTipoTransporteCount, deleteTipoTransporte } from "@/app/api-endpoints/tipo-transporte";
@@ -32,6 +33,8 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [cargandoSensores, setCargandoSensores] = useState(false);
+    const [refreshSensores, setRefreshSensores] = useState(0);
 
     const columnasUsuariosEmpresa = [
         { campo: 'nombreRol', header: intl.formatMessage({ id: 'Rol' }), tipo: 'string' },
@@ -217,6 +220,47 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nueva' });
 
+    const handleCrearSensoresDesdetipoSensor = () => {
+        if (!empresa.id) {
+            toast.current?.show({
+                severity: 'warn',
+                summary: intl.formatMessage({ id: 'Advertencia' }),
+                detail: intl.formatMessage({ id: 'Debe guardar la empresa primero' }),
+                life: 3000,
+            });
+            return;
+        }
+        confirmDialog({
+            message: intl.formatMessage({ id: '¿Está seguro que desea crear los sensores desde los tipos de sensor? Esto sobrescribirá los sensores actuales de la empresa.' }),
+            header: intl.formatMessage({ id: 'Confirmación' }),
+            icon: 'pi pi-exclamation-triangle',
+            acceptLabel: intl.formatMessage({ id: 'Sí' }),
+            rejectLabel: intl.formatMessage({ id: 'No' }),
+            accept: async () => {
+                setCargandoSensores(true);
+                try {
+                    await crearEnvioSensorEmpresaDesdetipoSensor(empresa.id, getUsuarioSesion()?.id);
+                    toast.current?.show({
+                        severity: 'success',
+                        summary: intl.formatMessage({ id: 'Éxito' }),
+                        detail: intl.formatMessage({ id: 'Sensores creados desde tipos de sensor correctamente' }),
+                        life: 3000,
+                    });
+                    setRefreshSensores(prev => prev + 1);
+                } catch (error) {
+                    toast.current?.show({
+                        severity: 'error',
+                        summary: intl.formatMessage({ id: 'Error' }),
+                        detail: intl.formatMessage({ id: 'Error al crear los sensores desde tipos de sensor' }),
+                        life: 3000,
+                    });
+                } finally {
+                    setCargandoSensores(false);
+                }
+            }
+        });
+    };
+
     const renderTabNoDisponible = (mensaje) => (
         <div className="text-center p-4">
             <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
@@ -292,18 +336,33 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
                                 <TabPanel header={intl.formatMessage({ id: 'Envío sensores' })}>
                                     {empresa.id ? (
-                                        <Crud
-                                            headerCrud={intl.formatMessage({ id: 'Sensores de empresa' })}
-                                            getRegistros={getEnvioSensorEmpresa}
-                                            getRegistrosCount={getEnvioSensorEmpresaCount}
-                                            botones={['nuevo', 'ver', 'editar', 'eliminar']}
-                                            controlador={"Envio Sensor Empresa"}
-                                            editarComponente={<EditarEnvioSensorEmpresa />}
-                                            columnas={columnasSensorEmpresa}
-                                            filtradoBase={{ empresaId: empresa.id }}
-                                            deleteRegistro={deleteEnvioSensorEmpresa}
-                                            editarComponenteParametrosExtra={{ empresaId: empresa.id, estoyDentroDeUnTab: true }}
-                                        />
+                                        <>
+                                            <ConfirmDialog />
+                                            <div className="flex justify-content-end mb-3">
+                                                <Button
+                                                    label={cargandoSensores ? intl.formatMessage({ id: 'Creando sensores...' }) : intl.formatMessage({ id: 'Crear sensores desde tipos de sensor' })}
+                                                    icon={cargandoSensores ? "pi pi-spin pi-spinner" : "pi pi-copy"}
+                                                    onClick={handleCrearSensoresDesdetipoSensor}
+                                                    disabled={cargandoSensores}
+                                                    className="p-button-help"
+                                                    tooltip={intl.formatMessage({ id: 'Crea los sensores de empresa a partir de los tipos de sensor definidos' })}
+                                                    tooltipOptions={{ position: 'left' }}
+                                                />
+                                            </div>
+                                            <Crud
+                                                key={`sensores-empresa-${refreshSensores}`}
+                                                headerCrud={intl.formatMessage({ id: 'Sensores de empresa' })}
+                                                getRegistros={getEnvioSensorEmpresa}
+                                                getRegistrosCount={getEnvioSensorEmpresaCount}
+                                                botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                                controlador={"Envio Sensor Empresa"}
+                                                editarComponente={<EditarEnvioSensorEmpresa />}
+                                                columnas={columnasSensorEmpresa}
+                                                filtradoBase={{ empresaId: empresa.id }}
+                                                deleteRegistro={deleteEnvioSensorEmpresa}
+                                                editarComponenteParametrosExtra={{ empresaId: empresa.id, estoyDentroDeUnTab: true }}
+                                            />
+                                        </>
                                     ) : renderTabNoDisponible(intl.formatMessage({ id: 'Debe guardar la empresa primero para poder gestionar sensores' }))}
                                 </TabPanel>
 

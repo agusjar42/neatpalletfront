@@ -733,6 +733,48 @@
         "operationId": "EnvioController.crearEnvioSensorDesdeEmpresa"
       }
     },
+    "/crear-envio-sensor-empresa-desde-tipo-sensor": {
+      "post": {
+        "x-controller-name": "EnvioSensorEmpresaController",
+        "x-operation-name": "crearSensoresDesdetipoSensor",
+        "tags": [
+          "EnvioSensorEmpresaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Crear sensores de empresa desde tipos de sensor"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "empresaId": {
+                    "type": "number"
+                  },
+                  "usuarioCreacion": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "empresaId"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "EnvioSensorEmpresaController.crearSensoresDesdetipoSensor"
+      }
+    },
     "/empresas/count": {
       "get": {
         "x-controller-name": "EmpresaController",

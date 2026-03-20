@@ -1,4 +1,5 @@
 import { EnvioSensorEmpresaControllerApi, settings } from "@/app/api-neatpallet";
+import { devuelveBasePath, getAccessToken } from "@/app/utility/Utils";
 
 const apiEnvioSensorEmpresa = new EnvioSensorEmpresaControllerApi(settings)
 
@@ -29,4 +30,18 @@ export const getEnvioSensorEmpresaCount = async (filtros) => {
     } catch (error) {
         console.log(error)
     }
+}
+
+export const crearEnvioSensorEmpresaDesdetipoSensor = async (empresaId, usuarioCreacion) => {
+    const basePath = devuelveBasePath();
+    const token = getAccessToken();
+    const response = await fetch(`${basePath}/crear-envio-sensor-empresa-desde-tipo-sensor`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ empresaId, usuarioCreacion })
+    });
+    if (!response.ok) throw new Error('Error al crear sensores desde tipo sensor');
 }

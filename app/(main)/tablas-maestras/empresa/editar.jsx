@@ -390,10 +390,11 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                                         getRegistrosCount={getTipoCarroceriaCount}
                                         botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                                         controlador={"Tipos de Carrocería"}
+                                        filtradoBase={{ empresaId: empresa.id }}
                                         editarComponente={<EditarTipoCarroceria />}
                                         columnas={columnasCatalogosGlobales}
                                         deleteRegistro={deleteTipoCarroceria}
-                                        editarComponenteParametrosExtra={{ estoyDentroDeUnTab: true }}
+                                        editarComponenteParametrosExtra={{ empresaId: empresa.id, estoyDentroDeUnTab: true }}
                                     />
                                 </TabPanel>
 
@@ -404,10 +405,11 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                                         getRegistrosCount={getTipoTransporteCount}
                                         botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                                         controlador={"Tipo Transporte"}
+                                        filtradoBase={{ empresaId: empresa.id }}
                                         editarComponente={<EditarTipoTransporte />}
                                         columnas={columnasCatalogosGlobales}
                                         deleteRegistro={deleteTipoTransporte}
-                                        editarComponenteParametrosExtra={{ estoyDentroDeUnTab: true }}
+                                        editarComponenteParametrosExtra={{ empresaId: empresa.id, estoyDentroDeUnTab: true }}
                                     />
                                 </TabPanel>
 

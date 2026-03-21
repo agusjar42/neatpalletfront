@@ -11986,6 +11986,9 @@
           "id": {
             "type": "number"
           },
+          "empresaId": {
+            "type": "number"
+          },
           "nombre": {
             "type": "string"
           },
@@ -12010,6 +12013,9 @@
             "type": "number"
           }
         },
+        "required": [
+          "empresaId"
+        ],
         "additionalProperties": false
       },
       "NewTipoTransporte": {
@@ -12017,6 +12023,9 @@
         "type": "object",
         "description": "(tsType: Omit<TipoTransporte, 'id'>, schemaOptions: { title: 'NewTipoTransporte', exclude: [ 'id' ] })",
         "properties": {
+          "empresaId": {
+            "type": "number"
+          },
           "nombre": {
             "type": "string"
           },
@@ -12041,8 +12050,85 @@
             "type": "number"
           }
         },
+        "required": [
+          "empresaId"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<TipoTransporte, 'id'>"
+      },
+      "EmpresaWithRelations": {
+        "title": "EmpresaWithRelations",
+        "type": "object",
+        "description": "(tsType: EmpresaWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "tiempoInactividad": {
+            "type": "number",
+            "nullable": false
+          },
+          "imagen": {
+            "type": "string",
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "EmpresaWithRelations"
       },
       "TipoTransporteWithRelations": {
         "title": "TipoTransporteWithRelations",
@@ -12052,6 +12138,9 @@
           "id": {
             "type": "number"
           },
+          "empresaId": {
+            "type": "number"
+          },
           "nombre": {
             "type": "string"
           },
@@ -12074,8 +12163,15 @@
           },
           "orden": {
             "type": "number"
-          }
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/EmpresaWithRelations"
+          },
+          "foreignKey": {}
         },
+        "required": [
+          "empresaId"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "TipoTransporteWithRelations"
       },
@@ -12085,6 +12181,9 @@
         "description": "(tsType: Partial<TipoTransporte>, schemaOptions: { partial: true })",
         "properties": {
           "id": {
+            "type": "number"
+          },
+          "empresaId": {
             "type": "number"
           },
           "nombre": {
@@ -12184,80 +12283,6 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Omit<TipoSensor, 'id'>"
-      },
-      "EmpresaWithRelations": {
-        "title": "EmpresaWithRelations",
-        "type": "object",
-        "description": "(tsType: EmpresaWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "codigo": {
-            "type": "string",
-            "nullable": true
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "descripcion": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuModificacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "tiempoInactividad": {
-            "type": "number",
-            "nullable": false
-          },
-          "imagen": {
-            "type": "string",
-            "nullable": true
-          },
-          "logo": {
-            "type": "string",
-            "nullable": true
-          },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "usuCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "EmpresaWithRelations"
       },
       "ClienteWithRelations": {
         "title": "ClienteWithRelations",
@@ -12779,6 +12804,9 @@
           "id": {
             "type": "number"
           },
+          "empresaId": {
+            "type": "number"
+          },
           "nombre": {
             "type": "string"
           },
@@ -12803,6 +12831,9 @@
             "type": "number"
           }
         },
+        "required": [
+          "empresaId"
+        ],
         "additionalProperties": false
       },
       "NewTipoCarroceria": {
@@ -12810,6 +12841,9 @@
         "type": "object",
         "description": "(tsType: Omit<TipoCarroceria, 'id'>, schemaOptions: { title: 'NewTipoCarroceria', exclude: [ 'id' ] })",
         "properties": {
+          "empresaId": {
+            "type": "number"
+          },
           "nombre": {
             "type": "string"
           },
@@ -12834,6 +12868,9 @@
             "type": "number"
           }
         },
+        "required": [
+          "empresaId"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<TipoCarroceria, 'id'>"
       },
@@ -12845,6 +12882,9 @@
           "id": {
             "type": "number"
           },
+          "empresaId": {
+            "type": "number"
+          },
           "nombre": {
             "type": "string"
           },
@@ -12867,8 +12907,15 @@
           },
           "orden": {
             "type": "number"
-          }
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/EmpresaWithRelations"
+          },
+          "foreignKey": {}
         },
+        "required": [
+          "empresaId"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "TipoCarroceriaWithRelations"
       },
@@ -12878,6 +12925,9 @@
         "description": "(tsType: Partial<TipoCarroceria>, schemaOptions: { partial: true })",
         "properties": {
           "id": {
+            "type": "number"
+          },
+          "empresaId": {
             "type": "number"
           },
           "nombre": {
@@ -25001,6 +25051,82 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Rol>"
       },
+      "TipoCarroceria.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "TipoCarroceria.ScopeFilter"
+      },
+      "TipoCarroceria.IncludeFilter.Items": {
+        "title": "TipoCarroceria.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "empresa"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/TipoCarroceria.ScopeFilter"
+          }
+        }
+      },
       "TipoCarroceria.Filter": {
         "type": "object",
         "title": "TipoCarroceria.Filter",
@@ -25039,6 +25165,9 @@
                   "id": {
                     "type": "boolean"
                   },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -25069,6 +25198,7 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "empresaId",
                     "nombre",
                     "usuarioCreacion",
                     "fechaCreacion",
@@ -25083,6 +25213,20 @@
               }
             ],
             "title": "TipoCarroceria.Fields"
+          },
+          "include": {
+            "title": "TipoCarroceria.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/TipoCarroceria.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
           }
         },
         "additionalProperties": false,
@@ -25131,6 +25275,9 @@
                   "id": {
                     "type": "boolean"
                   },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -25161,6 +25308,7 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "empresaId",
                     "nombre",
                     "usuarioCreacion",
                     "fechaCreacion",
@@ -25175,6 +25323,20 @@
               }
             ],
             "title": "TipoCarroceria.Fields"
+          },
+          "include": {
+            "title": "TipoCarroceria.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/TipoCarroceria.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
           }
         },
         "additionalProperties": false,
@@ -25472,6 +25634,82 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<TipoSensor>"
       },
+      "TipoTransporte.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "TipoTransporte.ScopeFilter"
+      },
+      "TipoTransporte.IncludeFilter.Items": {
+        "title": "TipoTransporte.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "empresa"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/TipoTransporte.ScopeFilter"
+          }
+        }
+      },
       "TipoTransporte.Filter": {
         "type": "object",
         "title": "TipoTransporte.Filter",
@@ -25510,6 +25748,9 @@
                   "id": {
                     "type": "boolean"
                   },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -25540,6 +25781,7 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "empresaId",
                     "nombre",
                     "usuarioCreacion",
                     "fechaCreacion",
@@ -25554,6 +25796,20 @@
               }
             ],
             "title": "TipoTransporte.Fields"
+          },
+          "include": {
+            "title": "TipoTransporte.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/TipoTransporte.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
           }
         },
         "additionalProperties": false,
@@ -25602,6 +25858,9 @@
                   "id": {
                     "type": "boolean"
                   },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -25632,6 +25891,7 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "empresaId",
                     "nombre",
                     "usuarioCreacion",
                     "fechaCreacion",
@@ -25646,6 +25906,20 @@
               }
             ],
             "title": "TipoTransporte.Fields"
+          },
+          "include": {
+            "title": "TipoTransporte.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/TipoTransporte.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
           }
         },
         "additionalProperties": false,

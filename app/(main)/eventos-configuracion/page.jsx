@@ -21,11 +21,11 @@ const EventosConfiguracion = () => {
     return (
         <div>
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Eventos configuración' })}
+                headerCrud={intl.formatMessage({ id: 'Eventos Configuración' })}
                 getRegistros={getEventoConfiguracion}
                 getRegistrosCount={getEventoConfiguracionCount}
                 botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"Eventos Configuracion"}
+                controlador={"Eventos Configuración"}
                 editarComponente={<EditarEventoConfiguracion />}
                 columnas={columnas}
                 deleteRegistro={deleteEventoConfiguracion}

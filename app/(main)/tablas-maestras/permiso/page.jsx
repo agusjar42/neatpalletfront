@@ -85,12 +85,20 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Logs incorrectos-Borrar' },
 
                 // Paises
-                /*{ header: intl.formatMessage({ id: 'Paises' }), seccion: 'Paises' },
+                { header: intl.formatMessage({ id: 'Paises' }), seccion: 'Paises' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Paises-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Paises-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Paises-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Paises-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Paises-Borrar' },*/
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Paises-Borrar' },
+
+                //Eventos Configuración
+                { header: intl.formatMessage({ id: 'Eventos Configuración' }), seccion: 'Eventos Configuración' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Eventos Configuración-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Eventos Configuración-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Eventos Configuración-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Eventos Configuración-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Eventos Configuración-Borrar' },
 
                 // Plantillas de correo
                 /*{ header: intl.formatMessage({ id: 'Plantillas de correo' }), seccion: 'Plantillas de correo' },
@@ -169,13 +177,13 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Configuracion-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Configuracion-Borrar' },
 
-                // Eventos Configuracion
+                /*// Eventos Configuracion
                 { header: intl.formatMessage({ id: 'Eventos Configuracion' }), seccion: 'Eventos Configuracion' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Eventos Configuracion-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Eventos Configuracion-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Eventos Configuracion-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Eventos Configuracion-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Eventos Configuracion-Borrar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Eventos Configuracion-Borrar' },*/
 
                 // Envio Movimiento
                 { header: intl.formatMessage({ id: 'Envio Movimiento' }), seccion: 'Envio Movimiento' },

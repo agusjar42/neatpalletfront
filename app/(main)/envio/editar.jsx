@@ -22,8 +22,12 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
     useEffect(() => {
         const fetchData = async () => {
             // Cargar tipos de transporte y carrocería disponibles
-            const dataTiposTransporte = await getTipoTransporte('{}');
-            const dataTiposCarroceria = await getTipoCarroceria('{}');
+            const empresaContexto = empresaId ?? getUsuarioSesion()?.empresaId;
+            const filtroTipos = empresaContexto
+                ? JSON.stringify({ where: { and: { empresaId: empresaContexto } } })
+                : '{}';
+            const dataTiposTransporte = await getTipoTransporte(filtroTipos);
+            const dataTiposCarroceria = await getTipoCarroceria(filtroTipos);
             setTiposTransporte(dataTiposTransporte || []);
             setTiposCarroceria(dataTiposCarroceria || []);
 
@@ -33,7 +37,7 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
             }
         };
         fetchData();
-    }, [idEditar, rowData]);
+    }, [idEditar, rowData, empresaId]);
 
     useEffect(() => {
         if (!onModoEdicionChange) return;

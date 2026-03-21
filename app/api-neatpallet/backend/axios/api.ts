@@ -8733,6 +8733,12 @@ export interface NewRol {
 export interface NewTipoCarroceria {
     /**
      * 
+     * @type {number}
+     * @memberof NewTipoCarroceria
+     */
+    'empresaId': number;
+    /**
+     * 
      * @type {string}
      * @memberof NewTipoCarroceria
      */
@@ -8835,6 +8841,12 @@ export interface NewTipoSensor {
  * @interface NewTipoTransporte
  */
 export interface NewTipoTransporte {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoTransporte
+     */
+    'empresaId': number;
     /**
      * 
      * @type {string}
@@ -12528,6 +12540,12 @@ export interface TipoCarroceria {
     'id'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof TipoCarroceria
+     */
+    'empresaId': number;
+    /**
+     * 
      * @type {string}
      * @memberof TipoCarroceria
      */
@@ -12605,6 +12623,12 @@ export interface TipoCarroceriaFilter {
      * @memberof TipoCarroceriaFilter
      */
     'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<TipoCarroceriaIncludeFilterItems | string>}
+     * @memberof TipoCarroceriaFilter
+     */
+    'include'?: Array<TipoCarroceriaIncludeFilterItems | string>;
 }
 /**
  * 
@@ -12648,7 +12672,41 @@ export interface TipoCarroceriaFilter1 {
      * @memberof TipoCarroceriaFilter1
      */
     'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<TipoCarroceriaIncludeFilterItems | string>}
+     * @memberof TipoCarroceriaFilter1
+     */
+    'include'?: Array<TipoCarroceriaIncludeFilterItems | string>;
 }
+/**
+ * 
+ * @export
+ * @interface TipoCarroceriaIncludeFilterItems
+ */
+export interface TipoCarroceriaIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCarroceriaIncludeFilterItems
+     */
+    'relation'?: TipoCarroceriaIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {TipoCarroceriaScopeFilter}
+     * @memberof TipoCarroceriaIncludeFilterItems
+     */
+    'scope'?: TipoCarroceriaScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum TipoCarroceriaIncludeFilterItemsRelationEnum {
+    Empresa = 'empresa'
+}
+
 /**
  * (tsType: Partial<TipoCarroceria>, schemaOptions: { partial: true })
  * @export
@@ -12661,6 +12719,12 @@ export interface TipoCarroceriaPartial {
      * @memberof TipoCarroceriaPartial
      */
     'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaPartial
+     */
+    'empresaId'?: number;
     /**
      * 
      * @type {string}
@@ -12703,6 +12767,55 @@ export interface TipoCarroceriaPartial {
      * @memberof TipoCarroceriaPartial
      */
     'orden'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface TipoCarroceriaScopeFilter
+ */
+export interface TipoCarroceriaScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCarroceriaScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoCarroceriaScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoCarroceriaScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof TipoCarroceriaScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof TipoCarroceriaScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
 }
 /**
  * (tsType: TipoCarroceriaWithRelations, schemaOptions: { includeRelations: true })
@@ -12718,6 +12831,12 @@ export interface TipoCarroceriaWithRelations {
     'id'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof TipoCarroceriaWithRelations
+     */
+    'empresaId': number;
+    /**
+     * 
      * @type {string}
      * @memberof TipoCarroceriaWithRelations
      */
@@ -12758,6 +12877,18 @@ export interface TipoCarroceriaWithRelations {
      * @memberof TipoCarroceriaWithRelations
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {EmpresaWithRelations}
+     * @memberof TipoCarroceriaWithRelations
+     */
+    'empresa'?: EmpresaWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof TipoCarroceriaWithRelations
+     */
+    'foreignKey'?: any;
 }
 /**
  * 
@@ -13138,6 +13269,12 @@ export interface TipoTransporte {
     'id'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof TipoTransporte
+     */
+    'empresaId': number;
+    /**
+     * 
      * @type {string}
      * @memberof TipoTransporte
      */
@@ -13215,6 +13352,12 @@ export interface TipoTransporteFilter {
      * @memberof TipoTransporteFilter
      */
     'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<TipoTransporteIncludeFilterItems | string>}
+     * @memberof TipoTransporteFilter
+     */
+    'include'?: Array<TipoTransporteIncludeFilterItems | string>;
 }
 /**
  * 
@@ -13258,7 +13401,41 @@ export interface TipoTransporteFilter1 {
      * @memberof TipoTransporteFilter1
      */
     'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<TipoTransporteIncludeFilterItems | string>}
+     * @memberof TipoTransporteFilter1
+     */
+    'include'?: Array<TipoTransporteIncludeFilterItems | string>;
 }
+/**
+ * 
+ * @export
+ * @interface TipoTransporteIncludeFilterItems
+ */
+export interface TipoTransporteIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransporteIncludeFilterItems
+     */
+    'relation'?: TipoTransporteIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {TipoTransporteScopeFilter}
+     * @memberof TipoTransporteIncludeFilterItems
+     */
+    'scope'?: TipoTransporteScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum TipoTransporteIncludeFilterItemsRelationEnum {
+    Empresa = 'empresa'
+}
+
 /**
  * (tsType: Partial<TipoTransporte>, schemaOptions: { partial: true })
  * @export
@@ -13271,6 +13448,12 @@ export interface TipoTransportePartial {
      * @memberof TipoTransportePartial
      */
     'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransportePartial
+     */
+    'empresaId'?: number;
     /**
      * 
      * @type {string}
@@ -13313,6 +13496,55 @@ export interface TipoTransportePartial {
      * @memberof TipoTransportePartial
      */
     'orden'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface TipoTransporteScopeFilter
+ */
+export interface TipoTransporteScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoTransporteScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoTransporteScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof TipoTransporteScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof TipoTransporteScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
 }
 /**
  * (tsType: TipoTransporteWithRelations, schemaOptions: { includeRelations: true })
@@ -13328,6 +13560,12 @@ export interface TipoTransporteWithRelations {
     'id'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof TipoTransporteWithRelations
+     */
+    'empresaId': number;
+    /**
+     * 
      * @type {string}
      * @memberof TipoTransporteWithRelations
      */
@@ -13368,6 +13606,18 @@ export interface TipoTransporteWithRelations {
      * @memberof TipoTransporteWithRelations
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {EmpresaWithRelations}
+     * @memberof TipoTransporteWithRelations
+     */
+    'empresa'?: EmpresaWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof TipoTransporteWithRelations
+     */
+    'foreignKey'?: any;
 }
 /**
  * 

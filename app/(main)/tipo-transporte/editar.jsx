@@ -8,7 +8,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosTipoTransporte from "./EditarDatosTipoTransporte";
 import { useIntl } from 'react-intl';
 
-const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, empresaId }) => {
     const toast = useRef(null);
     const [tipoTransporte, setTipoTransporte] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -41,6 +41,7 @@ const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
+                objGuardar['empresaId'] = empresaId ?? getUsuarioSesion()?.empresaId;
                 
                 const nuevoRegistro = await postTipoTransporte(objGuardar);
 

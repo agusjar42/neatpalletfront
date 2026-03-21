@@ -3,9 +3,11 @@ import { getTipoTransporte, getTipoTransporteCount, deleteTipoTransporte } from 
 import EditarTipoTransportes from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'
+import { getUsuarioSesion } from "@/app/utility/Utils";
 
 const TipoTransporte = () => {
     const intl = useIntl();
+    const empresaIdSesion = getUsuarioSesion()?.empresaId;
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
@@ -20,7 +22,9 @@ const TipoTransporte = () => {
                 getRegistrosCount={getTipoTransporteCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Tipo Transporte"}
+                filtradoBase={{empresaId: empresaIdSesion}}
                 editarComponente={<EditarTipoTransportes />}
+                editarComponenteParametrosExtra={{empresaId: empresaIdSesion}}
                 columnas={columnas}
                 deleteRegistro={deleteTipoTransporte}
             />

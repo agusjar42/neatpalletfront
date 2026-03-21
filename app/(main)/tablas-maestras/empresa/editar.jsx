@@ -9,7 +9,6 @@ import { getVistaUsuarios, getVistaUsuariosCount, deleteUsuario } from "@/app/ap
 import { getCliente, getClienteCount, deleteCliente } from "@/app/api-endpoints/cliente";
 import { getEnvio, getEnvioCount, deleteEnvio } from "@/app/api-endpoints/envio";
 import { getEnvioSensorEmpresa, getEnvioSensorEmpresaCount, deleteEnvioSensorEmpresa, crearEnvioSensorEmpresaDesdetipoSensor } from "@/app/api-endpoints/envio-sensor-empresa";
-import { getPallet, getPalletCount, deletePallet } from "@/app/api-endpoints/pallet";
 import { getTipoCarroceria, getTipoCarroceriaCount, deleteTipoCarroceria } from "@/app/api-endpoints/tipo-carroceria";
 import { getTipoTransporte, getTipoTransporteCount, deleteTipoTransporte } from "@/app/api-endpoints/tipo-transporte";
 import { getEventoConfiguracion, getEventoConfiguracionCount } from "@/app/api-endpoints/evento-configuracion";
@@ -18,9 +17,9 @@ import EditarUsuario from "../../usuarios/editar";
 import EditarCliente from "../../cliente/editar";
 import EditarEnvio from "../../envio/editar";
 import EditarEnvioSensorEmpresa from "../../envio-sensor-empresa/editar";
-import EditarPallet from "../../pallet/editar";
 import EditarTipoCarroceria from "../../tipo-carroceria/editar";
 import EditarTipoTransporte from "../../tipo-transporte/editar";
+import PalletsAsignadosEmpresa from "./PalletsAsignadosEmpresa";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
@@ -65,14 +64,6 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Tipo de Sensor' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
-    ];
-
-    const columnasPalletAsignado = [
-        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
-        { campo: 'codigo', header: intl.formatMessage({ id: 'Código' }), tipo: 'string' },
-        { campo: 'alias', header: intl.formatMessage({ id: 'Alias' }), tipo: 'string' },
-        { campo: 'modelo', header: intl.formatMessage({ id: 'Modelo' }), tipo: 'string' },
-        { campo: 'medidas', header: intl.formatMessage({ id: 'Medidas' }), tipo: 'string' },
     ];
 
     const columnasCatalogosGlobales = [
@@ -368,17 +359,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
                                 <TabPanel header={intl.formatMessage({ id: 'Pallets asignados a empresa' })}>
                                     {empresa.id ? (
-                                        <Crud
-                                            headerCrud={intl.formatMessage({ id: 'Pallets asignados a empresa' })}
-                                            getRegistros={getPallet}
-                                            getRegistrosCount={getPalletCount}
-                                            botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'importarCSVPallets']}
-                                            controlador={"Pallet"}
-                                            editarComponente={<EditarPallet />}
-                                            columnas={columnasPalletAsignado}
-                                            deleteRegistro={deletePallet}
-                                            editarComponenteParametrosExtra={{ estoyDentroDeUnTab: true }}
-                                        />
+                                        <PalletsAsignadosEmpresa empresaId={empresa.id} />
                                     ) : renderTabNoDisponible(intl.formatMessage({ id: 'Debe guardar la empresa primero para poder gestionar pallets asignados' }))}
                                 </TabPanel>
 

@@ -1278,7 +1278,6 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 header={intl.formatMessage({ id: 'Importar archivo CSV' })}
                                 labelSeleccionar={intl.formatMessage({ id: 'Seleccionar archivo' })}
                                 labelProcesar={intl.formatMessage({ id: 'Procesar archivo' })}
-                                empresaId={filtradoBase?.empresaId}
                                 onCSVProcessed={(results) => {
                                     // Recargar los datos después del procesamiento exitoso
                                     if (results.created > 0 || results.updated > 0) {

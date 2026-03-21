@@ -736,6 +736,269 @@ export interface EmpresaFilter1 {
 /**
  * 
  * @export
+ * @interface EmpresaPallet
+ */
+export interface EmpresaPallet {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPallet
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPallet
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPallet
+     */
+    'palletId'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface EmpresaPalletFilter
+ */
+export interface EmpresaPalletFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EmpresaPalletFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EmpresaPalletFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EmpresaPalletIncludeFilterItems | string>}
+     * @memberof EmpresaPalletFilter
+     */
+    'include'?: Array<EmpresaPalletIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EmpresaPalletFilter1
+ */
+export interface EmpresaPalletFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EmpresaPalletFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EmpresaPalletFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EmpresaPalletFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EmpresaPalletIncludeFilterItems | string>}
+     * @memberof EmpresaPalletFilter1
+     */
+    'include'?: Array<EmpresaPalletIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EmpresaPalletIncludeFilterItems
+ */
+export interface EmpresaPalletIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPalletIncludeFilterItems
+     */
+    'relation'?: EmpresaPalletIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {EmpresaPalletScopeFilter}
+     * @memberof EmpresaPalletIncludeFilterItems
+     */
+    'scope'?: EmpresaPalletScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum EmpresaPalletIncludeFilterItemsRelationEnum {
+    Empresa = 'empresa',
+    Pallet = 'pallet'
+}
+
+/**
+ * (tsType: Partial<EmpresaPallet>, schemaOptions: { partial: true })
+ * @export
+ * @interface EmpresaPalletPartial
+ */
+export interface EmpresaPalletPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletPartial
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletPartial
+     */
+    'palletId'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface EmpresaPalletScopeFilter
+ */
+export interface EmpresaPalletScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EmpresaPalletScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EmpresaPalletScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof EmpresaPalletScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof EmpresaPalletScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: EmpresaPalletWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface EmpresaPalletWithRelations
+ */
+export interface EmpresaPalletWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletWithRelations
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaPalletWithRelations
+     */
+    'palletId'?: number;
+    /**
+     * 
+     * @type {EmpresaWithRelations}
+     * @memberof EmpresaPalletWithRelations
+     */
+    'empresa'?: EmpresaWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof EmpresaPalletWithRelations
+     */
+    'foreignKey'?: any;
+    /**
+     * 
+     * @type {PalletWithRelations}
+     * @memberof EmpresaPalletWithRelations
+     */
+    'pallet'?: PalletWithRelations;
+}
+/**
+ * 
+ * @export
  * @interface EmpresaPartial
  */
 export interface EmpresaPartial {
@@ -7075,6 +7338,25 @@ export interface NewEmpresa {
     'usuarioIdiomaId'?: number;
 }
 /**
+ * (tsType: Omit<EmpresaPallet, \'id\'>, schemaOptions: { title: \'NewEmpresaPallet\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewEmpresaPallet
+ */
+export interface NewEmpresaPallet {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEmpresaPallet
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEmpresaPallet
+     */
+    'palletId'?: number;
+}
+/**
  * (tsType: Omit<Envio, \'id\'>, schemaOptions: { title: \'NewEnvio\', exclude: [ \'id\' ] })
  * @export
  * @interface NewEnvio
@@ -8189,12 +8471,6 @@ export interface NewPais {
  * @interface NewPallet
  */
 export interface NewPallet {
-    /**
-     * 
-     * @type {number}
-     * @memberof NewPallet
-     */
-    'empresaId'?: number;
     /**
      * 
      * @type {string}
@@ -9680,12 +9956,6 @@ export interface Pallet {
     'id'?: number;
     /**
      * 
-     * @type {number}
-     * @memberof Pallet
-     */
-    'empresaId'?: number;
-    /**
-     * 
      * @type {string}
      * @memberof Pallet
      */
@@ -9868,7 +10138,6 @@ export interface PalletIncludeFilterItems {
     * @enum {string}
     */
 export enum PalletIncludeFilterItemsRelationEnum {
-    Empresa = 'empresa',
     EnvioPallets = 'envioPallets',
     PalletParametros = 'palletParametros'
 }
@@ -10276,12 +10545,6 @@ export interface PalletPartial {
     'id'?: number;
     /**
      * 
-     * @type {number}
-     * @memberof PalletPartial
-     */
-    'empresaId'?: number;
-    /**
-     * 
      * @type {string}
      * @memberof PalletPartial
      */
@@ -10410,12 +10673,6 @@ export interface PalletWithRelations {
     'id'?: number;
     /**
      * 
-     * @type {number}
-     * @memberof PalletWithRelations
-     */
-    'empresaId'?: number;
-    /**
-     * 
      * @type {string}
      * @memberof PalletWithRelations
      */
@@ -10480,18 +10737,6 @@ export interface PalletWithRelations {
      * @memberof PalletWithRelations
      */
     'orden'?: number;
-    /**
-     * 
-     * @type {EmpresaWithRelations}
-     * @memberof PalletWithRelations
-     */
-    'empresa'?: EmpresaWithRelations;
-    /**
-     * 
-     * @type {any}
-     * @memberof PalletWithRelations
-     */
-    'foreignKey'?: any;
     /**
      * 
      * @type {Array<EnvioPalletWithRelations>}
@@ -16371,6 +16616,612 @@ export class EmpresaControllerApi extends BaseAPI {
      */
     public empresaControllerUpdateById(id: number, empresaPartial?: EmpresaPartial, options?: AxiosRequestConfig) {
         return EmpresaControllerApiFp(this.configuration).empresaControllerUpdateById(id, empresaPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * EmpresaPalletControllerApi - axios parameter creator
+ * @export
+ */
+export const EmpresaPalletControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/empresa-pallets/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewEmpresaPallet} [newEmpresaPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerCreate: async (newEmpresaPallet?: NewEmpresaPallet, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/empresa-pallets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newEmpresaPallet, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('empresaPalletControllerDeleteById', 'id', id)
+            const localVarPath = `/empresa-pallets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {EmpresaPalletFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerFind: async (filter?: EmpresaPalletFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/empresa-pallets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaPalletFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerFindById: async (id: number, filter?: EmpresaPalletFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('empresaPalletControllerFindById', 'id', id)
+            const localVarPath = `/empresa-pallets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaPallet} [empresaPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerReplaceById: async (id: number, empresaPallet?: EmpresaPallet, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('empresaPalletControllerReplaceById', 'id', id)
+            const localVarPath = `/empresa-pallets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(empresaPallet, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EmpresaPalletPartial} [empresaPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerUpdateAll: async (where?: { [key: string]: object; }, empresaPalletPartial?: EmpresaPalletPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/empresa-pallets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(empresaPalletPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaPalletPartial} [empresaPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerUpdateById: async (id: number, empresaPalletPartial?: EmpresaPalletPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('empresaPalletControllerUpdateById', 'id', id)
+            const localVarPath = `/empresa-pallets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(empresaPalletPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EmpresaPalletControllerApi - functional programming interface
+ * @export
+ */
+export const EmpresaPalletControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EmpresaPalletControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaPalletControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaPalletControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewEmpresaPallet} [newEmpresaPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaPalletControllerCreate(newEmpresaPallet?: NewEmpresaPallet, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmpresaPallet>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaPalletControllerCreate(newEmpresaPallet, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaPalletControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaPalletControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {EmpresaPalletFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaPalletControllerFind(filter?: EmpresaPalletFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EmpresaPalletWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaPalletControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaPalletFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaPalletControllerFindById(id: number, filter?: EmpresaPalletFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmpresaPalletWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaPalletControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaPallet} [empresaPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaPalletControllerReplaceById(id: number, empresaPallet?: EmpresaPallet, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaPalletControllerReplaceById(id, empresaPallet, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EmpresaPalletPartial} [empresaPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaPalletControllerUpdateAll(where?: { [key: string]: object; }, empresaPalletPartial?: EmpresaPalletPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaPalletControllerUpdateAll(where, empresaPalletPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaPalletPartial} [empresaPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaPalletControllerUpdateById(id: number, empresaPalletPartial?: EmpresaPalletPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaPalletControllerUpdateById(id, empresaPalletPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EmpresaPalletControllerApi - factory interface
+ * @export
+ */
+export const EmpresaPalletControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EmpresaPalletControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.empresaPalletControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewEmpresaPallet} [newEmpresaPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerCreate(newEmpresaPallet?: NewEmpresaPallet, options?: any): AxiosPromise<EmpresaPallet> {
+            return localVarFp.empresaPalletControllerCreate(newEmpresaPallet, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.empresaPalletControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EmpresaPalletFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerFind(filter?: EmpresaPalletFilter1, options?: any): AxiosPromise<Array<EmpresaPalletWithRelations>> {
+            return localVarFp.empresaPalletControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaPalletFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerFindById(id: number, filter?: EmpresaPalletFilter, options?: any): AxiosPromise<EmpresaPalletWithRelations> {
+            return localVarFp.empresaPalletControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaPallet} [empresaPallet] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerReplaceById(id: number, empresaPallet?: EmpresaPallet, options?: any): AxiosPromise<any> {
+            return localVarFp.empresaPalletControllerReplaceById(id, empresaPallet, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EmpresaPalletPartial} [empresaPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerUpdateAll(where?: { [key: string]: object; }, empresaPalletPartial?: EmpresaPalletPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.empresaPalletControllerUpdateAll(where, empresaPalletPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaPalletPartial} [empresaPalletPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaPalletControllerUpdateById(id: number, empresaPalletPartial?: EmpresaPalletPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.empresaPalletControllerUpdateById(id, empresaPalletPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EmpresaPalletControllerApi - object-oriented interface
+ * @export
+ * @class EmpresaPalletControllerApi
+ * @extends {BaseAPI}
+ */
+export class EmpresaPalletControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaPalletControllerApi
+     */
+    public empresaPalletControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return EmpresaPalletControllerApiFp(this.configuration).empresaPalletControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewEmpresaPallet} [newEmpresaPallet] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaPalletControllerApi
+     */
+    public empresaPalletControllerCreate(newEmpresaPallet?: NewEmpresaPallet, options?: AxiosRequestConfig) {
+        return EmpresaPalletControllerApiFp(this.configuration).empresaPalletControllerCreate(newEmpresaPallet, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaPalletControllerApi
+     */
+    public empresaPalletControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return EmpresaPalletControllerApiFp(this.configuration).empresaPalletControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EmpresaPalletFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaPalletControllerApi
+     */
+    public empresaPalletControllerFind(filter?: EmpresaPalletFilter1, options?: AxiosRequestConfig) {
+        return EmpresaPalletControllerApiFp(this.configuration).empresaPalletControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EmpresaPalletFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaPalletControllerApi
+     */
+    public empresaPalletControllerFindById(id: number, filter?: EmpresaPalletFilter, options?: AxiosRequestConfig) {
+        return EmpresaPalletControllerApiFp(this.configuration).empresaPalletControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EmpresaPallet} [empresaPallet] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaPalletControllerApi
+     */
+    public empresaPalletControllerReplaceById(id: number, empresaPallet?: EmpresaPallet, options?: AxiosRequestConfig) {
+        return EmpresaPalletControllerApiFp(this.configuration).empresaPalletControllerReplaceById(id, empresaPallet, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {EmpresaPalletPartial} [empresaPalletPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaPalletControllerApi
+     */
+    public empresaPalletControllerUpdateAll(where?: { [key: string]: object; }, empresaPalletPartial?: EmpresaPalletPartial, options?: AxiosRequestConfig) {
+        return EmpresaPalletControllerApiFp(this.configuration).empresaPalletControllerUpdateAll(where, empresaPalletPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EmpresaPalletPartial} [empresaPalletPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaPalletControllerApi
+     */
+    public empresaPalletControllerUpdateById(id: number, empresaPalletPartial?: EmpresaPalletPartial, options?: AxiosRequestConfig) {
+        return EmpresaPalletControllerApiFp(this.configuration).empresaPalletControllerUpdateById(id, empresaPalletPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

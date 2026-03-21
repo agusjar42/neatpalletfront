@@ -775,6 +775,309 @@
         "operationId": "EnvioSensorEmpresaController.crearSensoresDesdetipoSensor"
       }
     },
+    "/empresa-pallets/count": {
+      "get": {
+        "x-controller-name": "EmpresaPalletController",
+        "x-operation-name": "count",
+        "tags": [
+          "EmpresaPalletController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EmpresaPallet model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EmpresaPallet.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EmpresaPallet>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EmpresaPalletController.count"
+      }
+    },
+    "/empresa-pallets/{id}": {
+      "put": {
+        "x-controller-name": "EmpresaPalletController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "EmpresaPalletController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EmpresaPallet PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmpresaPallet"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EmpresaPalletController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "EmpresaPalletController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "EmpresaPalletController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EmpresaPallet PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmpresaPalletPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EmpresaPalletController.updateById"
+      },
+      "get": {
+        "x-controller-name": "EmpresaPalletController",
+        "x-operation-name": "findById",
+        "tags": [
+          "EmpresaPalletController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EmpresaPallet model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaPalletWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaPallet.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EmpresaPalletController.findById"
+      },
+      "delete": {
+        "x-controller-name": "EmpresaPalletController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "EmpresaPalletController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EmpresaPallet DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EmpresaPalletController.deleteById"
+      }
+    },
+    "/empresa-pallets": {
+      "post": {
+        "x-controller-name": "EmpresaPalletController",
+        "x-operation-name": "create",
+        "tags": [
+          "EmpresaPalletController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EmpresaPallet model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaPallet"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewEmpresaPallet"
+              }
+            }
+          }
+        },
+        "operationId": "EmpresaPalletController.create"
+      },
+      "patch": {
+        "x-controller-name": "EmpresaPalletController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "EmpresaPalletController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EmpresaPallet PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EmpresaPallet.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EmpresaPallet>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmpresaPalletPartial"
+              }
+            }
+          }
+        },
+        "operationId": "EmpresaPalletController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "EmpresaPalletController",
+        "x-operation-name": "find",
+        "tags": [
+          "EmpresaPalletController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of EmpresaPallet model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmpresaPalletWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaPallet.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EmpresaPalletController.find"
+      }
+    },
     "/empresas/count": {
       "get": {
         "x-controller-name": "EmpresaController",
@@ -12546,9 +12849,6 @@
           "id": {
             "type": "number"
           },
-          "empresaId": {
-            "type": "number"
-          },
           "fechaImpresion": {
             "type": "string"
           },
@@ -12584,10 +12884,6 @@
           "orden": {
             "type": "number"
           },
-          "empresa": {
-            "$ref": "#/components/schemas/EmpresaWithRelations"
-          },
-          "foreignKey": {},
           "envioPallets": {
             "type": "array",
             "items": {
@@ -14355,9 +14651,6 @@
           "id": {
             "type": "number"
           },
-          "empresaId": {
-            "type": "number"
-          },
           "fechaImpresion": {
             "type": "string"
           },
@@ -14401,9 +14694,6 @@
         "type": "object",
         "description": "(tsType: Omit<Pallet, 'id'>, schemaOptions: { title: 'NewPallet', exclude: [ 'id' ] })",
         "properties": {
-          "empresaId": {
-            "type": "number"
-          },
           "fechaImpresion": {
             "type": "string"
           },
@@ -14449,9 +14739,6 @@
         "description": "(tsType: Partial<Pallet>, schemaOptions: { partial: true })",
         "properties": {
           "id": {
-            "type": "number"
-          },
-          "empresaId": {
             "type": "number"
           },
           "fechaImpresion": {
@@ -17643,6 +17930,80 @@
         ],
         "additionalProperties": false
       },
+      "EmpresaPallet": {
+        "title": "EmpresaPallet",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewEmpresaPallet": {
+        "title": "NewEmpresaPallet",
+        "type": "object",
+        "description": "(tsType: Omit<EmpresaPallet, 'id'>, schemaOptions: { title: 'NewEmpresaPallet', exclude: [ 'id' ] })",
+        "properties": {
+          "empresaId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<EmpresaPallet, 'id'>"
+      },
+      "EmpresaPalletWithRelations": {
+        "title": "EmpresaPalletWithRelations",
+        "type": "object",
+        "description": "(tsType: EmpresaPalletWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/EmpresaWithRelations"
+          },
+          "foreignKey": {},
+          "pallet": {
+            "$ref": "#/components/schemas/PalletWithRelations"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "EmpresaPalletWithRelations"
+      },
+      "EmpresaPalletPartial": {
+        "title": "EmpresaPalletPartial",
+        "type": "object",
+        "description": "(tsType: Partial<EmpresaPallet>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<EmpresaPallet>"
+      },
       "Cliente": {
         "title": "Cliente",
         "type": "object",
@@ -18078,6 +18439,250 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Cliente>"
+      },
+      "EmpresaPallet.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "EmpresaPallet.ScopeFilter"
+      },
+      "EmpresaPallet.IncludeFilter.Items": {
+        "title": "EmpresaPallet.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "empresa",
+              "pallet"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/EmpresaPallet.ScopeFilter"
+          }
+        }
+      },
+      "EmpresaPallet.Filter": {
+        "type": "object",
+        "title": "EmpresaPallet.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "palletId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "palletId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EmpresaPallet.Fields"
+          },
+          "include": {
+            "title": "EmpresaPallet.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EmpresaPallet.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EmpresaPallet>"
+      },
+      "EmpresaPallet.Filter1": {
+        "type": "object",
+        "title": "EmpresaPallet.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "EmpresaPallet.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "palletId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "palletId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EmpresaPallet.Fields"
+          },
+          "include": {
+            "title": "EmpresaPallet.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EmpresaPallet.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EmpresaPallet>"
       },
       "Empresa1": {
         "type": "object",
@@ -23140,7 +23745,6 @@
           "relation": {
             "type": "string",
             "enum": [
-              "empresa",
               "envioPallets",
               "palletParametros"
             ]
@@ -23188,9 +23792,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "empresaId": {
-                    "type": "boolean"
-                  },
                   "fechaImpresion": {
                     "type": "boolean"
                   },
@@ -23233,7 +23834,6 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "empresaId",
                     "fechaImpresion",
                     "codigo",
                     "alias",
@@ -23314,9 +23914,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "empresaId": {
-                    "type": "boolean"
-                  },
                   "fechaImpresion": {
                     "type": "boolean"
                   },
@@ -23359,7 +23956,6 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "empresaId",
                     "fechaImpresion",
                     "codigo",
                     "alias",
@@ -26957,7 +27553,7 @@
   ],
   "servers": [
     {
-      "url": "http://[::1]:8000"
+      "url": "http://localhost:8000"
     }
   ]
 }

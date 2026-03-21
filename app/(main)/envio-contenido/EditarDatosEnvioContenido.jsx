@@ -8,7 +8,7 @@ import { FileUpload } from "primereact/fileupload";
 import { Image } from 'primereact/image';
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
-import { convertirArchivoABase64, getUsuarioSesion } from "@/app/utility/Utils";
+import { convertirArchivoABase64 } from "@/app/utility/Utils";
 import { getProducto } from "@/app/api-endpoints/producto";
 import { getPallet } from "@/app/api-endpoints/pallet";
 
@@ -44,21 +44,17 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         cargarProductos();
     }, [clienteId]);
 
-    // Cargar pallets filtrados por empresa (ya que los pallets pertenecen a la empresa)
+    // Cargar pallets globales (ya no se filtran por empresa)
     useEffect(() => {
         const cargarPallets = async () => {
             try {
-                const empresaId = getUsuarioSesion()?.empresaId;
-                if (empresaId) {
-                    const filtroPallets = JSON.stringify({ where: { and: { empresaId: empresaId } } });
-                    const dataPallets = await getPallet(filtroPallets);
-                    // Formatear pallets para el dropdown
-                    const palletsFormateados = dataPallets?.map(pallet => ({
-                        ...pallet,
-                        label: `${pallet.codigo} - ${pallet.alias || 'Sin alias'}`
-                    })) || [];
-                    setPallets(palletsFormateados);
-                }
+                const dataPallets = await getPallet(JSON.stringify({}));
+                // Formatear pallets para el dropdown
+                const palletsFormateados = dataPallets?.map(pallet => ({
+                    ...pallet,
+                    label: `${pallet.codigo} - ${pallet.alias || 'Sin alias'}`
+                })) || [];
+                setPallets(palletsFormateados);
             } catch (error) {
                 console.error('Error cargando pallets:', error);
             }

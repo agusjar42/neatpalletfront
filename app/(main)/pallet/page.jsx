@@ -12,7 +12,6 @@ const Pallet = () => {
         { campo: 'alias', header: intl.formatMessage({ id: 'Alias' }), tipo: 'string' },
         { campo: 'modelo', header: intl.formatMessage({ id: 'Modelo' }), tipo: 'string' },
         { campo: 'medidas', header: intl.formatMessage({ id: 'Medidas' }), tipo: 'string' },
-        { campo: 'empresaId', header: intl.formatMessage({ id: 'Empresa asignada' }), tipo: 'string' },
     ]
 
     // Esta función transforma los registros para su exportación en formato CSV,

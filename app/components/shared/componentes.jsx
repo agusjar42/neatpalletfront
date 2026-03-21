@@ -486,8 +486,7 @@ const ImportarCSVPalletsDialog = ({
     header,
     labelSeleccionar,
     labelProcesar,
-    onCSVProcessed = null,
-    empresaId = null
+    onCSVProcessed = null
 }) => {
     const intl = useIntl();
     const resolvedHeader = header ?? intl.formatMessage({ id: 'Importar archivo CSV' });
@@ -512,7 +511,6 @@ const ImportarCSVPalletsDialog = ({
             }
 
             const palletData = {
-                empresaId: empresaId,
                 orden: fields[0],
                 codigo: fields[1] || '',
                 alias: fields[2] || '',
@@ -528,9 +526,6 @@ const ImportarCSVPalletsDialog = ({
             }
             if (!palletData.alias) {
                 throw new Error(`Línea ${lineIndex + 1}: Alias es obligatorio`);
-            }
-            if (!empresaId) {
-                throw new Error(`Línea ${lineIndex + 1}: ID de empresa no proporcionado`);
             }
 
             return palletData;
@@ -639,19 +634,6 @@ const ImportarCSVPalletsDialog = ({
             return;
         }
 
-        if (!empresaId) {
-            setErrorMessage(intl.formatMessage({ id: 'ID de empresa no proporcionado' }));
-            if (toast.current) {
-                toast.current.show({
-                    severity: 'error',
-                    summary: intl.formatMessage({ id: 'Error de configuración' }),
-                    detail: intl.formatMessage({ id: 'ID de empresa no proporcionado' }),
-                    life: 3000
-                });
-            }
-            return;
-        }
-        
         setIsProcessing(true);
         setErrorMessage('');
         setProcessResults({ created: 0, updated: 0, errors: [] });

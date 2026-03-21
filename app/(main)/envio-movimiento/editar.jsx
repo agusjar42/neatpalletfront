@@ -36,9 +36,7 @@ const EditarEnvioMovimiento = ({
             const dataEnviosPallet = await getEnvioPallet(
                 JSON.stringify(envioId ? { where: { envioId: envioId } } : {})
             );
-            const dataTiposSensor = await getTipoSensor(
-                JSON.stringify({ where: { empresaId: getUsuarioSesion()?.empresaId } })
-            );
+            const dataTiposSensor = await getTipoSensor(JSON.stringify({}));
             setEnvios(dataEnviosPallet || []);
             setTiposSensor(dataTiposSensor || []);
 

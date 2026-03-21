@@ -9,7 +9,6 @@ import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioPallet from "./EditarDatosEnvioPallet";
 import { useIntl } from 'react-intl';
-import { get } from "http";
 
 const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId }) => {
     const toast = useRef(null);
@@ -30,7 +29,7 @@ const EditarEnvioPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                                                         }
                                                     }
                                                 }));
-            const dataPallets = await getPallet(JSON.stringify({where: {empresaId: getUsuarioSesion()?.empresaId}}));
+            const dataPallets = await getPallet(JSON.stringify({}));
             setEnvios(dataEnvios || []);
             setPallets(dataPallets || []);
 

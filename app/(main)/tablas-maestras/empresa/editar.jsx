@@ -376,9 +376,8 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                                             controlador={"Pallet"}
                                             editarComponente={<EditarPallet />}
                                             columnas={columnasPalletAsignado}
-                                            filtradoBase={{ empresaId: empresa.id }}
                                             deleteRegistro={deletePallet}
-                                            editarComponenteParametrosExtra={{ empresaId: empresa.id, estoyDentroDeUnTab: true }}
+                                            editarComponenteParametrosExtra={{ estoyDentroDeUnTab: true }}
                                         />
                                     ) : renderTabNoDisponible(intl.formatMessage({ id: 'Debe guardar la empresa primero para poder gestionar pallets asignados' }))}
                                 </TabPanel>

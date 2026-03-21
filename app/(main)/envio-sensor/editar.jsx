@@ -33,15 +33,9 @@ const EditarEnvioSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                         }));
             setEnvios(dataEnvios || []);
             //
-            // Obtenemos todos los tipos de sensor disponibles para la empresa
+            // Obtenemos todos los tipos de sensor disponibles (globales)
             //
-            const dataTiposSensor = await getTipoSensor(JSON.stringify({
-                where: {
-                    and: {
-                        empresaId: getUsuarioSesion()?.empresaId
-                    }
-                }
-            }));
+            const dataTiposSensor = await getTipoSensor(JSON.stringify({}));
             //
             // Obtenemos todos los sensores ya introducidos para este envío
             //

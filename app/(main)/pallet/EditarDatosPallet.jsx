@@ -2,10 +2,9 @@ import React from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 
-const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando, mostrarSelectorEmpresa = false, empresas = [] }) => {
+const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
     const intl = useIntl();
 
     return (
@@ -83,24 +82,6 @@ const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando, mostrarSelector
                         inputStyle={{ textAlign: 'right' }}
                     />
                 </div>
-                {mostrarSelectorEmpresa && (
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="empresaId">{intl.formatMessage({ id: 'Empresa asignada' })}</label>
-                        <Dropdown
-                            id="empresaId"
-                            value={pallet.empresaId ?? null}
-                            options={[
-                                { id: null, nombre: intl.formatMessage({ id: 'Sin asignar' }) },
-                                ...empresas,
-                            ]}
-                            optionLabel="nombre"
-                            optionValue="id"
-                            placeholder={intl.formatMessage({ id: 'Selecciona empresa (opcional)' })}
-                            onChange={(e) => setPallet({ ...pallet, empresaId: e.value })}
-                            className="w-full"
-                        />
-                    </div>
-                )}
             </div>
         </Fieldset>
     );

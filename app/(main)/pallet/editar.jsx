@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postPallet, patchPallet, getPalletCount, getPallet } from "@/app/api-endpoints/pallet";
+import { postPallet, patchPallet, getPallet } from "@/app/api-endpoints/pallet";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosPallet from "./EditarDatosPallet";
@@ -10,14 +10,12 @@ import { useIntl } from 'react-intl';
 import EditarPalletParametros from "../pallet-parametro/editar";
 import Crud from "../../components/shared/crud";
 import { getPalletParametro, getPalletParametroCount, deletePalletParametro } from "@/app/api-endpoints/pallet-parametro";
-import { getEmpresas } from "@/app/api-endpoints/empresa";
 
-const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, empresaId }) => {
+const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const toast = useRef(null);
     const [pallet, setPallet] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
-    const [empresasDisponibles, setEmpresasDisponibles] = useState([]);
     const intl = useIntl();
 
     useEffect(() => {
@@ -30,34 +28,19 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
         fetchData();
     }, [idEditar, rowData]);
 
-    useEffect(() => {
-        const obtenerEmpresas = async () => {
-            if (empresaId) {
-                return;
-            }
-            const empresas = await getEmpresas();
-            setEmpresasDisponibles(Array.isArray(empresas) ? empresas : []);
-        };
-        obtenerEmpresas();
-    }, [empresaId]);
-
     const validaciones = async () => {
         let existeCodigo = false;
         //
-        //Comprobamos que el campo código no exista en el sistema, ya que debe ser único por empresa
+        // Comprobamos que el código no exista en el sistema, ya que ahora es único global
         //
-        const empresaContexto = empresaId ?? pallet.empresaId ?? null;
-        const where = empresaContexto === null
-            ? { and: { codigo: pallet.codigo } }
-            : { and: { empresaId: empresaContexto, codigo: pallet.codigo } };
-        const filtro = JSON.stringify({ where });
-        
+        const filtro = JSON.stringify({ where: { and: { codigo: pallet.codigo } } });
+
         const palletsConCodigoIgual = await getPallet(filtro);
         palletsConCodigoIgual.map(p => {
             //
             // Si el pallet encontrado es el mismo que estamos editando, lo ignoramos. Sino mostramos error y no guardamos
             //
-            if (p.id !== pallet.id) {                
+            if (p.id !== pallet.id) {
                 existeCodigo = true;
                 toast.current?.show({
                     severity: 'error',
@@ -70,7 +53,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
 
         const validaOrden = pallet.orden === undefined || pallet.orden === null || pallet.orden === "";
         const validaCodigo = pallet.codigo === undefined || pallet.codigo === "";
-        
+
         if (validaOrden || validaCodigo) {
             toast.current?.show({
                 severity: 'error',
@@ -79,7 +62,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                 life: 3000,
             });
         }
-        
+
         return (!validaOrden && !validaCodigo && !existeCodigo);
     }
 
@@ -94,9 +77,8 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
-                objGuardar['empresaId'] = empresaId ?? objGuardar['empresaId'] ?? null;
                 objGuardar['periodoEnvioMail'] = objGuardar['periodoEnvioMail'] ? objGuardar['periodoEnvioMail'] : 0;
-                
+
                 const nuevoRegistro = await postPallet(objGuardar);
 
                 if (nuevoRegistro?.id) {
@@ -112,7 +94,6 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                 }
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
-                objGuardar['empresaId'] = empresaId ?? objGuardar['empresaId'] ?? null;
                 delete objGuardar['fechaModificacion'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchPallet(objGuardar.id, objGuardar);
@@ -129,7 +110,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
     //
-    //Muestra la tabla de parámetros solo si el pallet ya está creado
+    // Muestra la tabla de parámetros solo si el pallet ya está creado
     //
     const columnas = [
         { campo: 'parametro', header: intl.formatMessage({ id: 'Parámetro' }), tipo: 'string' },
@@ -148,29 +129,28 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                             pallet={pallet}
                             setPallet={setPallet}
                             estadoGuardando={estadoGuardando}
-                            mostrarSelectorEmpresa={!empresaId}
-                            empresas={empresasDisponibles}
                         />
                         {//
-                        //Si el pallet ya está creado, mostramos la tabla de parámetros. Ojo en el parámetro editarComponenteParametrosExtra le pasamos el palletId para que al crear un nuevo parámetro ya venga relleno
-                        //
-                        pallet.id && <div><br></br>
-                            <Crud
-                                headerCrud={intl.formatMessage({ id: 'Parámetros' })}
-                                getRegistros={getPalletParametro}
-                                getRegistrosCount={getPalletParametroCount}
-                                botones={['nuevo','ver', 'editar', 'eliminar']}
-                                controlador={"Pallet Parametro"}
-                                editarComponente={<EditarPalletParametros />}
-                                columnas={columnas}
-                                filtradoBase={{palletId: pallet.id}}
-                                deleteRegistro={deletePalletParametro}
-                                cargarDatosInicialmente={true}
-                                editarComponenteParametrosExtra={{
-                                    palletId: pallet.id
-                                }}
-                            />
-                        </div>
+                            // Si el pallet ya está creado, mostramos la tabla de parámetros.
+                            // Ojo: en editarComponenteParametrosExtra le pasamos palletId para que al crear un nuevo parámetro ya venga relleno.
+                            //
+                            pallet.id && <div><br></br>
+                                <Crud
+                                    headerCrud={intl.formatMessage({ id: 'Parámetros' })}
+                                    getRegistros={getPalletParametro}
+                                    getRegistrosCount={getPalletParametroCount}
+                                    botones={['nuevo', 'ver', 'editar', 'eliminar']}
+                                    controlador={"Pallet Parametro"}
+                                    editarComponente={<EditarPalletParametros />}
+                                    columnas={columnas}
+                                    filtradoBase={{ palletId: pallet.id }}
+                                    deleteRegistro={deletePalletParametro}
+                                    cargarDatosInicialmente={true}
+                                    editarComponenteParametrosExtra={{
+                                        palletId: pallet.id
+                                    }}
+                                />
+                            </div>
                         }
                         <div className="flex justify-content-end mt-2">
                             {editable && (

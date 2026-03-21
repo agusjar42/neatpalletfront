@@ -28,9 +28,7 @@ const EditarPalletParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
             if (palletId) {
                 dataPallets[0] = await getPalletById(palletId);
             } else {
-                dataPallets = await getPallet(JSON.stringify({
-                    where: { empresaId: getUsuarioSesion()?.empresaId }
-                }));
+                dataPallets = await getPallet(JSON.stringify({}));
             }
             let dataParametros = await getParametro('{}');
             setPallets(dataPallets || []);

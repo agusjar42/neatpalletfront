@@ -8,11 +8,12 @@ import { FileUpload } from "primereact/fileupload";
 import { Image } from 'primereact/image';
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
-import { convertirArchivoABase64 } from "@/app/utility/Utils";
+import { convertirArchivoABase64, getUsuarioSesion } from "@/app/utility/Utils";
 import { getProducto } from "@/app/api-endpoints/producto";
 import { getPallet } from "@/app/api-endpoints/pallet";
+import { getEmpresaPallet } from "@/app/api-endpoints/empresa-pallet";
 
-const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGuardando, envios, estoyDentroDeUnTab, clienteId }) => {
+const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGuardando, envios, estoyDentroDeUnTab, clienteId, empresaId }) => {
     const intl = useIntl();
     const toast = useRef(null);
     
@@ -44,23 +45,54 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         cargarProductos();
     }, [clienteId]);
 
-    // Cargar pallets globales (ya no se filtran por empresa)
+    // Cargar solo pallets asociados a la empresa
     useEffect(() => {
         const cargarPallets = async () => {
             try {
-                const dataPallets = await getPallet(JSON.stringify({}));
+                setPallets([]);
+                const empresaContexto = Number(empresaId ?? getUsuarioSesion()?.empresaId);
+                if (!empresaContexto) {
+                    setPallets([]);
+                    return;
+                }
+
+                const dataEmpresaPallet = await getEmpresaPallet(JSON.stringify({}));
+                const asignacionesEmpresa = (dataEmpresaPallet || []).filter(
+                    (asignacion) => Number(asignacion?.empresaId) === empresaContexto
+                );
+
+                const palletIds = [...new Set(asignacionesEmpresa
+                    .map((asignacion) => asignacion?.palletId)
+                    .filter((id) => id !== undefined && id !== null))];
+
+                if (palletIds.length === 0) {
+                    setPallets([]);
+                    return;
+                }
+
+                // El backend actual no soporta "inq" en SqlFilterUtil, por eso filtramos en cliente.
+                const dataPallets = await getPallet(
+                    JSON.stringify({
+                        order: ["orden ASC", "codigo ASC"]
+                    })
+                );
+                const palletIdsSet = new Set(palletIds.map((id) => String(id)));
+                const palletsEmpresa = (dataPallets || []).filter((pallet) =>
+                    palletIdsSet.has(String(pallet?.id))
+                );
                 // Formatear pallets para el dropdown
-                const palletsFormateados = dataPallets?.map(pallet => ({
+                const palletsFormateados = palletsEmpresa?.map(pallet => ({
                     ...pallet,
                     label: `${pallet.codigo} - ${pallet.alias || 'Sin alias'}`
                 })) || [];
                 setPallets(palletsFormateados);
             } catch (error) {
                 console.error('Error cargando pallets:', error);
+                setPallets([]);
             }
         };
         cargarPallets();
-    }, []);
+    }, [empresaId]);
 
     // Efecto para calcular el peso total automáticamente
     useEffect(() => {

@@ -157,6 +157,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
         }
 
         confirmDialog({
+            group: 'editar-envio-confirmaciones',
             message: intl.formatMessage({ id: '¿Está seguro que desea crear la configuración desde la empresa? Esto sobrescribirá la configuración actual del envío.' }),
             header: intl.formatMessage({ id: 'Confirmación' }),
             icon: 'pi pi-exclamation-triangle',
@@ -165,7 +166,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
             accept: async () => {
                 setCargandoConfiguracion(true);
                 try {
-                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, usuarioCreacion: getUsuarioSesion()?.id};
+                    const empresaContexto = envio.empresaId ?? empresaId ?? getUsuarioSesion()?.empresaId;
+                    const datosEnvio = {envioId: envio.id, empresaId: empresaContexto, usuarioCreacion: getUsuarioSesion()?.id};
                     await crearEnvioConfiguracionDesdeEmpresa(datosEnvio);
                     toast.current?.show({
                         severity: 'success',
@@ -201,6 +203,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
         }
 
         confirmDialog({
+            group: 'editar-envio-confirmaciones',
             message: intl.formatMessage({ id: '¿Está seguro que desea crear los sensores desde la empresa? Esto sobrescribirá los sensores actuales del envío.' }),
             header: intl.formatMessage({ id: 'Confirmación' }),
             icon: 'pi pi-exclamation-triangle',
@@ -209,7 +212,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
             accept: async () => {
                 setCargandoSensores(true);
                 try {
-                    const datosEnvio = {envioId: envio.id, empresaId: envio.empresaId, usuarioCreacion: getUsuarioSesion()?.id};
+                    const empresaContexto = envio.empresaId ?? empresaId ?? getUsuarioSesion()?.empresaId;
+                    const datosEnvio = {envioId: envio.id, empresaId: empresaContexto, usuarioCreacion: getUsuarioSesion()?.id};
                     await crearEnvioSensorDesdeEmpresa(datosEnvio);
                     toast.current?.show({
                         severity: 'success',
@@ -236,6 +240,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
     return (
         <>
             <Toast ref={toast} position="top-right" />
+            <ConfirmDialog group="editar-envio-confirmaciones" />
             <Fieldset legend={intl.formatMessage({ id: 'Datos del envío' })}>
                 <div className="formgrid grid">
                 {/* Campo Orden */}
@@ -451,6 +456,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
                                         clienteId: envio.clienteId,
+                                        empresaId: envio.empresaId ?? empresaId,
                                         estoyDentroDeUnTab: true
                                     }}
                                 />

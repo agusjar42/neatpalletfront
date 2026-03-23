@@ -9,7 +9,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioContenido from "./EditarDatosEnvioContenido";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId, clienteId }) => {
+const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId, clienteId, empresaId }) => {
     const toast = useRef(null);
     const [envioContenido, setEnvioContenido] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -20,13 +20,18 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
     useEffect(() => {
         const fetchData = async () => {
             // Cargar envíos disponibles
+            const empresaContexto = empresaId ?? getUsuarioSesion()?.empresaId;
+            if (!empresaContexto) {
+                setEnvios([]);
+                return;
+            }
             const dataEnvios = await getEnvio(JSON.stringify({
-                                        where: {
-                                            and: {
-                                                empresaId: getUsuarioSesion()?.empresaId
-                                            }
-                                        }
-                                    }));
+                where: {
+                    and: {
+                        empresaId: empresaContexto
+                    }
+                }
+            }));
             setEnvios(dataEnvios || []);
 
             if (idEditar !== 0) {
@@ -35,7 +40,7 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
             }
         };
         fetchData();
-    }, [idEditar, rowData]);
+    }, [idEditar, rowData, empresaId]);
 
     const validaciones = async () => {
         //
@@ -140,6 +145,7 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                             envios={envios}
                             estoyDentroDeUnTab={estoyDentroDeUnTab}
                             clienteId={clienteId}
+                            empresaId={empresaId}
                         />
 
                         <div className="flex justify-content-end mt-2">

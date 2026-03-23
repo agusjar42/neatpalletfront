@@ -2,6 +2,8 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Checkbox } from "primereact/checkbox";
+import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from "primereact/toast";
@@ -124,15 +126,23 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
         const asignacionesPallet = asignacionesPorPallet.get(pallet.id) ?? [];
         const asignacionesEmpresaActual = asignacionesPallet.filter((asignacion) => asignacion?.empresaId === empresaId);
         const asignadoAEmpresaActual = asignacionesEmpresaActual.length > 0;
-        const asignadoAOtraEmpresa = asignacionesPallet.some(
-            (asignacion) => asignacion?.empresaId !== empresaId
-        );
+        const asignadoAOtraEmpresa = asignacionesPallet.some((asignacion) => asignacion?.empresaId !== empresaId);
 
         return {
             asignadoAEmpresaActual,
             asignadoAOtraEmpresa,
             asignacionesEmpresaActual
         };
+    };
+
+    const estaDeshabilitado = (pallet) => {
+        const { asignadoAEmpresaActual, asignadoAOtraEmpresa } = obtenerEstadoPallet(pallet);
+        return palletsPendientes.has(pallet.id) || (!asignadoAEmpresaActual && asignadoAOtraEmpresa);
+    };
+
+    const claseTextoFila = (pallet) => {
+        const { asignadoAEmpresaActual } = obtenerEstadoPallet(pallet);
+        return estaDeshabilitado(pallet) && !asignadoAEmpresaActual ? "text-500" : "";
     };
 
     const handleTogglePallet = async (pallet, checked) => {
@@ -172,6 +182,46 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
         }
     };
 
+    const renderCabeceraTabla = () => (
+        <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center gap-2">
+            <h5 className="m-0">{intl.formatMessage({ id: "Pallets asignados a empresa" })}</h5>
+            <span className="p-input-icon-left w-full md:w-20rem">
+                <i className="pi pi-search" />
+                <InputText
+                    className="w-full"
+                    value={textoBusqueda}
+                    onChange={(evento) => setTextoBusqueda(evento.target.value)}
+                    placeholder={intl.formatMessage({ id: "Buscar por codigo de pallet" })}
+                />
+            </span>
+        </div>
+    );
+
+    const asignadoBodyTemplate = (pallet) => {
+        const { asignadoAEmpresaActual } = obtenerEstadoPallet(pallet);
+
+        return (
+            <Checkbox
+                inputId={`empresa-pallet-${empresaId}-${pallet.id}`}
+                checked={asignadoAEmpresaActual}
+                disabled={estaDeshabilitado(pallet)}
+                onChange={(evento) => handleTogglePallet(pallet, evento.checked)}
+            />
+        );
+    };
+
+    const textoBodyTemplate = (campo) => (pallet) => (
+        <span className={claseTextoFila(pallet)}>{obtenerTexto(pallet[campo])}</span>
+    );
+
+    const codigoBodyTemplate = (pallet) => (
+        <span className={claseTextoFila(pallet)}>{obtenerTexto(pallet.codigo ?? `Pallet ${pallet.id}`)}</span>
+    );
+
+    const fechaImpresionBodyTemplate = (pallet) => (
+        <span className={claseTextoFila(pallet)}>{obtenerFecha(pallet.fechaImpresion)}</span>
+    );
+
     if (cargando) {
         return (
             <div className="flex justify-content-center align-items-center p-4">
@@ -184,67 +234,59 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
         <div>
             <Toast ref={toast} position="top-right" />
 
-            <div className="mb-3">
-                <span className="p-input-icon-left w-full md:w-20rem">
-                    <i className="pi pi-search" />
-                    <InputText
-                        className="w-full"
-                        value={textoBusqueda}
-                        onChange={(evento) => setTextoBusqueda(evento.target.value)}
-                        placeholder={intl.formatMessage({ id: "Buscar por codigo de pallet" })}
-                    />
-                </span>
-            </div>
-
-            <div className="border-1 surface-border border-round overflow-auto">
-                <table className="w-full">
-                    <thead>
-                        <tr className="surface-100">
-                            <th className="text-left p-3">{intl.formatMessage({ id: "Asignado" })}</th>
-                            <th className="text-left p-3">{intl.formatMessage({ id: "Orden" })}</th>
-                            <th className="text-left p-3">{intl.formatMessage({ id: "Código" })}</th>
-                            <th className="text-left p-3">{intl.formatMessage({ id: "Alias" })}</th>
-                            <th className="text-left p-3">{intl.formatMessage({ id: "Medidas" })}</th>
-                            <th className="text-left p-3">{intl.formatMessage({ id: "Modelo" })}</th>
-                            <th className="text-left p-3">{intl.formatMessage({ id: "Fecha de impresión" })}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {palletsFiltrados.length === 0 ? (
-                            <tr>
-                                <td colSpan={7} className="text-center p-4 text-600">
-                                    {intl.formatMessage({ id: "No hay pallets disponibles" })}
-                                </td>
-                            </tr>
-                        ) : (
-                            palletsFiltrados.map((pallet) => {
-                                const { asignadoAEmpresaActual, asignadoAOtraEmpresa } = obtenerEstadoPallet(pallet);
-                                const deshabilitado = palletsPendientes.has(pallet.id) || (!asignadoAEmpresaActual && asignadoAOtraEmpresa);
-                                const estiloTexto = deshabilitado && !asignadoAEmpresaActual ? "text-500" : "";
-
-                                return (
-                                    <tr key={pallet.id} className="border-bottom-1 surface-border">
-                                        <td className="p-3">
-                                            <Checkbox
-                                                inputId={`empresa-pallet-${empresaId}-${pallet.id}`}
-                                                checked={asignadoAEmpresaActual}
-                                                disabled={deshabilitado}
-                                                onChange={(evento) => handleTogglePallet(pallet, evento.checked)}
-                                            />
-                                        </td>
-                                        <td className={`p-3 ${estiloTexto}`}>{obtenerTexto(pallet.orden)}</td>
-                                        <td className={`p-3 ${estiloTexto}`}>{obtenerTexto(pallet.codigo ?? `Pallet ${pallet.id}`)}</td>
-                                        <td className={`p-3 ${estiloTexto}`}>{obtenerTexto(pallet.alias)}</td>
-                                        <td className={`p-3 ${estiloTexto}`}>{obtenerTexto(pallet.medidas)}</td>
-                                        <td className={`p-3 ${estiloTexto}`}>{obtenerTexto(pallet.modelo)}</td>
-                                        <td className={`p-3 ${estiloTexto}`}>{obtenerFecha(pallet.fechaImpresion)}</td>
-                                    </tr>
-                                );
-                            })
-                        )}
-                    </tbody>
-                </table>
-            </div>
+            <DataTable
+                className="datatable-responsive"
+                dataKey="id"
+                value={palletsFiltrados}
+                header={renderCabeceraTabla()}
+                paginator
+                rows={100}
+                rowsPerPageOptions={[25, 50, 100, 200]}
+                emptyMessage={<span>{intl.formatMessage({ id: "No se han encontrado registros" })}</span>}
+            >
+                <Column
+                    field="asignado"
+                    header={intl.formatMessage({ id: "Asignado" })}
+                    body={asignadoBodyTemplate}
+                    headerStyle={{ minWidth: "8rem" }}
+                />
+                <Column
+                    field="orden"
+                    header={intl.formatMessage({ id: "Orden" })}
+                    body={textoBodyTemplate("orden")}
+                    headerStyle={{ minWidth: "8rem" }}
+                />
+                <Column
+                    field="codigo"
+                    header={intl.formatMessage({ id: "Código" })}
+                    body={codigoBodyTemplate}
+                    headerStyle={{ minWidth: "12rem" }}
+                />
+                <Column
+                    field="alias"
+                    header={intl.formatMessage({ id: "Alias" })}
+                    body={textoBodyTemplate("alias")}
+                    headerStyle={{ minWidth: "12rem" }}
+                />
+                <Column
+                    field="medidas"
+                    header={intl.formatMessage({ id: "Medidas" })}
+                    body={textoBodyTemplate("medidas")}
+                    headerStyle={{ minWidth: "12rem" }}
+                />
+                <Column
+                    field="modelo"
+                    header={intl.formatMessage({ id: "Modelo" })}
+                    body={textoBodyTemplate("modelo")}
+                    headerStyle={{ minWidth: "12rem" }}
+                />
+                <Column
+                    field="fechaImpresion"
+                    header={intl.formatMessage({ id: "Fecha de impresión" })}
+                    body={fechaImpresionBodyTemplate}
+                    headerStyle={{ minWidth: "12rem" }}
+                />
+            </DataTable>
         </div>
     );
 };

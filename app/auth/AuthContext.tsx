@@ -109,6 +109,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       { label: "Tipos de sensores",             path: "/tipo-sensor",                 icon: "pi pi-circle",               permisoControlador: "Tipo Sensor" },
       { label: "Configuracion",                 path: "/eventos-configuracion",       icon: "pi pi-bell",                 permisoControlador: "Eventos Configuración" },
       { label: "Pallets de Neat",               path: "/pallet",                      icon: "pi pi-th-large",             permisoControlador: "Pallet" },
+      { label: "Pallets asignados",             path: "/tablas-maestras/pallets-asignados", icon: "pi pi-sitemap",              permisoControlador: "Pallet" },
       { label: "Informes contenido",            path: "/proximamente",                icon: "pi pi-refresh",              permisoControlador: "Envio Contenido" },
       { label: "Informes movimientos",          path: "/proximamente",                icon: "pi pi-arrow-right",          permisoControlador: "Envio Movimiento" },
       { label: "Informes Pallets",              path: "/proximamente",                icon: "pi pi-refresh",              permisoControlador: "Envio Contenido" },
@@ -245,4 +246,3 @@ export const useAuth = () => {
   }
   return context;
 };
-

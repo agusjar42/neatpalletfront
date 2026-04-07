@@ -29,6 +29,7 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
         { nombre: intl.formatMessage({ id: 'Parámetros permitidos de Pallet' }), url: '/pallet-parametro/' },
         { nombre: intl.formatMessage({ id: 'Eventos Configuracion' }), url: '/eventos-configuracion/' },
         { nombre: intl.formatMessage({ id: 'Pallet global' }), url: '/pallet/' },
+        { nombre: intl.formatMessage({ id: 'Pallets asignados' }), url: '/tablas-maestras/pallets-asignados/' },
         { nombre: intl.formatMessage({ id: 'Informes contenido' }), url: '/envio-contenido/' },
         { nombre: intl.formatMessage({ id: 'Informes movimientos' }), url: '/envio-movimiento/' },
         { nombre: intl.formatMessage({ id: 'Informes pallets' }), url: '/envio-pallet/' },

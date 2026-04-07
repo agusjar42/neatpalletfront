@@ -13,10 +13,11 @@ import { deleteEmpresaPallet, getEmpresaPallet, postEmpresaPallet } from "@/app/
 import { getPallet } from "@/app/api-endpoints/pallet";
 import { formatearFechaDate } from "@/app/utility/Utils";
 import { useIntl } from "react-intl";
+import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
-const VALOR_TODAS_EMPRESAS = "__TODAS__";
+    const VALOR_TODAS_EMPRESAS = "__TODAS__";
 
-const PalletsAsignadosGlobal = () => {
+    const PalletsAsignadosGlobal = () => {
     const intl = useIntl();
     const toast = useRef(null);
     const [pallets, setPallets] = useState([]);
@@ -26,6 +27,7 @@ const PalletsAsignadosGlobal = () => {
     const [textoBusqueda, setTextoBusqueda] = useState("");
     const [cargando, setCargando] = useState(false);
     const [palletsPendientes, setPalletsPendientes] = useState(new Set());
+    const [tienePermiso, setTienePermiso] = useState(false);
 
     const empresaSeleccionadaNumerica = useMemo(() => {
         if (empresaSeleccionadaId === VALOR_TODAS_EMPRESAS) {
@@ -74,6 +76,14 @@ const PalletsAsignadosGlobal = () => {
     useEffect(() => {
         cargarDatos();
     }, [cargarDatos]);
+
+    useEffect(() => {
+        const verificarPermiso = async () => {
+            const permiso = await tieneUsuarioPermiso('Neatpallet', 'Pallets Asignados', 'Actualizar');
+            setTienePermiso(permiso);
+        };
+        verificarPermiso();
+    }, []);
 
     const empresaPorId = useMemo(() => {
         const mapa = new Map();
@@ -357,12 +367,14 @@ const PalletsAsignadosGlobal = () => {
                         rowsPerPageOptions={[25, 50, 100, 200]}
                         emptyMessage={<span>{intl.formatMessage({ id: "No se han encontrado registros" })}</span>}
                     >
-                        <Column
-                            field="asignado"
-                            header={intl.formatMessage({ id: "Asignado" })}
-                            body={asignadoBodyTemplate}
-                            headerStyle={{ minWidth: "8rem" }}
-                        />
+                        {tienePermiso && (
+                            <Column
+                                field="asignado"
+                                header={intl.formatMessage({ id: "Asignado" })}
+                                body={asignadoBodyTemplate}
+                                headerStyle={{ minWidth: "8rem" }}
+                            />
+                        )}
                         <Column
                             field="nombreEmpresa"
                             header={intl.formatMessage({ id: "Nombre empresa" })}
@@ -420,4 +432,3 @@ const PalletsAsignadosGlobal = () => {
 };
 
 export default PalletsAsignadosGlobal;
-

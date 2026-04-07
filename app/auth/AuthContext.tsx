@@ -99,22 +99,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const jsonRutas: MenuItem[] = [
-      { label: "Empresa",                       path: "/tablas-maestras/empresa",    icon: "pi pi-building",             permisoControlador: "Empresas" },
-      { label: "Roles",                         path: "/tablas-maestras/rol",         icon: "pi pi-bars",                 permisoControlador: "Roles" },
-      { label: "Permisos",                      path: "/tablas-maestras/permiso",     icon: "pi pi-key",                  permisoControlador: "Permisos" },
-      { label: "Paises",                        path: "/tablas-maestras/pais",        icon: "pi pi-globe",                permisoControlador: "Paises" },
-      { label: "Parametros del Palet",          path: "/parametro",                   icon: "pi pi-wrench",               permisoControlador: "Parametro" },
-      { label: "Idiomas",                       path: "/tablas-maestras/idioma",      icon: "pi pi-language",             permisoControlador: "Idiomas" },
-      { label: "Traducciones",                  path: "/tablas-maestras/traduccion",  icon: "pi pi-bars",                 permisoControlador: "Traducciones" },
-      { label: "Tipos de sensores",             path: "/tipo-sensor",                 icon: "pi pi-circle",               permisoControlador: "Tipo Sensor" },
-      { label: "Configuracion",                 path: "/eventos-configuracion",       icon: "pi pi-bell",                 permisoControlador: "Eventos Configuración" },
-      { label: "Pallets de Neat",               path: "/pallet",                      icon: "pi pi-th-large",             permisoControlador: "Pallet" },
-      { label: "Pallets asignados",             path: "/tablas-maestras/pallets-asignados", icon: "pi pi-sitemap",              permisoControlador: "Pallet" },
-      { label: "Informes contenido",            path: "/proximamente",                icon: "pi pi-refresh",              permisoControlador: "Envio Contenido" },
-      { label: "Informes movimientos",          path: "/proximamente",                icon: "pi pi-arrow-right",          permisoControlador: "Envio Movimiento" },
-      { label: "Informes Pallets",              path: "/proximamente",                icon: "pi pi-refresh",              permisoControlador: "Envio Contenido" },
-      { label: "Logs de sistema",               path: "/logs-incorrectos",            icon: "pi pi-exclamation-triangle", permisoControlador: "Logs incorrectos" },
-      { label: "Logs de usuario",               path: "/tablas-maestras/log_usuario", icon: "pi pi-history",              permisoControlador: "Logs de usuarios" },
+      { label: "Empresa",                       path: "/tablas-maestras/empresa",           icon: "pi pi-building",             permisoControlador: "Empresas" },
+      { label: "Roles",                         path: "/tablas-maestras/rol",               icon: "pi pi-bars",                 permisoControlador: "Roles" },
+      { label: "Permisos",                      path: "/tablas-maestras/permiso",           icon: "pi pi-key",                  permisoControlador: "Permisos" },
+      { label: "Paises",                        path: "/tablas-maestras/pais",              icon: "pi pi-globe",                permisoControlador: "Paises" },
+      { label: "Parametros del Palet",          path: "/parametro",                         icon: "pi pi-wrench",               permisoControlador: "Parametro" },
+      { label: "Idiomas",                       path: "/tablas-maestras/idioma",            icon: "pi pi-language",             permisoControlador: "Idiomas" },
+      { label: "Traducciones",                  path: "/tablas-maestras/traduccion",        icon: "pi pi-bars",                 permisoControlador: "Traducciones" },
+      { label: "Tipos de sensores",             path: "/tipo-sensor",                       icon: "pi pi-circle",               permisoControlador: "Tipo Sensor" },
+      { label: "Configuracion",                 path: "/eventos-configuracion",             icon: "pi pi-bell",                 permisoControlador: "Eventos Configuración" },
+      { label: "Pallets de Neat",               path: "/pallet",                            icon: "pi pi-th-large",             permisoControlador: "Pallet" },
+      { label: "Pallets asignados",             path: "/tablas-maestras/pallets-asignados", icon: "pi pi-sitemap",              permisoControlador: "Pallets Asignados" },
+      { label: "Informes contenido",            path: "/proximamente",                      icon: "pi pi-refresh",              permisoControlador: "Envio Contenido" },
+      { label: "Informes movimientos",          path: "/proximamente",                      icon: "pi pi-arrow-right",          permisoControlador: "Envio Movimiento" },
+      { label: "Informes Pallets",              path: "/proximamente",                      icon: "pi pi-refresh",              permisoControlador: "Envio Pallets" },
+      { label: "Logs de sistema",               path: "/logs-incorrectos",                  icon: "pi pi-exclamation-triangle", permisoControlador: "Logs incorrectos" },
+      { label: "Logs de usuario",               path: "/tablas-maestras/log_usuario",       icon: "pi pi-history",              permisoControlador: "Logs de usuarios" },
     ];
 
     // Obtener los permisos del usuario actual de "Acceder"

@@ -323,6 +323,10 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Parámetros permitidos de Pallet-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Parámetros permitidos de Pallet-Borrar' },
 
+                //Pallets Asignados
+                { header: intl.formatMessage({ id: 'Pallets Asignados' }), seccion: 'Pallets Asignados' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Pallets Asignados-Acceder' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Pallets Asignados-Actualizar' },
             ];
 
             // Obtenemos los roles

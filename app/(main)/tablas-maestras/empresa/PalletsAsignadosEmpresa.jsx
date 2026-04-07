@@ -45,8 +45,21 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
                 getEmpresaPallet(JSON.stringify({}))
             ]);
 
-            setPallets(Array.isArray(respuestaPallets) ? respuestaPallets : []);
-            setAsignaciones(Array.isArray(respuestaAsignaciones) ? respuestaAsignaciones : []);
+            const asignacionesEmpresa = (Array.isArray(respuestaAsignaciones) ? respuestaAsignaciones : []).filter(
+                (asignacion) => Number(asignacion?.empresaId) === Number(empresaId)
+            );
+            const palletIdsEmpresa = new Set(
+                asignacionesEmpresa
+                    .map((asignacion) => asignacion?.palletId)
+                    .filter((palletId) => palletId !== undefined && palletId !== null)
+                    .map((palletId) => String(palletId))
+            );
+            const palletsEmpresa = (Array.isArray(respuestaPallets) ? respuestaPallets : []).filter((pallet) =>
+                palletIdsEmpresa.has(String(pallet?.id))
+            );
+
+            setPallets(palletsEmpresa);
+            setAsignaciones(asignacionesEmpresa);
         } catch (error) {
             console.error("Error cargando pallets asignados", error);
             toast.current?.show({
@@ -244,12 +257,14 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
                 rowsPerPageOptions={[25, 50, 100, 200]}
                 emptyMessage={<span>{intl.formatMessage({ id: "No se han encontrado registros" })}</span>}
             >
+                {/*
                 <Column
                     field="asignado"
                     header={intl.formatMessage({ id: "Asignado" })}
                     body={asignadoBodyTemplate}
                     headerStyle={{ minWidth: "8rem" }}
                 />
+                */}
                 <Column
                     field="orden"
                     header={intl.formatMessage({ id: "Orden" })}

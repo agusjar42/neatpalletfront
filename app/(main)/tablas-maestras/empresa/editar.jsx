@@ -258,6 +258,16 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             <p className="text-gray-600">{mensaje}</p>
         </div>
     );
+    //
+    //Si el usuario en sesión no pertenece a la empresa que se está editando, no le permito crear, editar ni eliminar envíos desde la pestaña de envíos dentro de la edición de empresa, solo podrá ver los envíos y descargar el CSV. Esto es para evitar que un usuario pueda modificar envíos de una empresa a la que no pertenece entrando a editar esa empresa (aunque no debería poder entrar a editarla, esta es una capa extra de seguridad).
+    //
+    let botonesEnvioDesdeEmpresa = ['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']
+    if (getUsuarioSesion()){
+        if (getUsuarioSesion().empresaId !== empresa.id){
+            botonesEnvioDesdeEmpresa = ['ver', 'descargarCSV']
+         }
+         console.log("Empresa en sesión:", getUsuarioSesion().empresaId, "Empresa editada:", empresa.id, "Botones de envío:", botonesEnvioDesdeEmpresa);
+    }
 
     return (
         <div>
@@ -314,7 +324,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                                             headerCrud={intl.formatMessage({ id: 'Envíos' })}
                                             getRegistros={getEnvio}
                                             getRegistrosCount={getEnvioCount}
-                                            botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                                            botones={botonesEnvioDesdeEmpresa}
                                             controlador={"Envíos"}
                                             editarComponente={<EditarEnvio />}
                                             columnas={columnasEnvio}

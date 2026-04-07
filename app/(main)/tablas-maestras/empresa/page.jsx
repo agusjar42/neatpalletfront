@@ -7,6 +7,8 @@ import { useIntl } from 'react-intl'
 const Empresa = () => {
     const intl = useIntl()
     const columnas = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
+        { campo: 'imagen', header: intl.formatMessage({ id: 'Imagen' }), tipo: 'imagen' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'email', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
         { campo: 'descripcion', header: intl.formatMessage({ id: 'Descripción' }), tipo: 'string' },
@@ -41,6 +43,7 @@ const Empresa = () => {
                     editarComponente={<EditarEmpresa />}
                     columnas={columnas}
                     deleteRegistro={deleteEmpresa}
+                    ordenDefault={"orden"}
                     procesarDatosParaCSV={procesarDatosParaCSV}
                 />
             }

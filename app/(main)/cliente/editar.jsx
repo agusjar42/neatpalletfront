@@ -114,7 +114,7 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
-                        <h2>{header} {(intl.formatMessage({ id: 'Cliente' })).toLowerCase()}</h2>
+                        <h2>{header} {(intl.formatMessage({ id: 'Punto de entrega' })).toLowerCase()}</h2>
                         <EditarDatosCliente
                             cliente={cliente}
                             setCliente={setCliente}

@@ -53,7 +53,7 @@ const EditarEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const columnasEnvio = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'numero', header: intl.formatMessage({ id: 'Numero' }), tipo: 'string' },
-        { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Cliente' }), tipo: 'string' },
+        { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Punto de entrega' }), tipo: 'string' },
         { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen' }), tipo: 'string' },
         { campo: 'destinoRuta', header: intl.formatMessage({ id: 'Destino' }), tipo: 'string' },
         { campo: 'fechaSalidaEspanol', header: intl.formatMessage({ id: 'Fecha salida' }), tipo: 'string' },

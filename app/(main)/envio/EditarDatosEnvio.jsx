@@ -256,7 +256,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
                         inputStyle={{ textAlign: 'right' }}/>
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
-                    <label htmlFor="clienteId"><b>{intl.formatMessage({ id: 'Cliente' })}*</b></label>
+                    <label htmlFor="clienteId"><b>{intl.formatMessage({ id: 'Punto de entrega' })}*</b></label>
                     <Dropdown 
                         value={envio.clienteId}
                         options={clientes}

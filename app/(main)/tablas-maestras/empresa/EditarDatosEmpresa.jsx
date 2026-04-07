@@ -1,12 +1,9 @@
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
-import { Dropdown } from 'primereact/dropdown';
-import React, { useState, useRef } from "react";
-import { Password } from "primereact/password";
+import React, { useState, useRef, useEffect } from "react";
 import { useIntl } from 'react-intl'
 import { InputTextarea } from 'primereact/inputtextarea';
 import { InputNumber } from "primereact/inputnumber";
-import { FileUpload } from "primereact/fileupload";
 import { Image } from 'primereact/image';
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
@@ -18,107 +15,97 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
     // Estados para el preview de las imágenes
     const [previewImagen, setPreviewImagen] = useState(empresa.imagenBase64 || null);
     const [previewLogo, setPreviewLogo] = useState(empresa.logoBase64 || null);
-    const [imagenInputRef, setImagenInputRef] = useState(null);
-    const [logoInputRef, setLogoInputRef] = useState(null);
+    const imagenInputRef = useRef(null);
+    const logoInputRef = useRef(null);
+
+    useEffect(() => {
+        setPreviewImagen(empresa.imagenBase64 || null);
+        setPreviewLogo(empresa.logoBase64 || null);
+    }, [empresa.id, empresa.imagenBase64, empresa.logoBase64]);
 
     // Función para manejar la selección de la imagen
-    const onSelectImagen = async (e) => {
-        if (e.files && e.files.length > 0) {
-            const file = e.files[0];
-                        
-            // Validar el tamaño del archivo (2MB = 2 * 1024 * 1024 bytes)
-            const maxSize = 2 * 1024 * 1024;
-            if (file.size > maxSize) {
-                toast.current?.show({
-                    severity: 'error',
-                    summary: 'ERROR',
-                    detail: intl.formatMessage({ id: 'La imagen no puede ser mayor a 2 MB' }),
-                    life: 3000,
-                });
-                return;
-            }
+    const procesarSeleccionArchivo = async (file, tipo) => {
+        if (!file) return;
 
-            try {
-                const base64 = await convertirArchivoABase64(file);
+        const maxSize = 2 * 1024 * 1024;
+        if (file.size > maxSize) {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'La imagen no puede ser mayor a 2 MB' }),
+                life: 3000,
+            });
+            return;
+        }
+
+        try {
+            const base64 = await convertirArchivoABase64(file);
+            if (tipo === 'imagen') {
                 setPreviewImagen(base64);
-                
-                // Guardamos el base64 en el estado de la empresa
-                setEmpresa({ 
-                    ...empresa, 
+                setEmpresa((prevEmpresa) => ({
+                    ...prevEmpresa,
                     imagenBase64: base64,
                     imagenNombre: file.name,
                     imagenTipo: file.type
-                });
-            } catch (error) {
-                console.error('Error convirtiendo archivo a base64:', error);
-                toast.current?.show({
-                    severity: 'error',
-                    summary: 'ERROR',
-                    detail: intl.formatMessage({ id: 'Error procesando la imagen' }),
-                    life: 3000,
-                });
-            }
-        }
-    };
-
-    // Función para manejar la selección del logo
-    const onSelectLogo = async (e) => {
-        if (e.files && e.files.length > 0) {
-            const file = e.files[0];
-            // Validar el tamaño del archivo (2MB = 2 * 1024 * 1024 bytes)
-            const maxSize = 2 * 1024 * 1024;
-            if (file.size > maxSize) {
-                toast.current?.show({
-                    severity: 'error',
-                    summary: 'ERROR',
-                    detail: intl.formatMessage({ id: 'La imagen no puede ser mayor a 2 MB' }),
-                    life: 3000,
-                });
-                return;
-            }
-            try {
-                const base64 = await convertirArchivoABase64(file);
+                }));
+            } else {
                 setPreviewLogo(base64);
-                
-                // Guardamos el base64 en el estado de la empresa
-                setEmpresa({ 
-                    ...empresa, 
+                setEmpresa((prevEmpresa) => ({
+                    ...prevEmpresa,
                     logoBase64: base64,
                     logoNombre: file.name,
                     logoTipo: file.type
-                });
-            } catch (error) {
-                console.error('Error convirtiendo archivo a base64:', error);
-                toast.current?.show({
-                    severity: 'error',
-                    summary: 'ERROR',
-                    detail: intl.formatMessage({ id: 'Error procesando la imagen' }),
-                    life: 3000,
-                });
+                }));
             }
+        } catch (error) {
+            console.error('Error convirtiendo archivo a base64:', error);
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'Error procesando la imagen' }),
+                life: 3000,
+            });
         }
     };
 
-    // Función para limpiar la imagen
+    const onSelectImagen = async (e) => {
+        if (e.target.files && e.target.files[0]) {
+            await procesarSeleccionArchivo(e.target.files[0], 'imagen');
+        }
+    };
+
+    const onSelectLogo = async (e) => {
+        if (e.target.files && e.target.files[0]) {
+            await procesarSeleccionArchivo(e.target.files[0], 'logo');
+        }
+    };
+
     const limpiarImagen = () => {
         setPreviewImagen(null);
-        setEmpresa({ 
-            ...empresa, 
+        setEmpresa((prevEmpresa) => ({
+            ...prevEmpresa,
+            imagen: null,
             imagenBase64: null,
             imagenNombre: null,
             imagenTipo: null
-        });
+        }));
+        if (imagenInputRef.current) {
+            imagenInputRef.current.value = '';
+        }
     };
 
-    // Función para limpiar el logo
     const limpiarLogo = () => {
         setPreviewLogo(null);
-        setEmpresa({ 
-            ...empresa, 
+        setEmpresa((prevEmpresa) => ({
+            ...prevEmpresa,
+            logo: null,
             logoBase64: null,
             logoNombre: null,
             logoTipo: null
-        });
+        }));
+        if (logoInputRef.current) {
+            logoInputRef.current.value = '';
+        }
     };
 
     const manejarCambioInputNumber = (e, nombreInput) => {
@@ -229,117 +216,104 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
                 {/* Sección de la Imagen - Imagen actual */}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="imagen" className="pb-2">{intl.formatMessage({ id: 'Imagen' })}</label>
-                    {empresa.imagen && (
-                        <Image
-                            src={empresa.imagen}
-                            alt="Imagen de la empresa"
-                            width="150"
-                            height="150"
-                            className="border-round"
-                            preview
-                        />
-                    )}   
+                    <div className="p-3 border-1 border-round surface-border">
+                        <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: '220px' }}>
+                            {(previewImagen || empresa.imagen) ? (
+                                <Image
+                                    src={previewImagen || empresa.imagen}
+                                    alt="Imagen de la empresa"
+                                    width="220"
+                                    className="border-round"
+                                    imageStyle={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain' }}
+                                    preview
+                                />
+                            ) : (
+                                <small className="text-color-secondary">Sin imagen cargada</small>
+                            )}
+                        </div>
+                        <div className="mt-2 text-center">
+                            <small className={previewImagen ? "text-green-600" : "text-color-secondary"}>
+                                {previewImagen
+                                    ? `Nueva imagen seleccionada${empresa.imagenNombre ? `: ${empresa.imagenNombre}` : ''}`
+                                    : (empresa.imagen ? 'Imagen actual' : 'No hay imagen cargada')}
+                            </small>
+                        </div>
+                        <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
+                            <Button
+                                label="Seleccionar imagen"
+                                icon="pi pi-upload"
+                                className="p-button-outlined p-button-sm"
+                                onClick={() => imagenInputRef.current?.click()}
+                            />
+                            {(previewImagen || empresa.imagen) && (
+                                <Button
+                                    label="Quitar"
+                                    icon="pi pi-times"
+                                    className="p-button-text p-button-sm"
+                                    onClick={limpiarImagen}
+                                />
+                            )}
+                        </div>
+                    </div>
                     <input
+                        id="imagen"
                         type="file"
                         accept="image/*"
-                        onChange={(e) => {
-                            if (e.target.files && e.target.files[0]) {
-                                onSelectImagen({ files: [e.target.files[0]] });
-                            }
-                        }}
+                        onChange={onSelectImagen}
                         style={{ display: 'none' }}
-                        ref={(ref) => setImagenInputRef(ref)}
+                        ref={imagenInputRef}
                     />
-                    <Button
-                        label="Cambiar imagen por:"
-                        icon="pi pi-upload"
-                        className="p-button-outlined"
-                        onClick={() => imagenInputRef?.click()}
-                    />
-                    
-                    {previewImagen && (
-                        <div className="mt-2">
-                            <div className="flex justify-content-between align-items-center mb-2">
-                                <small className="text-green-600">
-                                    Imagen seleccionada: {empresa.imagenNombre}
-                                </small>
-                                <Button 
-                                    icon="pi pi-times" 
-                                    className="p-button-rounded p-button-text p-button-sm"
-                                    onClick={limpiarImagen}
-                                    tooltip="Quitar imagen"
-                                />
-                            </div>
-                            <div className="flex justify-content-center">
-                                <Image 
-                                    src={previewImagen} 
-                                    alt="Preview imagen" 
-                                    width="200" 
-                                    height="200"
-                                    className="border-round"
-                                    preview 
-                                />
-                            </div>
-                        </div>
-                    )}
                 </div>
 
-                {/* Sección del Logo - Logo actual */}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="logo" className="pb-2">{intl.formatMessage({ id: 'Logo' })}</label>
-                    {empresa.logo && (
-                        <Image
-                            src={empresa.logo}
-                            alt="Logo de la empresa"
-                            width="150"
-                            height="150"
-                            className="border-round"
-                            preview
-                        />
-                    )}   
+                    <div className="p-3 border-1 border-round surface-border">
+                        <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: '220px' }}>
+                            {(previewLogo || empresa.logo) ? (
+                                <Image
+                                    src={previewLogo || empresa.logo}
+                                    alt="Logo de la empresa"
+                                    width="220"
+                                    className="border-round"
+                                    imageStyle={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain' }}
+                                    preview
+                                />
+                            ) : (
+                                <small className="text-color-secondary">Sin logo cargado</small>
+                            )}
+                        </div>
+                        <div className="mt-2 text-center">
+                            <small className={previewLogo ? "text-green-600" : "text-color-secondary"}>
+                                {previewLogo
+                                    ? `Nuevo logo seleccionado${empresa.logoNombre ? `: ${empresa.logoNombre}` : ''}`
+                                    : (empresa.logo ? 'Logo actual' : 'No hay logo cargado')}
+                            </small>
+                        </div>
+                        <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
+                            <Button
+                                label="Seleccionar logo"
+                                icon="pi pi-upload"
+                                className="p-button-outlined p-button-sm"
+                                onClick={() => logoInputRef.current?.click()}
+                            />
+                            {(previewLogo || empresa.logo) && (
+                                <Button
+                                    label="Quitar"
+                                    icon="pi pi-times"
+                                    className="p-button-text p-button-sm"
+                                    onClick={limpiarLogo}
+                                />
+                            )}
+                        </div>
+                    </div>
                     <input
+                        id="logo"
                         type="file"
                         accept="image/*"
-                        onChange={(e) => {
-                            if (e.target.files && e.target.files[0]) {
-                                onSelectLogo({ files: [e.target.files[0]] });
-                            }
-                        }}
+                        onChange={onSelectLogo}
                         style={{ display: 'none' }}
-                        ref={(ref) => setLogoInputRef(ref)}
+                        ref={logoInputRef}
                     />
-                    <Button
-                        label="Cambiar logo por:"
-                        icon="pi pi-upload"
-                        className="p-button-outlined"
-                        onClick={() => logoInputRef?.click()}
-                    />
-                    
-                    {previewLogo && (
-                        <div className="mt-2">
-                            <div className="flex justify-content-between align-items-center mb-2">
-                                <small className="text-green-600">
-                                    Logo seleccionado: {empresa.logoNombre}
-                                </small>
-                                <Button 
-                                    icon="pi pi-times" 
-                                    className="p-button-rounded p-button-text p-button-sm"
-                                    onClick={limpiarLogo}
-                                    tooltip="Quitar logo"
-                                />
-                            </div>
-                            <div className="flex justify-content-center">
-                                <Image 
-                                    src={previewLogo} 
-                                    alt="Preview logo" 
-                                    width="200" 
-                                    height="200"
-                                    className="border-round"
-                                    preview 
-                                />
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>
             <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-12">

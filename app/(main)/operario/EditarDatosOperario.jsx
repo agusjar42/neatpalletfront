@@ -26,7 +26,7 @@ const EditarDatosOperario = ({ operario, setOperario, estadoGuardando, estoyDent
             <div className="formgrid grid">
                 {!estoyDentroDeUnTab && (
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="clienteId"><b>{intl.formatMessage({ id: 'Cliente' })}*</b></label>
+                        <label htmlFor="clienteId"><b>{intl.formatMessage({ id: 'Punto de entrega' })}*</b></label>
                         <Dropdown 
                             value={operario.clienteId || ""}
                             onChange={(e) => setOperario({ ...operario, clienteId: e.value })}

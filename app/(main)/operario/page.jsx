@@ -7,7 +7,7 @@ import { useIntl } from 'react-intl';
 const Operario = () => {
     const intl = useIntl();
     const columnas = [
-        { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Cliente' }), tipo: 'string' },
+        { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Punto de entrega' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'telefono', header: intl.formatMessage({ id: 'Teléfono' }), tipo: 'string' },
         { campo: 'email', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },

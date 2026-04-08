@@ -10,6 +10,8 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from "primereact/toast";
 import { getEmpresas } from "@/app/api-endpoints/empresa";
 import { deleteEmpresaPallet, getEmpresaPallet, postEmpresaPallet } from "@/app/api-endpoints/empresa-pallet";
+import { getEnvio } from "@/app/api-endpoints/envio";
+import { getEnvioPallet } from "@/app/api-endpoints/envio-pallet";
 import { getPallet } from "@/app/api-endpoints/pallet";
 import { formatearFechaDate } from "@/app/utility/Utils";
 import { useIntl } from "react-intl";
@@ -205,6 +207,111 @@ import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
         return formatearFechaDate(fechaDate);
     };
 
+    const parsearFechaSoloDia = (fecha) => {
+        if (!fecha) {
+            return null;
+        }
+
+        if (fecha instanceof Date && !Number.isNaN(fecha.getTime())) {
+            return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate());
+        }
+
+        if (typeof fecha !== "string") {
+            return null;
+        }
+
+        const fechaNormalizada = fecha.trim();
+        if (!fechaNormalizada) {
+            return null;
+        }
+
+        const matchIso = fechaNormalizada.match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (matchIso) {
+            const year = Number(matchIso[1]);
+            const month = Number(matchIso[2]) - 1;
+            const day = Number(matchIso[3]);
+            return new Date(year, month, day);
+        }
+
+        const matchEs = fechaNormalizada.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+        if (matchEs) {
+            const day = Number(matchEs[1]);
+            const month = Number(matchEs[2]) - 1;
+            const year = Number(matchEs[3]);
+            return new Date(year, month, day);
+        }
+
+        const parsedDate = new Date(fechaNormalizada);
+        if (Number.isNaN(parsedDate.getTime())) {
+            return null;
+        }
+
+        return new Date(parsedDate.getFullYear(), parsedDate.getMonth(), parsedDate.getDate());
+    };
+
+    const tieneFechaLlegadaEnTransito = (fechaLlegada) => {
+        const fechaLlegadaDia = parsearFechaSoloDia(fechaLlegada);
+        if (!fechaLlegadaDia) {
+            return false;
+        }
+
+        const hoy = new Date();
+        const inicioHoy = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+
+        // Regla solicitada: bloquear cuando fechaLlegada sea superior a hoy.
+        return fechaLlegadaDia > inicioHoy;
+    };
+
+    const palletEstaEnTransito = useCallback(async (palletId) => {
+        const enviosPallet = await getEnvioPallet(JSON.stringify({
+            where: {
+                and: {
+                    id: palletId
+                }
+            }
+        }));
+
+        const registrosEnvioPallet = Array.isArray(enviosPallet) ? enviosPallet : [];
+        if (registrosEnvioPallet.length === 0) {
+            return false;
+        }
+
+        const envioIdsPendientes = new Set();
+
+        for (const envioPallet of registrosEnvioPallet) {
+            if (
+                tieneFechaLlegadaEnTransito(envioPallet?.fechaLlegada) ||
+                tieneFechaLlegadaEnTransito(envioPallet?.fechaLlegadaEspanol)
+            ) {
+                return true;
+            }
+
+            if (envioPallet?.envioId !== undefined && envioPallet?.envioId !== null) {
+                envioIdsPendientes.add(Number(envioPallet.envioId));
+            }
+        }
+
+        for (const envioId of envioIdsPendientes) {
+            const respuestaEnvio = await getEnvio(JSON.stringify({
+                where: {
+                    and: {
+                        id: envioId
+                    }
+                }
+            }));
+            const envio = Array.isArray(respuestaEnvio) ? respuestaEnvio[0] : null;
+
+            if (
+                tieneFechaLlegadaEnTransito(envio?.fechaLlegada) ||
+                tieneFechaLlegadaEnTransito(envio?.fechaLlegadaEspanol)
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }, []);
+
     const estaDeshabilitado = (pallet) => {
         if (palletsPendientes.has(pallet.id)) {
             return true;
@@ -228,6 +335,19 @@ import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
         try {
             marcarPalletPendiente(palletId, true);
+
+            if (!checked) {
+                const estaEnTransito = await palletEstaEnTransito(palletId);
+                if (estaEnTransito) {
+                    toast.current?.show({
+                        severity: "warn",
+                        summary: intl.formatMessage({ id: "Advertencia" }),
+                        detail: intl.formatMessage({ id: "No se puede desasignar el pallet porque esta en transito" }),
+                        life: 4000
+                    });
+                    return;
+                }
+            }
 
             if (empresaSeleccionadaNumerica === null) {
                 if (checked) {
@@ -432,3 +552,4 @@ import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 };
 
 export default PalletsAsignadosGlobal;
+

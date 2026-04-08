@@ -694,6 +694,42 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setDescargarCSVDialog(false);
     };
 
+    const getRegistrosTodosCSV = async () => {
+        const whereFiltro = {
+            ...crearFiltros(parametrosCrud.filters, operadorSeleccionado),
+        };
+
+        if (filtradoBase) {
+            for (const [key, value] of Object.entries(filtradoBase)) {
+                if (key === 'or') {
+                    whereFiltro['and']["or"] = {};
+                    for (const [keyOr, valueOr] of Object.entries(value)) {
+                        whereFiltro['and']['or'][keyOr] = valueOr;
+                    }
+                }
+                else {
+                    if (key === 'not') {
+                        whereFiltro['and']["not"] = {};
+                        for (const [keyNot, valueNot] of Object.entries(value)) {
+                            whereFiltro['and']['not'][keyNot] = valueNot;
+                        }
+                    }
+                    whereFiltro['and'][key] = value;
+                }
+            }
+        }
+
+        let order = null;
+        if (parametrosCrud.sortField !== null && parametrosCrud.sortOrder !== null) {
+            order = `${parametrosCrud.sortField} ${parametrosCrud.sortOrder === 1 ? 'ASC' : 'DESC'}`;
+        }
+
+        return await getRegistros(JSON.stringify({
+            where: whereFiltro,
+            order,
+        }));
+    };
+
     const confirmarImportarArchivoCSVPallets = () => {
         setImportarCSVPalletsDialog(true);
     };
@@ -1277,6 +1313,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 onHide={ocultarDescargarCSVDialog}
                                 registros={registros}
                                 getRegistros={getRegistros}
+                                getRegistrosTodosCSV={getRegistrosTodosCSV}
                                 nombreArchivo={headerCrud}
                                 procesarDatosParaCSV={procesarDatosParaCSV}
                                 columnas={columnas}

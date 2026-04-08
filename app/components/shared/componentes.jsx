@@ -417,7 +417,7 @@ const getIdiomaDefecto = () => {
     return idioma;
 };
 
-const descargarCSV = async (registros = [], columnas, procesarDatosParaCSV, getRegistros, setDescargarCSVDialog, nombreArchivo) => {
+const descargarCSV = async (registros = [], columnas, procesarDatosParaCSV, getRegistros, getRegistrosTodosCSV, setDescargarCSVDialog, nombreArchivo) => {
     try {
         let registrosTransformados = [];
         let archivoNombre;
@@ -426,7 +426,11 @@ const descargarCSV = async (registros = [], columnas, procesarDatosParaCSV, getR
             registrosAdescargar = registros
             archivoNombre = `${nombreArchivo}-mostrados.csv`;
         } else {
-            registrosAdescargar = await getRegistros(JSON.stringify({}));
+            if (getRegistrosTodosCSV) {
+                registrosAdescargar = await getRegistrosTodosCSV();
+            } else {
+                registrosAdescargar = await getRegistros(JSON.stringify({}));
+            }
             archivoNombre = `${nombreArchivo}-todos.csv`;
         }
 
@@ -450,6 +454,7 @@ const DescargarCSVDialog = ({
     labelTodos,
     registros,
     getRegistros,
+    getRegistrosTodosCSV,
     setDescargarCSVDialog,
     nombreArchivo,
     procesarDatosParaCSV,
@@ -466,14 +471,14 @@ const DescargarCSVDialog = ({
                 icon="pi pi-download"
                 text
                 style={{ whiteSpace: 'nowrap' }}
-                onClick={() => descargarCSV(registros, columnas, procesarDatosParaCSV, getRegistros, setDescargarCSVDialog, nombreArchivo)}
+                onClick={() => descargarCSV(registros, columnas, procesarDatosParaCSV, getRegistros, getRegistrosTodosCSV, setDescargarCSVDialog, nombreArchivo)}
             />
             <Button
                 label={resolvedLabelTodos}
                 icon="pi pi-download"
                 text
                 style={{ whiteSpace: 'nowrap' }}
-                onClick={() => descargarCSV([], columnas, procesarDatosParaCSV, getRegistros, setDescargarCSVDialog, nombreArchivo)}
+                onClick={() => descargarCSV([], columnas, procesarDatosParaCSV, getRegistros, getRegistrosTodosCSV, setDescargarCSVDialog, nombreArchivo)}
             />
         </div>
     );

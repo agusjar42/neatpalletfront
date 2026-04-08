@@ -158,7 +158,7 @@ const eliminarDialogFooter = (ocultarEliminarDialog, eliminar) => {
     );
 };
 
-const Header = ({ crearNuevo, generarCSV, importarCSVPallets, generarGrafico, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
+const Header = ({ crearNuevo, generarCSV, importarCSV, importarCSVPallets, generarGrafico, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
     operadorSeleccionado, setOperadorSeleccionado, listaOperadores,
 }) => {
     const intl = useIntl()
@@ -183,6 +183,17 @@ const Header = ({ crearNuevo, generarCSV, importarCSVPallets, generarGrafico, mo
                         icon="pi pi-download"
                         severity="success"
                         onClick={generarCSV}
+                        className="mr-2"
+                    />
+                )
+            }
+            {(importarCSV !== null && importarCSV !== undefined) &&     //Si no se envia la funcion de importarCSV, no muestra el boton
+                (
+                    <Button
+                        label={`${intl.formatMessage({ id: 'Importar' })} CSV`}
+                        icon="pi pi-upload"
+                        severity="warning"
+                        onClick={importarCSV}
                         className="mr-2"
                     />
                 )
@@ -476,6 +487,403 @@ const DescargarCSVDialog = ({
             footer={footer}
             onHide={onHide}
         >
+        </Dialog>
+    );
+};
+
+const normalizarClaveCSV = (value = '') => {
+    return String(value)
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '');
+};
+
+const parseCSVLine = (line, delimiter) => {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        const next = line[i + 1];
+
+        if (char === '"') {
+            if (inQuotes && next === '"') {
+                current += '"';
+                i++;
+            } else {
+                inQuotes = !inQuotes;
+            }
+        } else if (char === delimiter && !inQuotes) {
+            result.push(current.trim());
+            current = '';
+        } else {
+            current += char;
+        }
+    }
+
+    result.push(current.trim());
+    return result.map(field => field.replace(/^"|"$/g, '').trim());
+};
+
+const detectarDelimitador = (line = '') => {
+    const semicolonCount = (line.match(/;/g) || []).length;
+    const commaCount = (line.match(/,/g) || []).length;
+    return semicolonCount > commaCount ? ';' : ',';
+};
+
+const parseCSVTextToStructuredData = (text = '') => {
+    const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
+    if (lines.length === 0) {
+        return { headers: [], rows: [] };
+    }
+
+    const delimiter = detectarDelimitador(lines[0]);
+    const rawHeaders = parseCSVLine(lines[0], delimiter);
+    const headers = rawHeaders.map((header, index) => header || `columna_${index + 1}`);
+
+    const rows = lines.slice(1).map((line) => {
+        const values = parseCSVLine(line, delimiter);
+        const row = {};
+        headers.forEach((header, index) => {
+            row[header] = values[index] ?? '';
+        });
+        return row;
+    });
+
+    return { headers, rows };
+};
+
+const ImportarCSVDialog = ({
+    visible,
+    onHide,
+    header,
+    labelSeleccionar,
+    labelProcesar,
+    onProcessCSV = null,
+    onCSVProcessed = null
+}) => {
+    const intl = useIntl();
+    const resolvedHeader = header ?? intl.formatMessage({ id: 'Importar archivo CSV' });
+    const resolvedLabelSeleccionar = labelSeleccionar ?? intl.formatMessage({ id: 'Seleccionar archivo' });
+    const resolvedLabelProcesar = labelProcesar ?? intl.formatMessage({ id: 'Procesar archivo' });
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [processResults, setProcessResults] = useState({ created: 0, updated: 0, errors: [] });
+    const fileInputRef = useRef(null);
+    const toast = useRef(null);
+
+    const isCSVFile = (file) => {
+        const fileName = file.name.toLowerCase();
+        const hasCSVExtension = fileName.endsWith('.csv');
+        const hasCSVMimeType = file.type === 'text/csv' ||
+            file.type === 'application/csv' ||
+            file.type === 'text/plain' ||
+            file.type === '';
+
+        return hasCSVExtension && hasCSVMimeType;
+    };
+
+    const readCSVFile = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                try {
+                    resolve(e.target.result || '');
+                } catch (error) {
+                    reject(new Error('Error al leer el archivo: ' + error.message));
+                }
+            };
+
+            reader.onerror = () => {
+                reject(new Error('Error al leer el archivo'));
+            };
+
+            reader.readAsText(file, 'UTF-8');
+        });
+    };
+
+    const handleFileSelect = (event) => {
+        const file = event.target.files[0];
+
+        if (!file) {
+            setSelectedFile(null);
+            setErrorMessage('');
+            return;
+        }
+
+        if (!isCSVFile(file)) {
+            setErrorMessage(intl.formatMessage({ id: 'Por favor, seleccione un archivo CSV válido' }));
+            setSelectedFile(null);
+
+            if (toast.current) {
+                toast.current.show({
+                    severity: 'error',
+                    summary: intl.formatMessage({ id: 'Error de archivo' }),
+                    detail: intl.formatMessage({ id: 'El archivo seleccionado no es un CSV válido' }),
+                    life: 3000
+                });
+            }
+            return;
+        }
+
+        const maxSize = 10 * 1024 * 1024;
+        if (file.size > maxSize) {
+            setErrorMessage(intl.formatMessage({ id: 'El archivo es demasiado grande. Máximo permitido: 10MB' }));
+            setSelectedFile(null);
+
+            if (toast.current) {
+                toast.current.show({
+                    severity: 'error',
+                    summary: intl.formatMessage({ id: 'Error de tamaño' }),
+                    detail: intl.formatMessage({ id: 'El archivo excede el tamaño máximo permitido (10MB)' }),
+                    life: 3000
+                });
+            }
+            return;
+        }
+
+        setSelectedFile(file);
+        setErrorMessage('');
+    };
+
+    const handleFileUpload = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
+    const handleProcessFile = async () => {
+        if (!selectedFile) {
+            return;
+        }
+        if (!onProcessCSV) {
+            setErrorMessage(intl.formatMessage({ id: 'No hay un procesador de CSV configurado para esta pantalla' }));
+            return;
+        }
+
+        setIsProcessing(true);
+        setErrorMessage('');
+        setProcessResults({ created: 0, updated: 0, errors: [] });
+
+        try {
+            const rawText = await readCSVFile(selectedFile);
+            const { headers, rows } = parseCSVTextToStructuredData(rawText);
+
+            if (!headers.length || !rows.length) {
+                throw new Error(intl.formatMessage({ id: 'El archivo CSV está vacío o no contiene datos' }));
+            }
+
+            const rowsWithNormalizedKeys = rows.map((row) => {
+                const normalized = {};
+                Object.keys(row).forEach((key) => {
+                    normalized[normalizarClaveCSV(key)] = row[key];
+                });
+                return normalized;
+            });
+
+            const result = await onProcessCSV({
+                headers,
+                headersNormalizados: headers.map(normalizarClaveCSV),
+                rows,
+                rowsNormalizados: rowsWithNormalizedKeys,
+            });
+
+            const safeResult = {
+                created: result?.created || 0,
+                updated: result?.updated || 0,
+                errors: result?.errors || [],
+            };
+
+            setProcessResults(safeResult);
+
+            const totalProcessed = safeResult.created + safeResult.updated;
+            if (toast.current) {
+                if (safeResult.errors.length === 0) {
+                    toast.current.show({
+                        severity: 'success',
+                        summary: intl.formatMessage({ id: 'Procesamiento completado' }),
+                        detail: `${totalProcessed} ${intl.formatMessage({ id: 'registros procesados' })}: ${safeResult.created} ${intl.formatMessage({ id: 'creados' })}, ${safeResult.updated} ${intl.formatMessage({ id: 'actualizados' })}`,
+                        life: 5000
+                    });
+                } else {
+                    toast.current.show({
+                        severity: 'warn',
+                        summary: intl.formatMessage({ id: 'Procesamiento completado con errores' }),
+                        detail: `${totalProcessed} ${intl.formatMessage({ id: 'registros procesados' })}, ${safeResult.errors.length} ${intl.formatMessage({ id: 'errores' })}`,
+                        life: 5000
+                    });
+                }
+            }
+
+            if (onCSVProcessed) {
+                onCSVProcessed(safeResult);
+            }
+        } catch (error) {
+            setErrorMessage(error.message);
+            if (toast.current) {
+                toast.current.show({
+                    severity: 'error',
+                    summary: intl.formatMessage({ id: 'Error de procesamiento' }),
+                    detail: error.message,
+                    life: 3000
+                });
+            }
+        } finally {
+            setIsProcessing(false);
+        }
+    };
+
+    const handleHide = () => {
+        setSelectedFile(null);
+        setIsProcessing(false);
+        setErrorMessage('');
+        setProcessResults({ created: 0, updated: 0, errors: [] });
+        onHide();
+    };
+
+    const footer = (
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
+            <Button
+                label={resolvedLabelSeleccionar}
+                icon="pi pi-upload"
+                text
+                style={{ whiteSpace: 'nowrap' }}
+                onClick={handleFileUpload}
+                disabled={isProcessing}
+            />
+            <Button
+                label={resolvedLabelProcesar}
+                icon="pi pi-cog"
+                text
+                style={{ whiteSpace: 'nowrap' }}
+                onClick={handleProcessFile}
+                disabled={!selectedFile || isProcessing}
+                loading={isProcessing}
+            />
+        </div>
+    );
+
+    return (
+        <Dialog
+            visible={visible}
+            style={{ width: "500px" }}
+            header={resolvedHeader}
+            modal
+            footer={footer}
+            onHide={handleHide}
+        >
+            <Toast ref={toast} />
+            <div style={{ textAlign: 'center', padding: '20px' }}>
+                <input
+                    type="file"
+                    accept=".csv"
+                    onChange={handleFileSelect}
+                    ref={fileInputRef}
+                    style={{ display: 'none' }}
+                />
+
+                {errorMessage && (
+                    <div style={{
+                        backgroundColor: '#ffebee',
+                        color: '#c62828',
+                        padding: '10px',
+                        borderRadius: '4px',
+                        marginBottom: '15px',
+                        fontSize: '14px'
+                    }}>
+                        <i className="pi pi-exclamation-triangle" style={{ marginRight: '8px' }}></i>
+                        {errorMessage}
+                    </div>
+                )}
+
+                {selectedFile ? (
+                    <div>
+                        <i className="pi pi-file" style={{ fontSize: '3rem', color: '#4caf50', marginBottom: '10px' }}></i>
+                        <p style={{ fontSize: '16px', margin: '10px 0' }}>
+                            {intl.formatMessage({ id: 'Archivo seleccionado:' })} <strong>{selectedFile.name}</strong>
+                        </p>
+                        <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
+                            {intl.formatMessage({ id: 'Tamaño:' })} {(selectedFile.size / 1024).toFixed(2)} KB
+                        </p>
+
+                        {(processResults.created > 0 || processResults.updated > 0 || processResults.errors.length > 0) && (
+                            <div style={{ marginTop: '15px' }}>
+                                <h4 style={{ margin: '0 0 10px 0', color: '#333' }}>{intl.formatMessage({ id: 'Resultados del Procesamiento:' })}</h4>
+                                <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '10px' }}>
+                                    <div style={{ textAlign: 'center' }}>
+                                        <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#4caf50' }}>
+                                            {processResults.created}
+                                        </div>
+                                        <div style={{ fontSize: '12px', color: '#666' }}>{intl.formatMessage({ id: 'Creados' })}</div>
+                                    </div>
+                                    <div style={{ textAlign: 'center' }}>
+                                        <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2196f3' }}>
+                                            {processResults.updated}
+                                        </div>
+                                        <div style={{ fontSize: '12px', color: '#666' }}>{intl.formatMessage({ id: 'Actualizados' })}</div>
+                                    </div>
+                                    <div style={{ textAlign: 'center' }}>
+                                        <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#f44336' }}>
+                                            {processResults.errors.length}
+                                        </div>
+                                        <div style={{ fontSize: '12px', color: '#666' }}>{intl.formatMessage({ id: 'Errores' })}</div>
+                                    </div>
+                                </div>
+
+                                {processResults.errors.length > 0 && (
+                                    <div style={{
+                                        backgroundColor: '#ffebee',
+                                        border: '1px solid #ffcdd2',
+                                        borderRadius: '4px',
+                                        padding: '10px',
+                                        marginTop: '10px',
+                                        textAlign: 'left',
+                                        maxHeight: '150px',
+                                        overflowY: 'auto'
+                                    }}>
+                                        <div style={{ fontWeight: 'bold', color: '#c62828', marginBottom: '5px' }}>
+                                            {intl.formatMessage({ id: 'Errores encontrados:' })}
+                                        </div>
+                                        {processResults.errors.map((error, index) => (
+                                            <div key={index} style={{ fontSize: '12px', color: '#c62828', marginBottom: '3px' }}>
+                                                • {error}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div>
+                        <i className="pi pi-cloud-upload" style={{ fontSize: '3rem', color: '#ccc', marginBottom: '10px' }}></i>
+                        <p style={{ fontSize: '16px', color: '#666' }}>
+                            {intl.formatMessage({ id: 'Seleccione un archivo CSV para procesar' })}
+                        </p>
+                        <p style={{ fontSize: '12px', color: '#999', marginTop: '10px' }}>
+                            {intl.formatMessage({ id: 'Formatos soportados: .csv (máximo 10MB)' })}
+                        </p>
+                    </div>
+                )}
+
+                {isProcessing && (
+                    <div style={{
+                        backgroundColor: '#fff3e0',
+                        color: '#ef6c00',
+                        padding: '10px',
+                        borderRadius: '4px',
+                        marginTop: '15px',
+                        fontSize: '14px'
+                    }}>
+                        <i className="pi pi-spinner pi-spin" style={{ marginRight: '8px' }}></i>
+                        {intl.formatMessage({ id: 'Procesando archivo...' })}
+                    </div>
+                )}
+            </div>
         </Dialog>
     );
 };
@@ -1168,7 +1576,7 @@ export {
     comprobarImagen, manejarCambioImagen, templateGenerico, ErrorDetail,
     botonesDeAccionTemplate, eliminarDialogFooter, Header, dialogFooter,
     EliminarDialog, filtroActivoSnTemplate, opcionesActivoSnTemplate,
-    generarYDescargarCSV, prepararRegistrosParaCSV, DescargarCSVDialog, ImportarCSVPalletsDialog,
+    generarYDescargarCSV, prepararRegistrosParaCSV, DescargarCSVDialog, ImportarCSVDialog, ImportarCSVPalletsDialog,
     GenerarGraficoDialog, formatearBytes, esUrlImagen, getIdiomaDefecto, tieneUsuarioPermiso,
     obtenerTodosLosPermisos,
 

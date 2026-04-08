@@ -1,8 +1,9 @@
 "use client";
-import { getPaises, getPaisesCount, deletePais } from "@/app/api-endpoints/pais";
+import { getPaises, getPaisesCount, deletePais, postPais, patchPais } from "@/app/api-endpoints/pais";
 import EditarPais from "./editar";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
+import { createResult, getUsuarioSesionId, getValueFromRow, normalizeHeader, parseActivoSN, parseNumberOrNull } from "@/app/utility/csv-import-utils";
 const Pais = () => {
     const intl = useIntl();
     const columnas = [
@@ -11,6 +12,59 @@ const Pais = () => {
         { campo: 'iso', header: intl.formatMessage({ id: 'Iso' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ]
+
+    const procesarImportacionCSV = async ({ rowsNormalizados }) => {
+        const result = createResult();
+        const usuarioSesionId = getUsuarioSesionId();
+        const existentes = await getPaises();
+        const indexByIso = new Map();
+        const indexByNombre = new Map();
+
+        existentes.forEach((item) => {
+            if (item.iso) indexByIso.set(normalizeHeader(item.iso), item);
+            if (item.nombre) indexByNombre.set(normalizeHeader(item.nombre), item);
+        });
+
+        for (let i = 0; i < rowsNormalizados.length; i++) {
+            try {
+                const row = rowsNormalizados[i];
+                const iso = getValueFromRow(row, ["iso"]);
+                const nombre = getValueFromRow(row, ["nombre"]);
+                const orden = parseNumberOrNull(getValueFromRow(row, ["orden"]));
+                const activoSn = parseActivoSN(getValueFromRow(row, ["activoSn", "activo", "activosn"]), "S");
+
+                if (!iso && !nombre) {
+                    throw new Error(`Fila ${i + 2}: Debe indicar al menos ISO o Nombre`);
+                }
+
+                const payload = {
+                    iso: iso || null,
+                    nombre: nombre || null,
+                    orden,
+                    activoSn,
+                };
+
+                const existente = (iso && indexByIso.get(normalizeHeader(iso))) || (nombre && indexByNombre.get(normalizeHeader(nombre)));
+                if (existente?.id) {
+                    payload.usuModificacion = usuarioSesionId;
+                    await patchPais(existente.id, payload);
+                    result.updated++;
+                } else {
+                    payload.usuCreacion = usuarioSesionId;
+                    const nuevo = await postPais(payload);
+                    if (nuevo?.id) {
+                        result.created++;
+                        if (payload.iso) indexByIso.set(normalizeHeader(payload.iso), nuevo);
+                        if (payload.nombre) indexByNombre.set(normalizeHeader(payload.nombre), nuevo);
+                    }
+                }
+            } catch (error) {
+                result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);
+            }
+        }
+
+        return result;
+    };
  
     return (
         <div>
@@ -18,12 +72,13 @@ const Pais = () => {
                 headerCrud={intl.formatMessage({ id: 'Paises' })}
                 getRegistros={getPaises}
                 getRegistrosCount={getPaisesCount}
-                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV', 'importarCSV']}
                 controlador={"Paises"}
                 empresaId={null}
                 editarComponente={<EditarPais />}
                 columnas={columnas}
                 deleteRegistro={deletePais}
+                procesarImportacionCSV={procesarImportacionCSV}
             />
         </div>
     );

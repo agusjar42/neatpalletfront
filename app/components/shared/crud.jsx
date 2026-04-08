@@ -5,7 +5,7 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { Toast } from "primereact/toast";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, ImportarCSVPalletsDialog, GenerarGraficoDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
+import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, ImportarCSVDialog, ImportarCSVPalletsDialog, GenerarGraficoDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 import { formatearFechaDate, formatearFechaHoraDate, formatearFechaLocal_a_toISOString, formatNumber, getUsuarioSesion } from "@/app/utility/Utils";
 import CodigoQR from "./codigo_qr";
 import { postEnviarQR } from "@/app/api-endpoints/plantilla_email";
@@ -26,7 +26,8 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from "@/app/auth/AuthContext";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
-    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = true, onDataChange }) => {
+    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = true, onDataChange,
+    procesarImportacionCSV }) => {
     const intl = useIntl()
     const router = useRouter();
     const { usuarioAutenticado, isInitialized } = useAuth();
@@ -61,6 +62,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     const [eliminarRegistroDialog, setEliminarRegistroDialog] = useState(false);
     const [descargarCSVDialog, setDescargarCSVDialog] = useState(false);
+    const [importarCSVDialog, setImportarCSVDialog] = useState(false);
     const [importarCSVPalletsDialog, setImportarCSVPalletsDialog] = useState(false);
     const [generarGraficoDialog, setGenerarGraficoDialog] = useState(false);
     const [mostarQRDialog, setMostarQRDialog] = useState(false);
@@ -696,6 +698,14 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setImportarCSVPalletsDialog(true);
     };
 
+    const confirmarImportarArchivoCSV = () => {
+        setImportarCSVDialog(true);
+    };
+
+    const ocultarImportarCSVDialog = () => {
+        setImportarCSVDialog(false);
+    };
+
     const ocultarImportarCSVPalletsDialog = () => {
         setImportarCSVPalletsDialog(false);
     };
@@ -800,6 +810,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         }
         if (botones.includes('descargarCSV')) {
             propiedadesHeader['generarCSV'] = confirmarDescargarArchivoCSV
+        }
+        if (botones.includes('importarCSV') && procesarImportacionCSV) {
+            propiedadesHeader['importarCSV'] = confirmarImportarArchivoCSV
         }
         if (botones.includes('importarCSVPallets')) {
             propiedadesHeader['importarCSVPallets'] = confirmarImportarArchivoCSVPallets
@@ -1270,6 +1283,20 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 header={intl.formatMessage({ id: 'Descargar archivo CSV' })}
                                 labelMostrados={intl.formatMessage({ id: 'Registros mostrados' })}
                                 labelTodos={intl.formatMessage({ id: 'Todos los registros' })}
+                            />
+                            {/* MODAL DE (IMPORTAR CSV) GENERICO */}
+                            <ImportarCSVDialog
+                                visible={importarCSVDialog}
+                                onHide={ocultarImportarCSVDialog}
+                                header={intl.formatMessage({ id: 'Importar archivo CSV' })}
+                                labelSeleccionar={intl.formatMessage({ id: 'Seleccionar archivo' })}
+                                labelProcesar={intl.formatMessage({ id: 'Procesar archivo' })}
+                                onProcessCSV={procesarImportacionCSV}
+                                onCSVProcessed={(results) => {
+                                    if (results.created > 0 || results.updated > 0) {
+                                        obtenerDatos();
+                                    }
+                                }}
                             />
                             {/* MODAL DE (IMPORTAR CSV PALLETS) */}
                             <ImportarCSVPalletsDialog

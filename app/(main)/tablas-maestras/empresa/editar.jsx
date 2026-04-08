@@ -14,11 +14,15 @@ import {
   getCliente,
   getClienteCount,
   deleteCliente,
+  postCliente,
+  patchCliente,
 } from "@/app/api-endpoints/cliente";
 import {
   getProducto,
   getProductoCount,
   deleteProducto,
+  postProducto,
+  patchProducto,
 } from "@/app/api-endpoints/producto";
 import {
   getEnvio,
@@ -35,11 +39,15 @@ import {
   getTipoCarroceria,
   getTipoCarroceriaCount,
   deleteTipoCarroceria,
+  postTipoCarroceria,
+  patchTipoCarroceria,
 } from "@/app/api-endpoints/tipo-carroceria";
 import {
   getTipoTransporte,
   getTipoTransporteCount,
   deleteTipoTransporte,
+  postTipoTransporte,
+  patchTipoTransporte,
 } from "@/app/api-endpoints/tipo-transporte";
 import {
   getEventoConfiguracion,
@@ -58,6 +66,16 @@ import "primeicons/primeicons.css";
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import { useIntl } from "react-intl";
 import Crud from "../../../components/shared/crud";
+import { getRol } from "@/app/api-endpoints/rol";
+import { getIdiomas } from "@/app/api-endpoints/idioma";
+import {
+  createResult,
+  getUsuarioSesionId,
+  getValueFromRow,
+  normalizeHeader,
+  parseActivoSN,
+  parseNumberOrNull,
+} from "@/app/utility/csv-import-utils";
 
 const EditarEmpresa = ({
   idEditar,
@@ -251,6 +269,192 @@ const EditarEmpresa = ({
       tipo: "string",
     },
   ];
+
+  const procesarImportacionPuntosEntregaCSV = async ({ rowsNormalizados }) => {
+    const result = createResult();
+    const usuarioSesionId = getUsuarioSesionId();
+    const existentes = await getCliente(JSON.stringify({ where: { and: { empresaId: empresa.id } }, limit: 100000 }));
+    const clientesByMail = new Map();
+    const clientesByNombre = new Map();
+    existentes.forEach((item) => {
+      if (item.mail) clientesByMail.set(normalizeHeader(item.mail), item);
+      if (item.nombre) clientesByNombre.set(normalizeHeader(item.nombre), item);
+    });
+
+    for (let i = 0; i < rowsNormalizados.length; i++) {
+      try {
+        const row = rowsNormalizados[i];
+        const nombre = getValueFromRow(row, ["nombre"]);
+        const mail = getValueFromRow(row, ["mail", "email", "correo"]);
+        const telefono = getValueFromRow(row, ["telefono", "tel"]);
+        const orden = parseNumberOrNull(getValueFromRow(row, ["orden"]));
+
+        if (!nombre && !mail) {
+          throw new Error(`Fila ${i + 2}: Debe informar al menos Nombre o Email`);
+        }
+
+        const payload = {
+          empresaId: empresa.id,
+          nombre: nombre || null,
+          mail: mail || null,
+          telefono: telefono || null,
+          orden,
+        };
+
+        const existente =
+          (mail && clientesByMail.get(normalizeHeader(mail))) ||
+          (nombre && clientesByNombre.get(normalizeHeader(nombre)));
+
+        if (existente?.id) {
+          payload.usuModificacion = usuarioSesionId;
+          await patchCliente(existente.id, payload);
+          result.updated++;
+        } else {
+          payload.usuCreacion = usuarioSesionId;
+          const nuevo = await postCliente(payload);
+          if (nuevo?.id) {
+            result.created++;
+            if (mail) clientesByMail.set(normalizeHeader(mail), nuevo);
+            if (nombre) clientesByNombre.set(normalizeHeader(nombre), nuevo);
+          }
+        }
+      } catch (error) {
+        result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);
+      }
+    }
+
+    return result;
+  };
+
+  const procesarImportacionProductosEmpresaCSV = async ({ rowsNormalizados }) => {
+    const result = createResult();
+    const usuarioSesionId = getUsuarioSesionId();
+    const existentes = await getProducto(JSON.stringify({ where: { and: { empresaId: empresa.id } }, limit: 100000 }));
+    const productosByNombre = new Map();
+    existentes.forEach((item) => {
+      if (item.nombre) productosByNombre.set(normalizeHeader(item.nombre), item);
+    });
+
+    for (let i = 0; i < rowsNormalizados.length; i++) {
+      try {
+        const row = rowsNormalizados[i];
+        const nombre = getValueFromRow(row, ["nombre"]);
+        if (!nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
+
+        const payload = {
+          empresaId: empresa.id,
+          nombre,
+          orden: parseNumberOrNull(getValueFromRow(row, ["orden"])),
+          pesoKgs: parseNumberOrNull(getValueFromRow(row, ["pesoKgs", "peso", "pesokg"])),
+          activoSN: parseActivoSN(getValueFromRow(row, ["activoSN", "activoSn", "activo"]), "S"),
+        };
+
+        const existente = productosByNombre.get(normalizeHeader(nombre));
+        if (existente?.id) {
+          payload.usuModificacion = usuarioSesionId;
+          await patchProducto(existente.id, payload);
+          result.updated++;
+        } else {
+          payload.usuCreacion = usuarioSesionId;
+          const nuevo = await postProducto(payload);
+          if (nuevo?.id) {
+            result.created++;
+            productosByNombre.set(normalizeHeader(nombre), nuevo);
+          }
+        }
+      } catch (error) {
+        result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);
+      }
+    }
+
+    return result;
+  };
+
+  const procesarImportacionTipoCarroceriaEmpresaCSV = async ({ rowsNormalizados }) => {
+    const result = createResult();
+    const usuarioSesionId = getUsuarioSesionId();
+    const existentes = await getTipoCarroceria(JSON.stringify({ where: { and: { empresaId: empresa.id } }, limit: 100000 }));
+    const indexByNombre = new Map();
+    existentes.forEach((item) => {
+      if (item.nombre) indexByNombre.set(normalizeHeader(item.nombre), item);
+    });
+
+    for (let i = 0; i < rowsNormalizados.length; i++) {
+      try {
+        const row = rowsNormalizados[i];
+        const nombre = getValueFromRow(row, ["nombre"]);
+        if (!nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
+
+        const payload = {
+          empresaId: empresa.id,
+          nombre,
+          orden: parseNumberOrNull(getValueFromRow(row, ["orden"])),
+          activoSn: parseActivoSN(getValueFromRow(row, ["activoSn", "activo"]), "S"),
+        };
+
+        const existente = indexByNombre.get(normalizeHeader(nombre));
+        if (existente?.id) {
+          payload.usuarioModificacion = usuarioSesionId;
+          await patchTipoCarroceria(existente.id, payload);
+          result.updated++;
+        } else {
+          payload.usuarioCreacion = usuarioSesionId;
+          const nuevo = await postTipoCarroceria(payload);
+          if (nuevo?.id) {
+            result.created++;
+            indexByNombre.set(normalizeHeader(nombre), nuevo);
+          }
+        }
+      } catch (error) {
+        result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);
+      }
+    }
+
+    return result;
+  };
+
+  const procesarImportacionTipoTransporteEmpresaCSV = async ({ rowsNormalizados }) => {
+    const result = createResult();
+    const usuarioSesionId = getUsuarioSesionId();
+    const existentes = await getTipoTransporte(JSON.stringify({ where: { and: { empresaId: empresa.id } }, limit: 100000 }));
+    const indexByNombre = new Map();
+    existentes.forEach((item) => {
+      if (item.nombre) indexByNombre.set(normalizeHeader(item.nombre), item);
+    });
+
+    for (let i = 0; i < rowsNormalizados.length; i++) {
+      try {
+        const row = rowsNormalizados[i];
+        const nombre = getValueFromRow(row, ["nombre"]);
+        if (!nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
+
+        const payload = {
+          empresaId: empresa.id,
+          nombre,
+          orden: parseNumberOrNull(getValueFromRow(row, ["orden"])),
+          activoSn: parseActivoSN(getValueFromRow(row, ["activoSn", "activo"]), "S"),
+        };
+
+        const existente = indexByNombre.get(normalizeHeader(nombre));
+        if (existente?.id) {
+          payload.usuarioModificacion = usuarioSesionId;
+          await patchTipoTransporte(existente.id, payload);
+          result.updated++;
+        } else {
+          payload.usuarioCreacion = usuarioSesionId;
+          const nuevo = await postTipoTransporte(payload);
+          if (nuevo?.id) {
+            result.created++;
+            indexByNombre.set(normalizeHeader(nombre), nuevo);
+          }
+        }
+      } catch (error) {
+        result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);
+      }
+    }
+
+    return result;
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -519,6 +723,7 @@ const EditarEmpresa = ({
                         "editar",
                         "eliminar",
                         "descargarCSV",
+                        "importarCSV",
                       ]}
                       controlador={"Usuarios"}
                       editarComponente={<EditarUsuario />}
@@ -555,6 +760,7 @@ const EditarEmpresa = ({
                         "editar",
                         "eliminar",
                         "descargarCSV",
+                        "importarCSV",
                       ]}
                       controlador={"Clientes"}
                       editarComponente={<EditarCliente />}
@@ -565,6 +771,7 @@ const EditarEmpresa = ({
                         empresaId: empresa.id,
                         estoyDentroDeUnTab: true,
                       }}
+                      procesarImportacionCSV={procesarImportacionPuntosEntregaCSV}
                     />
                   ) : (
                     renderTabNoDisponible(
@@ -587,6 +794,7 @@ const EditarEmpresa = ({
                         "editar",
                         "eliminar",
                         "descargarCSV",
+                        "importarCSV",
                       ]}
                       controlador={"Productos"}
                       editarComponente={<EditarProducto />}
@@ -597,6 +805,7 @@ const EditarEmpresa = ({
                         empresaId: empresa.id,
                         estoyDentroDeUnTab: true,
                       }}
+                      procesarImportacionCSV={procesarImportacionProductosEmpresaCSV}
                     />
                   ) : (
                     renderTabNoDisponible(
@@ -721,6 +930,7 @@ const EditarEmpresa = ({
                       "editar",
                       "eliminar",
                       "descargarCSV",
+                      "importarCSV",
                     ]}
                     controlador={"Tipos de Carrocería"}
                     filtradoBase={{ empresaId: empresa.id }}
@@ -731,6 +941,7 @@ const EditarEmpresa = ({
                       empresaId: empresa.id,
                       estoyDentroDeUnTab: true,
                     }}
+                    procesarImportacionCSV={procesarImportacionTipoCarroceriaEmpresaCSV}
                   />
                 </TabPanel>
 
@@ -749,6 +960,7 @@ const EditarEmpresa = ({
                       "editar",
                       "eliminar",
                       "descargarCSV",
+                      "importarCSV",
                     ]}
                     controlador={"Tipo Transporte"}
                     filtradoBase={{ empresaId: empresa.id }}
@@ -759,6 +971,7 @@ const EditarEmpresa = ({
                       empresaId: empresa.id,
                       estoyDentroDeUnTab: true,
                     }}
+                    procesarImportacionCSV={procesarImportacionTipoTransporteEmpresaCSV}
                   />
                 </TabPanel>
 

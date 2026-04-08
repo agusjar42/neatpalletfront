@@ -9,7 +9,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioContenido from "./EditarDatosEnvioContenido";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId, clienteId, empresaId }) => {
+const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId, empresaId }) => {
     const toast = useRef(null);
     const [envioContenido, setEnvioContenido] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -144,7 +144,6 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                             estadoGuardando={estadoGuardando}
                             envios={envios}
                             estoyDentroDeUnTab={estoyDentroDeUnTab}
-                            clienteId={clienteId}
                             empresaId={empresaId}
                         />
 

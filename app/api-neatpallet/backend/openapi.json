@@ -12630,6 +12630,10 @@
             "type": "number",
             "nullable": true
           },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          },
           "empresa": {
             "$ref": "#/components/schemas/EmpresaWithRelations"
           },
@@ -13777,7 +13781,7 @@
             "type": "number",
             "nullable": false
           },
-          "clienteId": {
+          "empresaId": {
             "type": "number"
           },
           "nombre": {
@@ -13808,6 +13812,10 @@
           },
           "pesoKgs": {
             "type": "number"
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -13817,7 +13825,7 @@
         "type": "object",
         "description": "(tsType: Omit<Producto, 'id'>, schemaOptions: { title: 'NewProducto', exclude: [ 'id' ] })",
         "properties": {
-          "clienteId": {
+          "empresaId": {
             "type": "number"
           },
           "nombre": {
@@ -13848,6 +13856,10 @@
           },
           "pesoKgs": {
             "type": "number"
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -13862,7 +13874,7 @@
             "type": "number",
             "nullable": false
           },
-          "clienteId": {
+          "empresaId": {
             "type": "number"
           },
           "nombre": {
@@ -13894,8 +13906,12 @@
           "pesoKgs": {
             "type": "number"
           },
-          "cliente": {
-            "$ref": "#/components/schemas/ClienteWithRelations"
+          "orden": {
+            "type": "number",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/EmpresaWithRelations"
           },
           "foreignKey": {}
         },
@@ -13911,7 +13927,7 @@
             "type": "number",
             "nullable": false
           },
-          "clienteId": {
+          "empresaId": {
             "type": "number"
           },
           "nombre": {
@@ -13942,6 +13958,10 @@
           },
           "pesoKgs": {
             "type": "number"
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -18045,6 +18065,10 @@
           "usuModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -18085,6 +18109,10 @@
             "nullable": true
           },
           "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -18132,6 +18160,10 @@
             "nullable": true
           },
           "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -18286,6 +18318,9 @@
                   },
                   "usuModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -18303,7 +18338,8 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
-                    "usuModificacion"
+                    "usuModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -18396,6 +18432,9 @@
                   },
                   "usuModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -18413,7 +18452,8 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
-                    "usuModificacion"
+                    "usuModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -24986,7 +25026,7 @@
           "relation": {
             "type": "string",
             "enum": [
-              "cliente"
+              "empresa"
             ]
           },
           "scope": {
@@ -25032,7 +25072,7 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "clienteId": {
+                  "empresaId": {
                     "type": "boolean"
                   },
                   "nombre": {
@@ -25055,6 +25095,9 @@
                   },
                   "pesoKgs": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -25065,14 +25108,15 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "clienteId",
+                    "empresaId",
                     "nombre",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
                     "activoSN",
-                    "pesoKgs"
+                    "pesoKgs",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -25142,7 +25186,7 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "clienteId": {
+                  "empresaId": {
                     "type": "boolean"
                   },
                   "nombre": {
@@ -25165,6 +25209,9 @@
                   },
                   "pesoKgs": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -25175,14 +25222,15 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "clienteId",
+                    "empresaId",
                     "nombre",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
                     "activoSN",
-                    "pesoKgs"
+                    "pesoKgs",
+                    "orden"
                   ],
                   "example": "id"
                 },

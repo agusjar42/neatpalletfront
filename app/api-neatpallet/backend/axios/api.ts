@@ -81,6 +81,12 @@ export interface Cliente {
      * @memberof Cliente
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Cliente
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -262,6 +268,12 @@ export interface ClientePartial {
      * @memberof ClientePartial
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ClientePartial
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -372,6 +384,12 @@ export interface ClienteWithRelations {
      * @memberof ClienteWithRelations
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ClienteWithRelations
+     */
+    'orden'?: number | null;
     /**
      * 
      * @type {EmpresaWithRelations}
@@ -7191,6 +7209,12 @@ export interface NewCliente {
      * @memberof NewCliente
      */
     'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewCliente
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -8799,7 +8823,7 @@ export interface NewProducto {
      * @type {number}
      * @memberof NewProducto
      */
-    'clienteId'?: number;
+    'empresaId'?: number;
     /**
      * 
      * @type {string}
@@ -8842,6 +8866,12 @@ export interface NewProducto {
      * @memberof NewProducto
      */
     'pesoKgs'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProducto
+     */
+    'orden'?: number | null;
 }
 /**
  * (tsType: Omit<RefrescarToken, \'id\'>, schemaOptions: { title: \'NewRefrescarToken\', exclude: [ \'id\' ] })
@@ -11754,7 +11784,7 @@ export interface Producto {
      * @type {number}
      * @memberof Producto
      */
-    'clienteId'?: number;
+    'empresaId'?: number;
     /**
      * 
      * @type {string}
@@ -11797,6 +11827,12 @@ export interface Producto {
      * @memberof Producto
      */
     'pesoKgs'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Producto
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -11915,7 +11951,7 @@ export interface ProductoIncludeFilterItems {
     * @enum {string}
     */
 export enum ProductoIncludeFilterItemsRelationEnum {
-    Cliente = 'cliente'
+    Empresa = 'empresa'
 }
 
 /**
@@ -11935,7 +11971,7 @@ export interface ProductoPartial {
      * @type {number}
      * @memberof ProductoPartial
      */
-    'clienteId'?: number;
+    'empresaId'?: number;
     /**
      * 
      * @type {string}
@@ -11978,6 +12014,12 @@ export interface ProductoPartial {
      * @memberof ProductoPartial
      */
     'pesoKgs'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPartial
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -12045,7 +12087,7 @@ export interface ProductoWithRelations {
      * @type {number}
      * @memberof ProductoWithRelations
      */
-    'clienteId'?: number;
+    'empresaId'?: number;
     /**
      * 
      * @type {string}
@@ -12090,10 +12132,16 @@ export interface ProductoWithRelations {
     'pesoKgs'?: number;
     /**
      * 
-     * @type {ClienteWithRelations}
+     * @type {number}
      * @memberof ProductoWithRelations
      */
-    'cliente'?: ClienteWithRelations;
+    'orden'?: number | null;
+    /**
+     * 
+     * @type {EmpresaWithRelations}
+     * @memberof ProductoWithRelations
+     */
+    'empresa'?: EmpresaWithRelations;
     /**
      * 
      * @type {any}

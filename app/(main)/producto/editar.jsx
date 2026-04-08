@@ -1,61 +1,48 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { postProducto, patchProducto } from "@/app/api-endpoints/producto/index.js";
-import { getCliente } from "@/app/api-endpoints/cliente/index.js";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import EditarDatosProducto from "./EditarDatosProducto";
 import { useIntl } from 'react-intl';
 
-const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, clienteId, estoyDentroDeUnTab, onDataChange }) => {
+const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, empresaId, estoyDentroDeUnTab, onDataChange }) => {
     const toast = useRef(null);
     const [producto, setProducto] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
-    const [clientes, setClientes] = useState([]);
     const intl = useIntl();
 
     useEffect(() => {
         const fetchData = async () => {
-            // Cargar clientes disponibles
-            const dataClientes = await getCliente(JSON.stringify({
-                                        where: {
-                                            and: {
-                                                empresaId: getUsuarioSesion()?.empresaId
-                                            }
-                                        }
-                                    }));
-            setClientes(dataClientes || []);
-
             // Si el idEditar es diferente de nuevo, entonces se va a editar
             if (idEditar !== 0) {
                 // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
                 setProducto(registro);
-            } else if (clienteId) {
-                // Si estamos creando uno nuevo y tenemos clienteId, lo asignamos
-                setProducto({ ...emptyRegistro, clienteId: clienteId });
+            } else {
+                const empresaContexto = empresaId ?? getUsuarioSesion()?.empresaId;
+                setProducto({ ...emptyRegistro, empresaId: empresaContexto });
             }
         };
         fetchData();
-    }, [idEditar, rowData, clienteId, emptyRegistro]);
+    }, [idEditar, rowData, empresaId, emptyRegistro]);
 
     const validaciones = async () => {
         //
-        // Si estamos dentro de un tab y tenemos un clienteId, lo asignamos
+        // Si estamos dentro de un tab y tenemos una empresa, la asignamos
         //
-        if (estoyDentroDeUnTab && clienteId) {
-            producto.clienteId = clienteId;
+        if (estoyDentroDeUnTab && empresaId) {
+            producto.empresaId = empresaId;
         }
         // Validaciones básicas
         const validaNombre = producto.nombre === undefined || producto.nombre === "";
-        const validaClienteId = producto.clienteId === undefined || producto.clienteId === null;
+        const validaEmpresaId = producto.empresaId === undefined || producto.empresaId === null;
         
         // Si existe algún campo vacío entonces no se puede guardar
-        return (!validaNombre && !validaClienteId)
+        return (!validaNombre && !validaEmpresaId)
     }
 
     const guardarProducto = async () => {
@@ -72,6 +59,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 // Elimino y añado los campos que no se necesitan
                 delete objGuardar.id;
                 delete objGuardar.clienteNombre;
+                delete objGuardar.empresaNombre;
                 objGuardar['usuCreacion'] = usuarioActual;
                 
                 // Hacemos el insert del registro
@@ -96,6 +84,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             } else {
                 // Elimino y añado los campos que no se necesitan para el update
                 delete objGuardar.clienteNombre;
+                delete objGuardar.empresaNombre;
                 delete objGuardar.fechaCreacion;
                 delete objGuardar.fechaModificacion;
                 delete objGuardar.usuCreacion;
@@ -139,7 +128,6 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                             setProducto={setProducto}
                             estadoGuardando={estadoGuardando}
                             estoyDentroDeUnTab={estoyDentroDeUnTab}
-                            clientes={clientes}
                         />
 
                         <div className="flex justify-content-end mt-2">

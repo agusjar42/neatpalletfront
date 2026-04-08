@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, act } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
@@ -13,7 +13,7 @@ import { getProducto } from "@/app/api-endpoints/producto";
 import { getPallet } from "@/app/api-endpoints/pallet";
 import { getEmpresaPallet } from "@/app/api-endpoints/empresa-pallet";
 
-const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGuardando, envios, estoyDentroDeUnTab, clienteId, empresaId }) => {
+const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGuardando, envios, estoyDentroDeUnTab, empresaId }) => {
     const intl = useIntl();
     const toast = useRef(null);
     
@@ -29,21 +29,26 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         value: envio.id
     }));
 
-    // Cargar productos filtrados por cliente
+    // Cargar productos activos de la empresa
     useEffect(() => {
         const cargarProductos = async () => {
-            if (clienteId) {
-                try {
-                    const filtroProductos = JSON.stringify({ where: { and: { clienteId: clienteId, activoSN: 'S' } } });
-                    const dataProductos = await getProducto(filtroProductos);
-                    setProductos(dataProductos || []);
-                } catch (error) {
-                    console.error('Error cargando productos:', error);
+            try {
+                const empresaContexto = Number(empresaId ?? envioContenido?.empresaId ?? getUsuarioSesion()?.empresaId);
+                if (!empresaContexto) {
+                    setProductos([]);
+                    return;
                 }
+
+                const filtroProductos = JSON.stringify({ where: { and: { empresaId: empresaContexto, activoSN: 'S' } } });
+                const dataProductos = await getProducto(filtroProductos);
+                setProductos(dataProductos || []);
+            } catch (error) {
+                console.error('Error cargando productos:', error);
+                setProductos([]);
             }
         };
         cargarProductos();
-    }, [clienteId]);
+    }, [empresaId, envioContenido?.empresaId]);
 
     // Cargar solo pallets asociados a la empresa
     useEffect(() => {
@@ -290,11 +295,11 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         className={`${(estadoGuardando && (envioContenido.productoId === "" || envioContenido.productoId === null || envioContenido.productoId === undefined)) ? "p-invalid" : ""}`}
                         filter
                         showClear
-                        disabled={!clienteId}
+                        disabled={!Number(empresaId ?? envioContenido?.empresaId ?? getUsuarioSesion()?.empresaId)}
                     />
-                    {!clienteId && (
+                    {!Number(empresaId ?? envioContenido?.empresaId ?? getUsuarioSesion()?.empresaId) && (
                         <small className="text-orange-600">
-                            {intl.formatMessage({ id: 'Debe seleccionar un cliente en el envío para ver los productos disponibles' })}
+                            {intl.formatMessage({ id: 'Debe seleccionar una empresa en el envío para ver los productos disponibles' })}
                         </small>
                     )}
                 </div>

@@ -5,7 +5,7 @@ import EditarTraduccion from "./editar";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
 import { useEffect, useState } from 'react';
-import { createResult, getUsuarioSesionId, normalizeHeader } from "@/app/utility/csv-import-utils";
+import { createResult, getUsuarioSesionId, getValueFromRow, normalizeHeader, parseNumberOrNull } from "@/app/utility/csv-import-utils";
 
 const Traduccion = () => {
     const intl = useIntl();
@@ -39,13 +39,13 @@ const Traduccion = () => {
         for (const [key, value] of Object.entries(row)) {
             const keyNormalizada = normalizeHeader(key);
             if (keyNormalizada === `${idiomaNombreNormalizado}id`) {
-                return value || null;
+                return parseNumberOrNull(value);
             }
         }
         return null;
     };
 
-    const procesarImportacionCSV = async ({ rows }) => {
+    const procesarImportacionCSV = async ({ rows, rowsNormalizados }) => {
         const result = createResult();
         const usuarioSesionId = getUsuarioSesionId();
         const idiomas = await getIdiomas();
@@ -57,17 +57,11 @@ const Traduccion = () => {
             idiomaByIso.set(normalizeHeader(idioma.iso), idioma);
         });
 
-        const existentes = await getVistaTraduccionIdioma(JSON.stringify({ limit: 100000 }));
-        const existingByClave = new Map();
-        existentes.forEach((item) => {
-            if (item.clave) {
-                existingByClave.set(normalizeHeader(item.clave), item);
-            }
-        });
-
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
+            const rowNormalizada = rowsNormalizados?.[i] || {};
             try {
+                const rowId = parseNumberOrNull(getValueFromRow(rowNormalizada, ['id']));
                 const claveEntry = Object.entries(row).find(([key]) => {
                     const normalized = normalizeHeader(key);
                     return normalized === 'clave' || normalized === 'key';
@@ -78,11 +72,11 @@ const Traduccion = () => {
                     throw new Error(`Fila ${i + 2}: La columna "clave" es obligatoria`);
                 }
 
-                const existingRow = existingByClave.get(normalizeHeader(clave));
+                let rowIdUsado = false;
 
                 for (const [header, value] of Object.entries(row)) {
                     const normalizedHeader = normalizeHeader(header);
-                    if (normalizedHeader === 'clave' || normalizedHeader === 'key') {
+                    if (normalizedHeader === 'clave' || normalizedHeader === 'key' || normalizedHeader === 'id') {
                         continue;
                     }
 
@@ -97,7 +91,11 @@ const Traduccion = () => {
                     }
 
                     const idiomaNombreNormalizado = normalizeHeader(idioma.nombre);
-                    const traduccionId = obtenerTranslationId(existingRow, idiomaNombreNormalizado);
+                    let traduccionId = obtenerTranslationId(row, idiomaNombreNormalizado);
+                    if (!traduccionId && rowId && !rowIdUsado) {
+                        traduccionId = rowId;
+                        rowIdUsado = true;
+                    }
 
                     if (traduccionId) {
                         await patchTraduccion(traduccionId, {

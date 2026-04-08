@@ -270,27 +270,93 @@ const EditarEmpresa = ({
     },
   ];
 
-  const procesarImportacionPuntosEntregaCSV = async ({ rowsNormalizados }) => {
+  const procesarImportacionUsuariosEmpresaCSV = async ({ rowsNormalizados }) => {
     const result = createResult();
     const usuarioSesionId = getUsuarioSesionId();
-    const existentes = await getCliente(JSON.stringify({ where: { and: { empresaId: empresa.id } }, limit: 100000 }));
-    const clientesByMail = new Map();
-    const clientesByNombre = new Map();
-    existentes.forEach((item) => {
-      if (item.mail) clientesByMail.set(normalizeHeader(item.mail), item);
-      if (item.nombre) clientesByNombre.set(normalizeHeader(item.nombre), item);
+
+    const [roles, idiomas] = await Promise.all([
+      getRol(JSON.stringify({ where: { and: { empresaId: empresa.id } }, limit: 100000 })),
+      getIdiomas(JSON.stringify({ limit: 100000 })),
+    ]);
+
+    const rolByNombre = new Map();
+    roles.forEach((item) => {
+      if (item.nombre) rolByNombre.set(normalizeHeader(item.nombre), item);
+    });
+
+    const idiomaByNombre = new Map();
+    const idiomaByIso = new Map();
+    idiomas.forEach((item) => {
+      if (item.nombre) idiomaByNombre.set(normalizeHeader(item.nombre), item);
+      if (item.iso) idiomaByIso.set(normalizeHeader(item.iso), item);
     });
 
     for (let i = 0; i < rowsNormalizados.length; i++) {
       try {
         const row = rowsNormalizados[i];
+        const rowId = parseNumberOrNull(getValueFromRow(row, ["id"]));
+        const mail = getValueFromRow(row, ["mail", "email", "correo"]);
+        const nombre = getValueFromRow(row, ["nombre"]);
+        const telefono = getValueFromRow(row, ["telefono", "tel"]);
+        const rolId = parseNumberOrNull(getValueFromRow(row, ["rolId", "rolid"])) ??
+          rolByNombre.get(normalizeHeader(getValueFromRow(row, ["rol", "nombreRol"])))?.id;
+        const idiomaValor = getValueFromRow(row, ["idioma", "iso"]);
+        const idiomaId = parseNumberOrNull(getValueFromRow(row, ["idiomaId", "idiomaid"])) ??
+          idiomaByNombre.get(normalizeHeader(idiomaValor))?.id ??
+          idiomaByIso.get(normalizeHeader(idiomaValor))?.id ??
+          getUsuarioSesion()?.idiomaId;
+
+        if (!rowId && !mail) {
+          throw new Error(`Fila ${i + 2}: El email es obligatorio para insertar`);
+        }
+
+        const payload = {
+          empresaId: empresa.id,
+          nombre: nombre || null,
+          mail: mail || null,
+          telefono: telefono || null,
+          activoSn: parseActivoSN(getValueFromRow(row, ["activoSn", "activo"]), "S"),
+          usuarioAdmin: parseActivoSN(getValueFromRow(row, ["usuarioAdmin", "admin"]), "N"),
+        };
+
+        if (rolId) payload.rolId = rolId;
+        if (idiomaId) payload.idiomaId = idiomaId;
+
+        if (rowId) {
+          payload.usuModificacion = usuarioSesionId;
+          await patchUsuario(rowId, payload);
+          result.updated++;
+        } else {
+          if (!payload.rolId || !payload.idiomaId) {
+            throw new Error(`Fila ${i + 2}: Para insertar, rolId e idiomaId son obligatorios`);
+          }
+          payload.usuCreacion = usuarioSesionId;
+          await postUsuario(payload);
+          result.created++;
+        }
+      } catch (error) {
+        result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);
+      }
+    }
+
+    return result;
+  };
+
+  const procesarImportacionPuntosEntregaCSV = async ({ rowsNormalizados }) => {
+    const result = createResult();
+    const usuarioSesionId = getUsuarioSesionId();
+
+    for (let i = 0; i < rowsNormalizados.length; i++) {
+      try {
+        const row = rowsNormalizados[i];
+        const rowId = parseNumberOrNull(getValueFromRow(row, ["id"]));
         const nombre = getValueFromRow(row, ["nombre"]);
         const mail = getValueFromRow(row, ["mail", "email", "correo"]);
         const telefono = getValueFromRow(row, ["telefono", "tel"]);
         const orden = parseNumberOrNull(getValueFromRow(row, ["orden"]));
 
-        if (!nombre && !mail) {
-          throw new Error(`Fila ${i + 2}: Debe informar al menos Nombre o Email`);
+        if (!rowId && !nombre && !mail) {
+          throw new Error(`Fila ${i + 2}: Debe informar al menos Nombre o Email para insertar`);
         }
 
         const payload = {
@@ -301,22 +367,14 @@ const EditarEmpresa = ({
           orden,
         };
 
-        const existente =
-          (mail && clientesByMail.get(normalizeHeader(mail))) ||
-          (nombre && clientesByNombre.get(normalizeHeader(nombre)));
-
-        if (existente?.id) {
+        if (rowId) {
           payload.usuModificacion = usuarioSesionId;
-          await patchCliente(existente.id, payload);
+          await patchCliente(rowId, payload);
           result.updated++;
         } else {
           payload.usuCreacion = usuarioSesionId;
-          const nuevo = await postCliente(payload);
-          if (nuevo?.id) {
-            result.created++;
-            if (mail) clientesByMail.set(normalizeHeader(mail), nuevo);
-            if (nombre) clientesByNombre.set(normalizeHeader(nombre), nuevo);
-          }
+          await postCliente(payload);
+          result.created++;
         }
       } catch (error) {
         result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);
@@ -329,17 +387,13 @@ const EditarEmpresa = ({
   const procesarImportacionProductosEmpresaCSV = async ({ rowsNormalizados }) => {
     const result = createResult();
     const usuarioSesionId = getUsuarioSesionId();
-    const existentes = await getProducto(JSON.stringify({ where: { and: { empresaId: empresa.id } }, limit: 100000 }));
-    const productosByNombre = new Map();
-    existentes.forEach((item) => {
-      if (item.nombre) productosByNombre.set(normalizeHeader(item.nombre), item);
-    });
 
     for (let i = 0; i < rowsNormalizados.length; i++) {
       try {
         const row = rowsNormalizados[i];
+        const rowId = parseNumberOrNull(getValueFromRow(row, ["id"]));
         const nombre = getValueFromRow(row, ["nombre"]);
-        if (!nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
+        if (!rowId && !nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
 
         const payload = {
           empresaId: empresa.id,
@@ -349,18 +403,14 @@ const EditarEmpresa = ({
           activoSN: parseActivoSN(getValueFromRow(row, ["activoSN", "activoSn", "activo"]), "S"),
         };
 
-        const existente = productosByNombre.get(normalizeHeader(nombre));
-        if (existente?.id) {
+        if (rowId) {
           payload.usuModificacion = usuarioSesionId;
-          await patchProducto(existente.id, payload);
+          await patchProducto(rowId, payload);
           result.updated++;
         } else {
           payload.usuCreacion = usuarioSesionId;
-          const nuevo = await postProducto(payload);
-          if (nuevo?.id) {
-            result.created++;
-            productosByNombre.set(normalizeHeader(nombre), nuevo);
-          }
+          await postProducto(payload);
+          result.created++;
         }
       } catch (error) {
         result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);
@@ -373,17 +423,13 @@ const EditarEmpresa = ({
   const procesarImportacionTipoCarroceriaEmpresaCSV = async ({ rowsNormalizados }) => {
     const result = createResult();
     const usuarioSesionId = getUsuarioSesionId();
-    const existentes = await getTipoCarroceria(JSON.stringify({ where: { and: { empresaId: empresa.id } }, limit: 100000 }));
-    const indexByNombre = new Map();
-    existentes.forEach((item) => {
-      if (item.nombre) indexByNombre.set(normalizeHeader(item.nombre), item);
-    });
 
     for (let i = 0; i < rowsNormalizados.length; i++) {
       try {
         const row = rowsNormalizados[i];
+        const rowId = parseNumberOrNull(getValueFromRow(row, ["id"]));
         const nombre = getValueFromRow(row, ["nombre"]);
-        if (!nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
+        if (!rowId && !nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
 
         const payload = {
           empresaId: empresa.id,
@@ -392,18 +438,14 @@ const EditarEmpresa = ({
           activoSn: parseActivoSN(getValueFromRow(row, ["activoSn", "activo"]), "S"),
         };
 
-        const existente = indexByNombre.get(normalizeHeader(nombre));
-        if (existente?.id) {
+        if (rowId) {
           payload.usuarioModificacion = usuarioSesionId;
-          await patchTipoCarroceria(existente.id, payload);
+          await patchTipoCarroceria(rowId, payload);
           result.updated++;
         } else {
           payload.usuarioCreacion = usuarioSesionId;
-          const nuevo = await postTipoCarroceria(payload);
-          if (nuevo?.id) {
-            result.created++;
-            indexByNombre.set(normalizeHeader(nombre), nuevo);
-          }
+          await postTipoCarroceria(payload);
+          result.created++;
         }
       } catch (error) {
         result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);
@@ -416,17 +458,13 @@ const EditarEmpresa = ({
   const procesarImportacionTipoTransporteEmpresaCSV = async ({ rowsNormalizados }) => {
     const result = createResult();
     const usuarioSesionId = getUsuarioSesionId();
-    const existentes = await getTipoTransporte(JSON.stringify({ where: { and: { empresaId: empresa.id } }, limit: 100000 }));
-    const indexByNombre = new Map();
-    existentes.forEach((item) => {
-      if (item.nombre) indexByNombre.set(normalizeHeader(item.nombre), item);
-    });
 
     for (let i = 0; i < rowsNormalizados.length; i++) {
       try {
         const row = rowsNormalizados[i];
+        const rowId = parseNumberOrNull(getValueFromRow(row, ["id"]));
         const nombre = getValueFromRow(row, ["nombre"]);
-        if (!nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
+        if (!rowId && !nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
 
         const payload = {
           empresaId: empresa.id,
@@ -435,18 +473,14 @@ const EditarEmpresa = ({
           activoSn: parseActivoSN(getValueFromRow(row, ["activoSn", "activo"]), "S"),
         };
 
-        const existente = indexByNombre.get(normalizeHeader(nombre));
-        if (existente?.id) {
+        if (rowId) {
           payload.usuarioModificacion = usuarioSesionId;
-          await patchTipoTransporte(existente.id, payload);
+          await patchTipoTransporte(rowId, payload);
           result.updated++;
         } else {
           payload.usuarioCreacion = usuarioSesionId;
-          const nuevo = await postTipoTransporte(payload);
-          if (nuevo?.id) {
-            result.created++;
-            indexByNombre.set(normalizeHeader(nombre), nuevo);
-          }
+          await postTipoTransporte(payload);
+          result.created++;
         }
       } catch (error) {
         result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);
@@ -734,6 +768,7 @@ const EditarEmpresa = ({
                         empresaId: empresa.id,
                         estoyDentroDeUnTab: true,
                       }}
+                      procesarImportacionCSV={procesarImportacionUsuariosEmpresaCSV}
                     />
                   ) : (
                     renderTabNoDisponible(

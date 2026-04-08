@@ -3,7 +3,7 @@ import { getIdiomas, getIdiomasCount, deleteIdioma, postIdioma, patchIdioma } fr
 import EditarIdioma from "./editar";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
-import { createResult, getUsuarioSesionId, getValueFromRow, normalizeHeader, parseActivoSN, parseNumberOrNull } from "@/app/utility/csv-import-utils";
+import { createResult, getUsuarioSesionId, getValueFromRow, parseActivoSN, parseNumberOrNull } from "@/app/utility/csv-import-utils";
 const Idioma = () => {
     const intl = useIntl();
 
@@ -17,24 +17,17 @@ const Idioma = () => {
     const procesarImportacionCSV = async ({ rowsNormalizados }) => {
         const result = createResult();
         const usuarioSesionId = getUsuarioSesionId();
-        const existentes = await getIdiomas();
-        const indexByIso = new Map();
-        const indexByNombre = new Map();
-
-        existentes.forEach((item) => {
-            if (item.iso) indexByIso.set(normalizeHeader(item.iso), item);
-            if (item.nombre) indexByNombre.set(normalizeHeader(item.nombre), item);
-        });
 
         for (let i = 0; i < rowsNormalizados.length; i++) {
             try {
                 const row = rowsNormalizados[i];
+                const rowId = parseNumberOrNull(getValueFromRow(row, ["id"]));
                 const iso = getValueFromRow(row, ["iso"]);
                 const nombre = getValueFromRow(row, ["nombre"]);
                 const orden = parseNumberOrNull(getValueFromRow(row, ["orden"]));
                 const activoSn = parseActivoSN(getValueFromRow(row, ["activoSn", "activo", "activosn"]), "S");
 
-                if (!iso && !nombre) {
+                if (!rowId && !iso && !nombre) {
                     throw new Error(`Fila ${i + 2}: Debe indicar al menos ISO o Nombre`);
                 }
 
@@ -45,19 +38,14 @@ const Idioma = () => {
                     activoSn,
                 };
 
-                const existente = (iso && indexByIso.get(normalizeHeader(iso))) || (nombre && indexByNombre.get(normalizeHeader(nombre)));
-                if (existente?.id) {
+                if (rowId) {
                     payload.usuModificacion = usuarioSesionId;
-                    await patchIdioma(existente.id, payload);
+                    await patchIdioma(rowId, payload);
                     result.updated++;
                 } else {
                     payload.usuCreacion = usuarioSesionId;
-                    const nuevo = await postIdioma(payload);
-                    if (nuevo?.id) {
-                        result.created++;
-                        if (payload.iso) indexByIso.set(normalizeHeader(payload.iso), nuevo);
-                        if (payload.nombre) indexByNombre.set(normalizeHeader(payload.nombre), nuevo);
-                    }
+                    await postIdioma(payload);
+                    result.created++;
                 }
             } catch (error) {
                 result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);

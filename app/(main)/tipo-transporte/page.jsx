@@ -14,7 +14,6 @@ import {
   createResult,
   getUsuarioSesionId,
   getValueFromRow,
-  normalizeHeader,
   parseActivoSN,
   parseNumberOrNull,
 } from "@/app/utility/csv-import-utils";
@@ -31,19 +30,13 @@ const TipoTransporte = () => {
   const procesarImportacionCSV = async ({ rowsNormalizados }) => {
     const result = createResult();
     const usuarioSesionId = getUsuarioSesionId();
-    const existentes = await getTipoTransporte(
-      JSON.stringify({ where: { and: { empresaId: empresaIdSesion } } })
-    );
-    const indexByNombre = new Map();
-    existentes.forEach((item) => {
-      if (item.nombre) indexByNombre.set(normalizeHeader(item.nombre), item);
-    });
 
     for (let i = 0; i < rowsNormalizados.length; i++) {
       try {
         const row = rowsNormalizados[i];
+        const rowId = parseNumberOrNull(getValueFromRow(row, ["id"]));
         const nombre = getValueFromRow(row, ["nombre"]);
-        if (!nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
+        if (!rowId && !nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
 
         const payload = {
           empresaId: empresaIdSesion,
@@ -52,18 +45,14 @@ const TipoTransporte = () => {
           activoSn: parseActivoSN(getValueFromRow(row, ["activoSn", "activo"]), "S"),
         };
 
-        const existente = indexByNombre.get(normalizeHeader(nombre));
-        if (existente?.id) {
+        if (rowId) {
           payload.usuarioModificacion = usuarioSesionId;
-          await patchTipoTransporte(existente.id, payload);
+          await patchTipoTransporte(rowId, payload);
           result.updated++;
         } else {
           payload.usuarioCreacion = usuarioSesionId;
-          const nuevo = await postTipoTransporte(payload);
-          if (nuevo?.id) {
-            result.created++;
-            indexByNombre.set(normalizeHeader(nombre), nuevo);
-          }
+          await postTipoTransporte(payload);
+          result.created++;
         }
       } catch (error) {
         result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);

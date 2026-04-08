@@ -392,10 +392,21 @@ const generarYDescargarCSV = (registros, encabezados, nombreArchivo) => {
 const prepararRegistrosParaCSV = async (registros, columnas, procesarDatosParaCSV) => {
     if (procesarDatosParaCSV) {
         const resultados = await procesarDatosParaCSV(registros);
-        return resultados
+        return (resultados || []).map((registroTransformado, index) => {
+            // Aseguramos que el CSV incluya el id real del registro para facilitar updates por id en importaciÃ³n.
+            if (registroTransformado && registroTransformado.id !== undefined) {
+                return registroTransformado;
+            }
+            return {
+                id: registros?.[index]?.id ?? null,
+                ...registroTransformado,
+            };
+        });
     } else {
         return registros.map(record => {
-            const registroTransformado = {};
+            const registroTransformado = {
+                id: record.id ?? null,
+            };
             columnas.forEach(columna => {
                 registroTransformado[columna.header] = record[columna.campo];
             });

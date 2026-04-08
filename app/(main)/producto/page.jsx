@@ -14,7 +14,6 @@ import {
   getUsuarioSesionEmpresaId,
   getUsuarioSesionId,
   getValueFromRow,
-  normalizeHeader,
   parseActivoSN,
   parseNumberOrNull,
 } from "@/app/utility/csv-import-utils";
@@ -53,20 +52,13 @@ const Producto = () => {
     const result = createResult();
     const usuarioSesionId = getUsuarioSesionId();
     const empresaSesionId = getUsuarioSesionEmpresaId();
-    const existentes = await getProducto(JSON.stringify({ limit: 100000 }));
-    const indexByEmpresaNombre = new Map();
-
-    existentes.forEach((item) => {
-      if (!item.nombre) return;
-      const key = `${item.empresaId}-${normalizeHeader(item.nombre)}`;
-      indexByEmpresaNombre.set(key, item);
-    });
 
     for (let i = 0; i < rowsNormalizados.length; i++) {
       try {
         const row = rowsNormalizados[i];
+        const rowId = parseNumberOrNull(getValueFromRow(row, ["id"]));
         const nombre = getValueFromRow(row, ["nombre"]);
-        if (!nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
+        if (!rowId && !nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
 
         const empresaId =
           parseNumberOrNull(getValueFromRow(row, ["empresaId", "empresa"])) ??
@@ -83,19 +75,14 @@ const Producto = () => {
           activoSN: parseActivoSN(getValueFromRow(row, ["activoSN", "activoSn", "activo"]), "S"),
         };
 
-        const key = `${empresaId}-${normalizeHeader(nombre)}`;
-        const existente = indexByEmpresaNombre.get(key);
-        if (existente?.id) {
+        if (rowId) {
           payload.usuModificacion = usuarioSesionId;
-          await patchProducto(existente.id, payload);
+          await patchProducto(rowId, payload);
           result.updated++;
         } else {
           payload.usuCreacion = usuarioSesionId;
-          const nuevo = await postProducto(payload);
-          if (nuevo?.id) {
-            result.created++;
-            indexByEmpresaNombre.set(key, nuevo);
-          }
+          await postProducto(payload);
+          result.created++;
         }
       } catch (error) {
         result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);

@@ -3,7 +3,7 @@ import { getPaises, getPaisesCount, deletePais, postPais, patchPais } from "@/ap
 import EditarPais from "./editar";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
-import { createResult, getUsuarioSesionId, getValueFromRow, normalizeHeader, parseActivoSN, parseNumberOrNull } from "@/app/utility/csv-import-utils";
+import { createResult, getUsuarioSesionId, getValueFromRow, parseActivoSN, parseNumberOrNull } from "@/app/utility/csv-import-utils";
 const Pais = () => {
     const intl = useIntl();
     const columnas = [
@@ -16,24 +16,17 @@ const Pais = () => {
     const procesarImportacionCSV = async ({ rowsNormalizados }) => {
         const result = createResult();
         const usuarioSesionId = getUsuarioSesionId();
-        const existentes = await getPaises();
-        const indexByIso = new Map();
-        const indexByNombre = new Map();
-
-        existentes.forEach((item) => {
-            if (item.iso) indexByIso.set(normalizeHeader(item.iso), item);
-            if (item.nombre) indexByNombre.set(normalizeHeader(item.nombre), item);
-        });
 
         for (let i = 0; i < rowsNormalizados.length; i++) {
             try {
                 const row = rowsNormalizados[i];
+                const rowId = parseNumberOrNull(getValueFromRow(row, ["id"]));
                 const iso = getValueFromRow(row, ["iso"]);
                 const nombre = getValueFromRow(row, ["nombre"]);
                 const orden = parseNumberOrNull(getValueFromRow(row, ["orden"]));
                 const activoSn = parseActivoSN(getValueFromRow(row, ["activoSn", "activo", "activosn"]), "S");
 
-                if (!iso && !nombre) {
+                if (!rowId && !iso && !nombre) {
                     throw new Error(`Fila ${i + 2}: Debe indicar al menos ISO o Nombre`);
                 }
 
@@ -44,19 +37,14 @@ const Pais = () => {
                     activoSn,
                 };
 
-                const existente = (iso && indexByIso.get(normalizeHeader(iso))) || (nombre && indexByNombre.get(normalizeHeader(nombre)));
-                if (existente?.id) {
+                if (rowId) {
                     payload.usuModificacion = usuarioSesionId;
-                    await patchPais(existente.id, payload);
+                    await patchPais(rowId, payload);
                     result.updated++;
                 } else {
                     payload.usuCreacion = usuarioSesionId;
-                    const nuevo = await postPais(payload);
-                    if (nuevo?.id) {
-                        result.created++;
-                        if (payload.iso) indexByIso.set(normalizeHeader(payload.iso), nuevo);
-                        if (payload.nombre) indexByNombre.set(normalizeHeader(payload.nombre), nuevo);
-                    }
+                    await postPais(payload);
+                    result.created++;
                 }
             } catch (error) {
                 result.errors.push(error.message || `Fila ${i + 2}: Error desconocido`);

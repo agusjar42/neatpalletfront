@@ -36,7 +36,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
     },
     {
       campo: "telefono",
-      header: intl.formatMessage({ id: "TelÃ©fono" }),
+      header: intl.formatMessage({ id: "Teléfono" }),
       tipo: "string",
     },
     {
@@ -59,12 +59,12 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
     },
     {
       campo: "direccion",
-      header: intl.formatMessage({ id: "DirecciÃ³n" }),
+      header: intl.formatMessage({ id: "Dirección" }),
       tipo: "string",
     },
     {
       campo: "direccionGps",
-      header: intl.formatMessage({ id: "DirecciÃ³n GPS" }),
+      header: intl.formatMessage({ id: "Dirección GPS" }),
       tipo: "string",
     },
     {
@@ -134,11 +134,11 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
           </div>
           <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
             <label htmlFor="telefono">
-              {intl.formatMessage({ id: "TelÃ©fono" })}
+              {intl.formatMessage({ id: "Teléfono" })}
             </label>
             <InputText
               value={cliente.telefono || ""}
-              placeholder={intl.formatMessage({ id: "TelÃ©fono del cliente" })}
+              placeholder={intl.formatMessage({ id: "Teléfono del cliente" })}
               onChange={(e) =>
                 setCliente({ ...cliente, telefono: e.target.value })
               }
@@ -182,7 +182,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                       />
                       <span>
                         {intl.formatMessage({
-                          id: "GestiÃ³n de operarios asociados al cliente.",
+                          id: "Gestión de operarios asociados al cliente.",
                         })}
                       </span>
                     </div>
@@ -249,7 +249,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                       />
                       <span>
                         {intl.formatMessage({
-                          id: "GestiÃ³n de lugares de parada asociados al cliente.",
+                          id: "Gestión de lugares de parada asociados al cliente.",
                         })}
                       </span>
                     </div>

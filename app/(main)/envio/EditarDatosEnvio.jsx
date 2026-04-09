@@ -54,7 +54,6 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombreProducto', header: intl.formatMessage({ id: 'Producto' }), tipo: 'string' },
         { campo: 'codigoPallet', header: intl.formatMessage({ id: 'Código Pallet' }), tipo: 'string' },
-        { campo: 'referencia', header: intl.formatMessage({ id: 'Referencia' }), tipo: 'string' },
         { campo: 'pesoKgs', header: intl.formatMessage({ id: 'Peso (Kg)' }), tipo: 'number' },
         { campo: 'cantidad', header: intl.formatMessage({ id: 'Cantidad' }), tipo: 'number' },
         { campo: 'pesoTotal', header: intl.formatMessage({ id: 'Peso Total (Kg)' }), tipo: 'number' },
@@ -237,6 +236,10 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
         });
     };
 
+    const handleGenerarInforme = () => {
+        window.open("/analisis_trazabilidad_ruta.pdf", "_blank");
+    };
+
     return (
         <>
             <Toast ref={toast} position="top-right" />
@@ -365,8 +368,24 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
                         />
                     </div>
                 )}
+                {/* Acciones del envío */}
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-9">
+                    <label>&nbsp;</label>
+                    {envio.id && (
+                        <div className="flex justify-content-end mb-3">
+                            <Button
+                                label={intl.formatMessage({ id: 'Generar informe' })}
+                                icon="pi pi-file"
+                                severity="warning"
+                                onClick={handleGenerarInforme}
+                            />
+                        </div>
+                    )}
+                    </div>
                 </div>
             </Fieldset>
+
+
 
         {/* Pestañas para bloques adicionales */}
         <div className="mt-4">
@@ -493,7 +512,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
                                     headerCrud={intl.formatMessage({ id: 'Movimientos del Envío' })}
                                     getRegistros={getMovimientosEnvio}
                                     getRegistrosCount={getMovimientosEnvioCount}
-                                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'generarGrafico']}
+                                    botones={['ver', 'eliminar', 'descargarCSV', 'generarGrafico']}
                                     controlador={"Envio Movimiento"}
                                     editarComponente={<EditarEnvioMovimiento />}
                                     columnas={columnasMovimiento}

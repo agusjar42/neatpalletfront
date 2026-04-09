@@ -74,6 +74,13 @@ const Envio = () => {
                 />
             </Dialog>
             <div>
+                <Button
+                    label={intl.formatMessage({ id: "Generar informe" })}
+                    icon="pi pi-file"
+                    severity="warning"
+                    onClick={handleGenerarInforme}
+                    className="mb-3"
+                />
                 {mostrarAccionesRuta && (
                     <>
                         <Button
@@ -82,13 +89,6 @@ const Envio = () => {
                             severity="info"
                             onClick={handleGenerarRuta}
                             className="mb-3 mx-2"
-                        />
-                        <Button
-                            label={intl.formatMessage({ id: "Generar informe" })}
-                            icon="pi pi-file"
-                            severity="warning"
-                            onClick={handleGenerarInforme}
-                            className="mb-3"
                         />
                     </>
                 )}

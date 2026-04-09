@@ -22,7 +22,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando }) => {
         <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
           <label htmlFor="orden">{intl.formatMessage({ id: "Orden" })}</label>
           <InputNumber
-            value={producto.orden}
+            value={producto.orden === '' || producto.orden === undefined ? null : producto.orden}
             onValueChange={(e) => setProducto({ ...producto, orden: e.value })}
             mode="decimal"
             useGrouping={false}

@@ -1,14 +1,12 @@
-"use client";
-import { getEnvio, getEnvioCount, deleteEnvio, generarDatosFake } from "@/app/api-endpoints/envio";
+﻿"use client";
+import { getEnvio, getEnvioCount, deleteEnvio } from "@/app/api-endpoints/envio";
 import EditarEnvios from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { Button } from 'primereact/button';
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
-import { Toast } from "primereact/toast";
 import { Dialog } from "primereact/dialog";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 const MapView = dynamic(() => import("@/app/components/map/MapView"), {
@@ -31,8 +29,6 @@ const realRoute = [
 
 const Envio = () => {
     const intl = useIntl();
-    const toast = useRef(null);
-    const [refreshKey, setRefreshKey] = useState(0);
     const [verRutaDialog, setVerRutaDialog] = useState(false);
     const [mostrarAccionesRuta, setMostrarAccionesRuta] = useState(false);
 
@@ -52,38 +48,6 @@ const Envio = () => {
         { campo: 'fechaLlegadaEspanol', header: intl.formatMessage({ id: 'Fecha llegada' }), tipo: 'string' }
     ];
 
-    const handleGenerarDatosFake = () => {
-        confirmDialog({
-            message: intl.formatMessage({ id: '¿Estás seguro de que quieres generar datos fake?' }),
-            header: intl.formatMessage({ id: 'Confirmación' }),
-            icon: 'pi pi-exclamation-triangle',
-            acceptLabel: intl.formatMessage({ id: 'Sí' }),
-            rejectLabel: intl.formatMessage({ id: 'No' }),
-            accept: async () => {
-                try {
-                    const datosSesion = getUsuarioSesion();
-                    await generarDatosFake({ usuarioCreacion: datosSesion.id, empresaId: datosSesion.empresaId });
-                    toast.current?.show({
-                        severity: "success",
-                        summary: "OK",
-                        detail: intl.formatMessage({ id: 'Datos fake generados correctamente' }),
-                        life: 3000,
-                    });
-                    // Recargar los datos del Crud
-                    setRefreshKey(prev => prev + 1);
-                } catch (error) {
-                    console.error('Error al generar datos fake:', error);
-                    toast.current?.show({
-                        severity: "error",
-                        summary: "Error",
-                        detail: intl.formatMessage({ id: 'Error al generar datos fake' }),
-                        life: 3000,
-                    });
-                }
-            }
-        });
-    };
-
     const handleGenerarRuta = () => {
         setVerRutaDialog(true);
     };
@@ -94,8 +58,6 @@ const Envio = () => {
 
     return (
         <>
-            <ConfirmDialog />
-            <Toast ref={toast} position="top-right" />
             <Dialog
                 header={intl.formatMessage({ id: "Ver ruta" })}
                 visible={verRutaDialog}
@@ -112,13 +74,6 @@ const Envio = () => {
                 />
             </Dialog>
             <div>
-                <Button
-                    label={intl.formatMessage({ id: "Generar Datos Fake" })}
-                    icon="pi pi-database"
-                    severity="danger"
-                    onClick={handleGenerarDatosFake}
-                    className="mb-3"
-                />
                 {mostrarAccionesRuta && (
                     <>
                         <Button
@@ -138,7 +93,6 @@ const Envio = () => {
                     </>
                 )}
                 <Crud
-                    key={`envios-${refreshKey}`}
                     headerCrud={intl.formatMessage({ id: 'Envíos' })}
                     getRegistros={getEnvio}
                     getRegistrosCount={getEnvioCount}

@@ -28,6 +28,7 @@ import {
   getEnvio,
   getEnvioCount,
   deleteEnvio,
+  generarDatosFake,
 } from "@/app/api-endpoints/envio";
 import {
   getEnvioSensorEmpresa,
@@ -93,6 +94,7 @@ const EditarEmpresa = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [cargandoSensores, setCargandoSensores] = useState(false);
   const [refreshSensores, setRefreshSensores] = useState(0);
+  const [refreshEnvios, setRefreshEnvios] = useState(0);
 
   const columnasUsuariosEmpresa = [
     {
@@ -691,6 +693,56 @@ const EditarEmpresa = ({
     });
   };
 
+  const handleGenerarDatosFake = () => {
+    if (!empresa.id) {
+      toast.current?.show({
+        severity: "warn",
+        summary: intl.formatMessage({ id: "Advertencia" }),
+        detail: intl.formatMessage({ id: "Debe guardar la empresa primero" }),
+        life: 3000,
+      });
+      return;
+    }
+
+    confirmDialog({
+      message: intl.formatMessage({
+        id: "\u00BFEst\u00E1s seguro de que quieres generar datos fake?",
+      }),
+      header: intl.formatMessage({ id: "Confirmaci\u00F3n" }),
+      icon: "pi pi-exclamation-triangle",
+      acceptLabel: intl.formatMessage({ id: "S\u00ED" }),
+      rejectLabel: intl.formatMessage({ id: "No" }),
+      accept: async () => {
+        try {
+          await generarDatosFake({
+            usuarioCreacion: getUsuarioSesion()?.id,
+            empresaId: empresa.id,
+          });
+          toast.current?.show({
+            severity: "success",
+            summary: "OK",
+            detail: intl.formatMessage({
+              id: "Datos fake generados correctamente",
+            }),
+            life: 3000,
+          });
+          setRefreshEnvios((prev) => prev + 1);
+        } catch (error) {
+          toast.current?.show({
+            severity: "error",
+            summary: intl.formatMessage({ id: "Error" }),
+            detail: intl.formatMessage({ id: "Error al generar datos fake" }),
+            life: 3000,
+          });
+        }
+      },
+    });
+  };
+
+  const handleVerRutas = () => {
+    window.open("/seguimiento-rutas", "_blank");
+  };
+
   const renderTabNoDisponible = (mensaje) => (
     <div className="text-center p-4">
       <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
@@ -727,6 +779,7 @@ const EditarEmpresa = ({
         <div className="col-12">
           <div className="card">
             <Toast ref={toast} position="top-right" />
+            <ConfirmDialog />
             <h2>
               {header} {intl.formatMessage({ id: "Empresa" }).toLowerCase()}
             </h2>
@@ -853,21 +906,38 @@ const EditarEmpresa = ({
 
                 <TabPanel header={intl.formatMessage({ id: "Envíos" })}>
                   {empresa.id ? (
-                    <Crud
-                      headerCrud={intl.formatMessage({ id: "Envíos" })}
-                      getRegistros={getEnvio}
-                      getRegistrosCount={getEnvioCount}
-                      botones={botonesEnvioDesdeEmpresa}
-                      controlador={"Envíos"}
-                      editarComponente={<EditarEnvio />}
-                      columnas={columnasEnvio}
-                      filtradoBase={{ empresaId: empresa.id }}
-                      deleteRegistro={deleteEnvio}
-                      editarComponenteParametrosExtra={{
-                        empresaId: empresa.id,
-                        estoyDentroDeUnTab: true,
-                      }}
-                    />
+                    <>
+                      <div className="flex justify-content-end gap-2 mb-3">
+                        <Button
+                          label={intl.formatMessage({ id: "Ver rutas" })}
+                          icon="pi pi-map"
+                          severity="info"
+                          onClick={handleVerRutas}
+                        />
+                        <Button
+                          label={intl.formatMessage({ id: "Generar Datos Fake" })}
+                          icon="pi pi-database"
+                          severity="danger"
+                          onClick={handleGenerarDatosFake}
+                        />
+                      </div>
+                      <Crud
+                        key={`envios-empresa-${refreshEnvios}`}
+                        headerCrud={intl.formatMessage({ id: "Envíos" })}
+                        getRegistros={getEnvio}
+                        getRegistrosCount={getEnvioCount}
+                        botones={botonesEnvioDesdeEmpresa}
+                        controlador={"Envíos"}
+                        editarComponente={<EditarEnvio />}
+                        columnas={columnasEnvio}
+                        filtradoBase={{ empresaId: empresa.id }}
+                        deleteRegistro={deleteEnvio}
+                        editarComponenteParametrosExtra={{
+                          empresaId: empresa.id,
+                          estoyDentroDeUnTab: true,
+                        }}
+                      />
+                    </>
                   ) : (
                     renderTabNoDisponible(
                       intl.formatMessage({
@@ -880,7 +950,6 @@ const EditarEmpresa = ({
                 <TabPanel header={intl.formatMessage({ id: "Envío sensores" })}>
                   {empresa.id ? (
                     <>
-                      <ConfirmDialog />
                       <div className="flex justify-content-end mb-3">
                         <Button
                           label={

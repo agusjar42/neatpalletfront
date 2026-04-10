@@ -6,7 +6,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { ConfirmDialog } from 'primereact/confirmdialog';
 import { useIntl } from 'react-intl';
 import Crud from "../../components/shared/crud";
 import { crearEnvioConfiguracionDesdeEmpresa, crearEnvioSensorDesdeEmpresa } from "@/app/api-endpoints/envio";
@@ -35,6 +35,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
     const [cargandoSensores, setCargandoSensores] = useState(false);
     const [refreshSensores, setRefreshSensores] = useState(0);
     const [clientes, setClientes] = useState([]);
+    const [confirmacionPendiente, setConfirmacionPendiente] = useState(null);
+    const confirmDialogAbierto = useRef(false);
 
     // Estados para los contadores de cada tab (solo para Movimientos, Pallets y Paradas)
     const [conteoMovimiento, setConteoMovimiento] = useState(0);
@@ -144,6 +146,36 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
         return await getEnvioMovimientoCount(JSON.stringify({ and: { ...where, envioId: envio.id } }));
     };
 
+    const abrirConfirmacionUnica = (configuracionConfirmacion) => {
+        if (confirmDialogAbierto.current) {
+            return;
+        }
+
+        confirmDialogAbierto.current = true;
+        setConfirmacionPendiente(configuracionConfirmacion);
+    };
+
+    const cerrarConfirmacion = () => {
+        confirmDialogAbierto.current = false;
+        setConfirmacionPendiente(null);
+    };
+
+    const aceptarConfirmacion = async () => {
+        const onAccept = confirmacionPendiente?.accept;
+        cerrarConfirmacion();
+        if (onAccept) {
+            await onAccept();
+        }
+    };
+
+    const rechazarConfirmacion = () => {
+        const onReject = confirmacionPendiente?.reject;
+        cerrarConfirmacion();
+        if (onReject) {
+            onReject();
+        }
+    };
+
     const handleCrearConfiguracionDesdeEmpresa = () => {
         if (!envio.id) {
             toast.current?.show({
@@ -155,8 +187,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
             return;
         }
 
-        confirmDialog({
-            group: 'editar-envio-confirmaciones',
+        abrirConfirmacionUnica({
             message: intl.formatMessage({ id: '¿Está seguro que desea crear la configuración desde la empresa? Esto sobrescribirá la configuración actual del envío.' }),
             header: intl.formatMessage({ id: 'Confirmación' }),
             icon: 'pi pi-exclamation-triangle',
@@ -201,8 +232,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
             return;
         }
 
-        confirmDialog({
-            group: 'editar-envio-confirmaciones',
+        abrirConfirmacionUnica({
             message: intl.formatMessage({ id: '¿Está seguro que desea crear los sensores desde la empresa? Esto sobrescribirá los sensores actuales del envío.' }),
             header: intl.formatMessage({ id: 'Confirmación' }),
             icon: 'pi pi-exclamation-triangle',
@@ -243,7 +273,17 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
     return (
         <>
             <Toast ref={toast} position="top-right" />
-            <ConfirmDialog group="editar-envio-confirmaciones" />
+            <ConfirmDialog
+                visible={Boolean(confirmacionPendiente)}
+                onHide={cerrarConfirmacion}
+                message={confirmacionPendiente?.message}
+                header={confirmacionPendiente?.header}
+                icon={confirmacionPendiente?.icon}
+                acceptLabel={confirmacionPendiente?.acceptLabel}
+                rejectLabel={confirmacionPendiente?.rejectLabel}
+                accept={aceptarConfirmacion}
+                reject={rechazarConfirmacion}
+            />
             <Fieldset legend={intl.formatMessage({ id: 'Datos del envío' })}>
                 <div className="formgrid grid">
                 {/* Campo Orden */}

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
@@ -654,6 +654,7 @@ const EditarEmpresa = ({
       return;
     }
     confirmDialog({
+      group: "empresa-confirmaciones",
       message: intl.formatMessage({
         id: "¿Está seguro que desea crear los sensores desde los tipos de sensor? Esto sobrescribirá los sensores actuales de la empresa.",
       }),
@@ -705,6 +706,7 @@ const EditarEmpresa = ({
     }
 
     confirmDialog({
+      group: "empresa-confirmaciones",
       message: intl.formatMessage({
         id: "\u00BFEst\u00E1s seguro de que quieres generar datos fake?",
       }),
@@ -779,7 +781,7 @@ const EditarEmpresa = ({
         <div className="col-12">
           <div className="card">
             <Toast ref={toast} position="top-right" />
-            <ConfirmDialog />
+            <ConfirmDialog group="empresa-confirmaciones" />
             <h2>
               {header} {intl.formatMessage({ id: "Empresa" }).toLowerCase()}
             </h2>
@@ -1131,3 +1133,4 @@ const EditarEmpresa = ({
 };
 
 export default EditarEmpresa;
+

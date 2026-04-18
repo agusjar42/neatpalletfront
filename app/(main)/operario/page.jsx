@@ -1,5 +1,5 @@
 "use client";
-import { getOperario, getOperarioCount, deleteOperario } from "@/app/api-endpoints/operario";
+import { getOperario, getOperarioCount, deleteOperario } from "@/app/api-endpoints/cliente-operario";
 import EditarOperarios from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl';

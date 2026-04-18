@@ -11,7 +11,7 @@ import { Toast } from "primereact/toast";
 import { getEmpresas } from "@/app/api-endpoints/empresa";
 import { deleteEmpresaPallet, getEmpresaPallet, postEmpresaPallet } from "@/app/api-endpoints/empresa-pallet";
 import { getEnvio } from "@/app/api-endpoints/envio";
-import { getEnvioPallet } from "@/app/api-endpoints/envio-pallet";
+import { getEnvioPallet } from "@/app/api-endpoints/envio-pallet-usado";
 import { getPallet } from "@/app/api-endpoints/pallet";
 import { formatearFechaDate } from "@/app/utility/Utils";
 import { useIntl } from "react-intl";
@@ -552,4 +552,3 @@ import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 };
 
 export default PalletsAsignadosGlobal;
-

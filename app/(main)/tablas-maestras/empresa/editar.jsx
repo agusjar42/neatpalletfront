@@ -23,7 +23,7 @@ import {
   deleteProducto,
   postProducto,
   patchProducto,
-} from "@/app/api-endpoints/producto";
+} from "@/app/api-endpoints/empresa-producto";
 import {
   getEnvio,
   getEnvioCount,
@@ -35,21 +35,21 @@ import {
   getEnvioSensorEmpresaCount,
   deleteEnvioSensorEmpresa,
   crearEnvioSensorEmpresaDesdetipoSensor,
-} from "@/app/api-endpoints/envio-sensor-empresa";
+} from "@/app/api-endpoints/empresa-sensor";
 import {
   getTipoCarroceria,
   getTipoCarroceriaCount,
   deleteTipoCarroceria,
   postTipoCarroceria,
   patchTipoCarroceria,
-} from "@/app/api-endpoints/tipo-carroceria";
+} from "@/app/api-endpoints/empresa-tipo-carroceria";
 import {
   getTipoTransporte,
   getTipoTransporteCount,
   deleteTipoTransporte,
   postTipoTransporte,
   patchTipoTransporte,
-} from "@/app/api-endpoints/tipo-transporte";
+} from "@/app/api-endpoints/empresa-tipo-transporte";
 import {
   getEventoConfiguracion,
   getEventoConfiguracionCount,

@@ -5,7 +5,7 @@ import {
   deleteProducto,
   postProducto,
   patchProducto,
-} from "@/app/api-endpoints/producto";
+} from "@/app/api-endpoints/empresa-producto";
 import EditarProductos from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from "react-intl";

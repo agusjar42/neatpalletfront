@@ -1,5 +1,5 @@
 "use client";
-import { getEnvioPallet, getEnvioPalletCount, deleteEnvioPallet } from "@/app/api-endpoints/envio-pallet";
+import { getEnvioPallet, getEnvioPalletCount, deleteEnvioPallet } from "@/app/api-endpoints/envio-pallet-usado";
 import EditarEnvioPallets from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'

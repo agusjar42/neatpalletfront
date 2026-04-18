@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postTipoTransporte, patchTipoTransporte } from "@/app/api-endpoints/tipo-transporte";
+import { postTipoTransporte, patchTipoTransporte } from "@/app/api-endpoints/empresa-tipo-transporte";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosTipoTransporte from "./EditarDatosTipoTransporte";

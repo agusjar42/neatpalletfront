@@ -1,5 +1,5 @@
 "use client";
-import { getEnvioSensorEmpresa, getEnvioSensorEmpresaCount, deleteEnvioSensorEmpresa } from "@/app/api-endpoints/envio-sensor-empresa";
+import { getEnvioSensorEmpresa, getEnvioSensorEmpresaCount, deleteEnvioSensorEmpresa } from "@/app/api-endpoints/empresa-sensor";
 import EditarEnvioSensorEmpresas from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'

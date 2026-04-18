@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { postEnvioMovimiento, patchEnvioMovimiento } from "@/app/api-endpoints/envio-movimiento";
-import { getEnvioPallet } from "@/app/api-endpoints/envio-pallet";
+import { getEnvioPallet } from "@/app/api-endpoints/envio-pallet-usado";
 import { getTipoSensor } from "@/app/api-endpoints/tipo-sensor";
 import "primeicons/primeicons.css";
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";

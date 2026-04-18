@@ -13,7 +13,7 @@ import { Column } from "primereact/column";
 import { Dialog } from "primereact/dialog";
 import { Badge } from 'primereact/badge';
 import { Toast } from "primereact/toast";
-import { getPermiso, postPermiso, deletePermiso, getVistaEmpresaRolPermiso, getListaPermisos } from "@/app/api-endpoints/permisos";
+import { getPermiso, postPermiso, deletePermiso, getVistaEmpresaRolPermiso } from "@/app/api-endpoints/permisos";
 import { getRol, getNombreRol } from "@/app/api-endpoints/rol";
 import { formatearFechaLocal_a_toISOString, getUsuarioSesion } from "@/app/utility/Utils";
 import { AutoComplete } from "primereact/autocomplete";

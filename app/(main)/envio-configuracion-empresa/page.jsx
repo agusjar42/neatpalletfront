@@ -1,5 +1,5 @@
 "use client";
-import { getEnvioConfiguracionEmpresa, getEnvioConfiguracionEmpresaCount, deleteEnvioConfiguracionEmpresa } from "@/app/api-endpoints/envio-configuracion-empresa";
+import { getEnvioConfiguracionEmpresa, getEnvioConfiguracionEmpresaCount, deleteEnvioConfiguracionEmpresa } from "@/app/api-endpoints/empresa-configuracion";
 import EditarEnvioConfiguracionEmpresas from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'

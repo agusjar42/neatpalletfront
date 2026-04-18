@@ -4,8 +4,8 @@ import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
-import { getLugarParada } from '@/app/api-endpoints/lugar-parada';
-import { getOperario } from '@/app/api-endpoints/operario';
+import { getLugarParada } from '@/app/api-endpoints/cliente-lugar-parada';
+import { getOperario } from '@/app/api-endpoints/cliente-operario';
 import { getUsuarioSesion } from '@/app/utility/Utils';
 
 const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, envios, estoyDentroDeUnTab, envioId }) => {

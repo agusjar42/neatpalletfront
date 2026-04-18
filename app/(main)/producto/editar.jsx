@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postProducto, patchProducto } from "@/app/api-endpoints/producto/index.js";
+import { postProducto, patchProducto } from "@/app/api-endpoints/empresa-producto/index.js";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import EditarDatosProducto from "./EditarDatosProducto";

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
-import { postOperario, patchOperario } from "@/app/api-endpoints/operario/index.js";
+import { postOperario, patchOperario } from "@/app/api-endpoints/cliente-operario/index.js";
 import { getCliente } from "@/app/api-endpoints/cliente/index.js";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";

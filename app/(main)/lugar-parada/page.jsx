@@ -1,5 +1,5 @@
 "use client";
-import { getLugarParada, getLugarParadaCount, deleteLugarParada } from "@/app/api-endpoints/lugar-parada";
+import { getLugarParada, getLugarParadaCount, deleteLugarParada } from "@/app/api-endpoints/cliente-lugar-parada";
 import EditarLugarParadas from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl';

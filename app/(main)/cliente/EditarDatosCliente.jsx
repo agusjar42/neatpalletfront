@@ -9,12 +9,12 @@ import {
   getOperario,
   getOperarioCount,
   deleteOperario,
-} from "@/app/api-endpoints/operario";
+} from "@/app/api-endpoints/cliente-operario";
 import {
   getLugarParada,
   getLugarParadaCount,
   deleteLugarParada,
-} from "@/app/api-endpoints/lugar-parada";
+} from "@/app/api-endpoints/cliente-lugar-parada";
 import EditarOperarios from "../operario/editar";
 import EditarLugarParadas from "../lugar-parada/editar";
 

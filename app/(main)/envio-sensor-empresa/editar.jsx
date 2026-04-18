@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postEnvioSensorEmpresa, patchEnvioSensorEmpresa, getEnvioSensorEmpresa } from "@/app/api-endpoints/envio-sensor-empresa";
+import { postEnvioSensorEmpresa, patchEnvioSensorEmpresa, getEnvioSensorEmpresa } from "@/app/api-endpoints/empresa-sensor";
 import { getTipoSensor } from "@/app/api-endpoints/tipo-sensor";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
-import { postLugarParada, patchLugarParada } from "@/app/api-endpoints/lugar-parada/index.js";
+import { postLugarParada, patchLugarParada } from "@/app/api-endpoints/cliente-lugar-parada/index.js";
 import { getCliente } from "@/app/api-endpoints/cliente/index.js";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";

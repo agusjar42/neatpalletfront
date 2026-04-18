@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postEnvioConfiguracionEmpresa, patchEnvioConfiguracionEmpresa } from "@/app/api-endpoints/envio-configuracion-empresa";
+import { postEnvioConfiguracionEmpresa, patchEnvioConfiguracionEmpresa } from "@/app/api-endpoints/empresa-configuracion";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioConfiguracionEmpresa from "./EditarDatosEnvioConfiguracionEmpresa";

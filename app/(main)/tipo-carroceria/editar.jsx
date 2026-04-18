@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
-import { postTipoCarroceria, patchTipoCarroceria } from "@/app/api-endpoints/tipo-carroceria";
+import { postTipoCarroceria, patchTipoCarroceria } from "@/app/api-endpoints/empresa-tipo-carroceria";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosTipoCarroceria from "./EditarDatosTipoCarroceria";

@@ -9,7 +9,7 @@ import { Image } from 'primereact/image';
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { convertirArchivoABase64, getUsuarioSesion } from "@/app/utility/Utils";
-import { getProducto } from "@/app/api-endpoints/producto";
+import { getProducto } from "@/app/api-endpoints/empresa-producto";
 import { getPallet } from "@/app/api-endpoints/pallet";
 import { getEmpresaPallet } from "@/app/api-endpoints/empresa-pallet";
 

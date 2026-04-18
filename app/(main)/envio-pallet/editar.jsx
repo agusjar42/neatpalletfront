@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postEnvioPallet, patchEnvioPallet } from "@/app/api-endpoints/envio-pallet";
+import { postEnvioPallet, patchEnvioPallet } from "@/app/api-endpoints/envio-pallet-usado";
 import { getEnvio } from "@/app/api-endpoints/envio";
 import { getPallet } from "@/app/api-endpoints/pallet";
 import 'primeicons/primeicons.css';

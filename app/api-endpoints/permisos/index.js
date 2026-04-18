@@ -1,7 +1,6 @@
-import { settings, PermisoControllerApi, ListaPermisosControllerApi } from "@/app/api-neatpallet";
+import { settings, PermisoControllerApi } from "@/app/api-neatpallet";
 
 const apiPermisos = new PermisoControllerApi(settings)
-const apiListaPermisos = new ListaPermisosControllerApi(settings)
 
 export const getPermiso= async (filtro) => {
     const { data: dataPermisos } = await apiPermisos.permisoControllerFind(filtro)
@@ -21,11 +20,6 @@ export const patchPermiso = async (idPermiso, objPermiso) => {
 export const deletePermiso = async (idPermiso) => {
     const { data: dataPermiso } = await apiPermisos.permisoControllerDeleteById(idPermiso)
     return dataPermiso
-}
-
-export const getListaPermisos = async () => {
-    const { data: dataPermisos } = await apiListaPermisos.listaPermisosControllerFind()
-    return dataPermisos
 }
 
 export const getVistaEmpresaRolPermiso = async (filtros) => {

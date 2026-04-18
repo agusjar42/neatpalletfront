@@ -5,7 +5,7 @@ import {
   deleteTipoCarroceria,
   postTipoCarroceria,
   patchTipoCarroceria,
-} from "@/app/api-endpoints/tipo-carroceria";
+} from "@/app/api-endpoints/empresa-tipo-carroceria";
 import EditarTipoCarroceria from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from "react-intl";

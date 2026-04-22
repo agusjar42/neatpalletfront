@@ -117,7 +117,7 @@ const EditarPalletParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
                 delete objGuardar['fechaModificacion'];
-                delete objGuardar['activoSn'];
+                delete objGuardar['activoSN'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchPalletParametro(objGuardar.id, objGuardar);
                 setIdEditar(null)

@@ -113,6 +113,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
     // Muestra la tabla de parámetros solo si el pallet ya está creado
     //
     const columnas = [
+        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'parametro', header: intl.formatMessage({ id: 'Parámetro' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
         { campo: 'textoLibre', header: intl.formatMessage({ id: 'Valor Libre' }), tipo: 'string' },

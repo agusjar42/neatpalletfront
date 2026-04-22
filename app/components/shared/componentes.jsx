@@ -158,7 +158,7 @@ const eliminarDialogFooter = (ocultarEliminarDialog, eliminar) => {
     );
 };
 
-const Header = ({ crearNuevo, generarCSV, importarCSV, importarCSVPallets, generarGrafico, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
+const Header = ({ crearNuevo, generarCSV, importarCSV, importarCSVPallets, generarGrafico, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
     operadorSeleccionado, setOperadorSeleccionado, listaOperadores,
 }) => {
     const intl = useIntl()
@@ -217,26 +217,6 @@ const Header = ({ crearNuevo, generarCSV, importarCSV, importarCSVPallets, gener
                         severity="info"
                         onClick={generarGrafico}
                         className="mr-2"
-                    />
-                )
-            }
-            {(mostrarQR !== null && mostrarQR !== undefined) &&     //Si no se envia la funcion de generarCSV, no muestra el boton
-                (
-                    <Button
-                        label={`${intl.formatMessage({ id: 'Mostrar' })} QR`}
-                        icon="pi pi-download"
-                        severity="success"
-                        onClick={mostrarQR}
-                    />
-                )
-            }
-            {(enviarCorreo !== null && enviarCorreo !== undefined) &&     //Si no se envia la funcion de generarCSV, no muestra el boton
-                (
-                    <Button
-                        label={`${intl.formatMessage({ id: 'Enviar correos' })}`}
-                        icon="pi pi-download"
-                        severity="success"
-                        onClick={enviarCorreo}
                     />
                 )
             }

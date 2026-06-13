@@ -93,7 +93,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         const primeraColumnaNoImagen = columnas.find(columna => columna.tipo !== 'imagen');
         return {
             first: 0,
-            rows: 100,
+            rows: 20,
             sortField: primeraColumnaNoImagen ? primeraColumnaNoImagen.campo : columnas[0].campo, // Por defecto se ordena por la primera columna que no sea de tipo "imagen", si no existe, la primera columna
             sortOrder: 1, // Por defecto se ordena en ascendente
             filters: filtros,
@@ -952,12 +952,86 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     //Muestra cuantos registros tiene el paginator
     const paginatorTemplate = {
-        layout: 'RowsPerPageDropdown PrevPageLink PageLinks NextPageLink CurrentPageReport',
+        layout: 'CurrentPageReport RowsPerPageDropdown',
         CurrentPageReport: (options) => {
             return (
-                <span style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                    {intl.formatMessage({ id: 'Mostrando' })} {options.first} {intl.formatMessage({ id: 'a' })} {options.last} {intl.formatMessage({ id: 'de' })} {options.totalRecords} {intl.formatMessage({ id: 'registros' })}
+                <span className="neat-paginator-report">
+                    {intl.formatMessage({ id: 'Mostrando' })} {options.last} {intl.formatMessage({ id: 'de' })} {options.totalRecords} (total {options.totalRecords})
                 </span>
+            );
+        },
+        PrevPageLink: (options) => {
+            const hasMultiplePages = options.props.totalRecords > options.props.rows;
+            if (!hasMultiplePages) return null;
+
+            return (
+                <button
+                    type="button"
+                    className="neat-page-nav"
+                    disabled={options.disabled}
+                    onClick={options.onClick}
+                >
+                    Anterior
+                </button>
+            );
+        },
+        NextPageLink: (options) => {
+            const hasMultiplePages = options.props.totalRecords > options.props.rows;
+            if (!hasMultiplePages) return null;
+
+            return (
+                <button
+                    type="button"
+                    className="neat-page-nav"
+                    disabled={options.disabled}
+                    onClick={options.onClick}
+                >
+                    Siguiente
+                </button>
+            );
+        },
+        RowsPerPageDropdown: (options) => {
+            const rowOptions = [20, 50, 100];
+            const rows = Number(options.value) || parametrosCrud.rows;
+            const currentPage = options.currentPage || 0;
+            const totalPages = options.totalPages || 1;
+            const hasMultiplePages = totalPages > 1;
+            const goToPage = (page) => manejarCambioDePagina({ first: page * rows, rows });
+
+            return (
+                <div className="neat-rows-per-page">
+                    {hasMultiplePages && (
+                        <div className="neat-page-nav-group">
+                            <button
+                                type="button"
+                                className="neat-page-nav"
+                                disabled={currentPage <= 0}
+                                onClick={() => goToPage(currentPage - 1)}
+                            >
+                                Anterior
+                            </button>
+                            <button
+                                type="button"
+                                className="neat-page-nav"
+                                disabled={currentPage >= totalPages - 1}
+                                onClick={() => goToPage(currentPage + 1)}
+                            >
+                                Siguiente
+                            </button>
+                        </div>
+                    )}
+                    <span>Por página:</span>
+                    {rowOptions.map((rows) => (
+                        <button
+                            key={rows}
+                            type="button"
+                            className={options.value === rows ? "active" : ""}
+                            onClick={(event) => options.onChange({ originalEvent: event, value: rows })}
+                        >
+                            {rows}
+                        </button>
+                    ))}
+                </div>
             );
         }
     };
@@ -1233,7 +1307,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 value={registros}
                                 filters={parametrosCrud.filters}
                                 removableSort
-                                rowsPerPageOptions={[25, 50, 100, 200]}
+                                rowsPerPageOptions={[20, 50, 100]}
                                 //currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
                                 lazy
                                 rows={parametrosCrud.rows}
@@ -1263,7 +1337,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 first={parametrosCrud.first}
                                 rows={parametrosCrud.rows}
                                 totalRecords={totalRegistros}
-                                rowsPerPageOptions={[25, 50, 100, 200]}
+                                rowsPerPageOptions={[20, 50, 100]}
                                 onPageChange={manejarCambioDePagina}
                                 template={paginatorTemplate}
                             />

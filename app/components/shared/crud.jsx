@@ -293,6 +293,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 detail: intl.formatMessage({ id: 'Registro editado correctamente' }),
                 life: 3000,
             });
+            if (onDataChange) {
+                onDataChange();
+            }
         }
         else if (registroResult === "insertado") {
             toast.current?.show({
@@ -301,6 +304,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 detail: intl.formatMessage({ id: 'Registro insertado correctamente' }),
                 life: 3000,
             });
+            if (onDataChange) {
+                onDataChange();
+            }
         }
         if (registroEditarFlag) {
             obtenerDatos();
@@ -501,12 +507,15 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     };
 
     const activoSNTemplate = (campo) => (rowData) => {
-        //const activo = rowData.campo === "S" ? intl.formatMessage({ id: 'SI' }) : intl.formatMessage({ id: 'NO' });
+        const activo = rowData[campo] === "S";
+
         return (
             <>
                 <span className="p-column-title" >activoSN</span>
-                {rowData[campo] === "S" && <Badge value={intl.formatMessage({ id: 'SI' })} severity="success"></Badge>}
-                {rowData[campo] === "N" && <Badge value={intl.formatMessage({ id: 'NO' })} severity="secondary"></Badge>}
+                <span className={`neat-status ${activo ? "neat-status-active" : "neat-status-inactive"}`}>
+                    <span className="neat-status-dot"></span>
+                    {activo ? "Activo" : "Inactivo"}
+                </span>
             </>
         );
     };

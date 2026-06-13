@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import {
     getEventoConfiguracion,
     getEventoConfiguracionCount,
@@ -7,9 +8,11 @@ import {
 import EditarEventoConfiguracion from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'
+import EventosConfiguracionIntro from "./EventosConfiguracionIntro";
 
 const EventosConfiguracion = () => {
     const intl = useIntl();
+    const [summaryRefreshKey, setSummaryRefreshKey] = useState(0);
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
@@ -20,6 +23,7 @@ const EventosConfiguracion = () => {
 
     return (
         <div>
+            <EventosConfiguracionIntro refreshKey={summaryRefreshKey} />
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Eventos Configuración' })}
                 getRegistros={getEventoConfiguracion}
@@ -29,6 +33,7 @@ const EventosConfiguracion = () => {
                 editarComponente={<EditarEventoConfiguracion />}
                 columnas={columnas}
                 deleteRegistro={deleteEventoConfiguracion}
+                onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
             />
         </div>
     );

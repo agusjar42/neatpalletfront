@@ -5,7 +5,6 @@ import { useEventListener, useMountEffect, useResizeListener, useUnmountEffect }
 import { DomHandler, classNames } from 'primereact/utils';
 import AppBreadCrumb from './AppBreadCrumb';
 import AppConfig from './AppConfig';
-import AdminPageIntro from './AdminPageIntro';
 import AppProfileSidebar from './AppProfileSidebar';
 import AppSidebar from './AppSidebar';
 import AppTopbar from './AppTopbar';
@@ -204,10 +203,7 @@ const LayoutContainer = (props: ChildContainerProps) => {
                 <div className="layout-content-wrapper">
                     <AppTopbar ref={topbarRef} />
                     <AppBreadCrumb className="content-breadcrumb"></AppBreadCrumb>
-                    <div className="layout-content">
-                        <AdminPageIntro />
-                        {props.children}
-                    </div>
+                    <div className="layout-content">{props.children}</div>
                 </div>
                 <AppProfileSidebar />
                 {process.env.NEXT_PUBLIC_ENTORNO === 'LOCAL' && <AppConfig />}

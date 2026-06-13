@@ -1,11 +1,15 @@
 "use client";
+import { useState } from "react";
 import { getIdiomas, getIdiomasCount, deleteIdioma, postIdioma, patchIdioma } from "@/app/api-endpoints/idioma";
 import EditarIdioma from "./editar";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
 import { createResult, getUsuarioSesionId, getValueFromRow, parseActivoSN, parseNumberOrNull } from "@/app/utility/csv-import-utils";
+import LenguajesTabs from "../LenguajesTabs";
+import IdiomaIntro from "./IdiomaIntro";
 const Idioma = () => {
     const intl = useIntl();
+    const [summaryRefreshKey, setSummaryRefreshKey] = useState(0);
 
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
@@ -57,6 +61,8 @@ const Idioma = () => {
 
     return (
         <div>
+            <LenguajesTabs />
+            <IdiomaIntro refreshKey={summaryRefreshKey} />
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Idiomas' })}
                 getRegistros={getIdiomas}
@@ -68,6 +74,7 @@ const Idioma = () => {
                 columnas={columnas}
                 deleteRegistro={deleteIdioma}
                 procesarImportacionCSV={procesarImportacionCSV}
+                onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
             />
         </div>
     );

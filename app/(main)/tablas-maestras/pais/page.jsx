@@ -1,11 +1,15 @@
 "use client";
+import { useState } from "react";
 import { getPaises, getPaisesCount, deletePais, postPais, patchPais } from "@/app/api-endpoints/pais";
 import EditarPais from "./editar";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
 import { createResult, getUsuarioSesionId, getValueFromRow, parseActivoSN, parseNumberOrNull } from "@/app/utility/csv-import-utils";
+import LenguajesTabs from "../LenguajesTabs";
+import PaisIntro from "./PaisIntro";
 const Pais = () => {
     const intl = useIntl();
+    const [summaryRefreshKey, setSummaryRefreshKey] = useState(0);
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
@@ -56,6 +60,8 @@ const Pais = () => {
  
     return (
         <div>
+            <LenguajesTabs />
+            <PaisIntro refreshKey={summaryRefreshKey} />
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Paises' })}
                 getRegistros={getPaises}
@@ -67,6 +73,7 @@ const Pais = () => {
                 columnas={columnas}
                 deleteRegistro={deletePais}
                 procesarImportacionCSV={procesarImportacionCSV}
+                onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
             />
         </div>
     );

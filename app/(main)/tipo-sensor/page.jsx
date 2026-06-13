@@ -1,11 +1,14 @@
 "use client";
+import { useState } from "react";
 import { getTipoSensor, getTipoSensorCount, deleteTipoSensor } from "@/app/api-endpoints/tipo-sensor";
 import EditarTipoSensors from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'
+import TipoSensorIntro from "./TipoSensorIntro";
 
 const TipoSensor = () => {
     const intl = useIntl();
+    const [summaryRefreshKey, setSummaryRefreshKey] = useState(0);
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
@@ -15,6 +18,7 @@ const TipoSensor = () => {
 
     return (
         <div>
+            <TipoSensorIntro refreshKey={summaryRefreshKey} />
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Tipos de Sensor' })}
                 getRegistros={getTipoSensor}
@@ -24,6 +28,7 @@ const TipoSensor = () => {
                 editarComponente={<EditarTipoSensors />}
                 columnas={columnas}
                 deleteRegistro={deleteTipoSensor}
+                onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
             />
         </div>
     );

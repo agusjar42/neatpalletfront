@@ -3,8 +3,8 @@ import { TraduccionControllerApi, IdiomaControllerApi, settings } from "@/app/ap
 const apiTraduccion = new TraduccionControllerApi(settings)
 const apiIdioma = new IdiomaControllerApi(settings)
 
-export const getTraducciones = async () => {
-    const { data: dataTraducciones } = await apiTraduccion.traduccionControllerFind()
+export const getTraducciones = async (filtrar) => {
+    const { data: dataTraducciones } = await apiTraduccion.traduccionControllerFind(filtrar)
     return dataTraducciones
 }
 

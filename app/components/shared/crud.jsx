@@ -1398,6 +1398,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 onCSVProcessed={(results) => {
                                     if (results.created > 0 || results.updated > 0) {
                                         obtenerDatos();
+                                        if (onDataChange) {
+                                            onDataChange();
+                                        }
                                     }
                                 }}
                             />

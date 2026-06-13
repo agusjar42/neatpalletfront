@@ -347,6 +347,36 @@ body {
     color: #dc2626;
 }
 
+.neat-tabs {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    margin: 0 0 1.5rem;
+    border-bottom: 1px solid #0f7a3f;
+}
+
+.neat-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.8rem 1rem;
+    color: #0f7a3f;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+
+    i {
+        font-size: 0.9rem;
+    }
+}
+
+.neat-tab:hover,
+.neat-tab-active {
+    color: #08764c;
+    background: #eaf6ef;
+    border-bottom-color: #08764c;
+}
+
 .card,
 .p-card,
 .p-fieldset,

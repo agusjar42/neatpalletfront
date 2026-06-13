@@ -6,10 +6,13 @@ import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
 import { useEffect, useState } from 'react';
 import { createResult, getUsuarioSesionId, getValueFromRow, normalizeHeader, parseNumberOrNull } from "@/app/utility/csv-import-utils";
+import LenguajesTabs from "../LenguajesTabs";
+import TraduccionIntro from "./TraduccionIntro";
 
 const Traduccion = () => {
     const intl = useIntl();
     const [columnas, setColumnas] = useState([{ campo: 'clave', header: intl.formatMessage({ id: 'Clave' }), tipo: 'string' }]);
+    const [summaryRefreshKey, setSummaryRefreshKey] = useState(0);
 
     useEffect(() => {
         const cargarColumnas = async () => {
@@ -124,6 +127,8 @@ const Traduccion = () => {
 
     return (
         <div>
+            <LenguajesTabs />
+            <TraduccionIntro refreshKey={summaryRefreshKey} />
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Traducciones' })}
                 getRegistros={getVistaTraduccionIdioma}
@@ -135,6 +140,7 @@ const Traduccion = () => {
                 columnas={columnas}
                 deleteRegistro={deleteTraduccion}
                 procesarImportacionCSV={procesarImportacionCSV}
+                onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
             />
         </div>
     );

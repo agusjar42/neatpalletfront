@@ -546,11 +546,11 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     const botonesDeAccionTemplate = (rowData) => {
         return (
-            <>
+            <div className="neat-row-actions">
                 {((botones.includes('ver') && puedeVer)) && (
                     <Button
                         icon="pi pi-eye"
-                        className="mr-2"
+                        className="neat-action-button neat-action-view"
                         rounded
                         title={intl.formatMessage({ id: 'Ver' })}
                         severity="info"
@@ -560,7 +560,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 {(botones.includes('editar') && puedeEditar) && (
                     <Button
                         icon="pi pi-pencil"
-                        className="mr-2"
+                        className="neat-action-button neat-action-edit"
                         rounded
                         title={intl.formatMessage({ id: 'Editar' })}
                         severity="success"
@@ -571,7 +571,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 {(botones.includes('pallet') && puedePallet) && (
                         <Button
                             icon="pi pi-box"
-                            className="mr-2"
+                            className="neat-action-button"
                             rounded
                             title={intl.formatMessage({ id: 'Pallets asociados' })}
                             severity="secondary"
@@ -581,7 +581,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 {(botones.includes('parada') && puedeParada) && (
                         <Button
                             icon="pi pi-map-marker"
-                            className="mr-2"
+                            className="neat-action-button"
                             rounded
                             title={intl.formatMessage({ id: 'Paradas' })}
                             severity="secondary"
@@ -591,7 +591,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 {(botones.includes('vehiculo') && puedeVehiculo) && (
                         <Button
                             icon="pi pi-car"
-                            className="mr-2"
+                            className="neat-action-button"
                             rounded
                             title={intl.formatMessage({ id: 'Vehiculo' })}
                             severity="secondary"
@@ -601,7 +601,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 {(botones.includes('contenido') && puedeContenido) && (
                         <Button
                             icon="pi pi-inbox"                            
-                            className="mr-2"
+                            className="neat-action-button"
                             rounded
                             title={intl.formatMessage({ id: 'Contenido' })}
                             severity="secondary"
@@ -611,13 +611,14 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 {(botones.includes('eliminar') && puedeBorrar) && (
                         <Button
                             icon="pi pi-trash"
+                            className="neat-action-button neat-action-delete"
                             rounded
                             title={intl.formatMessage({ id: 'Eliminar' })}
                             severity="danger"
                             onClick={() => confirmarEliminarRegistro(rowData)}
                         />
                 )}
-            </>
+            </div>
         );
     };
 

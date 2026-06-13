@@ -66,3 +66,371 @@ $scale: 14px !default;
 h1, h2, h3, h4, h5, h6 {
     margin: 0rem 0 1rem 0;
 }
+
+//
+// NEAT soft admin override
+//
+
+:root {
+    --neat-green-950: #052f22;
+    --neat-green-900: #08764c;
+    --neat-green-800: #0a8a56;
+    --neat-green-700: #16a765;
+    --neat-mint-50: #f6fbf7;
+    --neat-mint-100: #e7f8ec;
+    --neat-mint-200: #d7f2df;
+    --neat-mint-300: #bce9ca;
+    --neat-ink: #111c18;
+    --neat-muted: #6c7772;
+    --neat-border: #e4ebe7;
+}
+
+body {
+    background: #fbfcfb;
+    color: var(--neat-ink);
+}
+
+.layout-container {
+    --menu-bg: var(--neat-mint-100);
+    --menuitem-text-color: #073d2b;
+    --menuitem-icon-color: #5d806f;
+    --menuitem-hover-bg-color: rgba(22, 167, 101, 0.11);
+    --root-menuitem-text-color: #577466;
+    --sidebar-border: 1px solid #ccebd7;
+    --sidebar-shadow: none;
+}
+
+.layout-sidebar {
+    width: 17rem;
+    padding: 0;
+    background: var(--neat-mint-100);
+    border-right: 1px solid #ccebd7;
+    box-shadow: none;
+
+    .sidebar-header {
+        min-height: 4.1rem;
+        padding: 0.9rem 1.35rem;
+        border-bottom: 1px solid #ccebd7;
+        justify-content: flex-start;
+
+        .app-logo img {
+            width: 7.25rem !important;
+            height: 2.3rem !important;
+            padding: 0;
+            border-radius: 0;
+            background: transparent;
+            object-fit: contain;
+        }
+
+        &::after {
+            content: "ADMIN";
+            margin-left: auto;
+            padding: 0.25rem 0.55rem;
+            border: 1px solid #87dea8;
+            border-radius: 0.35rem;
+            color: var(--neat-green-900);
+            background: #dff8e8;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+        }
+    }
+
+    .layout-menu-container {
+        padding: 0.8rem 0.5rem 1rem 0.5rem;
+    }
+
+    .layout-menu {
+        .layout-root-menuitem > .layout-menuitem-root-text {
+            padding: 1rem 0.5rem 0.45rem 0.5rem;
+            color: #537161;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+        }
+
+        ul {
+            a {
+                min-height: 2.3rem;
+                margin: 0.08rem 0;
+                padding: 0.58rem 0.62rem;
+                border-radius: 0.45rem;
+                color: #063826;
+                font-weight: 500;
+
+                .layout-menuitem-icon {
+                    color: #678a78;
+                }
+
+                &:hover {
+                    background: rgba(22, 167, 101, 0.12);
+                }
+
+                &.active-route {
+                    background: var(--neat-mint-300);
+                    color: #052f22;
+                    box-shadow: none;
+
+                    .layout-menuitem-icon {
+                        color: var(--neat-green-900);
+                    }
+                }
+            }
+
+            ul li a {
+                padding-left: 1.2rem;
+            }
+        }
+    }
+}
+
+.layout-content-wrapper {
+    min-height: 100vh;
+    padding: 0;
+    background: #fbfcfb;
+}
+
+.layout-topbar {
+    position: sticky;
+    top: 0;
+    min-height: 4.1rem;
+    margin: 0;
+    padding: 0 1.9rem;
+    border: 0;
+    border-bottom: 1px solid var(--neat-border);
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: none;
+    backdrop-filter: none;
+
+    .topbar-menubutton {
+        display: none;
+    }
+
+    .topbar-breadcrumb {
+        display: block;
+
+        .layout-breadcrumb {
+            padding: 0;
+
+            ol {
+                gap: 0.5rem;
+                margin: 0;
+            }
+
+            li {
+                color: #7a817d;
+                font-size: 0.92rem;
+
+                &:last-child {
+                    color: var(--neat-ink);
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+
+    .topbar-menu {
+        gap: 1rem;
+
+        .topbar-search {
+            .p-inputtext {
+                width: 26rem;
+                padding-top: 0.62rem;
+                padding-bottom: 0.62rem;
+                border-radius: 0.5rem;
+                background: #f7f8f7;
+            }
+        }
+
+        .p-dropdown {
+            border-radius: 0.5rem;
+            background: #ffffff;
+        }
+
+        li.topbar-profile {
+            margin-left: 0.25rem !important;
+        }
+    }
+}
+
+.layout-content {
+    max-width: none;
+    padding: 2.6rem 2.3rem;
+}
+
+.card,
+.p-card,
+.p-fieldset,
+.p-panel {
+    border: 1px solid var(--neat-border);
+    border-radius: 0.65rem;
+    background: #ffffff;
+    box-shadow: none;
+}
+
+.card {
+    padding: 1.15rem;
+}
+
+.p-button {
+    border-radius: 0.48rem;
+    box-shadow: none;
+}
+
+.p-button:not(.p-button-text):not(.p-button-outlined):not(.p-button-secondary):not(.p-button-danger):not(.p-button-help):not(.p-button-warning):not(.p-button-info) {
+    border-color: #111c18;
+    background: #111c18;
+}
+
+.p-button.p-button-success {
+    border-color: var(--neat-green-900);
+    background: var(--neat-green-900);
+}
+
+.p-inputtext,
+.p-dropdown,
+.p-multiselect,
+.p-calendar .p-inputtext,
+.p-inputnumber .p-inputtext,
+.p-password .p-inputtext {
+    border-color: var(--neat-border);
+    border-radius: 0.5rem;
+    box-shadow: none;
+}
+
+.p-datatable {
+    .p-datatable-header {
+        border-color: var(--neat-border);
+        background: #ffffff;
+    }
+
+    .p-datatable-thead > tr > th {
+        padding: 0.95rem 1rem;
+        border-color: var(--neat-border);
+        background: #fbfcfb;
+        color: #4d5752;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+    }
+
+    .p-datatable-tbody > tr {
+        background: #ffffff;
+
+        &:hover {
+            background: #fbfdfc;
+        }
+
+        > td {
+            padding: 1rem;
+            border-color: var(--neat-border);
+            color: #14221d;
+        }
+    }
+}
+
+.neat-row-actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.45rem;
+    width: 100%;
+}
+
+.neat-row-actions .p-button.neat-action-button {
+    width: 2.35rem;
+    height: 2.35rem;
+    padding: 0;
+    border: 1px solid var(--neat-border) !important;
+    border-radius: 0.5rem;
+    background: #ffffff !important;
+    color: #4f5b56 !important;
+    box-shadow: none;
+
+    .p-button-icon {
+        font-size: 0.9rem;
+    }
+
+    &:enabled:hover {
+        border-color: #cfdad5 !important;
+        background: #f8faf9 !important;
+        color: #111c18 !important;
+    }
+
+    &:enabled:focus {
+        box-shadow: 0 0 0 0.16rem rgba(22, 167, 101, 0.16);
+    }
+}
+
+.neat-row-actions .p-button.neat-action-view {
+    color: #50615a !important;
+
+    &:enabled:hover {
+        border-color: #cbd8d2;
+        background: #f5f8f6;
+    }
+}
+
+.neat-row-actions .p-button.neat-action-edit {
+    color: #08764c !important;
+
+    &:enabled:hover {
+        border-color: #a9e5be !important;
+        background: #effaf3 !important;
+        color: #065f3d !important;
+    }
+}
+
+.neat-row-actions .p-button.neat-action-delete {
+    color: #8d3b36 !important;
+
+    &:enabled:hover {
+        border-color: #f0c5c1 !important;
+        background: #fff6f5 !important;
+        color: #b42318 !important;
+    }
+}
+
+.p-button.neat-clear-filters-button {
+    border-color: #d5dbd8 !important;
+    background: #ffffff !important;
+    color: #202824 !important;
+
+    .p-button-icon {
+        color: #202824 !important;
+    }
+
+    &:enabled:hover {
+        border-color: #bfc8c3 !important;
+        background: #f7f8f7 !important;
+        color: #111c18 !important;
+    }
+}
+
+@media screen and (min-width: $breakpoint) {
+    .layout-container.layout-static .layout-content-wrapper {
+        margin-left: 17rem;
+    }
+}
+
+@media screen and (max-width: ($breakpoint - 1)) {
+    .layout-content-wrapper {
+        padding: 0;
+    }
+
+    .layout-topbar {
+        padding: 0.75rem 1rem;
+
+        .topbar-menubutton {
+            display: inline-flex;
+        }
+
+        .topbar-menu .topbar-search .p-inputtext {
+            width: 100%;
+        }
+    }
+
+    .layout-content {
+        padding: 1rem;
+    }
+}

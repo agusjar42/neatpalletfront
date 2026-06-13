@@ -7,6 +7,7 @@ import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { getUsuarioSesion } from "@/app/utility/Utils";
+import AppBreadCrumb from './AppBreadCrumb';
 
 const AppTopbar = React.forwardRef((props, ref) => {
     const { onMenuToggle, showProfileSidebar, showConfigSidebar } = useContext(LayoutContext);
@@ -134,24 +135,21 @@ const AppTopbar = React.forwardRef((props, ref) => {
                     <i className="pi pi-bars"></i>
                 </button>
 
-                {/* <AppBreadcrumb className="topbar-breadcrumb"></AppBreadcrumb> */}
+                <AppBreadCrumb className="topbar-breadcrumb" />
             </div>
 
             <div className="topbar-end">
                 <ul className="topbar-menu">
-                    {false && (
-                        //Uso esta para "comentar" esta etiqueta html
-                        <li className="topbar-search">
-                            <span className="p-input-icon-left">
-                                <i className="pi pi-search"></i>
-                                <InputText
-                                    type="text"
-                                    placeholder="Search"
-                                    className="w-12rem sm:w-full"
-                                />
-                            </span>
-                        </li>
-                    )}
+                    <li className="topbar-search">
+                        <span className="p-input-icon-left">
+                            <i className="pi pi-search"></i>
+                            <InputText
+                                type="text"
+                                placeholder="Buscar empresa, usuario o pallet..."
+                                className="w-22rem sm:w-full"
+                            />
+                        </span>
+                    </li>
                     {false && (
                         <li className="ml-3">
                             <Button

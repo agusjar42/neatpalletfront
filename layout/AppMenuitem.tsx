@@ -30,7 +30,19 @@ const AppMenuitem = (props: AppMenuItemProps) => {
     const key = props.parentKey
         ? props.parentKey + "-" + props.index
         : String(props.index);
-    const isActiveRoute = item!.to && pathname === item!.to;
+
+    const normalizePath = (path?: string) => {
+        if (!path) return "";
+        const normalized = path.split("?")[0].replace(/\/+$/, "");
+        return normalized || "/";
+    };
+
+    const currentPath = normalizePath(pathname);
+    const itemPath = normalizePath(item!.to);
+    const isActiveRoute =
+        !!itemPath &&
+        (currentPath === itemPath ||
+            (itemPath !== "/" && currentPath.startsWith(`${itemPath}/`)));
     const active =
         activeMenu === key ||
         !!(activeMenu && activeMenu.startsWith(key + "-"));
@@ -62,9 +74,13 @@ const AppMenuitem = (props: AppMenuItemProps) => {
         if (!(isSlim() || isSlimPlus() || isHorizontal()) && isActiveRoute) {
             setActiveMenu(key);
         }
-        const url = pathname + searchParams.toString();
+        const url = normalizePath(pathname + searchParams.toString());
         const onRouteChange = () => {
-            if (!(isSlim() || isHorizontal()) && item!.to && item!.to === url) {
+            if (
+                !(isSlim() || isHorizontal()) &&
+                itemPath &&
+                (url === itemPath || (itemPath !== "/" && url.startsWith(`${itemPath}/`)))
+            ) {
                 setActiveMenu(key);
             }
         };

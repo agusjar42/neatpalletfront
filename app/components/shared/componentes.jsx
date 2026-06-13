@@ -243,7 +243,14 @@ const Header = ({ crearNuevo, generarCSV, importarCSV, importarCSVPallets, gener
             <Button className="p-button p-component mr-2 ml-2" type="button" icon="pi pi-search" label={intl.formatMessage({ id: 'Buscar' })} onClick={manejarBusquedaFiltroGlobal}>
 
             </Button>
-            <Button type="button" icon="pi pi-filter-slash" label={intl.formatMessage({ id: 'Limpiar filtros' })} outlined onClick={limpiarFiltros} />
+            <Button
+                type="button"
+                icon="pi pi-filter-slash"
+                label={intl.formatMessage({ id: 'Limpiar filtros' })}
+                className="neat-clear-filters-button"
+                outlined
+                onClick={limpiarFiltros}
+            />
         </div>
     </div>
 };

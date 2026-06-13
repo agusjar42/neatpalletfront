@@ -18,8 +18,13 @@ export const patchPermiso = async (idPermiso, objPermiso) => {
 }
 
 export const deletePermiso = async (idPermiso) => {
-    const { data: dataPermiso } = await apiPermisos.permisoControllerDeleteById(idPermiso)
-    return dataPermiso
+    try {
+        const { data: dataPermiso } = await apiPermisos.permisoControllerDeleteById(idPermiso)
+        return dataPermiso
+    } catch (error) {
+        console.error("Error al eliminar el permiso:", error);
+        throw error; // Re-throw the error para que pueda ser manejado por el llamador
+    }
 }
 
 export const getVistaEmpresaRolPermiso = async (filtros) => {

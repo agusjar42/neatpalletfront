@@ -39,10 +39,20 @@ const AppMenuitem = (props: AppMenuItemProps) => {
 
     const currentPath = normalizePath(pathname);
     const itemPath = normalizePath(item!.to);
-    const isActiveRoute =
+    const isLenguajesRoute = (path: string) => [
+        "/tablas-maestras/pais",
+        "/tablas-maestras/idioma",
+        "/tablas-maestras/traduccion",
+    ].some((lenguajePath) => path === lenguajePath || path.startsWith(`${lenguajePath}/`));
+    const routeMatchesItem = (path: string) => (
         !!itemPath &&
-        (currentPath === itemPath ||
-            (itemPath !== "/" && currentPath.startsWith(`${itemPath}/`)));
+        (
+            path === itemPath ||
+            (itemPath !== "/" && path.startsWith(`${itemPath}/`)) ||
+            (itemPath === "/tablas-maestras/idioma" && isLenguajesRoute(path))
+        )
+    );
+    const isActiveRoute = routeMatchesItem(currentPath);
     const active =
         activeMenu === key ||
         !!(activeMenu && activeMenu.startsWith(key + "-"));
@@ -78,8 +88,7 @@ const AppMenuitem = (props: AppMenuItemProps) => {
         const onRouteChange = () => {
             if (
                 !(isSlim() || isHorizontal()) &&
-                itemPath &&
-                (url === itemPath || (itemPath !== "/" && url.startsWith(`${itemPath}/`)))
+                routeMatchesItem(url)
             ) {
                 setActiveMenu(key);
             }

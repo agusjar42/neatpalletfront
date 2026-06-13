@@ -1,11 +1,14 @@
 "use client";
+import { useState } from "react";
 import { getParametro, getParametroCount, deleteParametro } from "@/app/api-endpoints/parametro";
 import EditarParametro from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'
+import ParametroIntro from "./ParametroIntro";
 
 const Parametro = () => {
     const intl = useIntl();
+    const [summaryRefreshKey, setSummaryRefreshKey] = useState(0);
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
@@ -15,6 +18,7 @@ const Parametro = () => {
 
     return (
         <div>
+            <ParametroIntro refreshKey={summaryRefreshKey} />
             {/* Bocadillo de información */}
             {/*<div className="p-mt-3">
                 <div
@@ -35,6 +39,7 @@ const Parametro = () => {
                 editarComponente={<EditarParametro />}
                 columnas={columnas}
                 deleteRegistro={deleteParametro}
+                onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
             />
         </div>
     );

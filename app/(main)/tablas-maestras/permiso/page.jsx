@@ -21,6 +21,7 @@ import { Checkbox } from "primereact/checkbox";
 import { bloquearPantalla } from "@/app/utility/Utils"
 import { useIntl } from 'react-intl';
 import Cookies from 'js-cookie';
+import PermisoIntro from "./PermisoIntro";
 
 const Permiso = () => {
     const intl = useIntl();
@@ -33,6 +34,7 @@ const Permiso = () => {
     const [marcado, setMarcado] = useState(false);
     const [listaPermisosMarcados, setListaPermisosMarcados] = useState(new Set());
     const [datosUsuario, setDatosUsuario] = useState(null);
+    const permisosEnProceso = useRef(new Set());
 
 
     useEffect(() => {
@@ -396,11 +398,15 @@ const Permiso = () => {
     };
 
     //Evento para marcar o desmarcar los checkbox aparte de añadirlo a la BBDD
-    const handlePermisoMarcado = (permiso, evento) => {
-        setListaPermisosMarcados(async (prevSet) => {
-            const newSet = new Set(prevSet);
-            bloquearPantalla(true)
-            document.body.style.cursor = 'wait';
+    const handlePermisoMarcado = async (permiso, evento) => {
+        if (permisosEnProceso.current.has(permiso)) {
+            return;
+        }
+
+        permisosEnProceso.current.add(permiso);
+        bloquearPantalla(true)
+        document.body.style.cursor = 'wait';
+        try {
             if (evento.checked) {
                 //añadir a la BBDD y al set
                 const partesPermiso = permiso.split('-');
@@ -413,7 +419,6 @@ const Permiso = () => {
                     usuCreacion: getUsuarioSesion()?.id,
                 };
                 await postPermiso(emptyPermiso);
-                newSet.add(permiso);
                 // if (partesPermiso[1] === 'Ver') {
                 //     window.location.reload();
                 // } else {
@@ -424,7 +429,7 @@ const Permiso = () => {
                 const partesPermiso = permiso.split('-');
                 if (partesPermiso[2] !== 'Sistemas') {
                     // Eliminar de la BBDD y del set
-                    const listadoPermisos = Array.from(newSet);
+                    const listadoPermisos = Array.from(listaPermisosMarcados);
                     // Eliminar el sufijo '-id' de los roles y crear un mapa de roles a sus IDs
                     const listaSinId = listadoPermisos.reduce((map, permisos) => {
                         const [key, id] = permisos.split(/-(?=[^-]+$)/); // Divide en el último '-'
@@ -434,7 +439,6 @@ const Permiso = () => {
                     // Buscar coincidencias y extraer sus IDs
                     if (listaSinId.hasOwnProperty(permiso)) {
                         await deletePermiso(parseInt(listaSinId[permiso]));
-                        newSet.delete(permiso + listaSinId[permiso]);
                         // if (partesPermiso[1] === 'Ver') {
                         //     window.location.reload();
                         // } else {
@@ -447,10 +451,18 @@ const Permiso = () => {
                     await obtenerDatos();
                 }
             }
+        } catch (error) {
+            toast.current?.show({
+                severity: 'error',
+                summary: intl.formatMessage({ id: 'Error' }),
+                detail: error.message || intl.formatMessage({ id: 'No se pudo actualizar el permiso' }),
+            });
+            await obtenerDatos();
+        } finally {
+            permisosEnProceso.current.delete(permiso);
             document.body.style.cursor = 'default';
             bloquearPantalla(false)
-            return newSet;
-        });
+        }
     };
 
     //LLamada al componente que generar checkbox
@@ -478,7 +490,7 @@ const Permiso = () => {
                 id={`checkbox-${rowData.seccion}-${columna}`} // Id único
                 checked={estaMarcado(`${rowData.seccion}-${columna}`, listaPermisosMarcados)} // Verificar si está en listaPermisosMarcados
                 onChange={(evento) =>
-                    handlePermisoMarcado(`${rowData.seccion}-${columna}`, evento, setListaPermisosMarcados)
+                    handlePermisoMarcado(`${rowData.seccion}-${columna}`, evento)
                 }
                 className="mr-2"
             />
@@ -506,6 +518,7 @@ const Permiso = () => {
             <div className="col-12">
                 <div className="card">
                     <Toast ref={toast} position="center" />
+                    <PermisoIntro permisos={columnaPrincipal} roles={columnasRoles} />
                     {/* ENCABEZADO PRINCIPAL */}
                     {/* <Toolbar className="mb-4" left={barraDeHerramientasIzquierda}></Toolbar> */}
 

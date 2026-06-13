@@ -175,6 +175,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envio Configuracion-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envio Configuracion-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envio Configuracion-Borrar' },
+                { header: intl.formatMessage({ id: 'Descargar CSV' }), seccion: 'Envio Configuracion-DescargarCSV' },
 
                 /*// Eventos Configuracion
                 { header: intl.formatMessage({ id: 'Eventos Configuracion' }), seccion: 'Eventos Configuracion' },
@@ -239,6 +240,8 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Pallet-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Pallet-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Pallet-Borrar' },
+                { header: intl.formatMessage({ id: 'Descargar CSV' }), seccion: 'Pallet-DescargarCSV' },
+                { header: intl.formatMessage({ id: 'Importar CSV' }), seccion: 'Pallet-ImportarCSV' },
 
                 // Parametro
                 { header: intl.formatMessage({ id: 'Parametro' }), seccion: 'Parametro' },

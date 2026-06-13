@@ -5,9 +5,8 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { Toast } from "primereact/toast";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, ImportarCSVDialog, ImportarCSVPalletsDialog, GenerarGraficoDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
+import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, ImportarCSVDialog, GenerarGraficoDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 import { formatearFechaDate, formatearFechaHoraDate, formatearFechaLocal_a_toISOString, formatNumber, getUsuarioSesion } from "@/app/utility/Utils";
-import CodigoQR from "./codigo_qr";
 import { postEnviarQR } from "@/app/api-endpoints/plantilla_email";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
@@ -63,7 +62,6 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [eliminarRegistroDialog, setEliminarRegistroDialog] = useState(false);
     const [descargarCSVDialog, setDescargarCSVDialog] = useState(false);
     const [importarCSVDialog, setImportarCSVDialog] = useState(false);
-    const [importarCSVPalletsDialog, setImportarCSVPalletsDialog] = useState(false);
     const [generarGraficoDialog, setGenerarGraficoDialog] = useState(false);
     const [mostarQRDialog, setMostarQRDialog] = useState(false);
     const [correoEnviarQR, setCorreoEnviarQR] = useState("");
@@ -74,6 +72,10 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const referenciaDataTable = useRef(null);
     const [editable, setEditable] = useState(false);
     const [puedeCrear, setPuedeCrear] = useState(true);
+    const [puedeDescargarCSV, setPuedeDescargarCSV] = useState(true);
+    const [puedeImportarCSV, setPuedeImportarCSV] = useState(true);
+    const [puedeImportarCSVPallets, setPuedeImportarCSVPallets] = useState(true);
+    const [puedeGenerarGrafico, setPuedeGenerarGrafico] = useState(true);
     const [puedeVer, setPuedeVer] = useState(true);
     const [puedeEditar, setPuedeEditar] = useState(true);
     const [puedeBorrar, setPuedeBorrar] = useState(true);
@@ -195,6 +197,10 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         const hasSession = typeof window !== 'undefined' && Boolean(localStorage.getItem('userDataNeatpallet'));
         if (isLoggingOut || !hasSession) {
             setPuedeCrear(false);
+            setPuedeDescargarCSV(false);
+            setPuedeImportarCSV(false);
+            setPuedeImportarCSVPallets(false);
+            setPuedeGenerarGrafico(false);
             setPuedeVer(false);
             setPuedeEditar(false);
             setPuedeBorrar(false);
@@ -216,6 +222,10 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         }
 
         setPuedeCrear(await tieneUsuarioPermiso('Neatpallet', controlador, 'nuevo'))
+        setPuedeDescargarCSV(await tieneUsuarioPermiso('Neatpallet', controlador, 'descargarCSV'))
+        setPuedeImportarCSV(await tieneUsuarioPermiso('Neatpallet', controlador, 'importarCSV'))
+        setPuedeImportarCSVPallets(await tieneUsuarioPermiso('Neatpallet', controlador, 'importarCSVPallets'))
+        setPuedeGenerarGrafico(await tieneUsuarioPermiso('Neatpallet', controlador, 'generarGrafico'))
         setPuedeVer(await tieneUsuarioPermiso('Neatpallet', controlador, 'ver'))
         setPuedeEditar(await tieneUsuarioPermiso('Neatpallet', controlador, 'actualizar'))
         setPuedeBorrar(await tieneUsuarioPermiso('Neatpallet', controlador, 'borrar'))
@@ -634,9 +644,6 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setIdEditar(0);
     };
 
-    const mostrarQRDialog = () => {
-        setMostarQRDialog(true);
-    };
 
     const mostrarEnvioMail = () => {
         const obtenerUsuariosActivos = async () => {
@@ -670,21 +677,6 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const ocultarQRDialog = () => {
         setMostarQRDialog(false);
     };
-
-    const enviarCorreoQR = async () => {
-        const parametrosQR = {
-            empresaId: getUsuarioSesion().empresaId,
-            emails: [correoEnviarQR],
-        }
-        await postEnviarQR(urlQREncriptado, JSON.stringify(parametrosQR))
-        setMostarQRDialog(false);
-        toast.current?.show({
-            severity: "success",
-            summary: "OK",
-            detail: intl.formatMessage({ id: 'Email enviado correctamente.' }),
-            life: 3000,
-        });
-    }
 
     const confirmarDescargarArchivoCSV = () => {
         setDescargarCSVDialog(true);
@@ -731,7 +723,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     };
 
     const confirmarImportarArchivoCSVPallets = () => {
-        setImportarCSVPalletsDialog(true);
+        setImportarCSVDialog(true);
     };
 
     const confirmarImportarArchivoCSV = () => {
@@ -740,10 +732,6 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     const ocultarImportarCSVDialog = () => {
         setImportarCSVDialog(false);
-    };
-
-    const ocultarImportarCSVPalletsDialog = () => {
-        setImportarCSVPalletsDialog(false);
     };
 
     const confirmarGenerarGrafico = async () => {
@@ -838,22 +826,16 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         if (botones.includes('nuevo') && puedeCrear) {
             propiedadesHeader['crearNuevo'] = crearNuevoRegistro
         }
-        if (botones.includes('mostrarQR') && puedeCrear) {
-            propiedadesHeader['mostrarQR'] = mostrarQRDialog
-        }
-        if (botones.includes('enviarCorreo')) {
-            propiedadesHeader['enviarCorreo'] = mostrarEnvioMail
-        }
-        if (botones.includes('descargarCSV')) {
+        if (botones.includes('descargarCSV') /*&& puedeDescargarCSV*/) {
             propiedadesHeader['generarCSV'] = confirmarDescargarArchivoCSV
         }
-        if (botones.includes('importarCSV') && procesarImportacionCSV) {
+        if (botones.includes('importarCSV') && procesarImportacionCSV /*&& puedeImportarCSV*/) {
             propiedadesHeader['importarCSV'] = confirmarImportarArchivoCSV
         }
-        if (botones.includes('importarCSVPallets')) {
+        if (botones.includes('importarCSVPallets') && procesarImportacionCSV /*&& puedeImportarCSVPallets*/) {
             propiedadesHeader['importarCSVPallets'] = confirmarImportarArchivoCSVPallets
         }
-        if (botones.includes('generarGrafico')) {
+        if (botones.includes('generarGrafico') /*&& puedeGenerarGrafico*/) {
             propiedadesHeader['generarGrafico'] = confirmarGenerarGrafico
         }
         return React.cloneElement(<Header />, propiedadesHeader);
@@ -1330,20 +1312,6 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 labelProcesar={intl.formatMessage({ id: 'Procesar archivo' })}
                                 onProcessCSV={procesarImportacionCSV}
                                 onCSVProcessed={(results) => {
-                                    if (results.created > 0 || results.updated > 0) {
-                                        obtenerDatos();
-                                    }
-                                }}
-                            />
-                            {/* MODAL DE (IMPORTAR CSV PALLETS) */}
-                            <ImportarCSVPalletsDialog
-                                visible={importarCSVPalletsDialog}
-                                onHide={ocultarImportarCSVPalletsDialog}
-                                header={intl.formatMessage({ id: 'Importar archivo CSV' })}
-                                labelSeleccionar={intl.formatMessage({ id: 'Seleccionar archivo' })}
-                                labelProcesar={intl.formatMessage({ id: 'Procesar archivo' })}
-                                onCSVProcessed={(results) => {
-                                    // Recargar los datos después del procesamiento exitoso
                                     if (results.created > 0 || results.updated > 0) {
                                         obtenerDatos();
                                     }

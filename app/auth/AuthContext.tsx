@@ -96,25 +96,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       path: string;
       icon: string;
       permisoControlador: string;
+      grupo: "OPERACIONES" | "SISTEMA";
     };
 
     const jsonRutas: MenuItem[] = [
-      { label: "Empresa",                       path: "/tablas-maestras/empresa",           icon: "pi pi-building",             permisoControlador: "Empresas" },
-      { label: "Roles",                         path: "/tablas-maestras/rol",               icon: "pi pi-bars",                 permisoControlador: "Roles" },
-      { label: "Permisos",                      path: "/tablas-maestras/permiso",           icon: "pi pi-key",                  permisoControlador: "Permisos" },
+      { label: "Clientes",                       path: "/tablas-maestras/empresa",           icon: "pi pi-building",             permisoControlador: "Empresas", grupo: "OPERACIONES" },
+      { label: "Roles",                         path: "/tablas-maestras/rol",               icon: "pi pi-bars",                 permisoControlador: "Roles", grupo: "SISTEMA" },
+      { label: "Permisos",                      path: "/tablas-maestras/permiso",           icon: "pi pi-key",                  permisoControlador: "Permisos", grupo: "SISTEMA" },
 /*      { label: "Paises",                        path: "/tablas-maestras/pais",              icon: "pi pi-globe",                permisoControlador: "Paises" },
       { label: "Traducciones",                  path: "/tablas-maestras/traduccion",        icon: "pi pi-bars",                 permisoControlador: "Traducciones" },
-      { label: "Pallets de Neat",               path: "/pallet",                            icon: "pi pi-th-large",             permisoControlador: "Pallet" },
-      { label: "Pallets asignados",             path: "/tablas-maestras/pallets-asignados", icon: "pi pi-sitemap",              permisoControlador: "Pallets Asignados" },
-      { label: "Informes contenido",            path: "/proximamente",                      icon: "pi pi-refresh",              permisoControlador: "Envio Contenido" },
+*/      { label: "Pallets",                        path: "/pallet",                            icon: "pi pi-th-large",             permisoControlador: "Pallet", grupo: "SISTEMA" },
+      { label: "Pallets asignados",             path: "/tablas-maestras/pallets-asignados", icon: "pi pi-sitemap",              permisoControlador: "Pallets Asignados", grupo: "OPERACIONES" },
+/*      { label: "Informes contenido",            path: "/proximamente",                      icon: "pi pi-refresh",              permisoControlador: "Envio Contenido" },
       { label: "Informes movimientos",          path: "/proximamente",                      icon: "pi pi-arrow-right",          permisoControlador: "Envio Movimiento" },
       { label: "Informes Pallets",              path: "/proximamente",                      icon: "pi pi-refresh",              permisoControlador: "Envio Pallets" },
-      { label: "Logs de sistema",               path: "/logs-incorrectos",                  icon: "pi pi-exclamation-triangle", permisoControlador: "Logs incorrectos" },
-      { label: "Logs de usuario",               path: "/tablas-maestras/log_usuario",       icon: "pi pi-history",              permisoControlador: "Logs de usuarios" },
-*/      { label: "Parametros",                  path: "/parametro",                         icon: "pi pi-wrench",               permisoControlador: "Parametro" },
-      { label: "Lenguajes",                     path: "/tablas-maestras/idioma",            icon: "pi pi-language",             permisoControlador: "Idiomas" },
-      { label: "Tipos de sensores",             path: "/tipo-sensor",                       icon: "pi pi-circle",               permisoControlador: "Tipo Sensor" },
-      { label: "Configuracion",                 path: "/eventos-configuracion",             icon: "pi pi-bell",                 permisoControlador: "Eventos Configuración" },
+*/      { label: "Logs de sistema",               path: "/logs-incorrectos",                  icon: "pi pi-exclamation-triangle", permisoControlador: "Logs incorrectos", grupo: "SISTEMA" },
+/*      { label: "Logs de usuario",               path: "/tablas-maestras/log_usuario",       icon: "pi pi-history",              permisoControlador: "Logs de usuarios" },
+*/      { label: "Parámetros",                  path: "/parametro",                         icon: "pi pi-wrench",               permisoControlador: "Parametro", grupo: "SISTEMA" },
+      { label: "Lenguajes",                     path: "/tablas-maestras/idioma",            icon: "pi pi-language",             permisoControlador: "Idiomas", grupo: "SISTEMA" },
+      { label: "Tipos de sensores",             path: "/tipo-sensor",                       icon: "pi pi-circle",               permisoControlador: "Tipo Sensor", grupo: "SISTEMA" },
+      { label: "Configuración",                 path: "/eventos-configuracion",             icon: "pi pi-bell",                 permisoControlador: "Eventos Configuración", grupo: "SISTEMA" },
     ];
 
     // Obtener los permisos del usuario actual de "Acceder"
@@ -123,20 +124,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       Array.isArray(permisos) ? permisos.map((permiso) => permiso.permisoControlador) : []
     );
 
-    // Declaramos el objeto que sera el menu final y le ponemos un titulo de menu
-    const jsonPermisos: {
+    const crearGrupoMenu = (label: "OPERACIONES" | "SISTEMA") => ({
+      label,
+      icon: "pi pi-fw pi-minus",
+      items: [] as { label: string; icon: string; to: string; }[]
+    });
+
+    const gruposMenu = {
+      OPERACIONES: crearGrupoMenu("OPERACIONES"),
+      SISTEMA: crearGrupoMenu("SISTEMA"),
+    };
+
+    const menuLateral: {
       label: string;
       icon: string;
       items: { label: string; icon: string; to: string; }[];
-    } = {
-      label: "Menu",
-      icon: "pi pi-fw pi-minus",
-      items: []
-    };
+    }[] = [];
 
     for (const item of jsonRutas) {
       if (permisosControlador.has(item.permisoControlador)) {
-        jsonPermisos['items'].push({
+        gruposMenu[item.grupo].items.push({
           label: item.label,
           icon: item.icon,
           to: item.path,
@@ -144,7 +151,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     }
 
-    localStorage.setItem('menuLateral', JSON.stringify([jsonPermisos]));
+    if (gruposMenu.OPERACIONES.items.length > 0) {
+      menuLateral.push(gruposMenu.OPERACIONES);
+    }
+    if (gruposMenu.SISTEMA.items.length > 0) {
+      menuLateral.push(gruposMenu.SISTEMA);
+    }
+
+    localStorage.setItem('menuLateral', JSON.stringify(menuLateral));
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new Event('menuLateralUpdated'));
     }
@@ -246,3 +260,4 @@ export const useAuth = () => {
   }
   return context;
 };
+

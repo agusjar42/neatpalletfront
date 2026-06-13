@@ -45,7 +45,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             emptyRegistro[columna.campo] = '';
         }
         //Crea los filtros que va a usar el dataTable a partir de la variable columnas
-        if (columna.tipo !== 'imagen') {
+        if (columna.tipo !== 'imagen' && !columna.virtual) {
             filtros[((columna.campo))] = { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] };
         }
 
@@ -90,7 +90,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [totalRegistros, setTotalRegistros] = useState(0);
     //Parametros del dataTable que usara para cargar los datos
     const [parametrosCrud, setParametrosCrud] = useState(() => {
-        const primeraColumnaNoImagen = columnas.find(columna => columna.tipo !== 'imagen');
+        const primeraColumnaNoImagen = columnas.find(columna => columna.tipo !== 'imagen' && !columna.virtual);
         return {
             first: 0,
             rows: 20,
@@ -1283,12 +1283,12 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         key={columna.campo}
                         field={columna.campo}
                         header={columna.header}
-                        sortable
-                        filter
+                        sortable={!columna.virtual}
+                        filter={!columna.virtual}
                         showFilterMatchModes={false}
                         showFilterOperator={false}
                         showFilterMenuOptions={false}
-                        body={templateGenerico(columna.campo, columna.header)}
+                        body={columna.body ? columna.body : templateGenerico(columna.campo, columna.header)}
                         filterClear={limpiarFiltrosTemplate}
                         filterApply={filtroAplicarTemplate}
                         filterPlaceholder={filterPlaceholder}

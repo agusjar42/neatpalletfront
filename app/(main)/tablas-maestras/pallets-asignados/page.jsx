@@ -16,6 +16,7 @@ import { getPallet } from "@/app/api-endpoints/pallet";
 import { formatearFechaDate } from "@/app/utility/Utils";
 import { useIntl } from "react-intl";
 import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
+import PalletsAsignadosIntro from "./PalletsAsignadosIntro";
 
     const VALOR_TODAS_EMPRESAS = "__TODAS__";
 
@@ -475,6 +476,11 @@ import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
             <div className="col-12">
                 <div className="card">
                     <Toast ref={toast} position="top-right" />
+                    <PalletsAsignadosIntro
+                        pallets={pallets}
+                        empresas={empresas}
+                        estadoPorPallet={estadoPorPallet}
+                    />
 
                     <DataTable
                         className="datatable-responsive pallets-asignados-table"

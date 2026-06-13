@@ -10,6 +10,8 @@ import { Column } from 'primereact/column';
 import { devuelveBasePath } from "@/app/utility/Utils";
 import axios from 'axios';
 import { useIntl } from "react-intl";
+import LogsSistemaTabs from "./LogsSistemaTabs";
+import LogsSistemaIntro from "./LogsSistemaIntro";
 
 const LogsIncorrectos = () => {
     const intl = useIntl();
@@ -153,23 +155,19 @@ const LogsIncorrectos = () => {
 
     const accionesTemplate = (rowData) => {
         return (
-            <div className="flex gap-2">
+            <div className="neat-row-actions">
                 <Button
                     icon="pi pi-download"
+                    className="neat-action-button neat-action-download"
                     rounded
-                    outlined
-                    severity="success"
-                    tooltip={intl.formatMessage({ id: "Descargar" })}
-                    tooltipOptions={{ position: 'top' }}
+                    title={intl.formatMessage({ id: "Descargar" })}
                     onClick={() => descargarArchivo(rowData.nombre)}
                 />
                 <Button
                     icon="pi pi-trash"
+                    className="neat-action-button neat-action-delete"
                     rounded
-                    outlined
-                    severity="danger"
-                    tooltip={intl.formatMessage({ id: "Borrar" })}
-                    tooltipOptions={{ position: 'top' }}
+                    title={intl.formatMessage({ id: "Borrar" })}
                     onClick={() => borrarArchivo(rowData.nombre)}
                 />
             </div>
@@ -190,21 +188,11 @@ const LogsIncorrectos = () => {
             <Toast ref={toast} position="top-right" />
 
             <div className="col-12">
-                <Card title={intl.formatMessage({ id: "Logs de sistema" })}>
+                <LogsSistemaTabs />
+                <LogsSistemaIntro archivos={archivos} />
+                <Card>
                     <div className="mb-3">
-                        <div className="p-mt-3">
-                            <div
-                                className="flex align-items-center bg-green-100 border-round p-3 w-full"
-                            >
-                                <span className="pi pi-info-circle text-blue-500 mr-2" style={{ fontSize: "1.5em" }} />
-                                    <span>
-                                        {intl.formatMessage({ id: "Aquí se pueden visualizar y gestionar los archivos de logs del sistema." })}{" "}
-                                        {intl.formatMessage({ id: "Se incluyen logs de intentos de login fallidos y logs de todas las peticiones a la API." })}{" "}
-                                        {intl.formatMessage({ id: "Cada archivo contiene los registros de un mes específico." })}
-                                    </span>
-                                </div>
-                            </div>
-                            <Button
+                        <Button
                             label={intl.formatMessage({ id: "Actualizar" })}
                             icon="pi pi-refresh"
                             onClick={cargarArchivos}

@@ -3,6 +3,7 @@ import { getEmpresas, getEmpresasCount, deleteEmpresa } from "@/app/api-endpoint
 import EditarEmpresa from "./editar";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
+import EmpresaIntro from "./EmpresaIntro";
 
 const Empresa = () => {
     const intl = useIntl()
@@ -28,6 +29,7 @@ const Empresa = () => {
 
     return (
         <div>
+            <EmpresaIntro />
             {//                
             //Si estoy entrando en la vista de usuarios y soy administrador no filtro por empresa mostrando todos los usuarios del sistema
             //

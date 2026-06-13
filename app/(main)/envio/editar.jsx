@@ -24,12 +24,26 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
             // Cargar tipos de transporte y carrocería disponibles
             const empresaContexto = empresaId ?? getUsuarioSesion()?.empresaId;
             const filtroTipos = empresaContexto
-                ? JSON.stringify({ where: { and: { empresaId: empresaContexto } } })
+                ? JSON.stringify({ where: { empresaId: empresaContexto } })
                 : '{}';
-            const dataTiposTransporte = await getTipoTransporte(filtroTipos);
-            const dataTiposCarroceria = await getTipoCarroceria(filtroTipos);
-            setTiposTransporte(dataTiposTransporte || []);
-            setTiposCarroceria(dataTiposCarroceria || []);
+            try {
+                const [dataTiposTransporte, dataTiposCarroceria] = await Promise.all([
+                    getTipoTransporte(filtroTipos),
+                    getTipoCarroceria(filtroTipos),
+                ]);
+                setTiposTransporte(dataTiposTransporte || []);
+                setTiposCarroceria(dataTiposCarroceria || []);
+            } catch (error) {
+                console.error("Error cargando catálogos de envío", error);
+                setTiposTransporte([]);
+                setTiposCarroceria([]);
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'Error cargando tipos de transporte o carrocería' }),
+                    life: 3000,
+                });
+            }
 
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);

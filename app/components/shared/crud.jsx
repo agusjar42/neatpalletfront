@@ -26,7 +26,7 @@ import { useAuth } from "@/app/auth/AuthContext";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
     parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = true, onDataChange,
-    procesarImportacionCSV }) => {
+    procesarImportacionCSV, onModoEdicionChange }) => {
     const intl = useIntl()
     const router = useRouter();
     const { usuarioAutenticado, isInitialized } = useAuth();
@@ -234,6 +234,12 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setPuedeVehiculo(await tieneUsuarioPermiso('Neatpallet', controlador, 'vehiculo'))
         setPuedeContenido(await tieneUsuarioPermiso('Neatpallet', controlador, 'contenido'))
     }
+
+    useEffect(() => {
+        if (onModoEdicionChange) {
+            onModoEdicionChange(idEditar === 0 || idEditar > 0);
+        }
+    }, [idEditar, onModoEdicionChange]);
 
     useEffect(() => {
         //Si no hay un controlador declarado, no se revisan los permisos
@@ -1337,7 +1343,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                         body={(rowData) => botonesDeAccionTemplate(rowData, botones)}
                                         header={intl.formatMessage({ id: 'Acciones' })}
                                         headerStyle={{ minWidth: "10rem" }}
-                                        style={{ minWidth: '200px' }}
+                                        style={{ minWidth: '200px', textAlign: 'left' }}
                                     ></Column>
                                 )}
                             </DataTable>

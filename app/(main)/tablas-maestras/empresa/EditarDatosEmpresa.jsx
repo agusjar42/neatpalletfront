@@ -128,7 +128,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
     };
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos para la empresa' })} toggleable collapsed>
+        <Fieldset legend={intl.formatMessage({ id: 'Datos' })} toggleable>
             <Toast ref={toast} position="top-right" />
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
@@ -213,18 +213,19 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
                     <small style={{ color: '#94949f', fontSize: '10px' }}> <i>{intl.formatMessage({ id: 'La cantidad de tiempo en minutos que tardará en cerrar la sesión por inactividad al usuario' })}</i> </small>
                 </div>
 
+                <div className="empresa-media-grid col-12">
                 {/* Sección de la Imagen - Imagen actual */}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="empresa-media-field flex flex-column field gap-2 mt-2">
                     <label htmlFor="imagen" className="pb-2">{intl.formatMessage({ id: 'Imagen' })}</label>
-                    <div className="p-3 border-1 border-round surface-border">
-                        <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: '220px' }}>
+                    <div className="empresa-media-card p-3 border-1 border-round surface-border">
+                        <div className="empresa-media-preview flex justify-content-center align-items-center border-round surface-100 p-2">
                             {(previewImagen || empresa.imagen) ? (
                                 <Image
                                     src={previewImagen || empresa.imagen}
                                     alt="Imagen de la empresa"
-                                    width="220"
+                                    width="180"
                                     className="border-round"
-                                    imageStyle={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain' }}
+                                    imageStyle={{ maxWidth: '100%', maxHeight: '130px', objectFit: 'contain' }}
                                     preview
                                 />
                             ) : (
@@ -265,17 +266,17 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
                     />
                 </div>
 
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="empresa-media-field flex flex-column field gap-2 mt-2">
                     <label htmlFor="logo" className="pb-2">{intl.formatMessage({ id: 'Logo' })}</label>
-                    <div className="p-3 border-1 border-round surface-border">
-                        <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: '220px' }}>
+                    <div className="empresa-media-card p-3 border-1 border-round surface-border">
+                        <div className="empresa-media-preview flex justify-content-center align-items-center border-round surface-100 p-2">
                             {(previewLogo || empresa.logo) ? (
                                 <Image
                                     src={previewLogo || empresa.logo}
                                     alt="Logo de la empresa"
-                                    width="220"
+                                    width="180"
                                     className="border-round"
-                                    imageStyle={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain' }}
+                                    imageStyle={{ maxWidth: '100%', maxHeight: '130px', objectFit: 'contain' }}
                                     preview
                                 />
                             ) : (
@@ -314,6 +315,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
                         style={{ display: 'none' }}
                         ref={logoInputRef}
                     />
+                </div>
                 </div>
             </div>
             <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-12">

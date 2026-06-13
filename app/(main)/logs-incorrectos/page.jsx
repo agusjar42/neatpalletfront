@@ -248,7 +248,7 @@ const LogsIncorrectos = () => {
                                 header={intl.formatMessage({ id: "Acciones" })}
                                 body={accionesTemplate}
                                 exportable={false}
-                                style={{ width: '20%' }}
+                                style={{ width: '20%', textAlign: 'left' }}
                             />
                         </DataTable>
                     )}

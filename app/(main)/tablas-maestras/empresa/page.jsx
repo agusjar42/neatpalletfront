@@ -24,6 +24,7 @@ import EditarTipoCarroceria from "../../tipo-carroceria/editar";
 import EditarTipoTransporte from "../../tipo-transporte/editar";
 import PalletsAsignadosEmpresa from "./PalletsAsignadosEmpresa";
 import EditarDatosEmpresa from "./EditarDatosEmpresa";
+import EmpresaIntro from "./EmpresaIntro";
 
 const camposPendientesBack = ["nombreComercial", "estado", "plan"];
 
@@ -519,16 +520,19 @@ const Empresa = () => {
 
     if (!empresaActiva) {
         return (
-            <Crud
-                headerCrud="Clientes"
-                getRegistros={getEmpresas}
-                getRegistrosCount={getEmpresasCount}
-                botones={["ver", "editar", "eliminar", "descargarCSV"]}
-                controlador="Empresas"
-                editarComponente={<EmpresaAdminDetalle />}
-                columnas={columnasEmpresas}
-                deleteRegistro={deleteEmpresa}
-            />
+            <>
+                <EmpresaIntro />
+                <Crud
+                    headerCrud="Clientes"
+                    getRegistros={getEmpresas}
+                    getRegistrosCount={getEmpresasCount}
+                    botones={["ver", "editar", "eliminar", "descargarCSV"]}
+                    controlador="Empresas"
+                    editarComponente={<EmpresaAdminDetalle />}
+                    columnas={columnasEmpresas}
+                    deleteRegistro={deleteEmpresa}
+                />
+            </>
         );
     }
 

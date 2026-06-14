@@ -87,6 +87,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [busquedaRealizada, setBusquedaRealizada] = useState(false);
     const [registrosForaneos, setRegistrosForaneos] = useState({});
     const [operadorSeleccionado, setOperadorSeleccionado] = useState('or');
+    const [edicionConCambios, setEdicionConCambios] = useState(false);
+    const contenedorEdicionRef = useRef(null);
 
     const [totalRegistros, setTotalRegistros] = useState(0);
     const puedeCargarDatosProtegidos = () => {
@@ -243,10 +245,51 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     }
 
     useEffect(() => {
-        if (onModoEdicionChange) {
-            onModoEdicionChange(idEditar === 0 || idEditar > 0);
+        if (idEditar === null) {
+            setEdicionConCambios(false);
         }
-    }, [idEditar, onModoEdicionChange]);
+    }, [idEditar]);
+
+    useEffect(() => {
+        if (!onModoEdicionChange) {
+            return;
+        }
+
+        onModoEdicionChange(edicionConCambios);
+    }, [edicionConCambios, onModoEdicionChange]);
+
+    useEffect(() => {
+        if (!(idEditar === 0 || idEditar > 0)) {
+            return;
+        }
+
+        const contenedor = contenedorEdicionRef.current;
+        if (!contenedor) {
+            return;
+        }
+
+        const marcarEdicionConCambios = (event) => {
+            const elemento = event.target;
+            if (!(elemento instanceof HTMLElement)) {
+                return;
+            }
+
+            const esCampoEditable = elemento.matches("input, textarea, select") || elemento.getAttribute("role") === "textbox";
+            if (!esCampoEditable) {
+                return;
+            }
+
+            setEdicionConCambios(true);
+        };
+
+        contenedor.addEventListener("input", marcarEdicionConCambios, true);
+        contenedor.addEventListener("change", marcarEdicionConCambios, true);
+
+        return () => {
+            contenedor.removeEventListener("input", marcarEdicionConCambios, true);
+            contenedor.removeEventListener("change", marcarEdicionConCambios, true);
+        };
+    }, [idEditar]);
 
     useEffect(() => {
         if (!puedeCargarDatosProtegidos()) {
@@ -1438,7 +1481,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             )}
 
             {(idEditar === 0 || idEditar > 0) && //Se hace la comprobacion asi en vez de >= porque tecnicamente null tambien es 0 
-                renderizarEditarComponente()
+                <div ref={contenedorEdicionRef}>
+                    {renderizarEditarComponente()}
+                </div>
             }
         </div>
     );

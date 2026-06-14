@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { getEventoConfiguracion, getEventoConfiguracionCount } from "@/app/api-endpoints/evento-configuracion";
+import { getUsuarioSesion } from "@/app/utility/Utils";
 
 const EventosConfiguracionIntro = ({ refreshKey = 0 }) => {
+    const esUsuarioAdmin = getUsuarioSesion()?.usuarioAdmin === "S";
     const [summary, setSummary] = useState({
         total: "-",
         activos: "-",
@@ -12,6 +14,10 @@ const EventosConfiguracionIntro = ({ refreshKey = 0 }) => {
     });
 
     useEffect(() => {
+        if (!esUsuarioAdmin) {
+            return;
+        }
+
         const cargarResumen = async () => {
             try {
                 const [totalResponse, registros] = await Promise.all([
@@ -45,7 +51,11 @@ const EventosConfiguracionIntro = ({ refreshKey = 0 }) => {
         };
 
         cargarResumen();
-    }, [refreshKey]);
+    }, [esUsuarioAdmin, refreshKey]);
+
+    if (!esUsuarioAdmin) {
+        return null;
+    }
 
     return (
         <section className="neat-page-intro">

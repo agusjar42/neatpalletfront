@@ -13,7 +13,7 @@ import { deleteEmpresaPallet, getEmpresaPallet, postEmpresaPallet } from "@/app/
 import { getEnvio } from "@/app/api-endpoints/envio";
 import { getEnvioPallet } from "@/app/api-endpoints/envio-pallet-usado";
 import { getPallet } from "@/app/api-endpoints/pallet";
-import { formatearFechaDate } from "@/app/utility/Utils";
+import { formatearFechaDate, getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from "react-intl";
 import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 import PalletsAsignadosIntro from "./PalletsAsignadosIntro";
@@ -24,10 +24,15 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
     const PalletsAsignadosGlobal = () => {
     const intl = useIntl();
     const toast = useRef(null);
+    const usuarioSesion = getUsuarioSesion();
+    const esUsuarioAdmin = usuarioSesion?.usuarioAdmin === "S";
+    const empresaSesionId = Number(usuarioSesion?.empresaId ?? 0) || null;
     const [pallets, setPallets] = useState([]);
     const [empresas, setEmpresas] = useState([]);
     const [asignaciones, setAsignaciones] = useState([]);
-    const [empresaSeleccionadaId, setEmpresaSeleccionadaId] = useState(VALOR_TODAS_EMPRESAS);
+    const [empresaSeleccionadaId, setEmpresaSeleccionadaId] = useState(
+        esUsuarioAdmin ? VALOR_TODAS_EMPRESAS : (empresaSesionId ? String(empresaSesionId) : VALOR_TODAS_EMPRESAS)
+    );
     const [textoBusqueda, setTextoBusqueda] = useState("");
     const [cargando, setCargando] = useState(false);
     const [palletsPendientes, setPalletsPendientes] = useState(new Set());
@@ -92,6 +97,12 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
     useEffect(() => {
         cargarDatos();
     }, [cargarDatos]);
+
+    useEffect(() => {
+        if (!esUsuarioAdmin && empresaSesionId) {
+            setEmpresaSeleccionadaId(String(empresaSesionId));
+        }
+    }, [empresaSesionId, esUsuarioAdmin]);
 
     useEffect(() => {
         const verificarPermiso = async () => {
@@ -166,16 +177,22 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
         };
     }, [empresaPorId, estadoPorPallet, empresaSeleccionadaNumerica]);
 
-    const opcionesEmpresas = useMemo(() => [
-        {
-            label: intl.formatMessage({ id: "Todas las empresas" }),
-            value: VALOR_TODAS_EMPRESAS
-        },
-        ...empresas.map((empresa) => ({
-            label: empresa?.nombre ?? `Empresa ${empresa?.id}`,
-            value: String(empresa?.id)
-        }))
-    ], [empresas, intl]);
+    const opcionesEmpresas = useMemo(() => {
+        const empresasDisponibles = esUsuarioAdmin
+            ? empresas
+            : empresas.filter((empresa) => Number(empresa?.id) === empresaSesionId);
+
+        return [
+            ...(esUsuarioAdmin ? [{
+                label: intl.formatMessage({ id: "Todas las empresas" }),
+                value: VALOR_TODAS_EMPRESAS
+            }] : []),
+            ...empresasDisponibles.map((empresa) => ({
+                label: empresa?.nombre ?? `Empresa ${empresa?.id}`,
+                value: String(empresa?.id)
+            }))
+        ];
+    }, [empresas, empresaSesionId, esUsuarioAdmin, intl]);
 
     const palletsFiltrados = useMemo(() => {
         const termino = (textoBusqueda ?? "").trim().toLowerCase();
@@ -196,14 +213,19 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                 return false;
             }
 
+            const { empresaActualId } = obtenerEstadoPallet(pallet);
+
+            if (!esUsuarioAdmin) {
+                return empresaSesionId !== null && Number(empresaActualId) === empresaSesionId;
+            }
+
             if (empresaSeleccionadaNumerica === null) {
                 return true;
             }
 
-            const { empresaActualId } = obtenerEstadoPallet(pallet);
             return empresaActualId === null || Number(empresaActualId) === empresaSeleccionadaNumerica;
         });
-    }, [empresaSeleccionadaNumerica, obtenerEstadoPallet, pallets, textoBusqueda]);
+    }, [empresaSeleccionadaNumerica, empresaSesionId, esUsuarioAdmin, obtenerEstadoPallet, pallets, textoBusqueda]);
 
     const obtenerTexto = (valor) => {
         if (valor === undefined || valor === null || valor === "") {
@@ -427,13 +449,19 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
         <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center gap-2">
             <div className="flex flex-column md:flex-row md:align-items-center gap-2 w-full md:w-auto">
                 <h5 className="m-0">{intl.formatMessage({ id: "Pallets asignados" })}</h5>
-                <Dropdown
-                    className="w-full md:w-20rem"
-                    value={empresaSeleccionadaId}
-                    options={opcionesEmpresas}
-                    onChange={(evento) => setEmpresaSeleccionadaId(evento.value)}
-                    placeholder={intl.formatMessage({ id: "Empresas" })}
-                />
+                {esUsuarioAdmin ? (
+                    <Dropdown
+                        className="w-full md:w-20rem"
+                        value={empresaSeleccionadaId}
+                        options={opcionesEmpresas}
+                        onChange={(evento) => setEmpresaSeleccionadaId(evento.value)}
+                        placeholder={intl.formatMessage({ id: "Empresas" })}
+                    />
+                ) : (
+                    <span className="neat-log-type-badge neat-log-type-green">
+                        {opcionesEmpresas[0]?.label ?? intl.formatMessage({ id: "Mi empresa" })}
+                    </span>
+                )}
             </div>
 
             <span className="p-input-icon-left w-full md:w-20rem">
@@ -495,11 +523,13 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
             <div className="col-12">
                 <div className="card">
                     <Toast ref={toast} position="top-right" />
-                    <PalletsAsignadosIntro
-                        pallets={pallets}
-                        empresas={empresas}
-                        estadoPorPallet={estadoPorPallet}
-                    />
+                    {esUsuarioAdmin && (
+                        <PalletsAsignadosIntro
+                            pallets={pallets}
+                            empresas={empresas}
+                            estadoPorPallet={estadoPorPallet}
+                        />
+                    )}
 
                     <DataTable
                         className="datatable-responsive pallets-asignados-table"

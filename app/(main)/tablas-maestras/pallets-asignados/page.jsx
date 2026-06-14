@@ -37,6 +37,8 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
     const [cargando, setCargando] = useState(false);
     const [palletsPendientes, setPalletsPendientes] = useState(new Set());
     const [tienePermiso, setTienePermiso] = useState(false);
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(100);
 
     const puedeCargarDatosProtegidos = () => {
         if (typeof window === "undefined") {
@@ -476,6 +478,64 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
         </div>
     );
 
+    const manejarCambioDePagina = (event) => {
+        setFirst(event.first);
+        setRows(event.rows);
+    };
+
+    const paginatorTemplate = {
+        layout: "CurrentPageReport RowsPerPageDropdown",
+        CurrentPageReport: (options) => (
+            <span className="neat-paginator-report">
+                {intl.formatMessage({ id: "Mostrando" })} {options.last} {intl.formatMessage({ id: "de" })} {options.totalRecords} (total {options.totalRecords})
+            </span>
+        ),
+        RowsPerPageDropdown: (options) => {
+            const rowOptions = [25, 50, 100, 200];
+            const currentRows = Number(options.value) || rows;
+            const currentPage = options.currentPage || 0;
+            const totalPages = options.totalPages || 1;
+            const hasMultiplePages = totalPages > 1;
+            const goToPage = (page) => manejarCambioDePagina({ first: page * currentRows, rows: currentRows });
+
+            return (
+                <div className="neat-rows-per-page">
+                    {hasMultiplePages && (
+                        <div className="neat-page-nav-group">
+                            <button
+                                type="button"
+                                className="neat-page-nav"
+                                disabled={currentPage <= 0}
+                                onClick={() => goToPage(currentPage - 1)}
+                            >
+                                Anterior
+                            </button>
+                            <button
+                                type="button"
+                                className="neat-page-nav"
+                                disabled={currentPage >= totalPages - 1}
+                                onClick={() => goToPage(currentPage + 1)}
+                            >
+                                Siguiente
+                            </button>
+                        </div>
+                    )}
+                    <span>Por pagina:</span>
+                    {rowOptions.map((rowCount) => (
+                        <button
+                            key={rowCount}
+                            type="button"
+                            className={options.value === rowCount ? "active" : ""}
+                            onClick={(event) => options.onChange({ originalEvent: event, value: rowCount })}
+                        >
+                            {rowCount}
+                        </button>
+                    ))}
+                </div>
+            );
+        }
+    };
+
     const asignadoBodyTemplate = (pallet) => {
         const { asignadoEmpresaSeleccionada, tieneAsignacion } = obtenerEstadoPallet(pallet);
         const checked = empresaSeleccionadaNumerica === null ? tieneAsignacion : asignadoEmpresaSeleccionada;
@@ -538,11 +598,14 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                         header={renderCabeceraTabla()}
                         rowHover
                         paginator
-                        rows={100}
+                        first={first}
+                        rows={rows}
+                        onPage={manejarCambioDePagina}
                         rowsPerPageOptions={[25, 50, 100, 200]}
+                        paginatorTemplate={paginatorTemplate}
                         emptyMessage={<span>{intl.formatMessage({ id: "No se han encontrado registros" })}</span>}
                     >
-                        {tienePermiso && (
+                        {esUsuarioAdmin && tienePermiso && (
                             <Column
                                 field="asignado"
                                 header={intl.formatMessage({ id: "Asignado" })}

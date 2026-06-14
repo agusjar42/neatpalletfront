@@ -130,7 +130,7 @@ const Login = () => {
         bloquearPantalla(true);
         try {
             const data = await loginGenerico(usuario, password);
-            if (data.activo === false) {
+            if (data.activoSn === 'N') {
                 // Log: Usuario inactivo 
                 await guardarLogLoginIncorrecto('usuario_inactivo', usuario, password);
                 setMessage(intl.formatMessage({ id: 'El usuario no está activo.' }));

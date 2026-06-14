@@ -131,6 +131,15 @@ const Empresa = () => {
     const [hayEdicionEnPestana, setHayEdicionEnPestana] = useState(false);
     const [tabActiva, setTabActiva] = useState("Resumen");
 
+    const puedeCargarDatosProtegidos = () => {
+        if (typeof window === "undefined") {
+            return false;
+        }
+        const isLoggingOut = sessionStorage.getItem("np_logging_out") === "1";
+        const hasSession = Boolean(localStorage.getItem("userDataNeatpallet"));
+        return !isLoggingOut && hasSession;
+    };
+
     const obtenerContextoSesion = () => {
         if (typeof window === "undefined") {
             return { usuarioAdmin: false, empresaId: null };
@@ -143,6 +152,9 @@ const Empresa = () => {
     };
 
     const cargarEmpresas = async () => {
+        if (!puedeCargarDatosProtegidos()) {
+            return;
+        }
         const { usuarioAdmin, empresaId } = obtenerContextoSesion();
         const where = usuarioAdmin ? { and: {} } : { and: { id: empresaId } };
         const queryParams = {
@@ -158,6 +170,9 @@ const Empresa = () => {
     };
 
     const cargarMetricas = async (empresaId) => {
+        if (!puedeCargarDatosProtegidos()) {
+            return;
+        }
         if (!empresaId) return;
 
         const whereEmpresa = { and: { empresaId } };

@@ -35124,7 +35124,7 @@ export const TraduccionControllerApiFp = function(configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async traduccionControllerVistaTraduccionIdiomaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async traduccionControllerVistaTraduccionIdiomaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionControllerVistaTraduccionIdiomaCount(where, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -35238,7 +35238,7 @@ export const TraduccionControllerApiFactory = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        traduccionControllerVistaTraduccionIdiomaCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
+        traduccionControllerVistaTraduccionIdiomaCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
             return localVarFp.traduccionControllerVistaTraduccionIdiomaCount(where, options).then((request) => request(axios, basePath));
         },
     };

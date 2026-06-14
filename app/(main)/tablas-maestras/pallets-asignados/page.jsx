@@ -32,6 +32,15 @@ import PalletsAsignadosIntro from "./PalletsAsignadosIntro";
     const [palletsPendientes, setPalletsPendientes] = useState(new Set());
     const [tienePermiso, setTienePermiso] = useState(false);
 
+    const puedeCargarDatosProtegidos = () => {
+        if (typeof window === "undefined") {
+            return false;
+        }
+        const isLoggingOut = sessionStorage.getItem("np_logging_out") === "1";
+        const hasSession = Boolean(localStorage.getItem("userDataNeatpallet"));
+        return !isLoggingOut && hasSession;
+    };
+
     const empresaSeleccionadaNumerica = useMemo(() => {
         if (empresaSeleccionadaId === VALOR_TODAS_EMPRESAS) {
             return null;
@@ -52,6 +61,9 @@ import PalletsAsignadosIntro from "./PalletsAsignadosIntro";
     };
 
     const cargarDatos = useCallback(async () => {
+        if (!puedeCargarDatosProtegidos()) {
+            return;
+        }
         setCargando(true);
         try {
             const [respuestaPallets, respuestaEmpresas, respuestaAsignaciones] = await Promise.all([
@@ -82,6 +94,9 @@ import PalletsAsignadosIntro from "./PalletsAsignadosIntro";
 
     useEffect(() => {
         const verificarPermiso = async () => {
+            if (!puedeCargarDatosProtegidos()) {
+                return;
+            }
             const permiso = await tieneUsuarioPermiso('Neatpallet', 'Pallets Asignados', 'Actualizar');
             setTienePermiso(permiso);
         };

@@ -166,6 +166,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const almacenarLogin = async (data: any) => {
     localStorage.setItem(config.storageTokenKeyName, (data.accessToken));
+    if (data.refreshToken) {
+      localStorage.setItem(config.storageRefreshTokenKeyName, data.refreshToken);
+    }
     localStorage.setItem('userDataNeatpallet', JSON.stringify({ ...data }));
     localStorage.setItem('empresa', data.empresaId);
 

@@ -130,11 +130,29 @@ export default class JwtService {
   //Guardan el token en el almacenamiento local.
   setToken(value) {
     localStorage.setItem(this.jwtConfig.storageTokenKeyName, value)
+    const storedUserData = localStorage.getItem('userDataNeatpallet')
+    if (storedUserData) {
+      try {
+        const userData = JSON.parse(storedUserData)
+        localStorage.setItem('userDataNeatpallet', JSON.stringify({ ...userData, accessToken: value }))
+      } catch (error) {
+        // Si el dato de sesion esta corrupto, mantenemos al menos el token principal actualizado.
+      }
+    }
   }
 
   //Guardan el token de refresco en el almacenamiento local.
   setRefreshToken(value) {
     localStorage.setItem(this.jwtConfig.storageRefreshTokenKeyName, value)
+    const storedUserData = localStorage.getItem('userDataNeatpallet')
+    if (storedUserData) {
+      try {
+        const userData = JSON.parse(storedUserData)
+        localStorage.setItem('userDataNeatpallet', JSON.stringify({ ...userData, refreshToken: value }))
+      } catch (error) {
+        // Si el dato de sesion esta corrupto, mantenemos al menos el refresh token actualizado.
+      }
+    }
   }
 
   // Inicia sesión llamando al método correspondiente del API del controlador de usuario.

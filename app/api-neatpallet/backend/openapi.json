@@ -259,7 +259,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Array of Rol model instances",
+            "description": "Array of Permiso model instances",
             "content": {
               "application/json": {
                 "schema": {
@@ -11346,7 +11346,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/loopback.Count"
                 }
               }
             }
@@ -27081,7 +27081,7 @@
   ],
   "servers": [
     {
-      "url": "http://localhost:8000"
+      "url": "http://[::1]:8000"
     }
   ]
 }

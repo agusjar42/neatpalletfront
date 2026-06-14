@@ -88,6 +88,14 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [operadorSeleccionado, setOperadorSeleccionado] = useState('or');
 
     const [totalRegistros, setTotalRegistros] = useState(0);
+    const puedeCargarDatosProtegidos = () => {
+        if (!isInitialized || !usuarioAutenticado || typeof window === 'undefined') {
+            return false;
+        }
+        const isLoggingOut = sessionStorage.getItem('np_logging_out') === '1';
+        const hasSession = Boolean(localStorage.getItem('userDataNeatpallet'));
+        return !isLoggingOut && hasSession;
+    };
     //Parametros del dataTable que usara para cargar los datos
     const [parametrosCrud, setParametrosCrud] = useState(() => {
         const primeraColumnaNoImagen = columnas.find(columna => columna.tipo !== 'imagen' && !columna.virtual);
@@ -101,6 +109,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     });
 
     const obtenerDatos = async () => {
+        if (!puedeCargarDatosProtegidos()) {
+            return;
+        }
         // Crear parámetros de consulta dinámicamente
         const whereFiltro = {
             ...crearFiltros(parametrosCrud.filters, operadorSeleccionado),
@@ -190,12 +201,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     };
 
     const obtenerPermisos = async () => {
-        if (!isInitialized || !usuarioAutenticado) {
-            return;
-        }
-        const isLoggingOut = typeof window !== 'undefined' && sessionStorage.getItem('np_logging_out') === '1';
-        const hasSession = typeof window !== 'undefined' && Boolean(localStorage.getItem('userDataNeatpallet'));
-        if (isLoggingOut || !hasSession) {
+        if (!puedeCargarDatosProtegidos()) {
             setPuedeCrear(false);
             setPuedeDescargarCSV(false);
             setPuedeImportarCSV(false);
@@ -242,6 +248,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     }, [idEditar, onModoEdicionChange]);
 
     useEffect(() => {
+        if (!puedeCargarDatosProtegidos()) {
+            return;
+        }
         //Si no hay un controlador declarado, no se revisan los permisos
         if (controlador && isInitialized && usuarioAutenticado) {
             obtenerPermisos()
@@ -321,6 +330,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     }, [registroResult, parametrosCrud, cargarDatosInicialmente, controlador, isInitialized, usuarioAutenticado]);
 
     const obtenerDatosForaneos = async () => {
+        if (!puedeCargarDatosProtegidos()) {
+            return;
+        }
         if (getRegistrosForaneos) {
             for (const key in getRegistrosForaneos) {
                 if (getRegistrosForaneos.hasOwnProperty(key)) {

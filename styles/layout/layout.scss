@@ -134,6 +134,77 @@ body {
             font-weight: 700;
             letter-spacing: 0.12em;
         }
+
+        &.client-sidebar-header {
+            gap: 0.75rem;
+
+            &::after {
+                content: none;
+            }
+
+            .client-sidebar-badge {
+                margin-left: auto;
+                padding: 0.25rem 0.55rem;
+                border: 1px solid #87dea8;
+                border-radius: 0.35rem;
+                color: var(--neat-green-900);
+                background: #dff8e8;
+                font-size: 0.68rem;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+            }
+        }
+    }
+
+    .client-company-card {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        margin: 0.7rem 0.5rem 0.35rem 0.5rem;
+        padding: 0.72rem 0.75rem;
+        border: 1px solid #bfe9cd;
+        border-radius: 0.55rem;
+        background: rgba(237, 251, 242, 0.72);
+        color: #063826;
+
+        .client-company-avatar {
+            display: grid;
+            width: 2.1rem;
+            height: 2.1rem;
+            place-items: center;
+            border-radius: 0.45rem;
+            color: #052f22;
+            background: #e9f8ee;
+            font-weight: 800;
+        }
+
+        .client-company-copy {
+            display: flex;
+            min-width: 0;
+            flex: 1;
+            flex-direction: column;
+            line-height: 1.15;
+
+            span {
+                color: #4f7865;
+                font-size: 0.64rem;
+                font-weight: 700;
+                letter-spacing: 0.16em;
+            }
+
+            strong {
+                overflow: hidden;
+                color: #052f22;
+                font-size: 0.84rem;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+
+        i {
+            color: #6a8b7a;
+            font-size: 0.75rem;
+        }
     }
 
     .layout-menu-container {
@@ -944,6 +1015,19 @@ body {
     border-radius: 0.8rem;
     background: #ffffff;
     box-shadow: 0 2px 8px rgba(17, 28, 24, 0.04);
+}
+
+.cliente-resumen-header {
+    margin-bottom: 1rem;
+
+    .empresa-profile-header {
+        padding-top: 1.25rem;
+        padding-bottom: 0.95rem;
+    }
+
+    .empresa-metrics {
+        padding-bottom: 1.15rem;
+    }
 }
 
 .empresa-empty-state {

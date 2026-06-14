@@ -126,6 +126,7 @@ const Empresa = () => {
     const [empresaActiva, setEmpresaActiva] = useState(null);
     const [empresaEdicion, setEmpresaEdicion] = useState(null);
     const [metricas, setMetricas] = useState({ pallets: 0, usuarios: 0, eventos24h: 0, enviosEnCurso: 0 });
+    const [contactos, setContactos] = useState([]);
     const [guardando, setGuardando] = useState(false);
     const [modoEdicion, setModoEdicion] = useState(false);
     const [hayEdicionEnPestana, setHayEdicionEnPestana] = useState(false);
@@ -191,6 +192,29 @@ const Empresa = () => {
         });
     };
 
+    const cargarContactos = async (empresaId) => {
+        if (!puedeCargarDatosProtegidos()) {
+            return;
+        }
+        if (!empresaId) return;
+
+        const queryParams = {
+            limit: 3,
+            offset: 0,
+            order: "nombre ASC",
+            where: {and: {empresaId}},
+        };
+        const usuarios = await getVistaUsuarios(JSON.stringify(queryParams)).catch(() => []);
+        const contactosEmpresa = Array.isArray(usuarios)
+            ? usuarios.map((usuario) => ({
+                nombre: usuario.nombre || usuario.mail || "Usuario",
+                email: usuario.mail || "",
+                rol: usuario.nombreRol || "usuario",
+            }))
+            : [];
+        setContactos(contactosEmpresa);
+    };
+
     useEffect(() => {
         cargarEmpresas();
     }, []);
@@ -198,6 +222,7 @@ const Empresa = () => {
     useEffect(() => {
         if (empresaActiva?.id) {
             cargarMetricas(empresaActiva.id);
+            cargarContactos(empresaActiva.id);
         }
     }, [empresaActiva?.id]);
 
@@ -285,6 +310,37 @@ const Empresa = () => {
     const cancelarEdicionEmpresa = () => {
         confirmarSalidaSinGuardar(() => setModoEdicion(false));
     };
+
+    const renderResumenCliente = () => (
+        <div className="empresa-profile-shell empresa-client-summary">
+            <section className="empresa-profile-card">
+                <div className="empresa-profile-header">
+                    <div className="empresa-avatar">
+                        {empresaActiva.logo ? <img src={empresaActiva.logo} alt="" /> : empresaActiva.nombre?.charAt(0) ?? "E"}
+                    </div>
+                    <div className="empresa-heading">
+                        <div className="empresa-title-row">
+                            <h1>{empresaActiva.nombre}</h1>
+                            <span className="empresa-pill empresa-pill-blue">{empresaActiva.plan}</span>
+                        </div>
+                        <p>{empresaActiva.nombreComercial || empresaActiva.nombre}</p>
+                    </div>
+                </div>
+
+                <div className="empresa-metrics">
+                    <MetricCard icon="pi pi-box" label="Pallets" value={metricas.pallets} />
+                    <MetricCard icon="pi pi-users" label="Usuarios" value={metricas.usuarios} />
+                    <MetricCard icon="pi pi-star" label="Plan" value={empresaActiva.plan} />
+                    <MetricCard icon="pi pi-bolt" label="Eventos · 24 h" value={metricas.eventos24h} />
+                    <MetricCard icon="pi pi-truck" label="Envios en curso" value={metricas.enviosEnCurso} />
+                </div>
+            </section>
+
+            <section className="empresa-tab-content">
+                <EmpresaResumen metricas={metricas} empresa={empresaActiva} contactos={contactos} />
+            </section>
+        </div>
+    );
 
     const renderCrudTab = () => {
         if (!empresaActiva?.id) return null;
@@ -444,6 +500,10 @@ const Empresa = () => {
         );
     }
 
+    if (!obtenerContextoSesion().usuarioAdmin) {
+        return renderResumenCliente();
+    }
+
     if (modoEdicion && empresaEdicion) {
         return (
             <div className="empresa-profile-shell">
@@ -552,7 +612,7 @@ const MetricCard = ({ icon, label, value }) => (
     </article>
 );
 
-const EmpresaResumen = ({ metricas, empresa }) => {
+const EmpresaResumen = ({ metricas, empresa, contactos = [] }) => {
     const actividad = [
         { tiempo: "2 min", texto: "Pallet NEAT-00001 reportó posición Valencia → Murcia", tipo: "PALLET" },
         { tiempo: "14 min", texto: "Andrea Soler actualizó configuración de alertas", tipo: "USER" },
@@ -562,11 +622,12 @@ const EmpresaResumen = ({ metricas, empresa }) => {
         { tiempo: "2 días", texto: "Nuevo usuario invitado: jordi.ferrer@logmed.com", tipo: "USER" },
     ];
 
-    const contactos = [
+    const contactosFallback = [
         { nombre: "Andrea Soler", email: "andrea.soler@logmed.com", rol: "org_admin" },
         { nombre: "Lucas Lindqvist", email: "lucas.lindqvist@logmed.com", rol: "ops_manager" },
         { nombre: "María Vidal", email: "maria.vidal@logmed.com", rol: "driver" },
     ];
+    const contactosVisibles = contactos.length > 0 ? contactos : contactosFallback;
 
     return (
         <div className="empresa-resumen-grid">
@@ -597,8 +658,8 @@ const EmpresaResumen = ({ metricas, empresa }) => {
                 <article className="empresa-resumen-panel">
                     <h3>Contactos</h3>
                     <div className="empresa-contact-list">
-                        {contactos.map((contacto) => (
-                            <div className="empresa-contact-item" key={contacto.email}>
+                        {contactosVisibles.map((contacto) => (
+                            <div className="empresa-contact-item" key={`${contacto.email}-${contacto.nombre}`}>
                                 <span>{contacto.nombre.charAt(0)}</span>
                                 <div>
                                     <strong>{contacto.nombre}</strong>

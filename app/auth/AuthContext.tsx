@@ -96,8 +96,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       path: string;
       icon: string;
       permisoControlador: string;
-      grupo: "OPERACIONES" | "SISTEMA";
+      grupo: "OPERACIONES" | "SISTEMA" | "MI PANEL";
     };
+
+    const userData = JSON.parse(localStorage.getItem('userDataNeatpallet') || '{}');
+    const esUsuarioAdmin = userData?.usuarioAdmin === 'S';
+
+    const jsonRutasCliente: MenuItem[] = [
+      { label: "Resumen",                  path: "/tablas-maestras/empresa",           icon: "pi pi-th-large",      permisoControlador: "Empresas", grupo: "MI PANEL" },
+      { label: "Envíos",                   path: "/envio",                             icon: "pi pi-box",           permisoControlador: "Envíos", grupo: "MI PANEL" },
+      { label: "Usuarios",                 path: "/usuarios",                          icon: "pi pi-users",         permisoControlador: "Usuarios", grupo: "MI PANEL" },
+      { label: "Puntos de entrega",        path: "/cliente",                           icon: "pi pi-globe",         permisoControlador: "Clientes", grupo: "MI PANEL" },
+      { label: "Productos",                path: "/producto",                          icon: "pi pi-credit-card",   permisoControlador: "Productos", grupo: "MI PANEL" },
+      { label: "Sensores activos",         path: "/envio-sensor-empresa",              icon: "pi pi-wifi",          permisoControlador: "Envio Sensor Empresa", grupo: "MI PANEL" },
+      { label: "Pallets asignados",        path: "/tablas-maestras/pallets-asignados", icon: "pi pi-desktop",       permisoControlador: "Pallets Asignados", grupo: "MI PANEL" },
+      { label: "Carrocerias",              path: "/tipo-carroceria",                   icon: "pi pi-server",        permisoControlador: "Tipos de Carrocería", grupo: "MI PANEL" },
+      { label: "Tipos de transporte",      path: "/tipo-transporte",                   icon: "pi pi-arrows-h",      permisoControlador: "Tipo Transporte", grupo: "MI PANEL" },
+      { label: "Configuración de eventos", path: "/eventos-configuracion",             icon: "pi pi-sliders-h",     permisoControlador: "Eventos Configuración", grupo: "MI PANEL" },
+    ];
 
     const jsonRutas: MenuItem[] = [
       { label: "Clientes",                       path: "/tablas-maestras/empresa",           icon: "pi pi-building",             permisoControlador: "Empresas", grupo: "OPERACIONES" },
@@ -118,13 +134,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       { label: "Configuración",                 path: "/eventos-configuracion",             icon: "pi pi-bell",                 permisoControlador: "Eventos Configuración", grupo: "SISTEMA" },
     ];
 
+    const rutasMenu = esUsuarioAdmin ? jsonRutas : jsonRutasCliente;
+
     // Obtener los permisos del usuario actual de "Acceder"
     const permisos = await obtenerTodosLosPermisos('Acceder');
     const permisosControlador = new Set(
       Array.isArray(permisos) ? permisos.map((permiso) => permiso.permisoControlador) : []
     );
 
-    const crearGrupoMenu = (label: "OPERACIONES" | "SISTEMA") => ({
+    const crearGrupoMenu = (label: "OPERACIONES" | "SISTEMA" | "MI PANEL") => ({
       label,
       icon: "pi pi-fw pi-minus",
       items: [] as { label: string; icon: string; to: string; }[]
@@ -133,6 +151,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const gruposMenu = {
       OPERACIONES: crearGrupoMenu("OPERACIONES"),
       SISTEMA: crearGrupoMenu("SISTEMA"),
+      "MI PANEL": crearGrupoMenu("MI PANEL"),
     };
 
     const menuLateral: {
@@ -141,7 +160,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       items: { label: string; icon: string; to: string; }[];
     }[] = [];
 
-    for (const item of jsonRutas) {
+    for (const item of rutasMenu) {
       if (permisosControlador.has(item.permisoControlador)) {
         gruposMenu[item.grupo].items.push({
           label: item.label,
@@ -151,6 +170,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     }
 
+    if (gruposMenu["MI PANEL"].items.length > 0) {
+      menuLateral.push(gruposMenu["MI PANEL"]);
+    }
     if (gruposMenu.OPERACIONES.items.length > 0) {
       menuLateral.push(gruposMenu.OPERACIONES);
     }
@@ -183,6 +205,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     //Obtiene el timer de la empresa del usuario
     const empresa = await getEmpresa(data.empresaId);
+    localStorage.setItem('nombreEmpresa', empresa?.nombre || data.nombreEmpresa || data.empresaNombre || '');
     if (empresa?.tiempoInactividad && empresa?.tiempoInactividad > 0) {
       localStorage.setItem('tiempoDeEsperaInactividad', '' + empresa?.tiempoInactividad);
     }

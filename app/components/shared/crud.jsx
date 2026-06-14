@@ -23,6 +23,7 @@ import PhoneInput from 'react-phone-input-2'
 import es from 'react-phone-input-2/lang/es.json'
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/app/auth/AuthContext";
+import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
     parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = true, onDataChange,
@@ -1320,6 +1321,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     return (
         <div>
+            <ClienteResumenHeader />
             {(idEditar === null) && (
                 <div className="grid">
                     <div className="col-12">

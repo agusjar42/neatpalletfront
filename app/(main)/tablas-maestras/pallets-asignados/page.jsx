@@ -17,6 +17,7 @@ import { formatearFechaDate } from "@/app/utility/Utils";
 import { useIntl } from "react-intl";
 import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 import PalletsAsignadosIntro from "./PalletsAsignadosIntro";
+import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
 
     const VALOR_TODAS_EMPRESAS = "__TODAS__";
 
@@ -488,6 +489,9 @@ import PalletsAsignadosIntro from "./PalletsAsignadosIntro";
 
     return (
         <div className="grid">
+            <div className="col-12">
+                <ClienteResumenHeader />
+            </div>
             <div className="col-12">
                 <div className="card">
                     <Toast ref={toast} position="top-right" />

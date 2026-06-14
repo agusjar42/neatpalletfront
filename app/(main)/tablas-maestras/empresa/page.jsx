@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "primereact/button";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { deleteEmpresa, getEmpresas, patchEmpresa } from "@/app/api-endpoints/empresa";
+import { deleteEmpresa, getEmpresas, getEmpresasCount, patchEmpresa } from "@/app/api-endpoints/empresa";
 import { getEmpresaPalletCount } from "@/app/api-endpoints/empresa-pallet";
 import { deleteUsuario, getVistaUsuarios, getVistaUsuariosCount } from "@/app/api-endpoints/usuario";
 import { getUsuarioSesion } from "@/app/utility/Utils";
@@ -108,6 +108,14 @@ const columnasEventoConfiguracion = [
     { campo: "activoSN", header: "Activo", tipo: "booleano" },
 ];
 
+const columnasEmpresas = [
+    { campo: "orden", header: "Orden", tipo: "number" },
+    { campo: "nombre", header: "Nombre", tipo: "string" },
+    { campo: "nombreComercial", header: "Nombre comercial", tipo: "string" },
+    { campo: "descripcion", header: "Descripcion", tipo: "string" },
+    { campo: "email", header: "Email", tipo: "string" },
+];
+
 const normalizarEmpresa = (empresa = {}) => ({
     ...empresa,
     codigo: empresa.codigo ?? `C-${String(empresa.id ?? 1).padStart(3, "0")}`,
@@ -167,7 +175,12 @@ const Empresa = () => {
         const data = await getEmpresas(JSON.stringify(queryParams));
         const lista = Array.isArray(data) ? data.map(normalizarEmpresa) : [];
 
-        setEmpresaActiva((actual) => lista.find((empresa) => empresa.id === actual?.id) ?? lista[0] ?? null);
+        setEmpresaActiva((actual) => {
+            if (usuarioAdmin) {
+                return actual ? lista.find((empresa) => empresa.id === actual?.id) ?? null : null;
+            }
+            return lista.find((empresa) => empresa.id === actual?.id) ?? lista[0] ?? null;
+        });
     };
 
     const cargarMetricas = async (empresaId) => {
@@ -492,7 +505,7 @@ const Empresa = () => {
         }
     };
 
-    if (!empresaActiva) {
+    if (!empresaActiva && !obtenerContextoSesion().usuarioAdmin) {
         return (
             <div className="empresa-profile-shell">
                 <div className="empresa-profile-card empresa-empty-state">No hay empresas configuradas.</div>
@@ -502,6 +515,21 @@ const Empresa = () => {
 
     if (!obtenerContextoSesion().usuarioAdmin) {
         return renderResumenCliente();
+    }
+
+    if (!empresaActiva) {
+        return (
+            <Crud
+                headerCrud="Clientes"
+                getRegistros={getEmpresas}
+                getRegistrosCount={getEmpresasCount}
+                botones={["ver", "editar", "eliminar", "descargarCSV"]}
+                controlador="Empresas"
+                editarComponente={<EmpresaAdminDetalle />}
+                columnas={columnasEmpresas}
+                deleteRegistro={deleteEmpresa}
+            />
+        );
     }
 
     if (modoEdicion && empresaEdicion) {
@@ -687,3 +715,263 @@ const OperationalRow = ({ label, value, warning = false }) => (
 
 export default Empresa;
 export { camposPendientesBack };
+
+const EmpresaAdminDetalle = ({ idEditar, editable, setIdEditar, rowData = [], setRegistroResult, setRegistroEditarFlag }) => {
+    const [empresaActiva, setEmpresaActiva] = useState(null);
+    const [empresaEdicion, setEmpresaEdicion] = useState(null);
+    const [metricas, setMetricas] = useState({ pallets: 0, usuarios: 0, eventos24h: 0, enviosEnCurso: 0 });
+    const [contactos, setContactos] = useState([]);
+    const [guardando, setGuardando] = useState(false);
+    const [modoEdicion, setModoEdicion] = useState(false);
+    const [hayEdicionEnPestana, setHayEdicionEnPestana] = useState(false);
+    const [tabActiva, setTabActiva] = useState("Resumen");
+
+    useEffect(() => {
+        const empresaSeleccionada = rowData.find((empresa) => empresa.id === idEditar);
+        setEmpresaActiva(empresaSeleccionada ? normalizarEmpresa(empresaSeleccionada) : null);
+    }, [idEditar, rowData]);
+
+    useEffect(() => {
+        if (empresaActiva) {
+            setEmpresaEdicion({ ...empresaActiva });
+        }
+    }, [empresaActiva]);
+
+    useEffect(() => {
+        setModoEdicion(false);
+        setRegistroEditarFlag?.(false);
+    }, [editable, idEditar, setRegistroEditarFlag]);
+
+    useEffect(() => {
+        if (!empresaActiva?.id) return;
+
+        const whereEmpresa = { and: { empresaId: empresaActiva.id } };
+        Promise.all([
+            getEmpresaPalletCount(JSON.stringify(whereEmpresa)).catch(() => ({ count: 0 })),
+            getVistaUsuariosCount(JSON.stringify(whereEmpresa)).catch(() => ({ count: 0 })),
+            getEnvioCount(JSON.stringify(whereEmpresa)).catch(() => ({ count: 0 })),
+            getVistaUsuarios(JSON.stringify({
+                limit: 3,
+                offset: 0,
+                order: "nombre ASC",
+                where: whereEmpresa,
+            })).catch(() => []),
+        ]).then(([pallets, usuarios, envios, usuariosEmpresa]) => {
+            setMetricas({
+                pallets: extraerCount(pallets),
+                usuarios: extraerCount(usuarios),
+                eventos24h: empresaActiva?.eventos24h ?? 0,
+                enviosEnCurso: extraerCount(envios),
+            });
+            setContactos(Array.isArray(usuariosEmpresa)
+                ? usuariosEmpresa.map((usuario) => ({
+                    nombre: usuario.nombre || usuario.mail || "Usuario",
+                    email: usuario.mail || "",
+                    rol: usuario.nombreRol || "usuario",
+                }))
+                : []);
+        });
+    }, [empresaActiva?.eventos24h, empresaActiva?.id]);
+
+    useEffect(() => {
+        const hayCambiosSinGuardar = modoEdicion || hayEdicionEnPestana;
+        if (!hayCambiosSinGuardar) return;
+
+        const manejarBeforeUnload = (event) => {
+            event.preventDefault();
+            event.returnValue = "";
+        };
+
+        window.addEventListener("beforeunload", manejarBeforeUnload);
+        return () => window.removeEventListener("beforeunload", manejarBeforeUnload);
+    }, [modoEdicion, hayEdicionEnPestana]);
+
+    const fechaAlta = useMemo(() => {
+        if (!empresaActiva?.fechaCreacion) return "-";
+        return new Date(empresaActiva.fechaCreacion).toLocaleDateString("sv-SE");
+    }, [empresaActiva?.fechaCreacion]);
+
+    const confirmarSalidaSinGuardar = (continuar) => {
+        confirmDialog({
+            message: "Los datos introducidos se perderan si sales de esta edicion.",
+            header: "Salir sin guardar?",
+            icon: "pi pi-exclamation-triangle",
+            acceptLabel: "Continuar",
+            rejectLabel: "Cancelar",
+            accept: continuar,
+        });
+    };
+
+    const volverAlListado = () => {
+        if (modoEdicion || hayEdicionEnPestana) {
+            confirmarSalidaSinGuardar(() => setIdEditar(null));
+            return;
+        }
+        setIdEditar(null);
+    };
+
+    const cambiarTab = (tab) => {
+        if (tab === tabActiva) return;
+        if (hayEdicionEnPestana) {
+            confirmarSalidaSinGuardar(() => {
+                setHayEdicionEnPestana(false);
+                setTabActiva(tab);
+            });
+            return;
+        }
+        setTabActiva(tab);
+    };
+
+    const guardarEmpresa = async () => {
+        if (!empresaEdicion?.id) return;
+
+        setGuardando(true);
+        const payload = {
+            codigo: empresaEdicion.codigo,
+            nombre: empresaEdicion.nombre,
+            descripcion: empresaEdicion.descripcion,
+            email: empresaEdicion.email,
+            imagen: empresaEdicion.imagen,
+            logo: empresaEdicion.logo,
+            imagenBase64: empresaEdicion.imagenBase64,
+            imagenNombre: empresaEdicion.imagenNombre,
+            imagenTipo: empresaEdicion.imagenTipo,
+            logoBase64: empresaEdicion.logoBase64,
+            logoNombre: empresaEdicion.logoNombre,
+            logoTipo: empresaEdicion.logoTipo,
+            orden: empresaEdicion.orden,
+            tiempoInactividad: empresaEdicion.tiempoInactividad,
+            usuModificacion: getUsuarioSesion()?.id,
+        };
+
+        await patchEmpresa(empresaEdicion.id, payload);
+        setEmpresaActiva(normalizarEmpresa({ ...empresaActiva, ...empresaEdicion }));
+        setModoEdicion(false);
+        setGuardando(false);
+        setRegistroResult("editado");
+    };
+
+    const cancelarEdicionEmpresa = () => {
+        confirmarSalidaSinGuardar(() => {
+            setEmpresaEdicion({ ...empresaActiva });
+            setModoEdicion(false);
+        });
+    };
+
+    const renderCrudTab = () => {
+        if (!empresaActiva?.id) return null;
+
+        const extra = { empresaId: empresaActiva.id, estoyDentroDeUnTab: true };
+        const filtroEmpresa = { empresaId: empresaActiva.id };
+        const propsEdicionTab = { onModoEdicionChange: setHayEdicionEnPestana };
+
+        switch (tabActiva) {
+            case "Envios":
+                return <Crud key={`envios-${empresaActiva.id}`} headerCrud="Envios" getRegistros={getEnvio} getRegistrosCount={getEnvioCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Envios" editarComponente={<EditarEnvio />} columnas={columnasEnvio} filtradoBase={filtroEmpresa} deleteRegistro={deleteEnvio} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+            case "Usuarios":
+                return <Crud key={`usuarios-${empresaActiva.id}`} headerCrud="Usuarios de empresa" getRegistros={getVistaUsuarios} getRegistrosCount={getVistaUsuariosCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Usuarios" editarComponente={<EditarUsuario />} columnas={columnasUsuariosEmpresa} filtradoBase={filtroEmpresa} deleteRegistro={deleteUsuario} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+            case "Puntos de entrega":
+                return <Crud key={`puntos-entrega-${empresaActiva.id}`} headerCrud="Puntos de entrega" getRegistros={getCliente} getRegistrosCount={getClienteCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Clientes" editarComponente={<EditarCliente />} columnas={columnasPuntosEntrega} filtradoBase={filtroEmpresa} deleteRegistro={deleteCliente} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+            case "Productos":
+                return <Crud key={`productos-${empresaActiva.id}`} headerCrud="Productos" getRegistros={getProducto} getRegistrosCount={getProductoCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Productos" editarComponente={<EditarProducto />} columnas={columnasProducto} filtradoBase={filtroEmpresa} deleteRegistro={deleteProducto} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+            case "Sensores activos":
+                return <Crud key={`sensores-${empresaActiva.id}`} headerCrud="Sensores de empresa" getRegistros={getEnvioSensorEmpresa} getRegistrosCount={getEnvioSensorEmpresaCount} botones={["nuevo", "ver", "editar", "eliminar"]} controlador="Envio Sensor Empresa" editarComponente={<EditarEnvioSensorEmpresa />} columnas={columnasSensorEmpresa} filtradoBase={filtroEmpresa} deleteRegistro={deleteEnvioSensorEmpresa} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+            case "Pallets asignados":
+                return <PalletsAsignadosEmpresa key={`pallets-${empresaActiva.id}`} empresaId={empresaActiva.id} />;
+            case "Carrocerias":
+                return <Crud key={`carrocerias-${empresaActiva.id}`} headerCrud="Tipos de Carroceria" getRegistros={getTipoCarroceria} getRegistrosCount={getTipoCarroceriaCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Tipos de Carroceria" editarComponente={<EditarTipoCarroceria />} columnas={columnasCatalogosGlobales} filtradoBase={filtroEmpresa} deleteRegistro={deleteTipoCarroceria} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+            case "Tipos de transporte":
+                return <Crud key={`transportes-${empresaActiva.id}`} headerCrud="Tipos de Transporte" getRegistros={getTipoTransporte} getRegistrosCount={getTipoTransporteCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Tipo Transporte" editarComponente={<EditarTipoTransporte />} columnas={columnasCatalogosGlobales} filtradoBase={filtroEmpresa} deleteRegistro={deleteTipoTransporte} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+            case "Configuracion de eventos":
+                return <Crud key={`eventos-${empresaActiva.id}`} headerCrud="Configuracion de eventos" getRegistros={getEventoConfiguracion} getRegistrosCount={getEventoConfiguracionCount} botones={[]} controlador="Eventos Configuracion" editarComponente={<div />} columnas={columnasEventoConfiguracion} deleteRegistro={() => {}} editarComponenteParametrosExtra={{ estoyDentroDeUnTab: true }} {...propsEdicionTab} />;
+            default:
+                return <EmpresaResumen key={`resumen-${empresaActiva.id}`} metricas={metricas} empresa={empresaActiva} contactos={contactos} />;
+        }
+    };
+
+    if (!empresaActiva) {
+        return <div className="empresa-profile-card empresa-empty-state">No se ha encontrado la empresa seleccionada.</div>;
+    }
+
+    if (modoEdicion && empresaEdicion) {
+        return (
+            <div className="empresa-profile-shell">
+                <ConfirmDialog />
+                <section className="empresa-profile-card empresa-edit-screen">
+                    <div className="empresa-edit-screen-header">
+                        <button className="empresa-back-button" type="button" onClick={cancelarEdicionEmpresa}>
+                            <i className="pi pi-chevron-left" aria-hidden="true"></i>
+                            Clientes
+                        </button>
+                        <div>
+                            <h1>Editar cliente</h1>
+                            <p>Modifica la ficha de <strong>{empresaActiva.nombre}</strong>. Los cambios se aplican al guardar.</p>
+                        </div>
+                    </div>
+
+                    <EditarDatosEmpresa empresa={empresaEdicion} setEmpresa={setEmpresaEdicion} estadoGuardando={guardando} />
+
+                    <footer className="empresa-edit-footer empresa-edit-screen-footer">
+                        <span></span>
+                        <div>
+                            <Button label="Cancelar" text onClick={cancelarEdicionEmpresa} />
+                            <Button label={guardando ? "Guardando..." : "Guardar cambios"} onClick={guardarEmpresa} disabled={guardando} />
+                        </div>
+                    </footer>
+                </section>
+            </div>
+        );
+    }
+
+    return (
+        <div className="empresa-profile-shell">
+            <ConfirmDialog />
+            <section className="empresa-profile-card">
+                <div className="empresa-profile-topbar">
+                    <button className="empresa-back-button" type="button" onClick={volverAlListado}>
+                        <i className="pi pi-chevron-left" aria-hidden="true"></i>
+                        Clientes
+                    </button>
+                </div>
+
+                <div className="empresa-profile-header">
+                    <div className="empresa-avatar">
+                        {empresaActiva.logo ? <img src={empresaActiva.logo} alt="" /> : empresaActiva.nombre?.charAt(0) ?? "E"}
+                    </div>
+                    <div className="empresa-heading">
+                        <div className="empresa-title-row">
+                            <h1>{empresaActiva.nombre}</h1>
+                            <span className="empresa-pill empresa-pill-success">{empresaActiva.estado}</span>
+                            <span className="empresa-pill empresa-pill-blue">{empresaActiva.plan}</span>
+                        </div>
+                        <p>{empresaActiva.codigo} · {empresaActiva.nombreComercial || empresaActiva.nombre} · ALTA {fechaAlta}</p>
+                    </div>
+                    <div className="empresa-header-actions">
+                        <Button label="Editar" icon="pi pi-pencil" outlined onClick={() => setModoEdicion(true)} />
+                        <Button label={empresaActiva.estado} icon="pi pi-circle-fill" severity="success" outlined />
+                    </div>
+                </div>
+
+                <div className="empresa-metrics">
+                    <MetricCard icon="pi pi-box" label="Pallets" value={metricas.pallets} />
+                    <MetricCard icon="pi pi-users" label="Usuarios" value={metricas.usuarios} />
+                    <MetricCard icon="pi pi-star" label="Plan" value={empresaActiva.plan} />
+                    <MetricCard icon="pi pi-bolt" label="Eventos · 24 h" value={metricas.eventos24h} />
+                    <MetricCard icon="pi pi-truck" label="Envios en curso" value={metricas.enviosEnCurso} />
+                </div>
+
+                <nav className="empresa-tabs" aria-label="Secciones de empresa">
+                    {tabs.map((tab) => (
+                        <button key={tab} className={tabActiva === tab ? "empresa-tab empresa-tab-active" : "empresa-tab"} type="button" onClick={() => cambiarTab(tab)}>
+                            {tab}
+                        </button>
+                    ))}
+                </nav>
+            </section>
+
+            <section className="empresa-tab-content" key={`${empresaActiva.id}-${tabActiva}`}>
+                {renderCrudTab()}
+            </section>
+        </div>
+    );
+};

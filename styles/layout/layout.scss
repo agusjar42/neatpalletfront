@@ -107,6 +107,12 @@ body {
     border-right: 1px solid #ccebd7;
     box-shadow: none;
 
+    .client-sidebar-shell {
+        display: flex;
+        min-height: 100%;
+        flex-direction: column;
+    }
+
     .sidebar-header {
         min-height: 4.1rem;
         padding: 0.9rem 1.35rem;
@@ -208,7 +214,75 @@ body {
     }
 
     .layout-menu-container {
+        flex: 1;
         padding: 0.8rem 0.5rem 1rem 0.5rem;
+    }
+
+    .client-sidebar-footer {
+        margin-top: auto;
+        border-top: 1px solid #ccebd7;
+        padding: 0.95rem 0.5rem 1rem;
+    }
+
+    .client-user-card {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        color: #063826;
+
+        .client-user-avatar {
+            display: grid;
+            width: 2.2rem;
+            height: 2.2rem;
+            flex: 0 0 auto;
+            place-items: center;
+            border-radius: 999px;
+            background: #22c55e;
+            color: #052f22;
+            font-size: 0.9rem;
+            font-weight: 800;
+        }
+
+        .client-user-copy {
+            display: flex;
+            min-width: 0;
+            flex: 1;
+            flex-direction: column;
+            line-height: 1.15;
+
+            strong {
+                color: #052f22;
+                font-size: 0.95rem;
+                font-weight: 700;
+            }
+
+            span {
+                color: #4f7865;
+                font-size: 0.8rem;
+                line-height: 1.25;
+                word-break: break-word;
+            }
+        }
+    }
+
+    .client-logout-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        flex: 0 0 auto;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        color: #6a8b7a;
+        cursor: pointer;
+        transition: background 0.15s ease, color 0.15s ease;
+
+        &:hover {
+            background: rgba(22, 167, 101, 0.12);
+            color: #08764c;
+        }
     }
 
     .layout-menu {

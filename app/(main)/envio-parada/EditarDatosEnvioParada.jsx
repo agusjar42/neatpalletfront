@@ -6,9 +6,8 @@ import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 import { getLugarParada } from '@/app/api-endpoints/cliente-lugar-parada';
 import { getOperario } from '@/app/api-endpoints/cliente-operario';
-import { getUsuarioSesion } from '@/app/utility/Utils';
 
-const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, envios, estoyDentroDeUnTab, envioId }) => {
+const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, envios, estoyDentroDeUnTab, envioId, clienteId }) => {
     const intl = useIntl();
     const [lugaresParada, setLugaresParada] = useState([]);
     const [operarios, setOperarios] = useState([]);
@@ -17,60 +16,64 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
         label: `${envio.id} - ${envio.origenRuta || 'Sin ruta'}`,
         value: envio.id
     }));
-    //
-    // Funciones para cargar los lugares de parada y los operarios según el cliente del envío
-    //
+
+    const envioSeleccionado = envios.find(env => env.id === (envioParada.envioId || envioId));
+    const clienteIdActual = clienteId || envioSeleccionado?.clienteId;
+
     useEffect(() => {
-        //
-        // Función para cargar lugares de parada
-        //
-        const cargarLugaresParada = async () => {
-            if (envioParada.envioId || envioId) {
-                try {
-                    // Buscar el envío seleccionado para obtener su clienteId
-                    const envioSeleccionado = envios.find(env => env.id === (envioParada.envioId || envioId));
-                    if (envioSeleccionado && envioSeleccionado.clienteId) {
-                        const filtro = JSON.stringify({
-                            where: {
-                                and: { clienteId: envioSeleccionado.clienteId, activoSN: 'S' }
-                            }
-                        });
-                        const lugares = await getLugarParada(filtro);
-                        setLugaresParada(lugares || []);
+        const cargarDatosRelacionados = async () => {
+            if (!clienteIdActual) {
+                setLugaresParada([]);
+                setOperarios([]);
+                return;
+            }
+
+            try {
+                const filtro = JSON.stringify({
+                    where: {
+                        and: { clienteId: clienteIdActual, activoSN: 'S' }
                     }
-                } catch (error) {
-                    console.error('Error al cargar lugares de parada:', error);
-                }
+                });
+
+                const [lugares, operariosData] = await Promise.all([
+                    getLugarParada(filtro),
+                    getOperario(filtro)
+                ]);
+
+                setLugaresParada(lugares || []);
+                setOperarios(operariosData || []);
+            } catch (error) {
+                console.error('Error al cargar datos de la parada:', error);
+                setLugaresParada([]);
+                setOperarios([]);
             }
         };
-        cargarLugaresParada();
-        //
-        // Función para cargar operarios 
-        //
-        const cargarOperarios = async () => {
-            if (envioParada.envioId || envioId) {
-                try {
-                    // Buscar el envío seleccionado para obtener su clienteId
-                    const envioSeleccionado = envios.find(env => env.id === (envioParada.envioId || envioId));
-                    if (envioSeleccionado && envioSeleccionado.clienteId) {
-                        const filtro = JSON.stringify({
-                            where: {
-                                and: { clienteId: envioSeleccionado.clienteId, activoSN: 'S'}
-                            }
-                        });
-                        const operariosData = await getOperario(filtro);
-                        setOperarios(operariosData || []);
-                    }
-                } catch (error) {
-                    console.error('Error al cargar operarios:', error);
-                }
-            }
-        };
-        cargarOperarios();
 
-    }, [envioParada.envioId, envioId, envios]);
+        cargarDatosRelacionados();
+    }, [clienteIdActual]);
 
-    // Función para manejar la selección del lugar de parada
+    useEffect(() => {
+        if (envioParada.lugarParadaId && !lugaresParada.some(lugar => lugar.id === envioParada.lugarParadaId)) {
+            setEnvioParada(prev => ({
+                ...prev,
+                lugarParadaId: "",
+                direccion: "",
+                lugarParadaGps: ""
+            }));
+        }
+    }, [lugaresParada, envioParada.lugarParadaId, setEnvioParada]);
+
+    useEffect(() => {
+        if (envioParada.operarioId && !operarios.some(operario => operario.id === envioParada.operarioId)) {
+            setEnvioParada(prev => ({
+                ...prev,
+                operarioId: "",
+                telefonoOperario: "",
+                emailOperario: ""
+            }));
+        }
+    }, [operarios, envioParada.operarioId, setEnvioParada]);
+
     const onLugarParadaChange = (e) => {
         const lugarSeleccionado = lugaresParada.find(lugar => lugar.id === e.value);
         if (lugarSeleccionado) {
@@ -78,14 +81,18 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                 ...envioParada,
                 lugarParadaId: e.value,
                 direccion: lugarSeleccionado.direccion || '',
-                lugarParadaGps: lugarSeleccionado.direccionGps  || ''
+                lugarParadaGps: lugarSeleccionado.direccionGps || ''
             });
         } else {
-            setEnvioParada({ ...envioParada, lugarParadaId: e.value });
+            setEnvioParada({
+                ...envioParada,
+                lugarParadaId: e.value,
+                direccion: '',
+                lugarParadaGps: ''
+            });
         }
     };
 
-    // Función para manejar la selección del operario
     const onOperarioChange = (e) => {
         const operarioSeleccionado = operarios.find(operario => operario.id === e.value);
         if (operarioSeleccionado) {
@@ -96,7 +103,12 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                 emailOperario: operarioSeleccionado.email || ''
             });
         } else {
-            setEnvioParada({ ...envioParada, operarioId: e.value });
+            setEnvioParada({
+                ...envioParada,
+                operarioId: e.value,
+                telefonoOperario: '',
+                emailOperario: ''
+            });
         }
     };
 
@@ -136,7 +148,7 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="fecha">{intl.formatMessage({ id: 'Fecha' })}</label>
                     <InputText type="datetime-local"
-                    value={envioParada.fecha}
+                        value={envioParada.fecha}
                         placeholder={intl.formatMessage({ id: 'Fecha de la parada' })}
                         onChange={(e) => setEnvioParada({ ...envioParada, fecha: e.target.value })}
                         maxLength={20}
@@ -146,7 +158,7 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="lugarParadaId"><b>{intl.formatMessage({ id: 'Lugar de parada' })}*</b></label>
-                    <Dropdown 
+                    <Dropdown
                         value={envioParada.lugarParadaId}
                         options={opcionesLugarParada}
                         onChange={onLugarParadaChange}
@@ -174,7 +186,7 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="operarioId"><b>{intl.formatMessage({ id: 'Operario' })}*</b></label>
-                    <Dropdown 
+                    <Dropdown
                         value={envioParada.operarioId}
                         options={opcionesOperario}
                         onChange={onOperarioChange}

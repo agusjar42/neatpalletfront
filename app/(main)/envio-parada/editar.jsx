@@ -9,7 +9,7 @@ import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosEnvioParada from "./EditarDatosEnvioParada";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId }) => {
+const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, estoyDentroDeUnTab, envioId, clienteId }) => {
     const toast = useRef(null);
     const [envioParada, setEnvioParada] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -139,6 +139,7 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                             envios={envios}
                             estoyDentroDeUnTab={estoyDentroDeUnTab}
                             envioId={envioId}
+                            clienteId={clienteId}
                         />
 
                         <div className="flex justify-content-end mt-2">

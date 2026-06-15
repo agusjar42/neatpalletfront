@@ -643,7 +643,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
                         {envio.id ? (
                             <>
                                 <Crud
-                                    key={`parada-${refreshConteos}`}
+                                    key={`parada-${refreshConteos}-${envio.clienteId || 'sin-cliente'}`}
                                     headerCrud={intl.formatMessage({ id: 'Paradas del Envío' })}
                                     getRegistros={getEnvioParada}
                                     getRegistrosCount={getEnvioParadaCount}
@@ -657,6 +657,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
                                     onModoEdicionChange={onModoEdicionTabChange}
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
+                                        clienteId: envio.clienteId,
                                         estoyDentroDeUnTab: true,
                                         onDataChange: () => setRefreshConteos(prev => prev + 1)
                                     }}

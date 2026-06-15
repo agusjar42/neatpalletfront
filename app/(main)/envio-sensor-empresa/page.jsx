@@ -1,11 +1,11 @@
 "use client";
-import { getEnvioSensorEmpresa, getEnvioSensorEmpresaCount, deleteEnvioSensorEmpresa } from "@/app/api-endpoints/empresa-sensor";
+import { getSensorEmpresa, getSensorEmpresaCount, deleteSensorEmpresa } from "@/app/api-endpoints/empresa-sensor";
 import EditarEnvioSensorEmpresas from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'
 import { getUsuarioSesion } from "@/app/utility/Utils";
 
-const EnvioSensorEmpresa = () => {
+const SensorEmpresa = () => {
     const intl = useIntl();
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
@@ -17,17 +17,17 @@ const EnvioSensorEmpresa = () => {
         <div>
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Sensores de Empresa' })}
-                getRegistros={getEnvioSensorEmpresa}
-                getRegistrosCount={getEnvioSensorEmpresaCount}
+                getRegistros={getSensorEmpresa}
+                getRegistrosCount={getSensorEmpresaCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Envio Sensor Empresa"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarEnvioSensorEmpresas />}
                 columnas={columnas}
-                deleteRegistro={deleteEnvioSensorEmpresa}
+                deleteRegistro={deleteSensorEmpresa}
             />
         </div>
     );
 };
 
-export default EnvioSensorEmpresa;
+export default SensorEmpresa;

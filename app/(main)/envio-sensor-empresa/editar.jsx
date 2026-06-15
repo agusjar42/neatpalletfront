@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postEnvioSensorEmpresa, patchEnvioSensorEmpresa, getEnvioSensorEmpresa } from "@/app/api-endpoints/empresa-sensor";
+import { postSensorEmpresa, patchSensorEmpresa, getSensorEmpresa } from "@/app/api-endpoints/empresa-sensor";
 import { getTipoSensor } from "@/app/api-endpoints/tipo-sensor";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
@@ -26,7 +26,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
             //
             //Obtenemos todos los sensores ya introducidos para la empresa
             //
-            const sensoresRegistrados = await getEnvioSensorEmpresa(JSON.stringify({
+            const sensoresRegistrados = await getSensorEmpresa(JSON.stringify({
                 where: {
                     and: {
                         empresaId: empresaId ?? getUsuarioSesion()?.empresaId
@@ -81,7 +81,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
 
     const verificarSensorDuplicado = async (tipoSensorId) => {
         try {
-            const registros = await getEnvioSensorEmpresa(JSON.stringify({
+            const registros = await getSensorEmpresa(JSON.stringify({
                 where: {
                     and: {
                         empresaId: empresaId ?? getUsuarioSesion()?.empresaId,
@@ -112,7 +112,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
                 objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = empresaId ?? getUsuarioSesion()?.empresaId;
 
-                const nuevoRegistro = await postEnvioSensorEmpresa(objGuardar);
+                const nuevoRegistro = await postSensorEmpresa(objGuardar);
 
                 if (nuevoRegistro?.id) {
                     setRegistroResult("insertado");
@@ -130,7 +130,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
                 delete objGuardar['fechaModificacion'];
                 delete objGuardar['activoSn'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
-                await patchEnvioSensorEmpresa(objGuardar.id, objGuardar);
+                await patchSensorEmpresa(objGuardar.id, objGuardar);
                 setIdEditar(null)
                 setRegistroResult("editado");
             }

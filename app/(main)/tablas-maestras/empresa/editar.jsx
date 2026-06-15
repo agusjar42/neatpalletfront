@@ -31,10 +31,10 @@ import {
   generarDatosFake,
 } from "@/app/api-endpoints/envio";
 import {
-  getEnvioSensorEmpresa,
-  getEnvioSensorEmpresaCount,
-  deleteEnvioSensorEmpresa,
-  crearEnvioSensorEmpresaDesdetipoSensor,
+  getSensorEmpresa,
+  getSensorEmpresaCount,
+  deleteSensorEmpresa,
+  crearSensorEmpresaDesdeTipoSensor,
 } from "@/app/api-endpoints/empresa-sensor";
 import {
   getTipoCarroceria,
@@ -665,7 +665,7 @@ const EditarEmpresa = ({
       accept: async () => {
         setCargandoSensores(true);
         try {
-          await crearEnvioSensorEmpresaDesdetipoSensor(
+          await crearSensorEmpresaDesdeTipoSensor(
             empresa.id,
             getUsuarioSesion()?.id
           );
@@ -982,14 +982,14 @@ const EditarEmpresa = ({
                         headerCrud={intl.formatMessage({
                           id: "Sensores de empresa",
                         })}
-                        getRegistros={getEnvioSensorEmpresa}
-                        getRegistrosCount={getEnvioSensorEmpresaCount}
+                        getRegistros={getSensorEmpresa}
+                        getRegistrosCount={getSensorEmpresaCount}
                         botones={["nuevo", "ver", "editar", "eliminar"]}
                         controlador={"Envio Sensor Empresa"}
                         editarComponente={<EditarEnvioSensorEmpresa />}
                         columnas={columnasSensorEmpresa}
                         filtradoBase={{ empresaId: empresa.id }}
-                        deleteRegistro={deleteEnvioSensorEmpresa}
+                        deleteRegistro={deleteSensorEmpresa}
                         editarComponenteParametrosExtra={{
                           empresaId: empresa.id,
                           estoyDentroDeUnTab: true,

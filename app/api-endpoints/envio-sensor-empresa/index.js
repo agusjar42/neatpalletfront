@@ -1,47 +1,72 @@
-import { EnvioSensorEmpresaControllerApi, settings } from "@/app/api-neatpallet";
 import { devuelveBasePath, getAccessToken } from "@/app/utility/Utils";
 
-const apiEnvioSensorEmpresa = new EnvioSensorEmpresaControllerApi(settings)
+const getAuthHeaders = () => ({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${getAccessToken()}`
+});
 
-export const getEnvioSensorEmpresa = async (filtro) => {
-    const { data: dataEnvioSensorEmpresas } = await apiEnvioSensorEmpresa.envioSensorEmpresaControllerFind(filtro)
-    return dataEnvioSensorEmpresas
-}
-
-export const postEnvioSensorEmpresa = async (objEnvioSensorEmpresa) => {
-    const { data: dataEnvioSensorEmpresa } = await apiEnvioSensorEmpresa.envioSensorEmpresaControllerCreate(objEnvioSensorEmpresa)
-    return dataEnvioSensorEmpresa
-}
-
-export const patchEnvioSensorEmpresa = async (idEnvioSensorEmpresa, objEnvioSensorEmpresa) => {
-    const { data: dataEnvioSensorEmpresa } = await apiEnvioSensorEmpresa.envioSensorEmpresaControllerUpdateById(idEnvioSensorEmpresa, objEnvioSensorEmpresa)
-    return dataEnvioSensorEmpresa
-}
-
-export const deleteEnvioSensorEmpresa = async (idEnvioSensorEmpresa) => {
-    const { data: dataEnvioSensorEmpresa } = await apiEnvioSensorEmpresa.envioSensorEmpresaControllerDeleteById(idEnvioSensorEmpresa)
-    return dataEnvioSensorEmpresa
-}
-
-export const getEnvioSensorEmpresaCount = async (filtros) => {
-    try {
-        const { data: dataEnvioSensorEmpresa } = await apiEnvioSensorEmpresa.envioSensorEmpresaControllerCount(filtros)
-        return dataEnvioSensorEmpresa
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-export const crearEnvioSensorEmpresaDesdetipoSensor = async (empresaId, usuarioCreacion) => {
+const buildUrl = (path, queryParams = {}) => {
     const basePath = devuelveBasePath();
-    const token = getAccessToken();
-    const response = await fetch(`${basePath}/crear-envio-sensor-empresa-desde-tipo-sensor`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ empresaId, usuarioCreacion })
+    const url = new URL(`${basePath}${path}`);
+
+    Object.entries(queryParams).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+            url.searchParams.set(key, value);
+        }
     });
-    if (!response.ok) throw new Error('Error al crear sensores desde tipo sensor');
-}
+
+    return url.toString();
+};
+
+const fetchJson = async (path, options = {}) => {
+    const response = await fetch(buildUrl(path, options.queryParams), {
+        method: options.method || 'GET',
+        headers: getAuthHeaders(),
+        body: options.body ? JSON.stringify(options.body) : undefined,
+    });
+
+    if (!response.ok) {
+        throw new Error(`Error ${response.status} en ${path}`);
+    }
+
+    if (response.status === 204) {
+        return null;
+    }
+
+    return await response.json();
+};
+
+export const getSensorEmpresa = async (filtro) => {
+    return await fetchJson('/sensor-empresas', { queryParams: { filter: filtro } });
+};
+
+export const postSensorEmpresa = async (objSensorEmpresa) => {
+    return await fetchJson('/sensor-empresas', { method: 'POST', body: objSensorEmpresa });
+};
+
+export const patchSensorEmpresa = async (idSensorEmpresa, objSensorEmpresa) => {
+    return await fetchJson(`/sensor-empresas/${idSensorEmpresa}`, { method: 'PATCH', body: objSensorEmpresa });
+};
+
+export const deleteSensorEmpresa = async (idSensorEmpresa) => {
+    return await fetchJson(`/sensor-empresas/${idSensorEmpresa}`, { method: 'DELETE' });
+};
+
+export const getSensorEmpresaCount = async (filtros) => {
+    return await fetchJson('/sensor-empresas/count', { queryParams: { where: filtros } });
+};
+
+export const crearSensorEmpresaDesdeTipoSensor = async (empresaId, usuarioCreacion) => {
+    return await fetchJson('/crear-sensor-empresa-desde-tipo-sensor', {
+        method: 'POST',
+        body: { empresaId, usuarioCreacion }
+    });
+};
+
+// Compatibilidad temporal mientras se actualizan imports restantes
+export const getEnvioSensorEmpresa = getSensorEmpresa;
+export const postEnvioSensorEmpresa = postSensorEmpresa;
+export const patchEnvioSensorEmpresa = patchSensorEmpresa;
+export const deleteEnvioSensorEmpresa = deleteSensorEmpresa;
+export const getEnvioSensorEmpresaCount = getSensorEmpresaCount;
+export const crearEnvioSensorEmpresaDesdetipoSensor = crearSensorEmpresaDesdeTipoSensor;

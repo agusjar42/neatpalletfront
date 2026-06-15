@@ -60,7 +60,7 @@ export const getNombreRol = async (nombre, empresaId) => {
 
 export const obtenerRolDashboard = async () => {
     const usuario = getUsuarioSesion();
-    let valorDevuelto = '/dashboard';
+    let valorDevuelto = '/tablas-maestras/empresa';
     if(usuario){
         const queryParamsRol = {
             where: {
@@ -70,7 +70,7 @@ export const obtenerRolDashboard = async () => {
             },
         };
         const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
-        valorDevuelto = rol[0].dashboardUrl || '/dashboard';
+        valorDevuelto = rol[0].dashboardUrl || '/tablas-maestras/empresa';
     }
     return valorDevuelto;
 

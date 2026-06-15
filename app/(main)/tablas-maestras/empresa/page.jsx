@@ -11,7 +11,7 @@ import Crud from "../../../components/shared/crud";
 import { getCliente, getClienteCount, deleteCliente } from "@/app/api-endpoints/cliente";
 import { getProducto, getProductoCount, deleteProducto } from "@/app/api-endpoints/empresa-producto";
 import { getEnvio, getEnvioCount, deleteEnvio } from "@/app/api-endpoints/envio";
-import { getEnvioSensorEmpresa, getEnvioSensorEmpresaCount, deleteEnvioSensorEmpresa } from "@/app/api-endpoints/empresa-sensor";
+import { getSensorEmpresa, getSensorEmpresaCount, deleteSensorEmpresa } from "@/app/api-endpoints/empresa-sensor";
 import { getTipoCarroceria, getTipoCarroceriaCount, deleteTipoCarroceria } from "@/app/api-endpoints/empresa-tipo-carroceria";
 import { getTipoTransporte, getTipoTransporteCount, deleteTipoTransporte } from "@/app/api-endpoints/empresa-tipo-transporte";
 import { getEventoConfiguracion, getEventoConfiguracionCount } from "@/app/api-endpoints/evento-configuracion";
@@ -439,14 +439,14 @@ const Empresa = () => {
                     <Crud
                         key={`sensores-${empresaActiva.id}`}
                         headerCrud="Sensores de empresa"
-                        getRegistros={getEnvioSensorEmpresa}
-                        getRegistrosCount={getEnvioSensorEmpresaCount}
+                        getRegistros={getSensorEmpresa}
+                        getRegistrosCount={getSensorEmpresaCount}
                         botones={["nuevo", "ver", "editar", "eliminar"]}
                         controlador="Envio Sensor Empresa"
                         editarComponente={<EditarEnvioSensorEmpresa />}
                         columnas={columnasSensorEmpresa}
                         filtradoBase={filtroEmpresa}
-                        deleteRegistro={deleteEnvioSensorEmpresa}
+                        deleteRegistro={deleteSensorEmpresa}
                         editarComponenteParametrosExtra={extra}
                         {...propsEdicionTab}
                     />
@@ -885,7 +885,7 @@ const EmpresaAdminDetalle = ({ idEditar, editable, setIdEditar, rowData = [], se
             case "Productos":
                 return <Crud key={`productos-${empresaActiva.id}`} headerCrud="Productos" getRegistros={getProducto} getRegistrosCount={getProductoCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Productos" editarComponente={<EditarProducto />} columnas={columnasProducto} filtradoBase={filtroEmpresa} deleteRegistro={deleteProducto} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
             case "Sensores activos":
-                return <Crud key={`sensores-${empresaActiva.id}`} headerCrud="Sensores de empresa" getRegistros={getEnvioSensorEmpresa} getRegistrosCount={getEnvioSensorEmpresaCount} botones={["nuevo", "ver", "editar", "eliminar"]} controlador="Envio Sensor Empresa" editarComponente={<EditarEnvioSensorEmpresa />} columnas={columnasSensorEmpresa} filtradoBase={filtroEmpresa} deleteRegistro={deleteEnvioSensorEmpresa} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+                return <Crud key={`sensores-${empresaActiva.id}`} headerCrud="Sensores de empresa" getRegistros={getSensorEmpresa} getRegistrosCount={getSensorEmpresaCount} botones={["nuevo", "ver", "editar", "eliminar"]} controlador="Envio Sensor Empresa" editarComponente={<EditarEnvioSensorEmpresa />} columnas={columnasSensorEmpresa} filtradoBase={filtroEmpresa} deleteRegistro={deleteSensorEmpresa} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
             case "Pallets asignados":
                 return <PalletsAsignadosEmpresa key={`pallets-${empresaActiva.id}`} empresaId={empresaActiva.id} />;
             case "Carrocerias":

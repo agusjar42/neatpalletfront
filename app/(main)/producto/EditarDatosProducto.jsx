@@ -24,11 +24,13 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando }) => {
           <InputNumber
             value={producto.orden === '' || producto.orden === undefined ? null : producto.orden}
             onValueChange={(e) => setProducto({ ...producto, orden: e.value })}
+            className="w-full"
             mode="decimal"
             useGrouping={false}
             min={0}
             max={99999}
             placeholder={intl.formatMessage({ id: "Orden del producto" })}
+            inputStyle={{ textAlign: "right" }}
           />
         </div>
         <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
@@ -59,11 +61,13 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando }) => {
             onValueChange={(e) =>
               setProducto({ ...producto, pesoKgs: e.value })
             }
+            className="w-full"
             mode="decimal"
             minFractionDigits={0}
             maxFractionDigits={3}
             min={0}
             placeholder={intl.formatMessage({ id: "Peso del producto" })}
+            inputStyle={{ textAlign: "right" }}
           />
         </div>
         <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">

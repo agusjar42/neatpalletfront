@@ -4,7 +4,6 @@ import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
-import { FileUpload } from "primereact/fileupload";
 import { Image } from 'primereact/image';
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
@@ -16,12 +15,11 @@ import { getEmpresaPallet } from "@/app/api-endpoints/empresa-pallet";
 const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGuardando, envios, estoyDentroDeUnTab, empresaId }) => {
     const intl = useIntl();
     const toast = useRef(null);
-    
-    // Estados para los previews
+
     const [previewFotoProducto, setPreviewFotoProducto] = useState(null);
     const [previewFotoPallet, setPreviewFotoPallet] = useState(null);
-    const [fotoProductoInputRef, setFotoProductoInputRef] = useState(null);
-    const [fotoPalletInputRef, setFotoPalletInputRef] = useState(null);
+    const fotoProductoInputRef = useRef(null);
+    const fotoPalletInputRef = useRef(null);
     const [productos, setProductos] = useState([]);
     const [pallets, setPallets] = useState([]);
     const opcionesEnvio = envios.map(envio => ({
@@ -29,7 +27,11 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         value: envio.id
     }));
 
-    // Cargar productos activos de la empresa
+    useEffect(() => {
+        setPreviewFotoProducto(envioContenido.fotoProductoBase64 || null);
+        setPreviewFotoPallet(envioContenido.fotoPalletBase64 || null);
+    }, [envioContenido.id, envioContenido.fotoProductoBase64, envioContenido.fotoPalletBase64]);
+
     useEffect(() => {
         const cargarProductos = async () => {
             try {
@@ -50,7 +52,6 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         cargarProductos();
     }, [empresaId, envioContenido?.empresaId]);
 
-    // Cargar solo pallets asociados a la empresa
     useEffect(() => {
         const cargarPallets = async () => {
             try {
@@ -75,7 +76,6 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                     return;
                 }
 
-                // El backend actual no soporta "inq" en SqlFilterUtil, por eso filtramos en cliente.
                 const dataPallets = await getPallet(
                     JSON.stringify({
                         order: ["orden ASC", "codigo ASC"]
@@ -85,7 +85,6 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                 const palletsEmpresa = (dataPallets || []).filter((pallet) =>
                     palletIdsSet.has(String(pallet?.id))
                 );
-                // Formatear pallets para el dropdown
                 const palletsFormateados = palletsEmpresa?.map(pallet => ({
                     ...pallet,
                     label: `${pallet.codigo} - ${pallet.alias || 'Sin alias'}`
@@ -99,12 +98,11 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         cargarPallets();
     }, [empresaId]);
 
-    // Efecto para calcular el peso total automáticamente
     useEffect(() => {
         const peso = envioContenido.pesoKgs || 0;
         const cantidad = envioContenido.cantidad || 0;
         const pesoTotalCalculado = peso * cantidad;
-        
+
         if (pesoTotalCalculado !== envioContenido.pesoTotal) {
             setEnvioContenido(prev => ({
                 ...prev,
@@ -113,8 +111,6 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         }
     }, [envioContenido.pesoKgs, envioContenido.cantidad]);
 
-
-    // Manejar la selección de producto
     const handleProductoChange = (e) => {
         const productoSeleccionado = productos.find(p => p.id === e.value);
         if (productoSeleccionado) {
@@ -128,7 +124,6 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         }
     };
 
-    // Manejar la selección de pallet
     const handlePalletChange = (e) => {
         setEnvioContenido({
             ...envioContenido,
@@ -139,8 +134,6 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
     const onSelectFotoProducto = async (e) => {
         if (e.files && e.files.length > 0) {
             const file = e.files[0];
-            
-            // Validar el tamaño del archivo (2MB = 2 * 1024 * 1024 bytes)
             const maxSize = 2 * 1024 * 1024;
             if (file.size > maxSize) {
                 toast.current?.show({
@@ -151,14 +144,12 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                 });
                 return;
             }
-            
+
             try {
                 const base64 = await convertirArchivoABase64(file);
                 setPreviewFotoProducto(base64);
-                
-                // Guardamos el base64 en el estado
-                setEnvioContenido({ 
-                    ...envioContenido, 
+                setEnvioContenido({
+                    ...envioContenido,
                     fotoProductoBase64: base64,
                     fotoProductoNombre: file.name,
                     fotoProductoTipo: file.type
@@ -178,8 +169,6 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
     const onSelectFotoPallet = async (e) => {
         if (e.files && e.files.length > 0) {
             const file = e.files[0];
-            
-            // Validar el tamaño del archivo (2MB = 2 * 1024 * 1024 bytes)
             const maxSize = 2 * 1024 * 1024;
             if (file.size > maxSize) {
                 toast.current?.show({
@@ -190,14 +179,12 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                 });
                 return;
             }
-            
+
             try {
                 const base64 = await convertirArchivoABase64(file);
                 setPreviewFotoPallet(base64);
-                
-                // Guardamos el base64 en el estado
-                setEnvioContenido({ 
-                    ...envioContenido, 
+                setEnvioContenido({
+                    ...envioContenido,
                     fotoPalletBase64: base64,
                     fotoPalletNombre: file.name,
                     fotoPalletTipo: file.type
@@ -218,20 +205,28 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
         setPreviewFotoProducto(null);
         setEnvioContenido({
             ...envioContenido,
+            fotoProducto: null,
             fotoProductoBase64: null,
             fotoProductoNombre: null,
             fotoProductoTipo: null
         });
+        if (fotoProductoInputRef.current) {
+            fotoProductoInputRef.current.value = '';
+        }
     };
 
     const limpiarFotoPallet = () => {
         setPreviewFotoPallet(null);
         setEnvioContenido({
             ...envioContenido,
+            fotoPallet: null,
             fotoPalletBase64: null,
             fotoPalletNombre: null,
             fotoPalletTipo: null
         });
+        if (fotoPalletInputRef.current) {
+            fotoPalletInputRef.current.value = '';
+        }
     };
 
     return (
@@ -246,8 +241,8 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         mode="decimal"
                         useGrouping={false}
                         min={0}
-                        max={99999} 
-                        inputStyle={{ textAlign: 'right' }}/>
+                        max={99999}
+                        inputStyle={{ textAlign: 'right' }} />
                 </div>
                 {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
@@ -257,11 +252,11 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         className={`p-column-filter ${(estadoGuardando && (envioContenido.envioId == null || envioContenido.envioId === "")) ? "p-invalid" : ""}`}
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
-                </div>)}                
+                </div>)}
 
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="palletId"><b>{intl.formatMessage({ id: 'Pallet' })}*</b></label>
-                    <Dropdown 
+                    <Dropdown
                         value={envioContenido.palletId}
                         options={pallets}
                         onChange={handlePalletChange}
@@ -274,18 +269,9 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                     />
                 </div>
 
-                {/*<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
-                    <label htmlFor="referencia">{intl.formatMessage({ id: 'Referencia' })}</label>
-                    <InputText value={envioContenido.referencia || ''}
-                        placeholder={intl.formatMessage({ id: 'Se completa automáticamente al seleccionar producto' })}
-                        disabled
-                        style={{ backgroundColor: '#f8f9fa' }}
-                        maxLength={50} />
-                </div> */}
-                
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="productoId"><b>{intl.formatMessage({ id: 'Producto' })}*</b></label>
-                    <Dropdown 
+                    <Dropdown
                         value={envioContenido.productoId}
                         options={productos}
                         onChange={handleProductoChange}
@@ -322,19 +308,19 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="pesoTotal">{intl.formatMessage({ id: 'Peso Total (Kg)' })}</label>
-                    <InputNumber 
+                    <InputNumber
                         value={envioContenido.pesoTotal || 0}
                         placeholder={intl.formatMessage({ id: 'Peso total calculado automáticamente' })}
-                        minFractionDigits={2} 
-                        maxFractionDigits={2} 
+                        minFractionDigits={2}
+                        maxFractionDigits={2}
                         min={0}
                         disabled
-                        inputStyle={{ textAlign: 'right', backgroundColor: '#f8f9fa' }} 
+                        inputStyle={{ textAlign: 'right', backgroundColor: '#f8f9fa' }}
                         tooltip={intl.formatMessage({ id: 'Campo calculado automáticamente: Peso × Cantidad' })}
                         tooltipOptions={{ position: 'top' }}
                     />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
                     <label htmlFor="medidas">{intl.formatMessage({ id: 'Medidas' })}</label>
                     <InputText value={envioContenido.medidas || ''}
                         placeholder={intl.formatMessage({ id: 'Medidas del producto' })}
@@ -342,19 +328,48 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                         maxLength={50} />
                 </div>
 
-                {/* Campos de rutas para mostrar las imágenes guardadas */}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="fotoProducto" className="pb-2">{intl.formatMessage({ id: 'Foto del producto' })}</label>
-                    {envioContenido.fotoProducto && (
-                        <Image
-                            src={envioContenido.fotoProducto}
-                            alt="Foto del Producto"
-                            width="200"
-                            preview
-                        />
-                    )}
-                    
+                    <div className="p-3 border-1 border-round surface-border">
+                        <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: '150px' }}>
+                            {(previewFotoProducto || envioContenido.fotoProducto) ? (
+                                <Image
+                                    src={previewFotoProducto || envioContenido.fotoProducto}
+                                    alt="Foto del producto"
+                                    width="220"
+                                    imageStyle={{ maxWidth: '100%', maxHeight: '150px', objectFit: 'contain' }}
+                                    preview
+                                />
+                            ) : (
+                                <small className="text-color-secondary">Sin imagen cargada</small>
+                            )}
+                        </div>
+                        <div className="mt-2 text-center">
+                            <small className={previewFotoProducto ? "text-green-600" : "text-color-secondary"}>
+                                {previewFotoProducto
+                                    ? `Nueva imagen seleccionada${envioContenido.fotoProductoNombre ? `: ${envioContenido.fotoProductoNombre}` : ''}`
+                                    : (envioContenido.fotoProducto ? 'Imagen actual' : 'No hay imagen cargada')}
+                            </small>
+                        </div>
+                        <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
+                            <Button
+                                label={previewFotoProducto || envioContenido.fotoProducto ? "Cambiar imagen" : "Seleccionar imagen"}
+                                icon="pi pi-upload"
+                                className="p-button-outlined p-button-sm"
+                                onClick={() => fotoProductoInputRef.current?.click()}
+                            />
+                            {(previewFotoProducto || envioContenido.fotoProducto) && (
+                                <Button
+                                    label="Quitar"
+                                    icon="pi pi-times"
+                                    className="p-button-text p-button-sm"
+                                    onClick={limpiarFotoProducto}
+                                />
+                            )}
+                        </div>
+                    </div>
                     <input
+                        id="fotoProducto"
                         type="file"
                         accept="image/*"
                         onChange={(e) => {
@@ -363,50 +378,52 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                             }
                         }}
                         style={{ display: 'none' }}
-                        ref={(ref) => setFotoProductoInputRef(ref)}
+                        ref={fotoProductoInputRef}
                     />
-                    <Button
-                        label="Cambiar foto por:"
-                        icon="pi pi-upload"
-                        className="p-button-outlined"
-                        onClick={() => fotoProductoInputRef?.click()}
-                    />
-                    
-                    {previewFotoProducto && (
-                        <div className="mt-2">
-                            <div className="flex justify-content-between align-items-center mb-2">
-                                <small className="text-green-600">
-                                    Imagen seleccionada: {envioContenido.fotoProductoNombre}
-                                </small>
-                                <Button 
-                                    icon="pi pi-times" 
-                                    className="p-button-rounded p-button-text p-button-sm"
-                                    onClick={limpiarFotoProducto}
-                                    tooltip="Quitar imagen"
-                                />
-                            </div>
-                            <Image 
-                                src={previewFotoProducto} 
-                                alt="Preview producto" 
-                                width="200" 
-                                preview 
-                            />
-                        </div>
-                    )}
                 </div>
 
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="fotoPallet" className="pb-2">{intl.formatMessage({ id: 'Foto del pallet' })}</label>
-                    {envioContenido.fotoPallet && (
-                        <Image
-                            src={envioContenido.fotoPallet}
-                            alt="Foto del pallet"
-                            width="200"
-                            preview
-                        />
-                    )}
-                    
+                    <div className="p-3 border-1 border-round surface-border">
+                        <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: '150px' }}>
+                            {(previewFotoPallet || envioContenido.fotoPallet) ? (
+                                <Image
+                                    src={previewFotoPallet || envioContenido.fotoPallet}
+                                    alt="Foto del pallet"
+                                    width="220"
+                                    imageStyle={{ maxWidth: '100%', maxHeight: '150px', objectFit: 'contain' }}
+                                    preview
+                                />
+                            ) : (
+                                <small className="text-color-secondary">Sin imagen cargada</small>
+                            )}
+                        </div>
+                        <div className="mt-2 text-center">
+                            <small className={previewFotoPallet ? "text-green-600" : "text-color-secondary"}>
+                                {previewFotoPallet
+                                    ? `Nueva imagen seleccionada${envioContenido.fotoPalletNombre ? `: ${envioContenido.fotoPalletNombre}` : ''}`
+                                    : (envioContenido.fotoPallet ? 'Imagen actual' : 'No hay imagen cargada')}
+                            </small>
+                        </div>
+                        <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
+                            <Button
+                                label={previewFotoPallet || envioContenido.fotoPallet ? "Cambiar imagen" : "Seleccionar imagen"}
+                                icon="pi pi-upload"
+                                className="p-button-outlined p-button-sm"
+                                onClick={() => fotoPalletInputRef.current?.click()}
+                            />
+                            {(previewFotoPallet || envioContenido.fotoPallet) && (
+                                <Button
+                                    label="Quitar"
+                                    icon="pi pi-times"
+                                    className="p-button-text p-button-sm"
+                                    onClick={limpiarFotoPallet}
+                                />
+                            )}
+                        </div>
+                    </div>
                     <input
+                        id="fotoPallet"
                         type="file"
                         accept="image/*"
                         onChange={(e) => {
@@ -415,36 +432,8 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                             }
                         }}
                         style={{ display: 'none' }}
-                        ref={(ref) => setFotoPalletInputRef(ref)}
+                        ref={fotoPalletInputRef}
                     />
-                    <Button
-                        label="Cambiar foto por:"
-                        icon="pi pi-upload"
-                        className="p-button-outlined"
-                        onClick={() => fotoPalletInputRef?.click()}
-                    />
-
-                    {previewFotoPallet && (
-                        <div className="mt-2">
-                            <div className="flex justify-content-between align-items-center mb-2">
-                                <small className="text-green-600">
-                                    Imagen seleccionada: {envioContenido.fotoPalletNombre}
-                                </small>
-                                <Button 
-                                    icon="pi pi-times" 
-                                    className="p-button-rounded p-button-text p-button-sm"
-                                    onClick={limpiarFotoPallet}
-                                    tooltip="Quitar imagen"
-                                />
-                            </div>
-                            <Image 
-                                src={previewFotoPallet} 
-                                alt="Preview pallet" 
-                                width="200" 
-                                preview 
-                            />
-                        </div>
-                    )}
                 </div>
             </div>
         </Fieldset>

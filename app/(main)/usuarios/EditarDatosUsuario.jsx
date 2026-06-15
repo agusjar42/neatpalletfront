@@ -4,7 +4,6 @@ import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { InputSwitch } from 'primereact/inputswitch';
 import { useIntl } from 'react-intl'
-import { FileUpload } from "primereact/fileupload";
 import { Image } from 'primereact/image';
 import { Button } from "primereact/button";
 import 'react-phone-input-2/lib/bootstrap.css'
@@ -18,20 +17,16 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
 }) => {
     const intl = useIntl()
     const toast = useRef(null);
-    
-    // Estado para el permiso de seleccionar rol
+
     const [puedeSeleccionarRol, setPuedeSeleccionarRol] = useState(false);
-    
-    // Estado para el preview del avatar
     const [previewAvatar, setPreviewAvatar] = useState(usuario.avatarBase64 || null);
     const [dropdownAbiertoIdioma, setDropdownAbiertoIdioma] = useState(false);
-    const [avatarInputRef, setAvatarInputRef] = useState(null);
     const [dropdownAbiertoRol, setDropdownAbiertoRol] = useState(false);
-    //Para que el dropdown muestre el registro seleccionado aunque no este en la lista
+    const avatarInputRef = useRef(null);
+
     const optionsIdioma = dropdownAbiertoIdioma ? listaIdiomas.map(registro => registro.nombre) : [idiomaSeleccionado || '', ...listaIdiomas.map(registro => registro.nombre)];
     const optionsRol = dropdownAbiertoRol ? listaRoles.map(registro => registro.nombre) : [rolSeleccionado || '', ...listaRoles.map(registro => registro.nombre)];
 
-    // useEffect para verificar el permiso de seleccionar rol
     useEffect(() => {
         const verificarPermiso = async () => {
             try {
@@ -45,10 +40,11 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
         verificarPermiso();
     }, []);
 
+    useEffect(() => {
+        setPreviewAvatar(usuario.avatarBase64 || null);
+    }, [usuario.id, usuario.avatarBase64]);
+
     const manejarCambioInputSwitch = async (e, nombreInputSwitch) => {
-        //
-        //Si voy a desactivar el switch de usuarioAdmin, verifico si el usuario es el único admin que queda en el sistema, si es así muestro un mensaje advirtiendo que no es posible
-        //
         let permiteDesactivar = true;
         if (nombreInputSwitch === "usuarioAdmin" && e.target && e.target.value === false) {
             const usuariosAdmin = await getUsuarios(JSON.stringify({ where: { and: { empresaId: usuario.empresaId, usuarioAdmin: 'S' } } }));
@@ -57,8 +53,8 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                 toast.current?.show({
                     severity: 'warn',
                     summary: 'ADVERTENCIA',
-                    detail: intl.formatMessage({ id: 'No puede desactivar este switch, porque no existe ningún otro usuario con privilegios de administrador. Activelo en otro si quiere desactivar este' }),
-                life: 3000,
+                    detail: intl.formatMessage({ id: 'No puede desactivar este switch, porque no existe ningún otro usuario con privilegios de administrador. Actívelo en otro si quiere desactivar este' }),
+                    life: 3000,
                 });
             }
         }
@@ -71,12 +67,10 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
         }
     };
 
-    // Función para manejar la selección del avatar
     const onSelectAvatar = async (e) => {
         if (e.files && e.files.length > 0) {
             const file = e.files[0];
-                       
-            // Validar el tamaño del archivo (2MB = 2 * 1024 * 1024 bytes)
+
             const maxSize = 2 * 1024 * 1024;
             if (file.size > maxSize) {
                 toast.current?.show({
@@ -91,10 +85,9 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
             try {
                 const base64 = await convertirArchivoABase64(file);
                 setPreviewAvatar(base64);
-                
-                // Guardamos el base64 en el estado del usuario
-                setUsuario({ 
-                    ...usuario, 
+
+                setUsuario({
+                    ...usuario,
                     avatarBase64: base64,
                     avatarNombre: file.name,
                     avatarTipo: file.type
@@ -111,15 +104,18 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
         }
     };
 
-    // Función para limpiar el avatar
     const limpiarAvatar = () => {
         setPreviewAvatar(null);
         setUsuario({
             ...usuario,
+            avatar: null,
             avatarBase64: null,
             avatarNombre: null,
             avatarTipo: null
         });
+        if (avatarInputRef.current) {
+            avatarInputRef.current.value = '';
+        }
     };
 
     return (
@@ -169,7 +165,7 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                         onChange={(e) => setUsuario({ ...usuario, telefono: e.target.value })}
                         className={`${(estadoGuardando && usuario.telefono === "") ? "p-invalid" : ""}`}
                         rows={5} cols={30} maxLength={50}
-                        style={{textAlign:"right"}} />
+                        style={{ textAlign: "right" }} />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="activoSN" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
@@ -187,20 +183,53 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                         />
                     </div>
                 )}
-                {/* Sección del Avatar - Imagen actual */}
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="avatar" className="pb-2">{intl.formatMessage({ id: 'Avatar' })}</label>
-                    {usuario.avatar && (
-                        <Image
-                            src={usuario.avatar}
-                            alt="Avatar del usuario"
-                            width="150"
-                            height="150"
-                            className="border-circle"
-                            preview
-                        />
-                    )}   
+                    <div className="p-3 border-1 border-round surface-border">
+                        <div
+                            className="flex justify-content-center align-items-center border-circle surface-100 mx-auto overflow-hidden"
+                            style={{ width: '150px', height: '150px' }}
+                        >
+                            {(previewAvatar || usuario.avatar) ? (
+                                <Image
+                                    src={previewAvatar || usuario.avatar}
+                                    alt="Avatar del usuario"
+                                    width="150"
+                                    height="150"
+                                    className="border-circle"
+                                    imageStyle={{ width: '150px', height: '150px', objectFit: 'cover' }}
+                                    preview
+                                />
+                            ) : (
+                                <small className="text-color-secondary text-center px-2">Sin avatar</small>
+                            )}
+                        </div>
+                        <div className="mt-2 text-center">
+                            <small className={previewAvatar ? "text-green-600" : "text-color-secondary"}>
+                                {previewAvatar
+                                    ? `Nuevo avatar seleccionado${usuario.avatarNombre ? `: ${usuario.avatarNombre}` : ''}`
+                                    : (usuario.avatar ? 'Avatar actual' : 'No hay avatar cargado')}
+                            </small>
+                        </div>
+                        <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
+                            <Button
+                                label={usuario.avatar || previewAvatar ? "Cambiar avatar" : "Seleccionar avatar"}
+                                icon="pi pi-upload"
+                                className="p-button-outlined p-button-sm"
+                                onClick={() => avatarInputRef.current?.click()}
+                            />
+                            {(previewAvatar || usuario.avatar) && (
+                                <Button
+                                    label="Quitar"
+                                    icon="pi pi-times"
+                                    className="p-button-text p-button-sm"
+                                    onClick={limpiarAvatar}
+                                />
+                            )}
+                        </div>
+                    </div>
                     <input
+                        id="avatar"
                         type="file"
                         accept="image/*"
                         onChange={(e) => {
@@ -209,42 +238,9 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                             }
                         }}
                         style={{ display: 'none' }}
-                        ref={(ref) => setAvatarInputRef(ref)}
+                        ref={avatarInputRef}
                     />
-                    <Button
-                        label="Cambiar avatar por:"
-                        icon="pi pi-upload"
-                        className="p-button-outlined"
-                        onClick={() => avatarInputRef?.click()}
-                    />
-                    
-                    {previewAvatar && (
-                        <div className="mt-2">
-                            <div className="flex justify-content-between align-items-center mb-2">
-                                <small className="text-green-600">
-                                    Avatar seleccionado: {usuario.avatarNombre}
-                                </small>
-                                <Button 
-                                    icon="pi pi-times" 
-                                    className="p-button-rounded p-button-text p-button-sm"
-                                    onClick={limpiarAvatar}
-                                    tooltip="Quitar imagen"
-                                />
-                            </div>
-                            <div className="flex justify-content-center">
-                                <Image 
-                                    src={previewAvatar} 
-                                    alt="Preview avatar" 
-                                    width="200" 
-                                    height="200"
-                                    className="border-circle"
-                                    preview 
-                                />
-                            </div>
-                        </div>
-                    )}
                 </div>
-
             </div>
         </Fieldset>
    );

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { obtenerRolDashboard } from "@/app/api-endpoints/rol";
 import Cookies from 'js-cookie';
-import { devuelveBasePath, emptyCache } from '../utility/Utils';
+import { clearPersistedSession, devuelveBasePath, emptyCache, getAccessToken, isJwtExpired } from '../utility/Utils';
 import jwt from "@/app/auth/jwt/useJwt";
 import { getEmpresa } from "@/app/api-endpoints/empresa";
 import { postLogUsuario } from "@/app/api-endpoints/log_usuario";
@@ -28,27 +28,38 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const config = jwt.jwtConfig;
   const isLoggingOutRef = useRef(false);
 
+  const limpiarSesionInvalida = () => {
+    Cookies.remove('authToken');
+    clearPersistedSession();
+    setUsuarioAutenticado(false);
+  };
+
   // Verificar si el usuario está autenticado al inicializar la aplicación
   useEffect(() => {
     const verificarAutenticacion = () => {
       const token = Cookies.get('authToken');
       const userData = localStorage.getItem('userDataNeatpallet');
+      const accessToken = getAccessToken();
       
-      if (token && userData) {
-        // Verificar que el token no haya expirado (opcional)
+      if (token && userData && accessToken) {
         try {
           const parsedUserData = JSON.parse(userData);
-          if (parsedUserData) {
+          const tokenExpirado = isJwtExpired(accessToken);
+
+          if (parsedUserData && !tokenExpirado) {
             setUsuarioAutenticado(true);
+          } else {
+            limpiarSesionInvalida();
           }
         } catch (error) {
-          // Si hay error al parsear los datos, limpiar y mantener como no autenticado
-          Cookies.remove('authToken');
-          localStorage.removeItem('userDataNeatpallet');
-          setUsuarioAutenticado(false);
+          limpiarSesionInvalida();
         }
       } else {
-        setUsuarioAutenticado(false);
+        if (token || userData || accessToken) {
+          limpiarSesionInvalida();
+        } else {
+          setUsuarioAutenticado(false);
+        }
       }
       setIsInitialized(true);
     };

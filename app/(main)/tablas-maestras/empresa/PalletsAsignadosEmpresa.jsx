@@ -5,6 +5,7 @@ import { Checkbox } from "primereact/checkbox";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
+import { Paginator } from "primereact/paginator";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from "primereact/toast";
 import { getPallet } from "@/app/api-endpoints/pallet";
@@ -18,6 +19,8 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
     const [pallets, setPallets] = useState([]);
     const [asignaciones, setAsignaciones] = useState([]);
     const [textoBusqueda, setTextoBusqueda] = useState("");
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(20);
     const [cargando, setCargando] = useState(false);
     const [palletsPendientes, setPalletsPendientes] = useState(new Set());
 
@@ -77,6 +80,10 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
         cargarDatos();
     }, [cargarDatos]);
 
+    useEffect(() => {
+        setFirst(0);
+    }, [textoBusqueda, empresaId]);
+
     const asignacionesPorPallet = useMemo(() => {
         const mapa = new Map();
 
@@ -113,6 +120,18 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
 
         return palletsOrdenados.filter((pallet) => `${pallet?.codigo ?? ""}`.toLowerCase().includes(termino));
     }, [pallets, textoBusqueda]);
+
+    useEffect(() => {
+        const total = palletsFiltrados.length;
+
+        if (first >= total && total > 0) {
+            setFirst(Math.max(0, Math.floor((total - 1) / rows) * rows));
+        }
+
+        if (total === 0 && first !== 0) {
+            setFirst(0);
+        }
+    }, [first, palletsFiltrados.length, rows]);
 
     const obtenerTexto = (valor) => {
         if (valor === undefined || valor === null || valor === "") {
@@ -210,6 +229,64 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
         </div>
     );
 
+    const manejarCambioDePagina = (event) => {
+        setFirst(event.first);
+        setRows(event.rows);
+    };
+
+    const paginatorTemplate = {
+        layout: "CurrentPageReport RowsPerPageDropdown",
+        CurrentPageReport: (options) => (
+            <span className="neat-paginator-report">
+                {intl.formatMessage({ id: "Mostrando" })} {options.last} {intl.formatMessage({ id: "de" })} {options.totalRecords} (total {options.totalRecords})
+            </span>
+        ),
+        RowsPerPageDropdown: (options) => {
+            const rowOptions = [20, 50, 100];
+            const currentRows = Number(options.value) || rows;
+            const currentPage = options.currentPage || 0;
+            const totalPages = options.totalPages || 1;
+            const hasMultiplePages = totalPages > 1;
+            const goToPage = (page) => manejarCambioDePagina({ first: page * currentRows, rows: currentRows });
+
+            return (
+                <div className="neat-rows-per-page">
+                    {hasMultiplePages && (
+                        <div className="neat-page-nav-group">
+                            <button
+                                type="button"
+                                className="neat-page-nav"
+                                disabled={currentPage <= 0}
+                                onClick={() => goToPage(currentPage - 1)}
+                            >
+                                Anterior
+                            </button>
+                            <button
+                                type="button"
+                                className="neat-page-nav"
+                                disabled={currentPage >= totalPages - 1}
+                                onClick={() => goToPage(currentPage + 1)}
+                            >
+                                Siguiente
+                            </button>
+                        </div>
+                    )}
+                    <span>Por p&aacute;gina:</span>
+                    {rowOptions.map((rowCount) => (
+                        <button
+                            key={rowCount}
+                            type="button"
+                            className={options.value === rowCount ? "active" : ""}
+                            onClick={(event) => options.onChange({ originalEvent: event, value: rowCount })}
+                        >
+                            {rowCount}
+                        </button>
+                    ))}
+                </div>
+            );
+        }
+    };
+
     const asignadoBodyTemplate = (pallet) => {
         const { asignadoAEmpresaActual } = obtenerEstadoPallet(pallet);
 
@@ -252,9 +329,7 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
                 dataKey="id"
                 value={palletsFiltrados}
                 header={renderCabeceraTabla()}
-                paginator
-                rows={100}
-                rowsPerPageOptions={[25, 50, 100, 200]}
+                rows={rows}
                 emptyMessage={<span>{intl.formatMessage({ id: "No se han encontrado registros" })}</span>}
             >
                 {/*
@@ -302,6 +377,15 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
                     headerStyle={{ minWidth: "12rem" }}
                 />
             </DataTable>
+
+            <Paginator
+                first={first}
+                rows={rows}
+                totalRecords={palletsFiltrados.length}
+                rowsPerPageOptions={[20, 50, 100]}
+                onPageChange={manejarCambioDePagina}
+                template={paginatorTemplate}
+            />
         </div>
     );
 };

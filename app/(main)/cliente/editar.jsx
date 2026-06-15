@@ -22,7 +22,9 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             if (idEditar !== 0) {
                 // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
-                setCliente(registro);
+                if (registro) {
+                    setCliente(registro);
+                }
             }
         };
         fetchData();
@@ -68,8 +70,12 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
                 //Si se crea el registro mostramos el toast
                 if (nuevoRegistro?.id) {
+                    setCliente((prev) => ({
+                        ...prev,
+                        ...nuevoRegistro,
+                    }));
                     setRegistroResult("insertado");
-                    setIdEditar(null);
+                    setIdEditar(nuevoRegistro.id);
                 } else {
                     toast.current?.show({
                         severity: 'error',

@@ -26,7 +26,7 @@ import EditarEnvioSensors from "../envio-sensor/editar";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 
 
-const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
+const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoEdicionTabChange }) => {
     const intl = useIntl();
     const toast = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -458,6 +458,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
                                     filtradoBase={{envioId: envio.id}}
                                     deleteRegistro={deleteEnvioConfiguracion}
                                     cargarDatosInicialmente={true}
+                                    onModoEdicionChange={onModoEdicionTabChange}
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
                                         estoyDentroDeUnTab: true
@@ -512,6 +513,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
                                     filtradoBase={{envioId: envio.id}}
                                     deleteRegistro={deleteEnvioContenido}
                                     cargarDatosInicialmente={true}
+                                    onModoEdicionChange={onModoEdicionTabChange}
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
                                         clienteId: envio.clienteId,
@@ -558,6 +560,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
                                     columnas={columnasMovimiento}
                                     deleteRegistro={deleteEnvioMovimiento}
                                     cargarDatosInicialmente={true}
+                                    onModoEdicionChange={onModoEdicionTabChange}
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
                                         estoyDentroDeUnTab: true,
@@ -615,6 +618,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
                                     filtradoBase={{envioId: envio.id}}
                                     deleteRegistro={deleteEnvioPallet}
                                     cargarDatosInicialmente={true}
+                                    onModoEdicionChange={onModoEdicionTabChange}
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
                                         estoyDentroDeUnTab: true,
@@ -650,6 +654,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
                                     filtradoBase={{envioId: envio.id}}
                                     deleteRegistro={deleteEnvioParada}
                                     cargarDatosInicialmente={true}
+                                    onModoEdicionChange={onModoEdicionTabChange}
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
                                         estoyDentroDeUnTab: true,
@@ -708,6 +713,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId }) => {
                                     filtradoBase={{envioId: envio.id}}
                                     deleteRegistro={deleteEnvioSensor}
                                     cargarDatosInicialmente={true}
+                                    onModoEdicionChange={onModoEdicionTabChange}
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
                                         estoyDentroDeUnTab: true

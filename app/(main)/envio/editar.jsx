@@ -15,6 +15,7 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
     const [envio, setEnvio] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [edicionTabActiva, setEdicionTabActiva] = useState(false);
     const [tiposTransporte, setTiposTransporte] = useState([]);
     const [tiposCarroceria, setTiposCarroceria] = useState([]);
     const intl = useIntl();
@@ -47,7 +48,9 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
 
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
-                setEnvio(registro);
+                if (registro) {
+                    setEnvio(registro);
+                }
             }
         };
         fetchData();
@@ -120,8 +123,12 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
                 const nuevoRegistro = await postEnvio(objGuardar);
 
                 if (nuevoRegistro?.id) {
+                    setEnvio((prevEnvio) => ({
+                        ...prevEnvio,
+                        ...nuevoRegistro,
+                    }));
                     setRegistroResult("insertado");
-                    setIdEditar(null);
+                    setIdEditar(nuevoRegistro.id);
                 } else {
                     toast.current?.show({
                         severity: 'error',
@@ -172,8 +179,10 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
                             tiposTransporte={tiposTransporte}
                             tiposCarroceria={tiposCarroceria}
                             empresaId={empresaId}
+                            onModoEdicionTabChange={setEdicionTabActiva}
                         />
 
+                        {!edicionTabActiva && (
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
@@ -186,6 +195,7 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
                             )}
                             <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
+                        )}
                     </div>
                 </div>
             </div>

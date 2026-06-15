@@ -4,7 +4,6 @@ import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
 import { Dropdown } from "primereact/dropdown";
 import { useIntl } from "react-intl";
-import { FileUpload } from "primereact/fileupload";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import { convertirArchivoABase64 } from "@/app/utility/Utils";
@@ -20,13 +19,17 @@ const EditarDatosEnvioMovimiento = ({
 }) => {
     const intl = useIntl();
     const [previewImagen, setPreviewImagen] = React.useState(envioMovimiento.imagenBase64 || null);
+    const imagenInputRef = React.useRef(null);
+
+    React.useEffect(() => {
+        setPreviewImagen(envioMovimiento.imagenBase64 || null);
+    }, [envioMovimiento.id, envioMovimiento.imagenBase64]);
 
     const opcionesEnvioPallet = envios.map((envioPallet) => ({
         label: `${envioPallet.id} - ${envioPallet.origenRuta || "Sin ruta"}${envioPallet.codigo ? ` - ${envioPallet.codigo}` : ""}${envioPallet.alias ? ` (${envioPallet.alias})` : ""}`,
         value: envioPallet.id,
     }));
 
-    // De los Tipos de Sensor solo mostramos los activos y el que esté seleccionado (para poder editar un registro inactivo)
     const opcionesTipoSensor = tiposSensor
         .filter((tipo) => tipo.activoSn === "S" || tipo.id === envioMovimiento.tipoSensorId)
         .map((tipo) => ({
@@ -61,10 +64,13 @@ const EditarDatosEnvioMovimiento = ({
             imagenNombre: null,
             imagenTipo: null,
         });
+        if (imagenInputRef.current) {
+            imagenInputRef.current.value = "";
+        }
     };
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: "Datos para el movimiento de envÃ­o" })}>
+        <Fieldset legend={intl.formatMessage({ id: "Datos para el movimiento de envío" })}>
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden">
@@ -94,7 +100,7 @@ const EditarDatosEnvioMovimiento = ({
                             options={opcionesEnvioPallet}
                             className={`p-column-filter ${estadoGuardando && (envioMovimiento.envioPalletId == null || envioMovimiento.envioPalletId === "") ? "p-invalid" : ""}`}
                             showClear
-                            placeholder={intl.formatMessage({ id: "Selecciona un envÃ­o pallet" })}
+                            placeholder={intl.formatMessage({ id: "Selecciona un envío pallet" })}
                         />
                     </div>
                 )}
@@ -149,32 +155,56 @@ const EditarDatosEnvioMovimiento = ({
                     <label htmlFor="imagen" className="pb-2">
                         {intl.formatMessage({ id: "Imagen" })}
                     </label>
-                    {envioMovimiento.imagen && <Image src={envioMovimiento.imagen} alt="Imagen" width="200" preview />}
-
-                    <label>{intl.formatMessage({ id: "Cambiar imagen por" })}</label>
-                    <FileUpload
-                        name="imagen"
-                        accept="image/*"
-                        onSelect={onSelectImagen}
-                        mode="basic"
-                        chooseLabel="Seleccionar nueva imagen"
-                        className="p-button-outlined pt-2"
-                    />
-
-                    {previewImagen && (
-                        <div className="mt-2">
-                            <div className="flex justify-content-between align-items-center mb-2">
-                                <small className="text-green-600">Imagen seleccionada: {envioMovimiento.imagenNombre}</small>
-                                <Button
-                                    icon="pi pi-times"
-                                    className="p-button-rounded p-button-text p-button-sm"
-                                    onClick={limpiarImagen}
-                                    tooltip="Quitar imagen"
+                    <div className="p-3 border-1 border-round surface-border">
+                        <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: "150px" }}>
+                            {(previewImagen || envioMovimiento.imagen) ? (
+                                <Image
+                                    src={previewImagen || envioMovimiento.imagen}
+                                    alt="Imagen"
+                                    width="220"
+                                    imageStyle={{ maxWidth: "100%", maxHeight: "150px", objectFit: "contain" }}
+                                    preview
                                 />
-                            </div>
-                            <Image src={previewImagen} alt="Preview" width="200" preview />
+                            ) : (
+                                <small className="text-color-secondary">Sin imagen cargada</small>
+                            )}
                         </div>
-                    )}
+                        <div className="mt-2 text-center">
+                            <small className={previewImagen ? "text-green-600" : "text-color-secondary"}>
+                                {previewImagen
+                                    ? `Nueva imagen seleccionada${envioMovimiento.imagenNombre ? `: ${envioMovimiento.imagenNombre}` : ""}`
+                                    : (envioMovimiento.imagen ? "Imagen actual" : "No hay imagen cargada")}
+                            </small>
+                        </div>
+                        <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
+                            <Button
+                                label={previewImagen || envioMovimiento.imagen ? "Cambiar imagen" : "Seleccionar imagen"}
+                                icon="pi pi-upload"
+                                className="p-button-outlined p-button-sm"
+                                onClick={() => imagenInputRef.current?.click()}
+                            />
+                            {(previewImagen || envioMovimiento.imagen) && (
+                                <Button
+                                    label="Quitar"
+                                    icon="pi pi-times"
+                                    className="p-button-text p-button-sm"
+                                    onClick={limpiarImagen}
+                                />
+                            )}
+                        </div>
+                    </div>
+                    <input
+                        id="imagen"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                                onSelectImagen({ files: [e.target.files[0]] });
+                            }
+                        }}
+                        style={{ display: "none" }}
+                        ref={imagenInputRef}
+                    />
                 </div>
             </div>
         </Fieldset>

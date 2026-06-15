@@ -322,7 +322,10 @@ const Empresa = () => {
     };
 
     const cancelarEdicionEmpresa = () => {
-        confirmarSalidaSinGuardar(() => setModoEdicion(false));
+        confirmarSalidaSinGuardar(() => {
+            setHayEdicionEnPestana(false);
+            setModoEdicion(false);
+        });
     };
 
     const renderResumenCliente = () => (
@@ -808,7 +811,10 @@ const EmpresaAdminDetalle = ({ idEditar, editable, setIdEditar, rowData = [], se
 
     const volverAlListado = () => {
         if (modoEdicion || hayEdicionEnPestana) {
-            confirmarSalidaSinGuardar(() => setIdEditar(null));
+            confirmarSalidaSinGuardar(() => {
+                setHayEdicionEnPestana(false);
+                setIdEditar(null);
+            });
             return;
         }
         setIdEditar(null);
@@ -857,6 +863,7 @@ const EmpresaAdminDetalle = ({ idEditar, editable, setIdEditar, rowData = [], se
 
     const cancelarEdicionEmpresa = () => {
         confirmarSalidaSinGuardar(() => {
+            setHayEdicionEnPestana(false);
             setEmpresaEdicion({ ...empresaActiva });
             setModoEdicion(false);
         });

@@ -42,12 +42,71 @@ export function formatearFechaHoraDate(fecha) {
 
 // Retorna el token del usuario que esta logueado
 export function getAccessToken() {
-  return localStorage.getItem('accessToken') || JSON.parse(localStorage.getItem('userDataNeatpallet'))?.accessToken
+  const accessToken = localStorage.getItem('accessToken')
+  if (accessToken) {
+    return accessToken
+  }
+
+  try {
+    return JSON.parse(localStorage.getItem('userDataNeatpallet'))?.accessToken
+  } catch (error) {
+    return null
+  }
 }
+
+function decodeBase64Url(value) {
+  const base64 = value.replace(/-/g, '+').replace(/_/g, '/')
+  const padding = base64.length % 4
+  const normalized = padding ? `${base64}${'='.repeat(4 - padding)}` : base64
+  return atob(normalized)
+}
+
+export function decodeJwtPayload(token) {
+  if (!token || typeof token !== 'string') return null
+
+  const parts = token.split('.')
+  if (parts.length < 2) return null
+
+  try {
+    return JSON.parse(decodeBase64Url(parts[1]))
+  } catch (error) {
+    return null
+  }
+}
+
+export function isJwtExpired(token, options = { clockSkewSeconds: 30 }) {
+  const payload = decodeJwtPayload(token)
+  if (!payload?.exp) return false
+
+  const clockSkewSeconds = Number(options?.clockSkewSeconds ?? 30)
+  const nowInSeconds = Math.floor(Date.now() / 1000)
+  return payload.exp <= nowInSeconds + clockSkewSeconds
+}
+
+export function clearPersistedSession() {
+  const sessionKeys = [
+    'accessToken',
+    'refreshToken',
+    'userDataNeatpallet',
+    'empresa',
+    'menuLateral',
+    'nombreEmpresa',
+    'tiempoDeEsperaInactividad',
+    'logoEmpresaUrl',
+    'JWTError'
+  ]
+
+  sessionKeys.forEach((key) => localStorage.removeItem(key))
+}
+
 //Retorna un array de los datos del usuario que está logueado
 export function getUsuarioSesion() {
   if (typeof localStorage !== 'undefined') {
-    return JSON.parse(localStorage.getItem('userDataNeatpallet'));
+    try {
+      return JSON.parse(localStorage.getItem('userDataNeatpallet'));
+    } catch (error) {
+      return null;
+    }
   }
   return null;
 }

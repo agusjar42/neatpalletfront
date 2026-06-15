@@ -461,7 +461,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
                                     onModoEdicionChange={onModoEdicionTabChange}
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
-                                        estoyDentroDeUnTab: true
+                                        estoyDentroDeUnTab: true,
+                                        ocultarClienteResumenHeader: true
                                     }}
                                 />
                             </>
@@ -518,7 +519,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
                                         envioId: envio.id,
                                         clienteId: envio.clienteId,
                                         empresaId: envio.empresaId ?? empresaId,
-                                        estoyDentroDeUnTab: true
+                                        estoyDentroDeUnTab: true,
+                                        ocultarClienteResumenHeader: true
                                     }}
                                 />
                             </>
@@ -564,6 +566,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
                                         estoyDentroDeUnTab: true,
+                                        ocultarClienteResumenHeader: true,
                                         onDataChange: () => setRefreshConteos(prev => prev + 1)
                                     }}
                                 />
@@ -622,6 +625,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
                                         estoyDentroDeUnTab: true,
+                                        ocultarClienteResumenHeader: true,
                                         onDataChange: () => setRefreshConteos(prev => prev + 1)
                                     }}
                                 />
@@ -659,6 +663,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
                                         envioId: envio.id,
                                         clienteId: envio.clienteId,
                                         estoyDentroDeUnTab: true,
+                                        ocultarClienteResumenHeader: true,
                                         onDataChange: () => setRefreshConteos(prev => prev + 1)
                                     }}
                                 />
@@ -717,7 +722,8 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
                                     onModoEdicionChange={onModoEdicionTabChange}
                                     editarComponenteParametrosExtra={{
                                         envioId: envio.id,
-                                        estoyDentroDeUnTab: true
+                                        estoyDentroDeUnTab: true,
+                                        ocultarClienteResumenHeader: true
                                     }}
                                 />
                             </>

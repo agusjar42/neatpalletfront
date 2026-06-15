@@ -212,6 +212,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                       editarComponenteParametrosExtra={{
                         clienteId: cliente.id,
                         estoyDentroDeUnTab: true,
+                        ocultarClienteResumenHeader: true,
                         onDataChange: () =>
                           setRefreshConteos((prev) => prev + 1),
                       }}
@@ -279,6 +280,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
                       editarComponenteParametrosExtra={{
                         clienteId: cliente.id,
                         estoyDentroDeUnTab: true,
+                        ocultarClienteResumenHeader: true,
                         onDataChange: () =>
                           setRefreshConteos((prev) => prev + 1),
                       }}

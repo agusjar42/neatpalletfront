@@ -1322,7 +1322,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     return (
         <div>
-            <ClienteResumenHeader />
+            {!editarComponenteParametrosExtra?.ocultarClienteResumenHeader && <ClienteResumenHeader />}
             {(idEditar === null) && (
                 <div className="grid">
                     <div className="col-12">

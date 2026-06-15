@@ -20,6 +20,7 @@ import {
 
 const Producto = () => {
   const intl = useIntl();
+  const empresaIdSesion = getUsuarioSesionEmpresaId();
   const columnas = [
     {
       campo: "orden",
@@ -102,6 +103,7 @@ const Producto = () => {
         controlador={"Productos"}
         editarComponente={<EditarProductos />}
         columnas={columnas}
+        filtradoBase={empresaIdSesion ? { empresaId: empresaIdSesion } : undefined}
         deleteRegistro={deleteProducto}
         procesarImportacionCSV={procesarImportacionCSV}
       />

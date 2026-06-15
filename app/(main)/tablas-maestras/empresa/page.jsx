@@ -130,6 +130,11 @@ const extraerCount = (valor) => {
     return Number(valor?.count ?? 0);
 };
 
+const getEstadoMeta = (estado) => {
+    const valor = estado ?? "Activa";
+    return estados.find((item) => item.value === valor) ?? estados[0];
+};
+
 const Empresa = () => {
     const [empresaActiva, setEmpresaActiva] = useState(null);
     const [empresaEdicion, setEmpresaEdicion] = useState(null);
@@ -269,6 +274,8 @@ const Empresa = () => {
         const payload = {
             codigo: empresaEdicion.codigo,
             nombre: empresaEdicion.nombre,
+            estado: empresaEdicion.estado,
+            plan: empresaEdicion.plan,
             descripcion: empresaEdicion.descripcion,
             email: empresaEdicion.email,
             imagen: empresaEdicion.imagen,
@@ -337,6 +344,7 @@ const Empresa = () => {
                     <div className="empresa-heading">
                         <div className="empresa-title-row">
                             <h1>{empresaActiva.nombre}</h1>
+                            <span className={`empresa-pill ${getEstadoMeta(empresaActiva.estado).className}`}>{empresaActiva.estado}</span>
                             <span className="empresa-pill empresa-pill-blue">{empresaActiva.plan}</span>
                         </div>
                         <p>{empresaActiva.nombreComercial || empresaActiva.nombre}</p>
@@ -592,7 +600,7 @@ const Empresa = () => {
                     <div className="empresa-heading">
                         <div className="empresa-title-row">
                             <h1>{empresaActiva.nombre}</h1>
-                            <span className="empresa-pill empresa-pill-success">{empresaActiva.estado}</span>
+                            <span className={`empresa-pill ${getEstadoMeta(empresaActiva.estado).className}`}>{empresaActiva.estado}</span>
                             <span className="empresa-pill empresa-pill-blue">{empresaActiva.plan}</span>
                         </div>
                         <p>
@@ -601,7 +609,6 @@ const Empresa = () => {
                     </div>
                     <div className="empresa-header-actions">
                         <Button label="Editar" icon="pi pi-pencil" outlined onClick={abrirEdicion} />
-                        <Button label={empresaActiva.estado} icon="pi pi-circle-fill" severity="success" outlined />
                     </div>
                 </div>
 
@@ -838,6 +845,8 @@ const EmpresaAdminDetalle = ({ idEditar, editable, setIdEditar, rowData = [], se
         const payload = {
             codigo: empresaEdicion.codigo,
             nombre: empresaEdicion.nombre,
+            estado: empresaEdicion.estado,
+            plan: empresaEdicion.plan,
             descripcion: empresaEdicion.descripcion,
             email: empresaEdicion.email,
             imagen: empresaEdicion.imagen,
@@ -951,14 +960,13 @@ const EmpresaAdminDetalle = ({ idEditar, editable, setIdEditar, rowData = [], se
                     <div className="empresa-heading">
                         <div className="empresa-title-row">
                             <h1>{empresaActiva.nombre}</h1>
-                            <span className="empresa-pill empresa-pill-success">{empresaActiva.estado}</span>
+                            <span className={`empresa-pill ${getEstadoMeta(empresaActiva.estado).className}`}>{empresaActiva.estado}</span>
                             <span className="empresa-pill empresa-pill-blue">{empresaActiva.plan}</span>
                         </div>
                         <p>{empresaActiva.codigo} · {empresaActiva.nombreComercial || empresaActiva.nombre} · ALTA {fechaAlta}</p>
                     </div>
                     <div className="empresa-header-actions">
                         <Button label="Editar" icon="pi pi-pencil" outlined onClick={() => setModoEdicion(true)} />
-                        <Button label={empresaActiva.estado} icon="pi pi-circle-fill" severity="success" outlined />
                     </div>
                 </div>
 

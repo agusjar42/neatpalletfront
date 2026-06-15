@@ -482,6 +482,18 @@ export interface Empresa {
      * @type {string}
      * @memberof Empresa
      */
+    'estado'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'plan'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
     'descripcion'?: string | null;
     /**
      * 
@@ -568,6 +580,18 @@ export interface Empresa1 {
      * @memberof Empresa1
      */
     'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'estado'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa1
+     */
+    'plan'?: string;
     /**
      * 
      * @type {string}
@@ -1037,6 +1061,18 @@ export interface EmpresaPartial {
      * @type {string}
      * @memberof EmpresaPartial
      */
+    'estado'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'plan'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
     'descripcion'?: string;
     /**
      * 
@@ -1159,6 +1195,18 @@ export interface EmpresaWithRelations {
      * @memberof EmpresaWithRelations
      */
     'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'estado'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'plan'?: string | null;
     /**
      * 
      * @type {string}
@@ -6740,6 +6788,18 @@ export interface NewEmpresa {
      * @memberof NewEmpresa
      */
     'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'estado'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'plan'?: string;
     /**
      * 
      * @type {string}

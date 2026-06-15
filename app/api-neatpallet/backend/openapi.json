@@ -12122,6 +12122,14 @@
             "type": "string",
             "nullable": true
           },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan": {
+            "type": "string",
+            "nullable": true
+          },
           "descripcion": {
             "type": "string",
             "nullable": true
@@ -17562,6 +17570,14 @@
             "type": "string",
             "nullable": true
           },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan": {
+            "type": "string",
+            "nullable": true
+          },
           "descripcion": {
             "type": "string",
             "nullable": true
@@ -18402,6 +18418,12 @@
           "nombre": {
             "type": "string"
           },
+          "estado": {
+            "type": "string"
+          },
+          "plan": {
+            "type": "string"
+          },
           "descripcion": {
             "type": "string"
           },
@@ -18463,6 +18485,12 @@
             "type": "string"
           },
           "nombre": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "plan": {
             "type": "string"
           },
           "descripcion": {
@@ -18562,6 +18590,12 @@
                   "nombre": {
                     "type": "boolean"
                   },
+                  "estado": {
+                    "type": "boolean"
+                  },
+                  "plan": {
+                    "type": "boolean"
+                  },
                   "descripcion": {
                     "type": "boolean"
                   },
@@ -18609,6 +18643,8 @@
                     "id",
                     "codigo",
                     "nombre",
+                    "estado",
+                    "plan",
                     "descripcion",
                     "email",
                     "password",
@@ -18641,6 +18677,12 @@
             "type": "string"
           },
           "nombre": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "plan": {
             "type": "string"
           },
           "descripcion": {
@@ -18757,6 +18799,12 @@
                   "nombre": {
                     "type": "boolean"
                   },
+                  "estado": {
+                    "type": "boolean"
+                  },
+                  "plan": {
+                    "type": "boolean"
+                  },
                   "descripcion": {
                     "type": "boolean"
                   },
@@ -18804,6 +18852,8 @@
                     "id",
                     "codigo",
                     "nombre",
+                    "estado",
+                    "plan",
                     "descripcion",
                     "email",
                     "password",

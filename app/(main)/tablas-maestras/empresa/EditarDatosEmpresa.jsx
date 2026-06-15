@@ -11,6 +11,17 @@ import { convertirArchivoABase64 } from "@/app/utility/Utils";
 const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
     const intl = useIntl()
     const toast = useRef(null);
+    const estadosEmpresa = [
+        { value: "Activa", color: "#16a34a" },
+        { value: "En prueba", color: "#a16207" },
+        { value: "Suspendida", color: "#b91c1c" },
+    ];
+    const planesEmpresa = [
+        { value: "Starter", precio: "EUR290/mes" },
+        { value: "Growth", precio: "EUR890/mes" },
+        { value: "Business", precio: "EUR2490/mes" },
+        { value: "Enterprise", precio: "EUR6900/mes" },
+    ];
     
     // Estados para el preview de las imágenes
     const [previewImagen, setPreviewImagen] = useState(empresa.imagenBase64 || null);
@@ -127,6 +138,13 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
         setEmpresa(_empresa);
     };
 
+    const actualizarSeleccionEmpresa = (campo, valor) => {
+        setEmpresa((prevEmpresa) => ({
+            ...prevEmpresa,
+            [campo]: valor
+        }));
+    };
+
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos' })} toggleable>
             <Toast ref={toast} position="top-right" />
@@ -211,6 +229,75 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
                         //className={`${(estadoGuardando && gastoCancelacion.diasParaEvento === "") ? "p-invalid" : ""}`}
                     />
                     <small style={{ color: '#94949f', fontSize: '10px' }}> <i>{intl.formatMessage({ id: 'La cantidad de tiempo en minutos que tardará en cerrar la sesión por inactividad al usuario' })}</i> </small>
+                </div>
+                <div className="flex flex-column field gap-4 mt-2 col-12 lg:col-8">
+                    <div>
+                        <label className="block mb-2"><b>{intl.formatMessage({ id: 'Estado' })}</b></label>
+                        <div className="flex flex-wrap gap-2">
+                            {estadosEmpresa.map((estado) => {
+                                const activo = (empresa.estado ?? "Activa") === estado.value;
+                                return (
+                                    <button
+                                        key={estado.value}
+                                        type="button"
+                                        onClick={() => actualizarSeleccionEmpresa("estado", estado.value)}
+                                        style={{
+                                            border: `1px solid ${activo ? estado.color : "#d8dee4"}`,
+                                            background: activo ? `${estado.color}14` : "#ffffff",
+                                            color: activo ? estado.color : "#4b5563",
+                                            borderRadius: "999px",
+                                            padding: "0.7rem 1rem",
+                                            display: "inline-flex",
+                                            alignItems: "center",
+                                            gap: "0.55rem",
+                                            fontWeight: 500,
+                                            cursor: "pointer",
+                                        }}
+                                    >
+                                        <span
+                                            style={{
+                                                width: "0.55rem",
+                                                height: "0.55rem",
+                                                borderRadius: "999px",
+                                                background: estado.color,
+                                                display: "inline-block"
+                                            }}
+                                        />
+                                        <span>{estado.value}</span>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <div>
+                        <label className="block mb-2"><b>{intl.formatMessage({ id: 'Plan' })}</b></label>
+                        <div className="flex flex-wrap gap-2">
+                            {planesEmpresa.map((plan) => {
+                                const activo = (empresa.plan ?? "Enterprise") === plan.value;
+                                return (
+                                    <button
+                                        key={plan.value}
+                                        type="button"
+                                        onClick={() => actualizarSeleccionEmpresa("plan", plan.value)}
+                                        style={{
+                                            border: `1px solid ${activo ? "#22c55e" : "#d8dee4"}`,
+                                            background: activo ? "#22c55e14" : "#ffffff",
+                                            color: activo ? "#16a34a" : "#4b5563",
+                                            borderRadius: "999px",
+                                            padding: "0.7rem 1rem",
+                                            display: "inline-flex",
+                                            alignItems: "baseline",
+                                            gap: "0.5rem",
+                                            cursor: "pointer",
+                                        }}
+                                    >
+                                        <span style={{ fontWeight: 600 }}>{plan.value}</span>
+                                        <span style={{ fontSize: "0.92rem", color: activo ? "#15803d" : "#8b949e" }}>{plan.precio}</span>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
 
                 <div className="empresa-media-grid col-12">

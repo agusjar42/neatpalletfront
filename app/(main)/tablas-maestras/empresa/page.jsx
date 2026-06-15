@@ -96,8 +96,7 @@ const columnasSensorEmpresa = [
 const columnasCatalogosGlobales = [
     { campo: "orden", header: "Orden", tipo: "string" },
     { campo: "nombre", header: "Nombre", tipo: "string" },
-    { campo: "descripcion", header: "Descripción", tipo: "string" },
-    { campo: "activoSN", header: "Activo", tipo: "booleano" },
+    { campo: "activoSn", header: "Activo", tipo: "booleano" },
 ];
 
 const columnasEventoConfiguracion = [
@@ -106,7 +105,7 @@ const columnasEventoConfiguracion = [
     { campo: "descripcion", header: "Descripción", tipo: "string" },
     { campo: "valor", header: "Valor", tipo: "string" },
     { campo: "unidadMedida", header: "Unidad", tipo: "string" },
-    { campo: "activoSN", header: "Activo", tipo: "booleano" },
+    { campo: "activoSn", header: "Activo", tipo: "booleano" },
 ];
 
 const columnasEmpresas = [

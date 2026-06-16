@@ -1137,6 +1137,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const columnasDinamicas = [];
     for (const columna of columnas) {
         const filterPlaceholder = `${intl.formatMessage({ id: 'Buscar por' })} ${(columna.header).toLowerCase()}`
+        const resolvedHeaderStyle = columna.headerStyle || { minWidth: "15rem" };
+        const resolvedStyle = columna.style || {};
 
         //Depende del tipo del columna se genera una u otra
         switch (columna.tipo) {
@@ -1149,7 +1151,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         sortable
                         body={activoSNTemplate(columna.campo)}
                         filterMenuStyle={{ width: '14rem' }}
-                        headerStyle={{ minWidth: "15rem" }}
+                        headerStyle={resolvedHeaderStyle}
+                        style={resolvedStyle}
                         filter
                         filterClear={limpiarFiltrosTemplate}
                         filterElement={filtroActivoSnTemplate}
@@ -1176,7 +1179,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         filterClear={limpiarFiltrosTemplate}
                         filterApply={filtroAplicarTemplate}
                         filterPlaceholder={filterPlaceholder}
-                        headerStyle={{ minWidth: "15rem" }}
+                        headerStyle={resolvedHeaderStyle}
+                        style={resolvedStyle}
                     ></Column>
                 );
                 break;
@@ -1196,7 +1200,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         filterClear={limpiarFiltrosTemplate}
                         filterApply={filtroAplicarTemplate}
                         filterPlaceholder={filterPlaceholder}
-                        headerStyle={{ minWidth: "15rem" }}
+                        headerStyle={resolvedHeaderStyle}
+                        style={resolvedStyle}
                     ></Column>
                 );
                 break;
@@ -1208,7 +1213,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         sortable
                         body={fechaTemplate(columna.campo)}
                         filterMenuStyle={{ width: '14rem' }}
-                        headerStyle={{ minWidth: "15rem" }}
+                        headerStyle={resolvedHeaderStyle}
+                        style={resolvedStyle}
                         filter
                         filterClear={limpiarFiltrosTemplate}
                         filterApply={filtroAplicarTemplate}
@@ -1227,7 +1233,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         sortable
                         body={fechaHoraTemplate(columna.campo)}
                         filterMenuStyle={{ width: '14rem' }}
-                        headerStyle={{ minWidth: "15rem" }}
+                        headerStyle={resolvedHeaderStyle}
+                        style={resolvedStyle}
                         filter
                         filterClear={limpiarFiltrosTemplate}
                         filterApply={filtroAplicarTemplate}
@@ -1251,7 +1258,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         body={comprobarImagen(columna.campo, columna.header)}
                         filterClear={limpiarFiltrosTemplate}
                         filterPlaceholder={filterPlaceholder}
-                        headerStyle={{ minWidth: "15rem" }}
+                        headerStyle={resolvedHeaderStyle}
+                        style={resolvedStyle}
                     ></Column>
                 );
                 break;
@@ -1292,8 +1300,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         filterApply={filtroAplicarTemplate}
                         filterElement={filtroForaneoTemplate}
                         filterPlaceholder={filterPlaceholder}
-                        headerStyle={{ minWidth: "15rem" }}
-                        style={{}}
+                        headerStyle={resolvedHeaderStyle}
+                        style={resolvedStyle}
                     ></Column>
                 );
                 break;
@@ -1312,8 +1320,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         filterClear={limpiarFiltrosTemplate}
                         filterApply={filtroAplicarTemplate}
                         filterPlaceholder={filterPlaceholder}
-                        headerStyle={{ minWidth: "15rem" }}
-                        style={{}}
+                        headerStyle={resolvedHeaderStyle}
+                        style={resolvedStyle}
                     ></Column>
                 );
                 break;

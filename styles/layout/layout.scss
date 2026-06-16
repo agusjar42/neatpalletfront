@@ -106,6 +106,7 @@ body {
     background: var(--neat-mint-100);
     border-right: 1px solid #ccebd7;
     box-shadow: none;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
     .client-sidebar-shell {
         display: flex;
@@ -287,23 +288,35 @@ body {
 
     .layout-menu {
         .layout-root-menuitem > .layout-menuitem-root-text {
-            padding: 1rem 0.5rem 0.45rem 0.5rem;
-            color: #537161;
-            font-size: 0.72rem;
-            letter-spacing: 0.14em;
+            padding: 1rem 0.5rem 0.55rem 0.5rem;
+            color: #5d756a;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
         }
 
         ul {
             a {
-                min-height: 2.3rem;
-                margin: 0.08rem 0;
-                padding: 0.58rem 0.62rem;
-                border-radius: 0.45rem;
-                color: #063826;
-                font-weight: 500;
+                min-height: 2.55rem;
+                margin: 0.16rem 0;
+                padding: 0.68rem 0.72rem;
+                border-radius: 0.6rem;
+                color: #21473b;
+                font-size: 1rem;
+                font-weight: 400;
+                letter-spacing: 0;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
 
                 .layout-menuitem-icon {
+                    width: 1.15rem;
+                    margin-right: 0.78rem;
                     color: #678a78;
+                    font-size: 0.95rem;
+                }
+
+                .layout-menuitem-text {
+                    line-height: 1.2;
                 }
 
                 &:hover {
@@ -311,9 +324,10 @@ body {
                 }
 
                 &.active-route {
-                    background: var(--neat-mint-300);
+                    background: #c8f0d3;
                     color: #052f22;
                     box-shadow: none;
+                    font-weight: 500;
 
                     .layout-menuitem-icon {
                         color: var(--neat-green-900);
@@ -322,7 +336,13 @@ body {
             }
 
             ul li a {
-                padding-left: 1.2rem;
+                padding-left: 1.55rem;
+                font-size: 0.97rem;
+                color: #6a7d74;
+
+                .layout-menuitem-icon {
+                    font-size: 0.8rem;
+                }
             }
         }
     }
@@ -337,15 +357,16 @@ body {
 .layout-topbar {
     position: sticky;
     top: 0;
-    min-height: 4.1rem;
+    min-height: 3.7rem;
     margin: 0;
-    padding: 0 1.9rem;
+    padding: 0 1.15rem;
     border: 0;
     border-bottom: 1px solid var(--neat-border);
     border-radius: 0;
-    background: rgba(255, 255, 255, 0.96);
+    background: #ffffff;
     box-shadow: none;
     backdrop-filter: none;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
     .topbar-menubutton {
         display: none;
@@ -360,40 +381,113 @@ body {
             ol {
                 gap: 0.5rem;
                 margin: 0;
+                align-items: center;
             }
 
             li {
-                color: #7a817d;
-                font-size: 0.92rem;
+                color: rgb(102, 102, 102);
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 20px;
+                letter-spacing: 0;
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
                 &:last-child {
-                    color: var(--neat-ink);
-                    font-weight: 700;
+                    color: rgb(31, 36, 34);
+                    font-weight: 600;
                 }
+            }
+
+            .layout-breadcrumb-chevron {
+                color: rgb(164, 169, 167);
+                font-size: 13px;
+                font-weight: 400;
+                line-height: 20px;
             }
         }
     }
 
     .topbar-menu {
-        gap: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
 
-        .topbar-search {
-            .p-inputtext {
-                width: 26rem;
-                padding-top: 0.62rem;
-                padding-bottom: 0.62rem;
-                border-radius: 0.5rem;
-                background: #f7f8f7;
+        .topbar-company {
+            span {
+                color: #1f2a25;
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                font-size: 0.84rem;
+                font-weight: 600;
+                letter-spacing: 0.02em;
             }
         }
 
-        .p-dropdown {
-            border-radius: 0.5rem;
+        .topbar-search {
+            .p-inputtext {
+                width: 18rem;
+                padding: 0.62rem 0.9rem 0.62rem 2rem;
+                border: 1px solid #e2e7e4;
+                border-radius: 999px;
+                background: #f8faf9;
+                color: #42554d;
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                font-size: 0.88rem;
+                box-shadow: none;
+            }
+
+            .pi-search {
+                left: 0.72rem;
+                color: #9aa8a2;
+                font-size: 0.85rem;
+            }
+        }
+
+        .topbar-language .p-dropdown {
+            min-width: 7.5rem;
+            border: 1px solid #e2e7e4;
+            border-radius: 0.7rem;
             background: #ffffff;
+
+            .p-dropdown-label {
+                padding: 0.7rem 0.9rem;
+                color: #23332d;
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                font-size: 0.86rem;
+                font-weight: 600;
+            }
+
+            .p-dropdown-trigger {
+                color: #7f8d87;
+            }
         }
 
         li.topbar-profile {
-            margin-left: 0.25rem !important;
+            margin-left: 0 !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            button.p-link {
+                display: inline-flex;
+                width: 2.2rem;
+                height: 2.2rem;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #e2e7e4;
+                border-radius: 999px;
+                background: #ffffff;
+                color: #495a54;
+            }
+
+            img {
+                width: 1.5rem;
+                height: 1.5rem;
+                border-radius: 999px;
+                object-fit: cover;
+            }
         }
     }
 }
@@ -413,18 +507,26 @@ body {
 
     h1 {
         margin: 0;
-        color: #101814;
-        font-size: 2rem;
-        font-weight: 800;
-        line-height: 1.12;
+        margin-bottom: 6px;
+        color: rgb(31, 36, 34);
+        font-family: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+        font-size: 21px;
+        font-weight: 600;
+        line-height: 25px;
+        letter-spacing: -0.42px;
+        text-rendering: optimizeLegibility;
     }
 
     p {
         max-width: 43rem;
-        margin: 0.65rem 0 0 0;
-        color: #3d4a44;
-        font-size: 1rem;
-        line-height: 1.45;
+        margin: 0.55rem 0 0 0;
+        color: #34424d;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 0.97rem;
+        font-weight: 400;
+        line-height: 1.32;
+        letter-spacing: -0.01em;
+        text-rendering: geometricPrecision;
     }
 }
 
@@ -1076,6 +1178,165 @@ body {
         border-color: #f0c5c1 !important;
         background: #fff6f5 !important;
         color: #b42318 !important;
+    }
+}
+
+.clientes-reference-crud {
+    .card {
+        padding: 0;
+        overflow: hidden;
+        border-radius: 0.9rem;
+    }
+
+    .p-datatable .p-datatable-header {
+        padding: 1.15rem 1.2rem 0.8rem;
+        border: 0;
+        border-bottom: 1px solid #ebe5d8;
+        background: rgb(250, 251, 250);
+    }
+
+    .p-datatable .p-datatable-thead > tr > th {
+        padding: 1rem 1.1rem;
+        border-bottom: 1px solid #ebe5d8;
+        background: rgb(250, 251, 250);
+        color: rgb(102, 102, 102) !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+    }
+
+    .p-datatable .p-datatable-thead > tr > th .p-column-title,
+    .p-datatable .p-datatable-thead > tr > th .p-sortable-column-icon,
+    .p-datatable .p-datatable-thead > tr > th .p-column-filter-menu-button,
+    .p-datatable .p-datatable-thead > tr > th .p-column-filter-menu-button .pi {
+        color: rgb(102, 102, 102) !important;
+    }
+
+    .p-datatable .p-datatable-tbody > tr > td {
+        padding: 1.35rem 1.1rem;
+        border-bottom: 1px solid #ebe5d8;
+        vertical-align: top;
+        color: rgb(74, 79, 77);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 0.98rem;
+    }
+
+    .p-datatable .p-datatable-tbody > tr:hover {
+        background: rgb(250, 251, 250);
+    }
+
+    .p-datatable .p-datatable-tbody > tr:hover > td {
+        background: rgb(250, 251, 250);
+    }
+
+    .clientes-crud-order-pill {
+        display: inline-flex;
+        min-width: 4rem;
+        height: 2rem;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 0.9rem;
+        border: 1px solid #e4e2da;
+        border-radius: 0.65rem;
+        background: #fcfcfb;
+        color: rgb(74, 79, 77);
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    .clientes-crud-thumb {
+        display: grid;
+        width: 4.1rem;
+        height: 4.1rem;
+        place-items: center;
+        overflow: hidden;
+        border-radius: 0.8rem;
+        border: 1px solid #e4ebe7;
+        background: #eef6f5;
+    }
+
+    .clientes-crud-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .clientes-crud-thumb-placeholder {
+        background:
+            repeating-linear-gradient(
+                -45deg,
+                #edf6f4,
+                #edf6f4 8px,
+                #e6f0ee 8px,
+                #e6f0ee 16px
+            );
+    }
+
+    .clientes-crud-thumb-placeholder span {
+        color: #8c9490;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+    }
+
+    .clientes-crud-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.38rem 0.8rem;
+        border: 1px solid #7ee39c;
+        border-radius: 999px;
+        background: #dcfce7;
+        color: #15803d;
+        font-size: 0.95rem;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    .clientes-crud-chip-dot {
+        width: 0.36rem;
+        height: 0.36rem;
+        border-radius: 999px;
+        background: #16a34a;
+        flex: 0 0 auto;
+    }
+
+    .clientes-crud-company {
+        display: flex;
+        flex-direction: column;
+        gap: 0.08rem;
+        line-height: 1.25;
+    }
+
+    .clientes-crud-company strong,
+    .clientes-crud-company span {
+        color: rgb(74, 79, 77);
+        font-size: 0.98rem;
+        font-weight: 500;
+    }
+
+    .clientes-crud-email {
+        color: rgb(74, 79, 77);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+    }
+
+    .clientes-crud-description {
+        max-width: 24rem;
+        color: rgb(74, 79, 77);
+        line-height: 1.45;
+    }
+
+    .neat-row-actions .p-button.neat-action-button {
+        border-color: #ddd9cf !important;
+        border-radius: 0.7rem !important;
+        color: #666257 !important;
+    }
+
+    .neat-row-actions .p-button.neat-action-button:hover {
+        background: #faf8f3 !important;
+        border-color: #cfc9bb !important;
     }
 }
 

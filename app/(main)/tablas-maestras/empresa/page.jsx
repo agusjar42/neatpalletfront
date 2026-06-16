@@ -108,14 +108,6 @@ const columnasEventoConfiguracion = [
     { campo: "activoSn", header: "Activo", tipo: "booleano" },
 ];
 
-const columnasEmpresas = [
-    { campo: "orden", header: "Orden", tipo: "number" },
-    { campo: "nombre", header: "Nombre", tipo: "string" },
-    { campo: "nombreComercial", header: "Nombre comercial", tipo: "string" },
-    { campo: "descripcion", header: "Descripcion", tipo: "string" },
-    { campo: "email", header: "Email", tipo: "string" },
-];
-
 const normalizarEmpresa = (empresa = {}) => ({
     ...empresa,
     codigo: empresa.codigo ?? `C-${String(empresa.id ?? 1).padStart(3, "0")}`,
@@ -134,6 +126,79 @@ const getEstadoMeta = (estado) => {
     const valor = estado ?? "Activa";
     return estados.find((item) => item.value === valor) ?? estados[0];
 };
+
+const placeholderImageCell = (label) => (rowData) => {
+    const src = rowData?.[label === "IMG" ? "imagen" : "logo"];
+    if (src) {
+        return (
+            <div className="clientes-crud-thumb">
+                <img src={src} alt={label} />
+            </div>
+        );
+    }
+
+    return (
+        <div className="clientes-crud-thumb clientes-crud-thumb-placeholder">
+            <span>{label}</span>
+        </div>
+    );
+};
+
+const ordenBodyTemplate = (rowData) => (
+    <span className="clientes-crud-order-pill">{rowData.orden ?? "-"}</span>
+);
+
+const nombreComercialBodyTemplate = (rowData) => (
+    <span className="clientes-crud-chip">
+        <span className="clientes-crud-chip-dot"></span>
+        {rowData.nombreComercial || rowData.nombre || "-"}
+    </span>
+);
+
+const empresaBodyTemplate = (rowData) => {
+    const nombre = rowData.nombre || "-";
+    const partes = String(nombre).split(" ");
+    const primeraLinea = partes.slice(0, Math.max(1, Math.ceil(partes.length / 2))).join(" ");
+    const segundaLinea = partes.slice(Math.max(1, Math.ceil(partes.length / 2))).join(" ");
+
+    return (
+        <div className="clientes-crud-company">
+            <strong>{primeraLinea}</strong>
+            {segundaLinea ? <span>{segundaLinea}</span> : null}
+        </div>
+    );
+};
+
+const emailBodyTemplate = (rowData) => (
+    <a className="clientes-crud-email" href={`mailto:${rowData.email}`}>
+        {rowData.email}
+    </a>
+);
+
+const descripcionBodyTemplate = (rowData) => {
+    const descripcion = rowData.descripcion || "-";
+    const descripcionTexto = String(descripcion);
+    const descripcionCorta = descripcionTexto.length > 25
+        ? `${descripcionTexto.slice(0, 25)}...`
+        : descripcionTexto;
+
+    return (
+        <div className="clientes-crud-description" title={descripcionTexto}>
+            {descripcionCorta}
+        </div>
+    );
+};
+
+const columnasEmpresas = [
+    { campo: "orden", header: "ORDEN", tipo: "number", body: ordenBodyTemplate, headerStyle: { minWidth: "5.5rem" }, style: { whiteSpace: "nowrap" } },
+    { campo: "codigo", header: "CÓDIGO", tipo: "string", headerStyle: { minWidth: "7rem" }, style: { whiteSpace: "nowrap" } },
+    { campo: "imagen", header: "IMAGEN", tipo: "string", body: placeholderImageCell("IMG"), headerStyle: { minWidth: "6.4rem" }, style: { whiteSpace: "nowrap" } },
+    { campo: "logo", header: "LOGO", tipo: "string", body: placeholderImageCell("LOGO"), headerStyle: { minWidth: "6.4rem" }, style: { whiteSpace: "nowrap" } },
+    { campo: "nombreComercial", header: "NOMBRE COMERCIAL", tipo: "string", body: nombreComercialBodyTemplate, headerStyle: { minWidth: "11rem" }, style: { whiteSpace: "nowrap" } },
+    { campo: "nombre", header: "EMPRESA", tipo: "string", body: empresaBodyTemplate, headerStyle: { minWidth: "12rem" } },
+    { campo: "email", header: "EMAIL", tipo: "string", body: emailBodyTemplate, headerStyle: { minWidth: "12rem" }, style: { whiteSpace: "nowrap" } },
+    { campo: "descripcion", header: "DESCRIPCIÓN", tipo: "string", body: descripcionBodyTemplate, headerStyle: { minWidth: "20rem" } },
+];
 
 const Empresa = () => {
     const [empresaActiva, setEmpresaActiva] = useState(null);
@@ -530,19 +595,19 @@ const Empresa = () => {
 
     if (!empresaActiva) {
         return (
-            <>
+            <div className="clientes-reference-crud">
                 <EmpresaIntro />
                 <Crud
-                    headerCrud="Clientes"
+                    headerCrud=""
                     getRegistros={getEmpresas}
                     getRegistrosCount={getEmpresasCount}
-                    botones={["ver", "editar", "eliminar", "descargarCSV"]}
+                    botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]}
                     controlador="Empresas"
                     editarComponente={<EmpresaAdminDetalle />}
                     columnas={columnasEmpresas}
                     deleteRegistro={deleteEmpresa}
                 />
-            </>
+            </div>
         );
     }
 

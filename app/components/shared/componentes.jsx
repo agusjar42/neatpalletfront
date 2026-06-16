@@ -164,7 +164,7 @@ const Header = ({ crearNuevo, generarCSV, importarCSV, importarCSVPallets, gener
     const intl = useIntl()
     return <div className="flex flex-col md:flex-row md:items-center">
         <div className="flex items-center mb-2 md:mb-0 md:mr-auto md:align-items-center">
-            <h5 className="m-0 mr-2">{nombre}</h5>
+            {nombre ? <h5 className="m-0 mr-2">{nombre}</h5> : null}
             {(crearNuevo !== null && crearNuevo !== undefined) &&     //Si no se envia la funcion de crearNuevo, no muestra el boton
                 (
                     <Button

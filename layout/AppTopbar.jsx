@@ -150,25 +150,10 @@ const AppTopbar = React.forwardRef((props, ref) => {
                             />
                         </span>
                     </li>
-                    {false && (
-                        <li className="ml-3">
-                            <Button
-                                type="button"
-                                icon="pi pi-cog"
-                                text
-                                rounded
-                                severity="secondary"
-                                className="flex-shrink-0"
-                                onClick={onConfigButtonClick}
-                            ></Button>
-                        </li>
-                    )}
-                    <li className="ml-3">
-
-                        
-                        <h5 className="m-0 mr-2">{empresaNombre}</h5>
+                    <li className="topbar-company">
+                        <span>{empresaNombre || "NEAT"}</span>
                     </li>
-                    <li className="ml-3">
+                    <li className="topbar-language">
                         <Dropdown
                             value={dropdownValue}
                             onChange={(e) => cambiarIdioma(e.value)}
@@ -183,10 +168,14 @@ const AppTopbar = React.forwardRef((props, ref) => {
                             className="p-link"
                             onClick={showProfileSidebar}
                         >
-                            <img
-                                src={avatar}
-                                alt="Profile"
-                            />
+                            {avatar ? (
+                                <img
+                                    src={avatar}
+                                    alt="Profile"
+                                />
+                            ) : (
+                                <i className="pi pi-bell" aria-hidden="true"></i>
+                            )}
                         </button>
                     </li>
                 </ul>

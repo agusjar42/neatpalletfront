@@ -127,13 +127,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     ];
 
     const jsonRutas: MenuItem[] = [
-      { label: "Clientes",                       path: "/tablas-maestras/empresa",           icon: "pi pi-building",             permisoControlador: "Empresas", grupo: "OPERACIONES" },
-      { label: "Roles",                         path: "/tablas-maestras/rol",               icon: "pi pi-bars",                 permisoControlador: "Roles", grupo: "SISTEMA" },
+      { label: "Clientes",                       path: "/tablas-maestras/empresa",           icon: "pi pi-building-columns",     permisoControlador: "Empresas", grupo: "OPERACIONES" },
+      { label: "Roles",                         path: "/tablas-maestras/rol",               icon: "pi pi-shield",               permisoControlador: "Roles", grupo: "SISTEMA" },
       { label: "Permisos",                      path: "/tablas-maestras/permiso",           icon: "pi pi-key",                  permisoControlador: "Permisos", grupo: "SISTEMA" },
 /*      { label: "Paises",                        path: "/tablas-maestras/pais",              icon: "pi pi-globe",                permisoControlador: "Paises" },
       { label: "Traducciones",                  path: "/tablas-maestras/traduccion",        icon: "pi pi-bars",                 permisoControlador: "Traducciones" },
-*/      { label: "Pallets",                        path: "/pallet",                            icon: "pi pi-th-large",             permisoControlador: "Pallet", grupo: "SISTEMA" },
-      { label: "Pallets asignados",             path: "/tablas-maestras/pallets-asignados", icon: "pi pi-sitemap",              permisoControlador: "Pallets Asignados", grupo: "OPERACIONES" },
+*/      { label: "Pallets",                        path: "/pallet",                            icon: "pi pi-warehouse",            permisoControlador: "Pallet", grupo: "SISTEMA" },
+      { label: "Pallets asignados",             path: "/tablas-maestras/pallets-asignados", icon: "pi pi-truck",                permisoControlador: "Pallets Asignados", grupo: "OPERACIONES" },
 /*      { label: "Informes contenido",            path: "/proximamente",                      icon: "pi pi-refresh",              permisoControlador: "Envio Contenido" },
       { label: "Informes movimientos",          path: "/proximamente",                      icon: "pi pi-arrow-right",          permisoControlador: "Envio Movimiento" },
       { label: "Informes Pallets",              path: "/proximamente",                      icon: "pi pi-refresh",              permisoControlador: "Envio Pallets" },
@@ -141,7 +141,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 /*      { label: "Logs de usuario",               path: "/tablas-maestras/log_usuario",       icon: "pi pi-history",              permisoControlador: "Logs de usuarios" },
 */      { label: "Parámetros",                  path: "/parametro",                         icon: "pi pi-wrench",               permisoControlador: "Parametro", grupo: "SISTEMA" },
       { label: "Lenguajes",                     path: "/tablas-maestras/idioma",            icon: "pi pi-language",             permisoControlador: "Idiomas", grupo: "SISTEMA" },
-      { label: "Tipos de sensores",             path: "/tipo-sensor",                       icon: "pi pi-circle",               permisoControlador: "Tipo Sensor", grupo: "SISTEMA" },
+      { label: "Tipos de sensores",             path: "/tipo-sensor",                       icon: "pi pi-wifi",                 permisoControlador: "Tipo Sensor", grupo: "SISTEMA" },
       { label: "Configuración",                 path: "/eventos-configuracion",             icon: "pi pi-bell",                 permisoControlador: "Eventos Configuración", grupo: "SISTEMA" },
     ];
 

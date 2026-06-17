@@ -137,7 +137,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 /*      { label: "Informes contenido",            path: "/proximamente",                      icon: "pi pi-refresh",              permisoControlador: "Envio Contenido" },
       { label: "Informes movimientos",          path: "/proximamente",                      icon: "pi pi-arrow-right",          permisoControlador: "Envio Movimiento" },
       { label: "Informes Pallets",              path: "/proximamente",                      icon: "pi pi-refresh",              permisoControlador: "Envio Pallets" },
-*/      { label: "Logs de sistema",               path: "/logs-incorrectos",                  icon: "pi pi-exclamation-triangle", permisoControlador: "Logs incorrectos", grupo: "SISTEMA" },
+*/      { label: "Analisis y auditoria",          path: "/envio-movimiento",                  icon: "pi pi-exclamation-triangle", permisoControlador: "Logs incorrectos", grupo: "OPERACIONES" },
 /*      { label: "Logs de usuario",               path: "/tablas-maestras/log_usuario",       icon: "pi pi-history",              permisoControlador: "Logs de usuarios" },
 */      { label: "Parámetros",                  path: "/parametro",                         icon: "pi pi-wrench",               permisoControlador: "Parametro", grupo: "SISTEMA" },
       { label: "Lenguajes",                     path: "/tablas-maestras/idioma",            icon: "pi pi-language",             permisoControlador: "Idiomas", grupo: "SISTEMA" },

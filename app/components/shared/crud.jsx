@@ -27,7 +27,7 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
     parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = true, onDataChange,
-    procesarImportacionCSV, onModoEdicionChange }) => {
+    procesarImportacionCSV, onModoEdicionChange, habilitarEntradaPorFila = controlador !== 'Permisos' }) => {
     const intl = useIntl()
     const router = useRouter();
     const { usuarioAutenticado, isInitialized } = useAuth();
@@ -817,12 +817,39 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setIdEditar(registro.id);
     };
 
+    const puedeEntrarEnRegistro = () => {
+        if (!habilitarEntradaPorFila) {
+            return false;
+        }
+
+        const puedeEntrarEditando = botones.includes('editar') && puedeEditar;
+        const puedeEntrarViendo = botones.includes('ver') && puedeVer;
+
+        return puedeEntrarEditando || puedeEntrarViendo;
+    };
+
+    const abrirRegistroDesdeFila = (registro) => {
+        if (!registro || !puedeEntrarEnRegistro()) {
+            return;
+        }
+
+        if (botones.includes('editar') && puedeEditar) {
+            editarRegistro(registro);
+            return;
+        }
+
+        if (botones.includes('ver') && puedeVer) {
+            verRegistro(registro);
+        }
+    };
+
     //Funcion que renderiza el compontente que servira para editar el registro
     const renderizarEditarComponente = () => {
         // Devuelve el componente con las propiedades aplicadas, MUY IMPORTANTE que el componente reciba las mismas propiedades
         return React.cloneElement(editarComponente, {
             idEditar: idEditar,
             editable: editable,
+            puedeEditar: puedeEditar,
             setIdEditar: setIdEditar,
             rowData: registros,
             emptyRegistro: emptyRegistro,
@@ -1343,6 +1370,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 header={renderizarHeader()}
                                 dataKey="id"
                                 value={registros}
+                                rowClassName={() => (puedeEntrarEnRegistro() ? { 'neat-clickable-row': true } : {})}
                                 filters={parametrosCrud.filters}
                                 removableSort
                                 rowsPerPageOptions={[20, 50, 100]}
@@ -1354,6 +1382,13 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 onPage={actualizarParametrosCrud}
                                 onSort={actualizarParametrosCrud}
                                 onFilter={manejarCambioFiltro}
+                                onRowClick={(event) => {
+                                    const target = event?.originalEvent?.target;
+                                    if (target?.closest('button, a, input, textarea, .p-checkbox, .p-dropdown, .p-column-filter-menu-button')) {
+                                        return;
+                                    }
+                                    abrirRegistroDesdeFila(event.data);
+                                }}
                                 sortField={parametrosCrud.sortField}
                                 sortOrder={parametrosCrud.sortOrder}
                                 emptyMessage={<span>{intl.formatMessage({ id: 'No se han encontrado registros' })}</span>}

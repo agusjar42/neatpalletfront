@@ -794,7 +794,7 @@ const OperationalRow = ({ label, value, warning = false }) => (
 export default Empresa;
 export { camposPendientesBack };
 
-const EmpresaAdminDetalle = ({ idEditar, editable, setIdEditar, rowData = [], setRegistroResult, setRegistroEditarFlag }) => {
+const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, rowData = [], setRegistroResult, setRegistroEditarFlag }) => {
     const [empresaActiva, setEmpresaActiva] = useState(null);
     const [empresaEdicion, setEmpresaEdicion] = useState(null);
     const [metricas, setMetricas] = useState({ pallets: 0, usuarios: 0, eventos24h: 0, enviosEnCurso: 0 });
@@ -816,7 +816,7 @@ const EmpresaAdminDetalle = ({ idEditar, editable, setIdEditar, rowData = [], se
     }, [empresaActiva]);
 
     useEffect(() => {
-        setModoEdicion(false);
+        setModoEdicion(Boolean(editable && idEditar > 0));
         setRegistroEditarFlag?.(false);
     }, [editable, idEditar, setRegistroEditarFlag]);
 
@@ -1031,7 +1031,9 @@ const EmpresaAdminDetalle = ({ idEditar, editable, setIdEditar, rowData = [], se
                         <p>{empresaActiva.codigo} · {empresaActiva.nombreComercial || empresaActiva.nombre} · ALTA {fechaAlta}</p>
                     </div>
                     <div className="empresa-header-actions">
+                        {puedeEditar ? (
                         <Button label="Editar" icon="pi pi-pencil" outlined onClick={() => setModoEdicion(true)} />
+                        ) : null}
                     </div>
                 </div>
 

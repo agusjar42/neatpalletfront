@@ -4,6 +4,7 @@ import EditarPallets from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'
 import { createResult, getValueFromRow } from "@/app/utility/csv-import-utils";
+import PalletIntro from "./PalletIntro";
 
 const Pallet = () => {
     const intl = useIntl();
@@ -121,8 +122,9 @@ const Pallet = () => {
 
     return (
         <div>
+            <PalletIntro />
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Stock global de pallets' })}
+                headerCrud=""
                 getRegistros={getPallet}
                 getRegistrosCount={getPalletCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV', 'importarCSVPallets']}

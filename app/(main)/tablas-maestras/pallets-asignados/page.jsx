@@ -34,6 +34,7 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
         esUsuarioAdmin ? VALOR_TODAS_EMPRESAS : (empresaSesionId ? String(empresaSesionId) : VALOR_TODAS_EMPRESAS)
     );
     const [textoBusqueda, setTextoBusqueda] = useState("");
+    const [filtroRapido, setFiltroRapido] = useState("todos");
     const [cargando, setCargando] = useState(false);
     const [palletsPendientes, setPalletsPendientes] = useState(new Set());
     const [tienePermiso, setTienePermiso] = useState(false);
@@ -215,7 +216,16 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                 return false;
             }
 
-            const { empresaActualId } = obtenerEstadoPallet(pallet);
+            const { empresaActualId, asignadoEmpresaSeleccionada, tieneAsignacion } = obtenerEstadoPallet(pallet);
+            const checked = empresaSeleccionadaNumerica === null ? tieneAsignacion : asignadoEmpresaSeleccionada;
+
+            if (filtroRapido === "asignados" && !checked) {
+                return false;
+            }
+
+            if (filtroRapido === "disponibles" && checked) {
+                return false;
+            }
 
             if (!esUsuarioAdmin) {
                 return empresaSesionId !== null && Number(empresaActualId) === empresaSesionId;
@@ -227,7 +237,7 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
 
             return empresaActualId === null || Number(empresaActualId) === empresaSeleccionadaNumerica;
         });
-    }, [empresaSeleccionadaNumerica, empresaSesionId, esUsuarioAdmin, obtenerEstadoPallet, pallets, textoBusqueda]);
+    }, [empresaSeleccionadaNumerica, empresaSesionId, esUsuarioAdmin, filtroRapido, obtenerEstadoPallet, pallets, textoBusqueda]);
 
     const obtenerTexto = (valor) => {
         if (valor === undefined || valor === null || valor === "") {
@@ -448,12 +458,21 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
     };
 
     const renderCabeceraTabla = () => (
-        <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center gap-2">
-            <div className="flex flex-column md:flex-row md:align-items-center gap-2 w-full md:w-auto">
-                <h5 className="m-0">{intl.formatMessage({ id: "Pallets asignados" })}</h5>
+        <div className="pallets-header-bar">
+            <span className="p-input-icon-left pallets-header-search">
+                <i className="pi pi-search" />
+                <InputText
+                    className="w-full"
+                    value={textoBusqueda}
+                    onChange={(evento) => setTextoBusqueda(evento.target.value)}
+                    placeholder={intl.formatMessage({ id: "Buscar por codigo de pallet" })}
+                />
+            </span>
+
+            <div className="pallets-header-company">
                 {esUsuarioAdmin ? (
                     <Dropdown
-                        className="w-full md:w-20rem"
+                        className="w-full"
                         value={empresaSeleccionadaId}
                         options={opcionesEmpresas}
                         onChange={(evento) => setEmpresaSeleccionadaId(evento.value)}
@@ -466,15 +485,17 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                 )}
             </div>
 
-            <span className="p-input-icon-left w-full md:w-20rem">
-                <i className="pi pi-search" />
-                <InputText
-                    className="w-full"
-                    value={textoBusqueda}
-                    onChange={(evento) => setTextoBusqueda(evento.target.value)}
-                    placeholder={intl.formatMessage({ id: "Buscar por codigo de pallet" })}
-                />
-            </span>
+            <div className="pallets-header-filters">
+                <button type="button" className={`pallets-quick-filter ${filtroRapido === "todos" ? "is-active" : ""}`} onClick={() => setFiltroRapido("todos")}>
+                    {intl.formatMessage({ id: "Todos" })}
+                </button>
+                <button type="button" className={`pallets-quick-filter ${filtroRapido === "asignados" ? "is-active" : ""}`} onClick={() => setFiltroRapido("asignados")}>
+                    {intl.formatMessage({ id: "Asignados" })}
+                </button>
+                <button type="button" className={`pallets-quick-filter ${filtroRapido === "disponibles" ? "is-active" : ""}`} onClick={() => setFiltroRapido("disponibles")}>
+                    {intl.formatMessage({ id: "Disponibles" })}
+                </button>
+            </div>
         </div>
     );
 
@@ -658,6 +679,70 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                     </DataTable>
 
                     <style jsx global>{`
+                        .pallets-header-bar {
+                            display: flex;
+                            align-items: center;
+                            gap: 0.55rem;
+                            flex-wrap: wrap;
+                        }
+
+                        .pallets-header-search {
+                            flex: 0 0 21rem;
+                            width: 21rem;
+                            min-width: 21rem;
+                            max-width: 21rem;
+                        }
+
+                        .pallets-header-company {
+                            flex: 0 0 15.5rem;
+                            max-width: 15.5rem;
+                        }
+
+                        .pallets-header-filters {
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                            flex-wrap: wrap;
+                        }
+
+                        .pallets-quick-filter {
+                            border: 1px solid #dfe5e2;
+                            border-radius: 999px;
+                            background: #ffffff;
+                            color: rgb(74, 79, 77);
+                            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                            font-size: 0.95rem;
+                            font-weight: 500;
+                            line-height: 1;
+                            padding: 0.7rem 1rem;
+                            cursor: pointer;
+                            transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+                        }
+
+                        .pallets-quick-filter.is-active {
+                            background: rgb(31, 36, 34);
+                            border-color: rgb(31, 36, 34);
+                            color: #ffffff;
+                        }
+
+                        @media (max-width: 768px) {
+                            .pallets-header-search {
+                                flex: 1 1 100%;
+                                width: 100%;
+                                min-width: 0;
+                                max-width: none;
+                            }
+
+                            .pallets-header-company {
+                                flex: 1 1 100%;
+                                max-width: none;
+                            }
+
+                            .pallets-header-filters {
+                                width: 100%;
+                            }
+                        }
+
                         .pallets-asignados-table .p-datatable-tbody > tr:hover {
                             background: #d8f5df !important;
                             transition: background-color 0.15s ease-in-out;

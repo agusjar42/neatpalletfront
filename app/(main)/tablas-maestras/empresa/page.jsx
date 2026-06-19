@@ -11,21 +11,25 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 import Crud from "../../../components/shared/crud";
 import { getCliente, getClienteCount, deleteCliente } from "@/app/api-endpoints/cliente";
 import { getProducto, getProductoCount, deleteProducto } from "@/app/api-endpoints/empresa-producto";
-import { getEnvio, getEnvioCount, deleteEnvio } from "@/app/api-endpoints/envio";
+import { getEnvio, getEnvioCount, deleteEnvio, getResumenEnvio } from "@/app/api-endpoints/envio";
 import { getSensorEmpresa, getSensorEmpresaCount, deleteSensorEmpresa } from "@/app/api-endpoints/empresa-sensor";
 import { getTipoCarroceria, getTipoCarroceriaCount, deleteTipoCarroceria } from "@/app/api-endpoints/empresa-tipo-carroceria";
 import { getTipoTransporte, getTipoTransporteCount, deleteTipoTransporte } from "@/app/api-endpoints/empresa-tipo-transporte";
 import { getEventoConfiguracion, getEventoConfiguracionCount } from "@/app/api-endpoints/evento-configuracion";
+import { getEnvioContenido } from "@/app/api-endpoints/envio-contenido";
+import { getEnvioMovimiento } from "@/app/api-endpoints/envio-movimiento";
+import { getEnvioParada } from "@/app/api-endpoints/envio-parada";
+import { getEnvioSensor } from "@/app/api-endpoints/envio-sensor";
 import EditarUsuario from "../../usuarios/editar";
 import EditarCliente from "../../cliente/editar";
 import EditarProducto from "../../producto/editar";
-import EditarEnvio from "../../envio/editar";
 import EditarEnvioSensorEmpresa from "../../envio-sensor-empresa/editar";
 import EditarTipoCarroceria from "../../tipo-carroceria/editar";
 import EditarTipoTransporte from "../../tipo-transporte/editar";
 import PalletsAsignadosEmpresa from "./PalletsAsignadosEmpresa";
 import EditarDatosEmpresa from "./EditarDatosEmpresa";
 import EmpresaIntro from "./EmpresaIntro";
+import { InputText } from "primereact/inputtext";
 
 const camposPendientesBack = ["nombreComercial", "estado", "plan"];
 
@@ -107,6 +111,27 @@ const columnasEventoConfiguracion = [
     { campo: "valor", header: "Valor", tipo: "string" },
     { campo: "unidadMedida", header: "Unidad", tipo: "string" },
     { campo: "activoSn", header: "Activo", tipo: "booleano" },
+];
+
+const tabsDetalleEnvio = ["Resumen", "Configuracion", "Contenido", "Movimientos", "Paradas", "Sensores", "Operarios", "Informe"];
+
+const resumenEnvioFallback = [
+    { pallet: "NEAT-00001", eventosGuardados: 252, eventosEnviados: "232 (92%)", totalAlarmas: 2, bateriaActual: 49 },
+    { pallet: "NEAT-00002", eventosGuardados: 204, eventosEnviados: "184 (90%)", totalAlarmas: 1, bateriaActual: 46 },
+];
+
+const operariosEnvioFallback = [
+    { rol: "Conductor", iniciales: "ME", nombre: "Mario Estevez", telefono: "+34 612 33 44 55", permiso: "C+E", turno: "5 may 06:00 - 5 may 18:00" },
+    { rol: "Co-conductor", iniciales: "LP", nombre: "Lucia Pereira", telefono: "+34 644 21 09 88", permiso: "C+E", turno: "5 may 14:00 - 5 may 22:00" },
+    { rol: "Supervisor logistico", iniciales: "AB", nombre: "Ainhoa Beltran", telefono: "+34 699 71 12 34", permiso: "—", turno: "24x7" },
+    { rol: "Tecnico de carga", iniciales: "HE", nombre: "Hassan El-Mahdi", telefono: "+34 651 80 22 17", permiso: "—", turno: "5 may 05:30 - 5 may 08:00" },
+];
+
+const documentosEnvioFallback = [
+    { tipo: "PDF", nombre: "CMR firmado", tamano: "142 KB", accion: "Descargar" },
+    { tipo: "PDF", nombre: "Albaran salida", tamano: "58 KB", accion: "Descargar" },
+    { tipo: "XLSX", nombre: "Lista de carga", tamano: "24 KB", accion: "Descargar" },
+    { tipo: "PDF", nombre: "Pre-check vehiculo", tamano: "86 KB", accion: "Descargar" },
 ];
 
 const normalizarEmpresa = (empresa = {}) => ({
@@ -449,7 +474,8 @@ const Empresa = () => {
                         getRegistrosCount={getEnvioCount}
                         botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]}
                         controlador="Envíos"
-                        editarComponente={<EditarEnvio />}
+                        accionEntradaPorFila="ver"
+                        editarComponente={<EmpresaEnvioDetalle />}
                         columnas={columnasEnvio}
                         filtradoBase={filtroEmpresa}
                         deleteRegistro={deleteEnvio}
@@ -793,6 +819,649 @@ const OperationalRow = ({ label, value, warning = false }) => (
     </div>
 );
 
+const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
+    const [envioActivo, setEnvioActivo] = useState(null);
+    const [detalleTabActiva, setDetalleTabActiva] = useState("Resumen");
+    const [contenido, setContenido] = useState([]);
+    const [movimientos, setMovimientos] = useState([]);
+    const [paradas, setParadas] = useState([]);
+    const [sensores, setSensores] = useState([]);
+    const [informePallets, setInformePallets] = useState([]);
+    const [modalDetalleRegistro, setModalDetalleRegistro] = useState({ visible: false, accion: "ver", seccion: "", registro: null });
+
+    useEffect(() => {
+        const envioSeleccionado = rowData.find((envio) => envio.id === idEditar);
+        setEnvioActivo(envioSeleccionado || null);
+    }, [idEditar, rowData]);
+
+    useEffect(() => {
+        if (!envioActivo?.id) return;
+
+        //
+        //Cargamos los bloques del detalle y, si alguna llamada falla,
+        //mantenemos datos de ejemplo para no dejar vacia la vista
+        //
+        Promise.all([
+            getEnvioContenido(JSON.stringify({ where: { and: { envioId: envioActivo.id } }, order: "orden ASC" })).catch(() => []),
+            getEnvioMovimiento(JSON.stringify({ where: { and: { envioId: envioActivo.id } }, order: "fecha DESC" })).catch(() => []),
+            getEnvioParada(JSON.stringify({ where: { and: { envioId: envioActivo.id } }, order: "orden ASC" })).catch(() => []),
+            getEnvioSensor(JSON.stringify({ where: { and: { envioId: envioActivo.id } }, order: "orden ASC" })).catch(() => []),
+            getResumenEnvio(envioActivo.id).catch(() => []),
+        ]).then(([contenidoData, movimientosData, paradasData, sensoresData, resumenData]) => {
+            setContenido(Array.isArray(contenidoData) && contenidoData.length > 0 ? contenidoData : construirContenidoFallback());
+            setMovimientos(Array.isArray(movimientosData) && movimientosData.length > 0 ? movimientosData : construirMovimientosFallback());
+            setParadas(Array.isArray(paradasData) && paradasData.length > 0 ? paradasData : construirParadasFallback(envioActivo));
+            setSensores(Array.isArray(sensoresData) && sensoresData.length > 0 ? sensoresData : construirSensoresFallback());
+            setInformePallets(Array.isArray(resumenData) && resumenData.length > 0 ? resumenData : resumenEnvioFallback);
+        });
+    }, [envioActivo?.id]);
+
+    if (!envioActivo) {
+        return <div className="empresa-profile-card empresa-empty-state">No se ha encontrado el envio seleccionado.</div>;
+    }
+
+    //
+    //Abrimos un modal local para gestionar ver, editar y nuevo
+    //en las subtabs internas del detalle de envios
+    //
+    const abrirModalDetalleRegistro = (seccion, accion, registro = null) => {
+        setModalDetalleRegistro({ visible: true, accion, seccion, registro });
+    };
+
+    //
+    //Cerramos el modal y limpiamos el registro temporal mostrado
+    //
+    const cerrarModalDetalleRegistro = () => {
+        setModalDetalleRegistro({ visible: false, accion: "ver", seccion: "", registro: null });
+    };
+
+    const resumenTop = construirResumenTop(envioActivo, contenido, sensores);
+    const conteos = {
+        contenido: contenido.length || 4,
+        movimientos: movimientos.length || 14,
+        paradas: paradas.length || 4,
+        sensores: sensores.length || 3,
+        operarios: operariosEnvioFallback.length,
+    };
+
+    return (
+        <div className="envio-detalle-shell">
+            <section className="empresa-profile-card envio-detalle-card">
+                <button className="empresa-back-button envio-volver-boton" type="button" onClick={() => setIdEditar(null)}>
+                    <i className="pi pi-chevron-left" aria-hidden="true"></i>
+                    Volver a envios
+                </button>
+
+                <div className="envio-detalle-heading">
+                    <small>ENVIO</small>
+                    <div>
+                        <h1>{envioActivo.numero || "ENV-00432"}</h1>
+                        <span>En transito</span>
+                    </div>
+                </div>
+
+                <div className="envio-detalle-strip">
+                    <InfoItem label="Cliente" value={envioActivo.clienteNombre || "Logistica del Mediterraneo"} />
+                    <InfoItem label="Pallet" value="NEAT-00001" mono />
+                    <InfoItem label="Origen" value={envioActivo.origenRuta || "C/ Mayor 10, Madrid"} />
+                    <InfoItem label="Destino" value={envioActivo.destinoRuta || "Av. Diagonal 20, Barcelona"} />
+                    <InfoItem label="Salida" value={envioActivo.fechaSalidaEspanol || "4 may 2026 · 06:00"} />
+                    <InfoItem label="ETA" value={envioActivo.fechaLlegadaEspanol || "6 may 2026 · 11:36"} />
+                </div>
+
+                <div className="envio-kpis-grid">
+                    <EnvioKpiCard label="Temp. max" value={resumenTop.temperaturaMax} helper="min 2.4 C · objetivo 2–8" />
+                    <EnvioKpiCard label="Distancia" value={resumenTop.distancia} helper="12 h 04 min en ruta" />
+                    <EnvioKpiCard label="Carga" value={resumenTop.carga} helper={`${resumenTop.unidades} uds · ${resumenTop.skus} SKU`} />
+                    <EnvioKpiCard label="Cumplimiento" value="Revisar" helper="temp · ETA" warning />
+                </div>
+
+                <nav className="envio-detalle-tabs">
+                    {tabsDetalleEnvio.map((tab) => (
+                        <button
+                            key={tab}
+                            type="button"
+                            className={detalleTabActiva === tab ? "envio-detalle-tab envio-detalle-tab-active" : "envio-detalle-tab"}
+                            onClick={() => setDetalleTabActiva(tab)}
+                        >
+                            {tab}
+                            {tab === "Contenido" ? <b>{conteos.contenido}</b> : null}
+                            {tab === "Movimientos" ? <b>{conteos.movimientos}</b> : null}
+                            {tab === "Paradas" ? <b>{conteos.paradas}</b> : null}
+                            {tab === "Sensores" ? <b>{conteos.sensores}</b> : null}
+                            {tab === "Operarios" ? <b>{conteos.operarios}</b> : null}
+                        </button>
+                    ))}
+                </nav>
+            </section>
+
+            <section className="empresa-tab-content">
+                {detalleTabActiva === "Resumen" ? <EnvioResumenTab envio={envioActivo} sensores={sensores} paradas={paradas} resumenTop={resumenTop} /> : null}
+                {detalleTabActiva === "Configuracion" ? <EnvioConfiguracionTab /> : null}
+                {detalleTabActiva === "Contenido" ? <EnvioContenidoTab contenido={contenido} resumenTop={resumenTop} onAbrirModal={abrirModalDetalleRegistro} /> : null}
+                {detalleTabActiva === "Movimientos" ? <EnvioMovimientosTab movimientos={movimientos} onAbrirModal={abrirModalDetalleRegistro} /> : null}
+                {detalleTabActiva === "Paradas" ? <EnvioParadasTab paradas={paradas} onAbrirModal={abrirModalDetalleRegistro} /> : null}
+                {detalleTabActiva === "Sensores" ? <EnvioSensoresTab sensores={sensores} onAbrirModal={abrirModalDetalleRegistro} /> : null}
+                {detalleTabActiva === "Operarios" ? <EnvioOperariosTab operarios={operariosEnvioFallback} onAbrirModal={abrirModalDetalleRegistro} /> : null}
+                {detalleTabActiva === "Informe" ? <EnvioInformeTab envio={envioActivo} informePallets={informePallets} onAbrirModal={abrirModalDetalleRegistro} /> : null}
+            </section>
+
+            <Dialog
+                visible={modalDetalleRegistro.visible}
+                onHide={cerrarModalDetalleRegistro}
+                modal
+                draggable={false}
+                resizable={false}
+                showHeader={false}
+                className="neat-crud-edit-dialog envio-registro-dialog"
+                style={{ width: "min(760px, 92vw)" }}
+            >
+                <EnvioDetalleRegistroModal
+                    accion={modalDetalleRegistro.accion}
+                    seccion={modalDetalleRegistro.seccion}
+                    registro={modalDetalleRegistro.registro}
+                    onCerrar={cerrarModalDetalleRegistro}
+                />
+            </Dialog>
+        </div>
+    );
+};
+
+const construirResumenTop = (envio, contenido = [], sensores = []) => {
+    const unidades = contenido.reduce((acumulado, item) => acumulado + Number(item.cantidad || item.unidades || 0), 0) || 1640;
+    const cargaKg = contenido.reduce((acumulado, item) => acumulado + Number(item.pesoTotal || 0), 0) || 860;
+    const skus = contenido.length || 4;
+    const sensorTemperatura = sensores.find((sensor) => String(sensor.nombreSensor || sensor.nombre || "").toLowerCase().includes("temp"));
+    const temperaturaMax = sensorTemperatura?.valor ? `${sensorTemperatura.valor}` : "8.2 C";
+
+    return {
+        temperaturaMax,
+        distancia: "684 km",
+        carga: `${cargaKg} kg`,
+        unidades,
+        skus,
+    };
+};
+
+const construirContenidoFallback = () => ([
+    { id: 1, referencia: "PR-0182", nombreProducto: "Yogur natural 125g (pack 4)", pesoKgs: 250, cantidad: 480, pesoTotal: 120 },
+    { id: 2, referencia: "PR-0210", nombreProducto: "Queso fresco 250g", pesoKgs: 250, cantidad: 320, pesoTotal: 80 },
+    { id: 3, referencia: "PR-0345", nombreProducto: "Leche entera 1L", pesoKgs: 1000, cantidad: 600, pesoTotal: 600 },
+    { id: 4, referencia: "PR-0509", nombreProducto: "Mantequilla 250g", pesoKgs: 250, cantidad: 240, pesoTotal: 60 },
+]);
+
+const construirMovimientosFallback = () => ([
+    { id: 1, fechaEspanol: "05 may · 06:13", nombreSensor: "GPS-01", evento: "Paso por punto intermedio", valor: "71 km/h", gps: "40.7227, 0.5568", severidad: "info" },
+    { id: 2, fechaEspanol: "05 may · 07:30", nombreSensor: "GPS-01", evento: "Parada tecnica", valor: "0 km/h", gps: "41.0227, 1.3068", severidad: "info" },
+    { id: 3, fechaEspanol: "05 may · 08:47", nombreSensor: "GPS-01", evento: "Reanudacion de marcha", valor: "43 km/h", gps: "41.3227, -2.9431", severidad: "info" },
+    { id: 4, fechaEspanol: "05 may · 09:04", nombreSensor: "TMP-01", evento: "Excursion de temperatura", valor: "10.4 C", gps: "41.6227, -2.1931", severidad: "alerta" },
+    { id: 5, fechaEspanol: "05 may · 10:21", nombreSensor: "GPS-01", evento: "Llegada a destino", valor: "0 km/h", gps: "41.9227, -1.4431", severidad: "ok" },
+    { id: 6, fechaEspanol: "05 may · 11:38", nombreSensor: "HUM-01", evento: "Lectura de humedad", valor: "57 %", gps: "40.2227, -0.6931", severidad: "info" },
+    { id: 7, fechaEspanol: "05 may · 12:55", nombreSensor: "TMP-01", evento: "Lectura de temperatura", valor: "4.5 C", gps: "40.5227, 0.0569", severidad: "info" },
+    { id: 8, fechaEspanol: "05 may · 13:12", nombreSensor: "BAT-01", evento: "Pallet activado", valor: "97 %", gps: "40.8227, 0.8070", severidad: "info" },
+    { id: 9, fechaEspanol: "05 may · 14:29", nombreSensor: "PESO-01", evento: "Carga registrada", valor: "447 kg", gps: "41.1227, 1.5570", severidad: "info" },
+    { id: 10, fechaEspanol: "05 may · 15:46", nombreSensor: "GPS-01", evento: "Salida desde origen", valor: "31 km/h", gps: "41.4227, -2.6930", severidad: "ok" },
+    { id: 11, fechaEspanol: "05 may · 16:03", nombreSensor: "GPS-01", evento: "Paso por punto intermedio", valor: "86 km/h", gps: "41.7227, -1.9430", severidad: "info" },
+    { id: 12, fechaEspanol: "05 may · 17:20", nombreSensor: "GPS-01", evento: "Parada tecnica", valor: "0 km/h", gps: "40.0227, -1.1929", severidad: "info" },
+    { id: 13, fechaEspanol: "05 may · 18:37", nombreSensor: "GPS-01", evento: "Reanudacion de marcha", valor: "33 km/h", gps: "40.3228, -0.4429", severidad: "info" },
+    { id: 14, fechaEspanol: "05 may · 19:54", nombreSensor: "TMP-01", evento: "Excursion de temperatura", valor: "8.9 C", gps: "40.6228, 0.3071", severidad: "alerta" },
+]);
+
+const construirParadasFallback = (envio) => ([
+    { id: 1, tipo: "Origen", direccion: envio?.origenRuta || "C/ Mayor 10, Madrid", gps: "43.0000, -3.0000", eta: "4 may 2026 06:00", real: "4 may 2026 06:00", detencion: "12 min", estado: "Completada" },
+    { id: 2, tipo: "Transito", direccion: "Centro logistico Zaragoza", gps: "41.6488, -0.8891", eta: "5 may 10:20", real: "5 may 10:34", detencion: "28 min", estado: "Completada" },
+    { id: 3, tipo: "Transito", direccion: "Plataforma cross-dock Lleida", gps: "41.6176, 0.6200", eta: "5 may 13:05", real: "5 may 13:11", detencion: "18 min", estado: "Completada" },
+    { id: 4, tipo: "Destino", direccion: envio?.destinoRuta || "Av. Diagonal 20, Barcelona", gps: "45.0000, 2.0000", eta: "6 may 2026 11:36", real: "—", detencion: "—", estado: "Pendiente" },
+]);
+
+const construirSensoresFallback = () => ([
+    { id: 1, orden: "01", nombreSensor: "Temperatura", codigo: "TMP-01", valor: "3.2 C", estado: "OK", color: "verde" },
+    { id: 2, orden: "02", nombreSensor: "Humedad", codigo: "HUM-01", valor: "55 %", estado: "OK", color: "azul" },
+    { id: 3, orden: "03", nombreSensor: "Bateria", codigo: "BAT-01", valor: "49 %", estado: "OK", color: "gris" },
+]);
+
+const InfoItem = ({ label, value, mono = false }) => (
+    <div className="envio-info-item">
+        <small>{label}</small>
+        <strong className={mono ? "envio-mono" : undefined}>{value}</strong>
+    </div>
+);
+
+const EnvioKpiCard = ({ label, value, helper, warning = false }) => (
+    <article className="envio-kpi-card">
+        <small>{label}</small>
+        <strong className={warning ? "envio-warning-text" : undefined}>{value}</strong>
+        <span>{helper}</span>
+    </article>
+);
+
+const EnvioResumenTab = ({ envio, sensores = [], paradas = [], resumenTop }) => (
+    <div className="envio-resumen-grid">
+        <article className="envio-panel envio-ruta-panel">
+            <h3>Ruta</h3>
+            <div className="envio-ruta-mapa">
+                <div className="envio-ruta-linea"></div>
+                {paradas.slice(0, 4).map((parada, index) => (
+                    <div key={parada.id || index} className={`envio-ruta-punto envio-ruta-punto-${parada.tipo?.toLowerCase() || "transito"}`} style={{ left: `${8 + index * 28}%`, top: `${58 - (index % 2) * 12}%` }}>
+                        <span>{parada.direccion}</span>
+                    </div>
+                ))}
+            </div>
+            <div className="envio-ruta-legend">
+                <em><b className="origen"></b>Origen</em>
+                <em><b className="transito"></b>Parada</em>
+                <em><b className="destino"></b>Destino</em>
+            </div>
+        </article>
+
+        <article className="envio-panel">
+            <h3>Sensores activos</h3>
+            <div className="envio-sensor-chart-list">
+                {sensores.map((sensor) => (
+                    <div className="envio-sensor-chart-row" key={sensor.id || sensor.codigo}>
+                        <div className="envio-sensor-chart-head">
+                            <strong><b className={`envio-sensor-dot ${sensor.color || "verde"}`}></b>{sensor.nombreSensor || sensor.nombre}</strong>
+                            <span>{sensor.codigo || "TMP-01"}</span>
+                            <strong>{sensor.valor}</strong>
+                        </div>
+                        <div className="envio-sensor-chart-track">
+                            <i className={`envio-sensor-chart-wave ${sensor.color || "verde"}`}></i>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </article>
+
+        <article className="envio-panel">
+            <h3>Linea de tiempo</h3>
+            <div className="envio-timeline">
+                {paradas.map((parada) => (
+                    <div className="envio-timeline-item" key={parada.id}>
+                        <b className={`envio-timeline-dot ${parada.tipo?.toLowerCase() || "transito"}`}></b>
+                        <div>
+                            <strong>{parada.direccion}</strong>
+                            <span>{parada.gps}</span>
+                            <small>ETA: {parada.eta} &nbsp;&nbsp; Real: {parada.real} &nbsp;&nbsp; Detencion: {parada.detencion}</small>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </article>
+
+        <article className="envio-panel">
+            <h3>Pallet asignado</h3>
+            <div className="envio-pallet-card">
+                <div className="envio-pallet-visual"></div>
+                <div className="envio-pallet-copy">
+                    <h4>NEAT-00001</h4>
+                    <small>NEAT One</small>
+                    <div><span>Bateria</span><strong>49%</strong></div>
+                    <div><span>Firmware</span><strong>v3.4.1</strong></div>
+                    <div><span>Ultima senal</span><strong>hace 2 min</strong></div>
+                    <div><span>Conexion</span><strong>4G + Bluetooth</strong></div>
+                </div>
+            </div>
+        </article>
+    </div>
+);
+
+const EnvioConfiguracionTab = () => (
+    <div className="envio-config-grid">
+        <article className="envio-panel">
+            <div className="envio-panel-head">
+                <h3>Telemetria</h3>
+                <span>Captura, guardado y envio de datos del pallet</span>
+            </div>
+            <div className="envio-config-list">
+                <ConfigRow label="Guardado de datos" helper="Cada cuanto se registran y almacenan las lecturas en el pallet.">
+                    <div className="envio-inline-inputs"><strong>10</strong><span>min</span></div>
+                </ConfigRow>
+                <ConfigRow label="Envio de datos" helper="Frecuencia con la que el pallet vuelca los datos al servidor.">
+                    <div className="envio-inline-inputs"><strong>12</strong><span>h</span></div>
+                </ConfigRow>
+                <ConfigRow label="Modo ahorro de energia" helper="Activo: guardado y envio usan los valores fijos del modo ahorro.">
+                    <ToggleFake active />
+                </ConfigRow>
+            </div>
+        </article>
+
+        <article className="envio-panel">
+            <h3>Alertas y notificaciones</h3>
+            <div className="envio-config-stack">
+                <ConfigRow label="Canales activos">
+                    <div className="envio-chip-group">
+                        <span>Email</span><span>SMS</span><span>WhatsApp</span>
+                    </div>
+                </ConfigRow>
+                <ConfigRow label="Destinatarios" helper="Separados por coma.">
+                    <div className="envio-pill-input">logistica@neat.com, cliente@empresa.com</div>
+                </ConfigRow>
+            </div>
+        </article>
+
+        <article className="envio-panel">
+            <div className="envio-panel-head">
+                <h3>Reglas y umbrales</h3>
+                <button type="button">+ Anadir regla</button>
+            </div>
+            <table className="envio-mini-table">
+                <thead>
+                    <tr><th>Parametro</th><th>Min</th><th>Max</th><th>Unidad</th><th>Accion</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Temperatura</td><td>2</td><td>8</td><td>C</td><td><div className="envio-chip-group"><span>Email</span><span className="mute">SMS</span><span className="mute">WhatsApp</span></div></td></tr>
+                    <tr><td>Humedad</td><td>45</td><td>75</td><td>%</td><td><div className="envio-chip-group"><span>Email</span><span className="mute">SMS</span><span className="mute">WhatsApp</span></div></td></tr>
+                    <tr><td>Apertura no prevista</td><td>—</td><td>—</td><td>—</td><td><div className="envio-chip-group"><span className="mute">Email</span><span>SMS</span><span className="mute">WhatsApp</span></div></td></tr>
+                    <tr><td>Retraso ETA</td><td>—</td><td>30</td><td>min</td><td><div className="envio-chip-group"><span>Email</span><span className="mute">SMS</span><span className="mute">WhatsApp</span></div></td></tr>
+                </tbody>
+            </table>
+        </article>
+
+        <article className="envio-panel">
+            <h3>Operativa y formato</h3>
+            <div className="envio-config-list">
+                <ConfigRow label="Unidad de temperatura">
+                    <div className="envio-segmented"><span className="active">C</span><span>F</span></div>
+                </ConfigRow>
+                <ConfigRow label="Zona horaria">
+                    <div className="envio-pill-input">Europe/Madrid</div>
+                </ConfigRow>
+                <ConfigRow label="Idioma de notificaciones">
+                    <div className="envio-pill-input">Espanol</div>
+                </ConfigRow>
+                <ConfigRow label="Cierre automatico tras entrega">
+                    <ToggleFake active />
+                </ConfigRow>
+            </div>
+        </article>
+
+        <article className="envio-panel envio-documentos-panel">
+            <div className="envio-panel-head">
+                <h3>Documentacion adjunta</h3>
+                <button type="button">Adjuntar archivo</button>
+            </div>
+            <div className="envio-document-list">
+                {documentosEnvioFallback.map((documento) => (
+                    <div className="envio-document-item" key={documento.nombre}>
+                        <b>{documento.tipo}</b>
+                        <div><strong>{documento.nombre}</strong><small>{documento.tamano}</small></div>
+                        <button type="button">{documento.accion}</button>
+                    </div>
+                ))}
+            </div>
+            <div className="envio-document-footer">
+                <button type="button">Restablecer valores por defecto</button>
+            </div>
+        </article>
+    </div>
+);
+
+const EnvioContenidoTab = ({ contenido = [], resumenTop, onAbrirModal }) => (
+    <article className="envio-panel">
+        <div className="envio-panel-head">
+            <h3>Contenido del pallet</h3>
+            <div className="envio-head-actions">
+                <span><strong>{resumenTop.unidades}</strong> unidades &nbsp;&nbsp; <strong>{resumenTop.carga}</strong> &nbsp;&nbsp; <strong>{resumenTop.skus}</strong> SKU</span>
+                <button type="button" onClick={() => onAbrirModal("Contenido", "nuevo")}>Nuevo registro</button>
+            </div>
+        </div>
+        <table className="envio-detail-table">
+            <thead>
+                <tr>
+                    <th>SKU</th><th>Producto</th><th>Peso/ud.</th><th>Unidades</th><th>Peso total</th><th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {contenido.map((item) => (
+                    <tr key={item.id || item.referencia}>
+                        <td>{item.referencia || item.codigoPallet || "-"}</td>
+                        <td><strong>{item.nombreProducto || item.nombre || "-"}</strong></td>
+                        <td>{item.pesoKgs} g</td>
+                        <td>{item.cantidad}</td>
+                        <td>{item.pesoTotal} kg</td>
+                        <td><ActionButtons seccion="Contenido" registro={item} onAbrirModal={onAbrirModal} /></td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </article>
+);
+
+const EnvioMovimientosTab = ({ movimientos = [], onAbrirModal }) => (
+    <article className="envio-panel">
+        <div className="envio-panel-head">
+            <h3>Movimientos</h3>
+            <button type="button" onClick={() => onAbrirModal("Movimientos", "nuevo")}>Nuevo registro</button>
+        </div>
+        <table className="envio-detail-table">
+            <thead>
+                <tr>
+                    <th>Fecha</th><th>Evento</th><th>Sensor</th><th>Valor</th><th>GPS</th><th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {movimientos.map((item) => (
+                    <tr key={item.id}>
+                        <td className="envio-mono">{item.fechaEspanol}</td>
+                        <td><span className={`envio-event-dot ${item.severidad}`}></span>{item.evento || item.nombreSensor || "-"}</td>
+                        <td>{item.nombreSensor}</td>
+                        <td><strong>{item.valor}</strong></td>
+                        <td><a href="#">{item.gps}</a></td>
+                        <td><ActionButtons seccion="Movimientos" registro={item} onAbrirModal={onAbrirModal} /></td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </article>
+);
+
+const EnvioParadasTab = ({ paradas = [], onAbrirModal }) => (
+    <article className="envio-panel">
+        <div className="envio-panel-head">
+            <h3>Paradas</h3>
+            <button type="button" onClick={() => onAbrirModal("Paradas", "nuevo")}>Nuevo registro</button>
+        </div>
+        <table className="envio-detail-table">
+            <thead>
+                <tr>
+                    <th>Tipo</th><th>Punto</th><th>Coordenadas</th><th>ETA</th><th>Hora real</th><th>Detencion</th><th>Estado</th><th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {paradas.map((item) => (
+                    <tr key={item.id}>
+                        <td><span className={`envio-badge ${item.tipo?.toLowerCase()}`}>{item.tipo?.toUpperCase()}</span></td>
+                        <td><strong>{item.direccion}</strong></td>
+                        <td className="envio-mono">{item.gps}</td>
+                        <td>{item.eta}</td>
+                        <td>{item.real}</td>
+                        <td>{item.detencion}</td>
+                        <td><span className={item.estado === "Pendiente" ? "envio-warning-text" : "envio-ok-text"}>{item.estado === "Pendiente" ? "Pendiente" : "✓ Completada"}</span></td>
+                        <td><ActionButtons seccion="Paradas" registro={item} onAbrirModal={onAbrirModal} /></td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </article>
+);
+
+const EnvioSensoresTab = ({ sensores = [], onAbrirModal }) => (
+    <article className="envio-panel">
+        <div className="envio-panel-head">
+            <h3>Sensores</h3>
+            <button type="button" onClick={() => onAbrirModal("Sensores", "nuevo")}>Nuevo registro</button>
+        </div>
+        <table className="envio-detail-table">
+            <thead>
+                <tr>
+                    <th>#</th><th>Tipo de sensor</th><th>ID</th><th>Valor</th><th>Estado</th><th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {sensores.map((item, index) => (
+                    <tr key={item.id || index}>
+                        <td>{item.orden || String(index + 1).padStart(2, "0")}</td>
+                        <td><span className={`envio-sensor-dot ${item.color || "verde"}`}></span><strong>{item.nombreSensor || item.nombre}</strong></td>
+                        <td className="envio-mono">{item.codigo || item.tipoSensorId || "-"}</td>
+                        <td><strong>{item.valor}</strong></td>
+                        <td className="envio-ok-text">{item.estado || "OK"}</td>
+                        <td><ActionButtons seccion="Sensores" registro={item} onAbrirModal={onAbrirModal} /></td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </article>
+);
+
+const EnvioOperariosTab = ({ operarios = [], onAbrirModal }) => (
+    <article className="envio-panel">
+        <div className="envio-panel-head">
+            <h3>Operarios</h3>
+            <button type="button" onClick={() => onAbrirModal("Operarios", "nuevo")}>Nuevo registro</button>
+        </div>
+        <table className="envio-detail-table">
+            <thead>
+                <tr>
+                    <th>Rol</th><th>Operario</th><th>Telefono</th><th>Permiso</th><th>Turno</th><th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {operarios.map((item) => (
+                    <tr key={`${item.rol}-${item.nombre}`}>
+                        <td>{item.rol}</td>
+                        <td><div className="envio-operario-cell"><span>{item.iniciales}</span><strong>{item.nombre}</strong></div></td>
+                        <td className="envio-mono">{item.telefono}</td>
+                        <td>{item.permiso}</td>
+                        <td>{item.turno}</td>
+                        <td><ActionButtons seccion="Operarios" registro={item} onAbrirModal={onAbrirModal} /></td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </article>
+);
+
+const EnvioInformeTab = ({ envio, informePallets = [], onAbrirModal }) => (
+    <article className="envio-panel">
+        <div className="envio-panel-head">
+            <h3>Informe del envio</h3>
+            <div className="envio-inline-actions"><button type="button" onClick={() => onAbrirModal("Informe", "nuevo")}>Nuevo registro</button><button type="button">Imprimir</button><button type="button">Descargar PDF</button></div>
+        </div>
+        <h4 className="envio-subtitle">PALLETS DEL ENVIO</h4>
+        <table className="envio-detail-table">
+            <thead>
+                <tr>
+                    <th>Nº pallet</th><th>Eventos guardados</th><th>Eventos enviados</th><th>Alarmas</th><th>Bateria</th><th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {informePallets.map((item, index) => (
+                    <tr key={`${item.pallet}-${index}`}>
+                        <td><strong>{item.pallet}</strong></td>
+                        <td>{item.eventosGuardados}</td>
+                        <td>{item.eventosEnviados}</td>
+                        <td className="envio-danger-text">{item.totalAlarmas}</td>
+                        <td><div className="envio-battery"><i style={{ width: `${Number(item.bateriaActual || 49)}%` }}></i><strong>{item.bateriaActual}%</strong></div></td>
+                        <td><ActionButtons seccion="Informe" registro={item} onAbrirModal={onAbrirModal} /></td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+
+        <div className="envio-informe-summary">
+            <h3>Resumen ejecutivo</h3>
+            <p>Envio {envio.numero || "ENV-00432"} de Logistica del Mediterraneo desde {envio.origenRuta || "C/ Mayor 10, Madrid"} hasta {envio.destinoRuta || "Av. Diagonal 20, Barcelona"}, transportado en el pallet NEAT-00001. Estado actual: <span>En transito</span>.</p>
+            <p>Distancia recorrida: <strong>684 km</strong> en <strong>12 h 04 min</strong>. Carga total: <strong>860 kg</strong> distribuida en <strong>4 SKU</strong>.</p>
+        </div>
+
+        <div className="envio-informe-kpis">
+            <div><small>Cadena de frio</small><strong className="envio-danger-text">1 desviaciones</strong><span>Rango 2–8 C · pico 8.2 C · valle 2.4 C</span></div>
+            <div><small>Puntualidad</small><strong className="envio-ok-text">Dentro de plazo</strong><span>ETA 6 may 2026 · 11:36</span></div>
+            <div><small>Calidad documental</small><strong className="envio-ok-text">4 / 4 documentos</strong><span>CMR, albaran, lista carga, pre-check</span></div>
+        </div>
+
+        <div className="envio-informe-lista">
+            <small>RECOMENDACIONES</small>
+            <ul>
+                <li>Revisar la calibracion del termostato del compartimento. 1 lecturas se salieron del rango objetivo.</li>
+                <li>Programar mantenimiento preventivo del pallet NEAT-0001 tras este viaje.</li>
+            </ul>
+        </div>
+
+        <div className="envio-informe-footer">
+            <span>Generado automaticamente por NEAT · 19/6/2026, 16:23:53</span>
+            <span>v3.4.1 · informe-ENV-00432.pdf</span>
+        </div>
+    </article>
+);
+
+const ConfigRow = ({ label, helper, children }) => (
+    <div className="envio-config-row">
+        <div>
+            <strong>{label}</strong>
+            {helper ? <span>{helper}</span> : null}
+        </div>
+        {children}
+    </div>
+);
+
+const ToggleFake = ({ active = false }) => (
+    <span className={active ? "envio-toggle envio-toggle-active" : "envio-toggle"}></span>
+);
+
+const EnvioDetalleRegistroModal = ({ accion, seccion, registro, onCerrar }) => {
+    const tituloAccion = accion === "nuevo" ? "Nuevo registro" : accion === "editar" ? "Editar registro" : "Ver registro";
+    const camposRegistro = registro && typeof registro === "object" ? Object.entries(registro).filter(([clave]) => clave !== "id") : [];
+
+    //
+    //Mostramos un modal generico para todas las subtabs internas
+    //de envios, evitando crear un formulario distinto por bloque
+    //
+    return (
+        <section className="envio-registro-modal">
+            <header className="envio-registro-modal-head">
+                <div>
+                    <h2>{tituloAccion}</h2>
+                    <p>{seccion}</p>
+                </div>
+            </header>
+
+            <div className="envio-registro-modal-body">
+                {camposRegistro.length > 0 ? camposRegistro.map(([clave, valor]) => (
+                    <label className="envio-registro-modal-field" key={clave}>
+                        <span>{formatearLabelModal(clave)}</span>
+                        <InputText value={valor == null ? "" : String(valor)} readOnly={accion === "ver"} />
+                    </label>
+                )) : (
+                    <div className="envio-registro-modal-empty">
+                        <p>Prepara los datos del nuevo registro de {seccion.toLowerCase()}.</p>
+                    </div>
+                )}
+            </div>
+
+            <footer className="envio-registro-modal-footer">
+                <Button label="Cancelar" text onClick={onCerrar} />
+                <Button label={accion === "ver" ? "Cerrar" : "Guardar cambios"} onClick={onCerrar} />
+            </footer>
+        </section>
+    );
+};
+
+const formatearLabelModal = (clave = "") => clave
+    .replace(/([A-Z])/g, " $1")
+    .replace(/_/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/^./, (texto) => texto.toUpperCase());
+
+const ActionButtons = ({ seccion, registro, onAbrirModal }) => (
+    <div className="envio-action-buttons">
+        <button type="button" onClick={() => onAbrirModal(seccion, "ver", registro)}><i className="pi pi-eye" aria-hidden="true"></i></button>
+        <button type="button" onClick={() => onAbrirModal(seccion, "editar", registro)}><i className="pi pi-pencil" aria-hidden="true"></i></button>
+        <button type="button"><i className="pi pi-trash" aria-hidden="true"></i></button>
+    </div>
+);
+
 export default Empresa;
 export { camposPendientesBack };
 
@@ -963,7 +1632,7 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
 
         switch (tabActiva) {
             case "Envios":
-                return <Crud key={`envios-${empresaActiva.id}`} headerCrud="Envios" getRegistros={getEnvio} getRegistrosCount={getEnvioCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Envios" editarComponente={<EditarEnvio />} columnas={columnasEnvio} filtradoBase={filtroEmpresa} deleteRegistro={deleteEnvio} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+                return <Crud key={`envios-${empresaActiva.id}`} headerCrud="Envios" getRegistros={getEnvio} getRegistrosCount={getEnvioCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} accionEntradaPorFila="ver" controlador="Envios" editarComponente={<EmpresaEnvioDetalle />} columnas={columnasEnvio} filtradoBase={filtroEmpresa} deleteRegistro={deleteEnvio} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
             case "Usuarios":
                 return <Crud key={`usuarios-${empresaActiva.id}`} headerCrud="Usuarios de empresa" getRegistros={getVistaUsuarios} getRegistrosCount={getVistaUsuariosCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Usuarios" editarComponente={<EditarUsuario />} columnas={columnasUsuariosEmpresa} filtradoBase={filtroEmpresa} deleteRegistro={deleteUsuario} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
             case "Puntos de entrega":

@@ -2109,6 +2109,15 @@ body {
 }
 
 .empresa-edit-main-dialog {
+    .p-dialog {
+        border-radius: 1rem;
+        box-shadow: 0 18px 48px rgba(15, 30, 25, 0.16);
+    }
+
+    .p-dialog-content {
+        padding: 1rem;
+    }
+
     .empresa-profile-card {
         margin: 0;
         border-radius: 0.85rem;

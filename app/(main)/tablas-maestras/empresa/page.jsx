@@ -1004,7 +1004,7 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
                     dismissableMask={false}
                     showHeader={false}
                     className="neat-crud-edit-dialog empresa-edit-main-dialog"
-                    style={{ width: "min(1320px, 96vw)" }}
+                    style={{ width: "min(1180px, 92vw)" }}
                 >
                     <section className="empresa-profile-card empresa-edit-screen">
                         <div className="empresa-edit-screen-header">

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "primereact/button";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Dialog } from "primereact/dialog";
 import { deleteEmpresa, getEmpresas, getEmpresasCount, patchEmpresa } from "@/app/api-endpoints/empresa";
 import { getEmpresaPalletCount } from "@/app/api-endpoints/empresa-pallet";
 import { deleteUsuario, getVistaUsuarios, getVistaUsuariosCount } from "@/app/api-endpoints/usuario";
@@ -602,6 +603,7 @@ const Empresa = () => {
                     getRegistros={getEmpresas}
                     getRegistrosCount={getEmpresasCount}
                     botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]}
+                    accionEntradaPorFila="ver"
                     controlador="Empresas"
                     editarComponente={<EmpresaAdminDetalle />}
                     columnas={columnasEmpresas}
@@ -948,24 +950,34 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
         const extra = { empresaId: empresaActiva.id, estoyDentroDeUnTab: true };
         const filtroEmpresa = { empresaId: empresaActiva.id };
         const propsEdicionTab = { onModoEdicionChange: setHayEdicionEnPestana };
+        const propsModalTab = {
+            mostrarEdicionEnModal: true,
+            modalEdicionProps: {
+                showHeader: false,
+                closable: false,
+                closeOnEscape: false,
+                dismissableMask: false,
+                style: { width: "min(900px, 92vw)" },
+            },
+        };
 
         switch (tabActiva) {
             case "Envios":
                 return <Crud key={`envios-${empresaActiva.id}`} headerCrud="Envios" getRegistros={getEnvio} getRegistrosCount={getEnvioCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Envios" editarComponente={<EditarEnvio />} columnas={columnasEnvio} filtradoBase={filtroEmpresa} deleteRegistro={deleteEnvio} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
             case "Usuarios":
-                return <Crud key={`usuarios-${empresaActiva.id}`} headerCrud="Usuarios de empresa" getRegistros={getVistaUsuarios} getRegistrosCount={getVistaUsuariosCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Usuarios" editarComponente={<EditarUsuario />} columnas={columnasUsuariosEmpresa} filtradoBase={filtroEmpresa} deleteRegistro={deleteUsuario} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+                return <Crud key={`usuarios-${empresaActiva.id}`} headerCrud="Usuarios de empresa" getRegistros={getVistaUsuarios} getRegistrosCount={getVistaUsuariosCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Usuarios" editarComponente={<EditarUsuario />} columnas={columnasUsuariosEmpresa} filtradoBase={filtroEmpresa} deleteRegistro={deleteUsuario} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
             case "Puntos de entrega":
                 return <Crud key={`puntos-entrega-${empresaActiva.id}`} headerCrud="Puntos de entrega" getRegistros={getCliente} getRegistrosCount={getClienteCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Clientes" editarComponente={<EditarCliente />} columnas={columnasPuntosEntrega} filtradoBase={filtroEmpresa} deleteRegistro={deleteCliente} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
             case "Productos":
-                return <Crud key={`productos-${empresaActiva.id}`} headerCrud="Productos" getRegistros={getProducto} getRegistrosCount={getProductoCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Productos" editarComponente={<EditarProducto />} columnas={columnasProducto} filtradoBase={filtroEmpresa} deleteRegistro={deleteProducto} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+                return <Crud key={`productos-${empresaActiva.id}`} headerCrud="Productos" getRegistros={getProducto} getRegistrosCount={getProductoCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Productos" editarComponente={<EditarProducto />} columnas={columnasProducto} filtradoBase={filtroEmpresa} deleteRegistro={deleteProducto} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
             case "Sensores activos":
-                return <Crud key={`sensores-${empresaActiva.id}`} headerCrud="Sensores de empresa" getRegistros={getSensorEmpresa} getRegistrosCount={getSensorEmpresaCount} botones={["nuevo", "ver", "editar", "eliminar"]} controlador="Envio Sensor Empresa" editarComponente={<EditarEnvioSensorEmpresa />} columnas={columnasSensorEmpresa} filtradoBase={filtroEmpresa} deleteRegistro={deleteSensorEmpresa} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+                return <Crud key={`sensores-${empresaActiva.id}`} headerCrud="Sensores de empresa" getRegistros={getSensorEmpresa} getRegistrosCount={getSensorEmpresaCount} botones={["nuevo", "ver", "editar", "eliminar"]} controlador="Envio Sensor Empresa" editarComponente={<EditarEnvioSensorEmpresa />} columnas={columnasSensorEmpresa} filtradoBase={filtroEmpresa} deleteRegistro={deleteSensorEmpresa} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
             case "Pallets asignados":
                 return <PalletsAsignadosEmpresa key={`pallets-${empresaActiva.id}`} empresaId={empresaActiva.id} />;
             case "Carrocerias":
-                return <Crud key={`carrocerias-${empresaActiva.id}`} headerCrud="Tipos de Carroceria" getRegistros={getTipoCarroceria} getRegistrosCount={getTipoCarroceriaCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Tipos de Carroceria" editarComponente={<EditarTipoCarroceria />} columnas={columnasCatalogosGlobales} filtradoBase={filtroEmpresa} deleteRegistro={deleteTipoCarroceria} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+                return <Crud key={`carrocerias-${empresaActiva.id}`} headerCrud="Tipos de Carroceria" getRegistros={getTipoCarroceria} getRegistrosCount={getTipoCarroceriaCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Tipos de Carroceria" editarComponente={<EditarTipoCarroceria />} columnas={columnasCatalogosGlobales} filtradoBase={filtroEmpresa} deleteRegistro={deleteTipoCarroceria} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
             case "Tipos de transporte":
-                return <Crud key={`transportes-${empresaActiva.id}`} headerCrud="Tipos de Transporte" getRegistros={getTipoTransporte} getRegistrosCount={getTipoTransporteCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Tipo Transporte" editarComponente={<EditarTipoTransporte />} columnas={columnasCatalogosGlobales} filtradoBase={filtroEmpresa} deleteRegistro={deleteTipoTransporte} editarComponenteParametrosExtra={extra} {...propsEdicionTab} />;
+                return <Crud key={`transportes-${empresaActiva.id}`} headerCrud="Tipos de Transporte" getRegistros={getTipoTransporte} getRegistrosCount={getTipoTransporteCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Tipo Transporte" editarComponente={<EditarTipoTransporte />} columnas={columnasCatalogosGlobales} filtradoBase={filtroEmpresa} deleteRegistro={deleteTipoTransporte} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
             case "Configuracion de eventos":
                 return <Crud key={`eventos-${empresaActiva.id}`} headerCrud="Configuracion de eventos" getRegistros={getEventoConfiguracion} getRegistrosCount={getEventoConfiguracionCount} botones={[]} controlador="Eventos Configuracion" editarComponente={<div />} columnas={columnasEventoConfiguracion} deleteRegistro={() => {}} editarComponenteParametrosExtra={{ estoyDentroDeUnTab: true }} {...propsEdicionTab} />;
             default:
@@ -981,28 +993,42 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
         return (
             <div className="empresa-profile-shell">
                 <ConfirmDialog />
-                <section className="empresa-profile-card empresa-edit-screen">
-                    <div className="empresa-edit-screen-header">
-                        <button className="empresa-back-button" type="button" onClick={cancelarEdicionEmpresa}>
-                            <i className="pi pi-chevron-left" aria-hidden="true"></i>
-                            Clientes
-                        </button>
-                        <div>
-                            <h1>Editar cliente</h1>
-                            <p>Modifica la ficha de <strong>{empresaActiva.nombre}</strong>. Los cambios se aplican al guardar.</p>
+                <Dialog
+                    visible={true}
+                    onHide={cancelarEdicionEmpresa}
+                    modal
+                    draggable={false}
+                    resizable={false}
+                    closable={false}
+                    closeOnEscape={false}
+                    dismissableMask={false}
+                    showHeader={false}
+                    className="neat-crud-edit-dialog empresa-edit-main-dialog"
+                    style={{ width: "min(1320px, 96vw)" }}
+                >
+                    <section className="empresa-profile-card empresa-edit-screen">
+                        <div className="empresa-edit-screen-header">
+                            <button className="empresa-back-button" type="button" onClick={cancelarEdicionEmpresa}>
+                                <i className="pi pi-chevron-left" aria-hidden="true"></i>
+                                Clientes
+                            </button>
+                            <div>
+                                <h1>Editar cliente</h1>
+                                <p>Modifica la ficha de <strong>{empresaActiva.nombre}</strong>. Los cambios se aplican al guardar.</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <EditarDatosEmpresa empresa={empresaEdicion} setEmpresa={setEmpresaEdicion} estadoGuardando={guardando} />
+                        <EditarDatosEmpresa empresa={empresaEdicion} setEmpresa={setEmpresaEdicion} estadoGuardando={guardando} />
 
-                    <footer className="empresa-edit-footer empresa-edit-screen-footer">
-                        <span></span>
-                        <div>
-                            <Button label="Cancelar" text onClick={cancelarEdicionEmpresa} />
-                            <Button label={guardando ? "Guardando..." : "Guardar cambios"} onClick={guardarEmpresa} disabled={guardando} />
-                        </div>
-                    </footer>
-                </section>
+                        <footer className="empresa-edit-footer empresa-edit-screen-footer">
+                            <span></span>
+                            <div>
+                                <Button label="Cancelar" text onClick={cancelarEdicionEmpresa} />
+                                <Button label={guardando ? "Guardando..." : "Guardar cambios"} onClick={guardarEmpresa} disabled={guardando} />
+                            </div>
+                        </footer>
+                    </section>
+                </Dialog>
             </div>
         );
     }

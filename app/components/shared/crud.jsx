@@ -27,7 +27,8 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
     parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = true, onDataChange,
-    procesarImportacionCSV, onModoEdicionChange, habilitarEntradaPorFila = controlador !== 'Permisos' }) => {
+    procesarImportacionCSV, onModoEdicionChange, habilitarEntradaPorFila = controlador !== 'Permisos',
+    accionEntradaPorFila = 'auto', mostrarEdicionEnModal = false, modalEdicionProps = {} }) => {
     const intl = useIntl()
     const router = useRouter();
     const { usuarioAutenticado, isInitialized } = useAuth();
@@ -833,6 +834,23 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             return;
         }
 
+        //
+        //Permitimos definir si el click sobre la fila debe abrir primero la vista detalle
+        //o la vista edicion, manteniendo el comportamiento actual por defecto
+        //
+        if (accionEntradaPorFila === 'ver' && botones.includes('ver') && puedeVer) {
+            verRegistro(registro);
+            return;
+        }
+
+        //
+        //Si se fuerza la edicion desde la fila, respetamos ese flujo de forma explicita
+        //
+        if (accionEntradaPorFila === 'editar' && botones.includes('editar') && puedeEditar) {
+            editarRegistro(registro);
+            return;
+        }
+
         if (botones.includes('editar') && puedeEditar) {
             editarRegistro(registro);
             return;
@@ -860,6 +878,16 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             ...editarComponenteParametrosExtra
         });
     }
+
+    const ocultarEdicionModal = () => {
+        //
+        //Cerramos la modal reutilizando el mismo flujo que usa el Crud
+        //para salir de una vista o edicion embebida
+        //
+        setIdEditar(null);
+        setEditable(false);
+        setRegistroEditarFlag(false);
+    };
 
     //Funcion que renderiza el componente header
     const renderizarHeader = () => {
@@ -1482,9 +1510,26 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             )}
 
             {(idEditar === 0 || idEditar > 0) && //Se hace la comprobacion asi en vez de >= porque tecnicamente null tambien es 0 
-                <div>
-                    {renderizarEditarComponente()}
-                </div>
+                <>
+                    {mostrarEdicionEnModal ? (
+                        <Dialog
+                            visible={true}
+                            onHide={ocultarEdicionModal}
+                            modal
+                            draggable={false}
+                            resizable={false}
+                            className="neat-crud-edit-dialog"
+                            style={{ width: "min(1100px, 92vw)" }}
+                            {...modalEdicionProps}
+                        >
+                            {renderizarEditarComponente()}
+                        </Dialog>
+                    ) : (
+                        <div>
+                            {renderizarEditarComponente()}
+                        </div>
+                    )}
+                </>
             }
         </div>
     );

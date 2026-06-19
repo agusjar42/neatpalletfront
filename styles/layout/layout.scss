@@ -2080,6 +2080,42 @@ body {
     }
 }
 
+.neat-crud-edit-dialog {
+    border-radius: 1rem;
+    overflow: hidden;
+
+    .p-dialog-header {
+        border-radius: 1rem 1rem 0 0;
+    }
+
+    .p-dialog-content {
+        padding: 1rem;
+        border-radius: 1rem;
+        background: #ffffff;
+    }
+
+    .p-dialog-footer {
+        border-radius: 0 0 1rem 1rem;
+    }
+
+    .card {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+}
+
+.empresa-edit-main-dialog {
+    .empresa-profile-card {
+        margin: 0;
+        border-radius: 0.85rem;
+        box-shadow: none;
+    }
+}
+
 .empresa-edit-modal {
     background: #ffffff;
 

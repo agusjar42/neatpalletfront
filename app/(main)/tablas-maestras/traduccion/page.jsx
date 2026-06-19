@@ -138,6 +138,11 @@ const Traduccion = () => {
                 //parametrosEliminar={['id', 'inglesId']}
                 editarComponente={<EditarTraduccion />}
                 columnas={columnas}
+                mostrarEdicionEnModal={true}
+                modalEdicionProps={{
+                    showHeader: false,
+                    style: { width: "min(1080px, 94vw)" },
+                }}
                 deleteRegistro={deleteTraduccion}
                 procesarImportacionCSV={procesarImportacionCSV}
                 onDataChange={() => setSummaryRefreshKey((key) => key + 1)}

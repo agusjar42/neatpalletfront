@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { getVistaEmpresaRol, getVistaEmpresaRolCount, deleteRol } from "@/app/api-endpoints/rol";
+import { getRol, getRolCount, deleteRol } from "@/app/api-endpoints/rol";
 import EditarRoles from "./editar";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
@@ -21,14 +21,19 @@ const Rol = () => {
             <RolIntro refreshKey={summaryRefreshKey} />
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Roles' })}
-                getRegistros={getVistaEmpresaRol}
-                getRegistrosCount={getVistaEmpresaRolCount}
+                getRegistros={getRol}
+                getRegistrosCount={getRolCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Roles"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarRoles />}
                 columnas={columnas}
                 deleteRegistro={deleteRol}
+                mostrarEdicionEnModal={true}
+                modalEdicionProps={{
+                    showHeader: false,
+                    style: { width: "min(980px, 92vw)" },
+                }}
                 onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
             />
         </div>

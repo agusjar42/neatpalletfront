@@ -9,6 +9,11 @@ export const getRol= async (filtro) => {
     return dataRoles
 }
 
+export const getRolCount = async (filtro) => {
+    const { data: dataRoles } = await apiRol.rolControllerCount(filtro)
+    return dataRoles
+}
+
 export const postRol = async (objRol) => {
     const { data: dataRol } = await apiRol.rolControllerCreate(objRol)
     return dataRol

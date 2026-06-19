@@ -24,6 +24,11 @@ const EnvioConfiguracion = () => {
                 controlador={"Envio Configuracion"}
                 editarComponente={<EditarEnvioConfiguracions />}
                 columnas={columnas}
+                mostrarEdicionEnModal={true}
+                modalEdicionProps={{
+                    showHeader: false,
+                    style: { width: "min(980px, 92vw)" },
+                }}
                 deleteRegistro={deleteEnvioConfiguracion}
             />
         </div>

@@ -27,6 +27,11 @@ const TipoSensor = () => {
                 controlador={"Tipo Sensor"}
                 editarComponente={<EditarTipoSensors />}
                 columnas={columnas}
+                mostrarEdicionEnModal={true}
+                modalEdicionProps={{
+                    showHeader: false,
+                    style: { width: "min(980px, 92vw)" },
+                }}
                 deleteRegistro={deleteTipoSensor}
                 onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
             />

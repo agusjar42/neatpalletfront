@@ -71,6 +71,11 @@ const Pais = () => {
                 empresaId={null}
                 editarComponente={<EditarPais />}
                 columnas={columnas}
+                mostrarEdicionEnModal={true}
+                modalEdicionProps={{
+                    showHeader: false,
+                    style: { width: "min(980px, 92vw)" },
+                }}
                 deleteRegistro={deletePais}
                 procesarImportacionCSV={procesarImportacionCSV}
                 onDataChange={() => setSummaryRefreshKey((key) => key + 1)}

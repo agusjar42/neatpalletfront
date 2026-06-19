@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getVistaEmpresaRol, getVistaEmpresaRolCount } from "@/app/api-endpoints/rol";
+import { getRol, getRolCount } from "@/app/api-endpoints/rol";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 
 const PANTALLAS_INICIO_DISPONIBLES = 10;
@@ -18,11 +18,11 @@ const RolIntro = ({ refreshKey = 0 }) => {
         const cargarResumen = async () => {
             try {
                 const empresaId = getUsuarioSesion()?.empresaId;
-                const whereEmpresa = { and: { empresaId } };
+                const filtroEmpresa = JSON.stringify({ where: { and: { empresaId } } });
                 const [totalResponse, registros] = await Promise.all([
-                    getVistaEmpresaRolCount(JSON.stringify(whereEmpresa)),
-                    getVistaEmpresaRol(JSON.stringify({
-                        where: whereEmpresa,
+                    getRolCount(filtroEmpresa),
+                    getRol(JSON.stringify({
+                        where: { and: { empresaId } },
                         fields: { activoSn: true, dashboardUrl: true },
                     })),
                 ]);

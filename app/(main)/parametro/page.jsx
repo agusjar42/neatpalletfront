@@ -38,6 +38,11 @@ const Parametro = () => {
                 controlador={"Parámetros permitidos de Pallet"}
                 editarComponente={<EditarParametro />}
                 columnas={columnas}
+                mostrarEdicionEnModal={true}
+                modalEdicionProps={{
+                    showHeader: false,
+                    style: { width: "min(980px, 92vw)" },
+                }}
                 deleteRegistro={deleteParametro}
                 onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
             />

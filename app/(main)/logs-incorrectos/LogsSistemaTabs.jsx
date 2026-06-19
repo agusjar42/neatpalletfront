@@ -7,7 +7,8 @@ const tabs = [
     { label: "Informes de contenido", href: "/envio-contenido", icon: "pi pi-file" },
     { label: "Informes de movimiento", href: "/envio-movimiento", icon: "pi pi-arrows-h" },
     { label: "Logs del sistema", href: "/logs-incorrectos", icon: "pi pi-list" },
-    { label: "Logs del usuario", href: "/tablas-maestras/log_usuario", icon: "pi pi-wave-pulse" },
+    { label: "Logs del usuario", href: "/tablas-maestras/log_usuario", icon: "pi pi-history" },
+    { label: "Histórico de json", href: "/tablas-maestras/log_json", icon: "pi pi-code" },
 ];
 
 const LogsSistemaTabs = () => {

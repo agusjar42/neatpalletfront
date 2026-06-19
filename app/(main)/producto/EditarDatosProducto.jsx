@@ -28,7 +28,6 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando }) => {
             mode="decimal"
             useGrouping={false}
             min={0}
-            max={99999}
             placeholder={intl.formatMessage({ id: "Orden del producto" })}
             inputStyle={{ textAlign: "right" }}
           />

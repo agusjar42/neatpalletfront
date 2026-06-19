@@ -69,11 +69,13 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
         });
     };
 
-    const cargarDatos = useCallback(async () => {
+    const cargarDatos = useCallback(async (mostrarSpinner = true) => {
         if (!puedeCargarDatosProtegidos()) {
             return;
         }
-        setCargando(true);
+        if (mostrarSpinner) {
+            setCargando(true);
+        }
         try {
             const [respuestaPallets, respuestaEmpresas, respuestaAsignaciones] = await Promise.all([
                 getPallet(JSON.stringify({ order: ["orden ASC", "codigo ASC"] })),
@@ -93,7 +95,9 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                 life: 3000
             });
         } finally {
-            setCargando(false);
+            if (mostrarSpinner) {
+                setCargando(false);
+            }
         }
     }, [intl]);
 
@@ -437,7 +441,21 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                 await Promise.all(asignacionesAEliminar.map((asignacion) => deleteEmpresaPallet(asignacion.id)));
             }
 
-            await cargarDatos();
+            toast.current?.show({
+                severity: "success",
+                summary: intl.formatMessage({ id: "OK" }),
+                detail: checked
+                    ? intl.formatMessage({ id: "La asignacion del pallet se ha realizado correctamente" })
+                    : intl.formatMessage({ id: "La desasignacion del pallet se ha realizado correctamente" }),
+                life: 3000
+            });
+
+            //
+            //Recargamos la tabla despues de lanzar el mensaje, para no desmontar
+            //el Toast antes de que tenga oportunidad de mostrarse
+            //
+            await cargarDatos(false);
+
         } catch (error) {
             console.error("Error actualizando asignacion de pallet", error);
 
@@ -451,7 +469,7 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                 life: 3000
             });
 
-            await cargarDatos();
+            await cargarDatos(false);
         } finally {
             marcarPalletPendiente(palletId, false);
         }

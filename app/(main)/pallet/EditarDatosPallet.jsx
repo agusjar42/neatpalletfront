@@ -20,7 +20,6 @@ const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
                         mode="decimal"
                         useGrouping={false}
                         min={0}
-                        max={99999}
                         inputStyle={{ textAlign: 'right' }}
                     />
                 </div>

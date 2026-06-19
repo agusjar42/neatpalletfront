@@ -133,7 +133,6 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                         mode="decimal"
                         useGrouping={false}
                         min={0}
-                        max={99999}
                         inputStyle={{ textAlign: 'right' }} />
                 </div>
                 {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">

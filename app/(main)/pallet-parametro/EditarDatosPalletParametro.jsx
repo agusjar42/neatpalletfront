@@ -59,7 +59,6 @@ const EditarDatosPalletParametro = ({ palletParametro, setPalletParametro, estad
                         mode="decimal"
                         useGrouping={false}
                         min={0}
-                        max={99999} 
                         inputStyle={{ textAlign: 'right' }}/>
                 </div>
                 {/* Solo mostrar el desplegable Pallet si palletId viene vacio */}

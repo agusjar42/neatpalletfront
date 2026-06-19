@@ -247,8 +247,12 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             return;
         }
 
-        onModoEdicionChange(idEditar === 0 || idEditar > 0);
-    }, [idEditar, onModoEdicionChange]);
+        //
+        //Solo marcamos edicion activa cuando estamos creando un registro
+        //o editando de verdad, no cuando la ficha se abre en modo solo lectura
+        //
+        onModoEdicionChange(idEditar === 0 || (idEditar > 0 && editable));
+    }, [editable, idEditar, onModoEdicionChange]);
 
     useEffect(() => {
         if (!puedeCargarDatosProtegidos()) {

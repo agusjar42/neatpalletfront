@@ -109,7 +109,6 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
               mode="decimal"
               useGrouping={false}
               min={0}
-              max={99999}
               placeholder={intl.formatMessage({ id: "Orden del cliente" })}
               inputStyle={{ textAlign: 'right' }}/>
           </div>

@@ -32,6 +32,11 @@ const EventosConfiguracion = () => {
                 controlador={"Eventos Configuración"}
                 editarComponente={<EditarEventoConfiguracion />}
                 columnas={columnas}
+                mostrarEdicionEnModal={true}
+                modalEdicionProps={{
+                    showHeader: false,
+                    style: { width: "min(1080px, 94vw)" },
+                }}
                 deleteRegistro={deleteEventoConfiguracion}
                 onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
             />

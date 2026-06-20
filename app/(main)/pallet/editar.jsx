@@ -16,17 +16,27 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
     const [pallet, setPallet] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [mostrarParametrosTrasAlta, setMostrarParametrosTrasAlta] = useState(false);
     const intl = useIntl();
 
     useEffect(() => {
         const fetchData = async () => {
+            if (idEditar === 0) {
+                setPallet(emptyRegistro);
+                setMostrarParametrosTrasAlta(false);
+                return;
+            }
+
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
-                setPallet(registro);
+                if (registro) {
+                    setPallet(registro);
+                }
+                setMostrarParametrosTrasAlta(false);
             }
         };
         fetchData();
-    }, [idEditar, rowData]);
+    }, [emptyRegistro, idEditar, rowData]);
 
     const validaciones = async () => {
         let existeCodigo = false;
@@ -82,8 +92,17 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                 const nuevoRegistro = await postPallet(objGuardar);
 
                 if (nuevoRegistro?.id) {
+                    //
+                    //Tras crear el pallet, mantenemos la ficha abierta para
+                    //poder trabajar inmediatamente con el bloque inferior
+                    //
+                    setPallet((prevState) => ({
+                        ...prevState,
+                        ...nuevoRegistro,
+                    }));
+                    setMostrarParametrosTrasAlta(true);
                     setRegistroResult("insertado");
-                    setIdEditar(null);
+                    setIdEditar(nuevoRegistro.id);
                 } else {
                     toast.current?.show({
                         severity: 'error',
@@ -135,7 +154,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                             // Si el pallet ya está creado, mostramos la tabla de parámetros.
                             // Ojo: en editarComponenteParametrosExtra le pasamos palletId para que al crear un nuevo parámetro ya venga relleno.
                             //
-                            pallet.id && <div><br></br>
+                            mostrarParametrosTrasAlta && pallet.id && <div><br></br>
                                 <Crud
                                     headerCrud={intl.formatMessage({ id: 'Parámetros' })}
                                     getRegistros={getPalletParametro}

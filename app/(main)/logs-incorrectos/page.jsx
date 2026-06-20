@@ -17,6 +17,8 @@ const LogsIncorrectos = () => {
     const intl = useIntl();
     const [archivos, setArchivos] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(20);
     const toast = useRef(null);
 
     useEffect(() => {
@@ -182,6 +184,54 @@ const LogsIncorrectos = () => {
         return formatearTamaño(rowData.tamaño);
     };
 
+    const manejarCambioDePagina = (event) => {
+        setFirst(event.first);
+        setRows(event.rows);
+    };
+
+    const paginatorTemplate = {
+        layout: "CurrentPageReport RowsPerPageDropdown",
+        CurrentPageReport: (options) => (
+            <span className="neat-paginator-report">
+                {intl.formatMessage({ id: "Mostrando" })} {options.last} {intl.formatMessage({ id: "de" })} {options.totalRecords} (total {options.totalRecords})
+            </span>
+        ),
+        RowsPerPageDropdown: (options) => {
+            const rowOptions = [20, 50, 100];
+            const currentRows = Number(options.value) || rows;
+            const currentPage = options.currentPage || 0;
+            const totalPages = options.totalPages || 1;
+            const hasMultiplePages = totalPages > 1;
+            const goToPage = (page) => manejarCambioDePagina({ first: page * currentRows, rows: currentRows });
+
+            return (
+                <div className="neat-rows-per-page">
+                    {hasMultiplePages && (
+                        <div className="neat-page-nav-group">
+                            <button type="button" className="neat-page-nav" disabled={currentPage <= 0} onClick={() => goToPage(currentPage - 1)}>
+                                Anterior
+                            </button>
+                            <button type="button" className="neat-page-nav" disabled={currentPage >= totalPages - 1} onClick={() => goToPage(currentPage + 1)}>
+                                Siguiente
+                            </button>
+                        </div>
+                    )}
+                    <span>Por pagina:</span>
+                    {rowOptions.map((rowCount) => (
+                        <button
+                            key={rowCount}
+                            type="button"
+                            className={options.value === rowCount ? "active" : ""}
+                            onClick={(event) => options.onChange({ originalEvent: event, value: rowCount })}
+                        >
+                            {rowCount}
+                        </button>
+                    ))}
+                </div>
+            );
+        }
+    };
+
     return (
         <div className="grid">
             <ConfirmDialog />
@@ -213,7 +263,11 @@ const LogsIncorrectos = () => {
                         <DataTable
                             value={archivos}
                             paginator
-                            rows={10}
+                            first={first}
+                            rows={rows}
+                            onPage={manejarCambioDePagina}
+                            rowsPerPageOptions={[20, 50, 100]}
+                            paginatorTemplate={paginatorTemplate}
                             dataKey="nombre"
                             emptyMessage={intl.formatMessage({ id: "No se encontraron archivos" })}
                             className="datatable-responsive"

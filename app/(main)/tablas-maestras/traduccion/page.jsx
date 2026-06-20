@@ -4,38 +4,48 @@ import { getIdiomas } from "@/app/api-endpoints/idioma";
 import EditarTraduccion from "./editar";
 import Crud from "../../../components/shared/crud";
 import { useIntl } from 'react-intl'
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { createResult, getUsuarioSesionId, getValueFromRow, normalizeHeader, parseNumberOrNull } from "@/app/utility/csv-import-utils";
 import LenguajesTabs from "../LenguajesTabs";
 import TraduccionIntro from "./TraduccionIntro";
 
 const Traduccion = () => {
     const intl = useIntl();
-    const [columnas, setColumnas] = useState([{ campo: 'clave', header: intl.formatMessage({ id: 'Clave' }), tipo: 'string' }]);
+    const [idiomas, setIdiomas] = useState([]);
     const [summaryRefreshKey, setSummaryRefreshKey] = useState(0);
 
     useEffect(() => {
-        const cargarColumnas = async () => {
+        const cargarIdiomas = async () => {
             try {
-                // Obtener los idiomas de la base de datos
-                const idiomas = await getIdiomas();
-                const idiomasOrdenados = idiomas.sort((a, b) => a.nombre.localeCompare(b.nombre));
-                // Añadir una columna por cada idioma
-                const columnasIdiomas = idiomasOrdenados.map(idioma => ({
-                    campo: idioma.nombre.toLowerCase(),
-                    header: idioma.nombre,
-                    tipo: 'string'
-                }));
-
-                // Combinar las columnas base con las de idiomas
-                setColumnas([...columnas, ...columnasIdiomas]);
+                //
+                //Cargamos los idiomas una sola vez para reutilizarlos en toda la pantalla
+                //
+                const idiomasData = await getIdiomas();
+                const idiomasOrdenados = Array.isArray(idiomasData)
+                    ? [...idiomasData].sort((a, b) => a.nombre.localeCompare(b.nombre))
+                    : [];
+                setIdiomas(idiomasOrdenados);
             } catch (error) {
                 console.error('Error al cargar los idiomas:', error);
             }
         };
 
-        cargarColumnas();
-    }, [intl]);
+        cargarIdiomas();
+    }, []);
+
+    const columnas = useMemo(() => {
+        //
+        //Construimos las columnas dinamicas usando la cache local de idiomas
+        //
+        return [
+            { campo: 'clave', header: intl.formatMessage({ id: 'Clave' }), tipo: 'string' },
+            ...idiomas.map((idioma) => ({
+                campo: idioma.nombre.toLowerCase(),
+                header: idioma.nombre,
+                tipo: 'string'
+            }))
+        ];
+    }, [idiomas, intl]);
 
     const obtenerTranslationId = (row, idiomaNombreNormalizado) => {
         if (!row) return null;
@@ -51,7 +61,6 @@ const Traduccion = () => {
     const procesarImportacionCSV = async ({ rows, rowsNormalizados }) => {
         const result = createResult();
         const usuarioSesionId = getUsuarioSesionId();
-        const idiomas = await getIdiomas();
         const idiomaByNombre = new Map();
         const idiomaByIso = new Map();
 
@@ -128,15 +137,16 @@ const Traduccion = () => {
     return (
         <div>
             <LenguajesTabs />
-            <TraduccionIntro refreshKey={summaryRefreshKey} />
+            <TraduccionIntro refreshKey={summaryRefreshKey} idiomas={idiomas} />
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Traducciones' })}
                 getRegistros={getVistaTraduccionIdioma}
                 getRegistrosCount={getVistaTraduccionIdiomaCount}
-                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV', 'importarCSV']}
+                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'importarCSV']}
                 controlador={"Traducciones"}
                 //parametrosEliminar={['id', 'inglesId']}
                 editarComponente={<EditarTraduccion />}
+                editarComponenteParametrosExtra={{ listaIdiomasInicial: idiomas }}
                 columnas={columnas}
                 mostrarEdicionEnModal={true}
                 modalEdicionProps={{

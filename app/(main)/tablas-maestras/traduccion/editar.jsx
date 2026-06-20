@@ -1,49 +1,40 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
-import { getIdiomas } from "@/app/api-endpoints/idioma";
 import { postTraduccion, patchTraduccion } from "@/app/api-endpoints/traduccion";
 import EditarDatosTraduccion from "./EditarDatosTraduccion";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
-const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+
+const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, listaIdiomasInicial = [] }) => {
     const intl = useIntl();
     const toast = useRef(null);
     const [traduccion, setTraduccion] = useState(emptyRegistro);
-    const [listaIdiomas, setListaIdiomas] = useState([]);
-    const [idiomaSeleccionado, setIdiomaSeleccionado] = useState(null);
+    const [listaIdiomas, setListaIdiomas] = useState(listaIdiomasInicial);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
 
+    useEffect(() => {
+        //
+        //Reutilizamos la lista de idiomas ya cargada en la pagina
+        //
+        setListaIdiomas(listaIdiomasInicial);
+    }, [listaIdiomasInicial]);
 
     useEffect(() => {
         //
-        //Lo marcamos aquí como saync ya que useEffect no permite ser async porque espera que la función que le pases devueva undefined o una función para limpiar el efecto. 
-        //Una función async devuelve una promesa, lo cual no es compatible con el comportamiento esperado de useEffect.
+        //Cargamos el registro cuando abrimos editar o ver
         //
-        const fetchData = async () => {
-            // Obtenemos todas las idiomas
-            try {
-                const idiomasData = await getIdiomas();
-                // Ordenar idiomas alfabéticamente
-                const idiomasOrdenados = idiomasData.sort((a, b) => a.nombre.localeCompare(b.nombre));
-                setListaIdiomas(idiomasOrdenados);
-            } catch (error) {
-                console.error('Error al cargar los idiomas:', error);
-            }
-
-            // Si el idEditar es diferente de nuevo, entonces se va a editar
-            if (idEditar !== 0) {
-                // Obtenemos el registro a editar
-                const registro = rowData.find((element) => element.id === idEditar);
-                setTraduccion(registro);
-            }
-        };
-        fetchData();
-    }, [idEditar, rowData]);
+        if (idEditar !== 0) {
+            const registro = rowData.find((element) => element.id === idEditar);
+            setTraduccion(registro);
+        }
+        else {
+            setTraduccion(emptyRegistro);
+        }
+    }, [emptyRegistro, idEditar, rowData]);
 
     const validaciones = async () => {
         //const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado.id === "";
@@ -51,7 +42,7 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
         //const validaValor = traduccion.valor === undefined || traduccion.valor === "";
 
         //
-        //Si existe algún bloque vacio entonces no se puede guardar
+        //Si existe algun bloque vacio entonces no se puede guardar
         //
         return !validaClave  // (!validaClave && !validaValor && !validaIdioma)
     }

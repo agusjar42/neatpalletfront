@@ -131,6 +131,11 @@ const Pallet = () => {
                 controlador={"Pallet"}
                 editarComponente={<EditarPallets />}
                 columnas={columnas}
+                mostrarEdicionEnModal={true}
+                modalEdicionProps={{
+                    showHeader: false,
+                    style: { width: "min(1200px, 96vw)" },
+                }}
                 deleteRegistro={deletePallet}
                 procesarDatosParaCSV={procesarDatosParaCSV}
                 procesarImportacionCSV={procesarImportacionCSV}

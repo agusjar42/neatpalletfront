@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getIdiomas } from "@/app/api-endpoints/idioma";
 import { getTraducciones } from "@/app/api-endpoints/traduccion";
 
-const TraduccionIntro = ({ refreshKey = 0 }) => {
+const TraduccionIntro = ({ refreshKey = 0, idiomas = [] }) => {
     const [summary, setSummary] = useState({
         claves: "-",
         idiomasActivos: "-",
@@ -18,10 +17,14 @@ const TraduccionIntro = ({ refreshKey = 0 }) => {
     useEffect(() => {
         const cargarResumen = async () => {
             try {
-                const [idiomas, traducciones] = await Promise.all([
-                    getIdiomas(JSON.stringify({ fields: { id: true, iso: true, activoSn: true } })),
-                    getTraducciones(JSON.stringify({ fields: { idiomaId: true, clave: true, valor: true } })),
-                ]);
+                if (!Array.isArray(idiomas) || idiomas.length === 0) {
+                    return;
+                }
+
+                //
+                //Solo pedimos las traducciones porque los idiomas ya estan disponibles
+                //
+                const traducciones = await getTraducciones(JSON.stringify({ fields: { idiomaId: true, clave: true, valor: true } }));
 
                 const idiomasActivos = Array.isArray(idiomas)
                     ? idiomas.filter((idioma) => idioma?.activoSn === "S")
@@ -70,7 +73,7 @@ const TraduccionIntro = ({ refreshKey = 0 }) => {
         };
 
         cargarResumen();
-    }, [refreshKey]);
+    }, [idiomas, refreshKey]);
 
     return (
         <section className="neat-page-intro">

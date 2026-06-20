@@ -60,7 +60,8 @@ const EditarDatosIdioma = ({ idioma, setIdioma, estadoGuardando, isoIdiomas, set
                             completeMethod={busquedaIsoIdiomas}
                             onChange={(e) => setIsoSeleccionado(e.value)}
                             //className={`${(estadoGuardando && idioma.iso === "") ? "p-invalid" : ""}`}
-                            style={{ width: '350px' }} // Ajusta este valor según sea necesario
+                            className="w-full"
+                            inputClassName="w-full"
                         />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">

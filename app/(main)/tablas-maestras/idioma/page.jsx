@@ -75,7 +75,7 @@ const Idioma = () => {
                 mostrarEdicionEnModal={true}
                 modalEdicionProps={{
                     showHeader: false,
-                    style: { width: "min(980px, 92vw)" },
+                    style: { width: "min(1120px, 96vw)" },
                 }}
                 deleteRegistro={deleteIdioma}
                 procesarImportacionCSV={procesarImportacionCSV}

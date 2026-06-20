@@ -25,6 +25,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const [listaIdiomas, setListaIdiomas] = useState([]);
     const [idiomaSeleccionado, setIdiomaSeleccionado] = useState(null);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
+    const [nombreEmpresaMostrar, setNombreEmpresaMostrar] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -40,6 +41,10 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 const usuarioEditar = rowData.find((element) => element.id === idEditar);
                 empresaFiltrar = usuarioEditar?.empresaId || null;
             }
+            const registrosEmpresas = empresaFiltrar ? await getEmpresas(JSON.stringify({ where: { id: empresaFiltrar } })) : [];
+            const usuarioEditar = rowData.find((element) => element.id === idEditar);
+            setNombreEmpresaMostrar(registrosEmpresas?.[0]?.nombre || usuarioEditar?.nombreEmpresa || "");
+
             const filtroRol = { where: { and: { empresaId: empresaFiltrar } } };
             const registrosRoles = await getRol(JSON.stringify(filtroRol));
 
@@ -70,6 +75,19 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 .filter(registro => registro.activoSn === 'S')
                 .sort((a, b) => a.nombre.localeCompare(b.nombre));
             setListaIdiomas(jsonIdiomasActivos);
+
+            //
+            //Si estamos creando uno nuevo, dejamos seleccionados rol e idioma
+            //para no romper la validacion aunque no se muestren ambos campos
+            //
+            if (idEditar === 0) {
+                if (!rolSeleccionado && jsonRolesActivos.length > 0) {
+                    setRolSeleccionado(jsonRolesActivos[0].nombre);
+                }
+                if (!idiomaSeleccionado && jsonIdiomasActivos.length > 0) {
+                    setIdiomaSeleccionado(jsonIdiomasActivos[0].nombre);
+                }
+            }
 
             // Si el idEditar es diferente de nuevo, entonces se va a editar
             if (idEditar !== 0) {
@@ -277,6 +295,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Usuario' })).toLowerCase()}</h2>
+                        <p className="usuario-edit-description">Cambia los datos personales, rol o empresa asignada.</p>
                         <EditarDatosUsuario
                             usuario={usuario}
                             setUsuario={setUsuario}
@@ -289,18 +308,18 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                             idiomaSeleccionado={idiomaSeleccionado}
                             setIdiomaSeleccionado={setIdiomaSeleccionado}
                             estadoGuardando={estadoGuardando}
+                            nombreEmpresaMostrar={nombreEmpresaMostrar}
                         />
-                        <div className="flex justify-content-end mt-2">
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : 'Guardar cambios'}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarUsuario}
-                                    className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>

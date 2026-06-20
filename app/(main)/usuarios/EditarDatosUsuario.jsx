@@ -1,30 +1,38 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-import { InputSwitch } from 'primereact/inputswitch';
 import { useIntl } from 'react-intl'
-import { Image } from 'primereact/image';
 import { Button } from "primereact/button";
 import 'react-phone-input-2/lib/bootstrap.css'
 import { convertirArchivoABase64 } from "@/app/utility/Utils";
 import { Toast } from "primereact/toast";
 import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
-import { getUsuarios } from "@/app/api-endpoints/usuario";
+
+//
+//Generamos las iniciales para la previsualizacion del avatar
+//
+const obtenerInicialesUsuario = (nombre = "") => {
+    const partes = String(nombre).trim().split(/\s+/).filter(Boolean);
+    if (partes.length === 0) {
+        return "--";
+    }
+    if (partes.length === 1) {
+        return partes[0].slice(0, 2).toUpperCase();
+    }
+    return `${partes[0][0] ?? ""}${partes[1][0] ?? ""}`.toUpperCase();
+};
 
 const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccionado, setIdiomaSeleccionado, estadoGuardando,
-    listaRoles, rolSeleccionado, setRolSeleccionado, listaTipoArchivos
+    listaRoles, rolSeleccionado, setRolSeleccionado, nombreEmpresaMostrar
 }) => {
     const intl = useIntl()
     const toast = useRef(null);
 
     const [puedeSeleccionarRol, setPuedeSeleccionarRol] = useState(false);
     const [previewAvatar, setPreviewAvatar] = useState(usuario.avatarBase64 || null);
-    const [dropdownAbiertoIdioma, setDropdownAbiertoIdioma] = useState(false);
     const [dropdownAbiertoRol, setDropdownAbiertoRol] = useState(false);
     const avatarInputRef = useRef(null);
 
-    const optionsIdioma = dropdownAbiertoIdioma ? listaIdiomas.map(registro => registro.nombre) : [idiomaSeleccionado || '', ...listaIdiomas.map(registro => registro.nombre)];
     const optionsRol = dropdownAbiertoRol ? listaRoles.map(registro => registro.nombre) : [rolSeleccionado || '', ...listaRoles.map(registro => registro.nombre)];
 
     useEffect(() => {
@@ -44,34 +52,14 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
         setPreviewAvatar(usuario.avatarBase64 || null);
     }, [usuario.id, usuario.avatarBase64]);
 
-    const manejarCambioInputSwitch = async (e, nombreInputSwitch) => {
-        let permiteDesactivar = true;
-        if (nombreInputSwitch === "usuarioAdmin" && e.target && e.target.value === false) {
-            const usuariosAdmin = await getUsuarios(JSON.stringify({ where: { and: { empresaId: usuario.empresaId, usuarioAdmin: 'S' } } }));
-            if (usuariosAdmin.length === 1 && usuariosAdmin[0].id === usuario.id) {
-                permiteDesactivar = false;
-                toast.current?.show({
-                    severity: 'warn',
-                    summary: 'ADVERTENCIA',
-                    detail: intl.formatMessage({ id: 'No puede desactivar este switch, porque no existe ningún otro usuario con privilegios de administrador. Actívelo en otro si quiere desactivar este' }),
-                    life: 3000,
-                });
-            }
-        }
-        if (permiteDesactivar) {
-            const valor = (e.target && e.target.value) || "";
-            let _usuario = { ...usuario };
-            const esTrue = valor === true ? 'S' : 'N';
-            _usuario[`${nombreInputSwitch}`] = esTrue;
-            setUsuario(_usuario);
-        }
-    };
-
+    //
+    //Convertimos la imagen seleccionada en base64 para conservar el flujo actual
+    //
     const onSelectAvatar = async (e) => {
         if (e.files && e.files.length > 0) {
             const file = e.files[0];
-
             const maxSize = 2 * 1024 * 1024;
+
             if (file.size > maxSize) {
                 toast.current?.show({
                     severity: 'error',
@@ -104,145 +92,92 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
         }
     };
 
-    const limpiarAvatar = () => {
-        setPreviewAvatar(null);
-        setUsuario({
-            ...usuario,
-            avatar: null,
-            avatarBase64: null,
-            avatarNombre: null,
-            avatarTipo: null
-        });
-        if (avatarInputRef.current) {
-            avatarInputRef.current.value = '';
-        }
-    };
-
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos para el Usuario' })}>
+        <div className="usuario-edit-modal-body">
             <Toast ref={toast} position="top-right" />
-            <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="usuRol"><b>{intl.formatMessage({ id: 'Rol' })}*</b> </label>
-                    <Dropdown value={rolSeleccionado || ""}
+
+            <div className="usuario-edit-avatar-panel">
+                <div className="usuario-edit-avatar-circle">
+                    {(previewAvatar || usuario.avatar) ? (
+                        <img src={previewAvatar || usuario.avatar} alt="Avatar del usuario" />
+                    ) : (
+                        <span>{obtenerInicialesUsuario(usuario.nombre)}</span>
+                    )}
+                </div>
+
+                <div className="usuario-edit-avatar-copy">
+                    <Button
+                        label="Subir foto"
+                        className="p-button-outlined p-button-sm"
+                        onClick={() => avatarInputRef.current?.click()}
+                    />
+                    <small>PNG o JPG. Cuadrada, 1:1 recomendado.</small>
+                </div>
+
+                <input
+                    id="avatar"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                            onSelectAvatar({ files: [e.target.files[0]] });
+                        }
+                    }}
+                    style={{ display: 'none' }}
+                    ref={avatarInputRef}
+                />
+            </div>
+
+            <div className="usuario-edit-form-grid">
+                <div className="usuario-edit-field">
+                    <label htmlFor="nombre">{intl.formatMessage({ id: 'Nombre' })}</label>
+                    <InputText
+                        value={usuario.nombre || ""}
+                        onChange={(e) => setUsuario({ ...usuario, nombre: e.target.value })}
+                        className={`${(estadoGuardando && usuario.nombre === "") ? "p-invalid" : ""}`}
+                        maxLength={50}
+                    />
+                </div>
+
+                <div className="usuario-edit-field">
+                    <label htmlFor="mail">{intl.formatMessage({ id: 'Email' })}</label>
+                    <InputText
+                        value={usuario.mail || ""}
+                        autoComplete='off'
+                        onChange={(e) => setUsuario({ ...usuario, mail: e.target.value })}
+                        maxLength={100}
+                    />
+                </div>
+
+                <div className="usuario-edit-field">
+                    <label htmlFor="telefono">{intl.formatMessage({ id: 'Telefono' })}</label>
+                    <InputText
+                        value={usuario.telefono || ""}
+                        onChange={(e) => setUsuario({ ...usuario, telefono: e.target.value })}
+                        className={`${(estadoGuardando && usuario.telefono === "") ? "p-invalid" : ""}`}
+                        maxLength={50}
+                    />
+                </div>
+
+                <div className="usuario-edit-field">
+                    <label htmlFor="empresaNombre">{intl.formatMessage({ id: 'Empresa' })}</label>
+                    <InputText value={nombreEmpresaMostrar || usuario.nombreEmpresa || ""} disabled />
+                </div>
+
+                <div className="usuario-edit-field usuario-edit-field-full">
+                    <label htmlFor="usuRol">{intl.formatMessage({ id: 'Rol' })}</label>
+                    <Dropdown
+                        value={rolSeleccionado || ""}
                         onChange={(e) => setRolSeleccionado(e.value)}
                         options={optionsRol}
                         onClick={() => setDropdownAbiertoRol(true)}
                         disabled={!puedeSeleccionarRol}
-                        className={`p-column-filter ${(estadoGuardando && (rolSeleccionado == null || rolSeleccionado === "")) ? "p-invalid" : ""}`}
-                        showClear
-                        placeholder={intl.formatMessage({ id: 'Selecciona un rol' })} />
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="examenIdioma"><b>{intl.formatMessage({ id: 'Idioma' })}*</b> </label>
-                    <Dropdown value={idiomaSeleccionado || ""}
-                        onChange={(e) => setIdiomaSeleccionado(e.value)}
-                        options={optionsIdioma}
-                        onClick={() => setDropdownAbiertoIdioma(true)}
-                        className={`p-column-filter ${(estadoGuardando && (idiomaSeleccionado == null || idiomaSeleccionado === "")) ? "p-invalid" : ""}`}
-                        showClear
-                        placeholder={intl.formatMessage({ id: 'Selecciona un idioma' })} />
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
-                    <InputText value={usuario.nombre}
-                        placeholder={intl.formatMessage({ id: 'Nombre' })}
-                        onChange={(e) => setUsuario({ ...usuario, nombre: e.target.value })}
-                        className={`${(estadoGuardando && usuario.nombre === "") ? "p-invalid" : ""}`}
-                        rows={5} cols={30} maxLength={50} />
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="mail"><b>{intl.formatMessage({ id: 'Mail' })}*</b></label>
-                    <InputText value={usuario.mail}
-                        placeholder={intl.formatMessage({ id: 'Mail' })}
-                        autoComplete='off'
-                        onChange={(e) => setUsuario({ ...usuario, mail: e.target.value })}
-                        rows={5} cols={30} maxLength={50} />
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="telefono"><b>{intl.formatMessage({ id: 'Teléfono' })}*</b></label>
-                    <InputText value={usuario.telefono}
-                        onChange={(e) => setUsuario({ ...usuario, telefono: e.target.value })}
-                        className={`${(estadoGuardando && usuario.telefono === "") ? "p-invalid" : ""}`}
-                        rows={5} cols={30} maxLength={50}
-                        style={{ textAlign: "right" }} />
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="activoSN" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
-                    <InputSwitch
-                        checked={usuario.activoSn === 'S'}
-                        onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
-                    />
-                </div>
-                {(JSON.parse(localStorage.getItem('userDataNeatpallet'))?.["usuarioAdmin"] || "N") === "S" && (
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="usuarioAdmin" className="font-bold block">{intl.formatMessage({ id: 'Usuario Admin' })}</label>
-                        <InputSwitch
-                            checked={usuario.usuarioAdmin === 'S'}
-                            onChange={(e) => manejarCambioInputSwitch(e, "usuarioAdmin")}
-                        />
-                    </div>
-                )}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="avatar" className="pb-2">{intl.formatMessage({ id: 'Avatar' })}</label>
-                    <div className="p-3 border-1 border-round surface-border">
-                        <div
-                            className="flex justify-content-center align-items-center border-circle surface-100 mx-auto overflow-hidden"
-                            style={{ width: '150px', height: '150px' }}
-                        >
-                            {(previewAvatar || usuario.avatar) ? (
-                                <Image
-                                    src={previewAvatar || usuario.avatar}
-                                    alt="Avatar del usuario"
-                                    width="150"
-                                    height="150"
-                                    className="border-circle"
-                                    imageStyle={{ width: '150px', height: '150px', objectFit: 'cover' }}
-                                    preview
-                                />
-                            ) : (
-                                <small className="text-color-secondary text-center px-2">Sin avatar</small>
-                            )}
-                        </div>
-                        <div className="mt-2 text-center">
-                            <small className={previewAvatar ? "text-green-600" : "text-color-secondary"}>
-                                {previewAvatar
-                                    ? `Nuevo avatar seleccionado${usuario.avatarNombre ? `: ${usuario.avatarNombre}` : ''}`
-                                    : (usuario.avatar ? 'Avatar actual' : 'No hay avatar cargado')}
-                            </small>
-                        </div>
-                        <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
-                            <Button
-                                label={usuario.avatar || previewAvatar ? "Cambiar avatar" : "Seleccionar avatar"}
-                                icon="pi pi-upload"
-                                className="p-button-outlined p-button-sm"
-                                onClick={() => avatarInputRef.current?.click()}
-                            />
-                            {(previewAvatar || usuario.avatar) && (
-                                <Button
-                                    label="Quitar"
-                                    icon="pi pi-times"
-                                    className="p-button-text p-button-sm"
-                                    onClick={limpiarAvatar}
-                                />
-                            )}
-                        </div>
-                    </div>
-                    <input
-                        id="avatar"
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                            if (e.target.files && e.target.files[0]) {
-                                onSelectAvatar({ files: [e.target.files[0]] });
-                            }
-                        }}
-                        style={{ display: 'none' }}
-                        ref={avatarInputRef}
+                        className={`${(estadoGuardando && (rolSeleccionado == null || rolSeleccionado === "")) ? "p-invalid" : ""}`}
+                        placeholder={intl.formatMessage({ id: 'Selecciona un rol' })}
                     />
                 </div>
             </div>
-        </Fieldset>
+        </div>
    );
 };
 export default EditarDatosUsuario;

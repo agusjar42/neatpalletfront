@@ -32,6 +32,14 @@ const Usuario = () => {
         }
     }, []);
 
+    const propsModal = {
+        mostrarEdicionEnModal: true,
+        modalEdicionProps: {
+            showHeader: false,
+            style: { width: "min(1080px, 94vw)" },
+        },
+    };
+
     const columnasUsuarioAdmin = [
         { campo: 'nombreEmpresa', header: intl.formatMessage({ id: 'Empresa' }), tipo: 'string' },
         { campo: 'nombreRol', header: intl.formatMessage({ id: 'Rol' }), tipo: 'string' },
@@ -71,9 +79,10 @@ const Usuario = () => {
                     seccion={"Usuario"}
                     columnas={columnas}
                     deleteRegistro={deleteUsuario}
+                    {...propsModal}
                 />
             )}
-            {//                
+            {//
             //Si estoy entrando en la vista de usuarios y soy administrador no filtro por empresa mostrando todos los usuarios del sistema
             //
             }
@@ -88,9 +97,10 @@ const Usuario = () => {
                     seccion={"Usuario"}
                     columnas={columnasUsuarioAdmin}
                     deleteRegistro={deleteUsuario}
+                    {...propsModal}
                 />
             }
-            {//                
+            {//
             //Si estoy entrando en la vista de usuarios y NO soy administrador filtro por empresa mostrando solo los usuarios de la empresa
             //
             }
@@ -108,6 +118,7 @@ const Usuario = () => {
                     seccion={"Usuario"}
                     columnas={columnas}
                     deleteRegistro={deleteUsuario}
+                    {...propsModal}
                 />
             }
 

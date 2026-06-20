@@ -1,6 +1,7 @@
-﻿"use client";
+"use client";
 import { getEnvio, getEnvioCount, deleteEnvio } from "@/app/api-endpoints/envio";
 import EditarEnvios from "./editar";
+import { EmpresaEnvioDetalle } from "../tablas-maestras/empresa/page";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl';
 import { getUsuarioSesion } from "@/app/utility/Utils";
@@ -26,6 +27,18 @@ const realRoute = [
     [39.4730, -0.3830],
     [39.4750, -0.3900],
 ];
+
+const EnvioEdicionUnificada = (props) => {
+    //
+    //Mantenemos el alta con el editor actual y reutilizamos
+    //el detalle moderno para los registros ya existentes
+    //
+    if (props.idEditar === 0) {
+        return <EditarEnvios {...props} />;
+    }
+
+    return <EmpresaEnvioDetalle {...props} />;
+};
 
 const Envio = () => {
     const intl = useIntl();
@@ -97,9 +110,10 @@ const Envio = () => {
                     getRegistros={getEnvio}
                     getRegistrosCount={getEnvioCount}
                     botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                    accionEntradaPorFila="ver"
                     controlador={"Envíos"}
-                    filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
-                    editarComponente={<EditarEnvios onModoEdicionChange={setMostrarAccionesRuta} />}
+                    filtradoBase={{ empresaId: getUsuarioSesion()?.empresaId }}
+                    editarComponente={<EnvioEdicionUnificada onModoEdicionChange={setMostrarAccionesRuta} />}
                     columnas={columnas}
                     deleteRegistro={deleteEnvio}
                     cargarDatosInicialmente={true}

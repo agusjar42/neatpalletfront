@@ -102,6 +102,11 @@ const Producto = () => {
         botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV", "importarCSV"]}
         controlador={"Productos"}
         editarComponente={<EditarProductos />}
+        mostrarEdicionEnModal={true}
+        modalEdicionProps={{
+          showHeader: false,
+          style: { width: "min(1080px, 94vw)" },
+        }}
         columnas={columnas}
         filtradoBase={empresaIdSesion ? { empresaId: empresaIdSesion } : undefined}
         deleteRegistro={deleteProducto}

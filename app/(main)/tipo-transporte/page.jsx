@@ -73,6 +73,11 @@ const TipoTransporte = () => {
         filtradoBase={{ empresaId: empresaIdSesion }}
         editarComponente={<EditarTipoTransportes />}
         editarComponenteParametrosExtra={{ empresaId: empresaIdSesion }}
+        mostrarEdicionEnModal={true}
+        modalEdicionProps={{
+          showHeader: false,
+          style: { width: "min(1080px, 94vw)" },
+        }}
         columnas={columnas}
         deleteRegistro={deleteTipoTransporte}
         procesarImportacionCSV={procesarImportacionCSV}

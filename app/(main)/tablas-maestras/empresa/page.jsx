@@ -1463,7 +1463,7 @@ const ActionButtons = ({ seccion, registro, onAbrirModal }) => (
 );
 
 export default Empresa;
-export { camposPendientesBack };
+export { camposPendientesBack, EmpresaEnvioDetalle };
 
 const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, rowData = [], setRegistroResult, setRegistroEditarFlag }) => {
     const [empresaActiva, setEmpresaActiva] = useState(null);

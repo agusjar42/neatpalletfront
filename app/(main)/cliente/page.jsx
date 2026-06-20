@@ -44,6 +44,11 @@ const Cliente = () => {
         controlador={"Clientes"}
         filtradoBase={{ empresaId: getUsuarioSesion()?.empresaId }}
         editarComponente={<EditarClientes />}
+        mostrarEdicionEnModal={true}
+        modalEdicionProps={{
+          showHeader: false,
+          style: { width: "min(1080px, 94vw)" },
+        }}
         columnas={columnas}
         deleteRegistro={deleteCliente}
       />

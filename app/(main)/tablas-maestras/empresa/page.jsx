@@ -452,7 +452,7 @@ const Empresa = () => {
             </section>
 
             <section className="empresa-tab-content">
-                <EmpresaResumen metricas={metricas} empresa={empresaActiva} contactos={contactos} />
+                <EmpresaResumenClienteMock metricas={metricas} empresa={empresaActiva} contactos={contactos} />
             </section>
         </div>
     );
@@ -735,11 +735,11 @@ const Empresa = () => {
 };
 
 const MetricCard = ({ icon, label, value }) => (
-    <article className="empresa-metric-card">
+    <article className={`empresa-metric-card ${label === "Plan" ? "empresa-metric-card-plan" : ""}`}>
         <span className="empresa-metric-icon">
             <i className={icon} aria-hidden="true"></i>
         </span>
-        <div>
+        <div className="empresa-metric-copy">
             <span>{label}</span>
             <strong>{value}</strong>
         </div>
@@ -818,6 +818,80 @@ const OperationalRow = ({ label, value, warning = false }) => (
         </div>
     </div>
 );
+
+const EmpresaResumenClienteMock = ({ metricas, empresa, contactos = [] }) => {
+    const actividad = [
+        { tiempo: "2 min", texto: "Pallet NEAT-00009 reporto posicion Valencia -> Murcia", tipo: "PALLET" },
+        { tiempo: "14 min", texto: "Diego Hansen actualizo configuracion de alertas", tipo: "USER" },
+        { tiempo: "1 h", texto: "136 llamadas API en la ultima hora", tipo: "API" },
+        { tiempo: "4 h", texto: "Pallet NEAT-00010 sensor de temperatura reemplazado", tipo: "SENSOR" },
+        { tiempo: "ayer", texto: "Factura mensual de EUR2490 emitida (auto-cobro OK)", tipo: "BILLING" },
+        { tiempo: "2 dias", texto: "Nuevo usuario invitado: jordi.ferrer@frutand.com", tipo: "USER" },
+    ];
+
+    const contactosFallback = [
+        { nombre: "Diego Hansen", email: "diego.hansen@frutand.com", rol: "org_admin" },
+        { nombre: "Sofia Muller", email: "sofia.muller@frutand.com", rol: "driver" },
+        { nombre: "Marc Pereira", email: "marc.pereira@frutand.com", rol: "viewer" },
+    ];
+    const contactosVisibles = contactos.length > 0 ? contactos : contactosFallback;
+    const estadoOperativo = [
+        { label: "Pallets reportando", value: metricas.pallets || 95, progress: 0.95 },
+        { label: "API errors", value: "2.3%", progress: 0.36, warning: true },
+        { label: "SLA mes", value: "99.94%", progress: 0.99 },
+        { label: "Onboarding", value: "100%", progress: 1 },
+    ];
+
+    return (
+        <div className="empresa-resumen-grid empresa-resumen-grid-mock">
+            <article className="empresa-resumen-panel empresa-resumen-panel-mock empresa-actividad-panel">
+                <h3>Actividad reciente</h3>
+                <div className="empresa-activity-list empresa-activity-list-mock">
+                    {actividad.map((item) => (
+                        <div className="empresa-activity-item empresa-activity-item-mock" key={`${item.tiempo}-${item.texto}`}>
+                            <span>{item.tiempo}</span>
+                            <div>
+                                <strong>{item.texto}</strong>
+                                <small>{item.tipo}</small>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </article>
+
+            <div className="empresa-resumen-side empresa-resumen-side-mock">
+                <article className="empresa-resumen-panel empresa-resumen-panel-mock">
+                    <h3>Estado operativo</h3>
+                    {estadoOperativo.map((item) => (
+                        <div className="empresa-operational-row empresa-operational-row-mock" key={item.label}>
+                            <span>{item.label}</span>
+                            <div>
+                                <b className={item.warning ? "empresa-progress-warning" : ""} style={{ width: `${Math.max(0.18, Math.min(item.progress, 1)) * 100}%` }}></b>
+                                <strong className={item.warning ? "empresa-value-warning" : ""}>{item.value}</strong>
+                            </div>
+                        </div>
+                    ))}
+                </article>
+
+                <article className="empresa-resumen-panel empresa-resumen-panel-mock">
+                    <h3>Contactos</h3>
+                    <div className="empresa-contact-list empresa-contact-list-mock">
+                        {contactosVisibles.map((contacto) => (
+                            <div className="empresa-contact-item empresa-contact-item-mock" key={`${contacto.email}-${contacto.nombre}`}>
+                                <span>{contacto.nombre.charAt(0).toUpperCase()}</span>
+                                <div>
+                                    <strong>{contacto.nombre}</strong>
+                                    <small>{contacto.email}</small>
+                                </div>
+                                <em>{String(contacto.rol || "viewer").toLowerCase().replaceAll(" ", "_")}</em>
+                            </div>
+                        ))}
+                    </div>
+                </article>
+            </div>
+        </div>
+    );
+};
 
 const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
     const [envioActivo, setEnvioActivo] = useState(null);

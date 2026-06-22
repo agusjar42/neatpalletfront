@@ -1,12 +1,17 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
+import { TabView, TabPanel } from "primereact/tabview";
 import { postCliente, patchCliente } from "@/app/api-endpoints/cliente";
+import { getOperario, getOperarioCount, deleteOperario } from "@/app/api-endpoints/cliente-operario";
+import { getLugarParada, getLugarParadaCount, deleteLugarParada } from "@/app/api-endpoints/cliente-lugar-parada";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import EditarDatosCliente from "./EditarDatosCliente";
+import EditarOperario from "../operario/editar";
+import EditarLugarParada from "../lugar-parada/editar";
+import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl';
 
 const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, empresaId }) => {
@@ -14,7 +19,22 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const [cliente, setCliente] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(0);
     const intl = useIntl();
+
+    const columnasOperarios = [
+        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'telefono', header: intl.formatMessage({ id: 'Telefono' }), tipo: 'string' },
+        { campo: 'email', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
+        { campo: 'activoSN', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' }
+    ];
+
+    const columnasLugaresParada = [
+        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'direccion', header: intl.formatMessage({ id: 'Direccion' }), tipo: 'string' },
+        { campo: 'direccionGps', header: intl.formatMessage({ id: 'Direccion GPS' }), tipo: 'string' },
+        { campo: 'activoSN', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' }
+    ];
 
     useEffect(() => {
         const fetchData = async () => {
@@ -64,6 +84,7 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 delete objGuardar.empresaNombre;
                 objGuardar['usuCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = empresaId ?? getUsuarioSesion()?.empresaId;
+                objGuardar['activoSN'] = objGuardar['activoSN'] || 'S';
                 
                 // Hacemos el insert del registro
                 const nuevoRegistro = await postCliente(objGuardar);
@@ -121,23 +142,94 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Punto de entrega' })).toLowerCase()}</h2>
+                        <p className="catalogo-edit-description">Actualiza el codigo, nombre, direccion, horario, telefono, email y estado del punto de entrega.</p>
                         <EditarDatosCliente
                             cliente={cliente}
                             setCliente={setCliente}
                             estadoGuardando={estadoGuardando}
                         />
 
-                        <div className="flex justify-content-end mt-2">
+                        <div className="mt-4">
+                            <TabView
+                                activeIndex={activeIndex}
+                                onTabChange={(e) => setActiveIndex(e.index)}
+                            >
+                                <TabPanel header={intl.formatMessage({ id: 'Operarios' })}>
+                                    {cliente.id ? (
+                                        <Crud
+                                            headerCrud={intl.formatMessage({ id: 'Operarios del Cliente' })}
+                                            getRegistros={getOperario}
+                                            getRegistrosCount={getOperarioCount}
+                                            botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                                            controlador={"Operarios"}
+                                            editarComponente={<EditarOperario />}
+                                            columnas={columnasOperarios}
+                                            filtradoBase={{ clienteId: cliente.id }}
+                                            deleteRegistro={deleteOperario}
+                                            mostrarEdicionEnModal={true}
+                                            modalEdicionProps={{
+                                                showHeader: false,
+                                                className: "neat-crud-edit-dialog catalogo-edit-dialog",
+                                                style: { width: "min(760px, 94vw)" },
+                                            }}
+                                            editarComponenteParametrosExtra={{
+                                                clienteId: cliente.id,
+                                                estoyDentroDeUnTab: true,
+                                                ocultarClienteResumenHeader: true,
+                                            }}
+                                        />
+                                    ) : (
+                                        <div className="text-center p-4">
+                                            <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+                                            <p className="text-gray-600">{intl.formatMessage({ id: 'Debe guardar el punto de entrega primero para poder gestionar operarios' })}</p>
+                                        </div>
+                                    )}
+                                </TabPanel>
+
+                                <TabPanel header={intl.formatMessage({ id: 'Lugares de Parada' })}>
+                                    {cliente.id ? (
+                                        <Crud
+                                            headerCrud={intl.formatMessage({ id: 'Lugares de Parada' })}
+                                            getRegistros={getLugarParada}
+                                            getRegistrosCount={getLugarParadaCount}
+                                            botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                                            controlador={"Lugar Parada"}
+                                            editarComponente={<EditarLugarParada />}
+                                            columnas={columnasLugaresParada}
+                                            filtradoBase={{ clienteId: cliente.id }}
+                                            deleteRegistro={deleteLugarParada}
+                                            mostrarEdicionEnModal={true}
+                                            modalEdicionProps={{
+                                                showHeader: false,
+                                                className: "neat-crud-edit-dialog catalogo-edit-dialog",
+                                                style: { width: "min(820px, 94vw)" },
+                                            }}
+                                            editarComponenteParametrosExtra={{
+                                                clienteId: cliente.id,
+                                                estoyDentroDeUnTab: true,
+                                                ocultarClienteResumenHeader: true,
+                                            }}
+                                        />
+                                    ) : (
+                                        <div className="text-center p-4">
+                                            <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
+                                            <p className="text-gray-600">{intl.formatMessage({ id: 'Debe guardar el punto de entrega primero para poder gestionar lugares de parada' })}</p>
+                                        </div>
+                                    )}
+                                </TabPanel>
+                            </TabView>
+                        </div>
+
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : 'Guardar cambios'}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarCliente}
-                                    className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>

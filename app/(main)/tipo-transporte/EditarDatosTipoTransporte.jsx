@@ -1,5 +1,4 @@
 import React from "react";
-import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { useIntl } from 'react-intl';
@@ -17,10 +16,9 @@ const EditarDatosTipoTransporte = ({ tipoTransporte, setTipoTransporte, estadoGu
     };
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos para el tipo de transporte' })}>
-            <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+            <div className="catalogo-edit-form-grid">
+                <div className="catalogo-edit-field">
+                    <label htmlFor="orden">{intl.formatMessage({ id: 'Orden' })}</label>
                     <InputNumber value={tipoTransporte.orden === '' || tipoTransporte.orden === undefined ? null : tipoTransporte.orden}
                         onChange={(e) => setTipoTransporte({ ...tipoTransporte, orden: e.value })}
                         className={`${(estadoGuardando && (tipoTransporte.orden === "" || tipoTransporte.orden === null || tipoTransporte.orden === undefined)) ? "p-invalid" : ""}`}
@@ -29,23 +27,22 @@ const EditarDatosTipoTransporte = ({ tipoTransporte, setTipoTransporte, estadoGu
                         min={0}
                         inputStyle={{ textAlign: 'right' }}/>
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
+                <div className="catalogo-edit-field">
+                    <label htmlFor="nombre">{intl.formatMessage({ id: 'Nombre' })}</label>
                     <InputText value={tipoTransporte.nombre}
                         placeholder={intl.formatMessage({ id: 'Nombre del tipo de transporte' })}
                         onChange={(e) => setTipoTransporte({ ...tipoTransporte, nombre: e.target.value })}
                         className={`${(estadoGuardando && tipoTransporte.nombre === "") ? "p-invalid" : ""}`}
                         maxLength={50} />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="activoSN" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
+                <div className="catalogo-edit-field">
+                    <label htmlFor="activoSN">{intl.formatMessage({ id: 'Activo' })}</label>
                     <InputSwitch
                         checked={tipoTransporte.activoSn === 'S'}
                         onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
                     />
                 </div>
             </div>
-        </Fieldset>
     );
 };
 

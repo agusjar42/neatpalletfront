@@ -14,11 +14,11 @@ const EventosConfiguracion = () => {
     const intl = useIntl();
     const [summaryRefreshKey, setSummaryRefreshKey] = useState(0);
     const columnas = [
-        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
-        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
-        { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
-        { campo: 'unidadMedida', header: intl.formatMessage({ id: 'Unidad de medida' }), tipo: 'string' },
-        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
+        { campo: 'orden', header: 'ORDEN', tipo: 'string' },
+        { campo: 'nombre', header: 'PARAMETRO', tipo: 'string' },
+        { campo: 'valor', header: 'VALOR', tipo: 'string' },
+        { campo: 'unidadMedida', header: 'UNIDAD', tipo: 'string' },
+        { campo: 'activoSn', header: 'ACTIVO', tipo: 'booleano' },
     ]
 
     return (
@@ -35,7 +35,8 @@ const EventosConfiguracion = () => {
                 mostrarEdicionEnModal={true}
                 modalEdicionProps={{
                     showHeader: false,
-                    style: { width: "min(1080px, 94vw)" },
+                    className: "neat-crud-edit-dialog catalogo-edit-dialog catalogo-edit-dialog-wide",
+                    style: { width: "min(760px, 94vw)" },
                 }}
                 deleteRegistro={deleteEventoConfiguracion}
                 onDataChange={() => setSummaryRefreshKey((key) => key + 1)}

@@ -21,10 +21,27 @@ import {
 const TipoTransporte = () => {
   const intl = useIntl();
   const empresaIdSesion = getUsuarioSesion()?.empresaId;
+  const codigoBodyTemplate = (rowData) => {
+    if (rowData?.codigo) {
+      return rowData.codigo;
+    }
+    if (rowData?.orden !== undefined && rowData?.orden !== null) {
+      return `T-${String(rowData.orden).padStart(2, "0")}`;
+    }
+    return "-";
+  };
+  const vehiculoBodyTemplate = (rowData) => rowData?.vehiculo ?? rowData?.nombre ?? "-";
+  const usoBodyTemplate = (rowData) => rowData?.uso ?? rowData?.nombre ?? "-";
+  const categoriaBodyTemplate = (rowData) => (
+    <span className="catalogo-table-chip">{rowData?.categoria ?? "General"}</span>
+  );
   const columnas = [
-    { campo: "orden", header: intl.formatMessage({ id: "Orden" }), tipo: "string" },
-    { campo: "nombre", header: intl.formatMessage({ id: "Nombre" }), tipo: "string" },
-    { campo: "activoSn", header: intl.formatMessage({ id: "Activo" }), tipo: "booleano" },
+    { campo: "orden", header: "ORDEN", tipo: "string" },
+    { campo: "codigo", header: "CODIGO", tipo: "string", body: codigoBodyTemplate },
+    { campo: "vehiculo", header: "VEHICULO", tipo: "string", body: vehiculoBodyTemplate },
+    { campo: "uso", header: "USO", tipo: "string", body: usoBodyTemplate },
+    { campo: "categoria", header: "CATEGORIA", tipo: "string", body: categoriaBodyTemplate },
+    { campo: "activoSn", header: "ACTIVO", tipo: "booleano" },
   ];
 
   const procesarImportacionCSV = async ({ rowsNormalizados }) => {
@@ -76,7 +93,8 @@ const TipoTransporte = () => {
         mostrarEdicionEnModal={true}
         modalEdicionProps={{
           showHeader: false,
-          style: { width: "min(1080px, 94vw)" },
+          className: "neat-crud-edit-dialog catalogo-edit-dialog",
+          style: { width: "min(560px, 94vw)" },
         }}
         columnas={columnas}
         deleteRegistro={deleteTipoTransporte}

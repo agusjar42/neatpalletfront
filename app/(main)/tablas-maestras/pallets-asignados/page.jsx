@@ -602,8 +602,16 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
         <span>{obtenerTexto(pallet.codigo ?? `Pallet ${pallet.id}`)}</span>
     );
 
-    const fechaImpresionBodyTemplate = (pallet) => (
-        <span>{obtenerFecha(pallet.fechaImpresion)}</span>
+    const adquisicionBodyTemplate = (pallet) => (
+        <span>{obtenerFecha(pallet.adquisicion)}</span>
+    );
+
+    const estadoBodyTemplate = (pallet) => (
+        <span>{obtenerTexto(pallet.estado)}</span>
+    );
+
+    const ultimaSenalBodyTemplate = (pallet) => (
+        <span>{obtenerTexto(pallet.ultimaSenal)}</span>
     );
 
     if (cargando) {
@@ -647,51 +655,65 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                         {esUsuarioAdmin && tienePermiso && (
                             <Column
                                 field="asignado"
-                                header={intl.formatMessage({ id: "Asignado" })}
+                                header="ASIGNADO"
                                 body={asignadoBodyTemplate}
                                 headerStyle={{ minWidth: "8rem" }}
                             />
                         )}
-                        <Column
-                            field="nombreEmpresa"
-                            header={intl.formatMessage({ id: "Nombre empresa" })}
-                            body={nombreEmpresaBodyTemplate}
-                            headerStyle={{ minWidth: "14rem" }}
-                        />
+                        {esUsuarioAdmin && (
+                            <Column
+                                field="nombreEmpresa"
+                                header="EMPRESA"
+                                body={nombreEmpresaBodyTemplate}
+                                headerStyle={{ minWidth: "14rem" }}
+                            />
+                        )}
                         <Column
                             field="orden"
-                            header={intl.formatMessage({ id: "Orden" })}
+                            header="ORDEN"
                             body={textoBodyTemplate("orden")}
                             headerStyle={{ minWidth: "8rem" }}
                         />
                         <Column
                             field="codigo"
-                            header={intl.formatMessage({ id: "Codigo" })}
+                            header="Nº PALLET"
                             body={codigoBodyTemplate}
                             headerStyle={{ minWidth: "12rem" }}
                         />
                         <Column
                             field="alias"
-                            header={intl.formatMessage({ id: "Alias" })}
+                            header="NOMBRE ASIGNADO"
                             body={textoBodyTemplate("alias")}
                             headerStyle={{ minWidth: "12rem" }}
                         />
                         <Column
                             field="medidas"
-                            header={intl.formatMessage({ id: "Medidas" })}
+                            header="MEDIDAS"
                             body={textoBodyTemplate("medidas")}
                             headerStyle={{ minWidth: "12rem" }}
                         />
                         <Column
                             field="modelo"
-                            header={intl.formatMessage({ id: "Modelo" })}
+                            header="MODELO"
                             body={textoBodyTemplate("modelo")}
                             headerStyle={{ minWidth: "12rem" }}
                         />
                         <Column
-                            field="fechaImpresion"
-                            header={intl.formatMessage({ id: "Fecha de impresion" })}
-                            body={fechaImpresionBodyTemplate}
+                            field="adquisicion"
+                            header="ADQUISICION"
+                            body={adquisicionBodyTemplate}
+                            headerStyle={{ minWidth: "12rem" }}
+                        />
+                        <Column
+                            field="estado"
+                            header="ESTADO"
+                            body={estadoBodyTemplate}
+                            headerStyle={{ minWidth: "12rem" }}
+                        />
+                        <Column
+                            field="ultimaSenal"
+                            header="ULTIMA SENAL"
+                            body={ultimaSenalBodyTemplate}
                             headerStyle={{ minWidth: "12rem" }}
                         />
                     </DataTable>

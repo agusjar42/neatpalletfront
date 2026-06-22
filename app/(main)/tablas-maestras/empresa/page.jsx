@@ -82,6 +82,28 @@ const columnasProducto = [
     { campo: "activoSN", header: "Activo", tipo: "booleano" },
 ];
 
+columnasPuntosEntrega.splice(0, columnasPuntosEntrega.length,
+    { campo: "orden", header: "Orden", tipo: "number" },
+    { campo: "codigo", header: "Codigo", tipo: "string" },
+    { campo: "nombre", header: "Nombre", tipo: "string" },
+    { campo: "direccion", header: "Direccion", tipo: "string" },
+    { campo: "horario", header: "Horario", tipo: "string" },
+    { campo: "telefono", header: "Telefono", tipo: "string" },
+    { campo: "mail", header: "Email", tipo: "string" },
+    { campo: "activoSN", header: "Estado", tipo: "booleano" },
+);
+
+columnasProducto.splice(0, columnasProducto.length,
+    { campo: "orden", header: "Orden", tipo: "number" },
+    { campo: "sku", header: "SKU", tipo: "string" },
+    { campo: "nombre", header: "Nombre", tipo: "string" },
+    { campo: "familia", header: "Familia", tipo: "string" },
+    { campo: "rangoTemp", header: "Rango temp.", tipo: "string" },
+    { campo: "vidaUtil", header: "Vida util", tipo: "string" },
+    { campo: "pesoKgs", header: "Peso", tipo: "number" },
+    { campo: "activoSN", header: "Estado", tipo: "booleano" },
+);
+
 const columnasEnvio = [
     { campo: "orden", header: "Orden", tipo: "string" },
     { campo: "numero", header: "Numero", tipo: "string" },

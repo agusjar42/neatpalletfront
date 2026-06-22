@@ -1,5 +1,4 @@
 import React from "react";
-import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { useIntl } from 'react-intl';
@@ -8,10 +7,9 @@ const EditarDatosEnvioConfiguracionEmpresa = ({ envioConfiguracionEmpresa, setEn
     const intl = useIntl();
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos para la configuración de empresa' })}>
-            <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
+            <div className="catalogo-edit-form-grid catalogo-edit-form-grid-wide">
+                <div className="catalogo-edit-field">
+                    <label htmlFor="orden">{intl.formatMessage({ id: 'Orden' })}</label>
                     <InputNumber value={envioConfiguracionEmpresa.orden === '' || envioConfiguracionEmpresa.orden === undefined ? null : envioConfiguracionEmpresa.orden}
                         onChange={(e) => setEnvioConfiguracionEmpresa({ ...envioConfiguracionEmpresa, orden: e.value })}
                         className={`${(estadoGuardando && (envioConfiguracionEmpresa.orden === "" || envioConfiguracionEmpresa.orden === null || envioConfiguracionEmpresa.orden === undefined)) ? "p-invalid" : ""}`}
@@ -20,22 +18,29 @@ const EditarDatosEnvioConfiguracionEmpresa = ({ envioConfiguracionEmpresa, setEn
                         min={0}
                         inputStyle={{ textAlign: 'right' }} />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
+                <div className="catalogo-edit-field">
+                    <label htmlFor="nombre">{intl.formatMessage({ id: 'Nombre' })}</label>
                     <InputText value={envioConfiguracionEmpresa.nombre}
-                        placeholder={intl.formatMessage({ id: 'Nombre de la configuración' })}
+                        placeholder={intl.formatMessage({ id: 'Nombre de la configuracion' })}
                         onChange={(e) => setEnvioConfiguracionEmpresa({ ...envioConfiguracionEmpresa, nombre: e.target.value })}
                         className={`${(estadoGuardando && envioConfiguracionEmpresa.nombre === "") ? "p-invalid" : ""}`}
                         maxLength={100} />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="catalogo-edit-field catalogo-edit-field-full">
+                    <label htmlFor="descripcion">{intl.formatMessage({ id: 'Descripcion' })}</label>
+                    <InputText value={envioConfiguracionEmpresa.descripcion || ""}
+                        placeholder={intl.formatMessage({ id: 'Descripcion de la configuracion' })}
+                        onChange={(e) => setEnvioConfiguracionEmpresa({ ...envioConfiguracionEmpresa, descripcion: e.target.value })}
+                        maxLength={255} />
+                </div>
+                <div className="catalogo-edit-field">
                     <label htmlFor="valor">{intl.formatMessage({ id: 'Valor' })}</label>
                     <InputText value={envioConfiguracionEmpresa.valor}
-                        placeholder={intl.formatMessage({ id: 'Valor de la configuración' })}
+                        placeholder={intl.formatMessage({ id: 'Valor de la configuracion' })}
                         onChange={(e) => setEnvioConfiguracionEmpresa({ ...envioConfiguracionEmpresa, valor: e.target.value })}
                         maxLength={50} />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <div className="catalogo-edit-field">
                     <label htmlFor="unidadMedida">{intl.formatMessage({ id: 'Unidad de medida' })}</label>
                     <InputText value={envioConfiguracionEmpresa.unidadMedida}
                         placeholder={intl.formatMessage({ id: 'Unidad de medida' })}
@@ -43,7 +48,6 @@ const EditarDatosEnvioConfiguracionEmpresa = ({ envioConfiguracionEmpresa, setEn
                         maxLength={50} />
                 </div>
             </div>
-        </Fieldset>
     );
 };
 

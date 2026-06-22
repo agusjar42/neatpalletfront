@@ -1,304 +1,102 @@
-import React, { useState, useEffect } from "react";
-import { Fieldset } from "primereact/fieldset";
+import React from "react";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
-import { TabView, TabPanel } from "primereact/tabview";
+import { InputSwitch } from "primereact/inputswitch";
 import { useIntl } from "react-intl";
-import Crud from "../../components/shared/crud";
-import {
-  getOperario,
-  getOperarioCount,
-  deleteOperario,
-} from "@/app/api-endpoints/cliente-operario";
-import {
-  getLugarParada,
-  getLugarParadaCount,
-  deleteLugarParada,
-} from "@/app/api-endpoints/cliente-lugar-parada";
-import EditarOperarios from "../operario/editar";
-import EditarLugarParadas from "../lugar-parada/editar";
 
 const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
   const intl = useIntl();
-  const [activeIndex, setActiveIndex] = useState(0);
 
-  // Estados para los contadores de cada tab
-  const [conteoOperarios, setConteoOperarios] = useState(0);
-  const [conteoLugares, setConteoLugares] = useState(0);
-  const [refreshConteos, setRefreshConteos] = useState(0);
-
-  // Columnas para las diferentes tablas
-  const columnasOperario = [
-    {
-      campo: "nombre",
-      header: intl.formatMessage({ id: "Nombre" }),
-      tipo: "string",
-    },
-    {
-      campo: "telefono",
-      header: intl.formatMessage({ id: "Teléfono" }),
-      tipo: "string",
-    },
-    {
-      campo: "email",
-      header: intl.formatMessage({ id: "Email" }),
-      tipo: "string",
-    },
-    {
-      campo: "activoSN",
-      header: intl.formatMessage({ id: "Activo" }),
-      tipo: "booleano",
-    },
-  ];
-
-  const columnasLugarParada = [
-    {
-      campo: "nombre",
-      header: intl.formatMessage({ id: "Nombre" }),
-      tipo: "string",
-    },
-    {
-      campo: "direccion",
-      header: intl.formatMessage({ id: "Dirección" }),
-      tipo: "string",
-    },
-    {
-      campo: "direccionGps",
-      header: intl.formatMessage({ id: "Dirección GPS" }),
-      tipo: "string",
-    },
-    {
-      campo: "activoSN",
-      header: intl.formatMessage({ id: "Activo" }),
-      tipo: "booleano",
-    },
-  ];
-
-  // Efecto para actualizar conteos cuando se carga el cliente
-  useEffect(() => {
-    const actualizarConteos = async () => {
-      if (cliente.id) {
-        try {
-          const whereFiltro = { and: { clienteId: cliente.id } };
-          const [conteoOp, conteoLug] = await Promise.all([
-            getOperarioCount(JSON.stringify(whereFiltro)),
-            getLugarParadaCount(JSON.stringify(whereFiltro)),
-          ]);
-
-          setConteoOperarios(conteoOp?.count || 0);
-          setConteoLugares(conteoLug?.count || 0);
-        } catch (error) {
-          console.error("Error al obtener conteos:", error);
-        }
-      }
-    };
-
-    actualizarConteos();
-  }, [cliente.id, refreshConteos]);
+  //
+  //Convertimos el switch al formato S/N que usa el backend
+  //
+  const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
+    const valor = (e.target && e.target.value) || "";
+    const clienteActualizado = { ...cliente };
+    clienteActualizado[nombreInputSwitch] = valor === true ? "S" : "N";
+    setCliente(clienteActualizado);
+  };
 
   return (
-    <div>
-      {/* InformaciÃ³n general del cliente */}
-      <Fieldset legend={intl.formatMessage({ id: "Datos del cliente" })}>
-        <div className="formgrid grid">
-          <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
-            <label htmlFor="orden">{intl.formatMessage({ id: "Orden" })}</label>
-            <InputNumber
-              value={cliente.orden}
-              onValueChange={(e) => setCliente({ ...cliente, orden: e.value })}
-              mode="decimal"
-              useGrouping={false}
-              min={0}
-              placeholder={intl.formatMessage({ id: "Orden del cliente" })}
-              inputStyle={{ textAlign: 'right' }}/>
-          </div>
-          <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
-            <label htmlFor="nombre">
-              <b>{intl.formatMessage({ id: "Nombre" })}*</b>
-            </label>
-            <InputText
-              value={cliente.nombre || ""}
-              placeholder={intl.formatMessage({ id: "Nombre del cliente" })}
-              onChange={(e) =>
-                setCliente({ ...cliente, nombre: e.target.value })
-              }
-              className={`${
-                estadoGuardando &&
-                (cliente.nombre === "" || cliente.nombre === undefined)
-                  ? "p-invalid"
-                  : ""
-              }`}
-              maxLength={50}
-            />
-          </div>
-          <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
-            <label htmlFor="telefono">
-              {intl.formatMessage({ id: "Teléfono" })}
-            </label>
-            <InputText
-              value={cliente.telefono || ""}
-              placeholder={intl.formatMessage({ id: "Teléfono del cliente" })}
-              onChange={(e) =>
-                setCliente({ ...cliente, telefono: e.target.value })
-              }
-              maxLength={50}
-              style={{ textAlign: "right" }}
-            />
-          </div>
-          <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-3">
-            <label htmlFor="mail">{intl.formatMessage({ id: "Email" })}</label>
-            <InputText
-              value={cliente.mail || ""}
-              placeholder={intl.formatMessage({ id: "Email del cliente" })}
-              onChange={(e) => setCliente({ ...cliente, mail: e.target.value })}
-              maxLength={50}
-            />
-          </div>
-        </div>
-      </Fieldset>
+    <div className="catalogo-edit-form-grid catalogo-edit-form-grid-wide">
+      <div className="catalogo-edit-field">
+        <label htmlFor="orden">{intl.formatMessage({ id: "Orden" })}</label>
+        <InputNumber
+          value={cliente.orden === "" || cliente.orden === undefined ? null : cliente.orden}
+          onValueChange={(e) => setCliente({ ...cliente, orden: e.value })}
+          mode="decimal"
+          useGrouping={false}
+          min={0}
+          inputStyle={{ textAlign: "right" }}
+        />
+      </div>
 
-      {/* PestaÃ±as para bloques adicionales */}
-      <div className="mt-4">
-        <TabView
-          activeIndex={activeIndex}
-          onTabChange={(e) => setActiveIndex(e.index)}
-        >
-          <TabPanel
-            header={`${intl.formatMessage({
-              id: "Operarios",
-            })} (${conteoOperarios})`}
-          >
-            <div>
-              {/* Solo mostrar la tabla de operarios si el cliente ya estÃ¡ creado */}
-              {cliente.id ? (
-                <>
-                  {/* Bocadillo de informaciÃ³n */}
-                  <div className="p-mt-3 mb-3">
-                    <div className="flex align-items-center bg-green-100 border-round p-3 w-full">
-                      <span
-                        className="pi pi-info-circle text-blue-500 mr-2"
-                        style={{ fontSize: "1.5em" }}
-                      />
-                      <span>
-                        {intl.formatMessage({
-                          id: "Gestión de operarios asociados al cliente.",
-                        })}
-                      </span>
-                    </div>
-                  </div>
-                  {
-                    <Crud
-                      key={`operario-${refreshConteos}`}
-                      headerCrud={intl.formatMessage({
-                        id: "Operarios del Cliente",
-                      })}
-                      getRegistros={getOperario}
-                      getRegistrosCount={getOperarioCount}
-                      botones={[
-                        "nuevo",
-                        "ver",
-                        "editar",
-                        "eliminar",
-                        "descargarCSV",
-                      ]}
-                      controlador={"Operarios"}
-                      editarComponente={<EditarOperarios />}
-                      columnas={columnasOperario}
-                      filtradoBase={{ clienteId: cliente.id }}
-                      deleteRegistro={deleteOperario}
-                      cargarDatosInicialmente={true}
-                      onDataChange={() => setRefreshConteos((prev) => prev + 1)}
-                      editarComponenteParametrosExtra={{
-                        clienteId: cliente.id,
-                        estoyDentroDeUnTab: true,
-                        ocultarClienteResumenHeader: true,
-                        onDataChange: () =>
-                          setRefreshConteos((prev) => prev + 1),
-                      }}
-                    />
-                  }
-                </>
-              ) : (
-                <div className="text-center p-4">
-                  <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
-                  <p className="text-gray-600">
-                    {intl.formatMessage({
-                      id: "Debe guardar el cliente primero para poder gestionar operarios",
-                    })}
-                  </p>
-                </div>
-              )}
-            </div>
-          </TabPanel>
+      <div className="catalogo-edit-field">
+        <label htmlFor="codigo">{intl.formatMessage({ id: "Codigo" })}</label>
+        <InputText
+          value={cliente.codigo || ""}
+          placeholder={intl.formatMessage({ id: "Codigo del cliente" })}
+          onChange={(e) => setCliente({ ...cliente, codigo: e.target.value })}
+          maxLength={50}
+        />
+      </div>
 
-          <TabPanel
-            header={`${intl.formatMessage({
-              id: "Lugares de Parada",
-            })} (${conteoLugares})`}
-          >
-            <div>
-              {/* Solo mostrar la tabla de lugares si el cliente ya estÃ¡ creado */}
-              {cliente.id ? (
-                <>
-                  {/* Bocadillo de informaciÃ³n */}
-                  <div className="p-mt-3 mb-3">
-                    <div className="flex align-items-center bg-green-100 border-round p-3 w-full">
-                      <span
-                        className="pi pi-info-circle text-blue-500 mr-2"
-                        style={{ fontSize: "1.5em" }}
-                      />
-                      <span>
-                        {intl.formatMessage({
-                          id: "Gestión de lugares de parada asociados al cliente.",
-                        })}
-                      </span>
-                    </div>
-                  </div>
-                  {
-                    <Crud
-                      key={`lugar-parada-${refreshConteos}`}
-                      headerCrud={intl.formatMessage({
-                        id: "Lugares de Parada del Cliente",
-                      })}
-                      getRegistros={getLugarParada}
-                      getRegistrosCount={getLugarParadaCount}
-                      botones={[
-                        "nuevo",
-                        "ver",
-                        "editar",
-                        "eliminar",
-                        "descargarCSV",
-                      ]}
-                      controlador={"Lugar Parada"}
-                      editarComponente={<EditarLugarParadas />}
-                      columnas={columnasLugarParada}
-                      filtradoBase={{ clienteId: cliente.id }}
-                      deleteRegistro={deleteLugarParada}
-                      cargarDatosInicialmente={true}
-                      onDataChange={() => setRefreshConteos((prev) => prev + 1)}
-                      editarComponenteParametrosExtra={{
-                        clienteId: cliente.id,
-                        estoyDentroDeUnTab: true,
-                        ocultarClienteResumenHeader: true,
-                        onDataChange: () =>
-                          setRefreshConteos((prev) => prev + 1),
-                      }}
-                    />
-                  }
-                </>
-              ) : (
-                <div className="text-center p-4">
-                  <i className="pi pi-info-circle text-blue-500 text-2xl mb-2"></i>
-                  <p className="text-gray-600">
-                    {intl.formatMessage({
-                      id: "Debe guardar el cliente primero para poder gestionar lugares de parada",
-                    })}
-                  </p>
-                </div>
-              )}
-            </div>
-          </TabPanel>
-        </TabView>
+      <div className="catalogo-edit-field">
+        <label htmlFor="nombre">{intl.formatMessage({ id: "Nombre" })}</label>
+        <InputText
+          value={cliente.nombre || ""}
+          placeholder={intl.formatMessage({ id: "Nombre del cliente" })}
+          onChange={(e) => setCliente({ ...cliente, nombre: e.target.value })}
+          className={`${estadoGuardando && !cliente.nombre ? "p-invalid" : ""}`}
+          maxLength={50}
+        />
+      </div>
+
+      <div className="catalogo-edit-field">
+        <label htmlFor="horario">{intl.formatMessage({ id: "Horario" })}</label>
+        <InputText
+          value={cliente.horario || ""}
+          placeholder={intl.formatMessage({ id: "Horario del cliente" })}
+          onChange={(e) => setCliente({ ...cliente, horario: e.target.value })}
+          maxLength={100}
+        />
+      </div>
+
+      <div className="catalogo-edit-field" style={{ gridColumn: "1 / -1" }}>
+        <label htmlFor="direccion">{intl.formatMessage({ id: "Direccion" })}</label>
+        <InputText
+          value={cliente.direccion || ""}
+          placeholder={intl.formatMessage({ id: "Direccion del cliente" })}
+          onChange={(e) => setCliente({ ...cliente, direccion: e.target.value })}
+          maxLength={500}
+        />
+      </div>
+
+      <div className="catalogo-edit-field">
+        <label htmlFor="telefono">{intl.formatMessage({ id: "Telefono" })}</label>
+        <InputText
+          value={cliente.telefono || ""}
+          placeholder={intl.formatMessage({ id: "Telefono del cliente" })}
+          onChange={(e) => setCliente({ ...cliente, telefono: e.target.value })}
+          maxLength={50}
+        />
+      </div>
+      <div className="catalogo-edit-field">
+        <label htmlFor="mail">{intl.formatMessage({ id: "Email" })}</label>
+        <InputText
+          value={cliente.mail || ""}
+          placeholder={intl.formatMessage({ id: "Email del cliente" })}
+          onChange={(e) => setCliente({ ...cliente, mail: e.target.value })}
+          maxLength={50}
+        />
+      </div>
+
+      <div className="catalogo-edit-field">
+        <label htmlFor="activoSN">{intl.formatMessage({ id: "Activo" })}</label>
+        <InputSwitch
+          checked={cliente.activoSN === "S"}
+          onChange={(e) => manejarCambioInputSwitch(e, "activoSN")}
+        />
       </div>
     </div>
   );

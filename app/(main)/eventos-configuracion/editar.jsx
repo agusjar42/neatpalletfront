@@ -88,24 +88,24 @@ const EditarEventoConfiguracion = ({ idEditar, setIdEditar, rowData, emptyRegist
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
-                        <h2>{header} {(intl.formatMessage({ id: 'Evento configuración' })).toLowerCase()}</h2>
+                        <h2>{header} {(intl.formatMessage({ id: 'Evento configuracion' })).toLowerCase()}</h2>
+                        <p className="catalogo-edit-description">Configura nombre, valor, unidad y descripcion del evento.</p>
                         <EditarDatosEnvioConfiguracionEmpresa
                             envioConfiguracionEmpresa={eventoConfiguracion}
                             setEnvioConfiguracionEmpresa={setEventoConfiguracion}
                             estadoGuardando={estadoGuardando}
                         />
 
-                        <div className="flex justify-content-end mt-2">
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : 'Guardar cambios'}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarEventoConfiguracion}
-                                    className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>

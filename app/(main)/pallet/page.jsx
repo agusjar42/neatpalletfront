@@ -10,24 +10,31 @@ const Pallet = () => {
     const intl = useIntl();
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
-        { campo: 'codigo', header: intl.formatMessage({ id: 'Código' }), tipo: 'string' },
-        { campo: 'alias', header: intl.formatMessage({ id: 'Alias' }), tipo: 'string' },
-        { campo: 'modelo', header: intl.formatMessage({ id: 'Modelo' }), tipo: 'string' },
+        { campo: 'codigo', header: 'Nº PALLET', tipo: 'string' },
+        { campo: 'alias', header: 'NOMBRE ASIGNADO', tipo: 'string' },
         { campo: 'medidas', header: intl.formatMessage({ id: 'Medidas' }), tipo: 'string' },
+        { campo: 'modelo', header: intl.formatMessage({ id: 'Modelo' }), tipo: 'string' },
+        { campo: 'adquisicion', header: 'ADQUISICION', tipo: 'string' },
+        { campo: 'estado', header: 'ESTADO', tipo: 'string' },
+        { campo: 'ultimaSenal', header: 'ULTIMA SENAL', tipo: 'string' },
     ]
 
-    // Esta función transforma los registros para su exportación en formato CSV,
-    // Permite asignar nombres personalizados a las columnas existentes y agregar nuevas columnas calculadas según las necesidades.
+    //
+    //Transformamos los registros para exportar con los nombres visibles en la tabla
+    //
     const procesarDatosParaCSV = (registros) => {
         return registros.map(registro => {
             return {
                 [intl.formatMessage({ id: 'Orden' })]: registro.orden,
-                [intl.formatMessage({ id: 'Código' })]: registro.codigo,
-                [intl.formatMessage({ id: 'Alias' })]: registro.alias,
-                [intl.formatMessage({ id: 'Modelo' })]: registro.modelo,
+                ['Nº pallet']: registro.codigo,
+                ['Nombre asignado']: registro.alias,
                 [intl.formatMessage({ id: 'Medidas' })]: registro.medidas,
-                [intl.formatMessage({ id: 'Fecha de Impresión' })]: registro.fechaImpresion,
-                [intl.formatMessage({ id: 'Periodo envío mail (horas)' })]: registro.periodoEnvioMail,
+                [intl.formatMessage({ id: 'Modelo' })]: registro.modelo,
+                ['Adquisicion']: registro.adquisicion,
+                ['Estado']: registro.estado,
+                ['Ultima senal']: registro.ultimaSenal,
+                [intl.formatMessage({ id: 'Periodo envio mail (horas)' })]: registro.periodoEnvioMail,
+                [intl.formatMessage({ id: 'Fecha de impresion' })]: registro.fechaImpresion,
             };
         });
     };
@@ -39,7 +46,7 @@ const Pallet = () => {
         rowsNormalizados = [],
     }) => {
         const result = createResult();
-        const cabecerasConocidas = ['orden', 'codigo', 'alias', 'modelo', 'medidas', 'periodoenviomail', 'fechaimpresion'];
+        const cabecerasConocidas = ['orden', 'codigo', 'alias', 'medidas', 'modelo', 'adquisicion', 'estado', 'ultimasenal', 'periodoenviomail', 'fechaimpresion'];
         const tieneCabecera = headersNormalizados.some((header) => cabecerasConocidas.includes(header));
 
         const filas = [];
@@ -51,8 +58,11 @@ const Pallet = () => {
                     orden: getValueFromRow(row, ['orden']),
                     codigo: getValueFromRow(row, ['codigo']),
                     alias: getValueFromRow(row, ['alias']),
-                    modelo: getValueFromRow(row, ['modelo']),
                     medidas: getValueFromRow(row, ['medidas']),
+                    modelo: getValueFromRow(row, ['modelo']),
+                    adquisicion: getValueFromRow(row, ['adquisicion']),
+                    estado: getValueFromRow(row, ['estado']),
+                    ultimaSenal: getValueFromRow(row, ['ultimaSenal', 'ultima senal']),
                     periodoEnvioMail: getValueFromRow(row, ['periodoEnvioMail', 'periodo envio mail', 'periodo envio mail horas', 'periodo']),
                     fechaImpresion: getValueFromRow(row, ['fechaImpresion', 'fecha impresion']),
                 });
@@ -65,10 +75,13 @@ const Pallet = () => {
                     orden: campos[0] ?? '',
                     codigo: campos[1] ?? '',
                     alias: campos[2] ?? '',
-                    modelo: campos[3] ?? '',
-                    medidas: campos[4] ?? '',
-                    periodoEnvioMail: campos[5] ?? '',
-                    fechaImpresion: campos[6] ?? '',
+                    medidas: campos[3] ?? '',
+                    modelo: campos[4] ?? '',
+                    adquisicion: campos[5] ?? '',
+                    estado: campos[6] ?? '',
+                    ultimaSenal: campos[7] ?? '',
+                    periodoEnvioMail: campos[8] ?? '',
+                    fechaImpresion: campos[9] ?? '',
                 });
             });
         }
@@ -93,8 +106,11 @@ const Pallet = () => {
                     orden: String(fila.orden ?? '').trim(),
                     codigo,
                     alias,
-                    modelo: String(fila.modelo ?? '').trim(),
                     medidas: String(fila.medidas ?? '').trim(),
+                    modelo: String(fila.modelo ?? '').trim(),
+                    adquisicion: String(fila.adquisicion ?? '').trim(),
+                    estado: String(fila.estado ?? '').trim(),
+                    ultimaSenal: String(fila.ultimaSenal ?? '').trim(),
                     periodoEnvioMail,
                     fechaImpresion: String(fila.fechaImpresion ?? '').trim() || new Date().toISOString(),
                 };
@@ -145,4 +161,3 @@ const Pallet = () => {
 };
 
 export default Pallet;
-

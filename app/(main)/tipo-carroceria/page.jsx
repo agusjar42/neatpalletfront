@@ -22,9 +22,11 @@ const TipoCarroceria = () => {
   const intl = useIntl();
   const empresaIdSesion = getUsuarioSesion()?.empresaId;
   const columnas = [
-    { campo: "orden", header: intl.formatMessage({ id: "Orden" }), tipo: "string" },
-    { campo: "nombre", header: intl.formatMessage({ id: "Nombre" }), tipo: "string" },
-    { campo: "activoSn", header: intl.formatMessage({ id: "Activo" }), tipo: "booleano" },
+    { campo: "orden", header: "ORDEN", tipo: "string" },
+    { campo: "codigo", header: "CODIGO", tipo: "string" },
+    { campo: "nombre", header: "TIPO", tipo: "string" },
+    { campo: "capacidad", header: "CAPACIDAD", tipo: "string" },
+    { campo: "activoSn", header: "ESTADO", tipo: "booleano" },
   ];
 
   const procesarImportacionCSV = async ({ rowsNormalizados }) => {
@@ -40,7 +42,9 @@ const TipoCarroceria = () => {
 
         const payload = {
           empresaId: empresaIdSesion,
+          codigo: getValueFromRow(row, ["codigo"]),
           nombre,
+          capacidad: getValueFromRow(row, ["capacidad"]),
           orden: parseNumberOrNull(getValueFromRow(row, ["orden"])),
           activoSn: parseActivoSN(getValueFromRow(row, ["activoSn", "activo"]), "S"),
         };
@@ -73,11 +77,6 @@ const TipoCarroceria = () => {
         filtradoBase={{ empresaId: empresaIdSesion }}
         editarComponente={<EditarTipoCarroceria />}
         editarComponenteParametrosExtra={{ empresaId: empresaIdSesion }}
-        mostrarEdicionEnModal={true}
-        modalEdicionProps={{
-          showHeader: false,
-          style: { width: "min(1080px, 94vw)" },
-        }}
         columnas={columnas}
         deleteRegistro={deleteTipoCarroceria}
         procesarImportacionCSV={procesarImportacionCSV}

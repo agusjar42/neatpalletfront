@@ -308,8 +308,16 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
         <span className={claseTextoFila(pallet)}>{obtenerTexto(pallet.codigo ?? `Pallet ${pallet.id}`)}</span>
     );
 
-    const fechaImpresionBodyTemplate = (pallet) => (
-        <span className={claseTextoFila(pallet)}>{obtenerFecha(pallet.fechaImpresion)}</span>
+    const adquisicionBodyTemplate = (pallet) => (
+        <span className={claseTextoFila(pallet)}>{obtenerFecha(pallet.adquisicion)}</span>
+    );
+
+    const estadoBodyTemplate = (pallet) => (
+        <span className={claseTextoFila(pallet)}>{obtenerTexto(pallet.estado)}</span>
+    );
+
+    const ultimaSenalBodyTemplate = (pallet) => (
+        <span className={claseTextoFila(pallet)}>{obtenerTexto(pallet.ultimaSenal)}</span>
     );
 
     if (cargando) {

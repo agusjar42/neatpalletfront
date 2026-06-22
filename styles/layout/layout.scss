@@ -3956,6 +3956,72 @@ body {
     grid-column: 1 / -1;
 }
 
+.catalogo-edit-dialog {
+    .p-dialog-content {
+        padding: 1.35rem;
+    }
+
+    h2 {
+        margin: 0;
+        color: #27313b;
+        font-size: 1.15rem;
+        font-weight: 700;
+    }
+}
+
+.catalogo-edit-description {
+    margin: 0.35rem 0 1.25rem;
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+.catalogo-edit-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem 0.75rem;
+}
+
+.catalogo-edit-form-grid-wide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.catalogo-edit-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    label {
+        color: #666f6a;
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    .p-inputtext,
+    .p-inputnumber,
+    .p-inputnumber-input,
+    .p-dropdown {
+        width: 100%;
+        border-radius: 0.6rem;
+    }
+}
+
+.catalogo-edit-field-full {
+    grid-column: 1 / -1;
+}
+
+.catalogo-table-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid #d9dee7;
+    border-radius: 999px;
+    background: #f8fafc;
+    color: #6b7280;
+    font-size: 0.75rem;
+    line-height: 1;
+    white-space: nowrap;
+}
+
 @media (max-width: 768px) {
     .usuario-edit-form-grid {
         grid-template-columns: minmax(0, 1fr);
@@ -3964,5 +4030,10 @@ body {
     .usuario-edit-avatar-panel {
         align-items: flex-start;
         flex-direction: column;
+    }
+
+    .catalogo-edit-form-grid,
+    .catalogo-edit-form-grid-wide {
+        grid-template-columns: minmax(0, 1fr);
     }
 }

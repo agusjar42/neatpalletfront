@@ -21,31 +21,64 @@ import {
 const Producto = () => {
   const intl = useIntl();
   const empresaIdSesion = getUsuarioSesionEmpresaId();
+
+  //
+  //Definimos anchos minimos para que las columnas mantengan una estructura estable
+  //
   const columnas = [
     {
       campo: "orden",
-      header: intl.formatMessage({ id: "Orden" }),
+      header: "ORDEN",
       tipo: "number",
+      headerStyle: { minWidth: "5.5rem" },
+      style: { whiteSpace: "nowrap" },
     },
     {
-      campo: "empresaId",
-      header: intl.formatMessage({ id: "Empresa" }),
-      tipo: "number",
+      campo: "sku",
+      header: "SKU",
+      tipo: "string",
+      headerStyle: { minWidth: "8rem" },
+      style: { whiteSpace: "nowrap" },
     },
     {
       campo: "nombre",
-      header: intl.formatMessage({ id: "Nombre" }),
+      header: "PRODUCTO",
       tipo: "string",
+      headerStyle: { minWidth: "14rem" },
+    },
+    {
+      campo: "familia",
+      header: "FAMILIA",
+      tipo: "string",
+      headerStyle: { minWidth: "10rem" },
+    },
+    {
+      campo: "rangoTemp",
+      header: "RANGO TEMP.",
+      tipo: "string",
+      headerStyle: { minWidth: "9rem" },
+      style: { whiteSpace: "nowrap" },
+    },
+    {
+      campo: "vidaUtil",
+      header: "VIDA UTIL",
+      tipo: "string",
+      headerStyle: { minWidth: "8rem" },
+      style: { whiteSpace: "nowrap" },
     },
     {
       campo: "pesoKgs",
-      header: intl.formatMessage({ id: "Peso (Kg)" }),
+      header: "PESO",
       tipo: "number",
+      headerStyle: { minWidth: "8rem" },
+      style: { whiteSpace: "nowrap" },
     },
     {
       campo: "activoSN",
-      header: intl.formatMessage({ id: "Activo" }),
+      header: "ESTADO",
       tipo: "booleano",
+      headerStyle: { minWidth: "8rem" },
+      style: { whiteSpace: "nowrap" },
     },
   ];
 
@@ -70,7 +103,11 @@ const Producto = () => {
 
         const payload = {
           empresaId,
+          sku: getValueFromRow(row, ["sku"]),
           nombre,
+          familia: getValueFromRow(row, ["familia"]),
+          rangoTemp: getValueFromRow(row, ["rangoTemp", "rango temp", "rangotemp"]),
+          vidaUtil: getValueFromRow(row, ["vidaUtil", "vida util", "vidautil"]),
           orden: parseNumberOrNull(getValueFromRow(row, ["orden"])),
           pesoKgs: parseNumberOrNull(getValueFromRow(row, ["pesoKgs", "peso", "pesokg"])),
           activoSN: parseActivoSN(getValueFromRow(row, ["activoSN", "activoSn", "activo"]), "S"),
@@ -105,7 +142,8 @@ const Producto = () => {
         mostrarEdicionEnModal={true}
         modalEdicionProps={{
           showHeader: false,
-          style: { width: "min(1080px, 94vw)" },
+          className: "neat-crud-edit-dialog catalogo-edit-dialog",
+          style: { width: "min(560px, 94vw)" },
         }}
         columnas={columnas}
         filtradoBase={empresaIdSesion ? { empresaId: empresaIdSesion } : undefined}

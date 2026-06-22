@@ -41,6 +41,16 @@ const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
                 />
             </div>
             <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <label htmlFor="adquisicion">{intl.formatMessage({ id: "Adquisicion" })}</label>
+                <InputText
+                    type="date"
+                    value={pallet.adquisicion}
+                    onChange={(e) => setPallet({ ...pallet, adquisicion: e.target.value })}
+                    maxLength={20}
+                    style={{ textAlign: "right" }}
+                />
+            </div>
+            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                 <label htmlFor="fechaImpresion">{intl.formatMessage({ id: "Fecha de impresion" })}</label>
                 <InputText
                     type="date"
@@ -65,6 +75,24 @@ const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
                     value={pallet.modelo}
                     placeholder={intl.formatMessage({ id: "Modelo del pallet" })}
                     onChange={(e) => setPallet({ ...pallet, modelo: e.target.value })}
+                    maxLength={50}
+                />
+            </div>
+            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <label htmlFor="estado">{intl.formatMessage({ id: "Estado" })}</label>
+                <InputText
+                    value={pallet.estado}
+                    placeholder={intl.formatMessage({ id: "Estado del pallet" })}
+                    onChange={(e) => setPallet({ ...pallet, estado: e.target.value })}
+                    maxLength={50}
+                />
+            </div>
+            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                <label htmlFor="ultimaSenal">{intl.formatMessage({ id: "Ultima senal" })}</label>
+                <InputText
+                    value={pallet.ultimaSenal}
+                    placeholder={intl.formatMessage({ id: "Ultima senal del pallet" })}
+                    onChange={(e) => setPallet({ ...pallet, ultimaSenal: e.target.value })}
                     maxLength={50}
                 />
             </div>

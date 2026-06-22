@@ -11,26 +11,64 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 
 const Cliente = () => {
   const intl = useIntl();
+
+  //
+  //Definimos anchos minimos para que las columnas mantengan la misma estructura visual
+  //
   const columnas = [
     {
       campo: "orden",
-      header: intl.formatMessage({ id: "Orden" }),
+      header: "ORDEN",
       tipo: "number",
+      headerStyle: { minWidth: "5.5rem" },
+      style: { whiteSpace: "nowrap" },
+    },
+    {
+      campo: "codigo",
+      header: "CODIGO",
+      tipo: "string",
+      headerStyle: { minWidth: "8rem" },
+      style: { whiteSpace: "nowrap" },
     },
     {
       campo: "nombre",
-      header: intl.formatMessage({ id: "Nombre" }),
+      header: "NOMBRE",
       tipo: "string",
+      headerStyle: { minWidth: "14rem" },
+    },
+    {
+      campo: "direccion",
+      header: "DIRECCION",
+      tipo: "string",
+      headerStyle: { minWidth: "14rem" },
+    },
+    {
+      campo: "horario",
+      header: "HORARIO",
+      tipo: "string",
+      headerStyle: { minWidth: "8rem" },
+      style: { whiteSpace: "nowrap" },
     },
     {
       campo: "telefono",
-      header: intl.formatMessage({ id: "Teléfono" }),
+      header: "TELEFONO",
       tipo: "string",
+      headerStyle: { minWidth: "8.5rem" },
+      style: { whiteSpace: "nowrap" },
     },
     {
       campo: "mail",
-      header: intl.formatMessage({ id: "Email" }),
+      header: "EMAIL",
       tipo: "string",
+      headerStyle: { minWidth: "14rem" },
+      style: { whiteSpace: "nowrap" },
+    },
+    {
+      campo: "activoSN",
+      header: "ESTADO",
+      tipo: "booleano",
+      headerStyle: { minWidth: "8rem" },
+      style: { whiteSpace: "nowrap" },
     },
   ];
 
@@ -44,11 +82,6 @@ const Cliente = () => {
         controlador={"Clientes"}
         filtradoBase={{ empresaId: getUsuarioSesion()?.empresaId }}
         editarComponente={<EditarClientes />}
-        mostrarEdicionEnModal={true}
-        modalEdicionProps={{
-          showHeader: false,
-          style: { width: "min(1080px, 94vw)" },
-        }}
         columnas={columnas}
         deleteRegistro={deleteCliente}
       />

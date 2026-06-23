@@ -90,7 +90,7 @@ columnasPuntosEntrega.splice(0, columnasPuntosEntrega.length,
     { campo: "horario", header: "Horario", tipo: "string" },
     { campo: "telefono", header: "Telefono", tipo: "string" },
     { campo: "mail", header: "Email", tipo: "string" },
-    { campo: "activoSN", header: "Estado", tipo: "booleano" },
+    { campo: "estado", header: "Estado", tipo: "string" },
 );
 
 columnasProducto.splice(0, columnasProducto.length,
@@ -101,17 +101,26 @@ columnasProducto.splice(0, columnasProducto.length,
     { campo: "rangoTemp", header: "Rango temp.", tipo: "string" },
     { campo: "vidaUtil", header: "Vida util", tipo: "string" },
     { campo: "pesoKgs", header: "Peso", tipo: "number" },
-    { campo: "activoSN", header: "Estado", tipo: "booleano" },
+    { campo: "estado", header: "Estado", tipo: "string" },
 );
 
 const columnasEnvio = [
     { campo: "orden", header: "Orden", tipo: "string" },
-    { campo: "numero", header: "Numero", tipo: "string" },
+    { campo: "numero", header: "Envio", tipo: "string" },
+    { campo: "palletCodigo", header: "Pallet", tipo: "string" },
     { campo: "clienteNombre", header: "Punto de entrega", tipo: "string" },
     { campo: "origenRuta", header: "Origen", tipo: "string" },
     { campo: "destinoRuta", header: "Destino", tipo: "string" },
-    { campo: "fechaSalidaEspanol", header: "Fecha salida", tipo: "string" },
-    { campo: "fechaLlegadaEspanol", header: "Fecha llegada", tipo: "string" },
+    //
+    //El estado se calcula en backend para que el CRUD interno
+    //y la pantalla principal de envios muestren la misma columna
+    //
+    {
+        campo: "estadoEnvio",
+        header: "Estado",
+        tipo: "string",
+        body: (rowData) => <span style={{ color: "#2f8f63", fontWeight: 500 }}>{rowData.estadoEnvio || "-"}</span>,
+    },
 ];
 
 const columnasSensorEmpresa = [
@@ -124,6 +133,14 @@ const columnasCatalogosGlobales = [
     { campo: "orden", header: "Orden", tipo: "string" },
     { campo: "nombre", header: "Nombre", tipo: "string" },
     { campo: "activoSn", header: "Activo", tipo: "booleano" },
+];
+
+const columnasCarroceria = [
+    { campo: "orden", header: "Orden", tipo: "string" },
+    { campo: "codigo", header: "Codigo", tipo: "string" },
+    { campo: "nombre", header: "Tipo", tipo: "string" },
+    { campo: "capacidad", header: "Capacidad", tipo: "string" },
+    { campo: "activoSn", header: "Estado", tipo: "booleano" },
 ];
 
 const columnasEventoConfiguracion = [
@@ -585,7 +602,7 @@ const Empresa = () => {
                         botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]}
                         controlador="Tipos de Carrocería"
                         editarComponente={<EditarTipoCarroceria />}
-                        columnas={columnasCatalogosGlobales}
+                        columnas={columnasCarroceria}
                         filtradoBase={filtroEmpresa}
                         deleteRegistro={deleteTipoCarroceria}
                         editarComponenteParametrosExtra={extra}
@@ -1740,7 +1757,7 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
             case "Pallets asignados":
                 return <PalletsAsignadosEmpresa key={`pallets-${empresaActiva.id}`} empresaId={empresaActiva.id} />;
             case "Carrocerias":
-                return <Crud key={`carrocerias-${empresaActiva.id}`} headerCrud="Tipos de Carroceria" getRegistros={getTipoCarroceria} getRegistrosCount={getTipoCarroceriaCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Tipos de Carroceria" editarComponente={<EditarTipoCarroceria />} columnas={columnasCatalogosGlobales} filtradoBase={filtroEmpresa} deleteRegistro={deleteTipoCarroceria} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
+                return <Crud key={`carrocerias-${empresaActiva.id}`} headerCrud="Tipos de Carroceria" getRegistros={getTipoCarroceria} getRegistrosCount={getTipoCarroceriaCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Tipos de Carroceria" editarComponente={<EditarTipoCarroceria />} columnas={columnasCarroceria} filtradoBase={filtroEmpresa} deleteRegistro={deleteTipoCarroceria} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
             case "Tipos de transporte":
                 return <Crud key={`transportes-${empresaActiva.id}`} headerCrud="Tipos de Transporte" getRegistros={getTipoTransporte} getRegistrosCount={getTipoTransporteCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Tipo Transporte" editarComponente={<EditarTipoTransporte />} columnas={columnasCatalogosGlobales} filtradoBase={filtroEmpresa} deleteRegistro={deleteTipoTransporte} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
             case "Configuracion de eventos":

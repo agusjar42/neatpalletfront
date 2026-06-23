@@ -496,11 +496,7 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                         onChange={(evento) => setEmpresaSeleccionadaId(evento.value)}
                         placeholder={intl.formatMessage({ id: "Empresas" })}
                     />
-                ) : (
-                    <span className="neat-log-type-badge neat-log-type-green">
-                        {opcionesEmpresas[0]?.label ?? intl.formatMessage({ id: "Mi empresa" })}
-                    </span>
-                )}
+                ) : null}
             </div>
 
             <div className="pallets-header-filters">

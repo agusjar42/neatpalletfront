@@ -28,11 +28,32 @@ const EditarDatosTipoTransporte = ({ tipoTransporte, setTipoTransporte, estadoGu
                         inputStyle={{ textAlign: 'right' }}/>
                 </div>
                 <div className="catalogo-edit-field">
-                    <label htmlFor="nombre">{intl.formatMessage({ id: 'Nombre' })}</label>
-                    <InputText value={tipoTransporte.nombre}
-                        placeholder={intl.formatMessage({ id: 'Nombre del tipo de transporte' })}
-                        onChange={(e) => setTipoTransporte({ ...tipoTransporte, nombre: e.target.value })}
-                        className={`${(estadoGuardando && tipoTransporte.nombre === "") ? "p-invalid" : ""}`}
+                    <label htmlFor="codigo">{intl.formatMessage({ id: 'Codigo' })}</label>
+                    <InputText value={tipoTransporte.codigo || ""}
+                        placeholder={intl.formatMessage({ id: 'Codigo del tipo de transporte' })}
+                        onChange={(e) => setTipoTransporte({ ...tipoTransporte, codigo: e.target.value })}
+                        maxLength={50} />
+                </div>
+                <div className="catalogo-edit-field">
+                    <label htmlFor="vehiculo">{intl.formatMessage({ id: 'Vehiculo' })}</label>
+                    <InputText value={tipoTransporte.vehiculo || ""}
+                        placeholder={intl.formatMessage({ id: 'Vehiculo del tipo de transporte' })}
+                        onChange={(e) => setTipoTransporte({ ...tipoTransporte, vehiculo: e.target.value, nombre: e.target.value })}
+                        className={`${(estadoGuardando && (tipoTransporte.vehiculo || tipoTransporte.nombre || "") === "") ? "p-invalid" : ""}`}
+                        maxLength={100} />
+                </div>
+                <div className="catalogo-edit-field">
+                    <label htmlFor="uso">{intl.formatMessage({ id: 'Uso' })}</label>
+                    <InputText value={tipoTransporte.uso || ""}
+                        placeholder={intl.formatMessage({ id: 'Uso del tipo de transporte' })}
+                        onChange={(e) => setTipoTransporte({ ...tipoTransporte, uso: e.target.value })}
+                        maxLength={100} />
+                </div>
+                <div className="catalogo-edit-field">
+                    <label htmlFor="categoria">{intl.formatMessage({ id: 'Categoria' })}</label>
+                    <InputText value={tipoTransporte.categoria || ""}
+                        placeholder={intl.formatMessage({ id: 'Categoria del tipo de transporte' })}
+                        onChange={(e) => setTipoTransporte({ ...tipoTransporte, categoria: e.target.value })}
                         maxLength={50} />
                 </div>
                 <div className="catalogo-edit-field">

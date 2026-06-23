@@ -143,6 +143,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Usuarios-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Usuarios-Borrar' },
                 { header: intl.formatMessage({ id: 'Seleccionar rol' }), seccion: 'Usuarios-SeleccionarRol' },
+                { header: intl.formatMessage({ id: 'Seleccionar estado' }), seccion: 'Usuarios-SeleccionarEstado' },
                 { header: intl.formatMessage({ id: 'Seleccionar tipo' }), seccion: 'Usuarios-SeleccionarTipo' },
                 { header: intl.formatMessage({ id: 'Ver perfil' }), seccion: 'Usuarios-VerPerfil' },
 

@@ -77,6 +77,12 @@ const TipoCarroceria = () => {
         filtradoBase={{ empresaId: empresaIdSesion }}
         editarComponente={<EditarTipoCarroceria />}
         editarComponenteParametrosExtra={{ empresaId: empresaIdSesion }}
+        mostrarEdicionEnModal={true}
+        modalEdicionProps={{
+          showHeader: false,
+          className: "neat-crud-edit-dialog catalogo-edit-dialog",
+          style: { width: "min(560px, 94vw)" },
+        }}
         columnas={columnas}
         deleteRegistro={deleteTipoCarroceria}
         procesarImportacionCSV={procesarImportacionCSV}

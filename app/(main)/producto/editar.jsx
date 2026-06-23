@@ -53,6 +53,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             let objGuardar = { ...producto };
             const usuarioActual = getUsuarioSesion()?.id;
             objGuardar.pesoKgs = Number(objGuardar.pesoKgs) || 0;
+            objGuardar.estado = objGuardar.estado || "Activo";
 
             // Si estoy insertando uno nuevo
             if (idEditar === 0) {

@@ -1,19 +1,16 @@
 import React from "react";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
-import { InputSwitch } from "primereact/inputswitch";
+import { Dropdown } from "primereact/dropdown";
 import { useIntl } from "react-intl";
 
 const EditarDatosProducto = ({ producto, setProducto, estadoGuardando }) => {
   const intl = useIntl();
-
-  const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
-    const valor = (e.target && e.target.value) || "";
-    let _producto = { ...producto };
-    const esTrue = valor === true ? "S" : "N";
-    _producto[`${nombreInputSwitch}`] = esTrue;
-    setProducto(_producto);
-  };
+  const opcionesEstado = [
+    { label: "Activo", value: "Activo" },
+    { label: "Pauseado", value: "Pauseado" },
+    { label: "Descatalogado", value: "Descatalogado" },
+  ];
 
   return (
     <div className="catalogo-edit-form-grid">
@@ -115,10 +112,13 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando }) => {
       </div>
 
       <div className="catalogo-edit-field">
-        <label htmlFor="activoSN">{intl.formatMessage({ id: "Activo" })}</label>
-        <InputSwitch
-          checked={producto.activoSN === "S"}
-          onChange={(e) => manejarCambioInputSwitch(e, "activoSN")}
+        <label htmlFor="estado">{intl.formatMessage({ id: "Estado" })}</label>
+        <Dropdown
+          value={producto.estado || "Activo"}
+          options={opcionesEstado}
+          onChange={(e) => setProducto({ ...producto, estado: e.value })}
+          placeholder={intl.formatMessage({ id: "Selecciona una opcion" })}
+          className="w-full"
         />
       </div>
     </div>

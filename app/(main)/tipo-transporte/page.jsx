@@ -58,9 +58,24 @@ const TipoTransporte = () => {
         const payload = {
           empresaId: empresaIdSesion,
           nombre,
+          codigo: getValueFromRow(row, ["codigo"]),
+          vehiculo: getValueFromRow(row, ["vehiculo"]),
+          uso: getValueFromRow(row, ["uso"]),
+          categoria: getValueFromRow(row, ["categoria"]),
           orden: parseNumberOrNull(getValueFromRow(row, ["orden"])),
           activoSn: parseActivoSN(getValueFromRow(row, ["activoSn", "activo"]), "S"),
         };
+
+        //
+        //Si el CSV no trae vehiculo, mantenemos el comportamiento legado
+        //copiando nombre al campo principal visible del CRUD
+        //
+        if (!payload.vehiculo) {
+          payload.vehiculo = nombre;
+        }
+        if (!payload.nombre) {
+          payload.nombre = payload.vehiculo;
+        }
 
         if (rowId) {
           payload.usuarioModificacion = usuarioSesionId;

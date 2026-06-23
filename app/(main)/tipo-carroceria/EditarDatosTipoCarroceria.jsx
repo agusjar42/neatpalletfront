@@ -28,7 +28,7 @@ const EditarDatosTipoCarroceria = ({ tipoCarroceria, setTipoCarroceria, estadoGu
                         inputStyle={{ textAlign: 'right' }} />
                 </div>
                 <div className="catalogo-edit-field">
-                    <label htmlFor="nombre">{intl.formatMessage({ id: 'Nombre' })}</label>
+                    <label htmlFor="codigo">{intl.formatMessage({ id: 'Codigo' })}</label>
                     <InputText value={tipoCarroceria.codigo || ""}
                         placeholder={intl.formatMessage({ id: 'Codigo de la carroceria' })}
                         onChange={(e) => setTipoCarroceria({ ...tipoCarroceria, codigo: e.target.value })}

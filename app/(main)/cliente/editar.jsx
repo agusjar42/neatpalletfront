@@ -84,7 +84,7 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 delete objGuardar.empresaNombre;
                 objGuardar['usuCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = empresaId ?? getUsuarioSesion()?.empresaId;
-                objGuardar['activoSN'] = objGuardar['activoSN'] || 'S';
+                objGuardar['estado'] = objGuardar['estado'] || 'Activo';
                 
                 // Hacemos el insert del registro
                 const nuevoRegistro = await postCliente(objGuardar);

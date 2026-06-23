@@ -3,7 +3,6 @@ import { Toast } from "primereact/toast";
 import EditarDatosUsuario from "./EditarDatosUsuario";
 
 import { useIntl } from 'react-intl';
-import { getEmpresas } from "@/app/api-endpoints/empresa";
 import { getRol, obtenerRolDashboard } from "@/app/api-endpoints/rol";
 import { getIdiomas } from "@/app/api-endpoints/idioma";
 import { Button } from "primereact/button";
@@ -19,14 +18,11 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const router = useRouter();
     const [usuario, setUsuario] = useState(emptyRegistro);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
-    const [empresaSeleccionada, setEmpresaSeleccionada] = useState(null);
     const [listaRoles, setListaRoles] = useState([]);
     const [rolSeleccionado, setRolSeleccionado] = useState(null);
     const [listaIdiomas, setListaIdiomas] = useState([]);
     const [idiomaSeleccionado, setIdiomaSeleccionado] = useState(null);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
-    const [nombreEmpresaMostrar, setNombreEmpresaMostrar] = useState("");
-
     useEffect(() => {
         const fetchData = async () => {
             //
@@ -34,16 +30,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             //
             // Obtenemos todos los roles
             //
-            let empresaFiltrar = null;
-            if (idEditar === 0) {
-                empresaFiltrar = (empresaId ?? getUsuarioSesion()?.empresaId) || null;
-            } else {
-                const usuarioEditar = rowData.find((element) => element.id === idEditar);
-                empresaFiltrar = usuarioEditar?.empresaId || null;
-            }
-            const registrosEmpresas = empresaFiltrar ? await getEmpresas(JSON.stringify({ where: { id: empresaFiltrar } })) : [];
-            const usuarioEditar = rowData.find((element) => element.id === idEditar);
-            setNombreEmpresaMostrar(registrosEmpresas?.[0]?.nombre || usuarioEditar?.nombreEmpresa || "");
+            const empresaFiltrar = (empresaId ?? getUsuarioSesion()?.empresaId) || null;
 
             const filtroRol = { where: { and: { empresaId: empresaFiltrar } } };
             const registrosRoles = await getRol(JSON.stringify(filtroRol));
@@ -94,6 +81,9 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
                 // Obtenemos el registro a editar
                 let registro = rowData.find((element) => element.id === idEditar);
+                if (registro && !registro.activoSn) {
+                    registro = { ...registro, activoSn: 'S' };
+                }
                 setUsuario(registro);
 
                 // Convertir IDs a nombres para los dropdowns
@@ -111,6 +101,9 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     }
                 }
 
+            }
+            else {
+                setUsuario((prev) => ({ ...prev, activoSn: prev?.activoSn || 'S' }));
             }
         };
         fetchData();
@@ -295,12 +288,10 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Usuario' })).toLowerCase()}</h2>
-                        <p className="usuario-edit-description">Cambia los datos personales, rol o empresa asignada.</p>
+                        <p className="usuario-edit-description">Cambia los datos personales, rol y estado del usuario.</p>
                         <EditarDatosUsuario
                             usuario={usuario}
                             setUsuario={setUsuario}
-                            empresaSeleccionada={empresaSeleccionada}
-                            setEmpresaSeleccionada={setEmpresaSeleccionada}
                             listaRoles={listaRoles}
                             rolSeleccionado={rolSeleccionado}
                             setRolSeleccionado={setRolSeleccionado}
@@ -308,7 +299,6 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                             idiomaSeleccionado={idiomaSeleccionado}
                             setIdiomaSeleccionado={setIdiomaSeleccionado}
                             estadoGuardando={estadoGuardando}
-                            nombreEmpresaMostrar={nombreEmpresaMostrar}
                         />
                         <div className="flex justify-content-end align-items-center gap-2 mt-3">
                             <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />

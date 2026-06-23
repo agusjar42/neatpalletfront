@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
+import { RadioButton } from 'primereact/radiobutton';
 import { useIntl } from 'react-intl'
 import { Button } from "primereact/button";
 import 'react-phone-input-2/lib/bootstrap.css'
@@ -23,12 +24,13 @@ const obtenerInicialesUsuario = (nombre = "") => {
 };
 
 const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccionado, setIdiomaSeleccionado, estadoGuardando,
-    listaRoles, rolSeleccionado, setRolSeleccionado, nombreEmpresaMostrar
+    listaRoles, rolSeleccionado, setRolSeleccionado
 }) => {
     const intl = useIntl()
     const toast = useRef(null);
 
     const [puedeSeleccionarRol, setPuedeSeleccionarRol] = useState(false);
+    const [puedeSeleccionarEstado, setPuedeSeleccionarEstado] = useState(false);
     const [previewAvatar, setPreviewAvatar] = useState(usuario.avatarBase64 || null);
     const [dropdownAbiertoRol, setDropdownAbiertoRol] = useState(false);
     const avatarInputRef = useRef(null);
@@ -38,11 +40,16 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
     useEffect(() => {
         const verificarPermiso = async () => {
             try {
-                const tienePermiso = await tieneUsuarioPermiso('Neatpallet', 'Usuarios', 'SeleccionarRol');
-                setPuedeSeleccionarRol(Boolean(tienePermiso));
+                const [permisoRol, permisoEstado] = await Promise.all([
+                    tieneUsuarioPermiso('Neatpallet', 'Usuarios', 'SeleccionarRol'),
+                    tieneUsuarioPermiso('Neatpallet', 'Usuarios', 'SeleccionarEstado'),
+                ]);
+                setPuedeSeleccionarRol(Boolean(permisoRol));
+                setPuedeSeleccionarEstado(Boolean(permisoEstado));
             } catch (error) {
-                console.error("Error verificando permiso SeleccionarRol:", error);
+                console.error("Error verificando permisos de Usuarios:", error);
                 setPuedeSeleccionarRol(false);
+                setPuedeSeleccionarEstado(false);
             }
         };
         verificarPermiso();
@@ -159,11 +166,6 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                     />
                 </div>
 
-                <div className="usuario-edit-field">
-                    <label htmlFor="empresaNombre">{intl.formatMessage({ id: 'Empresa' })}</label>
-                    <InputText value={nombreEmpresaMostrar || usuario.nombreEmpresa || ""} disabled />
-                </div>
-
                 <div className="usuario-edit-field usuario-edit-field-full">
                     <label htmlFor="usuRol">{intl.formatMessage({ id: 'Rol' })}</label>
                     <Dropdown
@@ -175,6 +177,34 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                         className={`${(estadoGuardando && (rolSeleccionado == null || rolSeleccionado === "")) ? "p-invalid" : ""}`}
                         placeholder={intl.formatMessage({ id: 'Selecciona un rol' })}
                     />
+                </div>
+
+                <div className="usuario-edit-field usuario-edit-field-full">
+                    <label htmlFor="activoSn">{intl.formatMessage({ id: 'Estado' })}</label>
+                    <div className="flex align-items-center gap-4 flex-wrap">
+                        <div className="flex align-items-center gap-2">
+                            <RadioButton
+                                inputId="usuario-estado-activo"
+                                name="usuarioEstado"
+                                value="S"
+                                checked={(usuario.activoSn || "S") === "S"}
+                                onChange={(e) => setUsuario({ ...usuario, activoSn: e.value })}
+                                disabled={!puedeSeleccionarEstado}
+                            />
+                            <label htmlFor="usuario-estado-activo">{intl.formatMessage({ id: 'Activo' })}</label>
+                        </div>
+                        <div className="flex align-items-center gap-2">
+                            <RadioButton
+                                inputId="usuario-estado-inactivo"
+                                name="usuarioEstado"
+                                value="N"
+                                checked={usuario.activoSn === "N"}
+                                onChange={(e) => setUsuario({ ...usuario, activoSn: e.value })}
+                                disabled={!puedeSeleccionarEstado}
+                            />
+                            <label htmlFor="usuario-estado-inactivo">{intl.formatMessage({ id: 'Inactivo' })}</label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

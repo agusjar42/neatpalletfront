@@ -51,14 +51,24 @@ const Envio = () => {
         }
     }, [mostrarAccionesRuta]);
 
+    //
+    //Mostramos el estado del envio con el mismo tono visual
+    //que se ve en la referencia del usuario
+    //
+    const estadoEnvioBodyTemplate = (rowData) => (
+        <span style={{ color: "#2f8f63", fontWeight: 500 }}>
+            {rowData.estadoEnvio || "-"}
+        </span>
+    );
+
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
-        { campo: 'numero', header: intl.formatMessage({ id: 'Numero' }), tipo: 'string' },
+        { campo: 'numero', header: intl.formatMessage({ id: 'Envio' }), tipo: 'string' },
+        { campo: 'palletCodigo', header: intl.formatMessage({ id: 'Pallet' }), tipo: 'string' },
         { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Punto de entrega' }), tipo: 'string' },
         { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen' }), tipo: 'string' },
         { campo: 'destinoRuta', header: intl.formatMessage({ id: 'Destino' }), tipo: 'string' },
-        { campo: 'fechaSalidaEspanol', header: intl.formatMessage({ id: 'Fecha salida' }), tipo: 'string' },
-        { campo: 'fechaLlegadaEspanol', header: intl.formatMessage({ id: 'Fecha llegada' }), tipo: 'string' }
+        { campo: 'estadoEnvio', header: intl.formatMessage({ id: 'Estado' }), tipo: 'string', body: estadoEnvioBodyTemplate }
     ];
 
     const handleGenerarRuta = () => {

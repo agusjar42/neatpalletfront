@@ -17,7 +17,7 @@ const EventosConfiguracion = () => {
         { campo: 'orden', header: 'ORDEN', tipo: 'string' },
         { campo: 'nombre', header: 'PARAMETRO', tipo: 'string' },
         { campo: 'valor', header: 'VALOR', tipo: 'string' },
-        { campo: 'unidadMedida', header: 'UNIDAD', tipo: 'string' },
+        { campo: 'unidadMedida', header: 'UNIDAD DE MEDIDA', tipo: 'string' },
         { campo: 'activoSn', header: 'ACTIVO', tipo: 'booleano' },
     ]
 

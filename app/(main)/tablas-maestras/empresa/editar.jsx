@@ -28,7 +28,6 @@ import {
   getEnvio,
   getEnvioCount,
   deleteEnvio,
-  generarDatosFake,
 } from "@/app/api-endpoints/envio";
 import {
   getSensorEmpresa,
@@ -94,7 +93,6 @@ const EditarEmpresa = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [cargandoSensores, setCargandoSensores] = useState(false);
   const [refreshSensores, setRefreshSensores] = useState(0);
-  const [refreshEnvios, setRefreshEnvios] = useState(0);
 
   const columnasUsuariosEmpresa = [
     {
@@ -136,8 +134,23 @@ const EditarEmpresa = ({
       tipo: "number",
     },
     {
+      campo: "codigo",
+      header: intl.formatMessage({ id: "Codigo" }),
+      tipo: "string",
+    },
+    {
       campo: "nombre",
       header: intl.formatMessage({ id: "Nombre" }),
+      tipo: "string",
+    },
+    {
+      campo: "direccion",
+      header: intl.formatMessage({ id: "Direccion" }),
+      tipo: "string",
+    },
+    {
+      campo: "horario",
+      header: intl.formatMessage({ id: "Horario" }),
       tipo: "string",
     },
     {
@@ -150,6 +163,11 @@ const EditarEmpresa = ({
       header: intl.formatMessage({ id: "Email" }),
       tipo: "string",
     },
+    {
+      campo: "activoSN",
+      header: intl.formatMessage({ id: "Estado" }),
+      tipo: "booleano",
+    },
   ];
 
   const columnasProducto = [
@@ -159,18 +177,66 @@ const EditarEmpresa = ({
       tipo: "number",
     },
     {
+      campo: "sku",
+      header: intl.formatMessage({ id: "SKU" }),
+      tipo: "string",
+    },
+    {
       campo: "nombre",
       header: intl.formatMessage({ id: "Nombre" }),
       tipo: "string",
     },
     {
+      campo: "familia",
+      header: intl.formatMessage({ id: "Familia" }),
+      tipo: "string",
+    },
+    {
+      campo: "rangoTemp",
+      header: intl.formatMessage({ id: "Rango temp." }),
+      tipo: "string",
+    },
+    {
+      campo: "vidaUtil",
+      header: intl.formatMessage({ id: "Vida util" }),
+      tipo: "string",
+    },
+    {
       campo: "pesoKgs",
-      header: intl.formatMessage({ id: "Peso (Kg)" }),
+      header: intl.formatMessage({ id: "Peso" }),
       tipo: "number",
     },
     {
       campo: "activoSN",
-      header: intl.formatMessage({ id: "Activo" }),
+      header: intl.formatMessage({ id: "Estado" }),
+      tipo: "booleano",
+    },
+  ];
+
+  const columnasCarroceria = [
+    {
+      campo: "orden",
+      header: intl.formatMessage({ id: "Orden" }),
+      tipo: "string",
+    },
+    {
+      campo: "codigo",
+      header: intl.formatMessage({ id: "Codigo" }),
+      tipo: "string",
+    },
+    {
+      campo: "nombre",
+      header: intl.formatMessage({ id: "Tipo" }),
+      tipo: "string",
+    },
+    {
+      campo: "capacidad",
+      header: intl.formatMessage({ id: "Capacidad" }),
+      tipo: "string",
+    },
+    {
+      campo: "activoSn",
+      header: intl.formatMessage({ id: "Estado" }),
       tipo: "booleano",
     },
   ];
@@ -363,10 +429,14 @@ const EditarEmpresa = ({
 
         const payload = {
           empresaId: empresa.id,
+          codigo: getValueFromRow(row, ["codigo"]),
           nombre: nombre || null,
+          direccion: getValueFromRow(row, ["direccion"]) || null,
+          horario: getValueFromRow(row, ["horario"]) || null,
           mail: mail || null,
           telefono: telefono || null,
           orden,
+          activoSN: parseActivoSN(getValueFromRow(row, ["activoSN", "activoSn", "activo"]), "S"),
         };
 
         if (rowId) {
@@ -399,7 +469,11 @@ const EditarEmpresa = ({
 
         const payload = {
           empresaId: empresa.id,
+          sku: getValueFromRow(row, ["sku"]) || null,
           nombre,
+          familia: getValueFromRow(row, ["familia"]) || null,
+          rangoTemp: getValueFromRow(row, ["rangoTemp", "rango temp", "rangotemp"]) || null,
+          vidaUtil: getValueFromRow(row, ["vidaUtil", "vida util", "vidautil"]) || null,
           orden: parseNumberOrNull(getValueFromRow(row, ["orden"])),
           pesoKgs: parseNumberOrNull(getValueFromRow(row, ["pesoKgs", "peso", "pesokg"])),
           activoSN: parseActivoSN(getValueFromRow(row, ["activoSN", "activoSn", "activo"]), "S"),
@@ -435,7 +509,9 @@ const EditarEmpresa = ({
 
         const payload = {
           empresaId: empresa.id,
+          codigo: getValueFromRow(row, ["codigo"]) || null,
           nombre,
+          capacidad: getValueFromRow(row, ["capacidad"]) || null,
           orden: parseNumberOrNull(getValueFromRow(row, ["orden"])),
           activoSn: parseActivoSN(getValueFromRow(row, ["activoSn", "activo"]), "S"),
         };
@@ -694,53 +770,6 @@ const EditarEmpresa = ({
     });
   };
 
-  const handleGenerarDatosFake = () => {
-    if (!empresa.id) {
-      toast.current?.show({
-        severity: "warn",
-        summary: intl.formatMessage({ id: "Advertencia" }),
-        detail: intl.formatMessage({ id: "Debe guardar la empresa primero" }),
-        life: 3000,
-      });
-      return;
-    }
-
-    confirmDialog({
-      group: "empresa-confirmaciones",
-      message: intl.formatMessage({
-        id: "\u00BFEst\u00E1s seguro de que quieres generar datos fake?",
-      }),
-      header: intl.formatMessage({ id: "Confirmaci\u00F3n" }),
-      icon: "pi pi-exclamation-triangle",
-      acceptLabel: intl.formatMessage({ id: "S\u00ED" }),
-      rejectLabel: intl.formatMessage({ id: "No" }),
-      accept: async () => {
-        try {
-          await generarDatosFake({
-            usuarioCreacion: getUsuarioSesion()?.id,
-            empresaId: empresa.id,
-          });
-          toast.current?.show({
-            severity: "success",
-            summary: "OK",
-            detail: intl.formatMessage({
-              id: "Datos fake generados correctamente",
-            }),
-            life: 3000,
-          });
-          setRefreshEnvios((prev) => prev + 1);
-        } catch (error) {
-          toast.current?.show({
-            severity: "error",
-            summary: intl.formatMessage({ id: "Error" }),
-            detail: intl.formatMessage({ id: "Error al generar datos fake" }),
-            life: 3000,
-          });
-        }
-      },
-    });
-  };
-
   const handleVerRutas = () => {
     window.open("/seguimiento-rutas", "_blank");
   };
@@ -910,21 +939,14 @@ const EditarEmpresa = ({
                   {empresa.id ? (
                     <>
                       <div className="flex justify-content-end gap-2 mb-3">
-                        <Button
-                          label={intl.formatMessage({ id: "Ver rutas" })}
-                          icon="pi pi-map"
-                          severity="info"
-                          onClick={handleVerRutas}
-                        />
-                        <Button
-                          label={intl.formatMessage({ id: "Generar Datos Fake" })}
-                          icon="pi pi-database"
-                          severity="danger"
-                          onClick={handleGenerarDatosFake}
-                        />
-                      </div>
+                      <Button
+                        label={intl.formatMessage({ id: "Ver rutas" })}
+                        icon="pi pi-map"
+                        severity="info"
+                        onClick={handleVerRutas}
+                      />
+                    </div>
                       <Crud
-                        key={`envios-empresa-${refreshEnvios}`}
                         headerCrud={intl.formatMessage({ id: "Envíos" })}
                         getRegistros={getEnvio}
                         getRegistrosCount={getEnvioCount}
@@ -1041,7 +1063,7 @@ const EditarEmpresa = ({
                     controlador={"Tipos de Carrocería"}
                     filtradoBase={{ empresaId: empresa.id }}
                     editarComponente={<EditarTipoCarroceria />}
-                    columnas={columnasCatalogosGlobales}
+                    columnas={columnasCarroceria}
                     deleteRegistro={deleteTipoCarroceria}
                     editarComponenteParametrosExtra={{
                       empresaId: empresa.id,

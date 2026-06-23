@@ -21,6 +21,7 @@ import {
 const Producto = () => {
   const intl = useIntl();
   const empresaIdSesion = getUsuarioSesionEmpresaId();
+  const estadoBodyTemplate = (rowData) => rowData?.estado || "-";
 
   //
   //Definimos anchos minimos para que las columnas mantengan una estructura estable
@@ -74,9 +75,10 @@ const Producto = () => {
       style: { whiteSpace: "nowrap" },
     },
     {
-      campo: "activoSN",
+      campo: "estado",
       header: "ESTADO",
-      tipo: "booleano",
+      tipo: "string",
+      body: estadoBodyTemplate,
       headerStyle: { minWidth: "8rem" },
       style: { whiteSpace: "nowrap" },
     },
@@ -110,7 +112,7 @@ const Producto = () => {
           vidaUtil: getValueFromRow(row, ["vidaUtil", "vida util", "vidautil"]),
           orden: parseNumberOrNull(getValueFromRow(row, ["orden"])),
           pesoKgs: parseNumberOrNull(getValueFromRow(row, ["pesoKgs", "peso", "pesokg"])),
-          activoSN: parseActivoSN(getValueFromRow(row, ["activoSN", "activoSn", "activo"]), "S"),
+          estado: getValueFromRow(row, ["estado", "activoSN", "activoSn", "activo"]) || "Activo",
         };
 
         if (rowId) {

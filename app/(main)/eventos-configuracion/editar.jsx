@@ -94,6 +94,7 @@ const EditarEventoConfiguracion = ({ idEditar, setIdEditar, rowData, emptyRegist
                             envioConfiguracionEmpresa={eventoConfiguracion}
                             setEnvioConfiguracionEmpresa={setEventoConfiguracion}
                             estadoGuardando={estadoGuardando}
+                            mostrarCampoActivoSn={true}
                         />
 
                         <div className="flex justify-content-end align-items-center gap-2 mt-3">

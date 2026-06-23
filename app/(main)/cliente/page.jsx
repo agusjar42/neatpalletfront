@@ -11,6 +11,7 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 
 const Cliente = () => {
   const intl = useIntl();
+  const estadoBodyTemplate = (rowData) => rowData?.estado || "-";
 
   //
   //Definimos anchos minimos para que las columnas mantengan la misma estructura visual
@@ -64,9 +65,10 @@ const Cliente = () => {
       style: { whiteSpace: "nowrap" },
     },
     {
-      campo: "activoSN",
+      campo: "estado",
       header: "ESTADO",
-      tipo: "booleano",
+      tipo: "string",
+      body: estadoBodyTemplate,
       headerStyle: { minWidth: "8rem" },
       style: { whiteSpace: "nowrap" },
     },

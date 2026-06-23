@@ -26,7 +26,12 @@ const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
-        const validaNombre = tipoTransporte.nombre === undefined || tipoTransporte.nombre === "";
+        //
+        //Mantenemos compatibilidad con el campo legado nombre
+        //pero la validacion visible pasa a vehiculo, que es la columna del CRUD
+        //
+        const nombreVisible = tipoTransporte.vehiculo ?? tipoTransporte.nombre ?? "";
+        const validaNombre = nombreVisible === undefined || nombreVisible === "";
         const validaOrden = tipoTransporte.orden === undefined || tipoTransporte.orden === null || tipoTransporte.orden === "";
         return (!validaNombre && !validaOrden)
     }
@@ -37,6 +42,12 @@ const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
         if (await validaciones()) {
             let objGuardar = { ...tipoTransporte };
             const usuarioActual = getUsuarioSesion()?.id;
+
+            //
+            //Sincronizamos nombre con vehiculo para no romper
+            //consumidores antiguos que todavia lean ese campo
+            //
+            objGuardar.nombre = objGuardar.vehiculo ?? objGuardar.nombre ?? "";
 
             if (idEditar === 0) {
                 delete objGuardar.id;
@@ -89,7 +100,7 @@ const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Tipo Transporte' })).toLowerCase()}</h2>
-                        <p className="catalogo-edit-description">Define el nombre y el orden del tipo de transporte.</p>
+                        <p className="catalogo-edit-description">Define los mismos campos visibles en el crud del tipo de transporte.</p>
                         <EditarDatosTipoTransporte
                             tipoTransporte={tipoTransporte}
                             setTipoTransporte={setTipoTransporte}

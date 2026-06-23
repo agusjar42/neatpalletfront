@@ -3482,81 +3482,6 @@
         "operationId": "EnvioController.count"
       }
     },
-    "/envios/generar-datos-fake": {
-      "post": {
-        "x-controller-name": "EnvioFakeDataController",
-        "x-operation-name": "generarDatosFake",
-        "tags": [
-          "EnvioFakeDataController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Genera datos fake para las tablas de envío",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "usuarioCreacion",
-                  "empresaId"
-                ],
-                "properties": {
-                  "usuarioCreacion": {
-                    "type": "number"
-                  },
-                  "empresaId": {
-                    "type": "number"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "EnvioFakeDataController.generarDatosFake"
-      }
-    },
-    "/envios/{id}/borrar-cascada": {
-      "delete": {
-        "x-controller-name": "EnvioFakeDataController",
-        "x-operation-name": "borrarEnvioCascada",
-        "tags": [
-          "EnvioFakeDataController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Borra un envío y todas sus tablas relacionadas en cascada"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "operationId": "EnvioFakeDataController.borrarEnvioCascada"
-      }
-    },
     "/envios/{id}": {
       "put": {
         "x-controller-name": "EnvioController",
@@ -12038,6 +11963,18 @@
           "empresaId": {
             "type": "number"
           },
+          "codigo": {
+            "type": "string"
+          },
+          "vehiculo": {
+            "type": "string"
+          },
+          "uso": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string"
+          },
           "nombre": {
             "type": "string"
           },
@@ -12074,6 +12011,18 @@
         "properties": {
           "empresaId": {
             "type": "number"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "vehiculo": {
+            "type": "string"
+          },
+          "uso": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string"
           },
           "nombre": {
             "type": "string"
@@ -12198,6 +12147,18 @@
           "empresaId": {
             "type": "number"
           },
+          "codigo": {
+            "type": "string"
+          },
+          "vehiculo": {
+            "type": "string"
+          },
+          "uso": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string"
+          },
           "nombre": {
             "type": "string"
           },
@@ -12242,6 +12203,18 @@
           },
           "empresaId": {
             "type": "number"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "vehiculo": {
+            "type": "string"
+          },
+          "uso": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string"
           },
           "nombre": {
             "type": "string"
@@ -12354,7 +12327,19 @@
             "type": "number",
             "nullable": false
           },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
           "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "horario": {
             "type": "string",
             "nullable": true
           },
@@ -12363,6 +12348,10 @@
             "nullable": true
           },
           "mail": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
             "type": "string",
             "nullable": true
           },
@@ -12610,6 +12599,9 @@
           "fechaImpresion": {
             "type": "string"
           },
+          "adquisicion": {
+            "type": "string"
+          },
           "codigo": {
             "type": "string"
           },
@@ -12623,6 +12615,12 @@
             "type": "string"
           },
           "modelo": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "ultimaSenal": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -12861,7 +12859,13 @@
           "empresaId": {
             "type": "number"
           },
+          "codigo": {
+            "type": "string"
+          },
           "nombre": {
+            "type": "string"
+          },
+          "capacidad": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -12898,7 +12902,13 @@
           "empresaId": {
             "type": "number"
           },
+          "codigo": {
+            "type": "string"
+          },
           "nombre": {
+            "type": "string"
+          },
+          "capacidad": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -12939,7 +12949,13 @@
           "empresaId": {
             "type": "number"
           },
+          "codigo": {
+            "type": "string"
+          },
           "nombre": {
+            "type": "string"
+          },
+          "capacidad": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -12984,7 +13000,13 @@
           "empresaId": {
             "type": "number"
           },
+          "codigo": {
+            "type": "string"
+          },
           "nombre": {
+            "type": "string"
+          },
+          "capacidad": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -13538,7 +13560,23 @@
           "empresaId": {
             "type": "number"
           },
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
           "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "familia": {
+            "type": "string",
+            "nullable": true
+          },
+          "rangoTemp": {
+            "type": "string",
+            "nullable": true
+          },
+          "vidaUtil": {
             "type": "string",
             "nullable": true
           },
@@ -13560,7 +13598,7 @@
             "type": "number",
             "nullable": true
           },
-          "activoSN": {
+          "estado": {
             "type": "string",
             "nullable": true
           },
@@ -13582,7 +13620,23 @@
           "empresaId": {
             "type": "number"
           },
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
           "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "familia": {
+            "type": "string",
+            "nullable": true
+          },
+          "rangoTemp": {
+            "type": "string",
+            "nullable": true
+          },
+          "vidaUtil": {
             "type": "string",
             "nullable": true
           },
@@ -13604,7 +13658,7 @@
             "type": "number",
             "nullable": true
           },
-          "activoSN": {
+          "estado": {
             "type": "string",
             "nullable": true
           },
@@ -13631,7 +13685,23 @@
           "empresaId": {
             "type": "number"
           },
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
           "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "familia": {
+            "type": "string",
+            "nullable": true
+          },
+          "rangoTemp": {
+            "type": "string",
+            "nullable": true
+          },
+          "vidaUtil": {
             "type": "string",
             "nullable": true
           },
@@ -13653,7 +13723,7 @@
             "type": "number",
             "nullable": true
           },
-          "activoSN": {
+          "estado": {
             "type": "string",
             "nullable": true
           },
@@ -13684,7 +13754,23 @@
           "empresaId": {
             "type": "number"
           },
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
           "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "familia": {
+            "type": "string",
+            "nullable": true
+          },
+          "rangoTemp": {
+            "type": "string",
+            "nullable": true
+          },
+          "vidaUtil": {
             "type": "string",
             "nullable": true
           },
@@ -13706,7 +13792,7 @@
             "type": "number",
             "nullable": true
           },
-          "activoSN": {
+          "estado": {
             "type": "string",
             "nullable": true
           },
@@ -14428,6 +14514,9 @@
           "fechaImpresion": {
             "type": "string"
           },
+          "adquisicion": {
+            "type": "string"
+          },
           "codigo": {
             "type": "string"
           },
@@ -14441,6 +14530,12 @@
             "type": "string"
           },
           "modelo": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "ultimaSenal": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -14471,6 +14566,9 @@
           "fechaImpresion": {
             "type": "string"
           },
+          "adquisicion": {
+            "type": "string"
+          },
           "codigo": {
             "type": "string"
           },
@@ -14484,6 +14582,12 @@
             "type": "string"
           },
           "modelo": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "ultimaSenal": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -14518,6 +14622,9 @@
           "fechaImpresion": {
             "type": "string"
           },
+          "adquisicion": {
+            "type": "string"
+          },
           "codigo": {
             "type": "string"
           },
@@ -14531,6 +14638,12 @@
             "type": "string"
           },
           "modelo": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "ultimaSenal": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -17720,7 +17833,19 @@
             "type": "number",
             "nullable": false
           },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
           "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "horario": {
             "type": "string",
             "nullable": true
           },
@@ -17729,6 +17854,10 @@
             "nullable": true
           },
           "mail": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
             "type": "string",
             "nullable": true
           },
@@ -17766,7 +17895,19 @@
             "type": "number",
             "nullable": false
           },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
           "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "horario": {
             "type": "string",
             "nullable": true
           },
@@ -17775,6 +17916,10 @@
             "nullable": true
           },
           "mail": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
             "type": "string",
             "nullable": true
           },
@@ -17817,7 +17962,19 @@
             "type": "number",
             "nullable": false
           },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
           "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "horario": {
             "type": "string",
             "nullable": true
           },
@@ -17826,6 +17983,10 @@
             "nullable": true
           },
           "mail": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
             "type": "string",
             "nullable": true
           },
@@ -17982,13 +18143,25 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "codigo": {
+                    "type": "boolean"
+                  },
                   "nombre": {
+                    "type": "boolean"
+                  },
+                  "direccion": {
+                    "type": "boolean"
+                  },
+                  "horario": {
                     "type": "boolean"
                   },
                   "telefono": {
                     "type": "boolean"
                   },
                   "mail": {
+                    "type": "boolean"
+                  },
+                  "estado": {
                     "type": "boolean"
                   },
                   "fechaCreacion": {
@@ -18016,9 +18189,13 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "codigo",
                     "nombre",
+                    "direccion",
+                    "horario",
                     "telefono",
                     "mail",
+                    "estado",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -18096,13 +18273,25 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "codigo": {
+                    "type": "boolean"
+                  },
                   "nombre": {
+                    "type": "boolean"
+                  },
+                  "direccion": {
+                    "type": "boolean"
+                  },
+                  "horario": {
                     "type": "boolean"
                   },
                   "telefono": {
                     "type": "boolean"
                   },
                   "mail": {
+                    "type": "boolean"
+                  },
+                  "estado": {
                     "type": "boolean"
                   },
                   "fechaCreacion": {
@@ -18130,9 +18319,13 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "codigo",
                     "nombre",
+                    "direccion",
+                    "horario",
                     "telefono",
                     "mail",
+                    "estado",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -23122,6 +23315,9 @@
                   "fechaImpresion": {
                     "type": "boolean"
                   },
+                  "adquisicion": {
+                    "type": "boolean"
+                  },
                   "codigo": {
                     "type": "boolean"
                   },
@@ -23135,6 +23331,12 @@
                     "type": "boolean"
                   },
                   "modelo": {
+                    "type": "boolean"
+                  },
+                  "estado": {
+                    "type": "boolean"
+                  },
+                  "ultimaSenal": {
                     "type": "boolean"
                   },
                   "usuarioCreacion": {
@@ -23162,11 +23364,14 @@
                   "enum": [
                     "id",
                     "fechaImpresion",
+                    "adquisicion",
                     "codigo",
                     "alias",
                     "periodoEnvioMail",
                     "medidas",
                     "modelo",
+                    "estado",
+                    "ultimaSenal",
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
@@ -23244,6 +23449,9 @@
                   "fechaImpresion": {
                     "type": "boolean"
                   },
+                  "adquisicion": {
+                    "type": "boolean"
+                  },
                   "codigo": {
                     "type": "boolean"
                   },
@@ -23257,6 +23465,12 @@
                     "type": "boolean"
                   },
                   "modelo": {
+                    "type": "boolean"
+                  },
+                  "estado": {
+                    "type": "boolean"
+                  },
+                  "ultimaSenal": {
                     "type": "boolean"
                   },
                   "usuarioCreacion": {
@@ -23284,11 +23498,14 @@
                   "enum": [
                     "id",
                     "fechaImpresion",
+                    "adquisicion",
                     "codigo",
                     "alias",
                     "periodoEnvioMail",
                     "medidas",
                     "modelo",
+                    "estado",
+                    "ultimaSenal",
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
@@ -24362,7 +24579,19 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "sku": {
+                    "type": "boolean"
+                  },
                   "nombre": {
+                    "type": "boolean"
+                  },
+                  "familia": {
+                    "type": "boolean"
+                  },
+                  "rangoTemp": {
+                    "type": "boolean"
+                  },
+                  "vidaUtil": {
                     "type": "boolean"
                   },
                   "fechaCreacion": {
@@ -24377,7 +24606,7 @@
                   "usuModificacion": {
                     "type": "boolean"
                   },
-                  "activoSN": {
+                  "estado": {
                     "type": "boolean"
                   },
                   "pesoKgs": {
@@ -24396,12 +24625,16 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "sku",
                     "nombre",
+                    "familia",
+                    "rangoTemp",
+                    "vidaUtil",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
-                    "activoSN",
+                    "estado",
                     "pesoKgs",
                     "orden"
                   ],
@@ -24476,7 +24709,19 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "sku": {
+                    "type": "boolean"
+                  },
                   "nombre": {
+                    "type": "boolean"
+                  },
+                  "familia": {
+                    "type": "boolean"
+                  },
+                  "rangoTemp": {
+                    "type": "boolean"
+                  },
+                  "vidaUtil": {
                     "type": "boolean"
                   },
                   "fechaCreacion": {
@@ -24491,7 +24736,7 @@
                   "usuModificacion": {
                     "type": "boolean"
                   },
-                  "activoSN": {
+                  "estado": {
                     "type": "boolean"
                   },
                   "pesoKgs": {
@@ -24510,12 +24755,16 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "sku",
                     "nombre",
+                    "familia",
+                    "rangoTemp",
+                    "vidaUtil",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
-                    "activoSN",
+                    "estado",
                     "pesoKgs",
                     "orden"
                   ],
@@ -25391,7 +25640,13 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "codigo": {
+                    "type": "boolean"
+                  },
                   "nombre": {
+                    "type": "boolean"
+                  },
+                  "capacidad": {
                     "type": "boolean"
                   },
                   "usuarioCreacion": {
@@ -25422,7 +25677,9 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "codigo",
                     "nombre",
+                    "capacidad",
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
@@ -25501,7 +25758,13 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "codigo": {
+                    "type": "boolean"
+                  },
                   "nombre": {
+                    "type": "boolean"
+                  },
+                  "capacidad": {
                     "type": "boolean"
                   },
                   "usuarioCreacion": {
@@ -25532,7 +25795,9 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "codigo",
                     "nombre",
+                    "capacidad",
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
@@ -25974,6 +26239,18 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "codigo": {
+                    "type": "boolean"
+                  },
+                  "vehiculo": {
+                    "type": "boolean"
+                  },
+                  "uso": {
+                    "type": "boolean"
+                  },
+                  "categoria": {
+                    "type": "boolean"
+                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -26005,6 +26282,10 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "codigo",
+                    "vehiculo",
+                    "uso",
+                    "categoria",
                     "nombre",
                     "usuarioCreacion",
                     "fechaCreacion",
@@ -26084,6 +26365,18 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "codigo": {
+                    "type": "boolean"
+                  },
+                  "vehiculo": {
+                    "type": "boolean"
+                  },
+                  "uso": {
+                    "type": "boolean"
+                  },
+                  "categoria": {
+                    "type": "boolean"
+                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -26115,6 +26408,10 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "codigo",
+                    "vehiculo",
+                    "uso",
+                    "categoria",
                     "nombre",
                     "usuarioCreacion",
                     "fechaCreacion",

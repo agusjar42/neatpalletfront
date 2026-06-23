@@ -1,21 +1,16 @@
 import React from "react";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
-import { InputSwitch } from "primereact/inputswitch";
+import { Dropdown } from "primereact/dropdown";
 import { useIntl } from "react-intl";
 
 const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
   const intl = useIntl();
-
-  //
-  //Convertimos el switch al formato S/N que usa el backend
-  //
-  const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
-    const valor = (e.target && e.target.value) || "";
-    const clienteActualizado = { ...cliente };
-    clienteActualizado[nombreInputSwitch] = valor === true ? "S" : "N";
-    setCliente(clienteActualizado);
-  };
+  const opcionesEstado = [
+    { label: "Activo", value: "Activo" },
+    { label: "Pauseado", value: "Pauseado" },
+    { label: "Descatalogado", value: "Descatalogado" },
+  ];
 
   return (
     <div className="catalogo-edit-form-grid catalogo-edit-form-grid-wide">
@@ -92,10 +87,13 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
       </div>
 
       <div className="catalogo-edit-field">
-        <label htmlFor="activoSN">{intl.formatMessage({ id: "Activo" })}</label>
-        <InputSwitch
-          checked={cliente.activoSN === "S"}
-          onChange={(e) => manejarCambioInputSwitch(e, "activoSN")}
+        <label htmlFor="estado">{intl.formatMessage({ id: "Estado" })}</label>
+        <Dropdown
+          value={cliente.estado || "Activo"}
+          options={opcionesEstado}
+          onChange={(e) => setCliente({ ...cliente, estado: e.value })}
+          placeholder={intl.formatMessage({ id: "Selecciona una opcion" })}
+          className="w-full"
         />
       </div>
     </div>

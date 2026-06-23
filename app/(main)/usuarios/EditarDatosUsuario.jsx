@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-import { RadioButton } from 'primereact/radiobutton';
+import { InputSwitch } from 'primereact/inputswitch';
 import { useIntl } from 'react-intl'
 import { Button } from "primereact/button";
 import 'react-phone-input-2/lib/bootstrap.css'
@@ -181,29 +181,14 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
 
                 <div className="usuario-edit-field usuario-edit-field-full">
                     <label htmlFor="activoSn">{intl.formatMessage({ id: 'Estado' })}</label>
-                    <div className="flex align-items-center gap-4 flex-wrap">
-                        <div className="flex align-items-center gap-2">
-                            <RadioButton
-                                inputId="usuario-estado-activo"
-                                name="usuarioEstado"
-                                value="S"
-                                checked={(usuario.activoSn || "S") === "S"}
-                                onChange={(e) => setUsuario({ ...usuario, activoSn: e.value })}
-                                disabled={!puedeSeleccionarEstado}
-                            />
-                            <label htmlFor="usuario-estado-activo">{intl.formatMessage({ id: 'Activo' })}</label>
-                        </div>
-                        <div className="flex align-items-center gap-2">
-                            <RadioButton
-                                inputId="usuario-estado-inactivo"
-                                name="usuarioEstado"
-                                value="N"
-                                checked={usuario.activoSn === "N"}
-                                onChange={(e) => setUsuario({ ...usuario, activoSn: e.value })}
-                                disabled={!puedeSeleccionarEstado}
-                            />
-                            <label htmlFor="usuario-estado-inactivo">{intl.formatMessage({ id: 'Inactivo' })}</label>
-                        </div>
+                    <div className="flex align-items-center gap-2">
+                        <InputSwitch
+                            inputId="usuario-estado"
+                            checked={(usuario.activoSn || "S") === "S"}
+                            onChange={(e) => setUsuario({ ...usuario, activoSn: e.value ? "S" : "N" })}
+                            disabled={!puedeSeleccionarEstado}
+                        />
+                        <label htmlFor="usuario-estado">{intl.formatMessage({ id: 'Activo' })}</label>
                     </div>
                 </div>
             </div>

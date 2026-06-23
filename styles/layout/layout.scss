@@ -834,6 +834,22 @@ body {
     box-shadow: none;
 }
 
+//
+//Mantenemos las acciones de guardado a la derecha
+//y mostramos primero Guardar y despues Cancelar
+//
+.flex.justify-content-end.align-items-center.gap-2.mt-3:has(> .p-button-secondary) {
+    justify-content: flex-end;
+}
+
+.flex.justify-content-end.align-items-center.gap-2.mt-3:has(> .p-button-secondary) > .p-button-secondary {
+    order: 2;
+}
+
+.flex.justify-content-end.align-items-center.gap-2.mt-3:has(> .p-button-secondary) > .p-button:not(.p-button-secondary) {
+    order: 1;
+}
+
 .p-datatable {
     .p-datatable-header {
         border-color: var(--neat-border);

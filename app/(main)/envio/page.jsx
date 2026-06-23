@@ -64,7 +64,6 @@ const Envio = () => {
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'numero', header: intl.formatMessage({ id: 'Envio' }), tipo: 'string' },
-        { campo: 'palletCodigo', header: intl.formatMessage({ id: 'Pallet' }), tipo: 'string' },
         { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Punto de entrega' }), tipo: 'string' },
         { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen' }), tipo: 'string' },
         { campo: 'destinoRuta', header: intl.formatMessage({ id: 'Destino' }), tipo: 'string' },

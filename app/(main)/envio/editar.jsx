@@ -114,6 +114,8 @@ const EditarEnvio = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
             delete objGuardar['codigoEmpresa'];
             delete objGuardar['nombreEmpresa'];
             delete objGuardar['clienteNombre'];
+            delete objGuardar['palletCodigo'];
+            delete objGuardar['estadoEnvio'];
 
             if (idEditar === 0) {
                 delete objGuardar.id;

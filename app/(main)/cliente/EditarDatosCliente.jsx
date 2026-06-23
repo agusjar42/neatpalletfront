@@ -8,7 +8,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
   const intl = useIntl();
   const opcionesEstado = [
     { label: "Activo", value: "Activo" },
-    { label: "Pauseado", value: "Pauseado" },
+    { label: "Pausado", value: "Pausado" },
     { label: "Descatalogado", value: "Descatalogado" },
   ];
 

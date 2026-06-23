@@ -16,13 +16,14 @@ import { getSensorEmpresa, getSensorEmpresaCount, deleteSensorEmpresa } from "@/
 import { getTipoCarroceria, getTipoCarroceriaCount, deleteTipoCarroceria } from "@/app/api-endpoints/empresa-tipo-carroceria";
 import { getTipoTransporte, getTipoTransporteCount, deleteTipoTransporte } from "@/app/api-endpoints/empresa-tipo-transporte";
 import { getEventoConfiguracion, getEventoConfiguracionCount } from "@/app/api-endpoints/evento-configuracion";
-import { getEnvioContenido } from "@/app/api-endpoints/envio-contenido";
+import { getEnvioContenido, getEnvioContenidoCount, deleteEnvioContenido } from "@/app/api-endpoints/envio-contenido";
 import { getEnvioMovimiento } from "@/app/api-endpoints/envio-movimiento";
 import { getEnvioParada } from "@/app/api-endpoints/envio-parada";
 import { getEnvioSensor } from "@/app/api-endpoints/envio-sensor";
 import EditarUsuario from "../../usuarios/editar";
 import EditarCliente from "../../cliente/editar";
 import EditarProducto from "../../producto/editar";
+import EditarEnvioContenido from "../../envio-contenido/editar";
 import EditarEnvioSensorEmpresa from "../../envio-sensor-empresa/editar";
 import EditarTipoCarroceria from "../../tipo-carroceria/editar";
 import EditarTipoTransporte from "../../tipo-transporte/editar";
@@ -121,6 +122,14 @@ const columnasEnvio = [
         tipo: "string",
         body: (rowData) => <span style={{ color: "#2f8f63", fontWeight: 500 }}>{rowData.estadoEnvio || "-"}</span>,
     },
+];
+
+const columnasEnvioContenidoDetalle = [
+    { campo: "sku", header: "SKU", tipo: "string" },
+    { campo: "nombreProducto", header: "Producto", tipo: "string" },
+    { campo: "pesoKgs", header: "Peso/ud.", tipo: "number" },
+    { campo: "cantidad", header: "Unidades", tipo: "number" },
+    { campo: "pesoTotal", header: "Peso total", tipo: "number" },
 ];
 
 const columnasSensorEmpresa = [
@@ -940,6 +949,7 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
     const [paradas, setParadas] = useState([]);
     const [sensores, setSensores] = useState([]);
     const [informePallets, setInformePallets] = useState([]);
+    const [refreshContenido, setRefreshContenido] = useState(0);
     const [modalDetalleRegistro, setModalDetalleRegistro] = useState({ visible: false, accion: "ver", seccion: "", registro: null });
 
     useEffect(() => {
@@ -952,7 +962,7 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
 
         //
         //Cargamos los bloques del detalle y, si alguna llamada falla,
-        //mantenemos datos de ejemplo para no dejar vacia la vista
+        //evitamos rellenar con mocks en contenido
         //
         Promise.all([
             getEnvioContenido(JSON.stringify({ where: { and: { envioId: envioActivo.id } }, order: "orden ASC" })).catch(() => []),
@@ -961,13 +971,13 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
             getEnvioSensor(JSON.stringify({ where: { and: { envioId: envioActivo.id } }, order: "orden ASC" })).catch(() => []),
             getResumenEnvio(envioActivo.id).catch(() => []),
         ]).then(([contenidoData, movimientosData, paradasData, sensoresData, resumenData]) => {
-            setContenido(Array.isArray(contenidoData) && contenidoData.length > 0 ? contenidoData : construirContenidoFallback());
+            setContenido(Array.isArray(contenidoData) ? contenidoData : []);
             setMovimientos(Array.isArray(movimientosData) && movimientosData.length > 0 ? movimientosData : construirMovimientosFallback());
             setParadas(Array.isArray(paradasData) && paradasData.length > 0 ? paradasData : construirParadasFallback(envioActivo));
             setSensores(Array.isArray(sensoresData) && sensoresData.length > 0 ? sensoresData : construirSensoresFallback());
             setInformePallets(Array.isArray(resumenData) && resumenData.length > 0 ? resumenData : resumenEnvioFallback);
         });
-    }, [envioActivo?.id]);
+    }, [envioActivo?.id, refreshContenido]);
 
     if (!envioActivo) {
         return <div className="empresa-profile-card empresa-empty-state">No se ha encontrado el envio seleccionado.</div>;
@@ -990,7 +1000,7 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
 
     const resumenTop = construirResumenTop(envioActivo, contenido, sensores);
     const conteos = {
-        contenido: contenido.length || 4,
+        contenido: contenido.length,
         movimientos: movimientos.length || 14,
         paradas: paradas.length || 4,
         sensores: sensores.length || 3,
@@ -1051,7 +1061,38 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
             <section className="empresa-tab-content">
                 {detalleTabActiva === "Resumen" ? <EnvioResumenTab envio={envioActivo} sensores={sensores} paradas={paradas} resumenTop={resumenTop} /> : null}
                 {detalleTabActiva === "Configuracion" ? <EnvioConfiguracionTab /> : null}
-                {detalleTabActiva === "Contenido" ? <EnvioContenidoTab contenido={contenido} resumenTop={resumenTop} onAbrirModal={abrirModalDetalleRegistro} /> : null}
+                {detalleTabActiva === "Contenido" ? (
+                    <article className="envio-panel">
+                        <Crud
+                            key={`detalle-envio-contenido-${envioActivo.id}-${refreshContenido}`}
+                            headerCrud="Contenido del pallet"
+                            getRegistros={getEnvioContenido}
+                            getRegistrosCount={getEnvioContenidoCount}
+                            botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]}
+                            controlador="Envio Contenido"
+                            editarComponente={<EditarEnvioContenido />}
+                            columnas={columnasEnvioContenidoDetalle}
+                            filtradoBase={{ envioId: envioActivo.id }}
+                            deleteRegistro={deleteEnvioContenido}
+                            cargarDatosInicialmente={true}
+                            mostrarEdicionEnModal={true}
+                            modalEdicionProps={{
+                                showHeader: false,
+                                className: "neat-crud-edit-dialog envio-registro-dialog",
+                                style: { width: "min(760px, 92vw)" },
+                            }}
+                            onDataChange={() => setRefreshContenido(prev => prev + 1)}
+                            editarComponenteParametrosExtra={{
+                                envioId: envioActivo.id,
+                                clienteId: envioActivo.clienteId,
+                                empresaId: envioActivo.empresaId,
+                                estoyDentroDeUnTab: true,
+                                ocultarClienteResumenHeader: true,
+                                onDataChange: () => setRefreshContenido(prev => prev + 1),
+                            }}
+                        />
+                    </article>
+                ) : null}
                 {detalleTabActiva === "Movimientos" ? <EnvioMovimientosTab movimientos={movimientos} onAbrirModal={abrirModalDetalleRegistro} /> : null}
                 {detalleTabActiva === "Paradas" ? <EnvioParadasTab paradas={paradas} onAbrirModal={abrirModalDetalleRegistro} /> : null}
                 {detalleTabActiva === "Sensores" ? <EnvioSensoresTab sensores={sensores} onAbrirModal={abrirModalDetalleRegistro} /> : null}
@@ -1095,13 +1136,6 @@ const construirResumenTop = (envio, contenido = [], sensores = []) => {
         skus,
     };
 };
-
-const construirContenidoFallback = () => ([
-    { id: 1, referencia: "PR-0182", nombreProducto: "Yogur natural 125g (pack 4)", pesoKgs: 250, cantidad: 480, pesoTotal: 120 },
-    { id: 2, referencia: "PR-0210", nombreProducto: "Queso fresco 250g", pesoKgs: 250, cantidad: 320, pesoTotal: 80 },
-    { id: 3, referencia: "PR-0345", nombreProducto: "Leche entera 1L", pesoKgs: 1000, cantidad: 600, pesoTotal: 600 },
-    { id: 4, referencia: "PR-0509", nombreProducto: "Mantequilla 250g", pesoKgs: 250, cantidad: 240, pesoTotal: 60 },
-]);
 
 const construirMovimientosFallback = () => ([
     { id: 1, fechaEspanol: "05 may · 06:13", nombreSensor: "GPS-01", evento: "Paso por punto intermedio", valor: "71 km/h", gps: "40.7227, 0.5568", severidad: "info" },
@@ -1325,13 +1359,18 @@ const EnvioContenidoTab = ({ contenido = [], resumenTop, onAbrirModal }) => (
                 </tr>
             </thead>
             <tbody>
+                {contenido.length === 0 ? (
+                    <tr>
+                        <td colSpan="6" className="text-center text-gray-600">No hay contenido registrado para este envio.</td>
+                    </tr>
+                ) : null}
                 {contenido.map((item) => (
                     <tr key={item.id || item.referencia}>
-                        <td>{item.referencia || item.codigoPallet || "-"}</td>
+                        <td>{item.sku || item.referencia || item.codigoPallet || "-"}</td>
                         <td><strong>{item.nombreProducto || item.nombre || "-"}</strong></td>
-                        <td>{item.pesoKgs} g</td>
-                        <td>{item.cantidad}</td>
-                        <td>{item.pesoTotal} kg</td>
+                        <td>{item.pesoKgs != null ? `${item.pesoKgs} g` : "-"}</td>
+                        <td>{item.cantidad ?? "-"}</td>
+                        <td>{item.pesoTotal != null ? `${item.pesoTotal} kg` : "-"}</td>
                         <td><ActionButtons seccion="Contenido" registro={item} onAbrirModal={onAbrirModal} /></td>
                     </tr>
                 ))}

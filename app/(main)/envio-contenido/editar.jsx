@@ -61,6 +61,7 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
         // Borramos las columnas de la vista que no pertenecen a la tabla EnvioContenido
         delete envioContenido.origenRuta;
         delete envioContenido.producto; // Se elimina porque es solo para mostrar, el importante es productoId
+        delete envioContenido.sku;
         
         // NO borramos los campos Base64 aquí, se procesan en el backend
         
@@ -76,6 +77,7 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
             const usuarioActual = getUsuarioSesion()?.id;
             delete objGuardar['nombreProducto']; 
             delete objGuardar['codigoPallet'];
+            delete objGuardar['sku'];
             objGuardar['cantidad'] = Number(objGuardar['cantidad']) || 0;
 
             if (idEditar === 0) {

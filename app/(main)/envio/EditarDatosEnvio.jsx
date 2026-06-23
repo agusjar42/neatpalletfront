@@ -17,12 +17,14 @@ import { getEnvioMovimiento, getEnvioMovimientoCount, deleteEnvioMovimiento } fr
 import { getEnvioPallet, getEnvioPalletCount, deleteEnvioPallet } from "@/app/api-endpoints/envio-pallet-usado";
 import { getEnvioParada, getEnvioParadaCount, deleteEnvioParada } from "@/app/api-endpoints/envio-parada";
 import { getCliente } from "@/app/api-endpoints/cliente";
+import { getOperario, getOperarioCount, deleteOperario } from "@/app/api-endpoints/cliente-operario";
 import EditarEnvioConfiguracion from "../envio-configuracion/editar";
 import EditarEnvioContenido from "../envio-contenido/editar";
 import EditarEnvioMovimiento from "../envio-movimiento/editar";
 import EditarEnvioPallet from "../envio-pallet/editar";
 import EditarEnvioParada from "../envio-parada/editar";
 import EditarEnvioSensors from "../envio-sensor/editar";
+import EditarOperario from "../operario/editar";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 
 
@@ -38,10 +40,13 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
     const [confirmacionPendiente, setConfirmacionPendiente] = useState(null);
     const confirmDialogAbierto = useRef(false);
 
-    // Estados para los contadores de cada tab (solo para Movimientos, Pallets y Paradas)
+    // Estados para los contadores de cada tab
+    const [conteoContenido, setConteoContenido] = useState(0);
     const [conteoMovimiento, setConteoMovimiento] = useState(0);
     const [conteoPallet, setConteoPallet] = useState(0);
     const [conteoParada, setConteoParada] = useState(0);
+    const [conteoSensor, setConteoSensor] = useState(0);
+    const [conteoOperario, setConteoOperario] = useState(0);
     const [refreshConteos, setRefreshConteos] = useState(0);
 
     // Columnas para las diferentes tablas
@@ -93,6 +98,13 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
     ];
 
+    const columnasOperario = [
+        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'telefono', header: intl.formatMessage({ id: 'Telefono' }), tipo: 'string' },
+        { campo: 'email', header: intl.formatMessage({ id: 'Email' }), tipo: 'string' },
+        { campo: 'activoSN', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
+    ];
+
     // Cargar clientes al inicializar el componente
     useEffect(() => {
         const cargarClientes = async () => {
@@ -108,30 +120,44 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
         cargarClientes();
     }, []);
 
-    // Cargar los conteos de Movimientos, Pallets y Paradas
+    // Cargar los conteos reales de las pestanas relacionadas
     useEffect(() => {
         const cargarConteos = async () => {
             if (envio.id) {
                 try {
                     const whereFiltro = { and: { envioId: envio.id } };
+                    const whereOperario = envio.clienteId ? { and: { clienteId: envio.clienteId } } : null;
 
-                    const [movimientoCount, palletCount, paradaCount] = await Promise.all([
+                    const [contenidoCount, movimientoCount, palletCount, paradaCount, sensorCount, operarioCount] = await Promise.all([
+                        getEnvioContenidoCount(JSON.stringify(whereFiltro)),
                         getEnvioMovimientoCount(JSON.stringify(whereFiltro)),
                         getEnvioPalletCount(JSON.stringify(whereFiltro)),
-                        getEnvioParadaCount(JSON.stringify(whereFiltro))
+                        getEnvioParadaCount(JSON.stringify(whereFiltro)),
+                        getEnvioSensorCount(JSON.stringify(whereFiltro)),
+                        whereOperario ? getOperarioCount(JSON.stringify(whereOperario)) : Promise.resolve({ count: 0 }),
                     ]);
 
+                    setConteoContenido(contenidoCount?.count || 0);
                     setConteoMovimiento(movimientoCount?.count || 0);
                     setConteoPallet(palletCount?.count || 0);
                     setConteoParada(paradaCount?.count || 0);
+                    setConteoSensor(sensorCount?.count || 0);
+                    setConteoOperario(operarioCount?.count || 0);
                 } catch (error) {
                     console.error('Error cargando conteos:', error);
                 }
+            } else {
+                setConteoContenido(0);
+                setConteoMovimiento(0);
+                setConteoPallet(0);
+                setConteoParada(0);
+                setConteoSensor(0);
+                setConteoOperario(0);
             }
         };
 
         cargarConteos();
-    }, [envio.id, refreshConteos, activeIndex]);
+    }, [envio.id, envio.clienteId, refreshConteos, activeIndex]);
 
     const getMovimientosEnvio = async (filtro) => {
         const queryParams = JSON.parse(filtro);
@@ -144,6 +170,19 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
         const whereFiltro = JSON.parse(filtros);
         const where = whereFiltro?.and ? whereFiltro.and : (whereFiltro || {});
         return await getEnvioMovimientoCount(JSON.stringify({ and: { ...where, envioId: envio.id } }));
+    };
+
+    const getOperariosCliente = async (filtro) => {
+        const queryParams = filtro ? JSON.parse(filtro) : {};
+        const where = queryParams?.where?.and ? queryParams.where.and : (queryParams?.where || {});
+        queryParams.where = { and: { ...where, clienteId: envio.clienteId } };
+        return await getOperario(JSON.stringify(queryParams));
+    };
+
+    const getOperariosClienteCount = async (filtros) => {
+        const whereFiltro = filtros ? JSON.parse(filtros) : {};
+        const where = whereFiltro?.and ? whereFiltro.and : (whereFiltro || {});
+        return await getOperarioCount(JSON.stringify({ and: { ...where, clienteId: envio.clienteId } }));
     };
 
     const abrirConfirmacionUnica = (configuracionConfirmacion) => {

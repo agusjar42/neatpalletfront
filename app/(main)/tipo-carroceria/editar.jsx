@@ -29,22 +29,13 @@ const EditarTipoCarroceria = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
     useEffect(() => {
         const cargarTipos = async () => {
             const empresaIdActual = empresaId ?? getUsuarioSesion()?.empresaId;
-            if (!empresaIdActual) return;
-
-            const filtroTipos = JSON.stringify({
-                where: {
-                    and: [
-                        { empresaId: empresaIdActual },
-                        { or: [{ activoSn: "S" }, { activoSn: null }] },
-                    ],
-                },
-                order: ["nombre ASC"],
-                fields: { nombre: true },
-                limit: 1000,
+            const tipos = await getTipoCarroceria();
+            const tiposFiltrados = (tipos || []).filter((item) => {
+                const mismaEmpresa = !empresaIdActual || item?.empresaId === empresaIdActual;
+                const activo = item?.activoSn === "S" || item?.activoSn == null;
+                return mismaEmpresa && activo;
             });
-
-            const tipos = await getTipoCarroceria(filtroTipos);
-            const nombres = Array.from(new Set((tipos || []).map((item) => item.nombre).filter(Boolean)));
+            const nombres = Array.from(new Set(tiposFiltrados.map((item) => item.nombre).filter(Boolean)));
             setTiposDisponibles(nombres);
         };
 

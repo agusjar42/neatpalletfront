@@ -61,6 +61,8 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 delete objGuardar.id;
                 delete objGuardar.clienteNombre;
                 delete objGuardar.empresaNombre;
+                delete objGuardar.activoSN;
+                delete objGuardar.activoSn;
                 objGuardar['usuCreacion'] = usuarioActual;
                 
                 // Hacemos el insert del registro
@@ -89,6 +91,8 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 delete objGuardar.fechaCreacion;
                 delete objGuardar.fechaModificacion;
                 delete objGuardar.usuCreacion;
+                delete objGuardar.activoSN;
+                delete objGuardar.activoSn;
                 objGuardar['usuModificacion'] = usuarioActual;
 
                 // Hacemos el update del registro

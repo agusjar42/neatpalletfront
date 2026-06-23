@@ -9069,6 +9069,264 @@
         "operationId": "TipoCarroceriaController.find"
       }
     },
+    "/tipo-categorias/count": {
+      "get": {
+        "x-controller-name": "TipoCategoriaController",
+        "x-operation-name": "count",
+        "tags": [
+          "TipoCategoriaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoCategoria model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoCategoria.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoCategoria>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoCategoriaController.count"
+      }
+    },
+    "/tipo-categorias/{id}": {
+      "put": {
+        "x-controller-name": "TipoCategoriaController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "TipoCategoriaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoCategoria PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoCategoria"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoCategoriaController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "TipoCategoriaController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "TipoCategoriaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoCategoria PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoCategoriaPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoCategoriaController.updateById"
+      },
+      "get": {
+        "x-controller-name": "TipoCategoriaController",
+        "x-operation-name": "findById",
+        "tags": [
+          "TipoCategoriaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoCategoria model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoCategoriaWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoCategoria.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoCategoriaController.findById"
+      },
+      "delete": {
+        "x-controller-name": "TipoCategoriaController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "TipoCategoriaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoCategoria DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TipoCategoriaController.deleteById"
+      }
+    },
+    "/tipo-categorias": {
+      "post": {
+        "x-controller-name": "TipoCategoriaController",
+        "x-operation-name": "create",
+        "tags": [
+          "TipoCategoriaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoCategoria model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoCategoria"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTipoCategoria"
+              }
+            }
+          }
+        },
+        "operationId": "TipoCategoriaController.create"
+      },
+      "get": {
+        "x-controller-name": "TipoCategoriaController",
+        "x-operation-name": "find",
+        "tags": [
+          "TipoCategoriaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of TipoCategoria model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoCategoriaWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoCategoria.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoCategoriaController.find"
+      }
+    },
     "/tipo-sensores/count": {
       "get": {
         "x-controller-name": "TipoSensorController",
@@ -9503,6 +9761,264 @@
           }
         ],
         "operationId": "TipoTransporteController.find"
+      }
+    },
+    "/tipo-vehiculos/count": {
+      "get": {
+        "x-controller-name": "TipoVehiculoController",
+        "x-operation-name": "count",
+        "tags": [
+          "TipoVehiculoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoVehiculo model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoVehiculo.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoVehiculo>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoVehiculoController.count"
+      }
+    },
+    "/tipo-vehiculos/{id}": {
+      "put": {
+        "x-controller-name": "TipoVehiculoController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "TipoVehiculoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoVehiculo PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoVehiculo"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoVehiculoController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "TipoVehiculoController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "TipoVehiculoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoVehiculo PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoVehiculoPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoVehiculoController.updateById"
+      },
+      "get": {
+        "x-controller-name": "TipoVehiculoController",
+        "x-operation-name": "findById",
+        "tags": [
+          "TipoVehiculoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoVehiculo model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoVehiculoWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoVehiculo.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoVehiculoController.findById"
+      },
+      "delete": {
+        "x-controller-name": "TipoVehiculoController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "TipoVehiculoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoVehiculo DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TipoVehiculoController.deleteById"
+      }
+    },
+    "/tipo-vehiculos": {
+      "post": {
+        "x-controller-name": "TipoVehiculoController",
+        "x-operation-name": "create",
+        "tags": [
+          "TipoVehiculoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoVehiculo model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoVehiculo"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTipoVehiculo"
+              }
+            }
+          }
+        },
+        "operationId": "TipoVehiculoController.create"
+      },
+      "get": {
+        "x-controller-name": "TipoVehiculoController",
+        "x-operation-name": "find",
+        "tags": [
+          "TipoVehiculoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of TipoVehiculo model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoVehiculoWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoVehiculo.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoVehiculoController.find"
       }
     },
     "/traducciones/count": {
@@ -11953,6 +12469,162 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<Traduccion>"
       },
+      "TipoVehiculo": {
+        "title": "TipoVehiculo",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "tipoVehiculocol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "additionalProperties": false
+      },
+      "NewTipoVehiculo": {
+        "title": "NewTipoVehiculo",
+        "type": "object",
+        "description": "(tsType: Omit<TipoVehiculo, 'id'>, schemaOptions: { title: 'NewTipoVehiculo', exclude: [ 'id' ] })",
+        "properties": {
+          "orden": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "tipoVehiculocol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<TipoVehiculo, 'id'>"
+      },
+      "TipoVehiculoWithRelations": {
+        "title": "TipoVehiculoWithRelations",
+        "type": "object",
+        "description": "(tsType: TipoVehiculoWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "tipoVehiculocol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "TipoVehiculoWithRelations"
+      },
+      "TipoVehiculoPartial": {
+        "title": "TipoVehiculoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<TipoVehiculo>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "tipoVehiculocol": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<TipoVehiculo>"
+      },
       "TipoTransporte": {
         "title": "TipoTransporte",
         "type": "object",
@@ -11966,10 +12638,16 @@
           "codigo": {
             "type": "string"
           },
-          "vehiculo": {
-            "type": "string"
+          "tipoVehiculoId": {
+            "type": "number"
           },
           "uso": {
+            "type": "string"
+          },
+          "tipoCategoriaId": {
+            "type": "number"
+          },
+          "vehiculo": {
             "type": "string"
           },
           "categoria": {
@@ -12015,10 +12693,16 @@
           "codigo": {
             "type": "string"
           },
-          "vehiculo": {
-            "type": "string"
+          "tipoVehiculoId": {
+            "type": "number"
           },
           "uso": {
+            "type": "string"
+          },
+          "tipoCategoriaId": {
+            "type": "number"
+          },
+          "vehiculo": {
             "type": "string"
           },
           "categoria": {
@@ -12150,10 +12834,16 @@
           "codigo": {
             "type": "string"
           },
-          "vehiculo": {
-            "type": "string"
+          "tipoVehiculoId": {
+            "type": "number"
           },
           "uso": {
+            "type": "string"
+          },
+          "tipoCategoriaId": {
+            "type": "number"
+          },
+          "vehiculo": {
             "type": "string"
           },
           "categoria": {
@@ -12207,10 +12897,16 @@
           "codigo": {
             "type": "string"
           },
-          "vehiculo": {
-            "type": "string"
+          "tipoVehiculoId": {
+            "type": "number"
           },
           "uso": {
+            "type": "string"
+          },
+          "tipoCategoriaId": {
+            "type": "number"
+          },
+          "vehiculo": {
             "type": "string"
           },
           "categoria": {
@@ -12848,6 +13544,150 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<TipoSensor>"
+      },
+      "TipoCategoria": {
+        "title": "TipoCategoria",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "usuCreacion": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "additionalProperties": false
+      },
+      "NewTipoCategoria": {
+        "title": "NewTipoCategoria",
+        "type": "object",
+        "description": "(tsType: Omit<TipoCategoria, 'id'>, schemaOptions: { title: 'NewTipoCategoria', exclude: [ 'id' ] })",
+        "properties": {
+          "orden": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "usuCreacion": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<TipoCategoria, 'id'>"
+      },
+      "TipoCategoriaWithRelations": {
+        "title": "TipoCategoriaWithRelations",
+        "type": "object",
+        "description": "(tsType: TipoCategoriaWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "usuCreacion": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "TipoCategoriaWithRelations"
+      },
+      "TipoCategoriaPartial": {
+        "title": "TipoCategoriaPartial",
+        "type": "object",
+        "description": "(tsType: Partial<TipoCategoria>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "usuCreacion": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<TipoCategoria>"
       },
       "TipoCarroceria": {
         "title": "TipoCarroceria",
@@ -25830,6 +26670,185 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<TipoCarroceria>"
       },
+      "TipoCategoria.Filter": {
+        "type": "object",
+        "title": "TipoCategoria.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "orden",
+                    "nombre",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuModificacion",
+                    "usuCreacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoCategoria.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoCategoria>"
+      },
+      "TipoCategoria.Filter1": {
+        "type": "object",
+        "title": "TipoCategoria.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "TipoCategoria.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "orden",
+                    "nombre",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuModificacion",
+                    "usuCreacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoCategoria.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoCategoria>"
+      },
       "TipoSensor.ScopeFilter": {
         "type": "object",
         "properties": {
@@ -26242,10 +27261,16 @@
                   "codigo": {
                     "type": "boolean"
                   },
-                  "vehiculo": {
+                  "tipoVehiculoId": {
                     "type": "boolean"
                   },
                   "uso": {
+                    "type": "boolean"
+                  },
+                  "tipoCategoriaId": {
+                    "type": "boolean"
+                  },
+                  "vehiculo": {
                     "type": "boolean"
                   },
                   "categoria": {
@@ -26283,8 +27308,10 @@
                     "id",
                     "empresaId",
                     "codigo",
-                    "vehiculo",
+                    "tipoVehiculoId",
                     "uso",
+                    "tipoCategoriaId",
+                    "vehiculo",
                     "categoria",
                     "nombre",
                     "usuarioCreacion",
@@ -26368,10 +27395,16 @@
                   "codigo": {
                     "type": "boolean"
                   },
-                  "vehiculo": {
+                  "tipoVehiculoId": {
                     "type": "boolean"
                   },
                   "uso": {
+                    "type": "boolean"
+                  },
+                  "tipoCategoriaId": {
+                    "type": "boolean"
+                  },
+                  "vehiculo": {
                     "type": "boolean"
                   },
                   "categoria": {
@@ -26409,8 +27442,10 @@
                     "id",
                     "empresaId",
                     "codigo",
-                    "vehiculo",
+                    "tipoVehiculoId",
                     "uso",
+                    "tipoCategoriaId",
+                    "vehiculo",
                     "categoria",
                     "nombre",
                     "usuarioCreacion",
@@ -26444,6 +27479,193 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<TipoTransporte>"
+      },
+      "TipoVehiculo.Filter": {
+        "type": "object",
+        "title": "TipoVehiculo.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "tipoVehiculocol": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "orden",
+                    "nombre",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "tipoVehiculocol"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoVehiculo.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoVehiculo>"
+      },
+      "TipoVehiculo.Filter1": {
+        "type": "object",
+        "title": "TipoVehiculo.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "TipoVehiculo.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "tipoVehiculocol": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "orden",
+                    "nombre",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "tipoVehiculocol"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoVehiculo.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoVehiculo>"
       },
       "Traduccion.Filter": {
         "type": "object",

@@ -10,6 +10,8 @@ import EditarTipoTransportes from "./editar";
 import Crud from "../../components/shared/crud";
 import { useIntl } from "react-intl";
 import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getTipoVehiculo } from "@/app/api-endpoints/tipo-vehiculo";
+import { getTipoCategoria } from "@/app/api-endpoints/tipo-categoria";
 import {
   createResult,
   getUsuarioSesionId,
@@ -47,35 +49,34 @@ const TipoTransporte = () => {
   const procesarImportacionCSV = async ({ rowsNormalizados }) => {
     const result = createResult();
     const usuarioSesionId = getUsuarioSesionId();
+    const [vehiculos, categorias] = await Promise.all([
+      getTipoVehiculo(),
+      getTipoCategoria(),
+    ]);
+    const vehiculoPorNombre = new Map((vehiculos || []).filter((item) => item?.nombre).map((item) => [String(item.nombre).trim().toLowerCase(), item.id]));
+    const categoriaPorNombre = new Map((categorias || []).filter((item) => item?.nombre).map((item) => [String(item.nombre).trim().toLowerCase(), item.id]));
 
     for (let i = 0; i < rowsNormalizados.length; i++) {
       try {
         const row = rowsNormalizados[i];
         const rowId = parseNumberOrNull(getValueFromRow(row, ["id"]));
-        const nombre = getValueFromRow(row, ["nombre"]);
-        if (!rowId && !nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
+        const vehiculoNombre = getValueFromRow(row, ["vehiculo", "nombre"]);
+        if (!rowId && !vehiculoNombre) throw new Error(`Fila ${i + 2}: El vehiculo es obligatorio`);
+        const categoriaNombre = getValueFromRow(row, ["categoria"]);
+        const tipoVehiculoId = parseNumberOrNull(getValueFromRow(row, ["tipoVehiculoId", "tipovehiculoid"])) ??
+          vehiculoPorNombre.get(String(vehiculoNombre || "").trim().toLowerCase());
+        const tipoCategoriaId = parseNumberOrNull(getValueFromRow(row, ["tipoCategoriaId", "tipocategoriaid"])) ??
+          categoriaPorNombre.get(String(categoriaNombre || "").trim().toLowerCase());
 
         const payload = {
           empresaId: empresaIdSesion,
-          nombre,
           codigo: getValueFromRow(row, ["codigo"]),
-          vehiculo: getValueFromRow(row, ["vehiculo"]),
           uso: getValueFromRow(row, ["uso"]),
-          categoria: getValueFromRow(row, ["categoria"]),
+          tipoVehiculoId,
+          tipoCategoriaId,
           orden: parseNumberOrNull(getValueFromRow(row, ["orden"])),
           activoSn: parseActivoSN(getValueFromRow(row, ["activoSn", "activo"]), "S"),
         };
-
-        //
-        //Si el CSV no trae vehiculo, mantenemos el comportamiento legado
-        //copiando nombre al campo principal visible del CRUD
-        //
-        if (!payload.vehiculo) {
-          payload.vehiculo = nombre;
-        }
-        if (!payload.nombre) {
-          payload.nombre = payload.vehiculo;
-        }
 
         if (rowId) {
           payload.usuarioModificacion = usuarioSesionId;

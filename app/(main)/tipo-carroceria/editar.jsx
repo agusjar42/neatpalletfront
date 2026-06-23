@@ -1,9 +1,8 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
-import { postTipoCarroceria, patchTipoCarroceria } from "@/app/api-endpoints/empresa-tipo-carroceria";
+import { getTipoCarroceria, postTipoCarroceria, patchTipoCarroceria } from "@/app/api-endpoints/empresa-tipo-carroceria";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosTipoCarroceria from "./EditarDatosTipoCarroceria";
@@ -14,6 +13,7 @@ const EditarTipoCarroceria = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
     const [tipoCarroceria, setTipoCarroceria] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [tiposDisponibles, setTiposDisponibles] = useState([]);
     const intl = useIntl();
 
     useEffect(() => {
@@ -25,6 +25,37 @@ const EditarTipoCarroceria = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
         };
         fetchData();
     }, [idEditar, rowData]);
+
+    useEffect(() => {
+        const cargarTipos = async () => {
+            const empresaIdActual = empresaId ?? getUsuarioSesion()?.empresaId;
+            if (!empresaIdActual) return;
+
+            const filtroTipos = JSON.stringify({
+                where: {
+                    and: [
+                        { empresaId: empresaIdActual },
+                        { or: [{ activoSn: "S" }, { activoSn: null }] },
+                    ],
+                },
+                order: ["nombre ASC"],
+                fields: { nombre: true },
+                limit: 1000,
+            });
+
+            const tipos = await getTipoCarroceria(filtroTipos);
+            const nombres = Array.from(new Set((tipos || []).map((item) => item.nombre).filter(Boolean)));
+            setTiposDisponibles(nombres);
+        };
+
+        cargarTipos();
+    }, [empresaId]);
+
+    useEffect(() => {
+        if (tipoCarroceria?.nombre && !tiposDisponibles.includes(tipoCarroceria.nombre)) {
+            setTiposDisponibles((prev) => [...prev, tipoCarroceria.nombre]);
+        }
+    }, [tipoCarroceria?.nombre, tiposDisponibles]);
 
     const validaciones = async () => {
         const validaNombre = tipoCarroceria.nombre === undefined || tipoCarroceria.nombre === "";
@@ -95,6 +126,7 @@ const EditarTipoCarroceria = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                             tipoCarroceria={tipoCarroceria}
                             setTipoCarroceria={setTipoCarroceria}
                             estadoGuardando={estadoGuardando}
+                            tiposDisponibles={tiposDisponibles}
                         />
 
                         <div className="flex justify-content-end align-items-center gap-2 mt-3">

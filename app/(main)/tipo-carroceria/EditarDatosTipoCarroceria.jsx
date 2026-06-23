@@ -3,8 +3,14 @@ import { InputText } from 'primereact/inputtext';
 import { useIntl } from 'react-intl';
 import { InputSwitch } from "primereact/inputswitch";
 import { InputNumber } from "primereact/inputnumber";
+import { Dropdown } from "primereact/dropdown";
 
-const EditarDatosTipoCarroceria = ({ tipoCarroceria, setTipoCarroceria, estadoGuardando }) => {
+const EditarDatosTipoCarroceria = ({
+    tipoCarroceria,
+    setTipoCarroceria,
+    estadoGuardando,
+    tiposDisponibles = [],
+}) => {
     const intl = useIntl();
     
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
@@ -36,11 +42,12 @@ const EditarDatosTipoCarroceria = ({ tipoCarroceria, setTipoCarroceria, estadoGu
                 </div>
                 <div className="catalogo-edit-field">
                     <label htmlFor="nombre">{intl.formatMessage({ id: 'Tipo' })}</label>
-                    <InputText value={tipoCarroceria.nombre}
-                        placeholder={intl.formatMessage({ id: 'Nombre del tipo de carroceria' })}
-                        onChange={(e) => setTipoCarroceria({ ...tipoCarroceria, nombre: e.target.value })}
+                    <Dropdown value={tipoCarroceria.nombre || ""}
+                        options={tiposDisponibles}
+                        placeholder={intl.formatMessage({ id: 'Selecciona un tipo de carroceria' })}
+                        onChange={(e) => setTipoCarroceria({ ...tipoCarroceria, nombre: e.value })}
                         className={`${(estadoGuardando && tipoCarroceria.nombre === "") ? "p-invalid" : ""}`}
-                        maxLength={50} />
+                        showClear />
                 </div>
                 <div className="catalogo-edit-field">
                     <label htmlFor="capacidad">{intl.formatMessage({ id: 'Capacidad' })}</label>

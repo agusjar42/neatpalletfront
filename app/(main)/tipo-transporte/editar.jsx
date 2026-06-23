@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { postTipoTransporte, patchTipoTransporte } from "@/app/api-endpoints/empresa-tipo-transporte";
+import { getTipoVehiculo } from "@/app/api-endpoints/tipo-vehiculo";
+import { getTipoCategoria } from "@/app/api-endpoints/tipo-categoria";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosTipoTransporte from "./EditarDatosTipoTransporte";
@@ -13,6 +15,8 @@ const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
     const [tipoTransporte, setTipoTransporte] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [vehiculosDisponibles, setVehiculosDisponibles] = useState([]);
+    const [categoriasDisponibles, setCategoriasDisponibles] = useState([]);
     const intl = useIntl();
 
     useEffect(() => {
@@ -25,13 +29,32 @@ const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
         fetchData();
     }, [idEditar, rowData]);
 
+    useEffect(() => {
+        const cargarCatalogos = async () => {
+            const [vehiculos, categorias] = await Promise.all([
+                getTipoVehiculo(),
+                getTipoCategoria(),
+            ]);
+
+            const vehiculosActivos = (vehiculos || []).filter((item) => item?.activoSn === "S" || item?.activoSn == null);
+            const categoriasActivas = (categorias || []).filter((item) => item?.activoSn === "S" || item?.activoSn == null);
+
+            const vehiculosNormalizados = vehiculosActivos
+                .filter((item) => item?.id && item?.nombre)
+                .map((item) => ({ label: item.nombre, value: item.id }));
+            const categoriasNormalizadas = categoriasActivas
+                .filter((item) => item?.id && item?.nombre)
+                .map((item) => ({ label: item.nombre, value: item.id }));
+
+            setVehiculosDisponibles(vehiculosNormalizados);
+            setCategoriasDisponibles(categoriasNormalizadas);
+        };
+
+        cargarCatalogos();
+    }, []);
+
     const validaciones = async () => {
-        //
-        //Mantenemos compatibilidad con el campo legado nombre
-        //pero la validacion visible pasa a vehiculo, que es la columna del CRUD
-        //
-        const nombreVisible = tipoTransporte.vehiculo ?? tipoTransporte.nombre ?? "";
-        const validaNombre = nombreVisible === undefined || nombreVisible === "";
+        const validaNombre = tipoTransporte.tipoVehiculoId === undefined || tipoTransporte.tipoVehiculoId === null || tipoTransporte.tipoVehiculoId === "";
         const validaOrden = tipoTransporte.orden === undefined || tipoTransporte.orden === null || tipoTransporte.orden === "";
         return (!validaNombre && !validaOrden)
     }
@@ -42,12 +65,9 @@ const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
         if (await validaciones()) {
             let objGuardar = { ...tipoTransporte };
             const usuarioActual = getUsuarioSesion()?.id;
-
-            //
-            //Sincronizamos nombre con vehiculo para no romper
-            //consumidores antiguos que todavia lean ese campo
-            //
-            objGuardar.nombre = objGuardar.vehiculo ?? objGuardar.nombre ?? "";
+            delete objGuardar.vehiculo;
+            delete objGuardar.categoria;
+            delete objGuardar.nombre;
 
             if (idEditar === 0) {
                 delete objGuardar.id;
@@ -105,6 +125,8 @@ const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                             tipoTransporte={tipoTransporte}
                             setTipoTransporte={setTipoTransporte}
                             estadoGuardando={estadoGuardando}
+                            vehiculosDisponibles={vehiculosDisponibles}
+                            categoriasDisponibles={categoriasDisponibles}
                         />
 
                         <div className="flex justify-content-end align-items-center gap-2 mt-3">

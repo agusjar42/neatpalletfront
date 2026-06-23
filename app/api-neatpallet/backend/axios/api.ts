@@ -8765,6 +8765,55 @@ export interface NewTipoCarroceria {
     'orden'?: number;
 }
 /**
+ * (tsType: Omit<TipoCategoria, \'id\'>, schemaOptions: { title: \'NewTipoCategoria\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTipoCategoria
+ */
+export interface NewTipoCategoria {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoCategoria
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoCategoria
+     */
+    'nombre': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoCategoria
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoCategoria
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoCategoria
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoCategoria
+     */
+    'usuModificacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoCategoria
+     */
+    'usuCreacion'?: number;
+}
+/**
  * (tsType: Omit<TipoSensor, \'id\'>, schemaOptions: { title: \'NewTipoSensor\', exclude: [ \'id\' ] })
  * @export
  * @interface NewTipoSensor
@@ -8839,16 +8888,28 @@ export interface NewTipoTransporte {
     'codigo'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof NewTipoTransporte
      */
-    'vehiculo'?: string;
+    'tipoVehiculoId'?: number;
     /**
      * 
      * @type {string}
      * @memberof NewTipoTransporte
      */
     'uso'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoTransporte
+     */
+    'tipoCategoriaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoTransporte
+     */
+    'vehiculo'?: string;
     /**
      * 
      * @type {string}
@@ -8897,6 +8958,61 @@ export interface NewTipoTransporte {
      * @memberof NewTipoTransporte
      */
     'orden'?: number;
+}
+/**
+ * (tsType: Omit<TipoVehiculo, \'id\'>, schemaOptions: { title: \'NewTipoVehiculo\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTipoVehiculo
+ */
+export interface NewTipoVehiculo {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoVehiculo
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoVehiculo
+     */
+    'nombre': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoVehiculo
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoVehiculo
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoVehiculo
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoVehiculo
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoVehiculo
+     */
+    'usuModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoVehiculo
+     */
+    'tipoVehiculocol'?: string;
 }
 /**
  * (tsType: Omit<Traduccion, \'id\'>, schemaOptions: { title: \'NewTraduccion\', exclude: [ \'id\' ] })
@@ -13421,6 +13537,251 @@ export interface TipoCarroceriaWithRelations {
 /**
  * 
  * @export
+ * @interface TipoCategoria
+ */
+export interface TipoCategoria {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoria
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoria
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoria
+     */
+    'nombre': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoria
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoria
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoria
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoria
+     */
+    'usuModificacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoria
+     */
+    'usuCreacion'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface TipoCategoriaFilter
+ */
+export interface TipoCategoriaFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoCategoriaFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoCategoriaFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoCategoriaFilter1
+ */
+export interface TipoCategoriaFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoCategoriaFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoCategoriaFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoCategoriaFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<TipoCategoria>, schemaOptions: { partial: true })
+ * @export
+ * @interface TipoCategoriaPartial
+ */
+export interface TipoCategoriaPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaPartial
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoriaPartial
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoriaPartial
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoriaPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoriaPartial
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaPartial
+     */
+    'usuModificacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaPartial
+     */
+    'usuCreacion'?: number;
+}
+/**
+ * (tsType: TipoCategoriaWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TipoCategoriaWithRelations
+ */
+export interface TipoCategoriaWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaWithRelations
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoriaWithRelations
+     */
+    'nombre': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoriaWithRelations
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoriaWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoCategoriaWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaWithRelations
+     */
+    'usuModificacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoCategoriaWithRelations
+     */
+    'usuCreacion'?: number;
+}
+/**
+ * 
+ * @export
  * @interface TipoSensor
  */
 export interface TipoSensor {
@@ -13809,16 +14170,28 @@ export interface TipoTransporte {
     'codigo'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof TipoTransporte
      */
-    'vehiculo'?: string;
+    'tipoVehiculoId'?: number;
     /**
      * 
      * @type {string}
      * @memberof TipoTransporte
      */
     'uso'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporte
+     */
+    'tipoCategoriaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransporte
+     */
+    'vehiculo'?: string;
     /**
      * 
      * @type {string}
@@ -14014,16 +14387,28 @@ export interface TipoTransportePartial {
     'codigo'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof TipoTransportePartial
      */
-    'vehiculo'?: string;
+    'tipoVehiculoId'?: number;
     /**
      * 
      * @type {string}
      * @memberof TipoTransportePartial
      */
     'uso'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransportePartial
+     */
+    'tipoCategoriaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransportePartial
+     */
+    'vehiculo'?: string;
     /**
      * 
      * @type {string}
@@ -14148,16 +14533,28 @@ export interface TipoTransporteWithRelations {
     'codigo'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof TipoTransporteWithRelations
      */
-    'vehiculo'?: string;
+    'tipoVehiculoId'?: number;
     /**
      * 
      * @type {string}
      * @memberof TipoTransporteWithRelations
      */
     'uso'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoTransporteWithRelations
+     */
+    'tipoCategoriaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoTransporteWithRelations
+     */
+    'vehiculo'?: string;
     /**
      * 
      * @type {string}
@@ -14218,6 +14615,269 @@ export interface TipoTransporteWithRelations {
      * @memberof TipoTransporteWithRelations
      */
     'foreignKey'?: any;
+}
+/**
+ * 
+ * @export
+ * @interface TipoVehiculo
+ */
+export interface TipoVehiculo {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculo
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculo
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculo
+     */
+    'nombre': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculo
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculo
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculo
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculo
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculo
+     */
+    'usuModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculo
+     */
+    'tipoVehiculocol'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface TipoVehiculoFilter
+ */
+export interface TipoVehiculoFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoVehiculoFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoVehiculoFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoVehiculoFilter1
+ */
+export interface TipoVehiculoFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoVehiculoFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoVehiculoFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoVehiculoFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<TipoVehiculo>, schemaOptions: { partial: true })
+ * @export
+ * @interface TipoVehiculoPartial
+ */
+export interface TipoVehiculoPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoPartial
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculoPartial
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculoPartial
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculoPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculoPartial
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoPartial
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoPartial
+     */
+    'usuModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculoPartial
+     */
+    'tipoVehiculocol'?: string;
+}
+/**
+ * (tsType: TipoVehiculoWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TipoVehiculoWithRelations
+ */
+export interface TipoVehiculoWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoWithRelations
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculoWithRelations
+     */
+    'nombre': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculoWithRelations
+     */
+    'activoSn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculoWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculoWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoWithRelations
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoVehiculoWithRelations
+     */
+    'usuModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoVehiculoWithRelations
+     */
+    'tipoVehiculocol'?: string;
 }
 /**
  * 
@@ -33964,6 +34624,537 @@ export class TipoCarroceriaControllerApi extends BaseAPI {
 
 
 /**
+ * TipoCategoriaControllerApi - axios parameter creator
+ * @export
+ */
+export const TipoCategoriaControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-categorias/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTipoCategoria} [newTipoCategoria] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerCreate: async (newTipoCategoria?: NewTipoCategoria, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-categorias`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTipoCategoria, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoCategoriaControllerDeleteById', 'id', id)
+            const localVarPath = `/tipo-categorias/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TipoCategoriaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerFind: async (filter?: TipoCategoriaFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-categorias`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCategoriaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerFindById: async (id: number, filter?: TipoCategoriaFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoCategoriaControllerFindById', 'id', id)
+            const localVarPath = `/tipo-categorias/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCategoria} [tipoCategoria] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerReplaceById: async (id: number, tipoCategoria?: TipoCategoria, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoCategoriaControllerReplaceById', 'id', id)
+            const localVarPath = `/tipo-categorias/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoCategoria, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCategoriaPartial} [tipoCategoriaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerUpdateById: async (id: number, tipoCategoriaPartial?: TipoCategoriaPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoCategoriaControllerUpdateById', 'id', id)
+            const localVarPath = `/tipo-categorias/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoCategoriaPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TipoCategoriaControllerApi - functional programming interface
+ * @export
+ */
+export const TipoCategoriaControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TipoCategoriaControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCategoriaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCategoriaControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTipoCategoria} [newTipoCategoria] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCategoriaControllerCreate(newTipoCategoria?: NewTipoCategoria, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoCategoria>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCategoriaControllerCreate(newTipoCategoria, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCategoriaControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCategoriaControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TipoCategoriaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCategoriaControllerFind(filter?: TipoCategoriaFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TipoCategoriaWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCategoriaControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCategoriaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCategoriaControllerFindById(id: number, filter?: TipoCategoriaFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoCategoriaWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCategoriaControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCategoria} [tipoCategoria] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCategoriaControllerReplaceById(id: number, tipoCategoria?: TipoCategoria, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCategoriaControllerReplaceById(id, tipoCategoria, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCategoriaPartial} [tipoCategoriaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoCategoriaControllerUpdateById(id: number, tipoCategoriaPartial?: TipoCategoriaPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoCategoriaControllerUpdateById(id, tipoCategoriaPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TipoCategoriaControllerApi - factory interface
+ * @export
+ */
+export const TipoCategoriaControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TipoCategoriaControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoCategoriaControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTipoCategoria} [newTipoCategoria] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerCreate(newTipoCategoria?: NewTipoCategoria, options?: any): AxiosPromise<TipoCategoria> {
+            return localVarFp.tipoCategoriaControllerCreate(newTipoCategoria, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoCategoriaControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TipoCategoriaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerFind(filter?: TipoCategoriaFilter1, options?: any): AxiosPromise<Array<TipoCategoriaWithRelations>> {
+            return localVarFp.tipoCategoriaControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCategoriaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerFindById(id: number, filter?: TipoCategoriaFilter, options?: any): AxiosPromise<TipoCategoriaWithRelations> {
+            return localVarFp.tipoCategoriaControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCategoria} [tipoCategoria] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerReplaceById(id: number, tipoCategoria?: TipoCategoria, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoCategoriaControllerReplaceById(id, tipoCategoria, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoCategoriaPartial} [tipoCategoriaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoCategoriaControllerUpdateById(id: number, tipoCategoriaPartial?: TipoCategoriaPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoCategoriaControllerUpdateById(id, tipoCategoriaPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TipoCategoriaControllerApi - object-oriented interface
+ * @export
+ * @class TipoCategoriaControllerApi
+ * @extends {BaseAPI}
+ */
+export class TipoCategoriaControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCategoriaControllerApi
+     */
+    public tipoCategoriaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TipoCategoriaControllerApiFp(this.configuration).tipoCategoriaControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTipoCategoria} [newTipoCategoria] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCategoriaControllerApi
+     */
+    public tipoCategoriaControllerCreate(newTipoCategoria?: NewTipoCategoria, options?: AxiosRequestConfig) {
+        return TipoCategoriaControllerApiFp(this.configuration).tipoCategoriaControllerCreate(newTipoCategoria, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCategoriaControllerApi
+     */
+    public tipoCategoriaControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TipoCategoriaControllerApiFp(this.configuration).tipoCategoriaControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TipoCategoriaFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCategoriaControllerApi
+     */
+    public tipoCategoriaControllerFind(filter?: TipoCategoriaFilter1, options?: AxiosRequestConfig) {
+        return TipoCategoriaControllerApiFp(this.configuration).tipoCategoriaControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoCategoriaFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCategoriaControllerApi
+     */
+    public tipoCategoriaControllerFindById(id: number, filter?: TipoCategoriaFilter, options?: AxiosRequestConfig) {
+        return TipoCategoriaControllerApiFp(this.configuration).tipoCategoriaControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoCategoria} [tipoCategoria] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCategoriaControllerApi
+     */
+    public tipoCategoriaControllerReplaceById(id: number, tipoCategoria?: TipoCategoria, options?: AxiosRequestConfig) {
+        return TipoCategoriaControllerApiFp(this.configuration).tipoCategoriaControllerReplaceById(id, tipoCategoria, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoCategoriaPartial} [tipoCategoriaPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoCategoriaControllerApi
+     */
+    public tipoCategoriaControllerUpdateById(id: number, tipoCategoriaPartial?: TipoCategoriaPartial, options?: AxiosRequestConfig) {
+        return TipoCategoriaControllerApiFp(this.configuration).tipoCategoriaControllerUpdateById(id, tipoCategoriaPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * TipoSensorControllerApi - axios parameter creator
  * @export
  */
@@ -34873,6 +36064,537 @@ export class TipoTransporteControllerApi extends BaseAPI {
      */
     public tipoTransporteControllerUpdateById(id: number, tipoTransportePartial?: TipoTransportePartial, options?: AxiosRequestConfig) {
         return TipoTransporteControllerApiFp(this.configuration).tipoTransporteControllerUpdateById(id, tipoTransportePartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TipoVehiculoControllerApi - axios parameter creator
+ * @export
+ */
+export const TipoVehiculoControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-vehiculos/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTipoVehiculo} [newTipoVehiculo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerCreate: async (newTipoVehiculo?: NewTipoVehiculo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-vehiculos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTipoVehiculo, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoVehiculoControllerDeleteById', 'id', id)
+            const localVarPath = `/tipo-vehiculos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TipoVehiculoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerFind: async (filter?: TipoVehiculoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-vehiculos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoVehiculoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerFindById: async (id: number, filter?: TipoVehiculoFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoVehiculoControllerFindById', 'id', id)
+            const localVarPath = `/tipo-vehiculos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoVehiculo} [tipoVehiculo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerReplaceById: async (id: number, tipoVehiculo?: TipoVehiculo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoVehiculoControllerReplaceById', 'id', id)
+            const localVarPath = `/tipo-vehiculos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoVehiculo, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoVehiculoPartial} [tipoVehiculoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerUpdateById: async (id: number, tipoVehiculoPartial?: TipoVehiculoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoVehiculoControllerUpdateById', 'id', id)
+            const localVarPath = `/tipo-vehiculos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoVehiculoPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TipoVehiculoControllerApi - functional programming interface
+ * @export
+ */
+export const TipoVehiculoControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TipoVehiculoControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoVehiculoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoVehiculoControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTipoVehiculo} [newTipoVehiculo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoVehiculoControllerCreate(newTipoVehiculo?: NewTipoVehiculo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoVehiculo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoVehiculoControllerCreate(newTipoVehiculo, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoVehiculoControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoVehiculoControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TipoVehiculoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoVehiculoControllerFind(filter?: TipoVehiculoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TipoVehiculoWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoVehiculoControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoVehiculoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoVehiculoControllerFindById(id: number, filter?: TipoVehiculoFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoVehiculoWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoVehiculoControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoVehiculo} [tipoVehiculo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoVehiculoControllerReplaceById(id: number, tipoVehiculo?: TipoVehiculo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoVehiculoControllerReplaceById(id, tipoVehiculo, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoVehiculoPartial} [tipoVehiculoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoVehiculoControllerUpdateById(id: number, tipoVehiculoPartial?: TipoVehiculoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoVehiculoControllerUpdateById(id, tipoVehiculoPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TipoVehiculoControllerApi - factory interface
+ * @export
+ */
+export const TipoVehiculoControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TipoVehiculoControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoVehiculoControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTipoVehiculo} [newTipoVehiculo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerCreate(newTipoVehiculo?: NewTipoVehiculo, options?: any): AxiosPromise<TipoVehiculo> {
+            return localVarFp.tipoVehiculoControllerCreate(newTipoVehiculo, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoVehiculoControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TipoVehiculoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerFind(filter?: TipoVehiculoFilter1, options?: any): AxiosPromise<Array<TipoVehiculoWithRelations>> {
+            return localVarFp.tipoVehiculoControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoVehiculoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerFindById(id: number, filter?: TipoVehiculoFilter, options?: any): AxiosPromise<TipoVehiculoWithRelations> {
+            return localVarFp.tipoVehiculoControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoVehiculo} [tipoVehiculo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerReplaceById(id: number, tipoVehiculo?: TipoVehiculo, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoVehiculoControllerReplaceById(id, tipoVehiculo, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoVehiculoPartial} [tipoVehiculoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoVehiculoControllerUpdateById(id: number, tipoVehiculoPartial?: TipoVehiculoPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoVehiculoControllerUpdateById(id, tipoVehiculoPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TipoVehiculoControllerApi - object-oriented interface
+ * @export
+ * @class TipoVehiculoControllerApi
+ * @extends {BaseAPI}
+ */
+export class TipoVehiculoControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoVehiculoControllerApi
+     */
+    public tipoVehiculoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TipoVehiculoControllerApiFp(this.configuration).tipoVehiculoControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTipoVehiculo} [newTipoVehiculo] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoVehiculoControllerApi
+     */
+    public tipoVehiculoControllerCreate(newTipoVehiculo?: NewTipoVehiculo, options?: AxiosRequestConfig) {
+        return TipoVehiculoControllerApiFp(this.configuration).tipoVehiculoControllerCreate(newTipoVehiculo, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoVehiculoControllerApi
+     */
+    public tipoVehiculoControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TipoVehiculoControllerApiFp(this.configuration).tipoVehiculoControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TipoVehiculoFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoVehiculoControllerApi
+     */
+    public tipoVehiculoControllerFind(filter?: TipoVehiculoFilter1, options?: AxiosRequestConfig) {
+        return TipoVehiculoControllerApiFp(this.configuration).tipoVehiculoControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoVehiculoFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoVehiculoControllerApi
+     */
+    public tipoVehiculoControllerFindById(id: number, filter?: TipoVehiculoFilter, options?: AxiosRequestConfig) {
+        return TipoVehiculoControllerApiFp(this.configuration).tipoVehiculoControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoVehiculo} [tipoVehiculo] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoVehiculoControllerApi
+     */
+    public tipoVehiculoControllerReplaceById(id: number, tipoVehiculo?: TipoVehiculo, options?: AxiosRequestConfig) {
+        return TipoVehiculoControllerApiFp(this.configuration).tipoVehiculoControllerReplaceById(id, tipoVehiculo, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoVehiculoPartial} [tipoVehiculoPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoVehiculoControllerApi
+     */
+    public tipoVehiculoControllerUpdateById(id: number, tipoVehiculoPartial?: TipoVehiculoPartial, options?: AxiosRequestConfig) {
+        return TipoVehiculoControllerApiFp(this.configuration).tipoVehiculoControllerUpdateById(id, tipoVehiculoPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -270,6 +270,22 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipo Sensor-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipo Sensor-Borrar' },
 
+                // Tipo Vehiculo
+                { header: intl.formatMessage({ id: 'Tipo Vehiculo' }), seccion: 'Tipo Vehiculo' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipo Vehiculo-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipo Vehiculo-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipo Vehiculo-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipo Vehiculo-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipo Vehiculo-Borrar' },
+
+                // Tipo Categoria
+                { header: intl.formatMessage({ id: 'Tipo Categoria' }), seccion: 'Tipo Categoria' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipo Categoria-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipo Categoria-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipo Categoria-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipo Categoria-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipo Categoria-Borrar' },
+
                 // Tipo Transporte
                 { header: intl.formatMessage({ id: 'Tipo Transporte' }), seccion: 'Tipo Transporte' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipo Transporte-Acceder' },

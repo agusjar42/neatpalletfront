@@ -142,6 +142,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 */      { label: "Parámetros",                  path: "/parametro",                         icon: "pi pi-wrench",               permisoControlador: "Parametro", grupo: "SISTEMA" },
       { label: "Lenguajes",                     path: "/tablas-maestras/idioma",            icon: "pi pi-language",             permisoControlador: "Idiomas", grupo: "SISTEMA" },
       { label: "Tipos de sensores",             path: "/tipo-sensor",                       icon: "pi pi-wifi",                 permisoControlador: "Tipo Sensor", grupo: "SISTEMA" },
+      { label: "Tipos de vehiculo",             path: "/tipo-vehiculo",                     icon: "pi pi-car",                  permisoControlador: "Tipo Vehiculo", grupo: "SISTEMA" },
+      { label: "Tipos de categoria",            path: "/tipo-categoria",                    icon: "pi pi-tags",                 permisoControlador: "Tipo Categoria", grupo: "SISTEMA" },
       { label: "Configuración",                 path: "/eventos-configuracion",             icon: "pi pi-bell",                 permisoControlador: "Eventos Configuración", grupo: "SISTEMA" },
     ];
 

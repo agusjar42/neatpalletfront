@@ -5,7 +5,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 import { getLugarParada } from '@/app/api-endpoints/cliente-lugar-parada';
-import { getOperario } from '@/app/api-endpoints/cliente-operario';
+import { getEnvioOperario } from '@/app/api-endpoints/envio-operario';
 
 const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, envios, estoyDentroDeUnTab, envioId, clienteId }) => {
     const intl = useIntl();
@@ -41,19 +41,31 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
             }
 
             try {
-                const filtro = JSON.stringify({
+                const filtroLugares = JSON.stringify({
                     where: {
-                        and: { clienteId: clienteIdActual, activoSN: 'S' }
-                    }
+                        clienteId: clienteIdActual
+                    },
+                    order: "nombre ASC"
+                });
+
+                const filtroOperarios = JSON.stringify({
+                    where: {
+                        envioId: envioId || envioParada.envioId
+                    },
+                    order: "id ASC"
                 });
 
                 const [lugares, operariosData] = await Promise.all([
-                    getLugarParada(filtro),
-                    getOperario(filtro)
+                    getLugarParada(filtroLugares),
+                    getEnvioOperario(filtroOperarios)
                 ]);
 
-                setLugaresParada(lugares || []);
-                setOperarios(operariosData || []);
+                //
+                //Mostramos solo los puntos activos del cliente y los operarios ya asociados
+                //al envio actual mediante la tabla envio_operario
+                //
+                setLugaresParada((lugares || []).filter((lugar) => lugar.activoSN !== 'N'));
+                setOperarios((operariosData || []).filter((operario) => operario.activoSN !== 'N'));
             } catch (error) {
                 console.error('Error al cargar datos de la parada:', error);
                 setLugaresParada([]);
@@ -62,7 +74,7 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
         };
 
         cargarDatosRelacionados();
-    }, [clienteIdActual]);
+    }, [clienteIdActual, envioId, envioParada.envioId]);
 
     useEffect(() => {
         if (envioParada.lugarParadaId && !lugaresParada.some(lugar => lugar.id === envioParada.lugarParadaId)) {
@@ -130,7 +142,7 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
     }));
 
     const opcionesOperario = operarios.map(operario => ({
-        label: operario.nombre,
+        label: `${operario.nombre || ''}${operario.telefono ? ` - ${operario.telefono}` : ''}`,
         value: operario.id
     }));
 

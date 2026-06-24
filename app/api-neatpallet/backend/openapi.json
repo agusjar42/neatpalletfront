@@ -2487,6 +2487,309 @@
         "operationId": "EnvioMovimientoController.find"
       }
     },
+    "/envio-operarios/count": {
+      "get": {
+        "x-controller-name": "EnvioOperarioController",
+        "x-operation-name": "count",
+        "tags": [
+          "EnvioOperarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioOperario model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EnvioOperario.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EnvioOperario>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EnvioOperarioController.count"
+      }
+    },
+    "/envio-operarios/{id}": {
+      "put": {
+        "x-controller-name": "EnvioOperarioController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "EnvioOperarioController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EnvioOperario PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvioOperario"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EnvioOperarioController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "EnvioOperarioController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "EnvioOperarioController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EnvioOperario PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvioOperarioPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EnvioOperarioController.updateById"
+      },
+      "get": {
+        "x-controller-name": "EnvioOperarioController",
+        "x-operation-name": "findById",
+        "tags": [
+          "EnvioOperarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioOperario model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioOperarioWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioOperario.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EnvioOperarioController.findById"
+      },
+      "delete": {
+        "x-controller-name": "EnvioOperarioController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "EnvioOperarioController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EnvioOperario DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EnvioOperarioController.deleteById"
+      }
+    },
+    "/envio-operarios": {
+      "post": {
+        "x-controller-name": "EnvioOperarioController",
+        "x-operation-name": "create",
+        "tags": [
+          "EnvioOperarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioOperario model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioOperario"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewEnvioOperario"
+              }
+            }
+          }
+        },
+        "operationId": "EnvioOperarioController.create"
+      },
+      "patch": {
+        "x-controller-name": "EnvioOperarioController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "EnvioOperarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EnvioOperario PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EnvioOperario.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EnvioOperario>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvioOperarioPartial"
+              }
+            }
+          }
+        },
+        "operationId": "EnvioOperarioController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "EnvioOperarioController",
+        "x-operation-name": "find",
+        "tags": [
+          "EnvioOperarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of EnvioOperario model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EnvioOperarioWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvioOperario.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EnvioOperarioController.find"
+      }
+    },
     "/envio-pallets/count": {
       "get": {
         "x-controller-name": "EnvioPalletController",
@@ -16866,7 +17169,22 @@
           "envioId": {
             "type": "number"
           },
+          "tipo": {
+            "type": "string"
+          },
           "fecha": {
+            "type": "string"
+          },
+          "eta": {
+            "type": "string"
+          },
+          "horaReal": {
+            "type": "string"
+          },
+          "detencion": {
+            "type": "string"
+          },
+          "estado": {
             "type": "string"
           },
           "lugarParadaId": {
@@ -16915,7 +17233,22 @@
           "envioId": {
             "type": "number"
           },
+          "tipo": {
+            "type": "string"
+          },
           "fecha": {
+            "type": "string"
+          },
+          "eta": {
+            "type": "string"
+          },
+          "horaReal": {
+            "type": "string"
+          },
+          "detencion": {
+            "type": "string"
+          },
+          "estado": {
             "type": "string"
           },
           "lugarParadaId": {
@@ -16968,7 +17301,22 @@
           "envioId": {
             "type": "number"
           },
+          "tipo": {
+            "type": "string"
+          },
           "fecha": {
+            "type": "string"
+          },
+          "eta": {
+            "type": "string"
+          },
+          "horaReal": {
+            "type": "string"
+          },
+          "detencion": {
+            "type": "string"
+          },
+          "estado": {
             "type": "string"
           },
           "lugarParadaId": {
@@ -17031,7 +17379,22 @@
           "envioId": {
             "type": "number"
           },
+          "tipo": {
+            "type": "string"
+          },
           "fecha": {
+            "type": "string"
+          },
+          "eta": {
+            "type": "string"
+          },
+          "horaReal": {
+            "type": "string"
+          },
+          "detencion": {
+            "type": "string"
+          },
+          "estado": {
             "type": "string"
           },
           "lugarParadaId": {
@@ -17163,6 +17526,136 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<EnvioPallet>"
+      },
+      "EnvioOperario": {
+        "title": "EnvioOperario",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "envioId": {
+            "type": "number"
+          },
+          "operarioId": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewEnvioOperario": {
+        "title": "NewEnvioOperario",
+        "type": "object",
+        "description": "(tsType: Omit<EnvioOperario, 'id'>, schemaOptions: { title: 'NewEnvioOperario', exclude: [ 'id' ] })",
+        "properties": {
+          "envioId": {
+            "type": "number"
+          },
+          "operarioId": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<EnvioOperario, 'id'>"
+      },
+      "EnvioOperarioWithRelations": {
+        "title": "EnvioOperarioWithRelations",
+        "type": "object",
+        "description": "(tsType: EnvioOperarioWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "envioId": {
+            "type": "number"
+          },
+          "operarioId": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "envio": {
+            "$ref": "#/components/schemas/EnvioWithRelations"
+          },
+          "foreignKey": {},
+          "operario": {
+            "$ref": "#/components/schemas/OperarioWithRelations"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "EnvioOperarioWithRelations"
+      },
+      "EnvioOperarioPartial": {
+        "title": "EnvioOperarioPartial",
+        "type": "object",
+        "description": "(tsType: Partial<EnvioOperario>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "envioId": {
+            "type": "number"
+          },
+          "operarioId": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<EnvioOperario>"
       },
       "EnvioMovimiento": {
         "title": "EnvioMovimiento",
@@ -21165,6 +21658,282 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<EnvioMovimiento>"
       },
+      "EnvioOperario.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "EnvioOperario.ScopeFilter"
+      },
+      "EnvioOperario.IncludeFilter.Items": {
+        "title": "EnvioOperario.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "envio",
+              "operario"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/EnvioOperario.ScopeFilter"
+          }
+        }
+      },
+      "EnvioOperario.Filter": {
+        "type": "object",
+        "title": "EnvioOperario.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "envioId": {
+                    "type": "boolean"
+                  },
+                  "operarioId": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "envioId",
+                    "operarioId",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EnvioOperario.Fields"
+          },
+          "include": {
+            "title": "EnvioOperario.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EnvioOperario.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EnvioOperario>"
+      },
+      "EnvioOperario.Filter1": {
+        "type": "object",
+        "title": "EnvioOperario.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "EnvioOperario.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "envioId": {
+                    "type": "boolean"
+                  },
+                  "operarioId": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "envioId",
+                    "operarioId",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EnvioOperario.Fields"
+          },
+          "include": {
+            "title": "EnvioOperario.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EnvioOperario.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EnvioOperario>"
+      },
       "EnvioPallet.ScopeFilter": {
         "type": "object",
         "properties": {
@@ -21560,7 +22329,22 @@
                   "envioId": {
                     "type": "boolean"
                   },
+                  "tipo": {
+                    "type": "boolean"
+                  },
                   "fecha": {
+                    "type": "boolean"
+                  },
+                  "eta": {
+                    "type": "boolean"
+                  },
+                  "horaReal": {
+                    "type": "boolean"
+                  },
+                  "detencion": {
+                    "type": "boolean"
+                  },
+                  "estado": {
                     "type": "boolean"
                   },
                   "lugarParadaId": {
@@ -21606,7 +22390,12 @@
                   "enum": [
                     "id",
                     "envioId",
+                    "tipo",
                     "fecha",
+                    "eta",
+                    "horaReal",
+                    "detencion",
+                    "estado",
                     "lugarParadaId",
                     "lugarParadaGps",
                     "direccion",
@@ -21690,7 +22479,22 @@
                   "envioId": {
                     "type": "boolean"
                   },
+                  "tipo": {
+                    "type": "boolean"
+                  },
                   "fecha": {
+                    "type": "boolean"
+                  },
+                  "eta": {
+                    "type": "boolean"
+                  },
+                  "horaReal": {
+                    "type": "boolean"
+                  },
+                  "detencion": {
+                    "type": "boolean"
+                  },
+                  "estado": {
                     "type": "boolean"
                   },
                   "lugarParadaId": {
@@ -21736,7 +22540,12 @@
                   "enum": [
                     "id",
                     "envioId",
+                    "tipo",
                     "fecha",
+                    "eta",
+                    "horaReal",
+                    "detencion",
+                    "estado",
                     "lugarParadaId",
                     "lugarParadaGps",
                     "direccion",

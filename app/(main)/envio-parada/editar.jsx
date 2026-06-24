@@ -78,7 +78,8 @@ const EditarEnvioParada = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
             //Borramos las columnas de la vista que no pertenecen a la tabla EnvioParada sino a su padre Envio
             //
             delete objGuardar['origenRuta'];
-            delete objGuardar['fechaEspanol'];
+            delete objGuardar['punto'];
+            delete objGuardar['coordenadas'];
             delete objGuardar['lugarParadaNombre'];
             delete objGuardar['operarioNombre'];
 

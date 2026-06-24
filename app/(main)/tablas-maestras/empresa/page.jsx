@@ -18,13 +18,17 @@ import { getTipoTransporte, getTipoTransporteCount, deleteTipoTransporte } from 
 import { getEventoConfiguracion, getEventoConfiguracionCount } from "@/app/api-endpoints/evento-configuracion";
 import { getEnvioContenido, getEnvioContenidoCount, deleteEnvioContenido } from "@/app/api-endpoints/envio-contenido";
 import { getEnvioMovimiento, getEnvioMovimientoCount, deleteEnvioMovimiento } from "@/app/api-endpoints/envio-movimiento";
-import { getEnvioParada } from "@/app/api-endpoints/envio-parada";
-import { getEnvioSensor } from "@/app/api-endpoints/envio-sensor";
+import { getEnvioParada, getEnvioParadaCount, deleteEnvioParada } from "@/app/api-endpoints/envio-parada";
+import { getEnvioOperario, getEnvioOperarioCount, deleteEnvioOperario } from "@/app/api-endpoints/envio-operario";
+import { getEnvioSensor, getEnvioSensorCount, deleteEnvioSensor } from "@/app/api-endpoints/envio-sensor";
 import EditarUsuario from "../../usuarios/editar";
 import EditarCliente from "../../cliente/editar";
 import EditarProducto from "../../producto/editar";
 import EditarEnvioContenido from "../../envio-contenido/editar";
 import EditarEnvioMovimiento from "../../envio-movimiento/editar";
+import EditarEnvioOperario from "../../envio-operario/editar";
+import EditarEnvioParada from "../../envio-parada/editar";
+import EditarEnvioSensor from "../../envio-sensor/editar";
 import EditarEnvioSensorEmpresa from "../../envio-sensor-empresa/editar";
 import EditarTipoCarroceria from "../../tipo-carroceria/editar";
 import EditarTipoTransporte from "../../tipo-transporte/editar";
@@ -138,6 +142,30 @@ const columnasEnvioMovimientoDetalle = [
     { campo: "nombreSensor", header: "Sensor", tipo: "string" },
     { campo: "valor", header: "Valor", tipo: "string" },
     { campo: "gps", header: "GPS", tipo: "string" },
+];
+
+const columnasEnvioParadaDetalle = [
+    { campo: "tipo", header: "Tipo", tipo: "string" },
+    { campo: "punto", header: "Punto", tipo: "string" },
+    { campo: "coordenadas", header: "Coordenadas", tipo: "string" },
+    { campo: "eta", header: "ETA", tipo: "string" },
+    { campo: "horaReal", header: "Hora real", tipo: "string" },
+    { campo: "detencion", header: "Detencion", tipo: "string" },
+    { campo: "estado", header: "Estado", tipo: "string" },
+];
+
+const columnasEnvioSensorDetalle = [
+    { campo: "orden", header: "Orden", tipo: "number" },
+    { campo: "nombreSensor", header: "Tipo de sensor", tipo: "string" },
+    { campo: "tipoSensorId", header: "ID", tipo: "number" },
+    { campo: "valor", header: "Valor", tipo: "string" },
+];
+
+const columnasOperarioDetalle = [
+    { campo: "nombre", header: "Operario", tipo: "string" },
+    { campo: "telefono", header: "Telefono", tipo: "string" },
+    { campo: "email", header: "Email", tipo: "string" },
+    { campo: "activoSN", header: "Activo", tipo: "booleano" },
 ];
 
 const columnasSensorEmpresa = [
@@ -956,9 +984,13 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
     const [movimientos, setMovimientos] = useState([]);
     const [paradas, setParadas] = useState([]);
     const [sensores, setSensores] = useState([]);
+    const [operarios, setOperarios] = useState([]);
     const [informePallets, setInformePallets] = useState([]);
     const [refreshContenido, setRefreshContenido] = useState(0);
     const [refreshMovimientos, setRefreshMovimientos] = useState(0);
+    const [refreshParadas, setRefreshParadas] = useState(0);
+    const [refreshSensores, setRefreshSensores] = useState(0);
+    const [refreshOperarios, setRefreshOperarios] = useState(0);
     const [modalDetalleRegistro, setModalDetalleRegistro] = useState({ visible: false, accion: "ver", seccion: "", registro: null });
 
     useEffect(() => {
@@ -978,15 +1010,17 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
             getEnvioMovimiento(JSON.stringify({ where: { and: { envioId: envioActivo.id } }, order: "fecha DESC" })).catch(() => []),
             getEnvioParada(JSON.stringify({ where: { and: { envioId: envioActivo.id } }, order: "orden ASC" })).catch(() => []),
             getEnvioSensor(JSON.stringify({ where: { and: { envioId: envioActivo.id } }, order: "orden ASC" })).catch(() => []),
+            getEnvioOperario(JSON.stringify({ where: { and: { envioId: envioActivo.id } }, order: "id ASC" })).catch(() => []),
             getResumenEnvio(envioActivo.id).catch(() => []),
-        ]).then(([contenidoData, movimientosData, paradasData, sensoresData, resumenData]) => {
+        ]).then(([contenidoData, movimientosData, paradasData, sensoresData, operariosData, resumenData]) => {
             setContenido(Array.isArray(contenidoData) ? contenidoData : []);
             setMovimientos(Array.isArray(movimientosData) && movimientosData.length > 0 ? movimientosData : construirMovimientosFallback());
-            setParadas(Array.isArray(paradasData) && paradasData.length > 0 ? paradasData : construirParadasFallback(envioActivo));
-            setSensores(Array.isArray(sensoresData) && sensoresData.length > 0 ? sensoresData : construirSensoresFallback());
+            setParadas(Array.isArray(paradasData) ? paradasData : []);
+            setSensores(Array.isArray(sensoresData) ? sensoresData : []);
+            setOperarios(Array.isArray(operariosData) ? operariosData : []);
             setInformePallets(Array.isArray(resumenData) && resumenData.length > 0 ? resumenData : resumenEnvioFallback);
         });
-    }, [envioActivo?.id, refreshContenido, refreshMovimientos]);
+    }, [envioActivo?.id, envioActivo?.clienteId, refreshContenido, refreshMovimientos, refreshParadas, refreshSensores, refreshOperarios]);
 
     if (!envioActivo) {
         return <div className="empresa-profile-card empresa-empty-state">No se ha encontrado el envio seleccionado.</div>;
@@ -1011,9 +1045,9 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
     const conteos = {
         contenido: contenido.length,
         movimientos: movimientos.length || 14,
-        paradas: paradas.length || 4,
-        sensores: sensores.length || 3,
-        operarios: operariosEnvioFallback.length,
+        paradas: paradas.length,
+        sensores: sensores.length,
+        operarios: operarios.length,
     };
 
     return (
@@ -1132,9 +1166,98 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
                         />
                     </article>
                 ) : null}
-                {detalleTabActiva === "Paradas" ? <EnvioParadasTab paradas={paradas} onAbrirModal={abrirModalDetalleRegistro} /> : null}
-                {detalleTabActiva === "Sensores" ? <EnvioSensoresTab sensores={sensores} onAbrirModal={abrirModalDetalleRegistro} /> : null}
-                {detalleTabActiva === "Operarios" ? <EnvioOperariosTab operarios={operariosEnvioFallback} onAbrirModal={abrirModalDetalleRegistro} /> : null}
+                {detalleTabActiva === "Paradas" ? (
+                    <article className="envio-panel">
+                        <Crud
+                            key={`detalle-envio-paradas-${envioActivo.id}-${refreshParadas}`}
+                            headerCrud="Paradas"
+                            getRegistros={getEnvioParada}
+                            getRegistrosCount={getEnvioParadaCount}
+                            botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]}
+                            controlador="Envio Parada"
+                            editarComponente={<EditarEnvioParada />}
+                            columnas={columnasEnvioParadaDetalle}
+                            filtradoBase={{ envioId: envioActivo.id }}
+                            deleteRegistro={deleteEnvioParada}
+                            cargarDatosInicialmente={true}
+                            mostrarEdicionEnModal={true}
+                            modalEdicionProps={{
+                                showHeader: false,
+                                className: "neat-crud-edit-dialog envio-registro-dialog",
+                                style: { width: "min(760px, 92vw)" },
+                            }}
+                            onDataChange={() => setRefreshParadas(prev => prev + 1)}
+                            editarComponenteParametrosExtra={{
+                                envioId: envioActivo.id,
+                                clienteId: envioActivo.clienteId,
+                                estoyDentroDeUnTab: true,
+                                ocultarClienteResumenHeader: true,
+                                onDataChange: () => setRefreshParadas(prev => prev + 1),
+                            }}
+                        />
+                    </article>
+                ) : null}
+                {detalleTabActiva === "Sensores" ? (
+                    <article className="envio-panel">
+                        <Crud
+                            key={`detalle-envio-sensores-${envioActivo.id}-${refreshSensores}`}
+                            headerCrud="Sensores"
+                            getRegistros={getEnvioSensor}
+                            getRegistrosCount={getEnvioSensorCount}
+                            botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]}
+                            controlador="Envio Sensor"
+                            editarComponente={<EditarEnvioSensor />}
+                            columnas={columnasEnvioSensorDetalle}
+                            filtradoBase={{ envioId: envioActivo.id }}
+                            deleteRegistro={deleteEnvioSensor}
+                            cargarDatosInicialmente={true}
+                            mostrarEdicionEnModal={true}
+                            modalEdicionProps={{
+                                showHeader: false,
+                                className: "neat-crud-edit-dialog envio-registro-dialog",
+                                style: { width: "min(760px, 92vw)" },
+                            }}
+                            onDataChange={() => setRefreshSensores(prev => prev + 1)}
+                            editarComponenteParametrosExtra={{
+                                envioId: envioActivo.id,
+                                estoyDentroDeUnTab: true,
+                                ocultarClienteResumenHeader: true,
+                                onDataChange: () => setRefreshSensores(prev => prev + 1),
+                            }}
+                        />
+                    </article>
+                ) : null}
+                {detalleTabActiva === "Operarios" ? (
+                    <article className="envio-panel">
+                        <Crud
+                            key={`detalle-envio-operarios-${envioActivo.id}-${envioActivo.clienteId}-${refreshOperarios}`}
+                            headerCrud="Operarios"
+                            getRegistros={getEnvioOperario}
+                            getRegistrosCount={getEnvioOperarioCount}
+                            botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]}
+                            controlador="Operarios"
+                            editarComponente={<EditarEnvioOperario />}
+                            columnas={columnasOperarioDetalle}
+                            filtradoBase={{ envioId: envioActivo.id }}
+                            deleteRegistro={deleteEnvioOperario}
+                            cargarDatosInicialmente={true}
+                            mostrarEdicionEnModal={true}
+                            modalEdicionProps={{
+                                showHeader: false,
+                                className: "neat-crud-edit-dialog envio-registro-dialog",
+                                style: { width: "min(760px, 92vw)" },
+                            }}
+                            onDataChange={() => setRefreshOperarios(prev => prev + 1)}
+                            editarComponenteParametrosExtra={{
+                                envioId: envioActivo.id,
+                                clienteId: envioActivo.clienteId,
+                                estoyDentroDeUnTab: true,
+                                ocultarClienteResumenHeader: true,
+                                onDataChange: () => setRefreshOperarios(prev => prev + 1),
+                            }}
+                        />
+                    </article>
+                ) : null}
                 {detalleTabActiva === "Informe" ? <EnvioInformeTab envio={envioActivo} informePallets={informePallets} onAbrirModal={abrirModalDetalleRegistro} /> : null}
             </section>
 

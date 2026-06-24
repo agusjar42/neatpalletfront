@@ -3811,6 +3811,341 @@ export interface EnvioMovimientoWithRelations {
 /**
  * 
  * @export
+ * @interface EnvioOperario
+ */
+export interface EnvioOperario {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperario
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperario
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperario
+     */
+    'operarioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioOperario
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioOperario
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperario
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperario
+     */
+    'usuModificacion'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioOperarioFilter
+ */
+export interface EnvioOperarioFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioOperarioFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioOperarioFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioOperarioIncludeFilterItems | string>}
+     * @memberof EnvioOperarioFilter
+     */
+    'include'?: Array<EnvioOperarioIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioOperarioFilter1
+ */
+export interface EnvioOperarioFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioOperarioFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioOperarioFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EnvioOperarioFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EnvioOperarioIncludeFilterItems | string>}
+     * @memberof EnvioOperarioFilter1
+     */
+    'include'?: Array<EnvioOperarioIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioOperarioIncludeFilterItems
+ */
+export interface EnvioOperarioIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioOperarioIncludeFilterItems
+     */
+    'relation'?: EnvioOperarioIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {EnvioOperarioScopeFilter}
+     * @memberof EnvioOperarioIncludeFilterItems
+     */
+    'scope'?: EnvioOperarioScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum EnvioOperarioIncludeFilterItemsRelationEnum {
+    Envio = 'envio',
+    Operario = 'operario'
+}
+
+/**
+ * (tsType: Partial<EnvioOperario>, schemaOptions: { partial: true })
+ * @export
+ * @interface EnvioOperarioPartial
+ */
+export interface EnvioOperarioPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioPartial
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioPartial
+     */
+    'operarioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioOperarioPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioOperarioPartial
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioPartial
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioPartial
+     */
+    'usuModificacion'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface EnvioOperarioScopeFilter
+ */
+export interface EnvioOperarioScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EnvioOperarioScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EnvioOperarioScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof EnvioOperarioScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof EnvioOperarioScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: EnvioOperarioWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface EnvioOperarioWithRelations
+ */
+export interface EnvioOperarioWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioWithRelations
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioWithRelations
+     */
+    'operarioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioOperarioWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioOperarioWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioWithRelations
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EnvioOperarioWithRelations
+     */
+    'usuModificacion'?: number;
+    /**
+     * 
+     * @type {EnvioWithRelations}
+     * @memberof EnvioOperarioWithRelations
+     */
+    'envio'?: EnvioWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof EnvioOperarioWithRelations
+     */
+    'foreignKey'?: any;
+    /**
+     * 
+     * @type {OperarioWithRelations}
+     * @memberof EnvioOperarioWithRelations
+     */
+    'operario'?: OperarioWithRelations;
+}
+/**
+ * 
+ * @export
  * @interface EnvioPallet
  */
 export interface EnvioPallet {
@@ -4166,7 +4501,37 @@ export interface EnvioParada {
      * @type {string}
      * @memberof EnvioParada
      */
+    'tipo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
     'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'eta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'horaReal'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'detencion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParada
+     */
+    'estado'?: string;
     /**
      * 
      * @type {number}
@@ -4379,7 +4744,37 @@ export interface EnvioParadaPartial {
      * @type {string}
      * @memberof EnvioParadaPartial
      */
+    'tipo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
     'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'eta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'horaReal'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'detencion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaPartial
+     */
+    'estado'?: string;
     /**
      * 
      * @type {number}
@@ -4519,7 +4914,37 @@ export interface EnvioParadaWithRelations {
      * @type {string}
      * @memberof EnvioParadaWithRelations
      */
+    'tipo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
     'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'eta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'horaReal'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'detencion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EnvioParadaWithRelations
+     */
+    'estado'?: string;
     /**
      * 
      * @type {number}
@@ -7564,6 +7989,49 @@ export interface NewEnvioMovimiento {
     'orden'?: number;
 }
 /**
+ * (tsType: Omit<EnvioOperario, \'id\'>, schemaOptions: { title: \'NewEnvioOperario\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewEnvioOperario
+ */
+export interface NewEnvioOperario {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioOperario
+     */
+    'envioId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioOperario
+     */
+    'operarioId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioOperario
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioOperario
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioOperario
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEnvioOperario
+     */
+    'usuModificacion'?: number;
+}
+/**
  * (tsType: Omit<EnvioPallet, \'id\'>, schemaOptions: { title: \'NewEnvioPallet\', exclude: [ \'id\' ] })
  * @export
  * @interface NewEnvioPallet
@@ -7623,7 +8091,37 @@ export interface NewEnvioParada {
      * @type {string}
      * @memberof NewEnvioParada
      */
+    'tipo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
     'fecha'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'eta'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'horaReal'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'detencion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEnvioParada
+     */
+    'estado'?: string;
     /**
      * 
      * @type {number}
@@ -21996,6 +22494,612 @@ export class EnvioMovimientoControllerApi extends BaseAPI {
      */
     public envioMovimientoControllerUpdateById(id: number, envioMovimientoPartial?: EnvioMovimientoPartial, options?: AxiosRequestConfig) {
         return EnvioMovimientoControllerApiFp(this.configuration).envioMovimientoControllerUpdateById(id, envioMovimientoPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * EnvioOperarioControllerApi - axios parameter creator
+ * @export
+ */
+export const EnvioOperarioControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-operarios/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewEnvioOperario} [newEnvioOperario] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerCreate: async (newEnvioOperario?: NewEnvioOperario, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-operarios`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newEnvioOperario, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioOperarioControllerDeleteById', 'id', id)
+            const localVarPath = `/envio-operarios/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {EnvioOperarioFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerFind: async (filter?: EnvioOperarioFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-operarios`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioOperarioFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerFindById: async (id: number, filter?: EnvioOperarioFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioOperarioControllerFindById', 'id', id)
+            const localVarPath = `/envio-operarios/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioOperario} [envioOperario] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerReplaceById: async (id: number, envioOperario?: EnvioOperario, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioOperarioControllerReplaceById', 'id', id)
+            const localVarPath = `/envio-operarios/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioOperario, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioOperarioPartial} [envioOperarioPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerUpdateAll: async (where?: { [key: string]: object; }, envioOperarioPartial?: EnvioOperarioPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/envio-operarios`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioOperarioPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioOperarioPartial} [envioOperarioPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerUpdateById: async (id: number, envioOperarioPartial?: EnvioOperarioPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('envioOperarioControllerUpdateById', 'id', id)
+            const localVarPath = `/envio-operarios/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(envioOperarioPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EnvioOperarioControllerApi - functional programming interface
+ * @export
+ */
+export const EnvioOperarioControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EnvioOperarioControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioOperarioControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioOperarioControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewEnvioOperario} [newEnvioOperario] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioOperarioControllerCreate(newEnvioOperario?: NewEnvioOperario, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioOperario>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioOperarioControllerCreate(newEnvioOperario, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioOperarioControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioOperarioControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {EnvioOperarioFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioOperarioControllerFind(filter?: EnvioOperarioFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvioOperarioWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioOperarioControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioOperarioFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioOperarioControllerFindById(id: number, filter?: EnvioOperarioFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvioOperarioWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioOperarioControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioOperario} [envioOperario] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioOperarioControllerReplaceById(id: number, envioOperario?: EnvioOperario, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioOperarioControllerReplaceById(id, envioOperario, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioOperarioPartial} [envioOperarioPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioOperarioControllerUpdateAll(where?: { [key: string]: object; }, envioOperarioPartial?: EnvioOperarioPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioOperarioControllerUpdateAll(where, envioOperarioPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioOperarioPartial} [envioOperarioPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async envioOperarioControllerUpdateById(id: number, envioOperarioPartial?: EnvioOperarioPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.envioOperarioControllerUpdateById(id, envioOperarioPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EnvioOperarioControllerApi - factory interface
+ * @export
+ */
+export const EnvioOperarioControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EnvioOperarioControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioOperarioControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewEnvioOperario} [newEnvioOperario] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerCreate(newEnvioOperario?: NewEnvioOperario, options?: any): AxiosPromise<EnvioOperario> {
+            return localVarFp.envioOperarioControllerCreate(newEnvioOperario, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.envioOperarioControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EnvioOperarioFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerFind(filter?: EnvioOperarioFilter1, options?: any): AxiosPromise<Array<EnvioOperarioWithRelations>> {
+            return localVarFp.envioOperarioControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioOperarioFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerFindById(id: number, filter?: EnvioOperarioFilter, options?: any): AxiosPromise<EnvioOperarioWithRelations> {
+            return localVarFp.envioOperarioControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioOperario} [envioOperario] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerReplaceById(id: number, envioOperario?: EnvioOperario, options?: any): AxiosPromise<any> {
+            return localVarFp.envioOperarioControllerReplaceById(id, envioOperario, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EnvioOperarioPartial} [envioOperarioPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerUpdateAll(where?: { [key: string]: object; }, envioOperarioPartial?: EnvioOperarioPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.envioOperarioControllerUpdateAll(where, envioOperarioPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EnvioOperarioPartial} [envioOperarioPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        envioOperarioControllerUpdateById(id: number, envioOperarioPartial?: EnvioOperarioPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.envioOperarioControllerUpdateById(id, envioOperarioPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EnvioOperarioControllerApi - object-oriented interface
+ * @export
+ * @class EnvioOperarioControllerApi
+ * @extends {BaseAPI}
+ */
+export class EnvioOperarioControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioOperarioControllerApi
+     */
+    public envioOperarioControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return EnvioOperarioControllerApiFp(this.configuration).envioOperarioControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewEnvioOperario} [newEnvioOperario] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioOperarioControllerApi
+     */
+    public envioOperarioControllerCreate(newEnvioOperario?: NewEnvioOperario, options?: AxiosRequestConfig) {
+        return EnvioOperarioControllerApiFp(this.configuration).envioOperarioControllerCreate(newEnvioOperario, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioOperarioControllerApi
+     */
+    public envioOperarioControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return EnvioOperarioControllerApiFp(this.configuration).envioOperarioControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EnvioOperarioFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioOperarioControllerApi
+     */
+    public envioOperarioControllerFind(filter?: EnvioOperarioFilter1, options?: AxiosRequestConfig) {
+        return EnvioOperarioControllerApiFp(this.configuration).envioOperarioControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioOperarioFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioOperarioControllerApi
+     */
+    public envioOperarioControllerFindById(id: number, filter?: EnvioOperarioFilter, options?: AxiosRequestConfig) {
+        return EnvioOperarioControllerApiFp(this.configuration).envioOperarioControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioOperario} [envioOperario] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioOperarioControllerApi
+     */
+    public envioOperarioControllerReplaceById(id: number, envioOperario?: EnvioOperario, options?: AxiosRequestConfig) {
+        return EnvioOperarioControllerApiFp(this.configuration).envioOperarioControllerReplaceById(id, envioOperario, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {EnvioOperarioPartial} [envioOperarioPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioOperarioControllerApi
+     */
+    public envioOperarioControllerUpdateAll(where?: { [key: string]: object; }, envioOperarioPartial?: EnvioOperarioPartial, options?: AxiosRequestConfig) {
+        return EnvioOperarioControllerApiFp(this.configuration).envioOperarioControllerUpdateAll(where, envioOperarioPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EnvioOperarioPartial} [envioOperarioPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnvioOperarioControllerApi
+     */
+    public envioOperarioControllerUpdateById(id: number, envioOperarioPartial?: EnvioOperarioPartial, options?: AxiosRequestConfig) {
+        return EnvioOperarioControllerApiFp(this.configuration).envioOperarioControllerUpdateById(id, envioOperarioPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

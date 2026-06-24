@@ -7,18 +7,19 @@ import { useIntl } from 'react-intl'
 const EnvioParada = () => {
     const intl = useIntl();
     const columnas = [
-        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
-        { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen Ruta' }), tipo: 'string' },
-        { campo: 'fechaEspanol', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'string' },
-        { campo: 'lugarParadaNombre', header: intl.formatMessage({ id: 'Lugar' }), tipo: 'string' },
-        { campo: 'operarioNombre', header: intl.formatMessage({ id: 'Operario' }), tipo: 'string' },
-        { campo: 'telefonoOperario', header: intl.formatMessage({ id: 'Teléfono' }), tipo: 'string' },
+        { campo: 'tipo', header: intl.formatMessage({ id: 'Tipo' }), tipo: 'string' },
+        { campo: 'punto', header: intl.formatMessage({ id: 'Punto' }), tipo: 'string' },
+        { campo: 'coordenadas', header: intl.formatMessage({ id: 'Coordenadas' }), tipo: 'string' },
+        { campo: 'eta', header: intl.formatMessage({ id: 'ETA' }), tipo: 'string' },
+        { campo: 'horaReal', header: intl.formatMessage({ id: 'Hora real' }), tipo: 'string' },
+        { campo: 'detencion', header: intl.formatMessage({ id: 'Detencion' }), tipo: 'string' },
+        { campo: 'estado', header: intl.formatMessage({ id: 'Estado' }), tipo: 'string' },
     ]
 
     return (
         <div>
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Paradas de Envío' })}
+                headerCrud={intl.formatMessage({ id: 'Paradas de envio' })}
                 getRegistros={getEnvioParada}
                 getRegistrosCount={getEnvioParadaCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}

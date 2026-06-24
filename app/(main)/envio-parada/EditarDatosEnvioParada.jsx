@@ -12,6 +12,18 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
     const [lugaresParada, setLugaresParada] = useState([]);
     const [operarios, setOperarios] = useState([]);
 
+    const estadosParada = [
+        { label: 'Pendiente', value: 'Pendiente' },
+        { label: 'Completada', value: 'Completada' },
+        { label: 'Incidencia', value: 'Incidencia' },
+    ];
+
+    const tiposParada = [
+        { label: 'Origen', value: 'Origen' },
+        { label: 'Transito', value: 'Transito' },
+        { label: 'Destino', value: 'Destino' },
+    ];
+
     const opcionesEnvio = envios.map(envio => ({
         label: `${envio.id} - ${envio.origenRuta || 'Sin ruta'}`,
         value: envio.id
@@ -123,40 +135,51 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
     }));
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos para la parada de envío' })}>
-            <div className="formgrid grid">
+        <Fieldset legend={intl.formatMessage({ id: 'Datos para la parada de envio' })}>
+            <div className="p-fluid formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={envioParada.orden === '' || envioParada.orden === undefined ? null : envioParada.orden}
+                    <InputNumber
+                        value={envioParada.orden === '' || envioParada.orden === undefined ? null : envioParada.orden}
                         onChange={(e) => setEnvioParada({ ...envioParada, orden: e.value })}
-                        className={`${(estadoGuardando && (envioParada.orden === "" || envioParada.orden === null || envioParada.orden === undefined)) ? "p-invalid" : ""}`}
+                        className={`w-full ${(estadoGuardando && (envioParada.orden === "" || envioParada.orden === null || envioParada.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"
                         useGrouping={false}
                         min={0}
-                        inputStyle={{ textAlign: 'right' }} />
+                        inputStyle={{ textAlign: 'right' }}
+                    />
                 </div>
-                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
-                    <Dropdown value={envioParada.envioId || ""}
-                        onChange={(e) => setEnvioParada({ ...envioParada, envioId: e.value })}
-                        options={opcionesEnvio}
-                        className={`p-column-filter ${(estadoGuardando && (envioParada.envioId == null || envioParada.envioId === "")) ? "p-invalid" : ""}`}
-                        showClear
-                        placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
-                </div>)}
+
+                {!estoyDentroDeUnTab && (
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                        <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
+                        <Dropdown
+                            value={envioParada.envioId || ""}
+                            onChange={(e) => setEnvioParada({ ...envioParada, envioId: e.value })}
+                            options={opcionesEnvio}
+                            className={`w-full p-column-filter ${(estadoGuardando && (envioParada.envioId == null || envioParada.envioId === "")) ? "p-invalid" : ""}`}
+                            showClear
+                            placeholder={intl.formatMessage({ id: 'Selecciona un envio' })}
+                        />
+                    </div>
+                )}
+
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="fecha">{intl.formatMessage({ id: 'Fecha' })}</label>
-                    <InputText type="datetime-local"
-                        value={envioParada.fecha}
-                        placeholder={intl.formatMessage({ id: 'Fecha de la parada' })}
-                        onChange={(e) => setEnvioParada({ ...envioParada, fecha: e.target.value })}
-                        maxLength={20}
-                        style={{ textAlign: 'right' }} />
+                    <label htmlFor="tipo">{intl.formatMessage({ id: 'Tipo' })}</label>
+                    <Dropdown
+                        value={envioParada.tipo || ""}
+                        onChange={(e) => setEnvioParada({ ...envioParada, tipo: e.value })}
+                        options={tiposParada}
+                        className="w-full p-column-filter"
+                        showClear
+                        placeholder={intl.formatMessage({ id: 'Selecciona un tipo' })}
+                    />
                 </div>
             </div>
-            <div className="formgrid grid">
+
+            <div className="p-fluid formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="lugarParadaId"><b>{intl.formatMessage({ id: 'Lugar de parada' })}*</b></label>
+                    <label htmlFor="lugarParadaId"><b>{intl.formatMessage({ id: 'Punto' })}*</b></label>
                     <Dropdown
                         value={envioParada.lugarParadaId}
                         options={opcionesLugarParada}
@@ -164,25 +187,76 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                         placeholder={intl.formatMessage({ id: 'Seleccionar lugar de parada' })}
                         filter
                         showClear
-                        className={`${(estadoGuardando && !envioParada.lugarParadaId) ? "p-invalid" : ""}`}
+                        className={`w-full ${(estadoGuardando && !envioParada.lugarParadaId) ? "p-invalid" : ""}`}
                     />
                 </div>
+
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="lugarParadaGps"><b>{intl.formatMessage({ id: 'GPS de la parada' })}*</b></label>
-                    <InputText value={envioParada.lugarParadaGps}
+                    <label htmlFor="lugarParadaGps"><b>{intl.formatMessage({ id: 'Coordenadas' })}*</b></label>
+                    <InputText
+                        value={envioParada.lugarParadaGps || ""}
                         placeholder={intl.formatMessage({ id: 'Coordenadas GPS de la parada' })}
                         onChange={(e) => setEnvioParada({ ...envioParada, lugarParadaGps: e.target.value })}
-                        maxLength={50} />
+                        maxLength={50}
+                    />
                 </div>
+
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="direccion"><b>{intl.formatMessage({ id: 'Dirección' })}*</b></label>
-                    <InputText value={envioParada.direccion}
-                        placeholder={intl.formatMessage({ id: 'Dirección de la parada' })}
+                    <label htmlFor="direccion"><b>{intl.formatMessage({ id: 'Direccion' })}*</b></label>
+                    <InputText
+                        value={envioParada.direccion || ""}
+                        placeholder={intl.formatMessage({ id: 'Direccion de la parada' })}
                         onChange={(e) => setEnvioParada({ ...envioParada, direccion: e.target.value })}
-                        maxLength={50} />
+                        maxLength={50}
+                    />
                 </div>
             </div>
-            <div className="formgrid grid">
+
+            <div className="p-fluid formgrid grid">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="eta">{intl.formatMessage({ id: 'ETA' })}</label>
+                    <InputText
+                        type="datetime-local"
+                        value={envioParada.eta || envioParada.fecha || ""}
+                        onChange={(e) => setEnvioParada({ ...envioParada, eta: e.target.value, fecha: e.target.value })}
+                        maxLength={20}
+                    />
+                </div>
+
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="horaReal">{intl.formatMessage({ id: 'Hora real' })}</label>
+                    <InputText
+                        type="datetime-local"
+                        value={envioParada.horaReal || ""}
+                        onChange={(e) => setEnvioParada({ ...envioParada, horaReal: e.target.value })}
+                        maxLength={20}
+                    />
+                </div>
+
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="detencion">{intl.formatMessage({ id: 'Detencion' })}</label>
+                    <InputText
+                        value={envioParada.detencion || ""}
+                        placeholder={intl.formatMessage({ id: 'Tiempo de detencion' })}
+                        onChange={(e) => setEnvioParada({ ...envioParada, detencion: e.target.value })}
+                        maxLength={20}
+                    />
+                </div>
+            </div>
+
+            <div className="p-fluid formgrid grid">
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="estado">{intl.formatMessage({ id: 'Estado' })}</label>
+                    <Dropdown
+                        value={envioParada.estado || ""}
+                        onChange={(e) => setEnvioParada({ ...envioParada, estado: e.value })}
+                        options={estadosParada}
+                        className="w-full p-column-filter"
+                        showClear
+                        placeholder={intl.formatMessage({ id: 'Selecciona un estado' })}
+                    />
+                </div>
+
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="operarioId"><b>{intl.formatMessage({ id: 'Operario' })}*</b></label>
                     <Dropdown
@@ -192,23 +266,30 @@ const EditarDatosEnvioParada = ({ envioParada, setEnvioParada, estadoGuardando, 
                         placeholder={intl.formatMessage({ id: 'Seleccionar operario' })}
                         filter
                         showClear
-                        className={`${(estadoGuardando && !envioParada.operarioId) ? "p-invalid" : ""}`}
+                        className={`w-full ${(estadoGuardando && !envioParada.operarioId) ? "p-invalid" : ""}`}
                     />
                 </div>
+
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="telefonoOperario"><b>{intl.formatMessage({ id: 'Teléfono del operario' })}*</b></label>
-                    <InputText value={envioParada.telefonoOperario}
-                        placeholder={intl.formatMessage({ id: 'Teléfono del operario' })}
+                    <label htmlFor="telefonoOperario"><b>{intl.formatMessage({ id: 'Telefono del operario' })}*</b></label>
+                    <InputText
+                        value={envioParada.telefonoOperario || ""}
+                        placeholder={intl.formatMessage({ id: 'Telefono del operario' })}
                         onChange={(e) => setEnvioParada({ ...envioParada, telefonoOperario: e.target.value })}
                         maxLength={20}
-                        style={{ textAlign: 'right' }} />
+                    />
                 </div>
+            </div>
+
+            <div className="p-fluid formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="emailOperario"><b>{intl.formatMessage({ id: 'Email del operario' })}*</b></label>
-                    <InputText value={envioParada.emailOperario}
+                    <InputText
+                        value={envioParada.emailOperario || ""}
                         placeholder={intl.formatMessage({ id: 'Email del operario' })}
                         onChange={(e) => setEnvioParada({ ...envioParada, emailOperario: e.target.value })}
-                        maxLength={100} />
+                        maxLength={100}
+                    />
                 </div>
             </div>
         </Fieldset>

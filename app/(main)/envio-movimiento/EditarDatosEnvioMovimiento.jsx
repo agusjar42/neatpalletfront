@@ -12,10 +12,9 @@ const EditarDatosEnvioMovimiento = ({
     envioMovimiento,
     setEnvioMovimiento,
     estadoGuardando,
-    envios,
+    pallets,
     tiposSensor,
     estoyDentroDeUnTab,
-    envioPalletId,
 }) => {
     const intl = useIntl();
     const [previewImagen, setPreviewImagen] = React.useState(envioMovimiento.imagenBase64 || null);
@@ -25,9 +24,12 @@ const EditarDatosEnvioMovimiento = ({
         setPreviewImagen(envioMovimiento.imagenBase64 || null);
     }, [envioMovimiento.id, envioMovimiento.imagenBase64]);
 
-    const opcionesEnvioPallet = envios.map((envioPallet) => ({
-        label: `${envioPallet.id} - ${envioPallet.origenRuta || "Sin ruta"}${envioPallet.codigo ? ` - ${envioPallet.codigo}` : ""}${envioPallet.alias ? ` (${envioPallet.alias})` : ""}`,
-        value: envioPallet.id,
+    //
+    //Mostramos los mismos pallets que se usan en la pestana de contenido
+    //
+    const opcionesEnvioPallet = pallets.map((pallet) => ({
+        label: pallet.label || `${pallet.codigo} - ${pallet.alias || pallet.modelo || "Sin alias"}`,
+        value: pallet.id,
     }));
 
     const opcionesTipoSensor = tiposSensor
@@ -70,7 +72,7 @@ const EditarDatosEnvioMovimiento = ({
     };
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: "Datos para el movimiento de envío" })}>
+        <Fieldset legend={intl.formatMessage({ id: "Datos para el movimiento de envÃ­o" })}>
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden">
@@ -88,21 +90,20 @@ const EditarDatosEnvioMovimiento = ({
                     />
                 </div>
 
-                {!(estoyDentroDeUnTab && envioPalletId) && (
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="envioPalletId">
-                            <b>{intl.formatMessage({ id: "Envio Pallet" })}*</b>
-                        </label>
-                        <Dropdown
-                            value={envioMovimiento.envioPalletId || ""}
-                            onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, envioPalletId: e.value })}
-                            options={opcionesEnvioPallet}
-                            className={`p-column-filter ${estadoGuardando && (envioMovimiento.envioPalletId == null || envioMovimiento.envioPalletId === "") ? "p-invalid" : ""}`}
-                            showClear
-                            placeholder={intl.formatMessage({ id: "Selecciona un envío pallet" })}
-                        />
-                    </div>
-                )}
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="palletId">
+                        <b>{intl.formatMessage({ id: "Pallet" })}*</b>
+                    </label>
+                    <Dropdown
+                        value={envioMovimiento.palletId || ""}
+                        onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, palletId: e.value })}
+                        options={opcionesEnvioPallet}
+                        className={`p-column-filter ${estadoGuardando && (envioMovimiento.palletId == null || envioMovimiento.palletId === "") ? "p-invalid" : ""}`}
+                        showClear
+                        filter
+                        placeholder={intl.formatMessage({ id: "Selecciona un pallet" })}
+                    />
+                </div>
 
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="tipoSensorId">

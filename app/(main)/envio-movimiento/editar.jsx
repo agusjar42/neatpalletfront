@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { postEnvioMovimiento, patchEnvioMovimiento } from "@/app/api-endpoints/envio-movimiento";
-import { getEnvioPallet } from "@/app/api-endpoints/envio-pallet-usado";
+import { getEnvioContenido } from "@/app/api-endpoints/envio-contenido";
 import { getTipoSensor } from "@/app/api-endpoints/tipo-sensor";
 import "primeicons/primeicons.css";
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
@@ -27,36 +27,129 @@ const EditarEnvioMovimiento = ({
     const [envioMovimiento, setEnvioMovimiento] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
-    const [envios, setEnvios] = useState([]);
+    const [palletsConMovimiento, setPalletsConMovimiento] = useState([]);
+    const [pallets, setPallets] = useState([]);
     const [tiposSensor, setTiposSensor] = useState([]);
     const intl = useIntl();
 
+    //
+    //Resolvemos el envioId real para el movimiento
+    //
+    const obtenerEnvioId = (registroMovimiento) => {
+        const palletSeleccionado = palletsConMovimiento.find(
+            (item) => Number(item?.palletId) === Number(registroMovimiento?.palletId)
+        );
+
+        if (palletSeleccionado?.envioId !== undefined && palletSeleccionado?.envioId !== null) {
+            return palletSeleccionado.envioId;
+        }
+
+        if (registroMovimiento?.envioId !== undefined && registroMovimiento?.envioId !== null && registroMovimiento?.envioId !== "") {
+            return registroMovimiento.envioId;
+        }
+
+        if (envioId !== undefined && envioId !== null && envioId !== "") {
+            return envioId;
+        }
+
+        return null;
+    };
+
+    //
+    //Guardamos tambien envioPalletId en envio_movimiento usando el pallet seleccionado
+    //
+    const obtenerEnvioPalletId = (registroMovimiento) => {
+        if (registroMovimiento?.envioPalletId !== undefined && registroMovimiento?.envioPalletId !== null && registroMovimiento?.envioPalletId !== "") {
+            return registroMovimiento.envioPalletId;
+        }
+
+        if (registroMovimiento?.palletId !== undefined && registroMovimiento?.palletId !== null && registroMovimiento?.palletId !== "") {
+            return registroMovimiento.palletId;
+        }
+
+        if (envioPalletId !== undefined && envioPalletId !== null && envioPalletId !== "") {
+            return envioPalletId;
+        }
+
+        return null;
+    };
+
     useEffect(() => {
         const fetchData = async () => {
-            const dataEnviosPallet = await getEnvioPallet(
+            //
+            //Cargamos los pallets registrados en envio_contenido para el envio actual
+            //
+            const dataEnvioContenido = await getEnvioContenido(
                 JSON.stringify(envioId ? { where: { envioId: envioId } } : {})
             );
+            const mapaPallets = new Map();
+            (dataEnvioContenido || []).forEach((registro) => {
+                const palletId = registro?.palletId;
+                if (palletId === undefined || palletId === null || mapaPallets.has(String(palletId))) {
+                    return;
+                }
+
+                mapaPallets.set(String(palletId), {
+                    id: palletId,
+                    envioId: registro?.envioId,
+                    palletId: palletId,
+                    codigo: registro?.codigoPallet || `Pallet ${palletId}`,
+                    alias: registro?.aliasPallet || "",
+                    label: registro?.codigoPallet
+                        ? `${registro.codigoPallet}${registro?.aliasPallet ? ` - ${registro.aliasPallet}` : ""}`
+                        : `Pallet ${palletId}`,
+                });
+            });
+            const palletsContenido = Array.from(mapaPallets.values());
+            setPallets(palletsContenido);
+            setPalletsConMovimiento(palletsContenido);
+
+            //
+            //Cargamos los tipos de sensor para el desplegable
+            //
             const dataTiposSensor = await getTipoSensor(JSON.stringify({}));
-            setEnvios(dataEnviosPallet || []);
             setTiposSensor(dataTiposSensor || []);
 
+            //
+            //Preparamos el registro en edicion y resolvemos su pallet asociado
+            //
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
-                setEnvioMovimiento(registro);
+                if (registro) {
+                    const palletRegistro = palletsContenido.find(
+                        (item) =>
+                            Number(item?.palletId) === Number(registro?.palletId) ||
+                            Number(item?.palletId) === Number(registro?.envioPalletId)
+                    );
+
+                    setEnvioMovimiento({
+                        ...registro,
+                        palletId: registro?.palletId ?? palletRegistro?.palletId ?? registro?.envioPalletId ?? "",
+                    });
+                }
             } else {
-                setEnvioMovimiento(emptyRegistro);
+                setEnvioMovimiento({
+                    ...emptyRegistro,
+                    envioId: envioId ?? emptyRegistro?.envioId ?? "",
+                    palletId: emptyRegistro?.palletId ?? "",
+                });
             }
         };
         fetchData();
     }, [idEditar, rowData, envioId, emptyRegistro]);
 
     const validaciones = async () => {
-        const envioPalletIdFinal = estoyDentroDeUnTab && envioPalletId ? envioPalletId : envioMovimiento.envioPalletId;
-        const validaEnvioPalletId = envioPalletIdFinal === undefined || envioPalletIdFinal === "";
+        //
+        //Resolvemos el envioId a partir del pallet seleccionado
+        //
+        const envioIdFinal = obtenerEnvioId(envioMovimiento);
+        const validaPalletId = envioMovimiento.palletId === undefined || envioMovimiento.palletId === null || envioMovimiento.palletId === "";
+        const validaEnvioId = envioIdFinal === undefined || envioIdFinal === null || envioIdFinal === "";
+        const validaEnvioPalletId = obtenerEnvioPalletId(envioMovimiento) === undefined || obtenerEnvioPalletId(envioMovimiento) === null || obtenerEnvioPalletId(envioMovimiento) === "";
         const validaTipoSensorId = envioMovimiento.tipoSensorId === undefined || envioMovimiento.tipoSensorId === "";
         const validaOrden =
             envioMovimiento.orden === undefined || envioMovimiento.orden === null || envioMovimiento.orden === "";
-        return !validaEnvioPalletId && !validaTipoSensorId && !validaOrden;
+        return !validaPalletId && !validaEnvioId && !validaEnvioPalletId && !validaTipoSensorId && !validaOrden;
     };
 
     const guardarEnvioMovimiento = async () => {
@@ -65,15 +158,21 @@ const EditarEnvioMovimiento = ({
 
         if (await validaciones()) {
             let objGuardar = { ...envioMovimiento };
-            if (estoyDentroDeUnTab && envioPalletId) {
-                objGuardar.envioPalletId = envioPalletId;
-            }
+
+            //
+            //Guardamos siempre el envioId real del movimiento
+            //
+            objGuardar.envioId = obtenerEnvioId(objGuardar);
+            objGuardar.envioPalletId = obtenerEnvioPalletId(objGuardar);
 
             const usuarioActual = getUsuarioSesion()?.id;
 
             delete objGuardar.origenRuta;
             delete objGuardar.codigo;
             delete objGuardar.alias;
+            delete objGuardar.codigoPallet;
+            delete objGuardar.aliasPallet;
+            delete objGuardar.palletId;
             delete objGuardar.nombreSensor;
             delete objGuardar.fechaEspanol;
             delete objGuardar.nombreTipoSensor;
@@ -115,10 +214,15 @@ const EditarEnvioMovimiento = ({
                 setRegistroResult("editado");
             }
         } else {
+            const envioIdFinal = obtenerEnvioId(envioMovimiento);
+            const envioPalletIdFinal = obtenerEnvioPalletId(envioMovimiento);
+            const faltaPalletAsignado = (!envioIdFinal || !envioPalletIdFinal) && envioMovimiento?.palletId;
             toast.current?.show({
                 severity: "error",
                 summary: "ERROR",
-                detail: intl.formatMessage({ id: "Todos los campos deben de ser rellenados" }),
+                detail: faltaPalletAsignado
+                    ? intl.formatMessage({ id: "El pallet seleccionado no esta asignado a este envio" })
+                    : intl.formatMessage({ id: "Todos los campos deben de ser rellenados" }),
                 life: 3000,
             });
         }
@@ -150,10 +254,9 @@ const EditarEnvioMovimiento = ({
                             envioMovimiento={envioMovimiento}
                             setEnvioMovimiento={setEnvioMovimiento}
                             estadoGuardando={estadoGuardando}
-                            envios={envios}
+                            pallets={pallets}
                             tiposSensor={tiposSensor}
                             estoyDentroDeUnTab={estoyDentroDeUnTab}
-                            envioPalletId={envioPalletId}
                         />
 
                         <div className="flex justify-content-end mt-2">

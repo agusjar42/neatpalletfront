@@ -2271,14 +2271,14 @@
     },
     "/envio-movimientos/count": {
       "get": {
-        "x-controller-name": "EnvioPalletMovimientoController",
+        "x-controller-name": "EnvioMovimientoController",
         "x-operation-name": "count",
         "tags": [
-          "EnvioPalletMovimientoController"
+          "EnvioMovimientoController"
         ],
         "responses": {
           "200": {
-            "description": "EnvioPalletMovimiento model count",
+            "description": "EnvioMovimiento model count",
             "content": {
               "application/json": {
                 "schema": {
@@ -2296,23 +2296,23 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "title": "EnvioPalletMovimiento.WhereFilter",
+                  "title": "EnvioMovimiento.WhereFilter",
                   "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<EnvioPalletMovimiento>"
+                  "x-typescript-type": "@loopback/repository#Where<EnvioMovimiento>"
                 }
               }
             }
           }
         ],
-        "operationId": "EnvioPalletMovimientoController.count"
+        "operationId": "EnvioMovimientoController.count"
       }
     },
     "/envio-movimientos/{id}": {
       "patch": {
-        "x-controller-name": "EnvioPalletMovimientoController",
+        "x-controller-name": "EnvioMovimientoController",
         "x-operation-name": "updateById",
         "tags": [
-          "EnvioPalletMovimientoController"
+          "EnvioMovimientoController"
         ],
         "responses": {
           "204": {
@@ -2320,7 +2320,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "EnvioPalletMovimiento PATCH success"
+                  "description": "EnvioMovimiento PATCH success"
                 }
               }
             }
@@ -2340,27 +2340,27 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EnvioPalletMovimientoPartial"
+                "$ref": "#/components/schemas/EnvioMovimientoPartial"
               }
             }
           },
           "x-parameter-index": 1
         },
-        "operationId": "EnvioPalletMovimientoController.updateById"
+        "operationId": "EnvioMovimientoController.updateById"
       },
       "get": {
-        "x-controller-name": "EnvioPalletMovimientoController",
+        "x-controller-name": "EnvioMovimientoController",
         "x-operation-name": "findById",
         "tags": [
-          "EnvioPalletMovimientoController"
+          "EnvioMovimientoController"
         ],
         "responses": {
           "200": {
-            "description": "EnvioPalletMovimiento model instance",
+            "description": "EnvioMovimiento model instance",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EnvioPalletMovimientoWithRelations"
+                  "$ref": "#/components/schemas/EnvioMovimientoWithRelations"
                 }
               }
             }
@@ -2381,19 +2381,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EnvioPalletMovimiento.Filter"
+                  "$ref": "#/components/schemas/EnvioMovimiento.Filter"
                 }
               }
             }
           }
         ],
-        "operationId": "EnvioPalletMovimientoController.findById"
+        "operationId": "EnvioMovimientoController.findById"
       },
       "delete": {
-        "x-controller-name": "EnvioPalletMovimientoController",
+        "x-controller-name": "EnvioMovimientoController",
         "x-operation-name": "deleteById",
         "tags": [
-          "EnvioPalletMovimientoController"
+          "EnvioMovimientoController"
         ],
         "responses": {
           "204": {
@@ -2401,7 +2401,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "EnvioPalletMovimiento DELETE success"
+                  "description": "EnvioMovimiento DELETE success"
                 }
               }
             }
@@ -2417,23 +2417,23 @@
             "required": true
           }
         ],
-        "operationId": "EnvioPalletMovimientoController.deleteById"
+        "operationId": "EnvioMovimientoController.deleteById"
       }
     },
     "/envio-movimientos": {
       "post": {
-        "x-controller-name": "EnvioPalletMovimientoController",
+        "x-controller-name": "EnvioMovimientoController",
         "x-operation-name": "create",
         "tags": [
-          "EnvioPalletMovimientoController"
+          "EnvioMovimientoController"
         ],
         "responses": {
           "200": {
-            "description": "EnvioPalletMovimiento model instance",
+            "description": "EnvioMovimiento model instance",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EnvioPalletMovimiento"
+                  "$ref": "#/components/schemas/EnvioMovimiento"
                 }
               }
             }
@@ -2443,28 +2443,28 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewEnvioPalletMovimiento"
+                "$ref": "#/components/schemas/NewEnvioMovimiento"
               }
             }
           }
         },
-        "operationId": "EnvioPalletMovimientoController.create"
+        "operationId": "EnvioMovimientoController.create"
       },
       "get": {
-        "x-controller-name": "EnvioPalletMovimientoController",
+        "x-controller-name": "EnvioMovimientoController",
         "x-operation-name": "find",
         "tags": [
-          "EnvioPalletMovimientoController"
+          "EnvioMovimientoController"
         ],
         "responses": {
           "200": {
-            "description": "Array of EnvioPalletMovimiento model instances",
+            "description": "Array of EnvioMovimiento model instances",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/EnvioPalletMovimientoWithRelations"
+                    "$ref": "#/components/schemas/EnvioMovimientoWithRelations"
                   }
                 }
               }
@@ -2478,13 +2478,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EnvioPalletMovimiento.Filter1"
+                  "$ref": "#/components/schemas/EnvioMovimiento.Filter1"
                 }
               }
             }
           }
         ],
-        "operationId": "EnvioPalletMovimientoController.find"
+        "operationId": "EnvioMovimientoController.find"
       }
     },
     "/envio-pallets/count": {
@@ -13116,6 +13116,9 @@
           "fechaSalida": {
             "type": "string"
           },
+          "estadoEnvio": {
+            "type": "string"
+          },
           "paradasPrevistas": {
             "type": "number"
           },
@@ -13192,214 +13195,18 @@
         "additionalProperties": false,
         "x-typescript-type": "EnvioSensorWithRelations"
       },
-      "ParametroWithRelations": {
-        "title": "ParametroWithRelations",
+      "EnvioMovimientoWithRelations": {
+        "title": "EnvioMovimientoWithRelations",
         "type": "object",
-        "description": "(tsType: ParametroWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "nombre": {
-            "type": "string"
-          },
-          "valorDisponible": {
-            "type": "string"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "activoSn": {
-            "type": "string"
-          },
-          "orden": {
-            "type": "number"
-          },
-          "palletParametros": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PalletParametroWithRelations"
-            }
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "ParametroWithRelations"
-      },
-      "PalletParametroWithRelations": {
-        "title": "PalletParametroWithRelations",
-        "type": "object",
-        "description": "(tsType: PalletParametroWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "palletId": {
-            "type": "number"
-          },
-          "parametroId": {
-            "type": "number"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "textoLibre": {
-            "type": "string"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          },
-          "pallet": {
-            "$ref": "#/components/schemas/PalletWithRelations"
-          },
-          "foreignKey": {},
-          "parametro": {
-            "$ref": "#/components/schemas/ParametroWithRelations"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "PalletParametroWithRelations"
-      },
-      "PalletWithRelations": {
-        "title": "PalletWithRelations",
-        "type": "object",
-        "description": "(tsType: PalletWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "fechaImpresion": {
-            "type": "string"
-          },
-          "adquisicion": {
-            "type": "string"
-          },
-          "codigo": {
-            "type": "string"
-          },
-          "alias": {
-            "type": "string"
-          },
-          "periodoEnvioMail": {
-            "type": "number"
-          },
-          "medidas": {
-            "type": "string"
-          },
-          "modelo": {
-            "type": "string"
-          },
-          "estado": {
-            "type": "string"
-          },
-          "ultimaSenal": {
-            "type": "string"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          },
-          "envioPallets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EnvioPalletWithRelations"
-            }
-          },
-          "palletParametros": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PalletParametroWithRelations"
-            }
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "PalletWithRelations"
-      },
-      "EnvioPalletWithRelations": {
-        "title": "EnvioPalletWithRelations",
-        "type": "object",
-        "description": "(tsType: EnvioPalletWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "palletId": {
-            "type": "number"
-          },
-          "envioId": {
-            "type": "number"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "pallet": {
-            "$ref": "#/components/schemas/PalletWithRelations"
-          },
-          "foreignKey": {},
-          "envio": {
-            "$ref": "#/components/schemas/EnvioWithRelations"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "EnvioPalletWithRelations"
-      },
-      "EnvioPalletMovimientoWithRelations": {
-        "title": "EnvioPalletMovimientoWithRelations",
-        "type": "object",
-        "description": "(tsType: EnvioPalletMovimientoWithRelations, schemaOptions: { includeRelations: true })",
+        "description": "(tsType: EnvioMovimientoWithRelations, schemaOptions: { includeRelations: true })",
         "properties": {
           "id": {
             "type": "number"
           },
           "tipoSensorId": {
+            "type": "number"
+          },
+          "envioId": {
             "type": "number"
           },
           "envioPalletId": {
@@ -13450,12 +13257,12 @@
             "$ref": "#/components/schemas/TipoSensorWithRelations"
           },
           "foreignKey": {},
-          "envioPallet": {
-            "$ref": "#/components/schemas/EnvioPalletWithRelations"
+          "envio": {
+            "$ref": "#/components/schemas/EnvioWithRelations"
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "EnvioPalletMovimientoWithRelations"
+        "x-typescript-type": "EnvioMovimientoWithRelations"
       },
       "TipoSensorWithRelations": {
         "title": "TipoSensorWithRelations",
@@ -13497,10 +13304,10 @@
               "$ref": "#/components/schemas/EnvioSensorWithRelations"
             }
           },
-          "envioPalletMovimientos": {
+          "envioMovimientos": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EnvioPalletMovimientoWithRelations"
+              "$ref": "#/components/schemas/EnvioMovimientoWithRelations"
             }
           }
         },
@@ -15187,6 +14994,205 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Omit<Parametro, 'id'>"
+      },
+      "EnvioPalletWithRelations": {
+        "title": "EnvioPalletWithRelations",
+        "type": "object",
+        "description": "(tsType: EnvioPalletWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          },
+          "envioId": {
+            "type": "number"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pallet": {
+            "$ref": "#/components/schemas/PalletWithRelations"
+          },
+          "foreignKey": {},
+          "envio": {
+            "$ref": "#/components/schemas/EnvioWithRelations"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "EnvioPalletWithRelations"
+      },
+      "PalletWithRelations": {
+        "title": "PalletWithRelations",
+        "type": "object",
+        "description": "(tsType: PalletWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "fechaImpresion": {
+            "type": "string"
+          },
+          "adquisicion": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "periodoEnvioMail": {
+            "type": "number"
+          },
+          "medidas": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "ultimaSenal": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "envioPallets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnvioPalletWithRelations"
+            }
+          },
+          "palletParametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PalletParametroWithRelations"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "PalletWithRelations"
+      },
+      "PalletParametroWithRelations": {
+        "title": "PalletParametroWithRelations",
+        "type": "object",
+        "description": "(tsType: PalletParametroWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "palletId": {
+            "type": "number"
+          },
+          "parametroId": {
+            "type": "number"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "textoLibre": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "pallet": {
+            "$ref": "#/components/schemas/PalletWithRelations"
+          },
+          "foreignKey": {},
+          "parametro": {
+            "$ref": "#/components/schemas/ParametroWithRelations"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "PalletParametroWithRelations"
+      },
+      "ParametroWithRelations": {
+        "title": "ParametroWithRelations",
+        "type": "object",
+        "description": "(tsType: ParametroWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "valorDisponible": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "palletParametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PalletParametroWithRelations"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "ParametroWithRelations"
       },
       "ParametroPartial": {
         "title": "ParametroPartial",
@@ -17067,178 +17073,6 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<EnvioParada>"
       },
-      "EnvioPalletMovimiento": {
-        "title": "EnvioPalletMovimiento",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "tipoSensorId": {
-            "type": "number"
-          },
-          "envioPalletId": {
-            "type": "number"
-          },
-          "fecha": {
-            "type": "string"
-          },
-          "gps": {
-            "type": "string"
-          },
-          "imagen": {
-            "type": "string"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "imagenBase64": {
-            "type": "string",
-            "maxLength": 10000000
-          },
-          "imagenNombre": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "imagenTipo": {
-            "type": "string",
-            "maxLength": 50
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          }
-        },
-        "additionalProperties": false
-      },
-      "NewEnvioPalletMovimiento": {
-        "title": "NewEnvioPalletMovimiento",
-        "type": "object",
-        "description": "(tsType: Omit<EnvioPalletMovimiento, 'id'>, schemaOptions: { title: 'NewEnvioPalletMovimiento', exclude: [ 'id' ] })",
-        "properties": {
-          "tipoSensorId": {
-            "type": "number"
-          },
-          "envioPalletId": {
-            "type": "number"
-          },
-          "fecha": {
-            "type": "string"
-          },
-          "gps": {
-            "type": "string"
-          },
-          "imagen": {
-            "type": "string"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "imagenBase64": {
-            "type": "string",
-            "maxLength": 10000000
-          },
-          "imagenNombre": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "imagenTipo": {
-            "type": "string",
-            "maxLength": 50
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<EnvioPalletMovimiento, 'id'>"
-      },
-      "EnvioPalletMovimientoPartial": {
-        "title": "EnvioPalletMovimientoPartial",
-        "type": "object",
-        "description": "(tsType: Partial<EnvioPalletMovimiento>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "tipoSensorId": {
-            "type": "number"
-          },
-          "envioPalletId": {
-            "type": "number"
-          },
-          "fecha": {
-            "type": "string"
-          },
-          "gps": {
-            "type": "string"
-          },
-          "imagen": {
-            "type": "string"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "imagenBase64": {
-            "type": "string",
-            "maxLength": 10000000
-          },
-          "imagenNombre": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "imagenTipo": {
-            "type": "string",
-            "maxLength": 50
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<EnvioPalletMovimiento>"
-      },
       "EnvioPallet": {
         "title": "EnvioPallet",
         "type": "object",
@@ -17329,6 +17163,187 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<EnvioPallet>"
+      },
+      "EnvioMovimiento": {
+        "title": "EnvioMovimiento",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "envioId": {
+            "type": "number"
+          },
+          "envioPalletId": {
+            "type": "number"
+          },
+          "fecha": {
+            "type": "string"
+          },
+          "gps": {
+            "type": "string"
+          },
+          "imagen": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "imagenBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "imagenNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "imagenTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewEnvioMovimiento": {
+        "title": "NewEnvioMovimiento",
+        "type": "object",
+        "description": "(tsType: Omit<EnvioMovimiento, 'id'>, schemaOptions: { title: 'NewEnvioMovimiento', exclude: [ 'id' ] })",
+        "properties": {
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "envioId": {
+            "type": "number"
+          },
+          "envioPalletId": {
+            "type": "number"
+          },
+          "fecha": {
+            "type": "string"
+          },
+          "gps": {
+            "type": "string"
+          },
+          "imagen": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "imagenBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "imagenNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "imagenTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<EnvioMovimiento, 'id'>"
+      },
+      "EnvioMovimientoPartial": {
+        "title": "EnvioMovimientoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<EnvioMovimiento>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "envioId": {
+            "type": "number"
+          },
+          "envioPalletId": {
+            "type": "number"
+          },
+          "fecha": {
+            "type": "string"
+          },
+          "gps": {
+            "type": "string"
+          },
+          "imagen": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "imagenBase64": {
+            "type": "string",
+            "maxLength": 10000000
+          },
+          "imagenNombre": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "imagenTipo": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<EnvioMovimiento>"
       },
       "EnvioContenido": {
         "title": "EnvioContenido",
@@ -18027,6 +18042,9 @@
           "fechaSalida": {
             "type": "string"
           },
+          "estadoEnvio": {
+            "type": "string"
+          },
           "paradasPrevistas": {
             "type": "number"
           },
@@ -18080,6 +18098,9 @@
             "type": "string"
           },
           "fechaSalida": {
+            "type": "string"
+          },
+          "estadoEnvio": {
             "type": "string"
           },
           "paradasPrevistas": {
@@ -18185,6 +18206,9 @@
             "type": "string"
           },
           "fechaSalida": {
+            "type": "string"
+          },
+          "estadoEnvio": {
             "type": "string"
           },
           "paradasPrevistas": {
@@ -20793,7 +20817,7 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<EnvioContenidoPallet>"
       },
-      "EnvioPalletMovimiento.ScopeFilter": {
+      "EnvioMovimiento.ScopeFilter": {
         "type": "object",
         "properties": {
           "offset": {
@@ -20852,27 +20876,27 @@
           }
         },
         "additionalProperties": false,
-        "title": "EnvioPalletMovimiento.ScopeFilter"
+        "title": "EnvioMovimiento.ScopeFilter"
       },
-      "EnvioPalletMovimiento.IncludeFilter.Items": {
-        "title": "EnvioPalletMovimiento.IncludeFilter.Items",
+      "EnvioMovimiento.IncludeFilter.Items": {
+        "title": "EnvioMovimiento.IncludeFilter.Items",
         "type": "object",
         "properties": {
           "relation": {
             "type": "string",
             "enum": [
               "tipoSensor",
-              "envioPallet"
+              "envio"
             ]
           },
           "scope": {
-            "$ref": "#/components/schemas/EnvioPalletMovimiento.ScopeFilter"
+            "$ref": "#/components/schemas/EnvioMovimiento.ScopeFilter"
           }
         }
       },
-      "EnvioPalletMovimiento.Filter": {
+      "EnvioMovimiento.Filter": {
         "type": "object",
-        "title": "EnvioPalletMovimiento.Filter",
+        "title": "EnvioMovimiento.Filter",
         "properties": {
           "offset": {
             "type": "integer",
@@ -20909,6 +20933,9 @@
                     "type": "boolean"
                   },
                   "tipoSensorId": {
+                    "type": "boolean"
+                  },
+                  "envioId": {
                     "type": "boolean"
                   },
                   "envioPalletId": {
@@ -20960,6 +20987,7 @@
                   "enum": [
                     "id",
                     "tipoSensorId",
+                    "envioId",
                     "envioPalletId",
                     "fecha",
                     "gps",
@@ -20979,15 +21007,15 @@
                 "uniqueItems": true
               }
             ],
-            "title": "EnvioPalletMovimiento.Fields"
+            "title": "EnvioMovimiento.Fields"
           },
           "include": {
-            "title": "EnvioPalletMovimiento.IncludeFilter",
+            "title": "EnvioMovimiento.IncludeFilter",
             "type": "array",
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/EnvioPalletMovimiento.IncludeFilter.Items"
+                  "$ref": "#/components/schemas/EnvioMovimiento.IncludeFilter.Items"
                 },
                 {
                   "type": "string"
@@ -20997,11 +21025,11 @@
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<EnvioPalletMovimiento>"
+        "x-typescript-type": "@loopback/repository#Filter<EnvioMovimiento>"
       },
-      "EnvioPalletMovimiento.Filter1": {
+      "EnvioMovimiento.Filter1": {
         "type": "object",
-        "title": "EnvioPalletMovimiento.Filter",
+        "title": "EnvioMovimiento.Filter",
         "properties": {
           "offset": {
             "type": "integer",
@@ -21030,7 +21058,7 @@
             ]
           },
           "where": {
-            "title": "EnvioPalletMovimiento.WhereFilter",
+            "title": "EnvioMovimiento.WhereFilter",
             "type": "object",
             "additionalProperties": true
           },
@@ -21043,6 +21071,9 @@
                     "type": "boolean"
                   },
                   "tipoSensorId": {
+                    "type": "boolean"
+                  },
+                  "envioId": {
                     "type": "boolean"
                   },
                   "envioPalletId": {
@@ -21094,6 +21125,7 @@
                   "enum": [
                     "id",
                     "tipoSensorId",
+                    "envioId",
                     "envioPalletId",
                     "fecha",
                     "gps",
@@ -21113,15 +21145,15 @@
                 "uniqueItems": true
               }
             ],
-            "title": "EnvioPalletMovimiento.Fields"
+            "title": "EnvioMovimiento.Fields"
           },
           "include": {
-            "title": "EnvioPalletMovimiento.IncludeFilter",
+            "title": "EnvioMovimiento.IncludeFilter",
             "type": "array",
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/EnvioPalletMovimiento.IncludeFilter.Items"
+                  "$ref": "#/components/schemas/EnvioMovimiento.IncludeFilter.Items"
                 },
                 {
                   "type": "string"
@@ -21131,7 +21163,7 @@
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<EnvioPalletMovimiento>"
+        "x-typescript-type": "@loopback/repository#Filter<EnvioMovimiento>"
       },
       "EnvioPallet.ScopeFilter": {
         "type": "object",
@@ -22573,6 +22605,9 @@
                   "fechaSalida": {
                     "type": "boolean"
                   },
+                  "estadoEnvio": {
+                    "type": "boolean"
+                  },
                   "paradasPrevistas": {
                     "type": "boolean"
                   },
@@ -22609,6 +22644,7 @@
                     "destinoRuta",
                     "gpsRutaDestino",
                     "fechaSalida",
+                    "estadoEnvio",
                     "paradasPrevistas",
                     "usuarioCreacion",
                     "fechaCreacion",
@@ -22711,6 +22747,9 @@
                   "fechaSalida": {
                     "type": "boolean"
                   },
+                  "estadoEnvio": {
+                    "type": "boolean"
+                  },
                   "paradasPrevistas": {
                     "type": "boolean"
                   },
@@ -22747,6 +22786,7 @@
                     "destinoRuta",
                     "gpsRutaDestino",
                     "fechaSalida",
+                    "estadoEnvio",
                     "paradasPrevistas",
                     "usuarioCreacion",
                     "fechaCreacion",
@@ -26918,7 +26958,7 @@
             "type": "string",
             "enum": [
               "envioSensores",
-              "envioPalletMovimientos"
+              "envioMovimientos"
             ]
           },
           "scope": {

@@ -17,13 +17,14 @@ import { getTipoCarroceria, getTipoCarroceriaCount, deleteTipoCarroceria } from 
 import { getTipoTransporte, getTipoTransporteCount, deleteTipoTransporte } from "@/app/api-endpoints/empresa-tipo-transporte";
 import { getEventoConfiguracion, getEventoConfiguracionCount } from "@/app/api-endpoints/evento-configuracion";
 import { getEnvioContenido, getEnvioContenidoCount, deleteEnvioContenido } from "@/app/api-endpoints/envio-contenido";
-import { getEnvioMovimiento } from "@/app/api-endpoints/envio-movimiento";
+import { getEnvioMovimiento, getEnvioMovimientoCount, deleteEnvioMovimiento } from "@/app/api-endpoints/envio-movimiento";
 import { getEnvioParada } from "@/app/api-endpoints/envio-parada";
 import { getEnvioSensor } from "@/app/api-endpoints/envio-sensor";
 import EditarUsuario from "../../usuarios/editar";
 import EditarCliente from "../../cliente/editar";
 import EditarProducto from "../../producto/editar";
 import EditarEnvioContenido from "../../envio-contenido/editar";
+import EditarEnvioMovimiento from "../../envio-movimiento/editar";
 import EditarEnvioSensorEmpresa from "../../envio-sensor-empresa/editar";
 import EditarTipoCarroceria from "../../tipo-carroceria/editar";
 import EditarTipoTransporte from "../../tipo-transporte/editar";
@@ -130,6 +131,13 @@ const columnasEnvioContenidoDetalle = [
     { campo: "pesoKgs", header: "Peso/ud.", tipo: "number" },
     { campo: "cantidad", header: "Unidades", tipo: "number" },
     { campo: "pesoTotal", header: "Peso total", tipo: "number" },
+];
+
+const columnasEnvioMovimientoDetalle = [
+    { campo: "fechaEspanol", header: "Fecha", tipo: "date" },
+    { campo: "nombreSensor", header: "Sensor", tipo: "string" },
+    { campo: "valor", header: "Valor", tipo: "string" },
+    { campo: "gps", header: "GPS", tipo: "string" },
 ];
 
 const columnasSensorEmpresa = [
@@ -950,6 +958,7 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
     const [sensores, setSensores] = useState([]);
     const [informePallets, setInformePallets] = useState([]);
     const [refreshContenido, setRefreshContenido] = useState(0);
+    const [refreshMovimientos, setRefreshMovimientos] = useState(0);
     const [modalDetalleRegistro, setModalDetalleRegistro] = useState({ visible: false, accion: "ver", seccion: "", registro: null });
 
     useEffect(() => {
@@ -977,7 +986,7 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
             setSensores(Array.isArray(sensoresData) && sensoresData.length > 0 ? sensoresData : construirSensoresFallback());
             setInformePallets(Array.isArray(resumenData) && resumenData.length > 0 ? resumenData : resumenEnvioFallback);
         });
-    }, [envioActivo?.id, refreshContenido]);
+    }, [envioActivo?.id, refreshContenido, refreshMovimientos]);
 
     if (!envioActivo) {
         return <div className="empresa-profile-card empresa-empty-state">No se ha encontrado el envio seleccionado.</div>;
@@ -1093,7 +1102,36 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
                         />
                     </article>
                 ) : null}
-                {detalleTabActiva === "Movimientos" ? <EnvioMovimientosTab movimientos={movimientos} onAbrirModal={abrirModalDetalleRegistro} /> : null}
+                {detalleTabActiva === "Movimientos" ? (
+                    <article className="envio-panel">
+                        <Crud
+                            key={`detalle-envio-movimientos-${envioActivo.id}-${refreshMovimientos}`}
+                            headerCrud="Movimientos"
+                            getRegistros={getEnvioMovimiento}
+                            getRegistrosCount={getEnvioMovimientoCount}
+                            botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV", "generarGrafico"]}
+                            controlador="Envio Movimiento"
+                            editarComponente={<EditarEnvioMovimiento />}
+                            columnas={columnasEnvioMovimientoDetalle}
+                            filtradoBase={{ envioId: envioActivo.id }}
+                            deleteRegistro={deleteEnvioMovimiento}
+                            cargarDatosInicialmente={true}
+                            mostrarEdicionEnModal={true}
+                            modalEdicionProps={{
+                                showHeader: false,
+                                className: "neat-crud-edit-dialog envio-registro-dialog",
+                                style: { width: "min(760px, 92vw)" },
+                            }}
+                            onDataChange={() => setRefreshMovimientos(prev => prev + 1)}
+                            editarComponenteParametrosExtra={{
+                                envioId: envioActivo.id,
+                                estoyDentroDeUnTab: true,
+                                ocultarClienteResumenHeader: true,
+                                onDataChange: () => setRefreshMovimientos(prev => prev + 1),
+                            }}
+                        />
+                    </article>
+                ) : null}
                 {detalleTabActiva === "Paradas" ? <EnvioParadasTab paradas={paradas} onAbrirModal={abrirModalDetalleRegistro} /> : null}
                 {detalleTabActiva === "Sensores" ? <EnvioSensoresTab sensores={sensores} onAbrirModal={abrirModalDetalleRegistro} /> : null}
                 {detalleTabActiva === "Operarios" ? <EnvioOperariosTab operarios={operariosEnvioFallback} onAbrirModal={abrirModalDetalleRegistro} /> : null}

@@ -1055,7 +1055,7 @@ const EmpresaEnvioDetalle = ({ idEditar, setIdEditar, rowData = [] }) => {
             <section className="empresa-profile-card envio-detalle-card">
                 <button className="empresa-back-button envio-volver-boton" type="button" onClick={() => setIdEditar(null)}>
                     <i className="pi pi-chevron-left" aria-hidden="true"></i>
-                    Volver a envios
+                    Volver
                 </button>
 
                 <div className="envio-detalle-heading">

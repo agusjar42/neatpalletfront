@@ -1,42 +1,39 @@
 import React from "react";
-import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { useIntl } from 'react-intl';
 
 const EditarDatosTraduccion = ({ traduccion, setTraduccion, estadoGuardando, idiomas }) => {
     const intl = useIntl();
 
-
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos para la traducción' })}>	
-            <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-12">
-                    <label htmlFor="clave"> <b>{intl.formatMessage({ id: 'Clave' })}*</b> </label>
-                    <InputText value={traduccion.clave}
-                        placeholder={intl.formatMessage({ id: 'Clave de la traducción' })}
-                        onChange={(e) => setTraduccion({ ...traduccion, clave: e.target.value })}
-                        className={`${(estadoGuardando && traduccion.clave === "") ? "p-invalid" : ""}`}
-                        rows={5} cols={30}
-                        disabled={true} />
-                </div>
-
-                {idiomas.map(idioma => (
-                    <div key={idioma.id} className="flex flex-column field gap-2 mt-2 col-12 lg:col-12">
-                        <label htmlFor={`valor-${idioma.nombre}`}>{idioma.nombre}</label>
-                        <InputText 
-                            value={traduccion[idioma.nombre.toLowerCase()] || ''}
-                            placeholder={intl.formatMessage({ id: 'Valor de la traducción en' }) + ' ' + idioma.nombre.toLowerCase()}
-                            onChange={(e) => setTraduccion({ 
-                                ...traduccion, 
-                                [idioma.nombre.toLowerCase()]: e.target.value 
-                            })}
-                            rows={5} 
-                            cols={30} 
-                        />
-                    </div>
-                ))}
+        <div className="catalogo-edit-form-grid catalogo-edit-form-grid-wide">
+            <div className="catalogo-edit-field catalogo-edit-field-full">
+                <label htmlFor="clave" style={{ color: "black" }}>
+                    <b>{intl.formatMessage({ id: 'Clave' })}*</b>
+                </label>
+                <InputText
+                    value={traduccion.clave || ""}
+                    placeholder={intl.formatMessage({ id: 'Clave de la traduccion' })}
+                    onChange={(e) => setTraduccion({ ...traduccion, clave: e.target.value })}
+                    className={`${(estadoGuardando && (traduccion.clave || "") === "") ? "p-invalid" : ""}`}
+                    disabled={true}
+                />
             </div>
-        </Fieldset>
+
+            {idiomas.map((idioma) => (
+                <div key={idioma.id} className="catalogo-edit-field catalogo-edit-field-full">
+                    <label htmlFor={`valor-${idioma.nombre}`}>{idioma.nombre}</label>
+                    <InputText
+                        value={traduccion[idioma.nombre.toLowerCase()] || ''}
+                        placeholder={`${intl.formatMessage({ id: 'Valor de la traduccion en' })} ${idioma.nombre.toLowerCase()}`}
+                        onChange={(e) => setTraduccion({
+                            ...traduccion,
+                            [idioma.nombre.toLowerCase()]: e.target.value
+                        })}
+                    />
+                </div>
+            ))}
+        </div>
     );
 };
 

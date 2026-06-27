@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import { Fieldset } from 'primereact/fieldset';
+import React from "react";
 import { InputText } from 'primereact/inputtext';
-import { Dropdown } from 'primereact/dropdown';
 import { InputSwitch } from 'primereact/inputswitch';
 import { InputNumber } from "primereact/inputnumber";
-import { AutoComplete } from "primereact/autocomplete";
 import { useIntl } from 'react-intl';
+
 const EditarDatosPais = ({ pais, setPais, estadoGuardando }) => {
     const intl = useIntl();
 
@@ -17,46 +15,51 @@ const EditarDatosPais = ({ pais, setPais, estadoGuardando }) => {
         setPais(_paischeck);
     };
 
-
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos para el pais' })}>
-            <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={pais.orden === '' || pais.orden === undefined ? null : pais.orden}
-                        onChange={(e) => setPais({ ...pais, orden: e.value })}
-                        className={`${(estadoGuardando && (pais.orden === "" || pais.orden === null || pais.orden === undefined)) ? "p-invalid" : ""}`}
-                        mode="decimal"
-                        useGrouping={false}
-                        min={0}
-                        inputStyle={{ textAlign: 'right' }} />
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="paisNombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
-                    <InputText value={pais.nombre}
-                        placeholder={intl.formatMessage({ id: 'Nombre del pais' })}
-                        onChange={(e) => setPais({ ...pais, nombre: e.target.value })}
-                        className={`${(estadoGuardando && pais.nombre === "") ? "p-invalid" : ""}`}
-                        rows={5} cols={30} maxLength={50} />
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="paisIso">{intl.formatMessage({ id: 'Iso' })}</label>
-                    <InputText value={pais.iso}
-                        placeholder={intl.formatMessage({ id: 'Iso del pais' })}
-                        onChange={(e) => setPais({ ...pais, iso: e.target.value })}
-                        //className={`${(estadoGuardando && pais.iso === "") ? "p-invalid" : ""}`}
-                        rows={5} cols={30} maxLength={10} />
-                </div>
-
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="activoSN" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
-                    <InputSwitch
-                        checked={pais.activoSn === 'S'}
-                        onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
-                    />
-                </div>
+        <div className="catalogo-edit-form-grid">
+            <div className="catalogo-edit-field">
+                <label htmlFor="orden" style={{ color: "black" }}>
+                    <b>{intl.formatMessage({ id: 'Orden' })}*</b>
+                </label>
+                <InputNumber
+                    value={pais.orden === '' || pais.orden === undefined ? null : pais.orden}
+                    onChange={(e) => setPais({ ...pais, orden: e.value })}
+                    className={`${(estadoGuardando && (pais.orden === "" || pais.orden === null || pais.orden === undefined)) ? "p-invalid" : ""}`}
+                    mode="decimal"
+                    useGrouping={false}
+                    min={0}
+                    inputStyle={{ textAlign: 'right' }}
+                />
             </div>
-        </Fieldset>
+            <div className="catalogo-edit-field">
+                <label htmlFor="nombre" style={{ color: "black" }}>
+                    <b>{intl.formatMessage({ id: 'Nombre' })}*</b>
+                </label>
+                <InputText
+                    value={pais.nombre || ""}
+                    placeholder={intl.formatMessage({ id: 'Nombre del pais' })}
+                    onChange={(e) => setPais({ ...pais, nombre: e.target.value })}
+                    className={`${(estadoGuardando && (pais.nombre || "") === "") ? "p-invalid" : ""}`}
+                    maxLength={50}
+                />
+            </div>
+            <div className="catalogo-edit-field">
+                <label htmlFor="iso">{intl.formatMessage({ id: 'Iso' })}</label>
+                <InputText
+                    value={pais.iso || ""}
+                    placeholder={intl.formatMessage({ id: 'Iso del pais' })}
+                    onChange={(e) => setPais({ ...pais, iso: e.target.value })}
+                    maxLength={10}
+                />
+            </div>
+            <div className="catalogo-edit-field">
+                <label htmlFor="activoSn">{intl.formatMessage({ id: 'Activo' })}</label>
+                <InputSwitch
+                    checked={pais.activoSn === 'S'}
+                    onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
+                />
+            </div>
+        </div>
     );
 };
 

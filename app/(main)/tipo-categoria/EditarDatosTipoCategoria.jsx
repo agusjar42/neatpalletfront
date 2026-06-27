@@ -10,7 +10,9 @@ const EditarDatosTipoCategoria = ({ tipoCategoria, setTipoCategoria, estadoGuard
     return (
         <div className="catalogo-edit-form-grid">
             <div className="catalogo-edit-field">
-                <label htmlFor="orden">{intl.formatMessage({ id: "Orden" })}</label>
+                <label htmlFor="orden" style={{ color: "black" }}>
+                    <b>{intl.formatMessage({ id: "Orden" })}*</b>
+                </label>
                 <InputNumber
                     value={tipoCategoria.orden === "" || tipoCategoria.orden === undefined ? null : tipoCategoria.orden}
                     onChange={(e) => setTipoCategoria({ ...tipoCategoria, orden: e.value })}
@@ -22,7 +24,9 @@ const EditarDatosTipoCategoria = ({ tipoCategoria, setTipoCategoria, estadoGuard
                 />
             </div>
             <div className="catalogo-edit-field">
-                <label htmlFor="nombre">{intl.formatMessage({ id: "Nombre" })}</label>
+                <label htmlFor="nombre" style={{ color: "black" }}>
+                    <b>{intl.formatMessage({ id: "Nombre" })}*</b>
+                </label>
                 <InputText
                     value={tipoCategoria.nombre || ""}
                     placeholder={intl.formatMessage({ id: "Nombre del tipo de categoria" })}

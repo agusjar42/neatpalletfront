@@ -90,6 +90,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [registrosForaneos, setRegistrosForaneos] = useState({});
     const [operadorSeleccionado, setOperadorSeleccionado] = useState('or');
     const [totalRegistros, setTotalRegistros] = useState(0);
+    const [estadoCargandoDatos, setEstadoCargandoDatos] = useState(false);
     const puedeCargarDatosProtegidos = () => {
         if (!isInitialized || !usuarioAutenticado || typeof window === 'undefined') {
             return false;
@@ -114,6 +115,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         if (!puedeCargarDatosProtegidos()) {
             return;
         }
+        setEstadoCargandoDatos(true);
         // Crear parámetros de consulta dinámicamente
         const whereFiltro = {
             ...crearFiltros(parametrosCrud.filters, operadorSeleccionado),
@@ -198,7 +200,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         } catch (err) {
             console.log(err.message);
         } finally {
-            console.log('Carga completa');
+            setEstadoCargandoDatos(false);
         }
     };
 
@@ -1444,6 +1446,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 header={renderizarHeader()}
                                 dataKey="id"
                                 value={registros}
+                                loading={estadoCargandoDatos}
+                                loadingIcon="pi pi-spin pi-spinner"
                                 rowClassName={() => (puedeEntrarEnRegistro() ? { 'neat-clickable-row': true } : {})}
                                 filters={parametrosCrud.filters}
                                 removableSort
@@ -1479,6 +1483,11 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                     ></Column>
                                 )}
                             </DataTable>
+                            {estadoCargandoDatos && (
+                                <div className="neat-crud-loading-banner">
+                                    {intl.formatMessage({ id: 'Cargando registros, por favor espere' })}
+                                </div>
+                            )}
 
                             <Paginator
                                 first={parametrosCrud.first}

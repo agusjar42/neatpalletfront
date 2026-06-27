@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { Dropdown } from 'primereact/dropdown';
 import { InputSwitch } from 'primereact/inputswitch';
 import { AutoComplete } from "primereact/autocomplete";
 import { useIntl } from 'react-intl';
+
 const EditarDatosIdioma = ({ idioma, setIdioma, estadoGuardando, isoIdiomas, setIsoSeleccionado, isoSeleccionado }) => {
     const intl = useIntl();
     const [filtradoIso, setFiltradoIso] = useState([]);
+
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
         const valor = (e.target && e.target.value) || "";
         let _idioma = { ...idioma };
@@ -30,49 +30,54 @@ const EditarDatosIdioma = ({ idioma, setIdioma, estadoGuardando, isoIdiomas, set
     };
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos para el idioma' })}>
-            <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={idioma.orden === '' || idioma.orden === undefined ? null : idioma.orden}
-                        onChange={(e) => setIdioma({ ...idioma, orden: e.value })}
-                        className={`${(estadoGuardando && (idioma.orden === "" || idioma.orden === null || idioma.orden === undefined)) ? "p-invalid" : ""}`}
-                        mode="decimal"
-                        useGrouping={false}
-                        min={0}
-                        inputStyle={{ textAlign: 'right' }} />
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="empresaTransporteNombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
-                    <InputText value={idioma.nombre}
-                        placeholder={intl.formatMessage({ id: 'Nombre del idioma' })}
-                        onChange={(e) => setIdioma({ ...idioma, nombre: e.target.value })}
-                        className={`${(estadoGuardando && idioma.nombre === "") ? "p-invalid" : ""}`}
-                        rows={5} cols={30} maxLength={50}/>
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="empresaTransporteNombre">{intl.formatMessage({ id: 'Iso' })}</label>
-                    <AutoComplete
-                            value={isoSeleccionado}
-                            suggestions={filtradoIso}
-                            dropdown
-                            field="idioma"
-                            completeMethod={busquedaIsoIdiomas}
-                            onChange={(e) => setIsoSeleccionado(e.value)}
-                            //className={`${(estadoGuardando && idioma.iso === "") ? "p-invalid" : ""}`}
-                            className="w-full"
-                            inputClassName="w-full"
-                        />
-                </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="activoSN" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
-                    <InputSwitch
-                        checked={idioma.activoSn === 'S'}
-                        onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
-                    />
-                </div>
+        <div className="catalogo-edit-form-grid">
+            <div className="catalogo-edit-field">
+                <label htmlFor="orden" style={{ color: "black" }}>
+                    <b>{intl.formatMessage({ id: 'Orden' })}*</b>
+                </label>
+                <InputNumber
+                    value={idioma.orden === '' || idioma.orden === undefined ? null : idioma.orden}
+                    onChange={(e) => setIdioma({ ...idioma, orden: e.value })}
+                    className={`${(estadoGuardando && (idioma.orden === "" || idioma.orden === null || idioma.orden === undefined)) ? "p-invalid" : ""}`}
+                    mode="decimal"
+                    useGrouping={false}
+                    min={0}
+                    inputStyle={{ textAlign: 'right' }}
+                />
             </div>
-        </Fieldset>
+            <div className="catalogo-edit-field">
+                <label htmlFor="nombre" style={{ color: "black" }}>
+                    <b>{intl.formatMessage({ id: 'Nombre' })}*</b>
+                </label>
+                <InputText
+                    value={idioma.nombre || ""}
+                    placeholder={intl.formatMessage({ id: 'Nombre del idioma' })}
+                    onChange={(e) => setIdioma({ ...idioma, nombre: e.target.value })}
+                    className={`${(estadoGuardando && (idioma.nombre || "") === "") ? "p-invalid" : ""}`}
+                    maxLength={50}
+                />
+            </div>
+            <div className="catalogo-edit-field">
+                <label htmlFor="iso">{intl.formatMessage({ id: 'Iso' })}</label>
+                <AutoComplete
+                    value={isoSeleccionado}
+                    suggestions={filtradoIso}
+                    dropdown
+                    field="idioma"
+                    completeMethod={busquedaIsoIdiomas}
+                    onChange={(e) => setIsoSeleccionado(e.value)}
+                    className="w-full"
+                    inputClassName="w-full"
+                />
+            </div>
+            <div className="catalogo-edit-field">
+                <label htmlFor="activoSn">{intl.formatMessage({ id: 'Activo' })}</label>
+                <InputSwitch
+                    checked={idioma.activoSn === 'S'}
+                    onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
+                />
+            </div>
+        </div>
     );
 };
 

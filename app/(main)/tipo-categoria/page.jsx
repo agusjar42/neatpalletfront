@@ -1,11 +1,14 @@
 "use client";
+import { useState } from "react";
 import { useIntl } from "react-intl";
 import Crud from "../../components/shared/crud";
 import EditarTipoCategoria from "./editar";
 import { getTipoCategoria, getTipoCategoriaCount, deleteTipoCategoria } from "@/app/api-endpoints/tipo-categoria";
+import TipoCategoriaIntro from "./TipoCategoriaIntro";
 
 const TipoCategoria = () => {
     const intl = useIntl();
+    const [summaryRefreshKey, setSummaryRefreshKey] = useState(0);
     const columnas = [
         { campo: "orden", header: intl.formatMessage({ id: "Orden" }), tipo: "string" },
         { campo: "nombre", header: intl.formatMessage({ id: "Nombre" }), tipo: "string" },
@@ -14,6 +17,7 @@ const TipoCategoria = () => {
 
     return (
         <div>
+            <TipoCategoriaIntro refreshKey={summaryRefreshKey} />
             <Crud
                 headerCrud={intl.formatMessage({ id: "Tipos de Categoria" })}
                 getRegistros={getTipoCategoria}
@@ -29,6 +33,7 @@ const TipoCategoria = () => {
                     style: { width: "min(560px, 94vw)" },
                 }}
                 deleteRegistro={deleteTipoCategoria}
+                onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
             />
         </div>
     );

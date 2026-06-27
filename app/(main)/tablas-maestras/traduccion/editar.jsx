@@ -37,25 +37,17 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
     }, [emptyRegistro, idEditar, rowData]);
 
     const validaciones = async () => {
-        //const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado.id === "";
         const validaClave = traduccion.clave === undefined || traduccion.clave === "";
-        //const validaValor = traduccion.valor === undefined || traduccion.valor === "";
-
-        //
-        //Si existe algun bloque vacio entonces no se puede guardar
-        //
-        return !validaClave  // (!validaClave && !validaValor && !validaIdioma)
-    }
+        return !validaClave;
+    };
 
     const guardarCodigoPostal = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
         if (await validaciones()) {
-            // Obtenemos el registro actual y solo entramos si tiene nombre y contenido
             let objGuardar = { ...traduccion };
             const usuarioActual = getUsuarioSesion()?.id;
 
-            // Si estoy insertando uno nuevo
             if (idEditar === 0) {
                 try {
                     for (const idioma of listaIdiomas) {
@@ -64,7 +56,7 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                             idiomaId: idioma.id,
                             clave: objGuardar.clave,
                             valor: objGuardar[idioma.nombre.toLowerCase()],
-                        }
+                        };
                         await postTraduccion(objTraduccion);
                     }
                     setRegistroResult("insertado");
@@ -81,28 +73,26 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
             } else {
                 try {
                     for (const idioma of listaIdiomas) {
-                        //Si la traduccion ya existe, hacemos el patch
                         if (objGuardar[idioma.nombre.toLowerCase() + 'Id']) {
                             const objTraduccion = {
                                 usuModificacion: usuarioActual,
                                 clave: objGuardar.clave,
                                 valor: objGuardar[idioma.nombre.toLowerCase()],
-                            }
+                            };
                             await patchTraduccion(objGuardar[idioma.nombre.toLowerCase() + 'Id'], objTraduccion);
                         }
-                        //Si la traduccion no existe, hacemos el post
                         else if (objGuardar[idioma.nombre.toLowerCase()]) {
                             const objTraduccion = {
                                 usuCreacion: usuarioActual,
                                 idiomaId: idioma.id,
                                 clave: objGuardar.clave,
                                 valor: objGuardar[idioma.nombre.toLowerCase()],
-                            }
+                            };
                             await postTraduccion(objTraduccion);
                         }
                     }
 
-                    setIdEditar(null)
+                    setIdEditar(null);
                     setRegistroResult("editado");
                 } catch (error) {
                     toast.current?.show({
@@ -123,13 +113,10 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
             });
         }
         setEstadoGuardandoBoton(false);
-        //setAccion("consulta");
-        //setIdEditar(null);
     };
 
     const cancelarEdicion = () => {
-        setIdEditar(null)
-        //setAccion("consulta");
+        setIdEditar(null);
     };
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nueva' });
@@ -140,7 +127,8 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
-                        <h2>{header} {(intl.formatMessage({ id: 'Traducción' })).toLowerCase()}</h2>
+                        <h2>{header} {(intl.formatMessage({ id: 'Traduccion' })).toLowerCase()}</h2>
+                        <p className="catalogo-edit-description">Configura la clave y sus valores por idioma activo.</p>
                         <EditarDatosTraduccion
                             traduccion={traduccion}
                             setTraduccion={setTraduccion}
@@ -148,17 +136,16 @@ const EditarTraduccion = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                             estadoGuardando={estadoGuardando}
                         />
 
-                        <div className="flex justify-content-end mt-2">
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : 'Guardar cambios'}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarCodigoPostal}
-                                    className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,9 @@ const EditarDatosTipoVehiculo = ({ tipoVehiculo, setTipoVehiculo, estadoGuardand
     return (
         <div className="catalogo-edit-form-grid">
             <div className="catalogo-edit-field">
-                <label htmlFor="orden">{intl.formatMessage({ id: "Orden" })}</label>
+                <label htmlFor="orden" style={{ color: "black" }}>
+                    <b>{intl.formatMessage({ id: "Orden" })}*</b>
+                </label>
                 <InputNumber
                     value={tipoVehiculo.orden === "" || tipoVehiculo.orden === undefined ? null : tipoVehiculo.orden}
                     onChange={(e) => setTipoVehiculo({ ...tipoVehiculo, orden: e.value })}
@@ -22,7 +24,9 @@ const EditarDatosTipoVehiculo = ({ tipoVehiculo, setTipoVehiculo, estadoGuardand
                 />
             </div>
             <div className="catalogo-edit-field">
-                <label htmlFor="nombre">{intl.formatMessage({ id: "Nombre" })}</label>
+                <label htmlFor="nombre" style={{ color: "black" }}>
+                    <b>{intl.formatMessage({ id: "Nombre" })}*</b>
+                </label>
                 <InputText
                     value={tipoVehiculo.nombre || ""}
                     placeholder={intl.formatMessage({ id: "Nombre del tipo de vehiculo" })}

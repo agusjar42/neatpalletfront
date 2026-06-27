@@ -16,6 +16,9 @@ const EditarTipoCategoria = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
     const intl = useIntl();
 
     useEffect(() => {
+        //
+        //Cuando se edita cargamos el registro seleccionado en el formulario
+        //
         if (idEditar !== 0) {
             const registro = rowData.find((element) => element.id === idEditar);
             setTipoCategoria(registro);
@@ -42,6 +45,9 @@ const EditarTipoCategoria = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
             let objGuardar = { ...tipoCategoria };
             const usuarioActual = getUsuarioSesion()?.id;
 
+            //
+            //Si es un alta preparamos los campos de creacion
+            //
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar.usuCreacion = usuarioActual;
@@ -61,6 +67,9 @@ const EditarTipoCategoria = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                     });
                 }
             } else {
+                //
+                //Si es una edicion actualizamos el registro existente
+                //
                 objGuardar.usuModificacion = usuarioActual;
                 delete objGuardar.fechaModificacion;
                 objGuardar = reemplazarNullPorVacio(objGuardar);
@@ -89,23 +98,23 @@ const EditarTipoCategoria = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: "Tipo Categoria" })).toLowerCase()}</h2>
+                        <p className="catalogo-edit-description">Configura el orden, nombre y estado del tipo de categoria.</p>
                         <EditarDatosTipoCategoria
                             tipoCategoria={tipoCategoria}
                             setTipoCategoria={setTipoCategoria}
                             estadoGuardando={estadoGuardando}
                             manejarCambioInputSwitch={manejarCambioInputSwitch}
                         />
-                        <div className="flex justify-content-end mt-2">
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label={intl.formatMessage({ id: "Cancelar" })} onClick={() => setIdEditar(null)} className="p-button-secondary" />
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: "Guardando" })}...` : intl.formatMessage({ id: "Guardar" })}
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: "Guardando" })}...` : "Guardar cambios"}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarTipoCategoria}
-                                    className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: "Cancelar" })} onClick={() => setIdEditar(null)} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { postIdioma, patchIdioma } from "@/app/api-endpoints/idioma";
 import EditarDatosIdioma from "./EditarDatosIdioma";
@@ -188,6 +187,7 @@ const EditarIdioma = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Idioma' })).toLowerCase()}</h2>
+                        <p className="catalogo-edit-description">Configura el orden, nombre, iso y estado del idioma.</p>
                         <EditarDatosIdioma
                             idioma={idioma}
                             setIdioma={setIdioma}
@@ -196,18 +196,17 @@ const EditarIdioma = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                             setIsoSeleccionado={setIsoSeleccionado}
                             isoSeleccionado={isoSeleccionado}
                         />
-                        
-                        <div className="flex justify-content-end mt-2">
+
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : 'Guardar cambios'}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                onClick={guardarEmpresaTransporte}
-                                    className="mr-2"
+                                    onClick={guardarEmpresaTransporte}
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>

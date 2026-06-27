@@ -2394,6 +2394,53 @@ body {
     gap: 0.85rem;
 }
 
+.envio-crud-ruta-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 12rem;
+}
+
+.envio-crud-ruta-linea {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: #1f2b25;
+
+    strong {
+        font-weight: 600;
+    }
+}
+
+.envio-crud-ruta-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    flex: 0 0 auto;
+}
+
+.envio-crud-ruta-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: #6e7973;
+    font-size: 0.92rem;
+    line-height: 1.2;
+    flex-wrap: wrap;
+}
+
+.envio-crud-ruta-hora-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.42rem;
+    border: 1px solid #d8dfdb;
+    border-radius: 0.45rem;
+    background: #ffffff;
+    color: #54605a;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
 .envio-detalle-shell {
     display: flex;
     flex-direction: column;

@@ -28,7 +28,7 @@ import EditarOperario from "../operario/editar";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 
 
-const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoEdicionTabChange }) => {
+const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoEdicionTabChange, modoAperturaRegistro }) => {
     const intl = useIntl();
     const toast = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -48,6 +48,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
     const [conteoSensor, setConteoSensor] = useState(0);
     const [conteoOperario, setConteoOperario] = useState(0);
     const [refreshConteos, setRefreshConteos] = useState(0);
+    const mostrarBloquePestanas = modoAperturaRegistro !== 'editar_boton' && modoAperturaRegistro !== 'ver_boton';
 
     // Columnas para las diferentes tablas
     const columnasConfiguracion = [
@@ -466,7 +467,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
 
 
         {/* Pestañas para bloques adicionales */}
-        <div className="mt-4">
+        {mostrarBloquePestanas && <div className="mt-4">
             <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                 <TabPanel header={intl.formatMessage({ id: 'Configuración' })}>
                     <div>
@@ -833,7 +834,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
                     </div>
                 </TabPanel>
             </TabView>
-        </div>
+        </div>}
         </>
     );
 };

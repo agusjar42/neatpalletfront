@@ -4,7 +4,7 @@ import EditarEnvios from "./editar";
 import { EmpresaEnvioDetalle } from "../tablas-maestras/empresa/page";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl';
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { formatearFechaDate, getUsuarioSesion } from "@/app/utility/Utils";
 import { Button } from 'primereact/button';
 import { Dialog } from "primereact/dialog";
 import { useEffect, useState } from "react";
@@ -30,10 +30,10 @@ const realRoute = [
 
 const EnvioEdicionUnificada = (props) => {
     //
-    //Mantenemos el alta con el editor actual y reutilizamos
-    //el detalle moderno para los registros ya existentes
+    //El alta y los botones de ver/editar deben abrir el editor clasico.
+    //El click sobre la fila conserva el detalle moderno actual.
     //
-    if (props.idEditar === 0) {
+    if (props.idEditar === 0 || props.modoAperturaRegistro === 'editar_boton' || props.modoAperturaRegistro === 'ver_boton') {
         return <EditarEnvios {...props} />;
     }
 
@@ -61,12 +61,82 @@ const Envio = () => {
         </span>
     );
 
+    //
+    //Formateamos la hora en hh:mm para la ficha compacta de origen y destino
+    //
+    const formatearHoraCorta = (fecha) => {
+        if (!fecha) {
+            return "--:--";
+        }
+
+        const fechaDate = new Date(fecha);
+        if (Number.isNaN(fechaDate.getTime())) {
+            return "--:--";
+        }
+
+        return fechaDate.toLocaleTimeString("es-ES", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+        });
+    };
+
+    //
+    //Normalizamos la fecha para soportar tanto string como Date
+    //
+    const formatearFechaCorta = (fecha) => {
+        if (!fecha) {
+            return "-";
+        }
+
+        const fechaDate = new Date(fecha);
+        if (Number.isNaN(fechaDate.getTime())) {
+            return "-";
+        }
+
+        return formatearFechaDate(fechaDate);
+    };
+
+    //
+    //Construimos el bloque visual de origen y destino sin afectar al resto de pantallas
+    //
+    const crearRutaBodyTemplate = ({ color, tituloCampo, gpsCampo, fechaCampo }) => (rowData) => (
+        <div className="envio-crud-ruta-cell">
+            <div className="envio-crud-ruta-linea">
+                <span
+                    className="envio-crud-ruta-dot"
+                    style={{ backgroundColor: color }}
+                ></span>
+                <strong>{rowData[tituloCampo] || "-"}</strong>
+            </div>
+            <div className="envio-crud-ruta-meta">{rowData[gpsCampo] || "-"}</div>
+            <div className="envio-crud-ruta-meta">
+                <span>{formatearFechaCorta(rowData[fechaCampo])}</span>
+                <span className="envio-crud-ruta-hora-chip">{formatearHoraCorta(rowData[fechaCampo])}</span>
+            </div>
+        </div>
+    );
+
+    const origenBodyTemplate = crearRutaBodyTemplate({
+        color: "#1f8f4e",
+        tituloCampo: "origenRuta",
+        gpsCampo: "gpsRutaOrigen",
+        fechaCampo: "fechaSalida",
+    });
+
+    const destinoBodyTemplate = crearRutaBodyTemplate({
+        color: "#c0362c",
+        tituloCampo: "destinoRuta",
+        gpsCampo: "gpsRutaDestino",
+        fechaCampo: "fechaLlegada",
+    });
+
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'numero', header: intl.formatMessage({ id: 'Envio' }), tipo: 'string' },
         { campo: 'clienteNombre', header: intl.formatMessage({ id: 'Punto de entrega' }), tipo: 'string' },
-        { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen' }), tipo: 'string' },
-        { campo: 'destinoRuta', header: intl.formatMessage({ id: 'Destino' }), tipo: 'string' },
+        { campo: 'origenRuta', header: intl.formatMessage({ id: 'Origen' }), tipo: 'string', body: origenBodyTemplate },
+        { campo: 'destinoRuta', header: intl.formatMessage({ id: 'Destino' }), tipo: 'string', body: destinoBodyTemplate },
         { campo: 'estadoEnvio', header: intl.formatMessage({ id: 'Estado' }), tipo: 'string', body: estadoEnvioBodyTemplate }
     ];
 

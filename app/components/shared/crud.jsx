@@ -59,6 +59,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [registroEditarFlag, setRegistroEditarFlag] = useState(registroEditar != null);
     const [registroResult, setRegistroResult] = useState("");
     const [idEditar, setIdEditar] = useState(null);
+    const [modoAperturaRegistro, setModoAperturaRegistro] = useState(null);
     const [registrosTipoArchivos, setRegistrosTipoArchivos] = useState([]);
 
     const [eliminarRegistroDialog, setEliminarRegistroDialog] = useState(false);
@@ -675,6 +676,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         //Hacemos esto sin el await para obtener los archivos de la seccion
         //obtenerDatos()
 
+        setModoAperturaRegistro('nuevo');
         setEditable(true);
         setIdEditar(0);
     };
@@ -812,12 +814,14 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setGenerarGraficoDialog(false);
     };
 
-    const editarRegistro = (registro) => {
+    const editarRegistro = (registro, modoApertura = 'editar_boton') => {
+        setModoAperturaRegistro(modoApertura);
         setEditable(true);
         setIdEditar(registro.id);
     };
 
-    const verRegistro = (registro) => {
+    const verRegistro = (registro, modoApertura = 'ver_boton') => {
+        setModoAperturaRegistro(modoApertura);
         setEditable(false);
         setIdEditar(registro.id);
     };
@@ -843,7 +847,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         //o la vista edicion, manteniendo el comportamiento actual por defecto
         //
         if (accionEntradaPorFila === 'ver' && botones.includes('ver') && puedeVer) {
-            verRegistro(registro);
+            verRegistro(registro, 'fila');
             return;
         }
 
@@ -851,17 +855,17 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         //Si se fuerza la edicion desde la fila, respetamos ese flujo de forma explicita
         //
         if (accionEntradaPorFila === 'editar' && botones.includes('editar') && puedeEditar) {
-            editarRegistro(registro);
+            editarRegistro(registro, 'fila');
             return;
         }
 
         if (botones.includes('editar') && puedeEditar) {
-            editarRegistro(registro);
+            editarRegistro(registro, 'fila');
             return;
         }
 
         if (botones.includes('ver') && puedeVer) {
-            verRegistro(registro);
+            verRegistro(registro, 'fila');
         }
     };
 
@@ -879,6 +883,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             listaTipoArchivos: registrosTipoArchivos,
             seccion: seccion,
             setRegistroEditarFlag: setRegistroEditarFlag,
+            modoAperturaRegistro: modoAperturaRegistro,
             ...editarComponenteParametrosExtra
         });
     }
@@ -891,6 +896,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setIdEditar(null);
         setEditable(false);
         setRegistroEditarFlag(false);
+        setModoAperturaRegistro(null);
     };
 
     //Funcion que renderiza el componente header

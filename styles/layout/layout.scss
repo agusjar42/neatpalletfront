@@ -2471,6 +2471,37 @@ body {
     color: #111916;
 }
 
+.neat-inline-access-denied {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 22rem;
+    padding: 2rem 1rem;
+}
+
+.neat-inline-access-denied-card {
+    max-width: 34rem;
+    padding: 2rem 2.25rem;
+    border: 1px solid #d8dfdb;
+    border-radius: 1rem;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(17, 28, 24, 0.06);
+    text-align: center;
+}
+
+.neat-inline-access-denied-card h2 {
+    margin: 0 0 0.65rem;
+    color: #1f2b25;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.neat-inline-access-denied-card p {
+    margin: 0;
+    color: #66736d;
+    font-size: 1rem;
+}
+
 .neat-crud-toolbar-button-primary {
     border-color: #d8dfdb;
     background: #ffffff;

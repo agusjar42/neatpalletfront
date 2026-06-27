@@ -86,6 +86,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [puedeParada, setPuedeParada] = useState(true);
     const [puedeVehiculo, setPuedeVehiculo] = useState(true);
     const [puedeContenido, setPuedeContenido] = useState(true);
+    const [sinAccesoEmbebido, setSinAccesoEmbebido] = useState(false);
     const [busquedaRealizada, setBusquedaRealizada] = useState(false);
     const [registrosForaneos, setRegistrosForaneos] = useState({});
     const [operadorSeleccionado, setOperadorSeleccionado] = useState('or');
@@ -222,11 +223,23 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         if (!registroEditar) {
             const sePuedeAcceder = await tieneUsuarioPermiso('Neatpallet', controlador, 'acceder')
             if (!sePuedeAcceder) {
-                //Si no puede acceder, redirige a la pantalla de acceso denegado
-                router.replace('/auth/access/');
+                //
+                //Si el CRUD esta embebido en una pestana no bloqueamos toda la aplicacion.
+                //Mostramos un estado local de acceso denegado dentro del contenido.
+                //
+                if (editarComponenteParametrosExtra?.estoyDentroDeUnTab) {
+                    setSinAccesoEmbebido(true);
+                } else {
+                    //
+                    //Si no puede acceder y es una pantalla completa, redirige a acceso denegado
+                    //
+                    router.replace('/auth/access/');
+                }
                 return;
             }
         }
+
+        setSinAccesoEmbebido(false);
 
         setPuedeCrear(await tieneUsuarioPermiso('Neatpallet', controlador, 'nuevo'))
         setPuedeDescargarCSV(await tieneUsuarioPermiso('Neatpallet', controlador, 'descargarCSV'))
@@ -1462,151 +1475,160 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     return (
         <div>
             {!editarComponenteParametrosExtra?.ocultarClienteResumenHeader && <ClienteResumenHeader />}
-            {(idEditar === null) && (
-                <div className="grid">
-                    <div className="col-12">
-                        <div {...(!(editarComponenteParametrosExtra?.estoyDentroDeUnTab ? editarComponenteParametrosExtra?.estoyDentroDeUnTab: false) && { className: "card" })}>
-                            <Toast ref={toast} position="top-right" />
-                            {/* ENCABEZADO PRINCIPAL */}
-                            <DataTable
-                                className="datatable-responsive"
-                                ref={referenciaDataTable}
-                                header={renderizarHeader()}
-                                dataKey="id"
-                                value={registros}
-                                rowClassName={() => (puedeEntrarEnRegistro() ? { 'neat-clickable-row': true } : {})}
-                                filters={parametrosCrud.filters}
-                                removableSort
-                                rowsPerPageOptions={[20, 50, 100]}
-                                //currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
-                                lazy
-                                rows={parametrosCrud.rows}
-                                totalRecords={totalRegistros}
-                                first={parametrosCrud.first}
-                                onPage={actualizarParametrosCrud}
-                                onSort={actualizarParametrosCrud}
-                                onFilter={manejarCambioFiltro}
-                                onRowClick={(event) => {
-                                    const target = event?.originalEvent?.target;
-                                    if (target?.closest('button, a, input, textarea, .p-checkbox, .p-dropdown, .p-column-filter-menu-button')) {
-                                        return;
-                                    }
-                                    abrirRegistroDesdeFila(event.data);
-                                }}
-                                sortField={parametrosCrud.sortField}
-                                sortOrder={parametrosCrud.sortOrder}
-                                emptyMessage={<span>{intl.formatMessage({ id: 'No se han encontrado registros' })}</span>}
-                            >
-                                {
-                                    ...columnasDinamicas //Muestra las columnas generadas
-                                }
-                                {(botones.length > 0 && !(botones.length === 1 && botones.includes('descargarCSV'))) && (
-                                    <Column
-                                        body={(rowData) => botonesDeAccionTemplate(rowData, botones)}
-                                        header={intl.formatMessage({ id: 'Acciones' })}
-                                        headerStyle={{ minWidth: "10rem" }}
-                                        style={{ minWidth: '200px', textAlign: 'left' }}
-                                    ></Column>
-                                )}
-                            </DataTable>
-
-                            <Paginator
-                                first={parametrosCrud.first}
-                                rows={parametrosCrud.rows}
-                                totalRecords={totalRegistros}
-                                rowsPerPageOptions={[20, 50, 100]}
-                                onPageChange={manejarCambioDePagina}
-                                template={paginatorTemplate}
-                            />
-
-                            {/* MODAL DE (ELIMINAR) REGISTRO */}
-                            <Dialog
-                                visible={eliminarRegistroDialog}
-                                style={{ width: "450px" }}
-                                header={intl.formatMessage({ id: '¿Eliminar registro?' })}
-                                modal
-                                footer={eliminarRegistroDialogFooter}
-                                onHide={ocultarEliminarRegistroDialog}
-                            >
-                                <div className="flex align-items-center justify-content-center">
-                                    <i
-                                        className="pi pi-exclamation-triangle mr-3"
-                                        style={{ fontSize: "2rem" }}
-                                    />
-                                    {registro && (
-                                        <span>
-                                            {intl.formatMessage({ id: mensajeEliminar || '¿Está seguro de que desea eliminar este registro?' })}
-                                        </span>
-                                    )}
-                                </div>
-                            </Dialog>
-                            {/* MODAL DE (DESCARGAR CSV) */}
-                            <DescargarCSVDialog
-                                visible={descargarCSVDialog}
-                                setDescargarCSVDialog={setDescargarCSVDialog}
-                                onHide={ocultarDescargarCSVDialog}
-                                registros={registros}
-                                getRegistros={getRegistros}
-                                getRegistrosTodosCSV={getRegistrosTodosCSV}
-                                nombreArchivo={headerCrud}
-                                procesarDatosParaCSV={procesarDatosParaCSV}
-                                columnas={columnas}
-                                header={intl.formatMessage({ id: 'Descargar archivo CSV' })}
-                                labelMostrados={intl.formatMessage({ id: 'Registros mostrados' })}
-                                labelTodos={intl.formatMessage({ id: 'Todos los registros' })}
-                            />
-                            {/* MODAL DE (IMPORTAR CSV) GENERICO */}
-                            <ImportarCSVDialog
-                                visible={importarCSVDialog}
-                                onHide={ocultarImportarCSVDialog}
-                                header={intl.formatMessage({ id: 'Importar archivo CSV' })}
-                                labelSeleccionar={intl.formatMessage({ id: 'Seleccionar archivo' })}
-                                labelProcesar={intl.formatMessage({ id: 'Procesar archivo' })}
-                                onProcessCSV={procesarImportacionCSV}
-                                onCSVProcessed={(results) => {
-                                    if (results.created > 0 || results.updated > 0) {
-                                        obtenerDatos();
-                                        if (onDataChange) {
-                                            onDataChange();
-                                        }
-                                    }
-                                }}
-                            />
-                            {/* MODAL DE (GENERAR GRAFICO) */}
-                            <GenerarGraficoDialog
-                                visible={generarGraficoDialog}
-                                onHide={ocultarGenerarGraficoDialog}
-                                registros={registrosGrafico}
-                                columnas={columnas}
-                                header={intl.formatMessage({ id: 'Gráfico de Datos' })}
-                            />
-                        </div>
+            {sinAccesoEmbebido ? (
+                <div className="neat-inline-access-denied">
+                    <div className="neat-inline-access-denied-card">
+                        <h2>Access Denied</h2>
+                        <p>You don&apos;t have the permissions to access this section</p>
                     </div>
                 </div>
-            )}
-
-            {(idEditar === 0 || idEditar > 0) && //Se hace la comprobacion asi en vez de >= porque tecnicamente null tambien es 0 
+            ) : (
                 <>
-                    {mostrarEdicionEnModal ? (
-                        <Dialog
-                            visible={true}
-                            onHide={ocultarEdicionModal}
-                            modal
-                            draggable={false}
-                            resizable={false}
-                            className="neat-crud-edit-dialog"
-                            style={{ width: "min(1100px, 92vw)" }}
-                            {...modalEdicionProps}
-                        >
-                            {renderizarEditarComponente()}
-                        </Dialog>
-                    ) : (
-                        <div>
-                            {renderizarEditarComponente()}
+                    {(idEditar === null) && (
+                        <div className="grid">
+                            <div className="col-12">
+                                <div {...(!(editarComponenteParametrosExtra?.estoyDentroDeUnTab ? editarComponenteParametrosExtra?.estoyDentroDeUnTab : false) && { className: "card" })}>
+                                    <Toast ref={toast} position="top-right" />
+                                    {/* ENCABEZADO PRINCIPAL */}
+                                    <DataTable
+                                        className="datatable-responsive"
+                                        ref={referenciaDataTable}
+                                        header={renderizarHeader()}
+                                        dataKey="id"
+                                        value={registros}
+                                        rowClassName={() => (puedeEntrarEnRegistro() ? { 'neat-clickable-row': true } : {})}
+                                        filters={parametrosCrud.filters}
+                                        removableSort
+                                        rowsPerPageOptions={[20, 50, 100]}
+                                        lazy
+                                        rows={parametrosCrud.rows}
+                                        totalRecords={totalRegistros}
+                                        first={parametrosCrud.first}
+                                        onPage={actualizarParametrosCrud}
+                                        onSort={actualizarParametrosCrud}
+                                        onFilter={manejarCambioFiltro}
+                                        onRowClick={(event) => {
+                                            const target = event?.originalEvent?.target;
+                                            if (target?.closest('button, a, input, textarea, .p-checkbox, .p-dropdown, .p-column-filter-menu-button')) {
+                                                return;
+                                            }
+                                            abrirRegistroDesdeFila(event.data);
+                                        }}
+                                        sortField={parametrosCrud.sortField}
+                                        sortOrder={parametrosCrud.sortOrder}
+                                        emptyMessage={<span>{intl.formatMessage({ id: 'No se han encontrado registros' })}</span>}
+                                    >
+                                        {
+                                            ...columnasDinamicas
+                                        }
+                                        {(botones.length > 0 && !(botones.length === 1 && botones.includes('descargarCSV'))) && (
+                                            <Column
+                                                body={(rowData) => botonesDeAccionTemplate(rowData, botones)}
+                                                header={intl.formatMessage({ id: 'Acciones' })}
+                                                headerStyle={{ minWidth: "10rem" }}
+                                                style={{ minWidth: '200px', textAlign: 'left' }}
+                                            ></Column>
+                                        )}
+                                    </DataTable>
+
+                                    <Paginator
+                                        first={parametrosCrud.first}
+                                        rows={parametrosCrud.rows}
+                                        totalRecords={totalRegistros}
+                                        rowsPerPageOptions={[20, 50, 100]}
+                                        onPageChange={manejarCambioDePagina}
+                                        template={paginatorTemplate}
+                                    />
+
+                                    <Dialog
+                                        visible={eliminarRegistroDialog}
+                                        style={{ width: "450px" }}
+                                        header={intl.formatMessage({ id: '??Eliminar registro?' })}
+                                        modal
+                                        footer={eliminarRegistroDialogFooter}
+                                        onHide={ocultarEliminarRegistroDialog}
+                                    >
+                                        <div className="flex align-items-center justify-content-center">
+                                            <i
+                                                className="pi pi-exclamation-triangle mr-3"
+                                                style={{ fontSize: "2rem" }}
+                                            />
+                                            {registro && (
+                                                <span>
+                                                    {intl.formatMessage({ id: mensajeEliminar || '??Est?? seguro de que desea eliminar este registro?' })}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </Dialog>
+
+                                    <DescargarCSVDialog
+                                        visible={descargarCSVDialog}
+                                        setDescargarCSVDialog={setDescargarCSVDialog}
+                                        onHide={ocultarDescargarCSVDialog}
+                                        registros={registros}
+                                        getRegistros={getRegistros}
+                                        getRegistrosTodosCSV={getRegistrosTodosCSV}
+                                        nombreArchivo={headerCrud}
+                                        procesarDatosParaCSV={procesarDatosParaCSV}
+                                        columnas={columnas}
+                                        header={intl.formatMessage({ id: 'Descargar archivo CSV' })}
+                                        labelMostrados={intl.formatMessage({ id: 'Registros mostrados' })}
+                                        labelTodos={intl.formatMessage({ id: 'Todos los registros' })}
+                                    />
+
+                                    <ImportarCSVDialog
+                                        visible={importarCSVDialog}
+                                        onHide={ocultarImportarCSVDialog}
+                                        header={intl.formatMessage({ id: 'Importar archivo CSV' })}
+                                        labelSeleccionar={intl.formatMessage({ id: 'Seleccionar archivo' })}
+                                        labelProcesar={intl.formatMessage({ id: 'Procesar archivo' })}
+                                        onProcessCSV={procesarImportacionCSV}
+                                        onCSVProcessed={(results) => {
+                                            if (results.created > 0 || results.updated > 0) {
+                                                obtenerDatos();
+                                                if (onDataChange) {
+                                                    onDataChange();
+                                                }
+                                            }
+                                        }}
+                                    />
+
+                                    <GenerarGraficoDialog
+                                        visible={generarGraficoDialog}
+                                        onHide={ocultarGenerarGraficoDialog}
+                                        registros={registrosGrafico}
+                                        columnas={columnas}
+                                        header={intl.formatMessage({ id: 'Gr??fico de Datos' })}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     )}
+
+                    {(idEditar === 0 || idEditar > 0) && (
+                        <>
+                            {mostrarEdicionEnModal ? (
+                                <Dialog
+                                    visible={true}
+                                    onHide={ocultarEdicionModal}
+                                    modal
+                                    draggable={false}
+                                    resizable={false}
+                                    className="neat-crud-edit-dialog"
+                                    style={{ width: "min(1100px, 92vw)" }}
+                                    {...modalEdicionProps}
+                                >
+                                    {renderizarEditarComponente()}
+                                </Dialog>
+                            ) : (
+                                <div>
+                                    {renderizarEditarComponente()}
+                                </div>
+                            )}
+                        </>
+                    )}
                 </>
-            }
+            )}
         </div>
     );
 };

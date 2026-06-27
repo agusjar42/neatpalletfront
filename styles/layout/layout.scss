@@ -1169,6 +1169,109 @@ body {
     background: var(--neat-green-900);
 }
 
+.Permiso .p-datatable .p-datatable-header {
+    padding: 0;
+}
+
+.neat-permiso-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.15rem;
+    border-bottom: 1px solid #eef2f0;
+}
+
+.neat-permiso-search {
+    width: min(22rem, 100%);
+}
+
+.neat-permiso-search .p-inputtext {
+    width: 100%;
+}
+
+.neat-permiso-toolbar-meta {
+    color: #6b7280;
+    font-size: 0.92rem;
+    white-space: nowrap;
+}
+
+.neat-permiso-section-title {
+    color: #0f172a;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.neat-permiso-action-title {
+    color: #334155;
+}
+
+.neat-permiso-role-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    text-align: center;
+}
+
+.neat-permiso-role-title {
+    color: #475569;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.neat-permiso-role-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.neat-permiso-link-button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #64748b;
+    font-size: 0.78rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.neat-permiso-link-button:hover {
+    color: #0f172a;
+}
+
+.neat-permiso-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 4.5rem;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid #d8e0ea;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+
+.neat-permiso-status.is-full {
+    border-color: #b7ebc7;
+    background: #effcf3;
+    color: #16803c;
+}
+
+.neat-permiso-status.is-partial {
+    border-color: #f4d49a;
+    background: #fff8ec;
+    color: #9a6700;
+}
+
+.neat-permiso-status.is-empty {
+    border-color: #d8e0ea;
+    background: #ffffff;
+    color: #64748b;
+}
+
 .neat-row-actions {
     display: inline-flex;
     align-items: center;
@@ -4236,5 +4339,14 @@ body {
     .catalogo-edit-form-grid,
     .catalogo-edit-form-grid-wide {
         grid-template-columns: minmax(0, 1fr);
+    }
+
+    .neat-permiso-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .neat-permiso-toolbar-meta {
+        white-space: normal;
     }
 }

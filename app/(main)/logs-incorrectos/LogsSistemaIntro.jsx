@@ -22,13 +22,6 @@ const LogsSistemaIntro = ({ archivos = [] }) => {
 
     return (
         <>
-            <div className="neat-info-panel">
-                <span className="neat-info-icon pi pi-info-circle" aria-hidden="true"></span>
-                <span>
-                    Aquí se pueden visualizar y gestionar los archivos de logs del sistema. Se incluyen logs de intentos de login fallidos y logs de todas las peticiones a la API. Cada archivo contiene los registros de un mes específico.
-                </span>
-            </div>
-
             <div className="neat-page-summary" aria-label="Resumen de logs del sistema">
                 <div className="neat-summary-item">
                     <span>Total archivos</span>
@@ -48,6 +41,7 @@ const LogsSistemaIntro = ({ archivos = [] }) => {
                     <strong>{loginFallidos.length} <small>archivos</small></strong>
                     <small>{formatearTamano(loginBytes)}</small>
                 </div>
+                <br />
             </div>
         </>
     );

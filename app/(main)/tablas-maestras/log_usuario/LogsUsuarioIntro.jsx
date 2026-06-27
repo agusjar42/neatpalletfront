@@ -56,13 +56,6 @@ const LogsUsuarioIntro = ({ registros = [] }) => {
 
     return (
         <>
-            <div className="neat-info-panel">
-                <span className="neat-info-icon pi pi-info-circle" aria-hidden="true"></span>
-                <span>
-                    Aquí se pueden consultar y gestionar los archivos de logs de actividad de los usuarios. Se incluyen inicios de sesión, acciones realizadas, eventos de auditoría y cambios de configuración. Cada archivo contiene los registros de un mes específico.
-                </span>
-            </div>
-
             <div className="neat-page-summary neat-page-summary-logs-usuario" aria-label="Resumen de logs de usuario">
                 <div className="neat-summary-item">
                     <span>Total archivos</span>
@@ -83,6 +76,7 @@ const LogsUsuarioIntro = ({ registros = [] }) => {
                         </div>
                     );
                 })}
+                <br />
             </div>
         </>
     );

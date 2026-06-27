@@ -7379,6 +7379,86 @@
         "operationId": "ParametroController.find"
       }
     },
+    "/permisos/actualizar-matriz": {
+      "post": {
+        "x-controller-name": "PermisoController",
+        "x-operation-name": "actualizarMatriz",
+        "tags": [
+          "PermisoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Actualiza permisos en bloque para un rol",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "creados": {
+                      "type": "number"
+                    },
+                    "eliminados": {
+                      "type": "number"
+                    },
+                    "omitidos": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "rolId",
+                  "permisos",
+                  "marcar",
+                  "usuId"
+                ],
+                "properties": {
+                  "rolId": {
+                    "type": "number"
+                  },
+                  "rolNombre": {
+                    "type": "string"
+                  },
+                  "marcar": {
+                    "type": "boolean"
+                  },
+                  "usuId": {
+                    "type": "number"
+                  },
+                  "permisos": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "controlador",
+                        "accion"
+                      ],
+                      "properties": {
+                        "controlador": {
+                          "type": "string"
+                        },
+                        "accion": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "PermisoController.actualizarMatriz"
+      }
+    },
     "/permisos/count": {
       "get": {
         "x-controller-name": "PermisoController",
@@ -12233,7 +12313,8 @@
         "required": [
           "empresaId",
           "rolId",
-          "idiomaId"
+          "idiomaId",
+          "nombre"
         ],
         "additionalProperties": false
       },
@@ -12324,7 +12405,8 @@
         "required": [
           "empresaId",
           "rolId",
-          "idiomaId"
+          "idiomaId",
+          "nombre"
         ],
         "additionalProperties": false,
         "x-typescript-type": "UsuarioWithRelations"
@@ -13338,7 +13420,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "direccion": {
             "type": "string",
@@ -13380,7 +13462,7 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "empresa": {
             "$ref": "#/components/schemas/EmpresaWithRelations"
@@ -14009,7 +14091,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -14021,7 +14103,7 @@
           },
           "dashboardUrl": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "fechaCreacion": {
             "type": "string",
@@ -14052,12 +14134,15 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "nombre",
+          "dashboardUrl",
+          "usuCreacion",
+          "orden"
         ],
         "additionalProperties": false
       },
@@ -14072,7 +14157,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -14084,7 +14169,7 @@
           },
           "dashboardUrl": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "fechaCreacion": {
             "type": "string",
@@ -14115,12 +14200,15 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "nombre",
+          "dashboardUrl",
+          "usuCreacion",
+          "orden"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Rol, 'id'>"
@@ -14140,7 +14228,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -14152,7 +14240,7 @@
           },
           "dashboardUrl": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "fechaCreacion": {
             "type": "string",
@@ -14183,12 +14271,15 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
           "empresaId",
-          "usuCreacion"
+          "nombre",
+          "dashboardUrl",
+          "usuCreacion",
+          "orden"
         ],
         "additionalProperties": false,
         "x-typescript-type": "RolWithRelations"
@@ -14208,7 +14299,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -14220,7 +14311,7 @@
           },
           "dashboardUrl": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "fechaCreacion": {
             "type": "string",
@@ -14251,7 +14342,7 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "additionalProperties": false,
@@ -15247,7 +15338,8 @@
             "type": "number"
           },
           "nombre": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "valorDisponible": {
             "type": "string"
@@ -15270,9 +15362,14 @@
             "type": "string"
           },
           "orden": {
-            "type": "number"
+            "type": "number",
+            "nullable": false
           }
         },
+        "required": [
+          "nombre",
+          "orden"
+        ],
         "additionalProperties": false
       },
       "NewParametro": {
@@ -15281,7 +15378,8 @@
         "description": "(tsType: Omit<Parametro, 'id'>, schemaOptions: { title: 'NewParametro', exclude: [ 'id' ] })",
         "properties": {
           "nombre": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "valorDisponible": {
             "type": "string"
@@ -15304,9 +15402,14 @@
             "type": "string"
           },
           "orden": {
-            "type": "number"
+            "type": "number",
+            "nullable": false
           }
         },
+        "required": [
+          "nombre",
+          "orden"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Parametro, 'id'>"
       },
@@ -15364,10 +15467,12 @@
             "type": "string"
           },
           "codigo": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "alias": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "periodoEnvioMail": {
             "type": "number"
@@ -15399,7 +15504,8 @@
             "format": "date-time"
           },
           "orden": {
-            "type": "number"
+            "type": "number",
+            "nullable": false
           },
           "envioPallets": {
             "type": "array",
@@ -15414,6 +15520,11 @@
             }
           }
         },
+        "required": [
+          "codigo",
+          "alias",
+          "orden"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "PalletWithRelations"
       },
@@ -15474,7 +15585,8 @@
             "type": "number"
           },
           "nombre": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "valorDisponible": {
             "type": "string"
@@ -15497,7 +15609,8 @@
             "type": "string"
           },
           "orden": {
-            "type": "number"
+            "type": "number",
+            "nullable": false
           },
           "palletParametros": {
             "type": "array",
@@ -15506,6 +15619,10 @@
             }
           }
         },
+        "required": [
+          "nombre",
+          "orden"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "ParametroWithRelations"
       },
@@ -15518,7 +15635,8 @@
             "type": "number"
           },
           "nombre": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "valorDisponible": {
             "type": "string"
@@ -15541,7 +15659,8 @@
             "type": "string"
           },
           "orden": {
-            "type": "number"
+            "type": "number",
+            "nullable": false
           }
         },
         "additionalProperties": false,
@@ -15679,10 +15798,12 @@
             "type": "string"
           },
           "codigo": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "alias": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "periodoEnvioMail": {
             "type": "number"
@@ -15714,9 +15835,15 @@
             "format": "date-time"
           },
           "orden": {
-            "type": "number"
+            "type": "number",
+            "nullable": false
           }
         },
+        "required": [
+          "codigo",
+          "alias",
+          "orden"
+        ],
         "additionalProperties": false
       },
       "NewPallet": {
@@ -15731,10 +15858,12 @@
             "type": "string"
           },
           "codigo": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "alias": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "periodoEnvioMail": {
             "type": "number"
@@ -15766,9 +15895,15 @@
             "format": "date-time"
           },
           "orden": {
-            "type": "number"
+            "type": "number",
+            "nullable": false
           }
         },
+        "required": [
+          "codigo",
+          "alias",
+          "orden"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Pallet, 'id'>"
       },
@@ -15787,10 +15922,12 @@
             "type": "string"
           },
           "codigo": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "alias": {
-            "type": "string"
+            "type": "string",
+            "nullable": false
           },
           "periodoEnvioMail": {
             "type": "number"
@@ -15822,7 +15959,8 @@
             "format": "date-time"
           },
           "orden": {
-            "type": "number"
+            "type": "number",
+            "nullable": false
           }
         },
         "additionalProperties": false,
@@ -15842,7 +15980,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -15868,11 +16006,13 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
-          "usuCreacion"
+          "nombre",
+          "usuCreacion",
+          "orden"
         ],
         "additionalProperties": false
       },
@@ -15887,7 +16027,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -15913,11 +16053,13 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
-          "usuCreacion"
+          "nombre",
+          "usuCreacion",
+          "orden"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Pais, 'id'>"
@@ -15937,7 +16079,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -15963,11 +16105,13 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
-          "usuCreacion"
+          "nombre",
+          "usuCreacion",
+          "orden"
         ],
         "additionalProperties": false,
         "x-typescript-type": "PaisWithRelations"
@@ -15987,7 +16131,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -16013,7 +16157,7 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "additionalProperties": false,
@@ -16033,7 +16177,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "telefono": {
             "type": "string",
@@ -16079,7 +16223,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "telefono": {
             "type": "string",
@@ -16130,7 +16274,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "telefono": {
             "type": "string",
@@ -16181,7 +16325,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "telefono": {
             "type": "string",
@@ -16298,7 +16442,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "direccionGps": {
             "type": "string",
@@ -16344,7 +16488,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "direccionGps": {
             "type": "string",
@@ -16395,7 +16539,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "direccionGps": {
             "type": "string",
@@ -16446,7 +16590,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "direccionGps": {
             "type": "string",
@@ -16690,7 +16834,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -16725,11 +16869,13 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
-          "usuCreacion"
+          "nombre",
+          "usuCreacion",
+          "orden"
         ],
         "additionalProperties": false
       },
@@ -16744,7 +16890,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -16779,11 +16925,13 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
-          "usuCreacion"
+          "nombre",
+          "usuCreacion",
+          "orden"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Idioma, 'id'>"
@@ -16803,7 +16951,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -16838,11 +16986,13 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "required": [
-          "usuCreacion"
+          "nombre",
+          "usuCreacion",
+          "orden"
         ],
         "additionalProperties": false,
         "x-typescript-type": "IdiomaWithRelations"
@@ -16862,7 +17012,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "activoSn": {
             "type": "string",
@@ -16897,7 +17047,7 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "additionalProperties": false,
@@ -19232,7 +19382,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "direccion": {
             "type": "string",
@@ -19274,7 +19424,7 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "additionalProperties": false
@@ -19294,7 +19444,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "direccion": {
             "type": "string",
@@ -19336,7 +19486,7 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "additionalProperties": false,
@@ -19361,7 +19511,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "direccion": {
             "type": "string",
@@ -19403,7 +19553,7 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "additionalProperties": false,

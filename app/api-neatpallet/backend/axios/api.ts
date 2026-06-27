@@ -50,7 +50,7 @@ export interface Cliente {
      * @type {string}
      * @memberof Cliente
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -110,7 +110,7 @@ export interface Cliente {
      * @type {number}
      * @memberof Cliente
      */
-    'orden'?: number | null;
+    'orden'?: number;
 }
 /**
  * 
@@ -261,7 +261,7 @@ export interface ClientePartial {
      * @type {string}
      * @memberof ClientePartial
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -321,7 +321,7 @@ export interface ClientePartial {
      * @type {number}
      * @memberof ClientePartial
      */
-    'orden'?: number | null;
+    'orden'?: number;
 }
 /**
  * 
@@ -401,7 +401,7 @@ export interface ClienteWithRelations {
      * @type {string}
      * @memberof ClienteWithRelations
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -461,7 +461,7 @@ export interface ClienteWithRelations {
      * @type {number}
      * @memberof ClienteWithRelations
      */
-    'orden'?: number | null;
+    'orden'?: number;
     /**
      * 
      * @type {EmpresaWithRelations}
@@ -6403,7 +6403,7 @@ export interface Idioma {
      * @type {string}
      * @memberof Idioma
      */
-    'nombre'?: string | null;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -6451,7 +6451,7 @@ export interface Idioma {
      * @type {number}
      * @memberof Idioma
      */
-    'orden'?: number | null;
+    'orden': number;
 }
 /**
  * 
@@ -6556,7 +6556,7 @@ export interface IdiomaPartial {
      * @type {string}
      * @memberof IdiomaPartial
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -6604,7 +6604,7 @@ export interface IdiomaPartial {
      * @type {number}
      * @memberof IdiomaPartial
      */
-    'orden'?: number | null;
+    'orden'?: number;
 }
 /**
  * (tsType: IdiomaWithRelations, schemaOptions: { includeRelations: true })
@@ -6629,7 +6629,7 @@ export interface IdiomaWithRelations {
      * @type {string}
      * @memberof IdiomaWithRelations
      */
-    'nombre'?: string | null;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -6677,7 +6677,7 @@ export interface IdiomaWithRelations {
      * @type {number}
      * @memberof IdiomaWithRelations
      */
-    'orden'?: number | null;
+    'orden': number;
 }
 /**
  * 
@@ -6719,16 +6719,16 @@ export interface InlineObject1 {
 export interface InlineObject10 {
     /**
      * 
-     * @type {string}
+     * @type {Array<string>}
      * @memberof InlineObject10
      */
-    'mail': string;
+    'emails'?: Array<string>;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineObject10
      */
-    'password': string;
+    'empresaId'?: number;
 }
 /**
  * 
@@ -6741,7 +6741,13 @@ export interface InlineObject11 {
      * @type {string}
      * @memberof InlineObject11
      */
-    'email'?: string;
+    'mail': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject11
+     */
+    'password': string;
 }
 /**
  * 
@@ -6754,29 +6760,42 @@ export interface InlineObject12 {
      * @type {string}
      * @memberof InlineObject12
      */
+    'email'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject13
+ */
+export interface InlineObject13 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject13
+     */
     'nombre': string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject12
+     * @memberof InlineObject13
      */
     'mail': string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject12
+     * @memberof InlineObject13
      */
     'password': string;
     /**
      * 
      * @type {number}
-     * @memberof InlineObject12
+     * @memberof InlineObject13
      */
     'empresaId': number;
     /**
      * 
      * @type {number}
-     * @memberof InlineObject12
+     * @memberof InlineObject13
      */
     'rolId': number;
 }
@@ -6851,16 +6870,34 @@ export interface InlineObject7 {
 export interface InlineObject8 {
     /**
      * 
-     * @type {Array<string>}
+     * @type {number}
      * @memberof InlineObject8
      */
-    'emails'?: Array<string>;
+    'rolId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject8
+     */
+    'rolNombre'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject8
+     */
+    'marcar': boolean;
     /**
      * 
      * @type {number}
      * @memberof InlineObject8
      */
-    'empresaId'?: number;
+    'usuId': number;
+    /**
+     * 
+     * @type {Array<PermisosActualizarMatrizPermisos>}
+     * @memberof InlineObject8
+     */
+    'permisos': Array<PermisosActualizarMatrizPermisos>;
 }
 /**
  * 
@@ -6924,25 +6961,19 @@ export interface InlineResponse2002 {
      * @type {number}
      * @memberof InlineResponse2002
      */
-    'eventosGuardados'?: number;
+    'creados'?: number;
     /**
      * 
      * @type {number}
      * @memberof InlineResponse2002
      */
-    'eventosEnviados'?: number;
+    'eliminados'?: number;
     /**
      * 
      * @type {number}
      * @memberof InlineResponse2002
      */
-    'totalAlarmas'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2002
-     */
-    'bateriaActual'?: number;
+    'omitidos'?: number;
 }
 /**
  * 
@@ -6952,28 +6983,28 @@ export interface InlineResponse2002 {
 export interface InlineResponse2003 {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineResponse2003
      */
-    'accessToken'?: string;
+    'eventosGuardados'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineResponse2003
      */
-    'expiresIn'?: string;
+    'eventosEnviados'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineResponse2003
      */
-    'refreshToken'?: string;
+    'totalAlarmas'?: number;
     /**
      * 
-     * @type {Usuario}
+     * @type {number}
      * @memberof InlineResponse2003
      */
-    'userData'?: Usuario;
+    'bateriaActual'?: number;
 }
 /**
  * 
@@ -6983,14 +7014,45 @@ export interface InlineResponse2003 {
 export interface InlineResponse2004 {
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof InlineResponse2004
+     */
+    'accessToken'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2004
+     */
+    'expiresIn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2004
+     */
+    'refreshToken'?: string;
+    /**
+     * 
+     * @type {Usuario}
+     * @memberof InlineResponse2004
+     */
+    'userData'?: Usuario;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse2005
+ */
+export interface InlineResponse2005 {
+    /**
+     * 
+     * @type {object}
+     * @memberof InlineResponse2005
      */
     'user'?: object;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse2004
+     * @memberof InlineResponse2005
      */
     'token'?: string;
 }
@@ -7299,7 +7361,7 @@ export interface LugarParada {
      * @type {string}
      * @memberof LugarParada
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -7446,7 +7508,7 @@ export interface LugarParadaPartial {
      * @type {string}
      * @memberof LugarParadaPartial
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -7513,7 +7575,7 @@ export interface LugarParadaWithRelations {
      * @type {string}
      * @memberof LugarParadaWithRelations
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -7653,7 +7715,7 @@ export interface NewCliente {
      * @type {string}
      * @memberof NewCliente
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -7713,7 +7775,7 @@ export interface NewCliente {
      * @type {number}
      * @memberof NewCliente
      */
-    'orden'?: number | null;
+    'orden'?: number;
 }
 /**
  * 
@@ -8796,7 +8858,7 @@ export interface NewIdioma {
      * @type {string}
      * @memberof NewIdioma
      */
-    'nombre'?: string | null;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -8844,7 +8906,7 @@ export interface NewIdioma {
      * @type {number}
      * @memberof NewIdioma
      */
-    'orden'?: number | null;
+    'orden': number;
 }
 /**
  * (tsType: Omit<LogUsuario, \'id\'>, schemaOptions: { title: \'NewLogUsuario\', exclude: [ \'id\' ] })
@@ -8924,7 +8986,7 @@ export interface NewLugarParada {
      * @type {string}
      * @memberof NewLugarParada
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -8979,7 +9041,7 @@ export interface NewOperario {
      * @type {string}
      * @memberof NewOperario
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -9040,7 +9102,7 @@ export interface NewPais {
      * @type {string}
      * @memberof NewPais
      */
-    'nombre'?: string | null;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -9076,7 +9138,7 @@ export interface NewPais {
      * @type {number}
      * @memberof NewPais
      */
-    'orden'?: number | null;
+    'orden': number;
 }
 /**
  * (tsType: Omit<Pallet, \'id\'>, schemaOptions: { title: \'NewPallet\', exclude: [ \'id\' ] })
@@ -9101,13 +9163,13 @@ export interface NewPallet {
      * @type {string}
      * @memberof NewPallet
      */
-    'codigo'?: string;
+    'codigo': string;
     /**
      * 
      * @type {string}
      * @memberof NewPallet
      */
-    'alias'?: string;
+    'alias': string;
     /**
      * 
      * @type {number}
@@ -9167,7 +9229,7 @@ export interface NewPallet {
      * @type {number}
      * @memberof NewPallet
      */
-    'orden'?: number;
+    'orden': number;
 }
 /**
  * (tsType: Omit<PalletParametro, \'id\'>, schemaOptions: { title: \'NewPalletParametro\', exclude: [ \'id\' ] })
@@ -9241,7 +9303,7 @@ export interface NewParametro {
      * @type {string}
      * @memberof NewParametro
      */
-    'nombre'?: string;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -9283,7 +9345,7 @@ export interface NewParametro {
      * @type {number}
      * @memberof NewParametro
      */
-    'orden'?: number;
+    'orden': number;
 }
 /**
  * (tsType: Omit<Permiso, \'id\'>, schemaOptions: { title: \'NewPermiso\', exclude: [ \'id\' ] })
@@ -9600,7 +9662,7 @@ export interface NewRol {
      * @type {string}
      * @memberof NewRol
      */
-    'nombre'?: string | null;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -9618,7 +9680,7 @@ export interface NewRol {
      * @type {string}
      * @memberof NewRol
      */
-    'dashboardUrl'?: string | null;
+    'dashboardUrl': string;
     /**
      * 
      * @type {string}
@@ -9660,7 +9722,7 @@ export interface NewRol {
      * @type {number}
      * @memberof NewRol
      */
-    'orden'?: number | null;
+    'orden': number;
 }
 /**
  * (tsType: Omit<TipoCarroceria, \'id\'>, schemaOptions: { title: \'NewTipoCarroceria\', exclude: [ \'id\' ] })
@@ -10240,7 +10302,7 @@ export interface Operario {
      * @type {string}
      * @memberof Operario
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -10387,7 +10449,7 @@ export interface OperarioPartial {
      * @type {string}
      * @memberof OperarioPartial
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -10454,7 +10516,7 @@ export interface OperarioWithRelations {
      * @type {string}
      * @memberof OperarioWithRelations
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -10521,7 +10583,7 @@ export interface Pais {
      * @type {string}
      * @memberof Pais
      */
-    'nombre'?: string | null;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -10557,7 +10619,7 @@ export interface Pais {
      * @type {number}
      * @memberof Pais
      */
-    'orden'?: number | null;
+    'orden': number;
 }
 /**
  * 
@@ -10662,7 +10724,7 @@ export interface PaisPartial {
      * @type {string}
      * @memberof PaisPartial
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -10698,7 +10760,7 @@ export interface PaisPartial {
      * @type {number}
      * @memberof PaisPartial
      */
-    'orden'?: number | null;
+    'orden'?: number;
 }
 /**
  * (tsType: PaisWithRelations, schemaOptions: { includeRelations: true })
@@ -10723,7 +10785,7 @@ export interface PaisWithRelations {
      * @type {string}
      * @memberof PaisWithRelations
      */
-    'nombre'?: string | null;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -10759,7 +10821,7 @@ export interface PaisWithRelations {
      * @type {number}
      * @memberof PaisWithRelations
      */
-    'orden'?: number | null;
+    'orden': number;
 }
 /**
  * 
@@ -10790,13 +10852,13 @@ export interface Pallet {
      * @type {string}
      * @memberof Pallet
      */
-    'codigo'?: string;
+    'codigo': string;
     /**
      * 
      * @type {string}
      * @memberof Pallet
      */
-    'alias'?: string;
+    'alias': string;
     /**
      * 
      * @type {number}
@@ -10856,7 +10918,7 @@ export interface Pallet {
      * @type {number}
      * @memberof Pallet
      */
-    'orden'?: number;
+    'orden': number;
 }
 /**
  * 
@@ -11543,13 +11605,13 @@ export interface PalletWithRelations {
      * @type {string}
      * @memberof PalletWithRelations
      */
-    'codigo'?: string;
+    'codigo': string;
     /**
      * 
      * @type {string}
      * @memberof PalletWithRelations
      */
-    'alias'?: string;
+    'alias': string;
     /**
      * 
      * @type {number}
@@ -11609,7 +11671,7 @@ export interface PalletWithRelations {
      * @type {number}
      * @memberof PalletWithRelations
      */
-    'orden'?: number;
+    'orden': number;
     /**
      * 
      * @type {Array<EnvioPalletWithRelations>}
@@ -11640,7 +11702,7 @@ export interface Parametro {
      * @type {string}
      * @memberof Parametro
      */
-    'nombre'?: string;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -11682,7 +11744,7 @@ export interface Parametro {
      * @type {number}
      * @memberof Parametro
      */
-    'orden'?: number;
+    'orden': number;
 }
 /**
  * 
@@ -11931,7 +11993,7 @@ export interface ParametroWithRelations {
      * @type {string}
      * @memberof ParametroWithRelations
      */
-    'nombre'?: string;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -11973,7 +12035,7 @@ export interface ParametroWithRelations {
      * @type {number}
      * @memberof ParametroWithRelations
      */
-    'orden'?: number;
+    'orden': number;
     /**
      * 
      * @type {Array<PalletParametroWithRelations>}
@@ -12243,6 +12305,25 @@ export interface PermisoWithRelations {
      * @memberof PermisoWithRelations
      */
     'usuModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface PermisosActualizarMatrizPermisos
+ */
+export interface PermisosActualizarMatrizPermisos {
+    /**
+     * 
+     * @type {string}
+     * @memberof PermisosActualizarMatrizPermisos
+     */
+    'controlador': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PermisosActualizarMatrizPermisos
+     */
+    'accion': string;
 }
 /**
  * 
@@ -13422,7 +13503,7 @@ export interface Rol {
      * @type {string}
      * @memberof Rol
      */
-    'nombre'?: string | null;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -13440,7 +13521,7 @@ export interface Rol {
      * @type {string}
      * @memberof Rol
      */
-    'dashboardUrl'?: string | null;
+    'dashboardUrl': string;
     /**
      * 
      * @type {string}
@@ -13482,7 +13563,7 @@ export interface Rol {
      * @type {number}
      * @memberof Rol
      */
-    'orden'?: number | null;
+    'orden': number;
 }
 /**
  * 
@@ -13587,7 +13668,7 @@ export interface RolPartial {
      * @type {string}
      * @memberof RolPartial
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -13605,7 +13686,7 @@ export interface RolPartial {
      * @type {string}
      * @memberof RolPartial
      */
-    'dashboardUrl'?: string | null;
+    'dashboardUrl'?: string;
     /**
      * 
      * @type {string}
@@ -13647,7 +13728,7 @@ export interface RolPartial {
      * @type {number}
      * @memberof RolPartial
      */
-    'orden'?: number | null;
+    'orden'?: number;
 }
 /**
  * (tsType: RolWithRelations, schemaOptions: { includeRelations: true })
@@ -13672,7 +13753,7 @@ export interface RolWithRelations {
      * @type {string}
      * @memberof RolWithRelations
      */
-    'nombre'?: string | null;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -13690,7 +13771,7 @@ export interface RolWithRelations {
      * @type {string}
      * @memberof RolWithRelations
      */
-    'dashboardUrl'?: string | null;
+    'dashboardUrl': string;
     /**
      * 
      * @type {string}
@@ -13732,7 +13813,7 @@ export interface RolWithRelations {
      * @type {number}
      * @memberof RolWithRelations
      */
-    'orden'?: number | null;
+    'orden': number;
 }
 /**
  * 
@@ -15777,7 +15858,7 @@ export interface Usuario {
      * @type {string}
      * @memberof Usuario
      */
-    'nombre'?: string;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -16685,7 +16766,7 @@ export interface UsuarioWithRelations {
      * @type {string}
      * @memberof UsuarioWithRelations
      */
-    'nombre'?: string;
+    'nombre': string;
     /**
      * 
      * @type {string}
@@ -22426,7 +22507,7 @@ export const EnvioControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async envioControllerResumenEnvio(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2002>>> {
+        async envioControllerResumenEnvio(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2003>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.envioControllerResumenEnvio(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -22445,7 +22526,7 @@ export const EnvioControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async envioControllerResumenEnvioPallet(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2002>>> {
+        async envioControllerResumenEnvioPallet(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2003>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.envioControllerResumenEnvioPallet(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -22570,7 +22651,7 @@ export const EnvioControllerApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioControllerResumenEnvio(id: number, options?: any): AxiosPromise<Array<InlineResponse2002>> {
+        envioControllerResumenEnvio(id: number, options?: any): AxiosPromise<Array<InlineResponse2003>> {
             return localVarFp.envioControllerResumenEnvio(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -22587,7 +22668,7 @@ export const EnvioControllerApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        envioControllerResumenEnvioPallet(id: number, options?: any): AxiosPromise<Array<InlineResponse2002>> {
+        envioControllerResumenEnvioPallet(id: number, options?: any): AxiosPromise<Array<InlineResponse2003>> {
             return localVarFp.envioControllerResumenEnvioPallet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -31534,6 +31615,43 @@ export const PermisoControllerApiAxiosParamCreator = function (configuration?: C
     return {
         /**
          * 
+         * @param {InlineObject8} [inlineObject8] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        permisoControllerActualizarMatriz: async (inlineObject8?: InlineObject8, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/permisos/actualizar-matriz`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject8, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} [rolId] 
          * @param {string} [modulo] 
          * @param {string} [controlador] 
@@ -31994,6 +32112,16 @@ export const PermisoControllerApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {InlineObject8} [inlineObject8] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async permisoControllerActualizarMatriz(inlineObject8?: InlineObject8, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.permisoControllerActualizarMatriz(inlineObject8, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {string} [rolId] 
          * @param {string} [modulo] 
          * @param {string} [controlador] 
@@ -32122,6 +32250,15 @@ export const PermisoControllerApiFactory = function (configuration?: Configurati
     return {
         /**
          * 
+         * @param {InlineObject8} [inlineObject8] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        permisoControllerActualizarMatriz(inlineObject8?: InlineObject8, options?: any): AxiosPromise<InlineResponse2002> {
+            return localVarFp.permisoControllerActualizarMatriz(inlineObject8, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {string} [rolId] 
          * @param {string} [modulo] 
          * @param {string} [controlador] 
@@ -32237,6 +32374,17 @@ export const PermisoControllerApiFactory = function (configuration?: Configurati
  * @extends {BaseAPI}
  */
 export class PermisoControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {InlineObject8} [inlineObject8] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PermisoControllerApi
+     */
+    public permisoControllerActualizarMatriz(inlineObject8?: InlineObject8, options?: AxiosRequestConfig) {
+        return PermisoControllerApiFp(this.configuration).permisoControllerActualizarMatriz(inlineObject8, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {string} [rolId] 
@@ -32587,15 +32735,15 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
         /**
          * 
          * @param {string} nombrePlantilla 
-         * @param {InlineObject8} inlineObject8 
+         * @param {InlineObject9} inlineObject9 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerEnviarEmails: async (nombrePlantilla: string, inlineObject8: InlineObject8, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        plantillaEmailControllerEnviarEmails: async (nombrePlantilla: string, inlineObject9: InlineObject9, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'nombrePlantilla' is not null or undefined
             assertParamExists('plantillaEmailControllerEnviarEmails', 'nombrePlantilla', nombrePlantilla)
-            // verify required parameter 'inlineObject8' is not null or undefined
-            assertParamExists('plantillaEmailControllerEnviarEmails', 'inlineObject8', inlineObject8)
+            // verify required parameter 'inlineObject9' is not null or undefined
+            assertParamExists('plantillaEmailControllerEnviarEmails', 'inlineObject9', inlineObject9)
             const localVarPath = `/plantilla-emails/enviarEmails/{nombrePlantilla}`
                 .replace(`{${"nombrePlantilla"}}`, encodeURIComponent(String(nombrePlantilla)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -32620,7 +32768,7 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject8, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject9, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -32630,15 +32778,15 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
         /**
          * 
          * @param {string} url 
-         * @param {InlineObject9} inlineObject9 
+         * @param {InlineObject10} inlineObject10 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerEnviarQR: async (url: string, inlineObject9: InlineObject9, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        plantillaEmailControllerEnviarQR: async (url: string, inlineObject10: InlineObject10, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'url' is not null or undefined
             assertParamExists('plantillaEmailControllerEnviarQR', 'url', url)
-            // verify required parameter 'inlineObject9' is not null or undefined
-            assertParamExists('plantillaEmailControllerEnviarQR', 'inlineObject9', inlineObject9)
+            // verify required parameter 'inlineObject10' is not null or undefined
+            assertParamExists('plantillaEmailControllerEnviarQR', 'inlineObject10', inlineObject10)
             const localVarPath = `/plantilla-emails/enviarQR/{url}`
                 .replace(`{${"url"}}`, encodeURIComponent(String(url)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -32663,7 +32811,7 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject9, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject10, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -32993,23 +33141,23 @@ export const PlantillaEmailControllerApiFp = function(configuration?: Configurat
         /**
          * 
          * @param {string} nombrePlantilla 
-         * @param {InlineObject8} inlineObject8 
+         * @param {InlineObject9} inlineObject9 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject8: InlineObject8, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject8, options);
+        async plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject9: InlineObject9, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject9, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} url 
-         * @param {InlineObject9} inlineObject9 
+         * @param {InlineObject10} inlineObject10 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async plantillaEmailControllerEnviarQR(url: string, inlineObject9: InlineObject9, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarQR(url, inlineObject9, options);
+        async plantillaEmailControllerEnviarQR(url: string, inlineObject10: InlineObject10, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarQR(url, inlineObject10, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -33126,22 +33274,22 @@ export const PlantillaEmailControllerApiFactory = function (configuration?: Conf
         /**
          * 
          * @param {string} nombrePlantilla 
-         * @param {InlineObject8} inlineObject8 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject8: InlineObject8, options?: any): AxiosPromise<void> {
-            return localVarFp.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject8, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} url 
          * @param {InlineObject9} inlineObject9 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerEnviarQR(url: string, inlineObject9: InlineObject9, options?: any): AxiosPromise<void> {
-            return localVarFp.plantillaEmailControllerEnviarQR(url, inlineObject9, options).then((request) => request(axios, basePath));
+        plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject9: InlineObject9, options?: any): AxiosPromise<void> {
+            return localVarFp.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject9, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} url 
+         * @param {InlineObject10} inlineObject10 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerEnviarQR(url: string, inlineObject10: InlineObject10, options?: any): AxiosPromise<void> {
+            return localVarFp.plantillaEmailControllerEnviarQR(url, inlineObject10, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -33256,25 +33404,25 @@ export class PlantillaEmailControllerApi extends BaseAPI {
     /**
      * 
      * @param {string} nombrePlantilla 
-     * @param {InlineObject8} inlineObject8 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PlantillaEmailControllerApi
-     */
-    public plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject8: InlineObject8, options?: AxiosRequestConfig) {
-        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject8, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} url 
      * @param {InlineObject9} inlineObject9 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlantillaEmailControllerApi
      */
-    public plantillaEmailControllerEnviarQR(url: string, inlineObject9: InlineObject9, options?: AxiosRequestConfig) {
-        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarQR(url, inlineObject9, options).then((request) => request(this.axios, this.basePath));
+    public plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject9: InlineObject9, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject9, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} url 
+     * @param {InlineObject10} inlineObject10 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerEnviarQR(url: string, inlineObject10: InlineObject10, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarQR(url, inlineObject10, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -40045,13 +40193,13 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @param {InlineObject10} inlineObject10 
+         * @param {InlineObject11} inlineObject11 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerLogin: async (inlineObject10: InlineObject10, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'inlineObject10' is not null or undefined
-            assertParamExists('usuariosControllerLogin', 'inlineObject10', inlineObject10)
+        usuariosControllerLogin: async (inlineObject11: InlineObject11, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'inlineObject11' is not null or undefined
+            assertParamExists('usuariosControllerLogin', 'inlineObject11', inlineObject11)
             const localVarPath = `/usuarios/login`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -40075,7 +40223,7 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject10, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject11, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -40084,13 +40232,13 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @param {InlineObject11} inlineObject11 
+         * @param {InlineObject12} inlineObject12 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRecuperarPassword: async (inlineObject11: InlineObject11, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'inlineObject11' is not null or undefined
-            assertParamExists('usuariosControllerRecuperarPassword', 'inlineObject11', inlineObject11)
+        usuariosControllerRecuperarPassword: async (inlineObject12: InlineObject12, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'inlineObject12' is not null or undefined
+            assertParamExists('usuariosControllerRecuperarPassword', 'inlineObject12', inlineObject12)
             const localVarPath = `/usuarios/recuperarPassword`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -40114,7 +40262,7 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject11, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject12, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -40162,11 +40310,11 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @param {InlineObject12} [inlineObject12] 
+         * @param {InlineObject13} [inlineObject13] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRegister: async (inlineObject12?: InlineObject12, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        usuariosControllerRegister: async (inlineObject13?: InlineObject13, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/usuarios/register`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -40190,7 +40338,7 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject12, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject13, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -40538,22 +40686,22 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {InlineObject10} inlineObject10 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usuariosControllerLogin(inlineObject10: InlineObject10, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerLogin(inlineObject10, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {InlineObject11} inlineObject11 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerRecuperarPassword(inlineObject11: InlineObject11, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRecuperarPassword(inlineObject11, options);
+        async usuariosControllerLogin(inlineObject11: InlineObject11, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerLogin(inlineObject11, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {InlineObject12} inlineObject12 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async usuariosControllerRecuperarPassword(inlineObject12: InlineObject12, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRecuperarPassword(inlineObject12, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -40568,12 +40716,12 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {InlineObject12} [inlineObject12] 
+         * @param {InlineObject13} [inlineObject13] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerRegister(inlineObject12?: InlineObject12, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRegister(inlineObject12, options);
+        async usuariosControllerRegister(inlineObject13?: InlineObject13, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRegister(inlineObject13, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -40708,21 +40856,21 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @param {InlineObject10} inlineObject10 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usuariosControllerLogin(inlineObject10: InlineObject10, options?: any): AxiosPromise<InlineResponse2003> {
-            return localVarFp.usuariosControllerLogin(inlineObject10, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {InlineObject11} inlineObject11 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRecuperarPassword(inlineObject11: InlineObject11, options?: any): AxiosPromise<void> {
-            return localVarFp.usuariosControllerRecuperarPassword(inlineObject11, options).then((request) => request(axios, basePath));
+        usuariosControllerLogin(inlineObject11: InlineObject11, options?: any): AxiosPromise<InlineResponse2004> {
+            return localVarFp.usuariosControllerLogin(inlineObject11, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {InlineObject12} inlineObject12 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usuariosControllerRecuperarPassword(inlineObject12: InlineObject12, options?: any): AxiosPromise<void> {
+            return localVarFp.usuariosControllerRecuperarPassword(inlineObject12, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -40735,12 +40883,12 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @param {InlineObject12} [inlineObject12] 
+         * @param {InlineObject13} [inlineObject13] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRegister(inlineObject12?: InlineObject12, options?: any): AxiosPromise<InlineResponse2004> {
-            return localVarFp.usuariosControllerRegister(inlineObject12, options).then((request) => request(axios, basePath));
+        usuariosControllerRegister(inlineObject13?: InlineObject13, options?: any): AxiosPromise<InlineResponse2005> {
+            return localVarFp.usuariosControllerRegister(inlineObject13, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -40877,24 +41025,24 @@ export class UsuariosControllerApi extends BaseAPI {
 
     /**
      * 
-     * @param {InlineObject10} inlineObject10 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsuariosControllerApi
-     */
-    public usuariosControllerLogin(inlineObject10: InlineObject10, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerLogin(inlineObject10, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @param {InlineObject11} inlineObject11 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsuariosControllerApi
      */
-    public usuariosControllerRecuperarPassword(inlineObject11: InlineObject11, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerRecuperarPassword(inlineObject11, options).then((request) => request(this.axios, this.basePath));
+    public usuariosControllerLogin(inlineObject11: InlineObject11, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerLogin(inlineObject11, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {InlineObject12} inlineObject12 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsuariosControllerApi
+     */
+    public usuariosControllerRecuperarPassword(inlineObject12: InlineObject12, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerRecuperarPassword(inlineObject12, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -40910,13 +41058,13 @@ export class UsuariosControllerApi extends BaseAPI {
 
     /**
      * 
-     * @param {InlineObject12} [inlineObject12] 
+     * @param {InlineObject13} [inlineObject13] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsuariosControllerApi
      */
-    public usuariosControllerRegister(inlineObject12?: InlineObject12, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerRegister(inlineObject12, options).then((request) => request(this.axios, this.basePath));
+    public usuariosControllerRegister(inlineObject13?: InlineObject13, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerRegister(inlineObject13, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

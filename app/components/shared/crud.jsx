@@ -27,7 +27,7 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
     parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = true, onDataChange,
-    procesarImportacionCSV, onModoEdicionChange, habilitarEntradaPorFila = controlador !== 'Permisos',
+    procesarImportacionCSV, onModoEdicionChange, onParametrosCrudChange, habilitarEntradaPorFila = controlador !== 'Permisos',
     accionEntradaPorFila = 'auto', mostrarEdicionEnModal = false, modalEdicionProps = {} }) => {
     const intl = useIntl()
     const router = useRouter();
@@ -256,6 +256,18 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         //
         onModoEdicionChange(idEditar === 0 || (idEditar > 0 && editable));
     }, [editable, idEditar, onModoEdicionChange]);
+
+    useEffect(() => {
+        if (!onParametrosCrudChange) {
+            return;
+        }
+
+        //
+        //Exponemos el estado real del paginado para pantallas que necesiten
+        //sincronizar consultas auxiliares con la pagina visible
+        //
+        onParametrosCrudChange(parametrosCrud);
+    }, [onParametrosCrudChange, parametrosCrud]);
 
     useEffect(() => {
         if (!puedeCargarDatosProtegidos()) {

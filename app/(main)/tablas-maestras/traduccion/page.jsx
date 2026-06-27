@@ -13,6 +13,12 @@ const Traduccion = () => {
     const intl = useIntl();
     const [idiomas, setIdiomas] = useState([]);
     const [summaryRefreshKey, setSummaryRefreshKey] = useState(0);
+    const [parametrosPaginacion, setParametrosPaginacion] = useState({
+        first: 0,
+        rows: 20,
+        sortField: 'clave',
+        sortOrder: 1,
+    });
 
     useEffect(() => {
         const cargarIdiomas = async () => {
@@ -137,7 +143,11 @@ const Traduccion = () => {
     return (
         <div>
             <LenguajesTabs />
-            <TraduccionIntro refreshKey={summaryRefreshKey} idiomas={idiomas} />
+            <TraduccionIntro
+                refreshKey={summaryRefreshKey}
+                idiomas={idiomas}
+                parametrosPaginacion={parametrosPaginacion}
+            />
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Traducciones' })}
                 getRegistros={getVistaTraduccionIdioma}
@@ -156,6 +166,7 @@ const Traduccion = () => {
                 deleteRegistro={deleteTraduccion}
                 procesarImportacionCSV={procesarImportacionCSV}
                 onDataChange={() => setSummaryRefreshKey((key) => key + 1)}
+                onParametrosCrudChange={setParametrosPaginacion}
             />
         </div>
     );

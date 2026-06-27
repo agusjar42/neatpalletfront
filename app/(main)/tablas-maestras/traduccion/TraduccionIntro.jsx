@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getTraducciones } from "@/app/api-endpoints/traduccion";
 
-const TraduccionIntro = ({ refreshKey = 0, idiomas = [] }) => {
+const TraduccionIntro = ({ refreshKey = 0, idiomas = [], parametrosPaginacion }) => {
     const [summary, setSummary] = useState({
         claves: "-",
         idiomasActivos: "-",
@@ -22,9 +22,19 @@ const TraduccionIntro = ({ refreshKey = 0, idiomas = [] }) => {
                 }
 
                 //
-                //Solo pedimos las traducciones porque los idiomas ya estan disponibles
+                //Sincronizamos la consulta auxiliar con el paginado visible para
+                //evitar traer todas las traducciones de golpe
                 //
-                const traducciones = await getTraducciones(JSON.stringify({ fields: { idiomaId: true, clave: true, valor: true } }));
+                const limit = parametrosPaginacion?.rows ?? 20;
+                const offset = parametrosPaginacion?.first ?? 0;
+                const sortField = parametrosPaginacion?.sortField ?? "clave";
+                const sortOrder = parametrosPaginacion?.sortOrder === -1 ? "DESC" : "ASC";
+                const traducciones = await getTraducciones(JSON.stringify({
+                    fields: { idiomaId: true, clave: true, valor: true },
+                    limit,
+                    offset,
+                    order: `${sortField} ${sortOrder}`,
+                }));
 
                 const idiomasActivos = Array.isArray(idiomas)
                     ? idiomas.filter((idioma) => idioma?.activoSn === "S")
@@ -73,7 +83,7 @@ const TraduccionIntro = ({ refreshKey = 0, idiomas = [] }) => {
         };
 
         cargarResumen();
-    }, [idiomas, refreshKey]);
+    }, [idiomas, parametrosPaginacion, refreshKey]);
 
     return (
         <section className="neat-page-intro">

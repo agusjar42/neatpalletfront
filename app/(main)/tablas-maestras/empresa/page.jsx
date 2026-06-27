@@ -433,7 +433,7 @@ const Empresa = () => {
     }, [empresaActiva?.id]);
 
     useEffect(() => {
-        const hayCambiosSinGuardar = modoEdicion || hayEdicionEnPestana;
+        const hayCambiosSinGuardar = (modoEdicion && JSON.stringify(empresaActiva ?? {}) !== JSON.stringify(empresaEdicion ?? {})) || hayEdicionEnPestana;
         if (!hayCambiosSinGuardar) return;
 
         const manejarBeforeUnload = (event) => {
@@ -443,7 +443,7 @@ const Empresa = () => {
 
         window.addEventListener("beforeunload", manejarBeforeUnload);
         return () => window.removeEventListener("beforeunload", manejarBeforeUnload);
-    }, [modoEdicion, hayEdicionEnPestana]);
+    }, [modoEdicion, empresaActiva, empresaEdicion, hayEdicionEnPestana]);
 
     const fechaAlta = useMemo(() => {
         if (!empresaActiva?.fechaCreacion) return "-";
@@ -516,6 +516,12 @@ const Empresa = () => {
     };
 
     const cancelarEdicionEmpresa = () => {
+        if (!modoEdicion || JSON.stringify(empresaActiva ?? {}) === JSON.stringify(empresaEdicion ?? {})) {
+            setHayEdicionEnPestana(false);
+            setModoEdicion(false);
+            return;
+        }
+
         confirmarSalidaSinGuardar(() => {
             setHayEdicionEnPestana(false);
             setModoEdicion(false);
@@ -767,12 +773,8 @@ const Empresa = () => {
         return (
             <div className="empresa-profile-shell">
                 <ConfirmDialog />
-                <section className="empresa-profile-card empresa-edit-screen">
+                <section className="empresa-edit-screen">
                     <div className="empresa-edit-screen-header">
-                        <button className="empresa-back-button" type="button" onClick={cancelarEdicionEmpresa}>
-                            <i className="pi pi-chevron-left" aria-hidden="true"></i>
-                            Clientes
-                        </button>
                         <div>
                             <h1>Editar cliente</h1>
                             <p>
@@ -789,9 +791,9 @@ const Empresa = () => {
 
                     <footer className="empresa-edit-footer empresa-edit-screen-footer">
                         <span></span>
-                        <div className="empresa-edit-footer-actions">
-                            <Button label="Cancelar" outlined onClick={cancelarEdicionEmpresa} />
-                            <Button label={guardando ? "Guardando..." : "Guardar cambios"} outlined onClick={guardarEmpresa} disabled={guardando} />
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label="Cancelar" className="p-button-secondary" onClick={cancelarEdicionEmpresa} />
+                            <Button label={guardando ? "Guardando..." : "Guardar cambios"} onClick={guardarEmpresa} disabled={guardando} />
                         </div>
                     </footer>
                 </section>
@@ -1876,7 +1878,7 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
     }, [empresaActiva?.eventos24h, empresaActiva?.id]);
 
     useEffect(() => {
-        const hayCambiosSinGuardar = modoEdicion || hayEdicionEnPestana;
+        const hayCambiosSinGuardar = (modoEdicion && JSON.stringify(empresaActiva ?? {}) !== JSON.stringify(empresaEdicion ?? {})) || hayEdicionEnPestana;
         if (!hayCambiosSinGuardar) return;
 
         const manejarBeforeUnload = (event) => {
@@ -1886,7 +1888,7 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
 
         window.addEventListener("beforeunload", manejarBeforeUnload);
         return () => window.removeEventListener("beforeunload", manejarBeforeUnload);
-    }, [modoEdicion, hayEdicionEnPestana]);
+    }, [modoEdicion, empresaActiva, empresaEdicion, hayEdicionEnPestana]);
 
     const fechaAlta = useMemo(() => {
         if (!empresaActiva?.fechaCreacion) return "-";
@@ -1905,7 +1907,7 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
     };
 
     const volverAlListado = () => {
-        if (modoEdicion || hayEdicionEnPestana) {
+        if ((modoEdicion && JSON.stringify(empresaActiva ?? {}) !== JSON.stringify(empresaEdicion ?? {})) || hayEdicionEnPestana) {
             confirmarSalidaSinGuardar(() => {
                 setHayEdicionEnPestana(false);
                 setIdEditar(null);
@@ -1959,6 +1961,13 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
     };
 
     const cancelarEdicionEmpresa = () => {
+        if (!modoEdicion || JSON.stringify(empresaActiva ?? {}) === JSON.stringify(empresaEdicion ?? {})) {
+            setHayEdicionEnPestana(false);
+            setEmpresaEdicion({ ...empresaActiva });
+            setModoEdicion(false);
+            return;
+        }
+
         confirmarSalidaSinGuardar(() => {
             setHayEdicionEnPestana(false);
             setEmpresaEdicion({ ...empresaActiva });
@@ -2025,15 +2034,11 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
                     closeOnEscape={false}
                     dismissableMask={false}
                     showHeader={false}
-                    className="neat-crud-edit-dialog empresa-edit-main-dialog"
+                    className="neat-crud-edit-dialog catalogo-edit-dialog empresa-edit-main-dialog"
                     style={{ width: "min(1180px, 92vw)" }}
                 >
-                    <section className="empresa-profile-card empresa-edit-screen">
+                    <section className="empresa-edit-screen">
                         <div className="empresa-edit-screen-header">
-                            <button className="empresa-back-button" type="button" onClick={cancelarEdicionEmpresa}>
-                                <i className="pi pi-chevron-left" aria-hidden="true"></i>
-                                Clientes
-                            </button>
                             <div>
                                 <h1>Editar cliente</h1>
                                 <p>Modifica la ficha de <strong>{empresaActiva.nombre}</strong>. Los cambios se aplican al guardar.</p>
@@ -2044,9 +2049,9 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
 
                         <footer className="empresa-edit-footer empresa-edit-screen-footer">
                             <span></span>
-                            <div className="empresa-edit-footer-actions">
-                                <Button label="Cancelar" outlined onClick={cancelarEdicionEmpresa} />
-                                <Button label={guardando ? "Guardando..." : "Guardar cambios"} outlined onClick={guardarEmpresa} disabled={guardando} />
+                            <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                                <Button label="Cancelar" className="p-button-secondary" onClick={cancelarEdicionEmpresa} />
+                                <Button label={guardando ? "Guardando..." : "Guardar cambios"} onClick={guardarEmpresa} disabled={guardando} />
                             </div>
                         </footer>
                     </section>

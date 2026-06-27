@@ -61,6 +61,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [idEditar, setIdEditar] = useState(null);
     const [modoAperturaRegistro, setModoAperturaRegistro] = useState(null);
     const [registrosTipoArchivos, setRegistrosTipoArchivos] = useState([]);
+    const [hayCambiosPendientesEdicion, setHayCambiosPendientesEdicion] = useState(false);
 
     const [eliminarRegistroDialog, setEliminarRegistroDialog] = useState(false);
     const [descargarCSVDialog, setDescargarCSVDialog] = useState(false);
@@ -91,6 +92,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [registrosForaneos, setRegistrosForaneos] = useState({});
     const [operadorSeleccionado, setOperadorSeleccionado] = useState('or');
     const [totalRegistros, setTotalRegistros] = useState(0);
+    const contenedorEdicionRef = useRef(null);
+    const instantaneaInicialEdicionRef = useRef("");
+    const usuarioHaInteractuadoRef = useRef(false);
     const puedeCargarDatosProtegidos = () => {
         if (!isInitialized || !usuarioAutenticado || typeof window === 'undefined') {
             return false;
@@ -261,11 +265,91 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         }
 
         //
-        //Solo marcamos edicion activa cuando estamos creando un registro
-        //o editando de verdad, no cuando la ficha se abre en modo solo lectura
+        //Solo notificamos cambios reales pendientes de guardar.
+        //Abrir la ficha sin tocar campos no debe activar avisos.
         //
-        onModoEdicionChange(idEditar === 0 || (idEditar > 0 && editable));
-    }, [editable, idEditar, onModoEdicionChange]);
+        onModoEdicionChange(hayCambiosPendientesEdicion);
+    }, [hayCambiosPendientesEdicion, onModoEdicionChange]);
+
+    const serializarEstadoFormulario = (contenedor) => {
+        if (!contenedor) {
+            return "";
+        }
+
+        const campos = Array.from(contenedor.querySelectorAll("input, select, textarea"));
+        return JSON.stringify(campos.map((campo, index) => {
+            const tipo = campo.type || campo.tagName;
+
+            if (tipo === "checkbox" || tipo === "radio") {
+                return {
+                    index,
+                    nombre: campo.name || campo.id || "",
+                    tipo,
+                    checked: Boolean(campo.checked),
+                    value: campo.value ?? "",
+                };
+            }
+
+            return {
+                index,
+                nombre: campo.name || campo.id || "",
+                tipo,
+                value: campo.value ?? "",
+            };
+        }));
+    };
+
+    useEffect(() => {
+        if (idEditar === null) {
+            setHayCambiosPendientesEdicion(false);
+            usuarioHaInteractuadoRef.current = false;
+            instantaneaInicialEdicionRef.current = "";
+            return;
+        }
+
+        const contenedor = contenedorEdicionRef.current;
+        if (!contenedor) {
+            return;
+        }
+
+        usuarioHaInteractuadoRef.current = false;
+        setHayCambiosPendientesEdicion(false);
+
+        const actualizarInstantaneaBase = () => {
+            if (!usuarioHaInteractuadoRef.current) {
+                instantaneaInicialEdicionRef.current = serializarEstadoFormulario(contenedor);
+                setHayCambiosPendientesEdicion(false);
+            }
+        };
+
+        actualizarInstantaneaBase();
+
+        const manejarCambioFormulario = () => {
+            usuarioHaInteractuadoRef.current = true;
+            const instantaneaActual = serializarEstadoFormulario(contenedor);
+            setHayCambiosPendientesEdicion(instantaneaActual !== instantaneaInicialEdicionRef.current);
+        };
+
+        const observer = new MutationObserver(() => {
+            actualizarInstantaneaBase();
+        });
+
+        observer.observe(contenedor, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ["value", "checked", "aria-checked"],
+        });
+
+        contenedor.addEventListener("input", manejarCambioFormulario, true);
+        contenedor.addEventListener("change", manejarCambioFormulario, true);
+
+        return () => {
+            observer.disconnect();
+            contenedor.removeEventListener("input", manejarCambioFormulario, true);
+            contenedor.removeEventListener("change", manejarCambioFormulario, true);
+        };
+    }, [idEditar, editable, modoAperturaRegistro]);
 
     useEffect(() => {
         if (!onParametrosCrudChange) {
@@ -1618,10 +1702,12 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                     style={{ width: "min(1100px, 92vw)" }}
                                     {...modalEdicionProps}
                                 >
-                                    {renderizarEditarComponente()}
+                                    <div ref={contenedorEdicionRef}>
+                                        {renderizarEditarComponente()}
+                                    </div>
                                 </Dialog>
                             ) : (
-                                <div>
+                                <div ref={contenedorEdicionRef}>
                                     {renderizarEditarComponente()}
                                 </div>
                             )}

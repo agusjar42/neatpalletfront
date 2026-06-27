@@ -1,4 +1,3 @@
-import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import React, { useState, useRef, useEffect } from "react";
 import { useIntl } from 'react-intl'
@@ -146,7 +145,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
     };
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos' })} toggleable>
+        <div className="empresa-edit-form-shell">
             <Toast ref={toast} position="top-right" />
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
@@ -413,7 +412,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando }) => {
                     rows={5} cols={30} maxLength={500} />
                     <small style={{ color: '#94949f', fontSize: '10px' }}> <i>{intl.formatMessage({ id: 'Máximo 500 caracteres' })}</i> </small>
             </div>
-        </Fieldset>
+        </div>
     );
 };
 

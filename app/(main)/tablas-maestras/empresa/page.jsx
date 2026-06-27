@@ -178,7 +178,10 @@ const columnasOperarioDetalle = [
 const columnasEmpresaSensor = [
     { campo: "orden", header: "Orden", tipo: "string" },
     { campo: "nombre", header: "Tipo de Sensor", tipo: "string" },
-    { campo: "valor", header: "Valor", tipo: "string" },
+    { campo: "unidad", header: "Unidad", tipo: "string" },
+    { campo: "valorMinimo", header: "Minimo", tipo: "string" },
+    { campo: "valorMaximo", header: "Maximo", tipo: "string" },
+    { campo: "activoSn", header: "Activo", tipo: "booleano" },
 ];
 
 const nombreTipoTransporteBodyTemplate = (rowData) => rowData?.nombre || rowData?.codigo || "-";
@@ -1990,7 +1993,7 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
             case "Productos":
                 return <Crud key={`productos-${empresaActiva.id}`} headerCrud="Productos" getRegistros={getProducto} getRegistrosCount={getProductoCount} botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]} controlador="Productos" editarComponente={<EditarProducto />} columnas={columnasProducto} filtradoBase={filtroEmpresa} deleteRegistro={deleteProducto} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
             case "Sensores activos":
-                return <Crud key={`sensores-${empresaActiva.id}`} headerCrud="Sensores de empresa" getRegistros={getEmpresaSensor} getRegistrosCount={getEmpresaSensorCount} botones={["nuevo", "ver", "editar", "eliminar"]} controlador="Empresa Sensor" editarComponente={<EditarEmpresaSensor />} columnas={columnasEmpresaSensor} filtradoBase={filtroEmpresa} deleteRegistro={deleteEmpresaSensor} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
+                return <Crud key={`sensores-${empresaActiva.id}`} headerCrud="Sensores de empresa" getRegistros={getEmpresaSensor} getRegistrosCount={getEmpresaSensorCount} botones={["nuevo", "ver", "editar", "eliminar"]} controlador="Sensores activos" editarComponente={<EditarEmpresaSensor />} columnas={columnasEmpresaSensor} filtradoBase={filtroEmpresa} deleteRegistro={deleteEmpresaSensor} editarComponenteParametrosExtra={extra} {...propsEdicionTab} {...propsModalTab} />;
             case "Pallets asignados":
                 return <PalletsAsignadosEmpresa key={`pallets-${empresaActiva.id}`} empresaId={empresaActiva.id} />;
             case "Carrocerias":

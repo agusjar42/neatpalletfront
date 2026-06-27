@@ -36,6 +36,7 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
     const avatarInputRef = useRef(null);
 
     const optionsRol = dropdownAbiertoRol ? listaRoles.map(registro => registro.nombre) : [rolSeleccionado || '', ...listaRoles.map(registro => registro.nombre)];
+    const optionsIdioma = listaIdiomas.map(registro => registro.nombre);
 
     useEffect(() => {
         const verificarPermiso = async () => {
@@ -137,7 +138,7 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
 
             <div className="usuario-edit-form-grid">
                 <div className="usuario-edit-field">
-                    <label htmlFor="nombre">{intl.formatMessage({ id: 'Nombre' })}</label>
+                    <label htmlFor="nombre" style={{ color: 'black' }}><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
                     <InputText
                         value={usuario.nombre || ""}
                         onChange={(e) => setUsuario({ ...usuario, nombre: e.target.value })}
@@ -163,6 +164,17 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                         onChange={(e) => setUsuario({ ...usuario, telefono: e.target.value })}
                         className={`${(estadoGuardando && usuario.telefono === "") ? "p-invalid" : ""}`}
                         maxLength={50}
+                    />
+                </div>
+
+                <div className="usuario-edit-field usuario-edit-field-full">
+                    <label htmlFor="idiomaId">{intl.formatMessage({ id: 'Idioma' })}</label>
+                    <Dropdown
+                        value={idiomaSeleccionado || ""}
+                        onChange={(e) => setIdiomaSeleccionado(e.value)}
+                        options={optionsIdioma}
+                        className={`${(estadoGuardando && (idiomaSeleccionado == null || idiomaSeleccionado === "")) ? "p-invalid" : ""}`}
+                        placeholder={intl.formatMessage({ id: 'Selecciona un idioma' })}
                     />
                 </div>
 

@@ -38,9 +38,10 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
     useEffect(() => {
         const fetchData = async () => {
-            // Si el idEditar es diferente de nuevo, entonces se va a editar
+            //
+            //Si el id es distinto de cero cargamos el registro a editar
+            //
             if (idEditar !== 0) {
-                // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
                 if (registro) {
                     setCliente(registro);
@@ -52,10 +53,17 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
     const validaciones = async () => {
         const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        // Validaciones básicas
+
+        //
+        //Validamos los campos obligatorios del registro
+        //
+        const validaOrden = cliente.orden === undefined || cliente.orden === null || cliente.orden === "";
         const validaNombre = cliente.nombre === undefined || cliente.nombre === "";
         let validaEmail = false;
-        
+
+        //
+        //Comprobamos que el email tenga un formato correcto
+        //
         if (cliente.mail && !regexEmail.test(cliente.mail)) {
             validaEmail = true;
             toast.current?.show({
@@ -65,31 +73,32 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 life: 3000,
             });
         }
-        // Si existe algún campo vacío entonces no se puede guardar
-        return (!validaNombre && !validaEmail)
+
+        return (!validaOrden && !validaNombre && !validaEmail);
     }
 
     const guardarCliente = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
         if (await validaciones()) {
-            // Obtenemos el registro actual y solo entramos si tiene nombre
+            //
+            //Obtenemos el registro actual y preparamos los campos de auditoria
+            //
             let objGuardar = { ...cliente };
             const usuarioActual = getUsuarioSesion()?.id;
 
-            // Si estoy insertando uno nuevo
             if (idEditar === 0) {
-                // Elimino y añado los campos que no se necesitan
+                //
+                //Eliminamos campos auxiliares y preparamos el alta
+                //
                 delete objGuardar.id;
                 delete objGuardar.empresaNombre;
                 objGuardar['usuCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = empresaId ?? getUsuarioSesion()?.empresaId;
                 objGuardar['estado'] = objGuardar['estado'] || 'Activo';
-                
-                // Hacemos el insert del registro
+
                 const nuevoRegistro = await postCliente(objGuardar);
 
-                //Si se crea el registro mostramos el toast
                 if (nuevoRegistro?.id) {
                     setCliente((prev) => ({
                         ...prev,
@@ -106,14 +115,15 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     });
                 }
             } else {
-                // Elimino y añado los campos que no se necesitan para el update
+                //
+                //Eliminamos campos auxiliares y preparamos la edicion
+                //
                 delete objGuardar.clienteNombre;
                 delete objGuardar.fechaCreacion;
                 delete objGuardar.fechaModificacion;
                 delete objGuardar.usuCreacion;
                 objGuardar['usuModificacion'] = usuarioActual;
 
-                // Hacemos el update del registro
                 await patchCliente(idEditar, objGuardar);
                 setIdEditar(null);
                 setRegistroResult("editado");
@@ -122,7 +132,7 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
-                detail: intl.formatMessage({ id: 'Todos los campos deben de ser rellenados' }),
+                detail: intl.formatMessage({ id: 'Los campos obligatorios deben de ser rellenados' }),
                 life: 3000,
             });
         }

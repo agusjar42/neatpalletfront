@@ -15,10 +15,11 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
   return (
     <div className="catalogo-edit-form-grid catalogo-edit-form-grid-wide">
       <div className="catalogo-edit-field">
-        <label htmlFor="orden">{intl.formatMessage({ id: "Orden" })}</label>
+        <label htmlFor="orden" style={{ color: 'black' }}><b>{intl.formatMessage({ id: "Orden" })}*</b></label>
         <InputNumber
           value={cliente.orden === "" || cliente.orden === undefined ? null : cliente.orden}
           onValueChange={(e) => setCliente({ ...cliente, orden: e.value })}
+          className={`${estadoGuardando && (cliente.orden === "" || cliente.orden === null || cliente.orden === undefined) ? "p-invalid" : ""}`}
           mode="decimal"
           useGrouping={false}
           min={0}
@@ -37,7 +38,7 @@ const EditarDatosCliente = ({ cliente, setCliente, estadoGuardando }) => {
       </div>
 
       <div className="catalogo-edit-field">
-        <label htmlFor="nombre">{intl.formatMessage({ id: "Nombre" })}</label>
+        <label htmlFor="nombre" style={{ color: 'black' }}><b>{intl.formatMessage({ id: "Nombre" })}*</b></label>
         <InputText
           value={cliente.nombre || ""}
           placeholder={intl.formatMessage({ id: "Nombre del cliente" })}

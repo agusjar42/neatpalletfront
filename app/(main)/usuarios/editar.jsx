@@ -114,8 +114,8 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         //Valida que los campos no esten vacios
         const validaNombre = usuario.nombre === undefined || usuario.nombre === "";
         const validaTelefono = usuario.telefono === undefined || usuario.telefono === "";
-        const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado.codigo === "";
-        const validaRol = rolSeleccionado == null || rolSeleccionado.codigo === "";
+        const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado === "";
+        const validaRol = rolSeleccionado == null || rolSeleccionado === "";
         const validaEmail = usuario.mail === undefined || usuario.mail === "";
 
         if (validaNombre || validaTelefono /* || validaEmpresa */ || validaIdioma || validaRol || validaEmail ) {

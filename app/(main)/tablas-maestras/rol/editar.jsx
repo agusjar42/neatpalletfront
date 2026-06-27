@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { postRol, patchRol } from "@/app/api-endpoints/rol";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import EditarDatosRol from "./EditarDatosRol";
 import { useIntl } from 'react-intl';
+
 const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const toast = useRef(null);
     const [rol, setRol] = useState(emptyRegistro);
@@ -15,18 +15,19 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [pantallaDashboardSeleccionada, setPantallaDashboardSeleccionada] = useState(null);
     const intl = useIntl();
+
     const pantallasDashboard = [
         { nombre: intl.formatMessage({ id: 'Empresas' }), url: '/tablas-maestras/empresa/' },
         { nombre: intl.formatMessage({ id: 'Roles' }), url: '/tablas-maestras/rol/' },
         { nombre: intl.formatMessage({ id: 'Permisos' }), url: '/tablas-maestras/permiso/' },
-        { nombre: intl.formatMessage({ id: 'Países' }), url: '/tablas-maestras/pais/' },
-        { nombre: intl.formatMessage({ id: 'Parámetros' }), url: '/parametro/' },
+        { nombre: intl.formatMessage({ id: 'PaÃ­ses' }), url: '/tablas-maestras/pais/' },
+        { nombre: intl.formatMessage({ id: 'ParÃ¡metros' }), url: '/parametro/' },
         { nombre: intl.formatMessage({ id: 'Idiomas' }), url: '/tablas-maestras/idioma/' },
         { nombre: intl.formatMessage({ id: 'Traducciones' }), url: '/tablas-maestras/traduccion/' },
         { nombre: intl.formatMessage({ id: 'Tipo Sensor' }), url: '/tipo-sensor/' },
-        { nombre: intl.formatMessage({ id: 'Tipo Carrocería' }), url: '/tipo-carroceria/' },
+        { nombre: intl.formatMessage({ id: 'Tipo CarrocerÃ­a' }), url: '/tipo-carroceria/' },
         { nombre: intl.formatMessage({ id: 'Tipo Transporte' }), url: '/tipo-transporte/' },
-        { nombre: intl.formatMessage({ id: 'Parámetros permitidos de Pallet' }), url: '/pallet-parametro/' },
+        { nombre: intl.formatMessage({ id: 'ParÃ¡metros permitidos de Pallet' }), url: '/pallet-parametro/' },
         { nombre: intl.formatMessage({ id: 'Eventos Configuracion' }), url: '/eventos-configuracion/' },
         { nombre: intl.formatMessage({ id: 'Pallet global' }), url: '/pallet/' },
         { nombre: intl.formatMessage({ id: 'Pallets asignados' }), url: '/tablas-maestras/pallets-asignados/' },
@@ -36,20 +37,17 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
         { nombre: intl.formatMessage({ id: 'Logs de sistema' }), url: '/logs-incorrectos/' },
         { nombre: intl.formatMessage({ id: 'Logs de usuario' }), url: '/tablas-maestras/log_usuario/' },
     ];
+
     useEffect(() => {
         //
-        //Lo marcamos aquí como saync ya que useEffect no permite ser async porque espera que la función que le pases devueva undefined o una función para limpiar el efecto. 
-        //Una función async devuelve una promesa, lo cual no es compatible con el comportamiento esperado de useEffect.
+        //Lo marcamos aqui como saync ya que useEffect no permite ser async
         //
         const fetchData = async () => {
-
-            // Si el idEditar es diferente de nuevo, entonces se va a editar
             if (idEditar !== 0) {
-                // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
                 const pantallaDashboard = (pantallasDashboard.find(cod => cod.url === registro.dashboardUrl));
                 if (pantallaDashboard) {
-                    setPantallaDashboardSeleccionada(pantallaDashboard.nombre)
+                    setPantallaDashboardSeleccionada(pantallaDashboard.nombre);
                 }
                 setRol(registro);
             }
@@ -58,43 +56,31 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
-
-        //Valida el bloque de nivel idioma
         const validaNombre = rol.nombre === undefined || rol.nombre === "";
         const validaPantallaInicio = pantallaDashboardSeleccionada === null || pantallaDashboardSeleccionada === "";
         const validaOrden = rol.orden === undefined || rol.orden === null || rol.orden === "";
-        //
-        //Si existe algún bloque vacio entonces no se puede guardar
-        //
-        return (!validaNombre && !validaPantallaInicio && !validaOrden)
-    }
+        return (!validaNombre && !validaPantallaInicio && !validaOrden);
+    };
 
     const guardarRol = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
         if (await validaciones()) {
-            // Obtenemos el registro actual y solo entramos si tiene nombre y contenido
             let objGuardar = { ...rol };
             const usuarioActual = getUsuarioSesion()?.id;
 
-            // Si estoy insertando uno nuevo
             if (idEditar === 0) {
-                // Elimino y añado los campos que no se necesitan
                 delete objGuardar.id;
                 delete objGuardar.nombreEmpresa;
                 objGuardar['usuCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
-                if(pantallaDashboardSeleccionada){
+                if (pantallaDashboardSeleccionada) {
                     objGuardar['dashboardUrl'] = pantallasDashboard.find(dashboard => dashboard.nombre === pantallaDashboardSeleccionada).url;
                 }
-                
-                // Hacemos el insert del registro
+
                 const nuevoRegistro = await postRol(objGuardar);
 
-                //Si se crea el registro mostramos el toast
                 if (nuevoRegistro?.id) {
-
-                    //Usamos una variable que luego se cargara en el useEffect de la pagina principal para mostrar el toast
                     setRegistroResult("insertado");
                     setIdEditar(null);
                 } else {
@@ -106,15 +92,14 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
                     });
                 }
             } else {
-                //Si se edita un registro existente Hacemos el patch del registro
                 delete objGuardar.nombreEmpresa;
                 objGuardar['usuModificacion'] = usuarioActual;
                 objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
-                if(pantallaDashboardSeleccionada){
+                if (pantallaDashboardSeleccionada) {
                     objGuardar['dashboardUrl'] = pantallasDashboard.find(dashboard => dashboard.nombre === pantallaDashboardSeleccionada).url;
                 }
                 await patchRol(objGuardar.id, objGuardar);
-                setIdEditar(null)
+                setIdEditar(null);
                 setRegistroResult("editado");
             }
         }
@@ -127,13 +112,10 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
             });
         }
         setEstadoGuardandoBoton(false);
-        //setAccion("consulta");
-        //setIdEditar(null);
     };
 
     const cancelarEdicion = () => {
-        setIdEditar(null)
-        //setAccion("consulta");
+        setIdEditar(null);
     };
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
@@ -145,26 +127,26 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Rol' })).toLowerCase()}</h2>
+                        <p className="catalogo-edit-description">Configura el orden, nombre, pantalla de inicio y estado del rol.</p>
                         <EditarDatosRol
                             rol={rol}
                             setRol={setRol}
                             estadoGuardando={estadoGuardando}
                             pantallasDashboard={pantallasDashboard}
-                            pantallaDashboardSeleccionada={pantallaDashboardSeleccionada} 
+                            pantallaDashboardSeleccionada={pantallaDashboardSeleccionada}
                             setPantallaDashboardSeleccionada={setPantallaDashboardSeleccionada}
                         />
 
-                        <div className="flex justify-content-end mt-2">
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : 'Guardar cambios'}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarRol}
-                                    className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>

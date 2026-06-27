@@ -29,8 +29,8 @@ const EditarTipoSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
     const validaciones = async () => {
         const validaNombre = tipoSensor.nombre === undefined || tipoSensor.nombre === "";
         const validaOrden = tipoSensor.orden === undefined || tipoSensor.orden === null || tipoSensor.orden === "";
-        return (!validaNombre && !validaOrden)
-    }
+        return (!validaNombre && !validaOrden);
+    };
 
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
         const valor = (e.target && e.target.value) || "";
@@ -68,7 +68,7 @@ const EditarTipoSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                 delete objGuardar['fechaModificacion'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchTipoSensor(objGuardar.id, objGuardar);
-                setIdEditar(null)
+                setIdEditar(null);
                 setRegistroResult("editado");
             }
         }
@@ -84,7 +84,7 @@ const EditarTipoSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
     };
 
     const cancelarEdicion = () => {
-        setIdEditar(null)
+        setIdEditar(null);
     };
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
@@ -96,6 +96,7 @@ const EditarTipoSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Tipo Sensor' })).toLowerCase()}</h2>
+                        <p className="catalogo-edit-description">Configura el orden, nombre, valor por defecto, unidad y estado del tipo de sensor.</p>
                         <EditarDatosTipoSensor
                             tipoSensor={tipoSensor}
                             setTipoSensor={setTipoSensor}
@@ -103,17 +104,16 @@ const EditarTipoSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                             manejarCambioInputSwitch={manejarCambioInputSwitch}
                         />
 
-                        <div className="flex justify-content-end mt-2">
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : 'Guardar cambios'}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarTipoSensor}
-                                    className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>

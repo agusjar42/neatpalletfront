@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { postParametro, patchParametro } from "@/app/api-endpoints/parametro";
 import 'primeicons/primeicons.css';
@@ -29,8 +28,8 @@ const EditarParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
     const validaciones = async () => {
         const validaNombre = parametro.nombre === undefined || parametro.nombre === "";
         const validaOrden = parametro.orden === undefined || parametro.orden === null || parametro.orden === "";
-        return (!validaNombre && !validaOrden)
-    }
+        return (!validaNombre && !validaOrden);
+    };
 
     const guardarParametro = async () => {
         setEstadoGuardando(true);
@@ -42,7 +41,7 @@ const EditarParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
-                
+
                 const nuevoRegistro = await postParametro(objGuardar);
 
                 if (nuevoRegistro?.id) {
@@ -61,7 +60,7 @@ const EditarParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
                 delete objGuardar['fechaModificacion'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchParametro(objGuardar.id, objGuardar);
-                setIdEditar(null)
+                setIdEditar(null);
                 setRegistroResult("editado");
             }
         }
@@ -77,7 +76,7 @@ const EditarParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
     };
 
     const cancelarEdicion = () => {
-        setIdEditar(null)
+        setIdEditar(null);
     };
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
@@ -89,23 +88,23 @@ const EditarParametro = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Parametro' })).toLowerCase()}</h2>
+                        <p className="catalogo-edit-description">Configura el orden, nombre, estado y valores disponibles del parametro.</p>
                         <EditarDatosParametro
                             parametro={parametro}
                             setParametro={setParametro}
                             estadoGuardando={estadoGuardando}
                         />
 
-                        <div className="flex justify-content-end mt-2">
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : 'Guardar cambios'}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarParametro}
-                                    className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>

@@ -835,19 +835,41 @@ body {
 }
 
 //
-//Mantenemos las acciones de guardado a la derecha
-//y mostramos primero Guardar y despues Cancelar
+//Homogeneizamos las acciones de las modales de edicion
+//para que Cancelar y Guardar cambios usen el mismo estilo claro
+//y queden con el orden visual de la referencia
 //
 .flex.justify-content-end.align-items-center.gap-2.mt-3:has(> .p-button-secondary) {
     justify-content: flex-end;
 }
 
 .flex.justify-content-end.align-items-center.gap-2.mt-3:has(> .p-button-secondary) > .p-button-secondary {
-    order: 2;
+    order: 1;
+    border: 1px solid #d8dfdb !important;
+    background: #ffffff !important;
+    color: #1f2b25 !important;
+    border-radius: 0.75rem !important;
+    padding: 0.78rem 1.05rem !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
 }
 
 .flex.justify-content-end.align-items-center.gap-2.mt-3:has(> .p-button-secondary) > .p-button:not(.p-button-secondary) {
-    order: 1;
+    order: 2;
+    border: 1px solid #d8dfdb !important;
+    background: #ffffff !important;
+    color: #1f2b25 !important;
+    border-radius: 0.75rem !important;
+    padding: 0.78rem 1.05rem !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+}
+
+.flex.justify-content-end.align-items-center.gap-2.mt-3:has(> .p-button-secondary) > .p-button-secondary:hover,
+.flex.justify-content-end.align-items-center.gap-2.mt-3:has(> .p-button-secondary) > .p-button:not(.p-button-secondary):hover {
+    border-color: #c4cfca !important;
+    background: #f7f9f8 !important;
+    color: #111916 !important;
 }
 
 .p-datatable {
@@ -2275,6 +2297,11 @@ body {
     justify-content: flex-end;
     gap: 0.65rem;
     flex-wrap: wrap;
+}
+
+.neat-crud-toolbar-actions > .neat-crud-toolbar-button:first-child,
+.neat-crud-toolbar-actions > .neat-crud-toolbar-button:nth-child(2) {
+    white-space: nowrap;
 }
 
 .neat-crud-toolbar-button {
@@ -4182,11 +4209,6 @@ body {
     grid-column: 1 / -1;
 }
 
-.neat-crud-loading-banner {
-    padding: 0.85rem 0 0.35rem;
-    color: #5f6b7a;
-    font-size: 0.95rem;
-}
 
 .catalogo-table-chip {
     display: inline-flex;

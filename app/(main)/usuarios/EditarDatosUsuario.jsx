@@ -167,7 +167,7 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                     />
                 </div>
 
-                <div className="usuario-edit-field usuario-edit-field-full">
+                <div className="usuario-edit-field">
                     <label htmlFor="idiomaId">{intl.formatMessage({ id: 'Idioma' })}</label>
                     <Dropdown
                         value={idiomaSeleccionado || ""}
@@ -178,7 +178,7 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                     />
                 </div>
 
-                <div className="usuario-edit-field usuario-edit-field-full">
+                <div className="usuario-edit-field">
                     <label htmlFor="usuRol">{intl.formatMessage({ id: 'Rol' })}</label>
                     <Dropdown
                         value={rolSeleccionado || ""}
@@ -191,7 +191,7 @@ const EditarDatosUsuario = ({ usuario, setUsuario, listaIdiomas, idiomaSeleccion
                     />
                 </div>
 
-                <div className="usuario-edit-field usuario-edit-field-full">
+                <div className="usuario-edit-field">
                     <label htmlFor="activoSn">{intl.formatMessage({ id: 'Estado' })}</label>
                     <div className="flex align-items-center gap-2">
                         <InputSwitch

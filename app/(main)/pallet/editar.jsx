@@ -63,8 +63,9 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
 
         const validaOrden = pallet.orden === undefined || pallet.orden === null || pallet.orden === "";
         const validaCodigo = pallet.codigo === undefined || pallet.codigo === "";
+        const validaAlias = pallet.alias === undefined || pallet.alias === "";
 
-        if (validaOrden || validaCodigo) {
+        if (validaOrden || validaCodigo || validaAlias) {
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
@@ -73,7 +74,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
             });
         }
 
-        return (!validaOrden && !validaCodigo && !existeCodigo);
+        return (!validaOrden && !validaCodigo && !validaAlias && !existeCodigo);
     }
 
     const guardarPallet = async () => {
@@ -145,6 +146,7 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Pallet' })).toLowerCase()}</h2>
+                        <p className="catalogo-edit-description">Configura el orden, codigo, alias, adquisicion y datos operativos del pallet.</p>
                         <EditarDatosPallet
                             pallet={pallet}
                             setPallet={setPallet}
@@ -172,17 +174,16 @@ const EditarPallet = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
                                 />
                             </div>
                         }
-                        <div className="flex justify-content-end mt-2">
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : 'Guardar cambios'}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarPallet}
-                                    className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>

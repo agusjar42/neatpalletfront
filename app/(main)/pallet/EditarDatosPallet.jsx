@@ -5,13 +5,16 @@ import { useIntl } from "react-intl";
 
 const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
     const intl = useIntl();
+    const fechaImpresionInput = pallet.fechaImpresion
+        ? String(pallet.fechaImpresion).slice(0, 10)
+        : "";
 
     return (
-        <div className="formgrid grid">
-            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                <label htmlFor="orden"><b>{intl.formatMessage({ id: "Orden" })}*</b></label>
+        <div className="catalogo-edit-form-grid catalogo-edit-form-grid-wide">
+            <div className="catalogo-edit-field">
+                <label htmlFor="orden" style={{ color: "black" }}><b>{intl.formatMessage({ id: "Orden" })}*</b></label>
                 <InputNumber
-                    value={pallet.orden}
+                    value={pallet.orden === "" || pallet.orden === undefined ? null : pallet.orden}
                     placeholder={intl.formatMessage({ id: "Orden del pallet" })}
                     onChange={(e) => setPallet({ ...pallet, orden: e.value })}
                     className={`${(estadoGuardando && (pallet.orden === "" || pallet.orden === null || pallet.orden === undefined)) ? "p-invalid" : ""}`}
@@ -21,72 +24,56 @@ const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
                     inputStyle={{ textAlign: "right" }}
                 />
             </div>
-            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                <label htmlFor="codigo"><b>{intl.formatMessage({ id: "Codigo" })}*</b></label>
+            <div className="catalogo-edit-field">
+                <label htmlFor="codigo" style={{ color: "black" }}><b>{intl.formatMessage({ id: "Codigo" })}*</b></label>
                 <InputText
-                    value={pallet.codigo}
+                    value={pallet.codigo || ""}
                     placeholder={intl.formatMessage({ id: "Codigo del pallet" })}
                     onChange={(e) => setPallet({ ...pallet, codigo: e.target.value })}
-                    className={`${(estadoGuardando && pallet.codigo === "") ? "p-invalid" : ""}`}
+                    className={`${(estadoGuardando && (pallet.codigo || "") === "") ? "p-invalid" : ""}`}
                     maxLength={50}
                 />
             </div>
-            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                <label htmlFor="alias">{intl.formatMessage({ id: "Alias" })}</label>
+            <div className="catalogo-edit-field">
+                <label htmlFor="alias" style={{ color: "black" }}><b>{intl.formatMessage({ id: "Alias" })}*</b></label>
                 <InputText
-                    value={pallet.alias}
+                    value={pallet.alias || ""}
                     placeholder={intl.formatMessage({ id: "Alias del pallet" })}
                     onChange={(e) => setPallet({ ...pallet, alias: e.target.value })}
+                    className={`${(estadoGuardando && (pallet.alias || "") === "") ? "p-invalid" : ""}`}
                     maxLength={50}
                 />
             </div>
-            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+            <div className="catalogo-edit-field">
                 <label htmlFor="adquisicion">{intl.formatMessage({ id: "Adquisicion" })}</label>
                 <InputText
                     type="date"
-                    value={pallet.fechaImpresion}
+                    value={fechaImpresionInput}
                     onChange={(e) => setPallet({ ...pallet, fechaImpresion: e.target.value })}
                     maxLength={20}
                     style={{ textAlign: "right" }}
                 />
             </div>
-            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+            <div className="catalogo-edit-field">
                 <label htmlFor="medidas">{intl.formatMessage({ id: "Medidas" })}</label>
                 <InputText
-                    value={pallet.medidas}
+                    value={pallet.medidas || ""}
                     placeholder={intl.formatMessage({ id: "Medidas del pallet" })}
                     onChange={(e) => setPallet({ ...pallet, medidas: e.target.value })}
                     maxLength={50}
                 />
             </div>
-            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+            <div className="catalogo-edit-field">
                 <label htmlFor="modelo">{intl.formatMessage({ id: "Modelo" })}</label>
                 <InputText
-                    value={pallet.modelo}
+                    value={pallet.modelo || ""}
                     placeholder={intl.formatMessage({ id: "Modelo del pallet" })}
                     onChange={(e) => setPallet({ ...pallet, modelo: e.target.value })}
                     maxLength={50}
                 />
             </div>
-            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                <label htmlFor="estado">{intl.formatMessage({ id: "Estado" })}</label>
-                <InputText
-                    value={pallet.estado}
-                    placeholder={intl.formatMessage({ id: "Estado del pallet" })}
-                    onChange={(e) => setPallet({ ...pallet, estado: e.target.value })}
-                    maxLength={50}
-                />
-            </div>
-            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                <label htmlFor="ultimaSenal">{intl.formatMessage({ id: "Ultima senal" })}</label>
-                <InputText
-                    value={pallet.ultimaSenal}
-                    placeholder={intl.formatMessage({ id: "Ultima senal del pallet" })}
-                    onChange={(e) => setPallet({ ...pallet, ultimaSenal: e.target.value })}
-                    maxLength={50}
-                />
-            </div>
-            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+            
+            <div className="catalogo-edit-field">
                 <label htmlFor="periodoEnvioMail">{intl.formatMessage({ id: "Periodo envio mail (horas)" })}</label>
                 <InputNumber
                     value={pallet.periodoEnvioMail}

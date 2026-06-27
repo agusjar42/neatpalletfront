@@ -14,7 +14,7 @@ const Pallet = () => {
         { campo: "alias", header: "NOMBRE ASIGNADO", tipo: "string" },
         { campo: "medidas", header: intl.formatMessage({ id: "Medidas" }), tipo: "string" },
         { campo: "modelo", header: intl.formatMessage({ id: "Modelo" }), tipo: "string" },
-        { campo: "fechaImpresion", header: "ADQUISICION", tipo: "string" },
+        { campo: "fechaImpresionEspanol", header: "ADQUISICION", tipo: "string" },
         { campo: "estado", header: "ESTADO", tipo: "string" },
         { campo: "ultimaSenal", header: "ULTIMA SENAL", tipo: "string" },
     ];

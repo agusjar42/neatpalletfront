@@ -2234,6 +2234,95 @@ body {
     }
 }
 
+.neat-crud-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.2rem 0;
+}
+
+.neat-crud-toolbar-search {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.neat-crud-search-shell {
+    display: block;
+    width: 100%;
+    max-width: 17rem;
+
+    .pi {
+        left: 0.95rem;
+        color: #8a938d;
+        font-size: 0.95rem;
+    }
+}
+
+.neat-crud-search-input {
+    width: 100%;
+    border: 1px solid #d8dfdb;
+    border-radius: 0.75rem;
+    padding: 0.82rem 0.95rem 0.82rem 2.55rem;
+    color: #324039;
+    box-shadow: none;
+}
+
+.neat-crud-toolbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+}
+
+.neat-crud-toolbar-button {
+    border-radius: 0.75rem;
+    padding: 0.78rem 1.05rem;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.neat-crud-toolbar-button-secondary {
+    border-color: #d8dfdb;
+    background: #ffffff;
+    color: #1f2b25;
+}
+
+.neat-crud-toolbar-button-secondary:hover {
+    border-color: #c4cfca;
+    background: #f7f9f8;
+    color: #111916;
+}
+
+.neat-crud-toolbar-button-primary {
+    border-color: #d8dfdb;
+    background: #ffffff;
+    color: #1f2b25;
+}
+
+.neat-crud-toolbar-button-primary:hover {
+    border-color: #c4cfca;
+    background: #f7f9f8;
+    color: #111916;
+}
+
+@media (max-width: 768px) {
+    .neat-crud-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .neat-crud-search-shell {
+        max-width: none;
+    }
+
+    .neat-crud-toolbar-actions {
+        justify-content: flex-start;
+    }
+}
+
 .empresa-edit-main-dialog {
     .p-dialog {
         border-radius: 1rem;

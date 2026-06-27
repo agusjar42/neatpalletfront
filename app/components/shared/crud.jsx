@@ -5,7 +5,7 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { Toast } from "primereact/toast";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, ImportarCSVDialog, GenerarGraficoDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
+import { comprobarImagen, templateGenerico, esUrlImagen, DescargarCSVDialog, ImportarCSVDialog, GenerarGraficoDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 import { formatearFechaDate, formatearFechaHoraDate, formatearFechaLocal_a_toISOString, formatNumber, getUsuarioSesion } from "@/app/utility/Utils";
 import { postEnviarQR } from "@/app/api-endpoints/plantilla_email";
 import { Button } from "primereact/button";
@@ -895,39 +895,75 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     //Funcion que renderiza el componente header
     const renderizarHeader = () => {
-        // Devuelve el componente con las propiedades aplicadas, MUY IMPORTANTE que el componente reciba las mismas propiedades
-        const propiedadesHeader = {
-            limpiarFiltros: limpiarFiltros,
-            valorDeFiltroGlobal: valorDeFiltroGlobal,
-            manejarCambioFiltroGlobal: manejarCambioFiltroGlobal,
-            manejarBusquedaFiltroGlobal: manejarBusquedaFiltroGlobal,
-            nombre: headerCrud,
-            operadorSeleccionado: operadorSeleccionado,
-            setOperadorSeleccionado: setOperadorSeleccionado,
-            listaOperadores: [
-                { label: intl.formatMessage({ id: 'OR' }), value: 'or' },
-                { label: intl.formatMessage({ id: 'AND' }), value: 'and' },
-                { label: intl.formatMessage({ id: 'OR NOT' }), value: 'orNot' },
-                { label: intl.formatMessage({ id: 'AND NOT' }), value: 'andNot' },
-            ],
-        }
+        const placeholderBusqueda = `${intl.formatMessage({ id: 'Buscar' })} ${(headerCrud || '').toLowerCase()}...`;
 
-        if (botones.includes('nuevo') && puedeCrear) {
-            propiedadesHeader['crearNuevo'] = crearNuevoRegistro
-        }
-        if (botones.includes('descargarCSV') /*&& puedeDescargarCSV*/) {
-            propiedadesHeader['generarCSV'] = confirmarDescargarArchivoCSV
-        }
-        if (botones.includes('importarCSV') && procesarImportacionCSV /*&& puedeImportarCSV*/) {
-            propiedadesHeader['importarCSV'] = confirmarImportarArchivoCSV
-        }
-        if (botones.includes('importarCSVPallets') && procesarImportacionCSV /*&& puedeImportarCSVPallets*/) {
-            propiedadesHeader['importarCSVPallets'] = confirmarImportarArchivoCSVPallets
-        }
-        if (botones.includes('generarGrafico') /*&& puedeGenerarGrafico*/) {
-            propiedadesHeader['generarGrafico'] = confirmarGenerarGrafico
-        }
-        return React.cloneElement(<Header />, propiedadesHeader);
+        return (
+            <div className="neat-crud-toolbar">
+                <div className="neat-crud-toolbar-search">
+                    <span className="p-input-icon-left neat-crud-search-shell">
+                        <i className="pi pi-search" />
+                        <InputText
+                            value={valorDeFiltroGlobal}
+                            onChange={manejarCambioFiltroGlobal}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    manejarBusquedaFiltroGlobal()
+                                }
+                            }}
+                            placeholder={placeholderBusqueda}
+                            className="neat-crud-search-input"
+                        />
+                    </span>
+                </div>
+                <div className="neat-crud-toolbar-actions">
+                    {(botones.includes('generarGrafico')) && (
+                        <Button
+                            label={intl.formatMessage({ id: 'Generar Grafico' })}
+                            icon="pi pi-chart-bar"
+                            severity="info"
+                            onClick={confirmarGenerarGrafico}
+                            className="neat-crud-toolbar-button"
+                        />
+                    )}
+                    {(botones.includes('importarCSVPallets') && procesarImportacionCSV) && (
+                        <Button
+                            label={`${intl.formatMessage({ id: 'Importar' })} CSV Pallets`}
+                            icon="pi pi-upload"
+                            onClick={confirmarImportarArchivoCSVPallets}
+                            className="neat-crud-toolbar-button neat-crud-toolbar-button-secondary"
+                            outlined
+                        />
+                    )}
+                    {(botones.includes('importarCSV') && procesarImportacionCSV) && (
+                        <Button
+                            label={`${intl.formatMessage({ id: 'Importar' })} CSV`}
+                            icon="pi pi-upload"
+                            onClick={confirmarImportarArchivoCSV}
+                            className="neat-crud-toolbar-button neat-crud-toolbar-button-secondary"
+                            outlined
+                        />
+                    )}
+                    {(botones.includes('descargarCSV')) && (
+                        <Button
+                            label={`${intl.formatMessage({ id: 'Exportar' })} CSV`}
+                            icon="pi pi-download"
+                            onClick={confirmarDescargarArchivoCSV}
+                            className="neat-crud-toolbar-button neat-crud-toolbar-button-secondary"
+                            outlined
+                        />
+                    )}
+                    {(botones.includes('nuevo') && puedeCrear) && (
+                        <Button
+                            label={intl.formatMessage({ id: 'Nuevo' })}
+                            icon="pi pi-plus"
+                            onClick={crearNuevoRegistro}
+                            className="neat-crud-toolbar-button neat-crud-toolbar-button-primary"
+                            outlined
+                        />
+                    )}
+                </div>
+            </div>
+        );
     }
 
 

@@ -165,6 +165,7 @@ const EditarEmpresaSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Sensor de Empresa' })).toLowerCase()}</h2>
+                        <p className="catalogo-edit-description">Asocia a un sensor los valores mínimos y máximos en los que debe trabajar.</p>
                         <EditarDatosEmpresaSensor
                             empresaSensor={empresaSensor}
                             setEmpresaSensor={setEmpresaSensor}

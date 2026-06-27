@@ -14528,7 +14528,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "familia": {
             "type": "string",
@@ -14560,7 +14560,7 @@
             "type": "number",
             "nullable": true
           },
-          "estado": {
+          "activoSN": {
             "type": "string",
             "nullable": true
           },
@@ -14569,7 +14569,7 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "additionalProperties": false
@@ -14588,7 +14588,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "familia": {
             "type": "string",
@@ -14620,7 +14620,7 @@
             "type": "number",
             "nullable": true
           },
-          "estado": {
+          "activoSN": {
             "type": "string",
             "nullable": true
           },
@@ -14629,7 +14629,7 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "additionalProperties": false,
@@ -14653,7 +14653,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "familia": {
             "type": "string",
@@ -14685,7 +14685,7 @@
             "type": "number",
             "nullable": true
           },
-          "estado": {
+          "activoSN": {
             "type": "string",
             "nullable": true
           },
@@ -14694,7 +14694,7 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "empresa": {
             "$ref": "#/components/schemas/EmpresaWithRelations"
@@ -14722,7 +14722,7 @@
           },
           "nombre": {
             "type": "string",
-            "nullable": true
+            "nullable": false
           },
           "familia": {
             "type": "string",
@@ -14754,7 +14754,7 @@
             "type": "number",
             "nullable": true
           },
-          "estado": {
+          "activoSN": {
             "type": "string",
             "nullable": true
           },
@@ -14763,7 +14763,7 @@
           },
           "orden": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           }
         },
         "additionalProperties": false,
@@ -26639,7 +26639,7 @@
                   "usuModificacion": {
                     "type": "boolean"
                   },
-                  "estado": {
+                  "activoSN": {
                     "type": "boolean"
                   },
                   "pesoKgs": {
@@ -26667,7 +26667,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
-                    "estado",
+                    "activoSN",
                     "pesoKgs",
                     "orden"
                   ],
@@ -26769,7 +26769,7 @@
                   "usuModificacion": {
                     "type": "boolean"
                   },
-                  "estado": {
+                  "activoSN": {
                     "type": "boolean"
                   },
                   "pesoKgs": {
@@ -26797,7 +26797,7 @@
                     "fechaModificacion",
                     "usuCreacion",
                     "usuModificacion",
-                    "estado",
+                    "activoSN",
                     "pesoKgs",
                     "orden"
                   ],

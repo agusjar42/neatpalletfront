@@ -309,7 +309,7 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
     );
 
     const adquisicionBodyTemplate = (pallet) => (
-        <span className={claseTextoFila(pallet)}>{obtenerFecha(pallet.adquisicion)}</span>
+        <span className={claseTextoFila(pallet)}>{obtenerFecha(pallet.fechaImpresion)}</span>
     );
 
     const estadoBodyTemplate = (pallet) => (

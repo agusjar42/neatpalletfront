@@ -599,7 +599,7 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
     );
 
     const adquisicionBodyTemplate = (pallet) => (
-        <span>{obtenerFecha(pallet.adquisicion)}</span>
+        <span>{obtenerFecha(pallet.fechaImpresion)}</span>
     );
 
     const estadoBodyTemplate = (pallet) => (
@@ -695,7 +695,7 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                             headerStyle={{ minWidth: "12rem" }}
                         />
                         <Column
-                            field="adquisicion"
+                            field="fechaImpresion"
                             header="ADQUISICION"
                             body={adquisicionBodyTemplate}
                             headerStyle={{ minWidth: "12rem" }}

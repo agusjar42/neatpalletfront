@@ -17,14 +17,18 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
 
     useEffect(() => {
         const fetchData = async () => {
-            // Si el idEditar es diferente de nuevo, entonces se va a editar
+            //
+            //Si el id es distinto de cero cargamos el registro a editar
+            //
             if (idEditar !== 0) {
-                // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
                 setProducto(registro);
             } else {
+                //
+                //Si es un alta nueva inicializamos la empresa de contexto
+                //
                 const empresaContexto = empresaId ?? getUsuarioSesion()?.empresaId;
-                setProducto({ ...emptyRegistro, empresaId: empresaContexto });
+                setProducto({ ...emptyRegistro, empresaId: empresaContexto, activoSN: "S" });
             }
         };
         fetchData();
@@ -32,47 +36,82 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
 
     const validaciones = async () => {
         //
-        // Si estamos dentro de un tab y tenemos una empresa, la asignamos
+        //Si estamos dentro de un tab y tenemos una empresa, la asignamos
         //
         if (estoyDentroDeUnTab && empresaId) {
             producto.empresaId = empresaId;
         }
-        // Validaciones básicas
+
+        //
+        //Validamos los campos obligatorios del registro
+        //
+        const validaOrden = producto.orden === undefined || producto.orden === null || producto.orden === "";
         const validaNombre = producto.nombre === undefined || producto.nombre === "";
         const validaEmpresaId = producto.empresaId === undefined || producto.empresaId === null;
-        
-        // Si existe algún campo vacío entonces no se puede guardar
-        return (!validaNombre && !validaEmpresaId)
+
+        return (!validaOrden && !validaNombre && !validaEmpresaId);
     }
+
+    //
+    //Construimos un payload limpio solo con campos validos del modelo
+    //
+    const construirPayloadProducto = (productoActual, usuarioActual, esAlta) => {
+        const ordenNormalizado = productoActual.orden === "" || productoActual.orden === undefined || productoActual.orden === null
+            ? null
+            : Number(productoActual.orden);
+
+        const pesoNormalizado = productoActual.pesoKgs === "" || productoActual.pesoKgs === undefined || productoActual.pesoKgs === null
+            ? null
+            : Number(productoActual.pesoKgs);
+
+        const payload = {
+            empresaId: productoActual.empresaId,
+            orden: ordenNormalizado,
+            sku: productoActual.sku || null,
+            nombre: productoActual.nombre || null,
+            familia: productoActual.familia || null,
+            rangoTemp: productoActual.rangoTemp || null,
+            vidaUtil: productoActual.vidaUtil || null,
+            activoSN: productoActual.activoSN || "S",
+            pesoKgs: Number.isNaN(pesoNormalizado) ? null : pesoNormalizado,
+        };
+
+        //
+        //Si el peso no viene informado no lo enviamos al backend
+        //
+        if (payload.pesoKgs === null) {
+            delete payload.pesoKgs;
+        }
+
+        if (esAlta) {
+            payload['usuCreacion'] = usuarioActual;
+        } else {
+            payload['usuModificacion'] = usuarioActual;
+        }
+
+        return payload;
+    };
 
     const guardarProducto = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
-        if (await validaciones()) {
-            // Obtenemos el registro actual y solo entramos si tiene nombre
-            let objGuardar = { ...producto };
-            const usuarioActual = getUsuarioSesion()?.id;
-            objGuardar.pesoKgs = Number(objGuardar.pesoKgs) || 0;
-            objGuardar.estado = objGuardar.estado || "Activo";
 
-            // Si estoy insertando uno nuevo
+        if (await validaciones()) {
+            //
+            //Preparamos el objeto final antes de guardar
+            //
+            const usuarioActual = getUsuarioSesion()?.id;
+
             if (idEditar === 0) {
-                // Elimino y añado los campos que no se necesitan
-                delete objGuardar.id;
-                delete objGuardar.clienteNombre;
-                delete objGuardar.empresaNombre;
-                delete objGuardar.activoSN;
-                delete objGuardar.activoSn;
-                objGuardar['usuCreacion'] = usuarioActual;
-                
-                // Hacemos el insert del registro
+                //
+                //En un alta enviamos solo campos validos del modelo
+                //
+                const objGuardar = construirPayloadProducto(producto, usuarioActual, true);
                 const nuevoRegistro = await postProducto(objGuardar);
 
-                //Si se crea el registro mostramos el toast
                 if (nuevoRegistro?.id) {
                     setRegistroResult("insertado");
                     setIdEditar(null);
-                    // Llamar al callback para actualizar conteos
                     if (onDataChange) {
                         onDataChange();
                     }
@@ -85,21 +124,13 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     });
                 }
             } else {
-                // Elimino y añado los campos que no se necesitan para el update
-                delete objGuardar.clienteNombre;
-                delete objGuardar.empresaNombre;
-                delete objGuardar.fechaCreacion;
-                delete objGuardar.fechaModificacion;
-                delete objGuardar.usuCreacion;
-                delete objGuardar.activoSN;
-                delete objGuardar.activoSn;
-                objGuardar['usuModificacion'] = usuarioActual;
-
-                // Hacemos el update del registro
+                //
+                //En una edicion enviamos solo campos validos del modelo
+                //
+                const objGuardar = construirPayloadProducto(producto, usuarioActual, false);
                 await patchProducto(idEditar, objGuardar);
                 setIdEditar(null);
                 setRegistroResult("editado");
-                // Llamar al callback para actualizar conteos
                 if (onDataChange) {
                     onDataChange();
                 }
@@ -108,10 +139,11 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
-                detail: intl.formatMessage({ id: 'Todos los campos deben de ser rellenados' }),
+                detail: intl.formatMessage({ id: 'Los campos obligatorios deben de ser rellenados' }),
                 life: 3000,
             });
         }
+
         setEstadoGuardandoBoton(false);
     };
 
@@ -128,7 +160,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     <div {...(!estoyDentroDeUnTab && { className: "card" })}>
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Producto' })).toLowerCase()}</h2>
-                        <p className="catalogo-edit-description">Modifica el sku, nombre, familia, rango de temperatura, vida util, peso y estado del producto.</p>
+                        <p className="catalogo-edit-description">Modifica el orden, sku, nombre, familia, rango de temperatura, vida util, peso y activo del producto.</p>
                         <EditarDatosProducto
                             producto={producto}
                             setProducto={setProducto}

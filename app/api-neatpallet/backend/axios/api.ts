@@ -9442,7 +9442,7 @@ export interface NewProducto {
      * @type {string}
      * @memberof NewProducto
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -9490,7 +9490,7 @@ export interface NewProducto {
      * @type {string}
      * @memberof NewProducto
      */
-    'estado'?: string | null;
+    'activoSN'?: string | null;
     /**
      * 
      * @type {number}
@@ -9502,7 +9502,7 @@ export interface NewProducto {
      * @type {number}
      * @memberof NewProducto
      */
-    'orden'?: number | null;
+    'orden'?: number;
 }
 /**
  * (tsType: Omit<RefrescarToken, \'id\'>, schemaOptions: { title: \'NewRefrescarToken\', exclude: [ \'id\' ] })
@@ -12639,7 +12639,7 @@ export interface Producto {
      * @type {string}
      * @memberof Producto
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -12687,7 +12687,7 @@ export interface Producto {
      * @type {string}
      * @memberof Producto
      */
-    'estado'?: string | null;
+    'activoSN'?: string | null;
     /**
      * 
      * @type {number}
@@ -12699,7 +12699,7 @@ export interface Producto {
      * @type {number}
      * @memberof Producto
      */
-    'orden'?: number | null;
+    'orden'?: number;
 }
 /**
  * 
@@ -12850,7 +12850,7 @@ export interface ProductoPartial {
      * @type {string}
      * @memberof ProductoPartial
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -12898,7 +12898,7 @@ export interface ProductoPartial {
      * @type {string}
      * @memberof ProductoPartial
      */
-    'estado'?: string | null;
+    'activoSN'?: string | null;
     /**
      * 
      * @type {number}
@@ -12910,7 +12910,7 @@ export interface ProductoPartial {
      * @type {number}
      * @memberof ProductoPartial
      */
-    'orden'?: number | null;
+    'orden'?: number;
 }
 /**
  * 
@@ -12990,7 +12990,7 @@ export interface ProductoWithRelations {
      * @type {string}
      * @memberof ProductoWithRelations
      */
-    'nombre'?: string | null;
+    'nombre'?: string;
     /**
      * 
      * @type {string}
@@ -13038,7 +13038,7 @@ export interface ProductoWithRelations {
      * @type {string}
      * @memberof ProductoWithRelations
      */
-    'estado'?: string | null;
+    'activoSN'?: string | null;
     /**
      * 
      * @type {number}
@@ -13050,7 +13050,7 @@ export interface ProductoWithRelations {
      * @type {number}
      * @memberof ProductoWithRelations
      */
-    'orden'?: number | null;
+    'orden'?: number;
     /**
      * 
      * @type {EmpresaWithRelations}

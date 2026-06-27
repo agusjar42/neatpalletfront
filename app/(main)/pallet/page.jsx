@@ -14,7 +14,7 @@ const Pallet = () => {
         { campo: "alias", header: "NOMBRE ASIGNADO", tipo: "string" },
         { campo: "medidas", header: intl.formatMessage({ id: "Medidas" }), tipo: "string" },
         { campo: "modelo", header: intl.formatMessage({ id: "Modelo" }), tipo: "string" },
-        { campo: "adquisicion", header: "ADQUISICION", tipo: "string" },
+        { campo: "fechaImpresion", header: "ADQUISICION", tipo: "string" },
         { campo: "estado", header: "ESTADO", tipo: "string" },
         { campo: "ultimaSenal", header: "ULTIMA SENAL", tipo: "string" },
     ];
@@ -30,7 +30,7 @@ const Pallet = () => {
                 ["Nombre asignado"]: registro.alias,
                 [intl.formatMessage({ id: "Medidas" })]: registro.medidas,
                 [intl.formatMessage({ id: "Modelo" })]: registro.modelo,
-                ["Adquisicion"]: registro.adquisicion,
+                ["Adquisicion"]: registro.fechaImpresion,
                 ["Estado"]: registro.estado,
                 ["Ultima senal"]: registro.ultimaSenal,
                 [intl.formatMessage({ id: "Periodo envio mail (horas)" })]: registro.periodoEnvioMail,
@@ -112,7 +112,7 @@ const Pallet = () => {
                     estado: String(fila.estado ?? "").trim(),
                     ultimaSenal: String(fila.ultimaSenal ?? "").trim(),
                     periodoEnvioMail,
-                    fechaImpresion: String(fila.fechaImpresion ?? "").trim() || new Date().toISOString(),
+                    fechaImpresion: String(fila.fechaImpresion ?? "").trim() || String(fila.adquisicion ?? "").trim() || new Date().toISOString(),
                 };
 
                 const upsertResult = await upsertPalletFromCSV(payload);

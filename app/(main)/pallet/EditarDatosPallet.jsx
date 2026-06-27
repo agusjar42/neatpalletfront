@@ -44,16 +44,6 @@ const EditarDatosPallet = ({ pallet, setPallet, estadoGuardando }) => {
                 <label htmlFor="adquisicion">{intl.formatMessage({ id: "Adquisicion" })}</label>
                 <InputText
                     type="date"
-                    value={pallet.adquisicion}
-                    onChange={(e) => setPallet({ ...pallet, adquisicion: e.target.value })}
-                    maxLength={20}
-                    style={{ textAlign: "right" }}
-                />
-            </div>
-            <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                <label htmlFor="fechaImpresion">{intl.formatMessage({ id: "Fecha de impresion" })}</label>
-                <InputText
-                    type="date"
                     value={pallet.fechaImpresion}
                     onChange={(e) => setPallet({ ...pallet, fechaImpresion: e.target.value })}
                     maxLength={20}

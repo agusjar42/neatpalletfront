@@ -4950,13 +4950,13 @@ export interface EnvioParada {
      * @type {string}
      * @memberof EnvioParada
      */
-    'lugarParadaGps'?: string;
+    'lugarParadaGps': string;
     /**
      * 
      * @type {string}
      * @memberof EnvioParada
      */
-    'direccion'?: string;
+    'direccion': string;
     /**
      * 
      * @type {number}
@@ -4968,13 +4968,13 @@ export interface EnvioParada {
      * @type {string}
      * @memberof EnvioParada
      */
-    'telefonoOperario'?: string;
+    'telefonoOperario': string;
     /**
      * 
      * @type {string}
      * @memberof EnvioParada
      */
-    'emailOperario'?: string;
+    'emailOperario': string;
     /**
      * 
      * @type {number}
@@ -5004,7 +5004,7 @@ export interface EnvioParada {
      * @type {number}
      * @memberof EnvioParada
      */
-    'orden'?: number;
+    'orden': number;
 }
 /**
  * 
@@ -5363,13 +5363,13 @@ export interface EnvioParadaWithRelations {
      * @type {string}
      * @memberof EnvioParadaWithRelations
      */
-    'lugarParadaGps'?: string;
+    'lugarParadaGps': string;
     /**
      * 
      * @type {string}
      * @memberof EnvioParadaWithRelations
      */
-    'direccion'?: string;
+    'direccion': string;
     /**
      * 
      * @type {number}
@@ -5381,13 +5381,13 @@ export interface EnvioParadaWithRelations {
      * @type {string}
      * @memberof EnvioParadaWithRelations
      */
-    'telefonoOperario'?: string;
+    'telefonoOperario': string;
     /**
      * 
      * @type {string}
      * @memberof EnvioParadaWithRelations
      */
-    'emailOperario'?: string;
+    'emailOperario': string;
     /**
      * 
      * @type {number}
@@ -5417,7 +5417,7 @@ export interface EnvioParadaWithRelations {
      * @type {number}
      * @memberof EnvioParadaWithRelations
      */
-    'orden'?: number;
+    'orden': number;
     /**
      * 
      * @type {EnvioWithRelations}
@@ -5630,7 +5630,7 @@ export interface EnvioSensor {
      * @type {string}
      * @memberof EnvioSensor
      */
-    'valor'?: string;
+    'valor': string;
     /**
      * 
      * @type {number}
@@ -5660,7 +5660,7 @@ export interface EnvioSensor {
      * @type {number}
      * @memberof EnvioSensor
      */
-    'orden'?: number;
+    'orden': number;
 }
 /**
  * 
@@ -5922,7 +5922,7 @@ export interface EnvioSensorWithRelations {
      * @type {string}
      * @memberof EnvioSensorWithRelations
      */
-    'valor'?: string;
+    'valor': string;
     /**
      * 
      * @type {number}
@@ -5952,7 +5952,7 @@ export interface EnvioSensorWithRelations {
      * @type {number}
      * @memberof EnvioSensorWithRelations
      */
-    'orden'?: number;
+    'orden': number;
     /**
      * 
      * @type {TipoSensorWithRelations}
@@ -8669,13 +8669,13 @@ export interface NewEnvioParada {
      * @type {string}
      * @memberof NewEnvioParada
      */
-    'lugarParadaGps'?: string;
+    'lugarParadaGps': string;
     /**
      * 
      * @type {string}
      * @memberof NewEnvioParada
      */
-    'direccion'?: string;
+    'direccion': string;
     /**
      * 
      * @type {number}
@@ -8687,13 +8687,13 @@ export interface NewEnvioParada {
      * @type {string}
      * @memberof NewEnvioParada
      */
-    'telefonoOperario'?: string;
+    'telefonoOperario': string;
     /**
      * 
      * @type {string}
      * @memberof NewEnvioParada
      */
-    'emailOperario'?: string;
+    'emailOperario': string;
     /**
      * 
      * @type {number}
@@ -8723,7 +8723,7 @@ export interface NewEnvioParada {
      * @type {number}
      * @memberof NewEnvioParada
      */
-    'orden'?: number;
+    'orden': number;
 }
 /**
  * (tsType: Omit<EnvioSensor, \'id\'>, schemaOptions: { title: \'NewEnvioSensor\', exclude: [ \'id\' ] })
@@ -8748,7 +8748,7 @@ export interface NewEnvioSensor {
      * @type {string}
      * @memberof NewEnvioSensor
      */
-    'valor'?: string;
+    'valor': string;
     /**
      * 
      * @type {number}
@@ -8778,7 +8778,7 @@ export interface NewEnvioSensor {
      * @type {number}
      * @memberof NewEnvioSensor
      */
-    'orden'?: number;
+    'orden': number;
 }
 /**
  * (tsType: Omit<EventoConfiguracion, \'id\'>, schemaOptions: { title: \'NewEventoConfiguracion\', exclude: [ \'id\' ] })

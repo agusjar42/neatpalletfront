@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
@@ -109,7 +108,7 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                 pesoTotal: pesoTotalCalculado
             }));
         }
-    }, [envioContenido.pesoKgs, envioContenido.cantidad]);
+    }, [envioContenido.pesoKgs, envioContenido.cantidad, envioContenido.pesoTotal, setEnvioContenido]);
 
     const handleProductoChange = (e) => {
         const productoSeleccionado = productos.find(p => p.id === e.value);
@@ -230,31 +229,38 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
     };
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: 'Datos para el contenido' })}>
+        <>
             <Toast ref={toast} position="top-right" />
-            <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 md:col-6 lg:col-4">
-                    <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={envioContenido.orden === '' || envioContenido.orden === undefined ? null : envioContenido.orden}
+            <div className="catalogo-edit-form-grid catalogo-edit-form-grid-wide">
+                <div className="catalogo-edit-field">
+                    <label htmlFor="orden" className="catalogo-edit-label-required">{intl.formatMessage({ id: 'Orden' })}*</label>
+                    <InputNumber
+                        value={envioContenido.orden === '' || envioContenido.orden === undefined ? null : envioContenido.orden}
                         onChange={(e) => setEnvioContenido({ ...envioContenido, orden: e.value })}
                         className={`${(estadoGuardando && (envioContenido.orden === "" || envioContenido.orden === null || envioContenido.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"
                         useGrouping={false}
                         min={0}
-                        inputStyle={{ textAlign: 'right' }} />
+                        inputStyle={{ textAlign: 'right' }}
+                    />
                 </div>
-                {!estoyDentroDeUnTab && (<div className="flex flex-column field gap-2 mt-2 col-12 md:col-6 lg:col-4">
-                    <label htmlFor="envioId"><b>{intl.formatMessage({ id: 'Origen Ruta' })}*</b></label>
-                    <Dropdown value={envioContenido.envioId || ""}
-                        onChange={(e) => setEnvioContenido({ ...envioContenido, envioId: e.value })}
-                        options={opcionesEnvio}
-                        className={`p-column-filter ${(estadoGuardando && (envioContenido.envioId == null || envioContenido.envioId === "")) ? "p-invalid" : ""}`}
-                        showClear
-                        placeholder={intl.formatMessage({ id: 'Selecciona un envío' })} />
-                </div>)}
 
-                <div className="flex flex-column field gap-2 mt-2 col-12 md:col-6 lg:col-4">
-                    <label htmlFor="palletId"><b>{intl.formatMessage({ id: 'Pallet' })}*</b></label>
+                {!estoyDentroDeUnTab && (
+                    <div className="catalogo-edit-field">
+                        <label htmlFor="envioId" className="catalogo-edit-label-required">{intl.formatMessage({ id: 'Origen Ruta' })}*</label>
+                        <Dropdown
+                            value={envioContenido.envioId || ""}
+                            onChange={(e) => setEnvioContenido({ ...envioContenido, envioId: e.value })}
+                            options={opcionesEnvio}
+                            className={`p-column-filter ${(estadoGuardando && (envioContenido.envioId == null || envioContenido.envioId === "")) ? "p-invalid" : ""}`}
+                            showClear
+                            placeholder={intl.formatMessage({ id: 'Selecciona un envio' })}
+                        />
+                    </div>
+                )}
+
+                <div className="catalogo-edit-field">
+                    <label htmlFor="palletId" className="catalogo-edit-label-required">{intl.formatMessage({ id: 'Pallet' })}*</label>
                     <Dropdown
                         value={envioContenido.palletId}
                         options={pallets}
@@ -268,8 +274,8 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                     />
                 </div>
 
-                <div className="flex flex-column field gap-2 mt-2 col-12 md:col-6 lg:col-4">
-                    <label htmlFor="productoId"><b>{intl.formatMessage({ id: 'Producto' })}*</b></label>
+                <div className="catalogo-edit-field">
+                    <label htmlFor="productoId" className="catalogo-edit-label-required">{intl.formatMessage({ id: 'Producto' })}*</label>
                     <Dropdown
                         value={envioContenido.productoId}
                         options={productos}
@@ -284,162 +290,172 @@ const EditarDatosEnvioContenido = ({ envioContenido, setEnvioContenido, estadoGu
                     />
                     {!Number(empresaId ?? envioContenido?.empresaId ?? getUsuarioSesion()?.empresaId) && (
                         <small className="text-orange-600">
-                            {intl.formatMessage({ id: 'Debe seleccionar una empresa en el envío para ver los productos disponibles' })}
+                            {intl.formatMessage({ id: 'Debe seleccionar una empresa en el envio para ver los productos disponibles' })}
                         </small>
                     )}
                 </div>
 
-                <div className="flex flex-column field gap-2 mt-2 col-12 md:col-6 lg:col-4">
+                <div className="catalogo-edit-field">
                     <label htmlFor="pesoKgs">{intl.formatMessage({ id: 'Peso (Kg)' })}</label>
-                    <InputNumber value={envioContenido.pesoKgs}
+                    <InputNumber
+                        value={envioContenido.pesoKgs}
                         placeholder={intl.formatMessage({ id: 'Peso en kilogramos' })}
                         onValueChange={(e) => setEnvioContenido({ ...envioContenido, pesoKgs: e.value })}
-                        minFractionDigits={2} maxFractionDigits={2} min={0}
-                        inputStyle={{ textAlign: 'right' }} />
+                        minFractionDigits={2}
+                        maxFractionDigits={2}
+                        min={0}
+                        inputStyle={{ textAlign: 'right' }}
+                    />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 md:col-6 lg:col-4">
+
+                <div className="catalogo-edit-field">
                     <label htmlFor="cantidad">{intl.formatMessage({ id: 'Cantidad' })}</label>
-                    <InputNumber value={envioContenido.cantidad || 0}
+                    <InputNumber
+                        value={envioContenido.cantidad || 0}
                         placeholder={intl.formatMessage({ id: 'Cantidad del producto' })}
                         onValueChange={(e) => setEnvioContenido({ ...envioContenido, cantidad: e.value })}
-                        minFractionDigits={0} maxFractionDigits={0} min={0}
-                        inputStyle={{ textAlign: 'right' }} />
+                        minFractionDigits={0}
+                        maxFractionDigits={0}
+                        min={0}
+                        inputStyle={{ textAlign: 'right' }}
+                    />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 md:col-6 lg:col-4">
+
+                <div className="catalogo-edit-field">
                     <label htmlFor="pesoTotal">{intl.formatMessage({ id: 'Peso Total (Kg)' })}</label>
                     <InputNumber
                         value={envioContenido.pesoTotal || 0}
-                        placeholder={intl.formatMessage({ id: 'Peso total calculado automáticamente' })}
+                        placeholder={intl.formatMessage({ id: 'Peso total calculado automaticamente' })}
                         minFractionDigits={2}
                         maxFractionDigits={2}
                         min={0}
                         disabled
                         inputStyle={{ textAlign: 'right', backgroundColor: '#f8f9fa' }}
-                        tooltip={intl.formatMessage({ id: 'Campo calculado automáticamente: Peso × Cantidad' })}
+                        tooltip={intl.formatMessage({ id: 'Campo calculado automaticamente: Peso por Cantidad' })}
                         tooltipOptions={{ position: 'top' }}
                     />
                 </div>
-                <div className="flex flex-column field gap-2 mt-2 col-12 md:col-6 lg:col-4">
+
+                <div className="catalogo-edit-field">
                     <label htmlFor="medidas">{intl.formatMessage({ id: 'Medidas' })}</label>
-                    <InputText value={envioContenido.medidas || ''}
+                    <InputText
+                        value={envioContenido.medidas || ''}
                         placeholder={intl.formatMessage({ id: 'Medidas del producto' })}
                         onChange={(e) => setEnvioContenido({ ...envioContenido, medidas: e.target.value })}
-                        maxLength={50} />
+                        maxLength={50}
+                    />
                 </div>
+                <div className="catalogo-edit-field"></div>
 
-                <div className="col-12">
-                    <div className="formgrid grid">
-                        <div className="flex flex-column field gap-2 mt-2 col-12 md:col-6">
-                            <label htmlFor="fotoProducto" className="pb-2">{intl.formatMessage({ id: 'Foto del producto' })}</label>
-                            <div className="p-3 border-1 border-round surface-border">
-                                <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: '150px' }}>
-                                    {(previewFotoProducto || envioContenido.fotoProducto) ? (
-                                        <Image
-                                            src={previewFotoProducto || envioContenido.fotoProducto}
-                                            alt="Foto del producto"
-                                            width="220"
-                                            imageStyle={{ maxWidth: '100%', maxHeight: '150px', objectFit: 'contain' }}
-                                            preview
-                                        />
-                                    ) : (
-                                        <small className="text-color-secondary">Sin imagen cargada</small>
-                                    )}
-                                </div>
-                                <div className="mt-2 text-center">
-                                    <small className={previewFotoProducto ? "text-green-600" : "text-color-secondary"}>
-                                        {previewFotoProducto
-                                            ? `Nueva imagen seleccionada${envioContenido.fotoProductoNombre ? `: ${envioContenido.fotoProductoNombre}` : ''}`
-                                            : (envioContenido.fotoProducto ? 'Imagen actual' : 'No hay imagen cargada')}
-                                    </small>
-                                </div>
-                                <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
-                                    <Button
-                                        label={previewFotoProducto || envioContenido.fotoProducto ? "Cambiar imagen" : "Seleccionar imagen"}
-                                        icon="pi pi-upload"
-                                        className="p-button-outlined p-button-sm"
-                                        onClick={() => fotoProductoInputRef.current?.click()}
-                                    />
-                                    {(previewFotoProducto || envioContenido.fotoProducto) && (
-                                        <Button
-                                            label="Quitar"
-                                            icon="pi pi-times"
-                                            className="p-button-text p-button-sm"
-                                            onClick={limpiarFotoProducto}
-                                        />
-                                    )}
-                                </div>
-                            </div>
-                            <input
-                                id="fotoProducto"
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => {
-                                    if (e.target.files && e.target.files[0]) {
-                                        onSelectFotoProducto({ files: [e.target.files[0]] });
-                                    }
-                                }}
-                                style={{ display: 'none' }}
-                                ref={fotoProductoInputRef}
-                            />
+                <div className="catalogo-edit-field">
+                    <label htmlFor="fotoProducto" className="pb-2">{intl.formatMessage({ id: 'Foto del producto' })}</label>
+                    <div className="p-3 border-1 border-round surface-border">
+                        <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: '150px' }}>
+                            {(previewFotoProducto || envioContenido.fotoProducto) ? (
+                                <Image
+                                    src={previewFotoProducto || envioContenido.fotoProducto}
+                                    alt="Foto del producto"
+                                    width="220"
+                                    imageStyle={{ maxWidth: '100%', maxHeight: '150px', objectFit: 'contain' }}
+                                    preview
+                                />
+                            ) : (
+                                <small className="text-color-secondary">Sin imagen cargada</small>
+                            )}
                         </div>
-
-                        <div className="flex flex-column field gap-2 mt-2 col-12 md:col-6">
-                            <label htmlFor="fotoPallet" className="pb-2">{intl.formatMessage({ id: 'Foto del pallet' })}</label>
-                            <div className="p-3 border-1 border-round surface-border">
-                                <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: '150px' }}>
-                                    {(previewFotoPallet || envioContenido.fotoPallet) ? (
-                                        <Image
-                                            src={previewFotoPallet || envioContenido.fotoPallet}
-                                            alt="Foto del pallet"
-                                            width="220"
-                                            imageStyle={{ maxWidth: '100%', maxHeight: '150px', objectFit: 'contain' }}
-                                            preview
-                                        />
-                                    ) : (
-                                        <small className="text-color-secondary">Sin imagen cargada</small>
-                                    )}
-                                </div>
-                                <div className="mt-2 text-center">
-                                    <small className={previewFotoPallet ? "text-green-600" : "text-color-secondary"}>
-                                        {previewFotoPallet
-                                            ? `Nueva imagen seleccionada${envioContenido.fotoPalletNombre ? `: ${envioContenido.fotoPalletNombre}` : ''}`
-                                            : (envioContenido.fotoPallet ? 'Imagen actual' : 'No hay imagen cargada')}
-                                    </small>
-                                </div>
-                                <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
-                                    <Button
-                                        label={previewFotoPallet || envioContenido.fotoPallet ? "Cambiar imagen" : "Seleccionar imagen"}
-                                        icon="pi pi-upload"
-                                        className="p-button-outlined p-button-sm"
-                                        onClick={() => fotoPalletInputRef.current?.click()}
-                                    />
-                                    {(previewFotoPallet || envioContenido.fotoPallet) && (
-                                        <Button
-                                            label="Quitar"
-                                            icon="pi pi-times"
-                                            className="p-button-text p-button-sm"
-                                            onClick={limpiarFotoPallet}
-                                        />
-                                    )}
-                                </div>
-                            </div>
-                            <input
-                                id="fotoPallet"
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => {
-                                    if (e.target.files && e.target.files[0]) {
-                                        onSelectFotoPallet({ files: [e.target.files[0]] });
-                                    }
-                                }}
-                                style={{ display: 'none' }}
-                                ref={fotoPalletInputRef}
+                        <div className="mt-2 text-center">
+                            <small className={previewFotoProducto ? "text-green-600" : "text-color-secondary"}>
+                                {previewFotoProducto
+                                    ? `Nueva imagen seleccionada${envioContenido.fotoProductoNombre ? `: ${envioContenido.fotoProductoNombre}` : ''}`
+                                    : (envioContenido.fotoProducto ? 'Imagen actual' : 'No hay imagen cargada')}
+                            </small>
+                        </div>
+                        <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
+                            <Button
+                                label={previewFotoProducto || envioContenido.fotoProducto ? "Cambiar imagen" : "Seleccionar imagen"}
+                                icon="pi pi-upload"
+                                className="p-button-outlined p-button-sm"
+                                onClick={() => fotoProductoInputRef.current?.click()}
                             />
+                            {(previewFotoProducto || envioContenido.fotoProducto) && (
+                                <Button
+                                    label="Quitar"
+                                    icon="pi pi-times"
+                                    className="p-button-text p-button-sm"
+                                    onClick={limpiarFotoProducto}
+                                />
+                            )}
                         </div>
                     </div>
+                    <input
+                        id="fotoProducto"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                                onSelectFotoProducto({ files: [e.target.files[0]] });
+                            }
+                        }}
+                        style={{ display: 'none' }}
+                        ref={fotoProductoInputRef}
+                    />
+                </div>
+
+                <div className="catalogo-edit-field">
+                    <label htmlFor="fotoPallet" className="pb-2">{intl.formatMessage({ id: 'Foto del pallet' })}</label>
+                    <div className="p-3 border-1 border-round surface-border">
+                        <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: '150px' }}>
+                            {(previewFotoPallet || envioContenido.fotoPallet) ? (
+                                <Image
+                                    src={previewFotoPallet || envioContenido.fotoPallet}
+                                    alt="Foto del pallet"
+                                    width="220"
+                                    imageStyle={{ maxWidth: '100%', maxHeight: '150px', objectFit: 'contain' }}
+                                    preview
+                                />
+                            ) : (
+                                <small className="text-color-secondary">Sin imagen cargada</small>
+                            )}
+                        </div>
+                        <div className="mt-2 text-center">
+                            <small className={previewFotoPallet ? "text-green-600" : "text-color-secondary"}>
+                                {previewFotoPallet
+                                    ? `Nueva imagen seleccionada${envioContenido.fotoPalletNombre ? `: ${envioContenido.fotoPalletNombre}` : ''}`
+                                    : (envioContenido.fotoPallet ? 'Imagen actual' : 'No hay imagen cargada')}
+                            </small>
+                        </div>
+                        <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
+                            <Button
+                                label={previewFotoPallet || envioContenido.fotoPallet ? "Cambiar imagen" : "Seleccionar imagen"}
+                                icon="pi pi-upload"
+                                className="p-button-outlined p-button-sm"
+                                onClick={() => fotoPalletInputRef.current?.click()}
+                            />
+                            {(previewFotoPallet || envioContenido.fotoPallet) && (
+                                <Button
+                                    label="Quitar"
+                                    icon="pi pi-times"
+                                    className="p-button-text p-button-sm"
+                                    onClick={limpiarFotoPallet}
+                                />
+                            )}
+                        </div>
+                    </div>
+                    <input
+                        id="fotoPallet"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                                onSelectFotoPallet({ files: [e.target.files[0]] });
+                            }
+                        }}
+                        style={{ display: 'none' }}
+                        ref={fotoPalletInputRef}
+                    />
                 </div>
             </div>
-        </Fieldset>
+        </>
     );
 };
 

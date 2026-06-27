@@ -250,6 +250,7 @@ const EditarEnvioMovimiento = ({
                         <h2>
                             {header} {(intl.formatMessage({ id: "Movimiento de Envio" })).toLowerCase()}
                         </h2>
+                        <p className="catalogo-edit-description">Configura el pallet, sensor, fecha, ubicacion e imagen del movimiento.</p>
                         <EditarDatosEnvioMovimiento
                             envioMovimiento={envioMovimiento}
                             setEnvioMovimiento={setEnvioMovimiento}
@@ -259,25 +260,24 @@ const EditarEnvioMovimiento = ({
                             estoyDentroDeUnTab={estoyDentroDeUnTab}
                         />
 
-                        <div className="flex justify-content-end mt-2">
-                            {editable && (
-                                <Button
-                                    label={
-                                        estadoGuardandoBoton
-                                            ? `${intl.formatMessage({ id: "Guardando" })}...`
-                                            : intl.formatMessage({ id: "Guardar" })
-                                    }
-                                    icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                    onClick={guardarEnvioMovimiento}
-                                    className="mr-2"
-                                    disabled={estadoGuardandoBoton}
-                                />
-                            )}
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
                             <Button
                                 label={intl.formatMessage({ id: "Cancelar" })}
                                 onClick={cancelarEdicion}
                                 className="p-button-secondary"
                             />
+                            {editable && (
+                                <Button
+                                    label={
+                                        estadoGuardandoBoton
+                                            ? `${intl.formatMessage({ id: "Guardando" })}...`
+                                            : "Guardar cambios"
+                                    }
+                                    icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
+                                    onClick={guardarEnvioMovimiento}
+                                    disabled={estadoGuardandoBoton}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>

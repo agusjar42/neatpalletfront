@@ -140,6 +140,7 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                     <div {...(!estoyDentroDeUnTab && { className: "card" })}>
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Contenido' })).toLowerCase()}</h2>
+                        <p className="catalogo-edit-description">Configura el orden, pallet, producto, cantidades e imagenes del contenido.</p>
                         <EditarDatosEnvioContenido
                             envioContenido={envioContenido}
                             setEnvioContenido={setEnvioContenido}
@@ -149,17 +150,16 @@ const EditarEnvioContenido = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                             empresaId={empresaId}
                         />
 
-                        <div className="flex justify-content-end mt-2">
+                        <div className="flex justify-content-end align-items-center gap-2 mt-3">
+                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : 'Guardar cambios'}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarEnvioContenido}
-                                    className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
                         </div>
                     </div>
                 </div>

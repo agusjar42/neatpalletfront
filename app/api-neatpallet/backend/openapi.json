@@ -13583,6 +13583,10 @@
             "$ref": "#/components/schemas/EnvioWithRelations"
           }
         },
+        "required": [
+          "valor",
+          "orden"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "EnvioSensorWithRelations"
       },
@@ -17246,6 +17250,10 @@
             "type": "number"
           }
         },
+        "required": [
+          "valor",
+          "orden"
+        ],
         "additionalProperties": false
       },
       "NewEnvioSensor": {
@@ -17280,6 +17288,10 @@
             "type": "number"
           }
         },
+        "required": [
+          "valor",
+          "orden"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<EnvioSensor, 'id'>"
       },
@@ -17385,6 +17397,13 @@
             "type": "number"
           }
         },
+        "required": [
+          "lugarParadaGps",
+          "direccion",
+          "telefonoOperario",
+          "emailOperario",
+          "orden"
+        ],
         "additionalProperties": false
       },
       "NewEnvioParada": {
@@ -17449,6 +17468,13 @@
             "type": "number"
           }
         },
+        "required": [
+          "lugarParadaGps",
+          "direccion",
+          "telefonoOperario",
+          "emailOperario",
+          "orden"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<EnvioParada, 'id'>"
       },
@@ -17527,6 +17553,13 @@
             "$ref": "#/components/schemas/OperarioWithRelations"
           }
         },
+        "required": [
+          "lugarParadaGps",
+          "direccion",
+          "telefonoOperario",
+          "emailOperario",
+          "orden"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "EnvioParadaWithRelations"
       },

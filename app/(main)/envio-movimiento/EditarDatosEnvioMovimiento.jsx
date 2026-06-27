@@ -1,5 +1,4 @@
 import React from "react";
-import { Fieldset } from "primereact/fieldset";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
 import { Dropdown } from "primereact/dropdown";
@@ -72,142 +71,132 @@ const EditarDatosEnvioMovimiento = ({
     };
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: "Datos para el movimiento de envÃ­o" })}>
-            <div className="formgrid grid">
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="orden">
-                        <b>{intl.formatMessage({ id: "Orden" })}*</b>
-                    </label>
-                    <InputNumber
-                        value={envioMovimiento.orden}
-                        placeholder={intl.formatMessage({ id: "Orden del movimiento" })}
-                        onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, orden: e.value })}
-                        className={`${estadoGuardando && (envioMovimiento.orden === "" || envioMovimiento.orden === null || envioMovimiento.orden === undefined) ? "p-invalid" : ""}`}
-                        mode="decimal"
-                        useGrouping={false}
-                        min={0}
-                        inputStyle={{ textAlign: "right" }}
-                    />
-                </div>
-
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="palletId">
-                        <b>{intl.formatMessage({ id: "Pallet" })}*</b>
-                    </label>
-                    <Dropdown
-                        value={envioMovimiento.palletId || ""}
-                        onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, palletId: e.value })}
-                        options={opcionesEnvioPallet}
-                        className={`p-column-filter ${estadoGuardando && (envioMovimiento.palletId == null || envioMovimiento.palletId === "") ? "p-invalid" : ""}`}
-                        showClear
-                        filter
-                        placeholder={intl.formatMessage({ id: "Selecciona un pallet" })}
-                    />
-                </div>
-
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="tipoSensorId">
-                        <b>{intl.formatMessage({ id: "Tipo de Sensor" })}*</b>
-                    </label>
-                    <Dropdown
-                        value={envioMovimiento.tipoSensorId || ""}
-                        onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, tipoSensorId: e.value })}
-                        options={opcionesTipoSensor}
-                        className={`p-column-filter ${estadoGuardando && (envioMovimiento.tipoSensorId == null || envioMovimiento.tipoSensorId === "") ? "p-invalid" : ""}`}
-                        showClear
-                        placeholder={intl.formatMessage({ id: "Selecciona un tipo de sensor" })}
-                    />
-                </div>
-
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="fecha">{intl.formatMessage({ id: "Fecha" })}</label>
-                    <InputText
-                        type="datetime-local"
-                        value={envioMovimiento.fecha}
-                        placeholder={intl.formatMessage({ id: "Fecha del movimiento" })}
-                        onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, fecha: e.target.value })}
-                        maxLength={20}
-                        style={{ textAlign: "right" }}
-                    />
-                </div>
-
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="gps">{intl.formatMessage({ id: "GPS" })}</label>
-                    <InputText
-                        value={envioMovimiento.gps}
-                        placeholder={intl.formatMessage({ id: "Coordenadas GPS" })}
-                        onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, gps: e.target.value })}
-                        maxLength={50}
-                    />
-                </div>
-
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="valor">{intl.formatMessage({ id: "Valor" })}</label>
-                    <InputText
-                        value={envioMovimiento.valor}
-                        placeholder={intl.formatMessage({ id: "Valor del sensor" })}
-                        onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, valor: e.target.value })}
-                        maxLength={50}
-                    />
-                </div>
-
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                    <label htmlFor="imagen" className="pb-2">
-                        {intl.formatMessage({ id: "Imagen" })}
-                    </label>
-                    <div className="p-3 border-1 border-round surface-border">
-                        <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: "150px" }}>
-                            {(previewImagen || envioMovimiento.imagen) ? (
-                                <Image
-                                    src={previewImagen || envioMovimiento.imagen}
-                                    alt="Imagen"
-                                    width="220"
-                                    imageStyle={{ maxWidth: "100%", maxHeight: "150px", objectFit: "contain" }}
-                                    preview
-                                />
-                            ) : (
-                                <small className="text-color-secondary">Sin imagen cargada</small>
-                            )}
-                        </div>
-                        <div className="mt-2 text-center">
-                            <small className={previewImagen ? "text-green-600" : "text-color-secondary"}>
-                                {previewImagen
-                                    ? `Nueva imagen seleccionada${envioMovimiento.imagenNombre ? `: ${envioMovimiento.imagenNombre}` : ""}`
-                                    : (envioMovimiento.imagen ? "Imagen actual" : "No hay imagen cargada")}
-                            </small>
-                        </div>
-                        <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
-                            <Button
-                                label={previewImagen || envioMovimiento.imagen ? "Cambiar imagen" : "Seleccionar imagen"}
-                                icon="pi pi-upload"
-                                className="p-button-outlined p-button-sm"
-                                onClick={() => imagenInputRef.current?.click()}
-                            />
-                            {(previewImagen || envioMovimiento.imagen) && (
-                                <Button
-                                    label="Quitar"
-                                    icon="pi pi-times"
-                                    className="p-button-text p-button-sm"
-                                    onClick={limpiarImagen}
-                                />
-                            )}
-                        </div>
-                    </div>
-                    <input
-                        id="imagen"
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                            if (e.target.files && e.target.files[0]) {
-                                onSelectImagen({ files: [e.target.files[0]] });
-                            }
-                        }}
-                        style={{ display: "none" }}
-                        ref={imagenInputRef}
-                    />
-                </div>
+        <div className="catalogo-edit-form-grid catalogo-edit-form-grid-wide">
+            <div className="catalogo-edit-field">
+                <label htmlFor="orden" className="catalogo-edit-label-required">{intl.formatMessage({ id: "Orden" })}*</label>
+                <InputNumber
+                    value={envioMovimiento.orden}
+                    placeholder={intl.formatMessage({ id: "Orden del movimiento" })}
+                    onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, orden: e.value })}
+                    className={`${estadoGuardando && (envioMovimiento.orden === "" || envioMovimiento.orden === null || envioMovimiento.orden === undefined) ? "p-invalid" : ""}`}
+                    mode="decimal"
+                    useGrouping={false}
+                    min={0}
+                    inputStyle={{ textAlign: "right" }}
+                />
             </div>
-        </Fieldset>
+
+            <div className="catalogo-edit-field">
+                <label htmlFor="palletId" className="catalogo-edit-label-required">{intl.formatMessage({ id: "Pallet" })}*</label>
+                <Dropdown
+                    value={envioMovimiento.palletId || ""}
+                    onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, palletId: e.value })}
+                    options={opcionesEnvioPallet}
+                    className={`p-column-filter ${estadoGuardando && (envioMovimiento.palletId == null || envioMovimiento.palletId === "") ? "p-invalid" : ""}`}
+                    showClear
+                    filter
+                    placeholder={intl.formatMessage({ id: "Selecciona un pallet" })}
+                />
+            </div>
+
+            <div className="catalogo-edit-field">
+                <label htmlFor="tipoSensorId" className="catalogo-edit-label-required">{intl.formatMessage({ id: "Tipo de Sensor" })}*</label>
+                <Dropdown
+                    value={envioMovimiento.tipoSensorId || ""}
+                    onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, tipoSensorId: e.value })}
+                    options={opcionesTipoSensor}
+                    className={`p-column-filter ${estadoGuardando && (envioMovimiento.tipoSensorId == null || envioMovimiento.tipoSensorId === "") ? "p-invalid" : ""}`}
+                    showClear
+                    placeholder={intl.formatMessage({ id: "Selecciona un tipo de sensor" })}
+                />
+            </div>
+
+            <div className="catalogo-edit-field">
+                <label htmlFor="fecha">{intl.formatMessage({ id: "Fecha" })}</label>
+                <InputText
+                    type="datetime-local"
+                    value={envioMovimiento.fecha}
+                    placeholder={intl.formatMessage({ id: "Fecha del movimiento" })}
+                    onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, fecha: e.target.value })}
+                    maxLength={20}
+                    style={{ textAlign: "right" }}
+                />
+            </div>
+
+            <div className="catalogo-edit-field">
+                <label htmlFor="gps">{intl.formatMessage({ id: "GPS" })}</label>
+                <InputText
+                    value={envioMovimiento.gps}
+                    placeholder={intl.formatMessage({ id: "Coordenadas GPS" })}
+                    onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, gps: e.target.value })}
+                    maxLength={50}
+                />
+            </div>
+
+            <div className="catalogo-edit-field">
+                <label htmlFor="valor">{intl.formatMessage({ id: "Valor" })}</label>
+                <InputText
+                    value={envioMovimiento.valor}
+                    placeholder={intl.formatMessage({ id: "Valor del sensor" })}
+                    onChange={(e) => setEnvioMovimiento({ ...envioMovimiento, valor: e.target.value })}
+                    maxLength={50}
+                />
+            </div>
+
+            <div className="catalogo-edit-field">
+                <label htmlFor="imagen" className="pb-2">{intl.formatMessage({ id: "Imagen" })}</label>
+                <div className="p-3 border-1 border-round surface-border">
+                    <div className="flex justify-content-center align-items-center border-round surface-100 p-2" style={{ minHeight: "150px" }}>
+                        {(previewImagen || envioMovimiento.imagen) ? (
+                            <Image
+                                src={previewImagen || envioMovimiento.imagen}
+                                alt="Imagen"
+                                width="220"
+                                imageStyle={{ maxWidth: "100%", maxHeight: "150px", objectFit: "contain" }}
+                                preview
+                            />
+                        ) : (
+                            <small className="text-color-secondary">Sin imagen cargada</small>
+                        )}
+                    </div>
+                    <div className="mt-2 text-center">
+                        <small className={previewImagen ? "text-green-600" : "text-color-secondary"}>
+                            {previewImagen
+                                ? `Nueva imagen seleccionada${envioMovimiento.imagenNombre ? `: ${envioMovimiento.imagenNombre}` : ""}`
+                                : (envioMovimiento.imagen ? "Imagen actual" : "No hay imagen cargada")}
+                        </small>
+                    </div>
+                    <div className="flex justify-content-center gap-2 mt-3 flex-wrap">
+                        <Button
+                            label={previewImagen || envioMovimiento.imagen ? "Cambiar imagen" : "Seleccionar imagen"}
+                            icon="pi pi-upload"
+                            className="p-button-outlined p-button-sm"
+                            onClick={() => imagenInputRef.current?.click()}
+                        />
+                        {(previewImagen || envioMovimiento.imagen) && (
+                            <Button
+                                label="Quitar"
+                                icon="pi pi-times"
+                                className="p-button-text p-button-sm"
+                                onClick={limpiarImagen}
+                            />
+                        )}
+                    </div>
+                </div>
+                <input
+                    id="imagen"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                            onSelectImagen({ files: [e.target.files[0]] });
+                        }
+                    }}
+                    style={{ display: "none" }}
+                    ref={imagenInputRef}
+                />
+            </div>
+        </div>
     );
 };
 

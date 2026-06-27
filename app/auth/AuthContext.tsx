@@ -108,7 +108,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       path: string;
       icon: string;
       permisoControlador: string;
-      permisosControladorAlternativos?: string[];
       grupo: "OPERACIONES" | "SISTEMA" | "MI PANEL";
     };
 
@@ -121,7 +120,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       { label: "Usuarios",                 path: "/usuarios",                          icon: "pi pi-users",         permisoControlador: "Usuarios", grupo: "MI PANEL" },
       { label: "Puntos de entrega",        path: "/cliente",                           icon: "pi pi-globe",         permisoControlador: "Clientes", grupo: "MI PANEL" },
       { label: "Productos",                path: "/producto",                          icon: "pi pi-credit-card",   permisoControlador: "Productos", grupo: "MI PANEL" },
-      { label: "Sensores activos",         path: "/empresa-sensor",                    icon: "pi pi-wifi",          permisoControlador: "Empresa Sensor", permisosControladorAlternativos: ["Envío Sensor Empresa", "Envio Sensor Empresa", "Envio Sensor"], grupo: "MI PANEL" },
+      { label: "Sensores activos",         path: "/empresa-sensor",                    icon: "pi pi-wifi",          permisoControlador: "Sensores activos", grupo: "MI PANEL" },
       { label: "Pallets asignados",        path: "/tablas-maestras/pallets-asignados", icon: "pi pi-desktop",       permisoControlador: "Pallets Asignados", grupo: "MI PANEL" },
       { label: "Tipos de carrocerías",     path: "/tipo-carroceria",                   icon: "pi pi-server",        permisoControlador: "Tipos de Carrocería", grupo: "MI PANEL" },
       { label: "Tipos de transporte",      path: "/tipo-transporte",                   icon: "pi pi-arrows-h",      permisoControlador: "Tipo Transporte", grupo: "MI PANEL" },
@@ -176,12 +175,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }[] = [];
 
     for (const item of rutasMenu) {
-      const permisosAceptados = [
-        item.permisoControlador,
-        ...(item.permisosControladorAlternativos ?? []),
-      ];
-
-      if (permisosAceptados.some((permisoControlador) => permisosControlador.has(permisoControlador))) {
+      if (permisosControlador.has(item.permisoControlador)) {
         gruposMenu[item.grupo].items.push({
           label: item.label,
           icon: item.icon,

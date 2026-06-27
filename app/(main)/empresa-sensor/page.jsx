@@ -20,7 +20,7 @@ const EmpresaSensor = () => {
                 getRegistros={getEmpresaSensor}
                 getRegistrosCount={getEmpresaSensorCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"Empresa Sensor"}
+                controlador={"Sensores activos"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarEmpresaSensor />}
                 columnas={columnas}

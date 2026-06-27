@@ -104,8 +104,15 @@ const EditarEmpresaSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
             let objGuardar = { ...empresaSensor };
             delete objGuardar['nombre'];
             delete objGuardar['nombreSensor'];
+            delete objGuardar['unidad'];
             const usuarioActual = getUsuarioSesion()?.id;
-            objGuardar["valor"] = objGuardar["valor"].toString();
+
+            //
+            //Normalizamos los nuevos campos de empresa_sensor antes de guardar
+            //
+            objGuardar["valorMinimo"] = objGuardar["valorMinimo"] == null || objGuardar["valorMinimo"] === "" ? null : objGuardar["valorMinimo"].toString();
+            objGuardar["valorMaximo"] = objGuardar["valorMaximo"] == null || objGuardar["valorMaximo"] === "" ? null : objGuardar["valorMaximo"].toString();
+            objGuardar["activoSn"] = objGuardar["activoSn"] || "S";
 
             if (idEditar === 0) {
                 delete objGuardar.id;
@@ -128,7 +135,6 @@ const EditarEmpresaSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
             } else {
                 objGuardar['usuarioModificacion'] = usuarioActual;
                 delete objGuardar['fechaModificacion'];
-                delete objGuardar['activoSn'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
                 await patchEmpresaSensor(objGuardar.id, objGuardar);
                 setIdEditar(null)
@@ -164,6 +170,8 @@ const EditarEmpresaSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                             setEmpresaSensor={setEmpresaSensor}
                             estadoGuardando={estadoGuardando}
                             tiposSensor={tiposSensor}
+                            idEditar={idEditar}
+                            editable={editable}
                         />
 
                         <div className="flex justify-content-end mt-2">

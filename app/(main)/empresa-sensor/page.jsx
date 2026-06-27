@@ -10,7 +10,10 @@ const EmpresaSensor = () => {
     const columnas = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Tipo de Sensor' }), tipo: 'string' },
-        { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
+        { campo: 'unidad', header: intl.formatMessage({ id: 'Unidad' }), tipo: 'string' },
+        { campo: 'valorMinimo', header: intl.formatMessage({ id: 'Minimo' }), tipo: 'string' },
+        { campo: 'valorMaximo', header: intl.formatMessage({ id: 'Maximo' }), tipo: 'string' },
+        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ]
 
     return (
@@ -23,6 +26,12 @@ const EmpresaSensor = () => {
                 controlador={"Sensores activos"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarEmpresaSensor />}
+                mostrarEdicionEnModal={true}
+                modalEdicionProps={{
+                    showHeader: false,
+                    className: "neat-crud-edit-dialog catalogo-edit-dialog",
+                    style: { width: "min(720px, 94vw)" },
+                }}
                 columnas={columnas}
                 deleteRegistro={deleteEmpresaSensor}
             />

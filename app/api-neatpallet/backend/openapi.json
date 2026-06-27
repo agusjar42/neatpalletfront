@@ -13274,6 +13274,9 @@
           },
           "valorDefecto": {
             "type": "string"
+          },
+          "unidad": {
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -13307,6 +13310,9 @@
             "type": "number"
           },
           "valorDefecto": {
+            "type": "string"
+          },
+          "unidad": {
             "type": "string"
           }
         },
@@ -13601,6 +13607,9 @@
           "valorDefecto": {
             "type": "string"
           },
+          "unidad": {
+            "type": "string"
+          },
           "envioSensores": {
             "type": "array",
             "items": {
@@ -13649,6 +13658,9 @@
             "type": "number"
           },
           "valorDefecto": {
+            "type": "string"
+          },
+          "unidad": {
             "type": "string"
           }
         },
@@ -18963,7 +18975,10 @@
           "empresaId": {
             "type": "number"
           },
-          "valor": {
+          "valorMinimo": {
+            "type": "string"
+          },
+          "valorMaximo": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -18982,6 +18997,9 @@
           },
           "orden": {
             "type": "number"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -18997,7 +19015,10 @@
           "empresaId": {
             "type": "number"
           },
-          "valor": {
+          "valorMinimo": {
+            "type": "string"
+          },
+          "valorMaximo": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -19016,6 +19037,9 @@
           },
           "orden": {
             "type": "number"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -19035,7 +19059,10 @@
           "empresaId": {
             "type": "number"
           },
-          "valor": {
+          "valorMinimo": {
+            "type": "string"
+          },
+          "valorMaximo": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -19054,6 +19081,9 @@
           },
           "orden": {
             "type": "number"
+          },
+          "activoSn": {
+            "type": "string"
           },
           "tipoSensor": {
             "$ref": "#/components/schemas/TipoSensorWithRelations"
@@ -19080,7 +19110,10 @@
           "empresaId": {
             "type": "number"
           },
-          "valor": {
+          "valorMinimo": {
+            "type": "string"
+          },
+          "valorMaximo": {
             "type": "string"
           },
           "usuarioCreacion": {
@@ -19099,6 +19132,9 @@
           },
           "orden": {
             "type": "number"
+          },
+          "activoSn": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -20079,7 +20115,10 @@
                   "empresaId": {
                     "type": "boolean"
                   },
-                  "valor": {
+                  "valorMinimo": {
+                    "type": "boolean"
+                  },
+                  "valorMaximo": {
                     "type": "boolean"
                   },
                   "usuarioCreacion": {
@@ -20096,6 +20135,9 @@
                   },
                   "orden": {
                     "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20108,12 +20150,14 @@
                     "id",
                     "tipoSensorId",
                     "empresaId",
-                    "valor",
+                    "valorMinimo",
+                    "valorMaximo",
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "orden"
+                    "orden",
+                    "activoSn"
                   ],
                   "example": "id"
                 },
@@ -20189,7 +20233,10 @@
                   "empresaId": {
                     "type": "boolean"
                   },
-                  "valor": {
+                  "valorMinimo": {
+                    "type": "boolean"
+                  },
+                  "valorMaximo": {
                     "type": "boolean"
                   },
                   "usuarioCreacion": {
@@ -20206,6 +20253,9 @@
                   },
                   "orden": {
                     "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -20218,12 +20268,14 @@
                     "id",
                     "tipoSensorId",
                     "empresaId",
-                    "valor",
+                    "valorMinimo",
+                    "valorMaximo",
                     "usuarioCreacion",
                     "fechaCreacion",
                     "usuarioModificacion",
                     "fechaModificacion",
-                    "orden"
+                    "orden",
+                    "activoSn"
                   ],
                   "example": "id"
                 },
@@ -27836,6 +27888,9 @@
                   },
                   "valorDefecto": {
                     "type": "boolean"
+                  },
+                  "unidad": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -27853,7 +27908,8 @@
                     "usuarioModificacion",
                     "fechaModificacion",
                     "orden",
-                    "valorDefecto"
+                    "valorDefecto",
+                    "unidad"
                   ],
                   "example": "id"
                 },
@@ -27946,6 +28002,9 @@
                   },
                   "valorDefecto": {
                     "type": "boolean"
+                  },
+                  "unidad": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -27963,7 +28022,8 @@
                     "usuarioModificacion",
                     "fechaModificacion",
                     "orden",
-                    "valorDefecto"
+                    "valorDefecto",
+                    "unidad"
                   ],
                   "example": "id"
                 },

@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { getTipoCarroceria, postTipoCarroceria, patchTipoCarroceria } from "@/app/api-endpoints/empresa-tipo-carroceria";
+import { postTipoCarroceria, patchTipoCarroceria } from "@/app/api-endpoints/empresa-tipo-carroceria";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
 import EditarDatosTipoCarroceria from "./EditarDatosTipoCarroceria";
@@ -13,7 +13,6 @@ const EditarTipoCarroceria = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
     const [tipoCarroceria, setTipoCarroceria] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
-    const [tiposDisponibles, setTiposDisponibles] = useState([]);
     const intl = useIntl();
 
     useEffect(() => {
@@ -25,28 +24,6 @@ const EditarTipoCarroceria = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
         };
         fetchData();
     }, [idEditar, rowData]);
-
-    useEffect(() => {
-        const cargarTipos = async () => {
-            const empresaIdActual = empresaId ?? getUsuarioSesion()?.empresaId;
-            const tipos = await getTipoCarroceria();
-            const tiposFiltrados = (tipos || []).filter((item) => {
-                const mismaEmpresa = !empresaIdActual || item?.empresaId === empresaIdActual;
-                const activo = item?.activoSn === "S" || item?.activoSn == null;
-                return mismaEmpresa && activo;
-            });
-            const nombres = Array.from(new Set(tiposFiltrados.map((item) => item.nombre).filter(Boolean)));
-            setTiposDisponibles(nombres);
-        };
-
-        cargarTipos();
-    }, [empresaId]);
-
-    useEffect(() => {
-        if (tipoCarroceria?.nombre && !tiposDisponibles.includes(tipoCarroceria.nombre)) {
-            setTiposDisponibles((prev) => [...prev, tipoCarroceria.nombre]);
-        }
-    }, [tipoCarroceria?.nombre, tiposDisponibles]);
 
     const validaciones = async () => {
         const validaNombre = tipoCarroceria.nombre === undefined || tipoCarroceria.nombre === "";
@@ -117,7 +94,6 @@ const EditarTipoCarroceria = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                             tipoCarroceria={tipoCarroceria}
                             setTipoCarroceria={setTipoCarroceria}
                             estadoGuardando={estadoGuardando}
-                            tiposDisponibles={tiposDisponibles}
                         />
 
                         <div className="flex justify-content-end align-items-center gap-2 mt-3">

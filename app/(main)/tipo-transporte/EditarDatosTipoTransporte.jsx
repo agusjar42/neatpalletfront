@@ -25,7 +25,7 @@ const EditarDatosTipoTransporte = ({
     return (
             <div className="catalogo-edit-form-grid">
                 <div className="catalogo-edit-field">
-                    <label htmlFor="orden">{intl.formatMessage({ id: 'Orden' })}</label>
+                    <label htmlFor="orden" style={{ color: 'black' }}><b>{intl.formatMessage({ id: 'Orden' })} *</b></label>
                     <InputNumber value={tipoTransporte.orden === '' || tipoTransporte.orden === undefined ? null : tipoTransporte.orden}
                         onChange={(e) => setTipoTransporte({ ...tipoTransporte, orden: e.value })}
                         className={`${(estadoGuardando && (tipoTransporte.orden === "" || tipoTransporte.orden === null || tipoTransporte.orden === undefined)) ? "p-invalid" : ""}`}
@@ -35,7 +35,7 @@ const EditarDatosTipoTransporte = ({
                         inputStyle={{ textAlign: 'right' }}/>
                 </div>
                 <div className="catalogo-edit-field">
-                    <label htmlFor="codigo">{intl.formatMessage({ id: 'Codigo' })}</label>
+                    <label htmlFor="codigo" style={{ color: 'black' }}><b>{intl.formatMessage({ id: 'Codigo' })} *</b></label>
                     <InputText value={tipoTransporte.codigo || ""}
                         placeholder={intl.formatMessage({ id: 'Codigo del tipo de transporte' })}
                         onChange={(e) => setTipoTransporte({ ...tipoTransporte, codigo: e.target.value })}

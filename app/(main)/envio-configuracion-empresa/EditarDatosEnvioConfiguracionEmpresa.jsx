@@ -24,7 +24,9 @@ const EditarDatosEnvioConfiguracionEmpresa = ({
     return (
             <div className="catalogo-edit-form-grid catalogo-edit-form-grid-wide">
                 <div className="catalogo-edit-field">
-                    <label htmlFor="orden">{intl.formatMessage({ id: 'Orden' })}</label>
+                    <label htmlFor="orden" style={{ color: 'black' }}>
+                        <b>{intl.formatMessage({ id: 'Orden' })}*</b>
+                    </label>
                     <InputNumber value={envioConfiguracionEmpresa.orden === '' || envioConfiguracionEmpresa.orden === undefined ? null : envioConfiguracionEmpresa.orden}
                         onChange={(e) => setEnvioConfiguracionEmpresa({ ...envioConfiguracionEmpresa, orden: e.value })}
                         className={`${(estadoGuardando && (envioConfiguracionEmpresa.orden === "" || envioConfiguracionEmpresa.orden === null || envioConfiguracionEmpresa.orden === undefined)) ? "p-invalid" : ""}`}
@@ -34,7 +36,9 @@ const EditarDatosEnvioConfiguracionEmpresa = ({
                         inputStyle={{ textAlign: 'right' }} />
                 </div>
                 <div className="catalogo-edit-field">
-                    <label htmlFor="nombre">{intl.formatMessage({ id: 'Nombre' })}</label>
+                    <label htmlFor="nombre" style={{ color: 'black' }}>
+                        <b>{intl.formatMessage({ id: 'Nombre' })}*</b>
+                    </label>
                     <InputText value={envioConfiguracionEmpresa.nombre}
                         placeholder={intl.formatMessage({ id: 'Nombre de la configuracion' })}
                         onChange={(e) => setEnvioConfiguracionEmpresa({ ...envioConfiguracionEmpresa, nombre: e.target.value })}

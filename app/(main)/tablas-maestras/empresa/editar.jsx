@@ -291,9 +291,19 @@ const EditarEmpresa = ({
       tipo: "string",
     },
     {
-      campo: "valor",
-      header: intl.formatMessage({ id: "Valor" }),
+      campo: "valorMinimo",
+      header: intl.formatMessage({ id: "Minimo" }),
       tipo: "string",
+    },
+    {
+      campo: "valorMaximo",
+      header: intl.formatMessage({ id: "Maximo" }),
+      tipo: "string",
+    },
+    {
+      campo: "activoSn",
+      header: intl.formatMessage({ id: "Activo" }),
+      tipo: "booleano",
     },
   ];
 

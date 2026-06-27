@@ -1272,7 +1272,13 @@ export interface EmpresaSensor {
      * @type {string}
      * @memberof EmpresaSensor
      */
-    'valor'?: string;
+    'valorMinimo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensor
+     */
+    'valorMaximo'?: string;
     /**
      * 
      * @type {number}
@@ -1303,6 +1309,12 @@ export interface EmpresaSensor {
      * @memberof EmpresaSensor
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensor
+     */
+    'activoSn'?: string;
 }
 /**
  * 
@@ -1454,7 +1466,13 @@ export interface EmpresaSensorPartial {
      * @type {string}
      * @memberof EmpresaSensorPartial
      */
-    'valor'?: string;
+    'valorMinimo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensorPartial
+     */
+    'valorMaximo'?: string;
     /**
      * 
      * @type {number}
@@ -1485,6 +1503,12 @@ export interface EmpresaSensorPartial {
      * @memberof EmpresaSensorPartial
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensorPartial
+     */
+    'activoSn'?: string;
 }
 /**
  * 
@@ -1564,7 +1588,13 @@ export interface EmpresaSensorWithRelations {
      * @type {string}
      * @memberof EmpresaSensorWithRelations
      */
-    'valor'?: string;
+    'valorMinimo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'valorMaximo'?: string;
     /**
      * 
      * @type {number}
@@ -1595,6 +1625,12 @@ export interface EmpresaSensorWithRelations {
      * @memberof EmpresaSensorWithRelations
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'activoSn'?: string;
     /**
      * 
      * @type {TipoSensorWithRelations}
@@ -7878,7 +7914,13 @@ export interface NewEmpresaSensor {
      * @type {string}
      * @memberof NewEmpresaSensor
      */
-    'valor'?: string;
+    'valorMinimo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresaSensor
+     */
+    'valorMaximo'?: string;
     /**
      * 
      * @type {number}
@@ -7909,6 +7951,12 @@ export interface NewEmpresaSensor {
      * @memberof NewEmpresaSensor
      */
     'orden'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresaSensor
+     */
+    'activoSn'?: string;
 }
 /**
  * (tsType: Omit<Envio, \'id\'>, schemaOptions: { title: \'NewEnvio\', exclude: [ \'id\' ] })
@@ -9784,6 +9832,12 @@ export interface NewTipoSensor {
      * @memberof NewTipoSensor
      */
     'valorDefecto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoSensor
+     */
+    'unidad'?: string;
 }
 /**
  * (tsType: Omit<TipoTransporte, \'id\'>, schemaOptions: { title: \'NewTipoTransporte\', exclude: [ \'id\' ] })
@@ -14385,6 +14439,12 @@ export interface TipoSensor {
      * @memberof TipoSensor
      */
     'valorDefecto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensor
+     */
+    'unidad'?: string;
 }
 /**
  * 
@@ -14567,6 +14627,12 @@ export interface TipoSensorPartial {
      * @memberof TipoSensorPartial
      */
     'valorDefecto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorPartial
+     */
+    'unidad'?: string;
 }
 /**
  * 
@@ -14677,6 +14743,12 @@ export interface TipoSensorWithRelations {
      * @memberof TipoSensorWithRelations
      */
     'valorDefecto'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoSensorWithRelations
+     */
+    'unidad'?: string;
     /**
      * 
      * @type {Array<EnvioSensorWithRelations>}

@@ -13,30 +13,47 @@ const EditarDatosTipoSensor = ({ tipoSensor, setTipoSensor, estadoGuardando, man
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={tipoSensor.orden === '' || tipoSensor.orden === undefined ? null : tipoSensor.orden}
+                    <InputNumber
+                        value={tipoSensor.orden === '' || tipoSensor.orden === undefined ? null : tipoSensor.orden}
                         onChange={(e) => setTipoSensor({ ...tipoSensor, orden: e.value })}
                         className={`${(estadoGuardando && (tipoSensor.orden === "" || tipoSensor.orden === null || tipoSensor.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"
                         useGrouping={false}
                         min={0}
-                        inputStyle={{ textAlign: 'right' }}/>
+                        inputStyle={{ textAlign: 'right' }}
+                    />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
-                    <InputText value={tipoSensor.nombre}
+                    <InputText
+                        value={tipoSensor.nombre}
                         placeholder={intl.formatMessage({ id: 'Nombre del tipo de sensor' })}
                         onChange={(e) => setTipoSensor({ ...tipoSensor, nombre: e.target.value })}
                         className={`${(estadoGuardando && tipoSensor.nombre === "") ? "p-invalid" : ""}`}
-                        maxLength={50} />
+                        maxLength={50}
+                    />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="valorDefecto">{intl.formatMessage({ id: 'Valor Defecto' })}</label>
-                    <InputText value={tipoSensor.valorDefecto}
+                    <InputText
+                        value={tipoSensor.valorDefecto}
                         placeholder={intl.formatMessage({ id: 'Valor defecto del tipo de sensor' })}
                         onChange={(e) => setTipoSensor({ ...tipoSensor, valorDefecto: e.target.value })}
                         className={`${(estadoGuardando && tipoSensor.valorDefecto === "") ? "p-invalid" : ""}`}
-                        maxLength={50} />
-                    <small style={{ color: '#94949f', fontSize: '10px' }}> <i>{intl.formatMessage({ id: 'Este campo se copiará en una empresa en su creación' })}</i> </small>
+                        maxLength={50}
+                    />
+                    <small style={{ color: '#94949f', fontSize: '10px' }}>
+                        <i>{intl.formatMessage({ id: 'Este campo se copiara en una empresa en su creacion' })}</i>
+                    </small>
+                </div>
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="unidad">{intl.formatMessage({ id: 'Unidad' })}</label>
+                    <InputText
+                        value={tipoSensor.unidad}
+                        placeholder={intl.formatMessage({ id: 'Unidad del sensor' })}
+                        onChange={(e) => setTipoSensor({ ...tipoSensor, unidad: e.target.value })}
+                        maxLength={50}
+                    />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="activoSn" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>

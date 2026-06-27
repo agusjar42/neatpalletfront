@@ -3,13 +3,11 @@ import { InputText } from 'primereact/inputtext';
 import { useIntl } from 'react-intl';
 import { InputSwitch } from "primereact/inputswitch";
 import { InputNumber } from "primereact/inputnumber";
-import { Dropdown } from "primereact/dropdown";
 
 const EditarDatosTipoCarroceria = ({
     tipoCarroceria,
     setTipoCarroceria,
     estadoGuardando,
-    tiposDisponibles = [],
 }) => {
     const intl = useIntl();
     
@@ -24,7 +22,7 @@ const EditarDatosTipoCarroceria = ({
     return (
             <div className="catalogo-edit-form-grid">
                 <div className="catalogo-edit-field">
-                    <label htmlFor="orden">{intl.formatMessage({ id: 'Orden' })}</label>
+                    <label htmlFor="orden" style={{ color: 'black' }}><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
                     <InputNumber value={tipoCarroceria.orden === '' || tipoCarroceria.orden === undefined ? null : tipoCarroceria.orden}
                         onChange={(e) => setTipoCarroceria({ ...tipoCarroceria, orden: e.value })}
                         className={`${(estadoGuardando && (tipoCarroceria.orden === "" || tipoCarroceria.orden === null || tipoCarroceria.orden === undefined)) ? "p-invalid" : ""}`}
@@ -34,21 +32,21 @@ const EditarDatosTipoCarroceria = ({
                         inputStyle={{ textAlign: 'right' }} />
                 </div>
                 <div className="catalogo-edit-field">
+                    <label htmlFor="nombre" style={{ color: 'black' }}><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
+                    <InputText value={tipoCarroceria.nombre || ""}
+                        placeholder={intl.formatMessage({ id: 'Nombre de la carroceria' })}
+                        onChange={(e) => setTipoCarroceria({ ...tipoCarroceria, nombre: e.target.value })}
+                        className={`${(estadoGuardando && tipoCarroceria.nombre === "") ? "p-invalid" : ""}`}
+                        maxLength={50} />
+                </div>
+                <div className="catalogo-edit-field">
                     <label htmlFor="codigo">{intl.formatMessage({ id: 'Codigo' })}</label>
                     <InputText value={tipoCarroceria.codigo || ""}
                         placeholder={intl.formatMessage({ id: 'Codigo de la carroceria' })}
                         onChange={(e) => setTipoCarroceria({ ...tipoCarroceria, codigo: e.target.value })}
                         maxLength={50} />
                 </div>
-                <div className="catalogo-edit-field">
-                    <label htmlFor="nombre">{intl.formatMessage({ id: 'Tipo' })}</label>
-                    <Dropdown value={tipoCarroceria.nombre || ""}
-                        options={tiposDisponibles}
-                        placeholder={intl.formatMessage({ id: 'Selecciona un tipo de carroceria' })}
-                        onChange={(e) => setTipoCarroceria({ ...tipoCarroceria, nombre: e.value })}
-                        className={`${(estadoGuardando && tipoCarroceria.nombre === "") ? "p-invalid" : ""}`}
-                        showClear />
-                </div>
+
                 <div className="catalogo-edit-field">
                     <label htmlFor="capacidad">{intl.formatMessage({ id: 'Capacidad' })}</label>
                     <InputText value={tipoCarroceria.capacidad || ""}

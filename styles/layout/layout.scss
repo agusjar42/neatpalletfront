@@ -2298,29 +2298,37 @@ body {
 .empresa-tabs {
     display: grid;
     grid-template-columns: repeat(10, minmax(0, 1fr));
-    border-top: 1px solid #eef2ef;
-    border-bottom: 1px solid #0f7a3f;
+    border-bottom: 1px solid #15803d;
 }
 
 .empresa-tab {
-    min-height: 3.35rem;
-    padding: 0.6rem 0.7rem;
+    display: block;
+    min-height: 3.5rem;
+    padding: 0.85rem 0.7rem;
     border: 0;
     border-bottom: 2px solid transparent;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
     background: #ffffff;
-    color: #0f7a3f;
-    font-weight: 800;
-    letter-spacing: 0.03em;
+    color: #15803d;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
-.empresa-tab:hover,
+.empresa-tab:hover {
+    color: #15803d;
+}
+
 .empresa-tab-active {
     background: #eaf6ef;
-    border-bottom-color: #08764c;
-    color: #08764c;
+    border-bottom-color: #15803d;
+    color: #15803d;
 }
 
 .empresa-edit-dialog {
@@ -3842,6 +3850,7 @@ body {
 
 .empresa-tab-content {
     margin-top: 1rem;
+    padding: 1.1rem 1.2rem 1.2rem;
 }
 
 .empresa-resumen-grid {
@@ -4416,7 +4425,12 @@ body {
 }
 
 .cliente-edit-card {
-    padding: 1.35rem;
+    padding: 1.85rem;
+}
+
+.cliente-edit-tabs-shell {
+    margin-top: 1.65rem;
+    padding: 0 0.35rem 0.35rem;
 }
 
 .cliente-edit-tabs-shell .p-tabview-panels {
@@ -4425,6 +4439,39 @@ body {
 
 .cliente-edit-tabs-shell .p-tabview-panel {
     padding: 0;
+}
+
+.cliente-edit-tabs-shell .p-tabview-nav {
+    padding: 0 0.15rem;
+    border-bottom: 1px solid #15803d;
+    background: transparent;
+}
+
+.cliente-edit-tabs-shell .p-tabview-nav li .p-tabview-nav-link {
+    display: block;
+    padding: 0.85rem 0.95rem;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: transparent;
+    background: #ffffff;
+    color: #15803d;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    box-shadow: none;
+}
+
+.cliente-edit-tabs-shell .p-tabview-nav li:not(.p-highlight) .p-tabview-nav-link:hover {
+    color: #15803d;
+    background: #ffffff;
+}
+
+.cliente-edit-tabs-shell .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    border-bottom-color: #15803d;
+    background: #eaf6ef;
+    color: #15803d;
 }
 
 @media (max-width: 768px) {

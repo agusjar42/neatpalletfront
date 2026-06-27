@@ -149,7 +149,7 @@ const EditarCliente = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         <div>
             <div className="grid Cliente">
                 <div className="col-12">
-                    <div className="card cliente-edit-card">
+                    <div className="card cliente-edit-card" style={{ padding: "1.5rem" }}>
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Punto de entrega' })).toLowerCase()}</h2>
                         <p className="catalogo-edit-description">Actualiza el codigo, nombre, direccion, horario, telefono, email y estado del punto de entrega.</p>

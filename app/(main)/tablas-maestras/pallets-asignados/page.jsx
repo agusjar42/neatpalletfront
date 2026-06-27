@@ -624,15 +624,15 @@ import ClienteResumenHeader from "@/app/components/shared/ClienteResumenHeader";
                 <ClienteResumenHeader />
             </div>
             <div className="col-12">
+                {esUsuarioAdmin && (
+                    <PalletsAsignadosIntro
+                        pallets={pallets}
+                        empresas={empresas}
+                        estadoPorPallet={estadoPorPallet}
+                    />
+                )}
                 <div className="card">
                     <Toast ref={toast} position="top-right" />
-                    {esUsuarioAdmin && (
-                        <PalletsAsignadosIntro
-                            pallets={pallets}
-                            empresas={empresas}
-                            estadoPorPallet={estadoPorPallet}
-                        />
-                    )}
 
                     <DataTable
                         className="datatable-responsive pallets-asignados-table"

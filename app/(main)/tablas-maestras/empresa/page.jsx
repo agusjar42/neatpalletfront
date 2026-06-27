@@ -58,6 +58,13 @@ const estados = [
     { label: "Suspendida", value: "Suspendida", className: "empresa-status-suspended" },
 ];
 
+const filtrosEstadoCrud = [
+    { label: "Todos", value: "Todos" },
+    { label: "Activa", value: "Activa" },
+    { label: "En prueba", value: "En prueba" },
+    { label: "Suspendida", value: "Suspendida" },
+];
+
 const planes = [
     { label: "Starter", precio: "€290/mes" },
     { label: "Growth", precio: "€890/mes" },
@@ -255,11 +262,11 @@ const placeholderImageCell = (label) => (rowData) => {
 };
 
 const ordenBodyTemplate = (rowData) => (
-    <span className="clientes-crud-order-pill">{rowData.orden ?? "-"}</span>
+    <span>{rowData.orden ?? "-"}</span>
 );
 
 const nombreComercialBodyTemplate = (rowData) => (
-    <span className="clientes-crud-chip">
+    <span className={`clientes-crud-chip ${getEstadoMeta(rowData?.estado).className}`}>
         <span className="clientes-crud-chip-dot"></span>
         {rowData.nombreComercial || rowData.nombre || "-"}
     </span>
@@ -319,6 +326,7 @@ const Empresa = () => {
     const [modoEdicion, setModoEdicion] = useState(false);
     const [hayEdicionEnPestana, setHayEdicionEnPestana] = useState(false);
     const [tabActiva, setTabActiva] = useState("Resumen");
+    const [filtroEstadoCrud, setFiltroEstadoCrud] = useState("Todos");
 
     const puedeCargarDatosProtegidos = () => {
         if (typeof window === "undefined") {
@@ -434,7 +442,7 @@ const Empresa = () => {
 
     const fechaAlta = useMemo(() => {
         if (!empresaActiva?.fechaCreacion) return "-";
-        return new Date(empresaActiva.fechaCreacion).toLocaleDateString("sv-SE");
+        return new Date(empresaActiva.fechaCreacion).toLocaleDateString("es-ES");
     }, [empresaActiva?.fechaCreacion]);
 
     const abrirEdicion = () => {
@@ -705,10 +713,31 @@ const Empresa = () => {
     }
 
     if (!empresaActiva) {
+        const filtroCrudEmpresas = filtroEstadoCrud === "Todos"
+            ? undefined
+            : { estado: filtroEstadoCrud };
+
+        const toolbarExtraEmpresas = (
+            <>
+                <span className="empresa-crud-quick-label">Estado:</span>
+                {filtrosEstadoCrud.map((item) => (
+                    <button
+                        key={item.value}
+                        type="button"
+                        className={`empresa-crud-quick-filter ${filtroEstadoCrud === item.value ? "is-active" : ""}`}
+                        onClick={() => setFiltroEstadoCrud(item.value)}
+                    >
+                        {item.label}
+                    </button>
+                ))}
+            </>
+        );
+
         return (
             <div className="clientes-reference-crud">
                 <EmpresaIntro />
                 <Crud
+                    key={`empresas-${filtroEstadoCrud}`}
                     headerCrud=""
                     getRegistros={getEmpresas}
                     getRegistrosCount={getEmpresasCount}
@@ -718,6 +747,8 @@ const Empresa = () => {
                     editarComponente={<EmpresaAdminDetalle />}
                     columnas={columnasEmpresas}
                     deleteRegistro={deleteEmpresa}
+                    filtradoBase={filtroCrudEmpresas}
+                    toolbarExtraContent={toolbarExtraEmpresas}
                 />
             </div>
         );
@@ -749,9 +780,9 @@ const Empresa = () => {
 
                     <footer className="empresa-edit-footer empresa-edit-screen-footer">
                         <span></span>
-                        <div>
-                            <Button label="Cancelar" text onClick={cancelarEdicionEmpresa} />
-                            <Button label={guardando ? "Guardando..." : "Guardar cambios"} onClick={guardarEmpresa} disabled={guardando} />
+                        <div className="empresa-edit-footer-actions">
+                            <Button label="Cancelar" outlined onClick={cancelarEdicionEmpresa} />
+                            <Button label={guardando ? "Guardando..." : "Guardar cambios"} outlined onClick={guardarEmpresa} disabled={guardando} />
                         </div>
                     </footer>
                 </section>
@@ -1850,7 +1881,7 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
 
     const fechaAlta = useMemo(() => {
         if (!empresaActiva?.fechaCreacion) return "-";
-        return new Date(empresaActiva.fechaCreacion).toLocaleDateString("sv-SE");
+        return new Date(empresaActiva.fechaCreacion).toLocaleDateString("es-ES");
     }, [empresaActiva?.fechaCreacion]);
 
     const confirmarSalidaSinGuardar = (continuar) => {
@@ -2004,9 +2035,9 @@ const EmpresaAdminDetalle = ({ idEditar, editable, puedeEditar, setIdEditar, row
 
                         <footer className="empresa-edit-footer empresa-edit-screen-footer">
                             <span></span>
-                            <div>
-                                <Button label="Cancelar" text onClick={cancelarEdicionEmpresa} />
-                                <Button label={guardando ? "Guardando..." : "Guardar cambios"} onClick={guardarEmpresa} disabled={guardando} />
+                            <div className="empresa-edit-footer-actions">
+                                <Button label="Cancelar" outlined onClick={cancelarEdicionEmpresa} />
+                                <Button label={guardando ? "Guardando..." : "Guardar cambios"} outlined onClick={guardarEmpresa} disabled={guardando} />
                             </div>
                         </footer>
                     </section>

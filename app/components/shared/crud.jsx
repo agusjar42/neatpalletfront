@@ -28,7 +28,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
     parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, cargarDatosInicialmente = true, onDataChange,
     procesarImportacionCSV, onModoEdicionChange, onParametrosCrudChange, habilitarEntradaPorFila = controlador !== 'Permisos',
-    accionEntradaPorFila = 'auto', mostrarEdicionEnModal = false, modalEdicionProps = {} }) => {
+    accionEntradaPorFila = 'auto', mostrarEdicionEnModal = false, modalEdicionProps = {}, toolbarExtraContent = null }) => {
     const intl = useIntl()
     const router = useRouter();
     const { usuarioAutenticado, isInitialized } = useAuth();
@@ -931,6 +931,11 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                             className="neat-crud-search-input"
                         />
                     </span>
+                    {toolbarExtraContent ? (
+                        <div className="neat-crud-toolbar-extra">
+                            {toolbarExtraContent}
+                        </div>
+                    ) : null}
                 </div>
                 <div className="neat-crud-toolbar-actions">
                     <Button

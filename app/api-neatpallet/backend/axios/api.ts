@@ -1244,6 +1244,377 @@ export interface EmpresaPartial {
     'logoTipo'?: string;
 }
 /**
+ * 
+ * @export
+ * @interface EmpresaSensor
+ */
+export interface EmpresaSensor {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensor
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensor
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensor
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensor
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensor
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensor
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensor
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensor
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensor
+     */
+    'orden'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface EmpresaSensorFilter
+ */
+export interface EmpresaSensorFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EmpresaSensorFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EmpresaSensorFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EmpresaSensorIncludeFilterItems | string>}
+     * @memberof EmpresaSensorFilter
+     */
+    'include'?: Array<EmpresaSensorIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EmpresaSensorFilter1
+ */
+export interface EmpresaSensorFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EmpresaSensorFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EmpresaSensorFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof EmpresaSensorFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<EmpresaSensorIncludeFilterItems | string>}
+     * @memberof EmpresaSensorFilter1
+     */
+    'include'?: Array<EmpresaSensorIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface EmpresaSensorIncludeFilterItems
+ */
+export interface EmpresaSensorIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensorIncludeFilterItems
+     */
+    'relation'?: EmpresaSensorIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {EmpresaSensorScopeFilter}
+     * @memberof EmpresaSensorIncludeFilterItems
+     */
+    'scope'?: EmpresaSensorScopeFilter;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum EmpresaSensorIncludeFilterItemsRelationEnum {
+    TipoSensor = 'tipoSensor',
+    Empresa = 'empresa'
+}
+
+/**
+ * (tsType: Partial<EmpresaSensor>, schemaOptions: { partial: true })
+ * @export
+ * @interface EmpresaSensorPartial
+ */
+export interface EmpresaSensorPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorPartial
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorPartial
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensorPartial
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensorPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorPartial
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensorPartial
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorPartial
+     */
+    'orden'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface EmpresaSensorScopeFilter
+ */
+export interface EmpresaSensorScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof EmpresaSensorScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof EmpresaSensorScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof EmpresaSensorScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof EmpresaSensorScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: EmpresaSensorWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface EmpresaSensorWithRelations
+ */
+export interface EmpresaSensorWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'orden'?: number;
+    /**
+     * 
+     * @type {TipoSensorWithRelations}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'tipoSensor'?: TipoSensorWithRelations;
+    /**
+     * 
+     * @type {any}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'foreignKey'?: any;
+    /**
+     * 
+     * @type {EmpresaWithRelations}
+     * @memberof EmpresaSensorWithRelations
+     */
+    'empresa'?: EmpresaWithRelations;
+}
+/**
  * (tsType: EmpresaWithRelations, schemaOptions: { includeRelations: true })
  * @export
  * @interface EmpresaWithRelations
@@ -7485,6 +7856,61 @@ export interface NewEmpresaPallet {
     'palletId'?: number;
 }
 /**
+ * (tsType: Omit<EmpresaSensor, \'id\'>, schemaOptions: { title: \'NewEmpresaSensor\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewEmpresaSensor
+ */
+export interface NewEmpresaSensor {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEmpresaSensor
+     */
+    'tipoSensorId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEmpresaSensor
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresaSensor
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEmpresaSensor
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresaSensor
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEmpresaSensor
+     */
+    'usuarioModificacion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresaSensor
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEmpresaSensor
+     */
+    'orden'?: number;
+}
+/**
  * (tsType: Omit<Envio, \'id\'>, schemaOptions: { title: \'NewEnvio\', exclude: [ \'id\' ] })
  * @export
  * @interface NewEnvio
@@ -9187,61 +9613,6 @@ export interface NewRol {
      * @memberof NewRol
      */
     'orden'?: number | null;
-}
-/**
- * (tsType: Omit<SensorEmpresa, \'id\'>, schemaOptions: { title: \'NewSensorEmpresa\', exclude: [ \'id\' ] })
- * @export
- * @interface NewSensorEmpresa
- */
-export interface NewSensorEmpresa {
-    /**
-     * 
-     * @type {number}
-     * @memberof NewSensorEmpresa
-     */
-    'tipoSensorId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewSensorEmpresa
-     */
-    'empresaId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewSensorEmpresa
-     */
-    'valor'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewSensorEmpresa
-     */
-    'usuarioCreacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewSensorEmpresa
-     */
-    'fechaCreacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewSensorEmpresa
-     */
-    'usuarioModificacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewSensorEmpresa
-     */
-    'fechaModificacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewSensorEmpresa
-     */
-    'orden'?: number;
 }
 /**
  * (tsType: Omit<TipoCarroceria, \'id\'>, schemaOptions: { title: \'NewTipoCarroceria\', exclude: [ \'id\' ] })
@@ -13308,377 +13679,6 @@ export interface RolWithRelations {
      * @memberof RolWithRelations
      */
     'orden'?: number | null;
-}
-/**
- * 
- * @export
- * @interface SensorEmpresa
- */
-export interface SensorEmpresa {
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresa
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresa
-     */
-    'tipoSensorId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresa
-     */
-    'empresaId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof SensorEmpresa
-     */
-    'valor'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresa
-     */
-    'usuarioCreacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof SensorEmpresa
-     */
-    'fechaCreacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresa
-     */
-    'usuarioModificacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof SensorEmpresa
-     */
-    'fechaModificacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresa
-     */
-    'orden'?: number;
-}
-/**
- * 
- * @export
- * @interface SensorEmpresaFilter
- */
-export interface SensorEmpresaFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof SensorEmpresaFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof SensorEmpresaFilter
-     */
-    'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<SensorEmpresaIncludeFilterItems | string>}
-     * @memberof SensorEmpresaFilter
-     */
-    'include'?: Array<SensorEmpresaIncludeFilterItems | string>;
-}
-/**
- * 
- * @export
- * @interface SensorEmpresaFilter1
- */
-export interface SensorEmpresaFilter1 {
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaFilter1
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaFilter1
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaFilter1
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof SensorEmpresaFilter1
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof SensorEmpresaFilter1
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof SensorEmpresaFilter1
-     */
-    'fields'?: object | Set<string>;
-    /**
-     * 
-     * @type {Array<SensorEmpresaIncludeFilterItems | string>}
-     * @memberof SensorEmpresaFilter1
-     */
-    'include'?: Array<SensorEmpresaIncludeFilterItems | string>;
-}
-/**
- * 
- * @export
- * @interface SensorEmpresaIncludeFilterItems
- */
-export interface SensorEmpresaIncludeFilterItems {
-    /**
-     * 
-     * @type {string}
-     * @memberof SensorEmpresaIncludeFilterItems
-     */
-    'relation'?: SensorEmpresaIncludeFilterItemsRelationEnum;
-    /**
-     * 
-     * @type {SensorEmpresaScopeFilter}
-     * @memberof SensorEmpresaIncludeFilterItems
-     */
-    'scope'?: SensorEmpresaScopeFilter;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum SensorEmpresaIncludeFilterItemsRelationEnum {
-    TipoSensor = 'tipoSensor',
-    Empresa = 'empresa'
-}
-
-/**
- * (tsType: Partial<SensorEmpresa>, schemaOptions: { partial: true })
- * @export
- * @interface SensorEmpresaPartial
- */
-export interface SensorEmpresaPartial {
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaPartial
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaPartial
-     */
-    'tipoSensorId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaPartial
-     */
-    'empresaId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof SensorEmpresaPartial
-     */
-    'valor'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaPartial
-     */
-    'usuarioCreacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof SensorEmpresaPartial
-     */
-    'fechaCreacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaPartial
-     */
-    'usuarioModificacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof SensorEmpresaPartial
-     */
-    'fechaModificacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaPartial
-     */
-    'orden'?: number;
-}
-/**
- * 
- * @export
- * @interface SensorEmpresaScopeFilter
- */
-export interface SensorEmpresaScopeFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaScopeFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaScopeFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaScopeFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof SensorEmpresaScopeFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof SensorEmpresaScopeFilter
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {any | Set<string>}
-     * @memberof SensorEmpresaScopeFilter
-     */
-    'fields'?: any | Set<string>;
-    /**
-     * 
-     * @type {Array<{ [key: string]: object; }>}
-     * @memberof SensorEmpresaScopeFilter
-     */
-    'include'?: Array<{ [key: string]: object; }>;
-}
-/**
- * (tsType: SensorEmpresaWithRelations, schemaOptions: { includeRelations: true })
- * @export
- * @interface SensorEmpresaWithRelations
- */
-export interface SensorEmpresaWithRelations {
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'tipoSensorId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'empresaId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'valor'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'usuarioCreacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'fechaCreacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'usuarioModificacion'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'fechaModificacion'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'orden'?: number;
-    /**
-     * 
-     * @type {TipoSensorWithRelations}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'tipoSensor'?: TipoSensorWithRelations;
-    /**
-     * 
-     * @type {any}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'foreignKey'?: any;
-    /**
-     * 
-     * @type {EmpresaWithRelations}
-     * @memberof SensorEmpresaWithRelations
-     */
-    'empresa'?: EmpresaWithRelations;
 }
 /**
  * 
@@ -18783,6 +18783,679 @@ export class EmpresaPalletControllerApi extends BaseAPI {
      */
     public empresaPalletControllerUpdateById(id: number, empresaPalletPartial?: EmpresaPalletPartial, options?: AxiosRequestConfig) {
         return EmpresaPalletControllerApiFp(this.configuration).empresaPalletControllerUpdateById(id, empresaPalletPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * EmpresaSensorControllerApi - axios parameter creator
+ * @export
+ */
+export const EmpresaSensorControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/empresa-sensores/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {InlineObject3} [inlineObject3] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerCrearSensoresDesdeTipoSensor: async (inlineObject3?: InlineObject3, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/crear-empresa-sensor-desde-tipo-sensor`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject3, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewEmpresaSensor} [newEmpresaSensor] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerCreate: async (newEmpresaSensor?: NewEmpresaSensor, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/empresa-sensores`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newEmpresaSensor, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('empresaSensorControllerDeleteById', 'id', id)
+            const localVarPath = `/empresa-sensores/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {EmpresaSensorFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerFind: async (filter?: EmpresaSensorFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/empresa-sensores`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaSensorFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerFindById: async (id: number, filter?: EmpresaSensorFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('empresaSensorControllerFindById', 'id', id)
+            const localVarPath = `/empresa-sensores/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaSensor} [empresaSensor] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerReplaceById: async (id: number, empresaSensor?: EmpresaSensor, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('empresaSensorControllerReplaceById', 'id', id)
+            const localVarPath = `/empresa-sensores/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(empresaSensor, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EmpresaSensorPartial} [empresaSensorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerUpdateAll: async (where?: { [key: string]: object; }, empresaSensorPartial?: EmpresaSensorPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/empresa-sensores`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(empresaSensorPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaSensorPartial} [empresaSensorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerUpdateById: async (id: number, empresaSensorPartial?: EmpresaSensorPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('empresaSensorControllerUpdateById', 'id', id)
+            const localVarPath = `/empresa-sensores/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(empresaSensorPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EmpresaSensorControllerApi - functional programming interface
+ * @export
+ */
+export const EmpresaSensorControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EmpresaSensorControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaSensorControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaSensorControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {InlineObject3} [inlineObject3] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaSensorControllerCrearSensoresDesdeTipoSensor(inlineObject3?: InlineObject3, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaSensorControllerCrearSensoresDesdeTipoSensor(inlineObject3, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewEmpresaSensor} [newEmpresaSensor] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaSensorControllerCreate(newEmpresaSensor?: NewEmpresaSensor, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmpresaSensor>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaSensorControllerCreate(newEmpresaSensor, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaSensorControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaSensorControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {EmpresaSensorFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaSensorControllerFind(filter?: EmpresaSensorFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EmpresaSensorWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaSensorControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaSensorFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaSensorControllerFindById(id: number, filter?: EmpresaSensorFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmpresaSensorWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaSensorControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaSensor} [empresaSensor] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaSensorControllerReplaceById(id: number, empresaSensor?: EmpresaSensor, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaSensorControllerReplaceById(id, empresaSensor, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EmpresaSensorPartial} [empresaSensorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaSensorControllerUpdateAll(where?: { [key: string]: object; }, empresaSensorPartial?: EmpresaSensorPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaSensorControllerUpdateAll(where, empresaSensorPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaSensorPartial} [empresaSensorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async empresaSensorControllerUpdateById(id: number, empresaSensorPartial?: EmpresaSensorPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.empresaSensorControllerUpdateById(id, empresaSensorPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EmpresaSensorControllerApi - factory interface
+ * @export
+ */
+export const EmpresaSensorControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EmpresaSensorControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.empresaSensorControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {InlineObject3} [inlineObject3] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerCrearSensoresDesdeTipoSensor(inlineObject3?: InlineObject3, options?: any): AxiosPromise<any> {
+            return localVarFp.empresaSensorControllerCrearSensoresDesdeTipoSensor(inlineObject3, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewEmpresaSensor} [newEmpresaSensor] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerCreate(newEmpresaSensor?: NewEmpresaSensor, options?: any): AxiosPromise<EmpresaSensor> {
+            return localVarFp.empresaSensorControllerCreate(newEmpresaSensor, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.empresaSensorControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {EmpresaSensorFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerFind(filter?: EmpresaSensorFilter1, options?: any): AxiosPromise<Array<EmpresaSensorWithRelations>> {
+            return localVarFp.empresaSensorControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaSensorFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerFindById(id: number, filter?: EmpresaSensorFilter, options?: any): AxiosPromise<EmpresaSensorWithRelations> {
+            return localVarFp.empresaSensorControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaSensor} [empresaSensor] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerReplaceById(id: number, empresaSensor?: EmpresaSensor, options?: any): AxiosPromise<any> {
+            return localVarFp.empresaSensorControllerReplaceById(id, empresaSensor, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {EmpresaSensorPartial} [empresaSensorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerUpdateAll(where?: { [key: string]: object; }, empresaSensorPartial?: EmpresaSensorPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.empresaSensorControllerUpdateAll(where, empresaSensorPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {EmpresaSensorPartial} [empresaSensorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        empresaSensorControllerUpdateById(id: number, empresaSensorPartial?: EmpresaSensorPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.empresaSensorControllerUpdateById(id, empresaSensorPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EmpresaSensorControllerApi - object-oriented interface
+ * @export
+ * @class EmpresaSensorControllerApi
+ * @extends {BaseAPI}
+ */
+export class EmpresaSensorControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaSensorControllerApi
+     */
+    public empresaSensorControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return EmpresaSensorControllerApiFp(this.configuration).empresaSensorControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {InlineObject3} [inlineObject3] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaSensorControllerApi
+     */
+    public empresaSensorControllerCrearSensoresDesdeTipoSensor(inlineObject3?: InlineObject3, options?: AxiosRequestConfig) {
+        return EmpresaSensorControllerApiFp(this.configuration).empresaSensorControllerCrearSensoresDesdeTipoSensor(inlineObject3, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewEmpresaSensor} [newEmpresaSensor] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaSensorControllerApi
+     */
+    public empresaSensorControllerCreate(newEmpresaSensor?: NewEmpresaSensor, options?: AxiosRequestConfig) {
+        return EmpresaSensorControllerApiFp(this.configuration).empresaSensorControllerCreate(newEmpresaSensor, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaSensorControllerApi
+     */
+    public empresaSensorControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return EmpresaSensorControllerApiFp(this.configuration).empresaSensorControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {EmpresaSensorFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaSensorControllerApi
+     */
+    public empresaSensorControllerFind(filter?: EmpresaSensorFilter1, options?: AxiosRequestConfig) {
+        return EmpresaSensorControllerApiFp(this.configuration).empresaSensorControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EmpresaSensorFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaSensorControllerApi
+     */
+    public empresaSensorControllerFindById(id: number, filter?: EmpresaSensorFilter, options?: AxiosRequestConfig) {
+        return EmpresaSensorControllerApiFp(this.configuration).empresaSensorControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EmpresaSensor} [empresaSensor] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaSensorControllerApi
+     */
+    public empresaSensorControllerReplaceById(id: number, empresaSensor?: EmpresaSensor, options?: AxiosRequestConfig) {
+        return EmpresaSensorControllerApiFp(this.configuration).empresaSensorControllerReplaceById(id, empresaSensor, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {EmpresaSensorPartial} [empresaSensorPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaSensorControllerApi
+     */
+    public empresaSensorControllerUpdateAll(where?: { [key: string]: object; }, empresaSensorPartial?: EmpresaSensorPartial, options?: AxiosRequestConfig) {
+        return EmpresaSensorControllerApiFp(this.configuration).empresaSensorControllerUpdateAll(where, empresaSensorPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {EmpresaSensorPartial} [empresaSensorPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EmpresaSensorControllerApi
+     */
+    public empresaSensorControllerUpdateById(id: number, empresaSensorPartial?: EmpresaSensorPartial, options?: AxiosRequestConfig) {
+        return EmpresaSensorControllerApiFp(this.configuration).empresaSensorControllerUpdateById(id, empresaSensorPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -34641,679 +35314,6 @@ export class RolControllerApi extends BaseAPI {
      */
     public rolControllerVistaEmpresaRolCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
         return RolControllerApiFp(this.configuration).rolControllerVistaEmpresaRolCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * SensorEmpresaControllerApi - axios parameter creator
- * @export
- */
-export const SensorEmpresaControllerApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/sensor-empresas/count`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {InlineObject3} [inlineObject3] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerCrearSensoresDesdeTipoSensor: async (inlineObject3?: InlineObject3, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/crear-sensor-empresa-desde-tipo-sensor`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject3, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {NewSensorEmpresa} [newSensorEmpresa] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerCreate: async (newSensorEmpresa?: NewSensorEmpresa, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/sensor-empresas`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newSensorEmpresa, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('sensorEmpresaControllerDeleteById', 'id', id)
-            const localVarPath = `/sensor-empresas/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {SensorEmpresaFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerFind: async (filter?: SensorEmpresaFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/sensor-empresas`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {SensorEmpresaFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerFindById: async (id: number, filter?: SensorEmpresaFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('sensorEmpresaControllerFindById', 'id', id)
-            const localVarPath = `/sensor-empresas/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {SensorEmpresa} [sensorEmpresa] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerReplaceById: async (id: number, sensorEmpresa?: SensorEmpresa, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('sensorEmpresaControllerReplaceById', 'id', id)
-            const localVarPath = `/sensor-empresas/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(sensorEmpresa, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {SensorEmpresaPartial} [sensorEmpresaPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerUpdateAll: async (where?: { [key: string]: object; }, sensorEmpresaPartial?: SensorEmpresaPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/sensor-empresas`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(sensorEmpresaPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {SensorEmpresaPartial} [sensorEmpresaPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerUpdateById: async (id: number, sensorEmpresaPartial?: SensorEmpresaPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('sensorEmpresaControllerUpdateById', 'id', id)
-            const localVarPath = `/sensor-empresas/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(sensorEmpresaPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * SensorEmpresaControllerApi - functional programming interface
- * @export
- */
-export const SensorEmpresaControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SensorEmpresaControllerApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sensorEmpresaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sensorEmpresaControllerCount(where, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {InlineObject3} [inlineObject3] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sensorEmpresaControllerCrearSensoresDesdeTipoSensor(inlineObject3?: InlineObject3, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sensorEmpresaControllerCrearSensoresDesdeTipoSensor(inlineObject3, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {NewSensorEmpresa} [newSensorEmpresa] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sensorEmpresaControllerCreate(newSensorEmpresa?: NewSensorEmpresa, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SensorEmpresa>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sensorEmpresaControllerCreate(newSensorEmpresa, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sensorEmpresaControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sensorEmpresaControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {SensorEmpresaFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sensorEmpresaControllerFind(filter?: SensorEmpresaFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SensorEmpresaWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sensorEmpresaControllerFind(filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {SensorEmpresaFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sensorEmpresaControllerFindById(id: number, filter?: SensorEmpresaFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SensorEmpresaWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sensorEmpresaControllerFindById(id, filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {SensorEmpresa} [sensorEmpresa] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sensorEmpresaControllerReplaceById(id: number, sensorEmpresa?: SensorEmpresa, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sensorEmpresaControllerReplaceById(id, sensorEmpresa, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {SensorEmpresaPartial} [sensorEmpresaPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sensorEmpresaControllerUpdateAll(where?: { [key: string]: object; }, sensorEmpresaPartial?: SensorEmpresaPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sensorEmpresaControllerUpdateAll(where, sensorEmpresaPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {SensorEmpresaPartial} [sensorEmpresaPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sensorEmpresaControllerUpdateById(id: number, sensorEmpresaPartial?: SensorEmpresaPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sensorEmpresaControllerUpdateById(id, sensorEmpresaPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * SensorEmpresaControllerApi - factory interface
- * @export
- */
-export const SensorEmpresaControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SensorEmpresaControllerApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.sensorEmpresaControllerCount(where, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {InlineObject3} [inlineObject3] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerCrearSensoresDesdeTipoSensor(inlineObject3?: InlineObject3, options?: any): AxiosPromise<any> {
-            return localVarFp.sensorEmpresaControllerCrearSensoresDesdeTipoSensor(inlineObject3, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {NewSensorEmpresa} [newSensorEmpresa] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerCreate(newSensorEmpresa?: NewSensorEmpresa, options?: any): AxiosPromise<SensorEmpresa> {
-            return localVarFp.sensorEmpresaControllerCreate(newSensorEmpresa, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.sensorEmpresaControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {SensorEmpresaFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerFind(filter?: SensorEmpresaFilter1, options?: any): AxiosPromise<Array<SensorEmpresaWithRelations>> {
-            return localVarFp.sensorEmpresaControllerFind(filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {SensorEmpresaFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerFindById(id: number, filter?: SensorEmpresaFilter, options?: any): AxiosPromise<SensorEmpresaWithRelations> {
-            return localVarFp.sensorEmpresaControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {SensorEmpresa} [sensorEmpresa] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerReplaceById(id: number, sensorEmpresa?: SensorEmpresa, options?: any): AxiosPromise<any> {
-            return localVarFp.sensorEmpresaControllerReplaceById(id, sensorEmpresa, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {SensorEmpresaPartial} [sensorEmpresaPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerUpdateAll(where?: { [key: string]: object; }, sensorEmpresaPartial?: SensorEmpresaPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.sensorEmpresaControllerUpdateAll(where, sensorEmpresaPartial, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {SensorEmpresaPartial} [sensorEmpresaPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sensorEmpresaControllerUpdateById(id: number, sensorEmpresaPartial?: SensorEmpresaPartial, options?: any): AxiosPromise<any> {
-            return localVarFp.sensorEmpresaControllerUpdateById(id, sensorEmpresaPartial, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * SensorEmpresaControllerApi - object-oriented interface
- * @export
- * @class SensorEmpresaControllerApi
- * @extends {BaseAPI}
- */
-export class SensorEmpresaControllerApi extends BaseAPI {
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SensorEmpresaControllerApi
-     */
-    public sensorEmpresaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return SensorEmpresaControllerApiFp(this.configuration).sensorEmpresaControllerCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {InlineObject3} [inlineObject3] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SensorEmpresaControllerApi
-     */
-    public sensorEmpresaControllerCrearSensoresDesdeTipoSensor(inlineObject3?: InlineObject3, options?: AxiosRequestConfig) {
-        return SensorEmpresaControllerApiFp(this.configuration).sensorEmpresaControllerCrearSensoresDesdeTipoSensor(inlineObject3, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {NewSensorEmpresa} [newSensorEmpresa] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SensorEmpresaControllerApi
-     */
-    public sensorEmpresaControllerCreate(newSensorEmpresa?: NewSensorEmpresa, options?: AxiosRequestConfig) {
-        return SensorEmpresaControllerApiFp(this.configuration).sensorEmpresaControllerCreate(newSensorEmpresa, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SensorEmpresaControllerApi
-     */
-    public sensorEmpresaControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return SensorEmpresaControllerApiFp(this.configuration).sensorEmpresaControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {SensorEmpresaFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SensorEmpresaControllerApi
-     */
-    public sensorEmpresaControllerFind(filter?: SensorEmpresaFilter1, options?: AxiosRequestConfig) {
-        return SensorEmpresaControllerApiFp(this.configuration).sensorEmpresaControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {SensorEmpresaFilter} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SensorEmpresaControllerApi
-     */
-    public sensorEmpresaControllerFindById(id: number, filter?: SensorEmpresaFilter, options?: AxiosRequestConfig) {
-        return SensorEmpresaControllerApiFp(this.configuration).sensorEmpresaControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {SensorEmpresa} [sensorEmpresa] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SensorEmpresaControllerApi
-     */
-    public sensorEmpresaControllerReplaceById(id: number, sensorEmpresa?: SensorEmpresa, options?: AxiosRequestConfig) {
-        return SensorEmpresaControllerApiFp(this.configuration).sensorEmpresaControllerReplaceById(id, sensorEmpresa, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {SensorEmpresaPartial} [sensorEmpresaPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SensorEmpresaControllerApi
-     */
-    public sensorEmpresaControllerUpdateAll(where?: { [key: string]: object; }, sensorEmpresaPartial?: SensorEmpresaPartial, options?: AxiosRequestConfig) {
-        return SensorEmpresaControllerApiFp(this.configuration).sensorEmpresaControllerUpdateAll(where, sensorEmpresaPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {SensorEmpresaPartial} [sensorEmpresaPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SensorEmpresaControllerApi
-     */
-    public sensorEmpresaControllerUpdateById(id: number, sensorEmpresaPartial?: SensorEmpresaPartial, options?: AxiosRequestConfig) {
-        return SensorEmpresaControllerApiFp(this.configuration).sensorEmpresaControllerUpdateById(id, sensorEmpresaPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

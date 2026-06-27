@@ -22,9 +22,11 @@ import { bloquearPantalla } from "@/app/utility/Utils"
 import { useIntl } from 'react-intl';
 import Cookies from 'js-cookie';
 import PermisoIntro from "./PermisoIntro";
+import { useAuth } from "@/app/auth/AuthContext";
 
 const Permiso = () => {
     const intl = useIntl();
+    const { refrescarMenuLateral } = useAuth();
     const [permisos, setPermisos] = useState([]);
     const [columnasRoles, setColumnasRoles] = useState([]);
     const [columnaPrincipal, setColumnaPrincipal] = useState([]);
@@ -163,13 +165,13 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envío Configuracion Empresa-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envío Configuracion Empresa-Borrar' },
 
-                //Envío Sensor Empresa
-                { header: intl.formatMessage({ id: 'Envío Sensor Empresa' }), seccion: 'Envío Sensor Empresa' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Envío Sensor Empresa-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Envío Sensor Empresa-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Envío Sensor Empresa-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Envío Sensor Empresa-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Envío Sensor Empresa-Borrar' },
+                // Empresa Sensor
+                { header: intl.formatMessage({ id: 'Empresa Sensor' }), seccion: 'Empresa Sensor' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Empresa Sensor-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Empresa Sensor-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Empresa Sensor-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Empresa Sensor-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Empresa Sensor-Borrar' },
 
                 // Envio Configuracion
                 { header: intl.formatMessage({ id: 'Envio Configuracion' }), seccion: 'Envio Configuracion' },
@@ -348,6 +350,11 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Pallets Asignados' }), seccion: 'Pallets Asignados' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Pallets Asignados-Acceder' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Pallets Asignados-Actualizar' },
+
+                //Sensores activos
+                { header: intl.formatMessage({ id: 'Sensores activos' }), seccion: 'Sensores activos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Sensores activos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Sensores activos-Ver' },
             ];
 
             // Obtenemos los roles
@@ -436,6 +443,10 @@ const Permiso = () => {
                     usuCreacion: getUsuarioSesion()?.id,
                 };
                 await postPermiso(emptyPermiso);
+                //
+                //Recalculamos el menu lateral para reflejar el nuevo permiso al instante
+                //
+                await refrescarMenuLateral();
                 // if (partesPermiso[1] === 'Ver') {
                 //     window.location.reload();
                 // } else {
@@ -456,6 +467,10 @@ const Permiso = () => {
                     // Buscar coincidencias y extraer sus IDs
                     if (listaSinId.hasOwnProperty(permiso)) {
                         await deletePermiso(parseInt(listaSinId[permiso]));
+                        //
+                        //Recalculamos el menu lateral para ocultar o mostrar entradas segun permisos
+                        //
+                        await refrescarMenuLateral();
                         // if (partesPermiso[1] === 'Ver') {
                         //     window.location.reload();
                         // } else {

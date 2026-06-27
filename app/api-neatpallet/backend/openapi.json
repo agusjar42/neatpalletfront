@@ -671,6 +671,48 @@
         "operationId": "CompruebaImagenController.compruebaImagenEndpoint"
       }
     },
+    "/crear-empresa-sensor-desde-tipo-sensor": {
+      "post": {
+        "x-controller-name": "EmpresaSensorController",
+        "x-operation-name": "crearSensoresDesdeTipoSensor",
+        "tags": [
+          "EmpresaSensorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Crear sensores de empresa desde tipos de sensor"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "empresaId": {
+                    "type": "number"
+                  },
+                  "usuarioCreacion": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "empresaId"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "EmpresaSensorController.crearSensoresDesdeTipoSensor"
+      }
+    },
     "/crear-envio-configuracion-desde-empresa": {
       "post": {
         "x-controller-name": "EnvioController",
@@ -731,48 +773,6 @@
           }
         },
         "operationId": "EnvioController.crearEnvioSensorDesdeEmpresa"
-      }
-    },
-    "/crear-sensor-empresa-desde-tipo-sensor": {
-      "post": {
-        "x-controller-name": "SensorEmpresaController",
-        "x-operation-name": "crearSensoresDesdeTipoSensor",
-        "tags": [
-          "SensorEmpresaController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Crear sensores de empresa desde tipos de sensor"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "empresaId": {
-                    "type": "number"
-                  },
-                  "usuarioCreacion": {
-                    "type": "number"
-                  }
-                },
-                "required": [
-                  "empresaId"
-                ]
-              }
-            }
-          }
-        },
-        "operationId": "SensorEmpresaController.crearSensoresDesdeTipoSensor"
       }
     },
     "/empresa-pallets/count": {
@@ -1076,6 +1076,309 @@
           }
         ],
         "operationId": "EmpresaPalletController.find"
+      }
+    },
+    "/empresa-sensores/count": {
+      "get": {
+        "x-controller-name": "EmpresaSensorController",
+        "x-operation-name": "count",
+        "tags": [
+          "EmpresaSensorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EmpresaSensor model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EmpresaSensor.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EmpresaSensor>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EmpresaSensorController.count"
+      }
+    },
+    "/empresa-sensores/{id}": {
+      "put": {
+        "x-controller-name": "EmpresaSensorController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "EmpresaSensorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EmpresaSensor PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmpresaSensor"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EmpresaSensorController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "EmpresaSensorController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "EmpresaSensorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EmpresaSensor PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmpresaSensorPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EmpresaSensorController.updateById"
+      },
+      "get": {
+        "x-controller-name": "EmpresaSensorController",
+        "x-operation-name": "findById",
+        "tags": [
+          "EmpresaSensorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EmpresaSensor model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaSensorWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaSensor.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EmpresaSensorController.findById"
+      },
+      "delete": {
+        "x-controller-name": "EmpresaSensorController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "EmpresaSensorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "EmpresaSensor DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EmpresaSensorController.deleteById"
+      }
+    },
+    "/empresa-sensores": {
+      "post": {
+        "x-controller-name": "EmpresaSensorController",
+        "x-operation-name": "create",
+        "tags": [
+          "EmpresaSensorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EmpresaSensor model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaSensor"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewEmpresaSensor"
+              }
+            }
+          }
+        },
+        "operationId": "EmpresaSensorController.create"
+      },
+      "patch": {
+        "x-controller-name": "EmpresaSensorController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "EmpresaSensorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "EmpresaSensor PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "EmpresaSensor.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<EmpresaSensor>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmpresaSensorPartial"
+              }
+            }
+          }
+        },
+        "operationId": "EmpresaSensorController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "EmpresaSensorController",
+        "x-operation-name": "find",
+        "tags": [
+          "EmpresaSensorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of EmpresaSensor model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmpresaSensorWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaSensor.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EmpresaSensorController.find"
       }
     },
     "/empresas/count": {
@@ -8849,309 +9152,6 @@
           }
         ],
         "operationId": "RolController.find"
-      }
-    },
-    "/sensor-empresas/count": {
-      "get": {
-        "x-controller-name": "SensorEmpresaController",
-        "x-operation-name": "count",
-        "tags": [
-          "SensorEmpresaController"
-        ],
-        "responses": {
-          "200": {
-            "description": "SensorEmpresa model count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "SensorEmpresa.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<SensorEmpresa>"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "SensorEmpresaController.count"
-      }
-    },
-    "/sensor-empresas/{id}": {
-      "put": {
-        "x-controller-name": "SensorEmpresaController",
-        "x-operation-name": "replaceById",
-        "tags": [
-          "SensorEmpresaController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "SensorEmpresa PUT success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SensorEmpresa"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "SensorEmpresaController.replaceById"
-      },
-      "patch": {
-        "x-controller-name": "SensorEmpresaController",
-        "x-operation-name": "updateById",
-        "tags": [
-          "SensorEmpresaController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "SensorEmpresa PATCH success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SensorEmpresaPartial"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "SensorEmpresaController.updateById"
-      },
-      "get": {
-        "x-controller-name": "SensorEmpresaController",
-        "x-operation-name": "findById",
-        "tags": [
-          "SensorEmpresaController"
-        ],
-        "responses": {
-          "200": {
-            "description": "SensorEmpresa model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SensorEmpresaWithRelations"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SensorEmpresa.Filter"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "SensorEmpresaController.findById"
-      },
-      "delete": {
-        "x-controller-name": "SensorEmpresaController",
-        "x-operation-name": "deleteById",
-        "tags": [
-          "SensorEmpresaController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "SensorEmpresa DELETE success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "operationId": "SensorEmpresaController.deleteById"
-      }
-    },
-    "/sensor-empresas": {
-      "post": {
-        "x-controller-name": "SensorEmpresaController",
-        "x-operation-name": "create",
-        "tags": [
-          "SensorEmpresaController"
-        ],
-        "responses": {
-          "200": {
-            "description": "SensorEmpresa model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SensorEmpresa"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewSensorEmpresa"
-              }
-            }
-          }
-        },
-        "operationId": "SensorEmpresaController.create"
-      },
-      "patch": {
-        "x-controller-name": "SensorEmpresaController",
-        "x-operation-name": "updateAll",
-        "tags": [
-          "SensorEmpresaController"
-        ],
-        "responses": {
-          "200": {
-            "description": "SensorEmpresa PATCH success count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "SensorEmpresa.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<SensorEmpresa>"
-                }
-              }
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SensorEmpresaPartial"
-              }
-            }
-          }
-        },
-        "operationId": "SensorEmpresaController.updateAll"
-      },
-      "get": {
-        "x-controller-name": "SensorEmpresaController",
-        "x-operation-name": "find",
-        "tags": [
-          "SensorEmpresaController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Array of SensorEmpresa model instances",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SensorEmpresaWithRelations"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SensorEmpresa.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "SensorEmpresaController.find"
       }
     },
     "/tipo-carrocerias/count": {
@@ -18728,160 +18728,6 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<Envio>"
       },
-      "SensorEmpresa": {
-        "title": "SensorEmpresa",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "tipoSensorId": {
-            "type": "number"
-          },
-          "empresaId": {
-            "type": "number"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          }
-        },
-        "additionalProperties": false
-      },
-      "NewSensorEmpresa": {
-        "title": "NewSensorEmpresa",
-        "type": "object",
-        "description": "(tsType: Omit<SensorEmpresa, 'id'>, schemaOptions: { title: 'NewSensorEmpresa', exclude: [ 'id' ] })",
-        "properties": {
-          "tipoSensorId": {
-            "type": "number"
-          },
-          "empresaId": {
-            "type": "number"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<SensorEmpresa, 'id'>"
-      },
-      "SensorEmpresaWithRelations": {
-        "title": "SensorEmpresaWithRelations",
-        "type": "object",
-        "description": "(tsType: SensorEmpresaWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "tipoSensorId": {
-            "type": "number"
-          },
-          "empresaId": {
-            "type": "number"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          },
-          "tipoSensor": {
-            "$ref": "#/components/schemas/TipoSensorWithRelations"
-          },
-          "foreignKey": {},
-          "empresa": {
-            "$ref": "#/components/schemas/EmpresaWithRelations"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "SensorEmpresaWithRelations"
-      },
-      "SensorEmpresaPartial": {
-        "title": "SensorEmpresaPartial",
-        "type": "object",
-        "description": "(tsType: Partial<SensorEmpresa>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "tipoSensorId": {
-            "type": "number"
-          },
-          "empresaId": {
-            "type": "number"
-          },
-          "valor": {
-            "type": "string"
-          },
-          "usuarioCreacion": {
-            "type": "number"
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "usuarioModificacion": {
-            "type": "number"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "orden": {
-            "type": "number"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<SensorEmpresa>"
-      },
       "EnvioContenidoPallet": {
         "title": "EnvioContenidoPallet",
         "type": "object",
@@ -19103,6 +18949,160 @@
           "usuCreacion"
         ],
         "additionalProperties": false
+      },
+      "EmpresaSensor": {
+        "title": "EmpresaSensor",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewEmpresaSensor": {
+        "title": "NewEmpresaSensor",
+        "type": "object",
+        "description": "(tsType: Omit<EmpresaSensor, 'id'>, schemaOptions: { title: 'NewEmpresaSensor', exclude: [ 'id' ] })",
+        "properties": {
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<EmpresaSensor, 'id'>"
+      },
+      "EmpresaSensorWithRelations": {
+        "title": "EmpresaSensorWithRelations",
+        "type": "object",
+        "description": "(tsType: EmpresaSensorWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          },
+          "tipoSensor": {
+            "$ref": "#/components/schemas/TipoSensorWithRelations"
+          },
+          "foreignKey": {},
+          "empresa": {
+            "$ref": "#/components/schemas/EmpresaWithRelations"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "EmpresaSensorWithRelations"
+      },
+      "EmpresaSensorPartial": {
+        "title": "EmpresaSensorPartial",
+        "type": "object",
+        "description": "(tsType: Partial<EmpresaSensor>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoSensorId": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "valor": {
+            "type": "string"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orden": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<EmpresaSensor>"
       },
       "EmpresaPallet": {
         "title": "EmpresaPallet",
@@ -19957,6 +19957,298 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<EmpresaPallet>"
+      },
+      "EmpresaSensor.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "EmpresaSensor.ScopeFilter"
+      },
+      "EmpresaSensor.IncludeFilter.Items": {
+        "title": "EmpresaSensor.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "tipoSensor",
+              "empresa"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/EmpresaSensor.ScopeFilter"
+          }
+        }
+      },
+      "EmpresaSensor.Filter": {
+        "type": "object",
+        "title": "EmpresaSensor.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoSensorId": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoSensorId",
+                    "empresaId",
+                    "valor",
+                    "usuarioCreacion",
+                    "fechaCreacion",
+                    "usuarioModificacion",
+                    "fechaModificacion",
+                    "orden"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EmpresaSensor.Fields"
+          },
+          "include": {
+            "title": "EmpresaSensor.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EmpresaSensor.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EmpresaSensor>"
+      },
+      "EmpresaSensor.Filter1": {
+        "type": "object",
+        "title": "EmpresaSensor.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "EmpresaSensor.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoSensorId": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoSensorId",
+                    "empresaId",
+                    "valor",
+                    "usuarioCreacion",
+                    "fechaCreacion",
+                    "usuarioModificacion",
+                    "fechaModificacion",
+                    "orden"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "EmpresaSensor.Fields"
+          },
+          "include": {
+            "title": "EmpresaSensor.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EmpresaSensor.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<EmpresaSensor>"
       },
       "Empresa1": {
         "type": "object",
@@ -26919,298 +27211,6 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Rol>"
-      },
-      "SensorEmpresa.ScopeFilter": {
-        "type": "object",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {},
-                "additionalProperties": true
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "uniqueItems": true
-              }
-            ]
-          },
-          "include": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {},
-              "additionalProperties": true
-            }
-          }
-        },
-        "additionalProperties": false,
-        "title": "SensorEmpresa.ScopeFilter"
-      },
-      "SensorEmpresa.IncludeFilter.Items": {
-        "title": "SensorEmpresa.IncludeFilter.Items",
-        "type": "object",
-        "properties": {
-          "relation": {
-            "type": "string",
-            "enum": [
-              "tipoSensor",
-              "empresa"
-            ]
-          },
-          "scope": {
-            "$ref": "#/components/schemas/SensorEmpresa.ScopeFilter"
-          }
-        }
-      },
-      "SensorEmpresa.Filter": {
-        "type": "object",
-        "title": "SensorEmpresa.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "tipoSensorId": {
-                    "type": "boolean"
-                  },
-                  "empresaId": {
-                    "type": "boolean"
-                  },
-                  "valor": {
-                    "type": "boolean"
-                  },
-                  "usuarioCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuarioModificacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "orden": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "tipoSensorId",
-                    "empresaId",
-                    "valor",
-                    "usuarioCreacion",
-                    "fechaCreacion",
-                    "usuarioModificacion",
-                    "fechaModificacion",
-                    "orden"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "SensorEmpresa.Fields"
-          },
-          "include": {
-            "title": "SensorEmpresa.IncludeFilter",
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/SensorEmpresa.IncludeFilter.Items"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            }
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<SensorEmpresa>"
-      },
-      "SensorEmpresa.Filter1": {
-        "type": "object",
-        "title": "SensorEmpresa.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "title": "SensorEmpresa.WhereFilter",
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "tipoSensorId": {
-                    "type": "boolean"
-                  },
-                  "empresaId": {
-                    "type": "boolean"
-                  },
-                  "valor": {
-                    "type": "boolean"
-                  },
-                  "usuarioCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuarioModificacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "orden": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "tipoSensorId",
-                    "empresaId",
-                    "valor",
-                    "usuarioCreacion",
-                    "fechaCreacion",
-                    "usuarioModificacion",
-                    "fechaModificacion",
-                    "orden"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "SensorEmpresa.Fields"
-          },
-          "include": {
-            "title": "SensorEmpresa.IncludeFilter",
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/SensorEmpresa.IncludeFilter.Items"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            }
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<SensorEmpresa>"
       },
       "TipoCarroceria.ScopeFilter": {
         "type": "object",

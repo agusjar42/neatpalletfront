@@ -2,16 +2,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { postSensorEmpresa, patchSensorEmpresa, getSensorEmpresa } from "@/app/api-endpoints/empresa-sensor";
+import { postEmpresaSensor, patchEmpresaSensor, getEmpresaSensor } from "@/app/api-endpoints/empresa-sensor";
 import { getTipoSensor } from "@/app/api-endpoints/tipo-sensor";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion, reemplazarNullPorVacio } from "@/app/utility/Utils";
-import EditarDatosEnvioSensorEmpresa from "./EditarDatosEnvioSensorEmpresa";
+import EditarDatosEmpresaSensor from "./EditarDatosEmpresaSensor";
 import { useIntl } from 'react-intl';
 
-const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, empresaId }) => {
+const EditarEmpresaSensor = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, empresaId }) => {
     const toast = useRef(null);
-    const [envioSensorEmpresa, setEnvioSensorEmpresa] = useState(emptyRegistro);
+    const [empresaSensor, setEmpresaSensor] = useState(emptyRegistro);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [tiposSensor, setTiposSensor] = useState([]);
@@ -26,7 +26,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
             //
             //Obtenemos todos los sensores ya introducidos para la empresa
             //
-            const sensoresRegistrados = await getSensorEmpresa(JSON.stringify({
+            const sensoresRegistrados = await getEmpresaSensor(JSON.stringify({
                 where: {
                     and: {
                         empresaId: empresaId ?? getUsuarioSesion()?.empresaId
@@ -55,21 +55,21 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
 
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
-                setEnvioSensorEmpresa(registro);
+                setEmpresaSensor(registro);
             }
         };
         fetchData();
     }, [idEditar, rowData]);
 
     const validaciones = async () => {
-        let validaTipoSensor = envioSensorEmpresa.tipoSensorId === undefined || envioSensorEmpresa.tipoSensorId === null || envioSensorEmpresa.tipoSensorId === "";
-        let validaOrden = envioSensorEmpresa.orden === undefined || envioSensorEmpresa.orden === null || envioSensorEmpresa.orden === "";
+        let validaTipoSensor = empresaSensor.tipoSensorId === undefined || empresaSensor.tipoSensorId === null || empresaSensor.tipoSensorId === "";
+        let validaOrden = empresaSensor.orden === undefined || empresaSensor.orden === null || empresaSensor.orden === "";
         let mensajeDevuelto = (validaTipoSensor || validaOrden) ? 'Todos los campos deben de ser rellenados' : '';
 
         if (mensajeDevuelto === '') {
             // Si estamos creando un nuevo registro (idEditar === 0), verificar si el tipo de sensor ya existe
             if (idEditar === 0) {
-                const sensorExistente = await verificarSensorDuplicado(envioSensorEmpresa.tipoSensorId);
+                const sensorExistente = await verificarSensorDuplicado(empresaSensor.tipoSensorId);
                 if (sensorExistente) {
                     mensajeDevuelto = 'Este tipo de sensor ya está registrado para la empresa';
                 }
@@ -81,7 +81,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
 
     const verificarSensorDuplicado = async (tipoSensorId) => {
         try {
-            const registros = await getSensorEmpresa(JSON.stringify({
+            const registros = await getEmpresaSensor(JSON.stringify({
                 where: {
                     and: {
                         empresaId: empresaId ?? getUsuarioSesion()?.empresaId,
@@ -96,12 +96,12 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
         }
     }
 
-    const guardarEnvioSensorEmpresa = async () => {
+    const guardarEmpresaSensor = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
         let mensajeValidacion = await validaciones()
         if (mensajeValidacion === '') {
-            let objGuardar = { ...envioSensorEmpresa };
+            let objGuardar = { ...empresaSensor };
             delete objGuardar['nombre'];
             delete objGuardar['nombreSensor'];
             const usuarioActual = getUsuarioSesion()?.id;
@@ -112,7 +112,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
                 objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = empresaId ?? getUsuarioSesion()?.empresaId;
 
-                const nuevoRegistro = await postSensorEmpresa(objGuardar);
+                const nuevoRegistro = await postEmpresaSensor(objGuardar);
 
                 if (nuevoRegistro?.id) {
                     setRegistroResult("insertado");
@@ -130,7 +130,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
                 delete objGuardar['fechaModificacion'];
                 delete objGuardar['activoSn'];
                 objGuardar = reemplazarNullPorVacio(objGuardar);
-                await patchSensorEmpresa(objGuardar.id, objGuardar);
+                await patchEmpresaSensor(objGuardar.id, objGuardar);
                 setIdEditar(null)
                 setRegistroResult("editado");
             }
@@ -159,9 +159,9 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {(intl.formatMessage({ id: 'Sensor de Empresa' })).toLowerCase()}</h2>
-                        <EditarDatosEnvioSensorEmpresa
-                            envioSensorEmpresa={envioSensorEmpresa}
-                            setEnvioSensorEmpresa={setEnvioSensorEmpresa}
+                        <EditarDatosEmpresaSensor
+                            empresaSensor={empresaSensor}
+                            setEmpresaSensor={setEmpresaSensor}
                             estadoGuardando={estadoGuardando}
                             tiposSensor={tiposSensor}
                         />
@@ -171,7 +171,7 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
                                 <Button
                                     label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                    onClick={guardarEnvioSensorEmpresa}
+                                    onClick={guardarEmpresaSensor}
                                     className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
@@ -185,4 +185,4 @@ const EditarEnvioSensorEmpresa = ({ idEditar, setIdEditar, rowData, emptyRegistr
     );
 };
 
-export default EditarEnvioSensorEmpresa;
+export default EditarEmpresaSensor;

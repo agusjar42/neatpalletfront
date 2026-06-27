@@ -15,7 +15,7 @@ const EventosConfiguracion = () => {
     const [summaryRefreshKey, setSummaryRefreshKey] = useState(0);
     const columnas = [
         { campo: 'orden', header: 'ORDEN', tipo: 'string' },
-        { campo: 'nombre', header: 'PARAMETRO', tipo: 'string' },
+        { campo: 'nombre', header: 'NOMBRE', tipo: 'string' },
         { campo: 'valor', header: 'VALOR', tipo: 'string' },
         { campo: 'unidadMedida', header: 'UNIDAD DE MEDIDA', tipo: 'string' },
         { campo: 'activoSn', header: 'ACTIVO', tipo: 'booleano' },

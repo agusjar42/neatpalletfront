@@ -5,7 +5,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 import { InputNumber } from "primereact/inputnumber";
 
-const EditarDatosEnvioSensorEmpresa = ({ envioSensorEmpresa, setEnvioSensorEmpresa, estadoGuardando, tiposSensor }) => {
+const EditarDatosEmpresaSensor = ({ empresaSensor, setEmpresaSensor, estadoGuardando, tiposSensor }) => {
     const intl = useIntl();
 
     //
@@ -14,7 +14,7 @@ const EditarDatosEnvioSensorEmpresa = ({ envioSensorEmpresa, setEnvioSensorEmpre
     const opcionesTipoSensor = tiposSensor
         .filter(tipo =>
             tipo.activoSn === "S" ||
-            tipo.id === envioSensorEmpresa.tipoSensorId
+            tipo.id === empresaSensor.tipoSensorId
         )
         .map(tipo => ({
             label: tipo.nombre,
@@ -26,9 +26,9 @@ const EditarDatosEnvioSensorEmpresa = ({ envioSensorEmpresa, setEnvioSensorEmpre
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="orden"><b>{intl.formatMessage({ id: 'Orden' })}*</b></label>
-                    <InputNumber value={envioSensorEmpresa.orden === '' || envioSensorEmpresa.orden === undefined ? null : envioSensorEmpresa.orden}
-                        onChange={(e) => setEnvioSensorEmpresa({ ...envioSensorEmpresa, orden: e.value })}
-                        className={`${(estadoGuardando && (envioSensorEmpresa.orden === "" || envioSensorEmpresa.orden === null || envioSensorEmpresa.orden === undefined)) ? "p-invalid" : ""}`}
+                    <InputNumber value={empresaSensor.orden === '' || empresaSensor.orden === undefined ? null : empresaSensor.orden}
+                        onChange={(e) => setEmpresaSensor({ ...empresaSensor, orden: e.value })}
+                        className={`${(estadoGuardando && (empresaSensor.orden === "" || empresaSensor.orden === null || empresaSensor.orden === undefined)) ? "p-invalid" : ""}`}
                         mode="decimal"
                         useGrouping={false}
                         min={0}
@@ -36,10 +36,10 @@ const EditarDatosEnvioSensorEmpresa = ({ envioSensorEmpresa, setEnvioSensorEmpre
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="tipoSensorId"><b>{intl.formatMessage({ id: 'Tipo de Sensor' })}*</b></label>
-                    <Dropdown value={envioSensorEmpresa.tipoSensorId || ""}
-                        onChange={(e) => setEnvioSensorEmpresa({ ...envioSensorEmpresa, tipoSensorId: e.value })}
+                    <Dropdown value={empresaSensor.tipoSensorId || ""}
+                        onChange={(e) => setEmpresaSensor({ ...empresaSensor, tipoSensorId: e.value })}
                         options={opcionesTipoSensor}
-                        className={`p-column-filter ${(estadoGuardando && (envioSensorEmpresa.tipoSensorId == null || envioSensorEmpresa.tipoSensorId === "")) ? "p-invalid" : ""}`}
+                        className={`p-column-filter ${(estadoGuardando && (empresaSensor.tipoSensorId == null || empresaSensor.tipoSensorId === "")) ? "p-invalid" : ""}`}
                         showClear
                         placeholder={intl.formatMessage({ id: 'Seleccione un tipo de sensor' })} />
                 </div>
@@ -48,9 +48,9 @@ const EditarDatosEnvioSensorEmpresa = ({ envioSensorEmpresa, setEnvioSensorEmpre
                         {intl.formatMessage({ id: 'Valor' })}
                         {/*<span className="pi pi-info-circle text-blue-500" style={{ fontSize: "1.5em" }} />*/}
                     </label>
-                    <InputNumber value={envioSensorEmpresa.valor}
+                    <InputNumber value={empresaSensor.valor}
                         placeholder={intl.formatMessage({ id: 'Valor del sensor' })}
-                        onChange={(e) => setEnvioSensorEmpresa({ ...envioSensorEmpresa, valor: e.value })}
+                        onChange={(e) => setEmpresaSensor({ ...empresaSensor, valor: e.value })}
                         maxLength={50}
                         inputStyle={{ textAlign: 'right' }} />
                     <small className="p-text-secondary">
@@ -73,4 +73,4 @@ const EditarDatosEnvioSensorEmpresa = ({ envioSensorEmpresa, setEnvioSensorEmpre
     );
 };
 
-export default EditarDatosEnvioSensorEmpresa;
+export default EditarDatosEmpresaSensor;

@@ -30,10 +30,10 @@ import {
   deleteEnvio,
 } from "@/app/api-endpoints/envio";
 import {
-  getSensorEmpresa,
-  getSensorEmpresaCount,
-  deleteSensorEmpresa,
-  crearSensorEmpresaDesdeTipoSensor,
+  getEmpresaSensor,
+  getEmpresaSensorCount,
+  deleteEmpresaSensor,
+  crearEmpresaSensorDesdeTipoSensor,
 } from "@/app/api-endpoints/empresa-sensor";
 import {
   getTipoCarroceria,
@@ -58,7 +58,7 @@ import EditarUsuario from "../../usuarios/editar";
 import EditarCliente from "../../cliente/editar";
 import EditarProducto from "../../producto/editar";
 import EditarEnvio from "../../envio/editar";
-import EditarEnvioSensorEmpresa from "../../envio-sensor-empresa/editar";
+import EditarEmpresaSensor from "../../empresa-sensor/editar";
 import EditarTipoCarroceria from "../../tipo-carroceria/editar";
 import EditarTipoTransporte from "../../tipo-transporte/editar";
 import PalletsAsignadosEmpresa from "./PalletsAsignadosEmpresa";
@@ -279,7 +279,7 @@ const EditarEmpresa = ({
     },
   ];
 
-  const columnasSensorEmpresa = [
+  const columnasEmpresaSensor = [
     {
       campo: "orden",
       header: intl.formatMessage({ id: "Orden" }),
@@ -741,7 +741,7 @@ const EditarEmpresa = ({
       accept: async () => {
         setCargandoSensores(true);
         try {
-          await crearSensorEmpresaDesdeTipoSensor(
+          await crearEmpresaSensorDesdeTipoSensor(
             empresa.id,
             getUsuarioSesion()?.id
           );
@@ -1004,14 +1004,14 @@ const EditarEmpresa = ({
                         headerCrud={intl.formatMessage({
                           id: "Sensores de empresa",
                         })}
-                        getRegistros={getSensorEmpresa}
-                        getRegistrosCount={getSensorEmpresaCount}
+                        getRegistros={getEmpresaSensor}
+                        getRegistrosCount={getEmpresaSensorCount}
                         botones={["nuevo", "ver", "editar", "eliminar"]}
-                        controlador={"Envio Sensor Empresa"}
-                        editarComponente={<EditarEnvioSensorEmpresa />}
-                        columnas={columnasSensorEmpresa}
+                        controlador={"Empresa Sensor"}
+                        editarComponente={<EditarEmpresaSensor />}
+                        columnas={columnasEmpresaSensor}
                         filtradoBase={{ empresaId: empresa.id }}
-                        deleteRegistro={deleteSensorEmpresa}
+                        deleteRegistro={deleteEmpresaSensor}
                         editarComponenteParametrosExtra={{
                           empresaId: empresa.id,
                           estoyDentroDeUnTab: true,

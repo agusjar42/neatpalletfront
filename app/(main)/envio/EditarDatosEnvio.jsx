@@ -92,7 +92,7 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
         { campo: 'operarioNombre', header: intl.formatMessage({ id: 'Operario' }), tipo: 'string' },
     ];
 
-    const columnasSensorEmpresa = [
+    const columnasEmpresaSensor = [
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'string' },
         { campo: 'nombreSensor', header: intl.formatMessage({ id: 'Tipo de Sensor' }), tipo: 'string' },
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
@@ -751,9 +751,9 @@ const EditarDatosEnvio = ({ envio, setEnvio, estadoGuardando, empresaId, onModoE
                                     getRegistros={getEnvioSensor}
                                     getRegistrosCount={getEnvioSensorCount}
                                     botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                                    controlador={"Envio Sensor Empresa"}
+                                    controlador={"Empresa Sensor"}
                                     editarComponente={<EditarEnvioSensors />}
-                                    columnas={columnasSensorEmpresa}
+                                    columnas={columnasEmpresaSensor}
                                     filtradoBase={{envioId: envio.id}}
                                     deleteRegistro={deleteEnvioSensor}
                                     cargarDatosInicialmente={true}

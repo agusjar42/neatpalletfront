@@ -54,9 +54,9 @@ const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
     }, []);
 
     const validaciones = async () => {
-        const validaCodigo = tipoTransporte.codigo === undefined || tipoTransporte.codigo === null || tipoTransporte.codigo === "";
+        const validaNombre = tipoTransporte.nombre === undefined || tipoTransporte.nombre === null || tipoTransporte.nombre === "";
         const validaOrden = tipoTransporte.orden === undefined || tipoTransporte.orden === null || tipoTransporte.orden === "";
-        return (!validaCodigo && !validaOrden)
+        return (!validaNombre && !validaOrden)
     }
 
     const guardarTipoTransporte = async () => {
@@ -67,7 +67,6 @@ const EditarTipoTransporte = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
             const usuarioActual = getUsuarioSesion()?.id;
             delete objGuardar.vehiculo;
             delete objGuardar.categoria;
-            delete objGuardar.nombre;
 
             if (idEditar === 0) {
                 delete objGuardar.id;

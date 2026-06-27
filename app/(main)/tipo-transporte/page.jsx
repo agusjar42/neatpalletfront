@@ -23,15 +23,7 @@ import {
 const TipoTransporte = () => {
   const intl = useIntl();
   const empresaIdSesion = getUsuarioSesion()?.empresaId;
-  const codigoBodyTemplate = (rowData) => {
-    if (rowData?.codigo) {
-      return rowData.codigo;
-    }
-    if (rowData?.orden !== undefined && rowData?.orden !== null) {
-      return `T-${String(rowData.orden).padStart(2, "0")}`;
-    }
-    return "-";
-  };
+  const nombreBodyTemplate = (rowData) => rowData?.nombre || rowData?.codigo || "-";
   const vehiculoBodyTemplate = (rowData) => rowData?.vehiculo ?? rowData?.nombre ?? "-";
   const usoBodyTemplate = (rowData) => rowData?.uso ?? rowData?.nombre ?? "-";
   const categoriaBodyTemplate = (rowData) => (
@@ -39,7 +31,7 @@ const TipoTransporte = () => {
   );
   const columnas = [
     { campo: "orden", header: "ORDEN", tipo: "string" },
-    { campo: "codigo", header: "CODIGO", tipo: "string", body: codigoBodyTemplate },
+    { campo: "nombre", header: "NOMBRE", tipo: "string", body: nombreBodyTemplate },
     { campo: "vehiculo", header: "VEHICULO", tipo: "string", body: vehiculoBodyTemplate },
     { campo: "uso", header: "USO", tipo: "string", body: usoBodyTemplate },
     { campo: "categoria", header: "CATEGORIA", tipo: "string", body: categoriaBodyTemplate },
@@ -60,8 +52,9 @@ const TipoTransporte = () => {
       try {
         const row = rowsNormalizados[i];
         const rowId = parseNumberOrNull(getValueFromRow(row, ["id"]));
+        const nombre = getValueFromRow(row, ["nombre"]);
         const vehiculoNombre = getValueFromRow(row, ["vehiculo", "nombre"]);
-        if (!rowId && !vehiculoNombre) throw new Error(`Fila ${i + 2}: El vehiculo es obligatorio`);
+        if (!rowId && !nombre) throw new Error(`Fila ${i + 2}: El nombre es obligatorio`);
         const categoriaNombre = getValueFromRow(row, ["categoria"]);
         const tipoVehiculoId = parseNumberOrNull(getValueFromRow(row, ["tipoVehiculoId", "tipovehiculoid"])) ??
           vehiculoPorNombre.get(String(vehiculoNombre || "").trim().toLowerCase());
@@ -70,6 +63,7 @@ const TipoTransporte = () => {
 
         const payload = {
           empresaId: empresaIdSesion,
+          nombre,
           codigo: getValueFromRow(row, ["codigo"]),
           uso: getValueFromRow(row, ["uso"]),
           tipoVehiculoId,

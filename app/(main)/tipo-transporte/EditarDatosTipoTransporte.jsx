@@ -25,7 +25,7 @@ const EditarDatosTipoTransporte = ({
     return (
             <div className="catalogo-edit-form-grid">
                 <div className="catalogo-edit-field">
-                    <label htmlFor="orden" style={{ color: 'black' }}><b>{intl.formatMessage({ id: 'Orden' })} *</b></label>
+                    <label htmlFor="orden" className="catalogo-edit-label-required">{intl.formatMessage({ id: 'Orden' })}*</label>
                     <InputNumber value={tipoTransporte.orden === '' || tipoTransporte.orden === undefined ? null : tipoTransporte.orden}
                         onChange={(e) => setTipoTransporte({ ...tipoTransporte, orden: e.value })}
                         className={`${(estadoGuardando && (tipoTransporte.orden === "" || tipoTransporte.orden === null || tipoTransporte.orden === undefined)) ? "p-invalid" : ""}`}
@@ -35,10 +35,11 @@ const EditarDatosTipoTransporte = ({
                         inputStyle={{ textAlign: 'right' }}/>
                 </div>
                 <div className="catalogo-edit-field">
-                    <label htmlFor="codigo" style={{ color: 'black' }}><b>{intl.formatMessage({ id: 'Codigo' })} *</b></label>
-                    <InputText value={tipoTransporte.codigo || ""}
-                        placeholder={intl.formatMessage({ id: 'Codigo del tipo de transporte' })}
-                        onChange={(e) => setTipoTransporte({ ...tipoTransporte, codigo: e.target.value })}
+                    <label htmlFor="nombre" className="catalogo-edit-label-required">{intl.formatMessage({ id: 'Nombre' })}*</label>
+                    <InputText value={tipoTransporte.nombre || ""}
+                        placeholder={intl.formatMessage({ id: 'Nombre del tipo de transporte' })}
+                        onChange={(e) => setTipoTransporte({ ...tipoTransporte, nombre: e.target.value })}
+                        className={`${(estadoGuardando && (tipoTransporte.nombre === "" || tipoTransporte.nombre === null || tipoTransporte.nombre === undefined)) ? "p-invalid" : ""}`}
                         maxLength={50} />
                 </div>
                 <div className="catalogo-edit-field">

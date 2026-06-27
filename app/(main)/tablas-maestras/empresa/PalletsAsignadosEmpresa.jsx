@@ -381,7 +381,7 @@ const PalletsAsignadosEmpresa = ({ empresaId }) => {
                 <Column
                     field="fechaImpresion"
                     header={intl.formatMessage({ id: "Fecha de impresión" })}
-                    body={fechaImpresionBodyTemplate}
+                    body={adquisicionBodyTemplate}
                     headerStyle={{ minWidth: "12rem" }}
                 />
             </DataTable>

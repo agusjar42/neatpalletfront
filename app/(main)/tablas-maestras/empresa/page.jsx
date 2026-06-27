@@ -181,6 +181,8 @@ const columnasEmpresaSensor = [
     { campo: "valor", header: "Valor", tipo: "string" },
 ];
 
+const nombreTipoTransporteBodyTemplate = (rowData) => rowData?.nombre || rowData?.codigo || "-";
+
 const columnasCatalogosGlobales = [
     { campo: "orden", header: "Orden", tipo: "string" },
     { campo: "nombre", header: "Nombre", tipo: "string" },
@@ -672,7 +674,11 @@ const Empresa = () => {
                         botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]}
                         controlador="Tipo Transporte"
                         editarComponente={<EditarTipoTransporte />}
-                        columnas={columnasCatalogosGlobales}
+                        columnas={[
+                            { campo: "orden", header: "Orden", tipo: "string" },
+                            { campo: "nombre", header: "Nombre", tipo: "string", body: nombreTipoTransporteBodyTemplate },
+                            { campo: "activoSn", header: "Activo", tipo: "booleano" },
+                        ]}
                         filtradoBase={filtroEmpresa}
                         deleteRegistro={deleteTipoTransporte}
                         editarComponenteParametrosExtra={extra}

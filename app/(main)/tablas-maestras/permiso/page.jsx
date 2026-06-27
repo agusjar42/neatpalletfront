@@ -676,10 +676,10 @@ const Permiso = () => {
     return (
         <div className="grid Permiso">
             <div className="col-12">
+                <PermisoIntro permisos={columnaPrincipal} roles={rolesDisponibles.map((rol) => rol.nombre)} />
                 <div className="card">
                     <Toast ref={toast} position="top-right" />
                     <ConfirmDialog />
-                    <PermisoIntro permisos={columnaPrincipal} roles={rolesDisponibles.map((rol) => rol.nombre)} />
                     <DataTable
                         className="datatable-responsive"
                         ref={referenciaDataTable}
